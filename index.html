@@ -1,0 +1,442 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title> [ 代码和诗 ]</title>
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+
+<div id="recent-posts-box">
+
+  
+  <div id="recent-posts">
+    <!-- <h1>Recent Posts</h1> -->
+    
+    
+    <div class="recent-post-item">
+
+      <a href="/2024/10/16/%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/" class="item-title">按位运算相关内容</a>
+      
+      <time datetime="2024-10-16T11:56:10.000Z">
+        2024-10-16
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 使用算数右移实现逻辑右移以int 32位为例
+我们清楚，当进行算数右移的时候，对于符号位为1的情况下，右移之后符号位、第32位的1，被移动到31位后，32位右被补上了1
+而逻辑右移与之不同的是，逻辑右移后，最高位、32位会被补0
+现在要用算数右移实现逻辑右移，看代码：
+x = x &gt;&gt; n;
+y = ~((1 &lt;&lt; 31) &gt;&gt; n &lt;&lt; 1);  
+x = x&amp;y;
+
+1、x符号位为0，算数右移动n位后，x为 0..（n+1个0）XXXXXXX…2、x符号位为1，算数右移动n位后，x为 1..（n+1个1）XXXXXXX…而对于逻辑右移n位后，无论x符号位是0还是1，都是算数右移中1、的情况
+
+所以我们只需要：x &#x3D; x&amp;0..（n+1个0）1111..1就可以将算数右移的结果转换为逻辑右移的结果。关键在于凑出掩码0..（n+1个0）1111..1，即y处的操作。
+
+分治法求二进制数中1的个数分治法的思想：一个复杂的问题分解成若干个规模较小但相似的子问题，“递归”地解决这些子问题，然后将这些子问题的解组合起来， -->
+        <!-- </div> -->
+
+        
+        <h2 id="使用算数右移实现逻辑右移"><a href="#使用算数右移实现逻辑右移" class="headerlink" title="使用算数右移实现逻辑右移"></a>使用算数右移实现逻辑右移</h2><p>以int 32位为例</p>
+<p>我们清楚，当进行算数右移的时候，对于符号位为1的情况下，右移之后符号位、第32位的1，被移动到31位后，32位右被补上了1</p>
+<p>而逻辑右移与之不同的是，逻辑右移后，最高位、32位会被补0</p>
+<p>现在要用算数右移实现逻辑右移，看代码：</p>
+<pre><code>x = x &gt;&gt; n;
+y = ~((1 &lt;&lt; 31) &gt;&gt; n &lt;&lt; 1);  
+x = x&amp;y;
+</code></pre>
+<p>1、x符号位为0，算数右移动n位后，x为 0..（n+1个0）XXXXXXX…<br>2、x符号位为1，算数右移动n位后，x为 1..（n+1个1）XXXXXXX…<br>而对于逻辑右移n位后，无论x符号位是0还是1，都是算数右移中1、的情况</p>
+<blockquote>
+<p>所以我们只需要：x &#x3D; x&amp;0..（n+1个0）1111..1就可以将算数右移的结果转换为逻辑右移的结果。<br>关键在于凑出掩码0..（n+1个0）1111..1，即y处的操作。</p>
+</blockquote>
+<h2 id="分治法求二进制数中1的个数"><a href="#分治法求二进制数中1的个数" class="headerlink" title="分治法求二进制数中1的个数"></a>分治法求二进制数中1的个数</h2><p>分治法的思想：一个复杂的问题分解成若干个规模较小但相似的子问题，“递归”地解决这些子问题，然后将这些子问题的解组合起来，得到原问题的解。</p>
+<p>让我们先以8位二进制数为例子：</p>
+<blockquote>
+<p>原问题：11011110 整体这个数（或者说“一”部分）有几个1<br>分解：求 1101 1110 两部分，分别有几个1<br>分解：求 11 01 11 10 四部分，分别有几个1<br>分解：求 1 1 0 1 1 1 1 0 八部分，分别有几个1</p>
+</blockquote>
+<p>显然，对于上一个问题，各个部分的数字0 or 1就代表了这个部分有几个1，即八个部分时各个部分有几个1已经清楚。最小问题的答案已知，考虑如何利用将最小问题的答案合并，求解上层的问题。</p>
+<p>注意：“各个部分的数字0 or 1就代表了这个部分有几个1”正是八部分时最大的特点，记住这个特点，因为我们的目标是“让‘一’部分时，该部分的数字就代表该部分有几个1。”</p>
+<p>下面开始合并，使用到的关系是：上一个问题中各个部分有几个1 &#x3D; 当前问题中相邻两个部分1的个数相加</p>
+<p>采用上面的关系对问题合并，我们会发现每解决一个问题后，问题中各个部分的数字，就代表原来该部分有几个1。</p>
+<blockquote>
+<p>合并： 四部分状况的问题的答案：10 01 10 01<br>合并： 二部分状况的问题的答案：0011 0011<br>合并： “一”部分（原问题）的答案：00000110</p>
+</blockquote>
+<p>根据前面的描述，00000110即原本1的个数。</p>
+<p>下面是具体的实现代码</p>
+<pre><code>cin&gt;&gt;x
+int x1,x2,x3,x4,x5,s,m;
+s = x &gt;&gt; 1;
+m = ~((1 &lt;&lt; 31));
+x1 = s&amp;m;
+x = (x &amp; 0x55555555) + (x1 &amp; 0x55555555);
+s = x &gt;&gt; 2;
+m = ~((1 &lt;&lt; 31) &gt;&gt; 1);
+x2 = s&amp;m;
+x = (x &amp; 0x33333333) + (x2 &amp; 0x33333333);
+s = x &gt;&gt; 4;
+m = ~((1 &lt;&lt; 31) &gt;&gt; 3);
+x3 = s&amp;m;
+x = (x &amp; 0x0F0F0F0F) + (x3 &amp; 0x0F0F0F0F);
+s = x &gt;&gt; 8;
+m = ~((1 &lt;&lt; 31) &gt;&gt; 7);
+x4 = s&amp;m;
+x = (x &amp; 0x00FF00FF) + (x4 &amp; 0x00FF00FF);
+s = x &gt;&gt; 16;
+m = ~((1 &lt;&lt; 31) &gt;&gt; 15);
+x5 = s&amp;m;
+x = (x &amp; 0x0000FFFF) + (x5 &amp; 0x0000FFFF);
+return x;
+</code></pre>
+<p>关键在于理解如何实现“上一个问题中各个部分有几个1 &#x3D; 当前问题中相邻两个部分1的个数相加”之中，相邻两部分相加。<br>不难想到，我们可以使用掩码。<br>例如：</p>
+<blockquote>
+<p>01010101和10101010（相邻的两位相加，结果为四部分状况答案）<br>x &#x3D; x&amp;0b01010101 + x&amp;0b10101010<br>00110011和11001100（相邻的四位相加，结果为两部分状况答案）<br>x &#x3D; x&amp;0b00110011 + x&amp;0b11001100<br>00001111和11110000（相邻的四位相加，结果为“一”部分状况、最终答案）<br>x &#x3D; x&amp;0b00001111 + x&amp;0b11110000</p>
+</blockquote>
+<p>当然这只是对最开始用例的解释，对于具体的计算机当中的int类型，32位可以如此类比。<br>最终我们需要合并使用当前问题的答案求解上一个问题5次（32 &#x3D; 2^5），对应代码中5处使用了掩码的位置。<br>值得一提的是，也可以在一次计算当中不更换掩码，但是要将x左或右移（逻辑右移！）对应的位数，就像我在代码中的那样。</p>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2024/10/16/按位运算相关内容/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
+      <a href="/2024/10/15/my-first-post/" class="item-title">汇编语言学习日志</a>
+      
+      <time datetime="2024-10-15T15:16:55.000Z">
+        2024-10-15
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- DEBUG模式下几种基本命令t 追踪执行命令a 指定内存后（回车）写入指令d 从哪段内存开始 显示多长的内存&#x2F;&#x2F;显示内存中内容e 从哪段内存开始（回车）修改内存u 从哪段内存开始&#x2F;&#x2F;显示翻译后内存中内容
+mov ax,bx
+add ax,bx
+sub ax,bx
+
+
+注意高八位、低八位，h、l注意数据溢出，加法溢出则舍去，减法不足则借位，指定了高八位、低八位就以对应的两个数字为参考标准确定是否要舍去与借位，不能修改其它数字。
+
+常见的运算符mulmul bx
+
+相乘的数都是八位或者都是十六位八位：一个默认放在AL中，另一个放在8位reg或内存中；结果默认放在AX中十六位：一个默认放在AX中，另一个放在16位reg或内存中；结果默认低16位放在AX中，高16位放在DX中。
+
+8位：ALBL &#x3D; AX16位：AXBX &#x3D; DXAX
+
+divdiv bx
+
+除数：8位、16位（2个数字、4个数字）两种被除数：默认放在AX或DX和AX中，除数为8位则被除数为16位默认放在AX中；如果除数为16位，则被除数为32位，默认放在DX和AX中 -->
+        <!-- </div> -->
+
+        
+        <h2 id="DEBUG模式下几种基本命令"><a href="#DEBUG模式下几种基本命令" class="headerlink" title="DEBUG模式下几种基本命令"></a>DEBUG模式下几种基本命令</h2><p>t 追踪执行命令<br>a 指定内存后（回车）写入指令<br>d 从哪段内存开始 显示多长的内存&#x2F;&#x2F;显示内存中内容<br>e 从哪段内存开始（回车）修改内存<br>u 从哪段内存开始&#x2F;&#x2F;显示翻译后内存中内容</p>
+<pre><code>mov ax,bx
+add ax,bx
+sub ax,bx
+</code></pre>
+<blockquote>
+<p>注意高八位、低八位，h、l<br>注意数据溢出，加法溢出则舍去，减法不足则借位，指定了高八位、低八位就以对应的两个数字为参考标准确定是否要舍去与借位，不能修改其它数字。</p>
+</blockquote>
+<h2 id="常见的运算符"><a href="#常见的运算符" class="headerlink" title="常见的运算符"></a>常见的运算符</h2><h3 id="mul"><a href="#mul" class="headerlink" title="mul"></a>mul</h3><pre><code>mul bx
+</code></pre>
+<p>相乘的数都是八位或者都是十六位<br>八位：一个默认放在AL中，另一个放在8位reg或内存中；结果默认放在AX中<br>十六位：一个默认放在AX中，另一个放在16位reg或内存中；结果默认低16位放在AX中，高16位放在DX中。</p>
+<blockquote>
+<p>8位：AL<em>BL &#x3D; AX<br>16位：AX</em>BX &#x3D; DXAX</p>
+</blockquote>
+<h3 id="div"><a href="#div" class="headerlink" title="div"></a>div</h3><pre><code>div bx
+</code></pre>
+<p>除数：8位、16位（2个数字、4个数字）两种<br>被除数：默认放在AX或DX和AX中，除数为8位则被除数为16位默认放在AX中；如果除数为16位，则被除数为32位，默认放在DX和AX中，DX存放高16位，AX存放低16位。<br>结果：如果除数为8位，则AL中存放结果，AH储存余数；如果除数为16位，则AX存储商，DX存储余数。</p>
+<blockquote>
+<p>除数8位:AX&#x2F;BL &#x3D; AL … AH<br>除数16位：DXAX&#x2F;BX &#x3D; AX … DX</p>
+</blockquote>
+<h3 id="and、or"><a href="#and、or" class="headerlink" title="and、or"></a>and、or</h3><p>以二进制为标准<br>指定8位还是16位进行运算</p>
+<h3 id="shl"><a href="#shl" class="headerlink" title="shl"></a>shl</h3><pre><code>shl ax,1
+</code></pre>
+<p>shl、shr 左移、右移，超出的舍去，缺少的0补<br>rol、ror 循环左移、右移，超出的补到后面缺少的<br>带进位的循环左移、右移 rcl rcr（了解）<br>以二进制为标准</p>
+<h3 id="inc、dec"><a href="#inc、dec" class="headerlink" title="inc、dec"></a>inc、dec</h3><pre><code>inc ax
+
+dec ax
+</code></pre>
+<p>相当于ax++、ax–<br>（进位、借位与普通加减法相同）</p>
+<h3 id="其它杂项"><a href="#其它杂项" class="headerlink" title="其它杂项"></a>其它杂项</h3><p>如果除法除以0会进入一个中断<br>使用int 0也可以进入这个中断<br>如果除以0是一个错误，会触发int 0的中断，会找到一个地址，代码运行的指针会指向这个地址，接下来或许可以通过在这个地址准备相应的处理方法来解决异常（了解）</p>
+<p>我们需要知道的就是当代码发生错误，代码运行的指针会跳转到其它地址。</p>
+<p>常见的中断编号int 0、int 9</p>
+<h2 id="ds寄存器与地址"><a href="#ds寄存器与地址" class="headerlink" title="ds寄存器与地址"></a>ds寄存器与地址</h2><blockquote>
+<p>物理地址 &#x3D; 段地址*16+偏移地址</p>
+</blockquote>
+<p>DS寄存器，数据段地址寄存器<br>    r ds<br>可编辑DS当中的内容</p>
+<p>配合mov指令使用，如</p>
+<pre><code>mov ax,[60]
+</code></pre>
+<p>效果会是将DS中的段地址结合[60]偏移地址指向的内容复制给ax<br>[]中对应的都是低位</p>
+<blockquote>
+<p>但是注意：在内存当中字单元的概念，即将一个字型数据（16位）的内存单元，由两个地址连续的内存单元，高地址内存单元（非起始）存放字符型高位字节，低地址内存单元（起始）存放字符型低位字节。<br>如我们将DS设置为21F0后，使用mov指令会将21F0:0060中的内容复制给ax<br>而d 21F0:0060这样显示：<br>12 34<br>则0060为低位，0061为高位<br>所以对应AXL 和 AXH，由此得到ax为3412<br>但是以上内容在使用al、ah等直接对八位操作的时候，对应的物理地址上的八位数会直接被移动到对应位置，而不需要考虑是高地址还是低地址内存</p>
+</blockquote>
+<p>另外</p>
+<blockquote>
+<p>注意：不能使用mov ds，10 00<br>但是可以<br>mov 1000，ax<br>mov ds，ax</p>
+</blockquote>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2024/10/15/my-first-post/"> Read more -->
+          </span>
+        </div>
+
+        
+      </div>
+      
+
+
+      <div id="recent-posts-paginator">
+        <span class="page-number current">1</span>
+      </div>
+
+    </div>
+
+<aside id="sidebar">
+  
+  <div class="widget-box">
+  	  <div class="widget-box">
+    <h3 class="widget-title-friends">friends</h3>
+    <div class="widget">
+      
+    </div>
+  </div>
+
+  </div>
+  
+  <div class="widget-box">
+  	
+
+  </div>
+  
+  <div class="widget-box">
+  	
+  <div class="widget-box">
+    <h3 class="widget-title-tag">tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li></ul>
+    </div>
+  </div>
+
+
+  </div>
+  
+  <div class="widget-box">
+  	
+  <div class="widget-box">
+    <h3 class="widget-title-archive">archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+  </div>
+  
+  <div class="widget-box">
+  	
+  <div class="widget-box">
+    <h3 class="widget-title-post">recent_posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a class="recent_posts-list-link" href="/2024/10/16/%E6%8C%89%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/">按位运算相关内容</a>
+          </li>
+        
+          <li>
+            <a class="recent_posts-list-link" href="/2024/10/15/my-first-post/">汇编语言学习日志</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  </div>
+  
+</aside>
+
+<!-- <div id="paginator"> -->
+<!--   <span class="page-number current">1</span> -->
+<!-- </div> -->
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
