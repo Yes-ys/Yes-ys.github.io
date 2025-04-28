@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>Traceroute</title>
+      <link href="/2025/04/27/Traceroute/"/>
+      <url>/2025/04/27/Traceroute/</url>
+      
+        <content type="html"><![CDATA[<p>这篇blog用于记录我在学习计算机工程系统导论时，一个与网络有关的实验。</p><h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><ol><li>学习Ping和Traceroute工具的使用，能够在网络开发和维护中熟练使用该工具获取网络状态和进行错误排查。</li><li>巩固课堂学习的因特网分层设计实现知识，理解因特网的分组转发网络的特性，通过分析互联网数据包因转发而产生的时延，加深理解尽力而为的因特网设计思想。</li><li>通过分析ICMP协议，学习在分层设计中进行跨层通信的设计实现方法，思考因特网网络层在错误处理上的折中设计和处理技巧。</li><li>通过Traceroute工具基于错误处理包进行路径探测功能的设计，体会在实践中体会设计方案在解决问题的同时是如何带来新的设计机会的。</li></ol><h2 id="实验过程与习题"><a href="#实验过程与习题" class="headerlink" title="实验过程与习题"></a>实验过程与习题</h2><h3 id="ping应用"><a href="#ping应用" class="headerlink" title="ping应用"></a>ping应用</h3><p>1.<strong>用不超过200字简要概括ping命令</strong><br>ping命令用于向主机或网关发送请求，使用的是ICMP协议的ECHO_REQUSET数据包，并且会接收ICMP ECHO_RESPONSE作为回应。其中ECHO_REQUSET数据包包含了IP和ICMP头部，其后是一个timeval结构以及若干的填充字节。ping命令支持IPv6以及IPv4协议，其中对IPv6节点的信息查询是根据RFC4620进行的，但是由于IPv6源路由被起用，中间跳点可能不被允许。</p><p><code>man ping</code>结果如图1所示<br><img src="/source_image/traceroute/im1.png" alt="图1"></p><p>2.<strong>说明实验现象背后的原因</strong><br>3.<strong>通过查询资料，画出所使用ICMP数据包的结构</strong></p><h3 id="traceroute应用"><a href="#traceroute应用" class="headerlink" title="traceroute应用"></a>traceroute应用</h3><p>1.<strong>不超过200字简要概括traceroute命令</strong><br>traceroute可以用于追踪数据包从源主机到目标主机的网络路径中，它通过发送一个含有TTL字段的IP数据包进行工作，数据包每传递到一个路由器TTL就会减1，当TTL为0的时候路由器就会丢弃该数据包，并给源主机发送一个ICMP（超时响应），其中包含了当前路由器的地址。traceroute在整个工作流程中会从TTL为1开始发送数据包，每次收到ICMP响应后就增大TTL值（2、3、4…），直到收到目的主机的响应。于是根据每一次收到的ICMP响应，traceroute就可以知晓从源主机到目标主机经过的每个路由器，并且显示相应的IP地址和响应时间。<br>2.<strong>确定并说明从源计算机到<a href="http://www.baidu.com的路径/">www.baidu.com的路径</a></strong></p><p>3.<strong>说明输出结果每个字段的意义</strong></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据结构与算法——树</title>
+      <link href="/2025/02/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%A0%91/"/>
+      <url>/2025/02/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%A0%91/</url>
+      
+        <content type="html"><![CDATA[<h2 id="如何输入一棵树"><a href="#如何输入一棵树" class="headerlink" title="如何输入一棵树"></a>如何输入一棵树</h2><p>在这里记录一些算法题中常见的树的输入方法</p><p>*输入格式一<br>第一行输入一个正整数n，代表树中结点的数量。<br>第二行输入n个正整数w1…wn，代表i点的权重<br>接下来n行，每行输入两个整数，其中第i行的li、ri表示i点的左儿子与右儿子，若为-1则表示不存在。</p><h2 id="如何存储一颗树"><a href="#如何存储一颗树" class="headerlink" title="如何存储一颗树"></a>如何存储一颗树</h2><p>在这里记录常见的树的存储方法</p><p>*存储方式一<br>我们可以使用一个树结点的结构体，通过将这些结构体使用指针连接起来，从而构建一棵完整的树。</p><pre><code class="C++">struct tree_node&#123;    int value;    tree_node * ls;    tree_node * rs;&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 数据结构与算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>unity锚点</title>
       <link href="/2025/02/03/unity%E9%94%9A%E7%82%B9/"/>
       <url>/2025/02/03/unity%E9%94%9A%E7%82%B9/</url>
@@ -11,6 +49,12 @@
         <content type="html"><![CDATA[<h2 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h2><p>参考文章<a href="https://blog.csdn.net/Terie/article/details/111433486">https://blog.csdn.net/Terie/article/details/111433486</a></p><p>透过这篇博客，我大概了解到了两个点：<br>pviot：轴心，采用相对坐标系，(0,0)-&gt;(1,1)，位于某ui的方框内，其表征着在ui被自适应缩放的时候，以哪个位置为标准缩放</p><p>锚点：unity提供了三种模式<br>1、四个锚点合在一起的模式<br>该模式下，在屏幕分辨率改变的过程当中，ui相对于锚点的位置不改变，ui的宽、高也不变</p><p>2、四个锚点两两在一起的模式<br>该模式下，ui的对应对于锚点连成的线的距离不改变，宽高比不改变，随之缩放</p><p>3、四个锚点分开的模式<br>该模式下，ui的四个边对应锚点连线矩形的四边距离不改变，宽高随着四向距离的改变，自适应。</p><p>一般情况下，设置Canvas的UI为随屏幕缩放的模式，理解pivot，记住不同位置的ui常用的锚点模式和放置位置就好。</p><p>一下是gpt的建议：<br>a. 确定元素的锚点<br>对于屏幕边缘的UI元素（如按钮、面板），将其Anchors设置在父容器的相应边缘。例如：<br>左上角的按钮：Anchors设为（0，1）到（0，1）<br>右上角的按钮：Anchors设为（1，1）到（1，1）<br>底部中央的按钮：Anchors设为（0.5，0）到（0.5，0）<br>b. 中央对齐的元素<br>对于中心对齐的UI元素（如中心的面板），将其Anchors设置在父容器的中心。例如：<br>中央面板：Anchors设为（0.5，0.5）到（0.5，0.5）<br>c. 保持宽高比例<br>在Inspector中勾选Canvas Scaler组件的“UI Scale Mode”选项，设置为“Scale With Screen Size”，并设置参考分辨率为你设计时的分辨率（如1920x1080）。这样Unity会根据屏幕分辨率自动缩放UI元素。</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> unity </tag>
+            
+        </tags>
       
     </entry>
     
