@@ -118,7 +118,7 @@
 <li>通过Traceroute工具基于错误处理包进行路径探测功能的设计，体会在实践中体会设计方案在解决问题的同时是如何带来新的设计机会的。</li>
 </ol>
 <h2 id="实验过程与习题"><a href="#实验过程与习题" class="headerlink" title="实验过程与习题"></a>实验过程与习题</h2><h3 id="ping应用"><a href="#ping应用" class="headerlink" title="ping应用"></a>ping应用</h3><p>1.<strong>用不超过200字简要概括ping命令</strong><br>ping命令用于向主机或网关发送请求，使用的是ICMP协议的ECHO_REQUSET数据包，并且会接收ICMP ECHO_RESPONSE作为回应。其中ECHO_REQUSET数据包包含了IP和ICMP头部，其后是一个timeval结构以及若干的填充字节。ping命令支持IPv6以及IPv4协议，其中对IPv6节点的信息查询是根据RFC4620进行的，但是由于IPv6源路由被起用，中间跳点可能不被允许。</p>
-<p><code>man ping</code>结果如图1所示<br><img src="/../_images/Traceroute/imx.jpg" alt="图1"></p>
+<p><code>man ping</code>结果如图1所示<br><img src="/source/_images/Traceroute/imx.jpg" alt="图1"></p>
 <p>2.<strong>说明实验现象背后的原因</strong><br>3.<strong>通过查询资料，画出所使用ICMP数据包的结构</strong></p>
 <h3 id="traceroute应用"><a href="#traceroute应用" class="headerlink" title="traceroute应用"></a>traceroute应用</h3><p>1.<strong>不超过200字简要概括traceroute命令</strong><br>traceroute可以用于追踪数据包从源主机到目标主机的网络路径中，它通过发送一个含有TTL字段的IP数据包进行工作，数据包每传递到一个路由器TTL就会减1，当TTL为0的时候路由器就会丢弃该数据包，并给源主机发送一个ICMP（超时响应），其中包含了当前路由器的地址。traceroute在整个工作流程中会从TTL为1开始发送数据包，每次收到ICMP响应后就增大TTL值（2、3、4…），直到收到目的主机的响应。于是根据每一次收到的ICMP响应，traceroute就可以知晓从源主机到目标主机经过的每个路由器，并且显示相应的IP地址和响应时间。<br>2.<strong>确定并说明从源计算机到<a target="_blank" rel="noopener" href="http://www.baidu.com的路径/">www.baidu.com的路径</a></strong></p>
 <p>3.<strong>说明输出结果每个字段的意义</strong></p>
