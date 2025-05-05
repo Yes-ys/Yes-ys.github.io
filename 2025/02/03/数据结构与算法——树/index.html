@@ -114,12 +114,7 @@
 <p>*输入格式一<br>第一行输入一个正整数n，代表树中结点的数量。<br>第二行输入n个正整数w1…wn，代表i点的权重<br>接下来n行，每行输入两个整数，其中第i行的li、ri表示i点的左儿子与右儿子，若为-1则表示不存在。</p>
 <h2 id="如何存储一颗树"><a href="#如何存储一颗树" class="headerlink" title="如何存储一颗树"></a>如何存储一颗树</h2><p>在这里记录常见的树的存储方法</p>
 <p>*存储方式一<br>我们可以使用一个树结点的结构体，通过将这些结构体使用指针连接起来，从而构建一棵完整的树。</p>
-<pre><code class="C++">struct tree_node&#123;
-    int value;
-    tree_node * ls;
-    tree_node * rs;
-&#125;
-</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">tree_node</span>&#123;</span><br><span class="line">    <span class="type">int</span> value;</span><br><span class="line">    tree_node * ls;</span><br><span class="line">    tree_node * rs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 		</div>
 

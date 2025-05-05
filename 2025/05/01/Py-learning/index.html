@@ -154,6 +154,32 @@
 <p>常用的解决方法，也是我们使用模块化的常用方法如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> somemodule</span><br><span class="line">somemodule.somename <span class="comment">#使用模块对象名来访问相应的变量、函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> somemodule <span class="keyword">import</span> somename <span class="keyword">as</span> another_name <span class="comment">#或者是别名</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="列表生成式"><a href="#列表生成式" class="headerlink" title="列表生成式"></a>列表生成式</h2><p>语法如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list_name = [formula <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(start, end)]</span><br><span class="line">list_name = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>这种创建列表的方法成为列表生成式，formula是用于生成列表的表达式，可以是返回一些值的函数，后面的循环是列表中生成元素的次数，循环一次便会调用一次formula。</p>
+<p>当然formula也可以直接是数学表达式，例如第二个例子展示的，用于生成1到9的平方的列表。</p>
+<p>注意end不被包含在内。</p>
+<h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><p>元组（Tuple）是一种内置的数据结构，属于不可变序列类型，用于存储多个元素。与列表（List）不同，<strong>元组一旦创建，其内容就不能更改（即不可变）</strong>。元组常用于存储一组相关的数据，例如函数返回多个值时，可以使用元组来打包这些值。</p>
+<h3 id="元组的创建"><a href="#元组的创建" class="headerlink" title="元组的创建"></a>元组的创建</h3><p>使用<code>()</code>来创建一个元组，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个空元组</span></span><br><span class="line">empty_tuple = ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个包含多个元素的元组</span></span><br><span class="line">example_tuple = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&quot;hello&quot;</span>, <span class="number">4.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个单元素的元组（注意逗号）</span></span><br><span class="line">single_element_tuple = (<span class="number">1</span>,)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以省略小括号，直接用逗号分隔元素</span></span><br><span class="line">another_tuple = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问元素</span></span><br><span class="line"><span class="built_in">print</span>(example_tuple[<span class="number">0</span>])  <span class="comment"># 输出 1</span></span><br><span class="line"><span class="built_in">print</span>(example_tuple[<span class="number">3</span>])  <span class="comment"># 输出 &quot;hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取元组的长度</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(example_tuple))  <span class="comment"># 输出 5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="元组的常见用途"><a href="#元组的常见用途" class="headerlink" title="元组的常见用途"></a>元组的常见用途</h3><ol>
+<li>多值返回，用于让函数返回多个值</li>
+<li>作为字典的键，这是由于元组的不可变性</li>
+</ol>
+<h2 id="函数的参数以及返回值"><a href="#函数的参数以及返回值" class="headerlink" title="函数的参数以及返回值"></a>函数的参数以及返回值</h2><p>在python中函数的参数不需要提前声明类型，同样的返回值也不需要提前进行声明。但是在大型的项目中为了便于程序的维护，以及提供静态的检查，可以使用注解符号。例如，下面这个例子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span>, <span class="type">Tuple</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">k_means</span>(<span class="params">D:<span class="type">List</span>[<span class="type">List</span>[<span class="built_in">float</span>]], n:<span class="built_in">int</span>, k:<span class="built_in">int</span></span>) -&gt; <span class="type">Tuple</span>(<span class="type">List</span>[<span class="type">List</span>[<span class="type">List</span>[<span class="built_in">float</span>]]], Lsit[<span class="type">List</span>[<span class="built_in">float</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>其中typing是类型注解使用的包，如果不需要使用类型进行注解可以不使用这个包。</p>
+<p>常见的类型注解有：</p>
+<ol>
+<li>List     eg: List[int]</li>
+<li>Tuple    eg: Tuple[float,str]</li>
+<li>Dict     eg: Dict[int,str]</li>
+<li>Set      eg: Set[str]<br>还有许多可用的…用到再查吧…</li>
+</ol>
+
 		</div>
 
 		<!-- 来必力City版安装代码 -->

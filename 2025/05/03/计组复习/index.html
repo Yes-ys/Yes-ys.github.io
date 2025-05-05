@@ -1,0 +1,389 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>计组复习 [ 代码和诗 ]</title>
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>计组复习</h1>
+			<p><code>我在大二下选修了计算机组成原理，这篇blog用来梳理相关知识点</code></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一些学习计算机组成原理之前应该知道的知识…</p>
+<ol>
+<li>计算机结构：系统程序员所能见到的<strong>硬件特性</strong>，指的是计算机的<strong>逻辑结构</strong></li>
+<li>计算机组成：计算机硬件的<strong>具体实现</strong>，指的是计算的<strong>物理结构</strong></li>
+<li>两类汇编语言，RISC &amp; CISC，对应精简与复杂的指令系统，MIPS属于RISC的一种</li>
+<li>计算机组成原理涉及：汇编，处理器、内存、IO三者对应的逻辑系统与硬件实现（数据通路），课程定位在整个计算机系统中处于硬件方面的数字电路之上，软件层面的操作系统之内（因为上到汇编），但在编译器之下（编译器同样属于OS的范畴）</li>
+<li>核心内容：CPU Organization(data path &amp; controller), Caches</li>
+<li>重点内容：MIPS汇编，Virtual Memory</li>
+<li>了解内容：I&#x2F;O, Bus</li>
+</ol>
+<p><strong>最后请谨记，该门课特点是概念抽象、繁琐…但是“清澈见底”，只要想弄清楚，一定可以！</strong></p>
+<h2 id="指令系统"><a href="#指令系统" class="headerlink" title="指令系统"></a>指令系统</h2><h3 id="指令系统设计"><a href="#指令系统设计" class="headerlink" title="指令系统设计"></a>指令系统设计</h3><p><code>这一部分主要是一些有关指令系统设计的知识点</code></p>
+<p>于是，首先看看这三个知识点：</p>
+<ol>
+<li>指令：二进制的机器语言</li>
+<li>汇编指令：助记符，每种条符号语句都映射到一条二进制的机器代码</li>
+<li>ISA：指令系统（指令集体系结构），<strong>软硬件交汇的地方</strong></li>
+</ol>
+<p>接下来，一条指令应该包含以下信息：</p>
+<ol>
+<li>操作码（定长 or 变长）</li>
+<li>源操作数参照（from where）</li>
+<li>目的位置参照（to where）</li>
+<li>下一条指令地址（what to do next?）</li>
+</ol>
+<p>按地址数的指令分类：</p>
+<p>零、一、二、三、多地址指令，其中二三是典型的RISC风格。三的特点是显示指定了dst，一或二的dst是隐含的（built-in or src）</p>
+<p>指令执行的阶段：</p>
+<p>取指令-&gt;译码-&gt;取操作数-&gt;运算（执行）-&gt;存放结果-&gt;取下一条指令<br><strong>不一定所有指令都涉及所有步骤，但是考虑的时候应该按最复杂的来，何尝不是一种设计原则？</strong></p>
+<p>指令设计基本原则：<br>完备性，兼容性，均匀性，可扩展性<br><strong>应当明白词语背后的含义</strong></p>
+<p>最简单的完备指令系统：<br>load, store, inc, brn</p>
+<h3 id="操作数类型"><a href="#操作数类型" class="headerlink" title="操作数类型"></a>操作数类型</h3><p>…</p>
+<h3 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h3><p>…</p>
+<h3 id="扩展操作码编码"><a href="#扩展操作码编码" class="headerlink" title="扩展操作码编码"></a>扩展操作码编码</h3><p>这是涉及关于如何给操作码编码，以及对应数量关系的问题。<br><strong>核心思想是一种数字状态，一个编码</strong></p>
+<p>涉及到的相关信息有：</p>
+<ol>
+<li>指令字长，例如16位、32位…</li>
+<li>地址长度，如6位…</li>
+<li>操作码长度，通常不同地址数量的编码不同</li>
+<li>不同地址数的指令的条数</li>
+</ol>
+<p>通常会已知1、2，4中某些地址数的指令条数，求剩余一种地址数的指令<strong>最多</strong>的条数。</p>
+<p>关键点是：</p>
+<ol>
+<li>明确<strong>已知的某些地址数的指令条数——剩下的一种地址数的指令条数</strong>一定存在函数关系</li>
+<li>从多地址数的指令开始考虑，考虑它的操作码有多少位，可求得这种指令至多有多少条</li>
+<li>利用“已知”的实际条数与至多有多少条，可以求得这种指令的<strong>剩余状态</strong>数量</li>
+<li>考虑减少一条地址的指令，对应操作码有多少位，<strong>记得计算操作码长度的时候，不仅是指令字长减去地址长度，还要减去上种指令操作码所用长度</strong></li>
+<li>求得这种指令至多有多少条，利用<strong>剩余状态</strong>×<strong>操作码长度</strong></li>
+<li>显然这个过程可以反复进行，由地址数量最多的情况，如3个地址码，到最少的情况，如零地址码<br><strong>最后，不一定所有的状态都有使用…</strong></li>
+</ol>
+<h3 id="指令设计的风格"><a href="#指令设计的风格" class="headerlink" title="指令设计的风格"></a>指令设计的风格</h3><p>尤其关注RISC的风格。</p>
+<p>RISC是<strong>load&#x2F;store型指令系统</strong>，特点是只有load、store命令才能访问存储器，其它运算类的指令通通不能访问存储器<br>（值得注意的是这种指令系统，属于<strong>通用寄存器型指令系统</strong>的子集，特点是使用通用寄存器存放临时数据，而不使用累加器）</p>
+<p>RISC的特点是：</p>
+<ol>
+<li>指令数目少</li>
+<li>指令格式规整</li>
+<li>Load&#x2F;store风格</li>
+<li>采用流水线的指令执行方式</li>
+<li>采用大量通用寄存器</li>
+<li>采用硬连线控制器</li>
+<li>采用优化的编译器</li>
+</ol>
+<h3 id="异常与中断"><a href="#异常与中断" class="headerlink" title="异常与中断"></a>异常与中断</h3><p>…</p>
+<h3 id="程序的机器级表示（MIPS指令系统）"><a href="#程序的机器级表示（MIPS指令系统）" class="headerlink" title="程序的机器级表示（MIPS指令系统）"></a>程序的机器级表示（MIPS指令系统）</h3><p><code>这一部分是重点知识，所以会有多级的副标题。请着重掌握！</code></p>
+<h4 id="MIPS有关的基础知识"><a href="#MIPS有关的基础知识" class="headerlink" title="MIPS有关的基础知识"></a>MIPS有关的基础知识</h4><p><code>一些零碎的知识点，不好纳入后面的各级标题之中，于是集中在此...</code><br><code>或者说并非无法纳入，而是比较重要...单拎出来也方便记忆</code></p>
+<ol>
+<li>MIPS指令长度都是32位</li>
+<li>MIPS中设计了32个通用寄存器</li>
+<li>MIPS使用大端的存储方式</li>
+<li>MIPS设计的存储器按照字节编址，1Byte对应一个存储单元，有自己的专属地址</li>
+</ol>
+<h4 id="MIPS指令的机器级表示"><a href="#MIPS指令的机器级表示" class="headerlink" title="MIPS指令的机器级表示"></a>MIPS指令的机器级表示</h4><p>MIPS中指令格式包括R型、I型、J型。</p>
+<ol>
+<li>R型指令</li>
+</ol>
+<p>机器级表示:<br>op6+rs5+rt5+rd5+shamt5+func5</p>
+<ol>
+<li>op是操作码，对于R型来说全是0</li>
+<li>shamt是用于处理移位操作的</li>
+<li>func是用于区分操作码的</li>
+<li>rs, rt为源寄存器1、2</li>
+<li>rd为目的寄存器</li>
+</ol>
+<p><strong>注意，R型指令助记符表示的时候，实际上是 op rd rs rt的顺序，要和机器级位置区分开</strong><br><code>不妨考虑一下，op全为0的好处是什么</code></p>
+<ol start="2">
+<li>I型指令</li>
+</ol>
+<p>机器级表示：<br>op6+rs5+rt5+imm16</p>
+<ol>
+<li>常用I型指令：双目运算，rs与imm运算，送至rt    <code>addi $2,$1,imm</code></li>
+<li>常用I型指令，load、store，采用的<strong>MIPS采用基址+相对位移量</strong>的访存方式     <code>lw $2,100($1)</code></li>
+<li>常用I型指令，beq、bne，条件分支   <code>beq $1,$2,L</code></li>
+<li>imm是16位，但是与其运算的寄存器rs是32位的，需要进行扩展，扩展的规则如下：<br>①用于进行双目运算的时候，i是符号扩展imm，iu是零扩展imm<br>②用于load、store的时候，imm总是符号扩展，虽然有u的存在，例如lhu, lbu等，但是这里的u对应的用于0扩展不足32位的存储内容，从而加载到寄存器<br>③用于条件分支的时候，beq、bne应该与slt搭配使用，所以imm通常只与1、0进行相等与否的比较，于是也不存在什么扩展与否的问题<br><strong>注意，实际上slt也可以是I型的，并且很常用，但是也有R型的</strong></li>
+</ol>
+<ol start="3">
+<li>J型指令</li>
+</ol>
+<p>机器级表示：<br>op6+target address26</p>
+<ol>
+<li>实际的目的地址计算方式，pc高4位:target address:00<br>最后总是00的原因，在于MIPS中指令总是32位的，从0地址开始访存：0,100,1000,1100…（0、4、8、12…），末尾总是00，这个特点在后面设计用于MIPS的CPU的时候也非常有用</li>
+<li>显然，这是一种局部寻址的方式</li>
+</ol>
+<h4 id="MIPS设计的通用寄存器"><a href="#MIPS设计的通用寄存器" class="headerlink" title="MIPS设计的通用寄存器"></a>MIPS设计的通用寄存器</h4><p>MIPS使用32个通用寄存器，我们应该掌握以下有关的知识。</p>
+<ol>
+<li>两种助记符号的使用</li>
+</ol>
+<ol>
+<li>编号：”$”+“数字：0~31”</li>
+<li>名称</li>
+</ol>
+<p><code>程序中一般都使用名称，举例子的时候使用编号多一些。或许，前者体现“助记”，后者体现“通用”</code></p>
+<ol start="2">
+<li>经常使用的寄存器</li>
+</ol>
+<ol>
+<li>zero<br>编号为0，其功能是提供0值，寄存器中始终是全0</li>
+<li>v0-v1<br>编号2-3，功能是存放过程调用的返回值</li>
+<li>a0-a3<br>编号4-7，功能是存放过程调用的参数</li>
+<li>t0-t7<br>编号8-15，功能是存放临时使用的变量</li>
+<li>s0-s7<br>编号16-23 功能是调用者保存的寄存器</li>
+<li>t8-t9<br>编号24-25，功能是存放临时使用的变量</li>
+<li>sp, fp, ra<br>编号29-31，功能是，栈指针（栈顶），帧指针（栈底），存放调用过程返回地址</li>
+</ol>
+<p>记忆的方法，“一个过程调用，使用了4个参数a，返回了两个值v，调用者保存了8个寄存器s，被调用者保存了10个寄存器t，关键在于sp、fp与ra”+zero</p>
+<ol start="3">
+<li>了解的寄存器</li>
+</ol>
+<ol>
+<li>at<br>编号为1，保留给编译器使用</li>
+<li>k0-k1<br>编号为26-27，保留给系统使用</li>
+<li>gp<br>编号为28，全局指针</li>
+</ol>
+<h4 id="MIPS汇编指令"><a href="#MIPS汇编指令" class="headerlink" title="MIPS汇编指令"></a>MIPS汇编指令</h4><p><code>在开始做这一部分的笔记之前，我思考了一个问题——如何才能更好的记忆MIPS汇编指令。我得出的答案是，一般性规律的记忆+特殊性个例的记忆。对于一般性规律的记忆，其规律包括：指令的助记符+什么类型的指令+指令的特性，前两者可以帮助我们正确地写出指令，后者可以帮助我们正确地理解指令。对于特殊性个例，我们不妨记住全部。在记忆的过程中带着这个思想，或许会容易记忆一些。</code></p>
+<p>我们接下来按照指令的类别进行。</p>
+<ol>
+<li>算术类指令</li>
+</ol>
+<ol>
+<li>算术运算包括，加、减、乘、除<br>对应的基本助记符是add、sub、mult、div</li>
+<li>加、减有I型和R型，使用I型的时候，如addi、subi</li>
+<li>加、减默认会判断溢出，也有不判断溢出，对应u扩展（undo），如addu、subu<br><strong>当然也有addiu、subiu</strong></li>
+<li>乘、除比较特殊，仅有R型，但是是双目操作符，因为结果存放在默认寄存器hi，lo（乘法hi，lo分别为高低32位，除法hi为32位余数，lo为32位商）</li>
+<li>乘、除分有符号数和无符号数，对应为u扩展（unsigned），如multu、divu<br><strong>注意区分unsigned和undo</strong></li>
+</ol>
+<p><code>一般性的规律是，助记符：加、减有I、R型，乘、除只有R型</code></p>
+<ol start="2">
+<li>存储访问</li>
+</ol>
+<p>存储访问，按照访存字节，分为按字（word，MIPS中是32位），按半字（half word，16位），按字节（byte，8位）访问</p>
+<p>以及MIPS最有特色的指令<strong>lui</strong></p>
+<ol>
+<li>lw、sw，按字访问lw&#x2F;sw $1 100($2)，sw是MIPS中唯一一个dst在src之后的指令</li>
+<li>lhu、lbu，按半字、字节加载，16位内存到32位存储器涉及扩展，格式与lw、sw相同，内存中数据是按无符号扩展<br><strong>注意，必须加u，这就意味着使用半字或字节的时候，内存中内容只能按字节扩展到寄存器</strong><br><strong>但是imm的扩展只能是符号扩展，没有undo的选择</strong></li>
+<li>sh、sb，按半字、字节存储，格式与lw、sw相同，由于是寄存器到存储器，不用考虑扩展。<br><strong>sh、sb同样的只要是访存，imm都是按符号扩展</strong></li>
+<li>lui，I型，使用方法，lui rs,imm，将16位imm放置在rs的高16位<br><em>这是一个很能体现MIPS特色的指令，如果程序员，<del>按照自己的想象</del>（这个数字并不存在于任何其它的位置），想要将一个32位的数字放置在寄存器中，就可以按照16位、16位的存放。可以先lui，再addi</em><br><strong>按照自己的想象是很重要的一点！这将lui和lw、lhu、lbu区分开来，因为lui根本没有访存！</strong></li>
+</ol>
+<p><code>一般性的规律是，助记符；访存都是I型</code></p>
+<ol start="3">
+<li>逻辑运算</li>
+</ol>
+<p>MIPS中常用的逻辑运算是与、或、异或</p>
+<ol>
+<li>与，and，有R型、I型，I型对应i扩展，如addi rd,rs,rt</li>
+<li>或，or，同与</li>
+<li>异或，xor，同与</li>
+</ol>
+<p><code>一般性的规律是，助记符，逻辑运算有R型、I型</code></p>
+<ol start="4">
+<li>移位操作</li>
+</ol>
+<p>MIPS中的涉及的移位操作有，逻辑左、右移动，算术右移</p>
+<ol>
+<li>逻辑左移，sll，I型，如sll rt,rs,imm</li>
+<li>逻辑右移，srl，同上</li>
+<li>算术右移，sra，同上<br><strong>注意，表示是逻辑还是算术的l和a，放在最后</strong></li>
+</ol>
+<p><code>一般性的规律是，助记符，移位只有I型</code></p>
+<ol start="5">
+<li>条件分支</li>
+</ol>
+<p>MIPS中涉及的条件分支，常用的是，slt、beq、bne</p>
+<ol>
+<li>slt，有R型、I型，如slt rt,rs,imm<br><strong>注意slt的I型，不使用i扩展！</strong></li>
+<li>beq，I型，如beq rs,rt,L<br><strong>实际编程中L的位置，通常写label，进一步的处理或许是交给汇编器进行的…</strong></li>
+<li>bne，同beq</li>
+</ol>
+<p><code>一般性的规律是，助记符，slt有R型，其它都是I型</code></p>
+<ol start="6">
+<li>无条件跳转指令</li>
+</ol>
+<p>MIPS中的跳转指令常用的是j、jr、jal</p>
+<ol>
+<li>j，J型指令，如j L（实际使用L是label）</li>
+<li>jr，J型指令，地址存放在Register中，如j rd</li>
+<li>jal，J型指令，<strong>注意这个指令有两个操作</strong>，一个如普通的j一般跳转到L，另一个是$ra &#x3D; PC + 4（存放返回地址，所以这个指令常用于过程调用）</li>
+</ol>
+<p><code>一般性的规律是，助记符，都是J型</code></p>
+
+		</div>
+
+		<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjIyNC8yMjczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
