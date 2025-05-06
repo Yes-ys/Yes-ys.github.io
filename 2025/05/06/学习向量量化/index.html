@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Archives: 2025 [ 代码和诗 ]</title>
+	<title>学习向量量化 [ 代码和诗 ]</title>
 	
 	
 	<!-- stylesheets list from _config.yml -->
@@ -105,113 +105,61 @@
 			<div id="content-inner">
 
 				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>学习向量量化</h1>
+			<p><code>这篇blog用于记录我使用python对学习向量量化这种聚类算法的复现</code></p>
+<h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>学习向量量化也成为LVQ(Learning Vector Quantization)，同样属于原型聚类算法，类似于k-means通过希望划分的簇的数量求得相同数量的“簇中心”并以此为原型将数据集划分为对应的簇，LVQ通过求得与希望划分的簇数量相同的“原型向量”，并以此来将数据集划分为对应的簇。</p>
+<p>如果说k-means也同样是借助原型向量的话，那么关键就在于两种算法更新原型向量的方法不同。k-means是不断的用原型向量划分簇，又用簇更新原型向量；LVQ则是利用样本的预先标注作为“监督信息”，不断利用样本更新原型向量。</p>
+<h2 id="算法详解"><a href="#算法详解" class="headerlink" title="算法详解"></a>算法详解</h2><p>整个算法的大致流程如下：</p>
+<p>输入: $D &#x3D; {(x_1,y_1),(x_2,y_2),…,(x_m,y_m)}, q, {t_1,t_2,…,t_q},\eta \in (0,1)$其中，D是带有标记的数据集，q是原型向量个数，$t_i,i \in {1,2,…,q}$ 对应原型向量的标记，$\eta$是学习率</p>
+<p>算法过程：</p>
+<ol>
+<li>初始化原型向量${p_1,p_2,…,p_q}$</li>
+<li>repeat:</li>
+<li>从$D$中随机挑选一个样本$(x_j,y_j)$</li>
+<li>找到与$x_j$最近的原型向量$p_i^{*}$</li>
+<li>if(t_i^{*} &#x3D;&#x3D; y_j): $p’ &#x3D; p_i^{*} + \eta(p_i^{*} - x_j)$</li>
+<li>else: $p’ &#x3D; p_i^{*} - \eta(p_i^{*} - x_j)$</li>
+<li>判断是否到达退出条件</li>
+</ol>
+<p>整个算法过程的关键就在于5、6，实际上相当于找到距离原型向量最近的样本，如果是同标记的则将该原型向量向该样本“拉近”，如果是不同标记的则“推远”（因为对应的是同标记的在一个簇中可能性较大，不同标记在不同簇中可能性较大）</p>
+<p>关于7的退出条件，通常可以设置一个最大迭代轮数，或者是原型向量的更新程度已经小于了一个阈值。</p>
 
+		</div>
 
+		<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjIyNC8yMjczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
+       if (typeof LivereTower === 'function') { return; }
 
-<div id="archive-details">
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
-  <h1>undefined/2025</h1>
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+		
+	</article>
 
-  
-  <div class="archive-item">
-    <a href="/2025/05/06/%E5%AD%A6%E4%B9%A0%E5%90%91%E9%87%8F%E9%87%8F%E5%8C%96/">
-      学习向量量化
-    </a>
-    <time datetime="2025-05-06T15:22:52.000Z">
-      2025-05-06
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/05/06/%E5%85%AD%E7%BA%A7%E8%AF%8D%E6%B1%87/">
-      六级词汇
-    </a>
-    <time datetime="2025-05-06T02:17:16.000Z">
-      2025-05-06
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/05/03/%E8%AE%A1%E7%BB%84%E5%A4%8D%E4%B9%A0/">
-      计组复习
-    </a>
-    <time datetime="2025-05-03T08:48:40.000Z">
-      2025-05-03
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/05/01/k-means/">
-      k-means
-    </a>
-    <time datetime="2025-05-01T14:55:06.000Z">
-      2025-05-01
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/05/01/Py-learning/">
-      Py_learning
-    </a>
-    <time datetime="2025-05-01T04:55:26.000Z">
-      2025-05-01
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/04/30/Clustering-learning-route/">
-      Clustering-learning-route
-    </a>
-    <time datetime="2025-04-30T13:35:10.000Z">
-      2025-04-30
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/04/30/Clustering-watermelon-book/">
-      Clustering-watermelon-book
-    </a>
-    <time datetime="2025-04-30T11:58:19.000Z">
-      2025-04-30
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/04/27/Traceroute/">
-      Traceroute
-    </a>
-    <time datetime="2025-04-27T11:35:01.000Z">
-      2025-04-27
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/02/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%A0%91/">
-      数据结构与算法——树
-    </a>
-    <time datetime="2025-02-03T10:42:16.000Z">
-      2025-02-03
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/02/03/unity%E9%94%9A%E7%82%B9/">
-      unity锚点
-    </a>
-    <time datetime="2025-02-03T10:38:50.000Z">
-      2025-02-03
-    </time>
-  </div>
-  
-
-  <div id="other-paginator">
-    <span class="page-number current">1</span>
-  </div>
+	<div id="toc">
+		
+	</div>
 
 </div>
 
-
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
 
 
 			</div>
