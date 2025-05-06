@@ -121,12 +121,113 @@
 <li>repeat:</li>
 <li>从$D$中随机挑选一个样本$(x_j,y_j)$</li>
 <li>找到与$x_j$最近的原型向量$p_i^{*}$</li>
-<li>if(t_i^{*} &#x3D;&#x3D; y_j): $p’ &#x3D; p_i^{*} + \eta(p_i^{*} - x_j)$</li>
+<li>if($t_i^{*}$ &#x3D;&#x3D; $y_j$): $p’ &#x3D; p_i^{*} + \eta(p_i^{*} - x_j)$</li>
 <li>else: $p’ &#x3D; p_i^{*} - \eta(p_i^{*} - x_j)$</li>
 <li>判断是否到达退出条件</li>
 </ol>
 <p>整个算法过程的关键就在于5、6，实际上相当于找到距离原型向量最近的样本，如果是同标记的则将该原型向量向该样本“拉近”，如果是不同标记的则“推远”（因为对应的是同标记的在一个簇中可能性较大，不同标记在不同簇中可能性较大）</p>
 <p>关于7的退出条件，通常可以设置一个最大迭代轮数，或者是原型向量的更新程度已经小于了一个阈值。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>使用python对西瓜书上的示例复现代码如下（30个样本，9-21号样本标记为2，其它样本标记为1，随机选择5个样本作为原始向量，标记分别为1、2、2、1、1，学习率为0.1）</p>
+<p>Data.py数据集部分:</p>
+<pre><code>D = [
+    [0, 0],
+    [0.697, 0.460], [0.774, 0.376], [0.634, 0.264], [0.608, 0.318], [0.556, 0.215],
+    [0.403, 0.237], [0.481, 0.149], [0.437, 0.211], [0.666, 0.091], [0.243, 0.267],
+    [0.245, 0.057], [0.343, 0.099], [0.639, 0.161], [0.657, 0.198], [0.360, 0.370],
+    [0.593, 0.042], [0.719, 0.103], [0.359, 0.188], [0.339, 0.241], [0.282, 0.257],
+    [0.748, 0.232], [0.714, 0.346], [0.483, 0.312], [0.478, 0.437], [0.525, 0.369],
+    [0.751, 0.489], [0.532, 0.472], [0.473, 0.376], [0.725, 0.445], [0.446, 0.459]
+]  # 数据集，1~30，0索引不使用
+# 数据集的标记，LVQ使用
+T = [
+    0,
+    1, 1, 1, 1, 1,
+    1, 1, 1, 2, 2,
+    2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2,
+    2, 1, 1, 1, 1,
+    1, 1, 1, 1, 1
+]
+# 原始向量标记的输入
+q_vect = [1, 2, 2, 1, 1]
+</code></pre>
+<p>main.py主函数部分：</p>
+<pre><code>import K_means
+import LVQ
+import Data
+
+
+def main(): 
+    print(&quot;LVQ 的结果&quot;, end=&quot;\n&quot;)
+    res = LVQ.lvq(Data.D, Data.T, Data.q_vect)
+    for i in range(5):
+        print(len(res[i]) - 1, end=&quot;\n&quot;)
+        if len(res[i]) == 1:
+            print(&quot;[]&quot;, end=&quot;\n&quot;)
+            continue
+        for j in range(len(res[i])):
+            if j == 0:
+                continue
+            print(res[i][j], end=&quot; &quot;)
+        if len(res[i]) != 1:
+            print(&quot; &quot;)
+
+
+    if __name__ == &quot;__main__&quot;:
+        main()
+</code></pre>
+<p>LVQ.py学习向量量化算法部分：</p>
+<pre><code>def lvq(D:[[float]], T:[int], q_vect:[]):
+l_rate = 0.1
+import random as rd
+q_vec_index = rd.sample(range(1, 31), 5)  # 随机选取5个样本作为原型向量
+q_vec = []  # 原型向量
+for i in range(0,5):
+    q_vec.append(D[q_vec_index[i]])
+
+for _ in range(0,10000):  # 迭代10000轮
+    j_dex = rd.randint(1,30)  # 随机挑选一个样本，randint函数的参数是一个闭区间！
+    q = 0 # 距离j_dex最近的原型向量的索引
+    d = (D[j_dex][0] - q_vec[0][0])**2 + (D[j_dex][1] - q_vec[0][1])**2
+    for i in range(1,5):
+        d_i = (D[j_dex][0] - q_vec[i][0])**2 + (D[j_dex][1] - q_vec[i][1])**2
+        if d_i &lt; d:
+            q = i
+            d = d_i
+    if q_vect[q] == T[j_dex]:  # 将原型向量与样本拉近
+        q_vec[q][0] = q_vec[q][0] + l_rate*(D[j_dex][0] - q_vec[q][0])
+        q_vec[q][1] = q_vec[q][1] + l_rate*(D[j_dex][1] - q_vec[q][1])
+    else:  # 将原型向量与样本推远
+        q_vec[q][0] = q_vec[q][0] - l_rate * (D[j_dex][0] - q_vec[q][0])
+        q_vec[q][1] = q_vec[q][1] - l_rate * (D[j_dex][1] - q_vec[q][1])
+result = [[], [], [], [], []]
+for i in range(0,5):
+    result[i].append(q_vec[i])
+for i in range(1,31):
+    j = 0
+    d = (D[i][0] - q_vec[j][0])**2 + (D[i][1] - q_vec[j][0])**2
+    for _ in range(1,5):
+        d_ = (D[i][0] - q_vec[_][0])**2 + (D[i][1] - q_vec[_][1])**2
+        if d_ &lt; d:
+            d = d_
+            j = _
+    result[j].append(D[i])
+return result
+</code></pre>
+<p><code>捉个一个虫，py中万物皆对象，在初始化q_vec的时候直接将数据集D中的元素append进去，实际上共享了内存，这会导致更新原型向量的时候，数据集中的元素被更新，解决方案是使用深拷贝</code></p>
+<p>修改方法：<br>将q_vec初始化的地方：</p>
+<pre><code>q_vec = []  # 原型向量
+for i in range(0,5):
+    q_vec.append(D[q_vec_index[i]])
+</code></pre>
+<p>更改为：</p>
+<pre><code>q_vec = [x.copy() for x in (D[i] for i in q_vec_index)]  # 关键修复点：使用列表拷贝
+</code></pre>
+<p>最终运行结果：</p>
+<blockquote>
+<p>3<br>[0.36, 0.37] [0.478, 0.437] [0.446, 0.459]<br>8<br>[0.634, 0.264] [0.556, 0.215] [0.666, 0.091] [0.639, 0.161] [0.657, 0.198] [0.593, 0.042] [0.719, 0.103] [0.748, 0.232]<br>9<br>[0.403, 0.237] [0.481, 0.149] [0.437, 0.211] [0.243, 0.267] [0.245, 0.057] [0.343, 0.099] [0.359, 0.188] [0.339, 0.241] [0.282, 0.257]<br>5<br>[0.697, 0.46] [0.774, 0.376] [0.714, 0.346] [0.751, 0.489] [0.725, 0.445]<br>5<br>[0.608, 0.318] [0.483, 0.312] [0.525, 0.369] [0.532, 0.472] [0.473, 0.376]  </p>
+</blockquote>
+<p>对应为5个簇中样本的数量和相应的样本</p>
 
 		</div>
 
