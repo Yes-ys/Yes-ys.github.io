@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Archives: 2025 [ 代码和诗 ]</title>
+	<title>MapReduce [ 代码和诗 ]</title>
 	
 	
 	<!-- stylesheets list from _config.yml -->
@@ -105,41 +105,48 @@
 			<div id="content-inner">
 
 				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>MapReduce</h1>
+			<p><code>这篇blog用于记录，我在学习计算机系统工程导论，有关性能的章节时，阅读的一篇叫做MapReduce的论文</code></p>
+<h2 id="工程师提出MapReduce的编程模型和实现，他们的性能目标是什么？"><a href="#工程师提出MapReduce的编程模型和实现，他们的性能目标是什么？" class="headerlink" title="工程师提出MapReduce的编程模型和实现，他们的性能目标是什么？"></a>工程师提出MapReduce的编程模型和实现，他们的性能目标是什么？</h2><p>他们的性能目标是通过MapReduce实现大规模数据专用计算的自动并行化，使得缺少并行与分布式系统经验的程序员可以轻松利用大规模分布式系统资源，从而突破数据处理的时延这一性能瓶颈。</p>
+<h2 id="Google是怎么通过实现去满足这些目标的？"><a href="#Google是怎么通过实现去满足这些目标的？" class="headerlink" title="Google是怎么通过实现去满足这些目标的？"></a>Google是怎么通过实现去满足这些目标的？</h2><p>MapReduce程序主要有用户部分和库部分，前者根据用户的业务逻辑需要在后者的基础上进行编写，而相关的并行化、容错、本地优化和负载均衡的细节被隐藏在后者中。整个系统的工作流程是：MapReduce库分割输入文件为较小块，并启动程序运行于机器集群之上；主结点根据块的分割情况，将map、reduce任务分配给各个机器处理；map任务通过用户的MAP函数建立相应的键值对；reduce任务将map任务处理的结果进行排序从而组合相同键，再通过用户的Reduce进行处理。这样的程序系统可以运行于廉价的PC集群之上，可以显著减少时延。</p>
+<p>基于此，Google使用MapReduce程序来进行自己业务要求的实现：重写了生成Google网页搜索服务所需数据结构的生产索引、生成流行查询报告的数据提取、用于新实验和产品的网页属性提取等等。</p>
+<h2 id="MapReduce为什么选择这样实现，而没有走其它技术道路？"><a href="#MapReduce为什么选择这样实现，而没有走其它技术道路？" class="headerlink" title="MapReduce为什么选择这样实现，而没有走其它技术道路？"></a>MapReduce为什么选择这样实现，而没有走其它技术道路？</h2>
+		</div>
 
+		<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjIyNC8yMjczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
+       if (typeof LivereTower === 'function') { return; }
 
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
-<div id="archive-details">
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+		
+	</article>
 
-  <h1>undefined/2025</h1>
-
-  
-  <div class="archive-item">
-    <a href="/2025/02/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%A0%91/">
-      数据结构与算法——树
-    </a>
-    <time datetime="2025-02-03T10:42:16.000Z">
-      2025-02-03
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2025/02/03/unity%E9%94%9A%E7%82%B9/">
-      unity锚点
-    </a>
-    <time datetime="2025-02-03T10:38:50.000Z">
-      2025-02-03
-    </time>
-  </div>
-  
-
-  <div id="other-paginator">
-    <a class="extend prev" rel="prev" href="/archives/2025/"> </a><a class="page-number" href="/archives/2025/">1</a><span class="page-number current">2</span>
-  </div>
+	<div id="toc">
+		
+	</div>
 
 </div>
 
-
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
 
 
 			</div>
