@@ -115,6 +115,234 @@
     
     <div class="recent-post-item">
 
+      <a href="/2025/05/01/Py-learning/" class="item-title">Py_learning</a>
+      
+      <time datetime="2025-05-01T04:55:26.000Z">
+        2025-05-01
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 由于我在学习机器学习算法的时候，希望通过Python来对相关的算法进行复现。而自己在此之前其实零零散散不成体系地接触过Python语言，也了解一些基本的东西，但是对于Python中一些语言“特性”方面的东西所知甚少，例如变量的作用域与生命周期，不同模块间的访问等等；此外我对Python风格的代码写法也并不熟悉，其实写什么感觉都是C的味道......于是写下这篇blog用来记录，进一步对相关内容的学习
+模块化的Python程序内置变量__name____name__是python模块当中的一个内置变量，每个模块都有。如果你选择当前模块开始执行，那么当前模块内置的__name__会被置为__main__；如果一个模块是被令一个模块import进去的，那么这个模块的__name__会被置为__模块名__，但是不会引入后缀。
+模块化通过__name__我们就可以将我整个项目文件模块化的组织起来。将一个模块作为程序的执行入口，并始终自我约束地从这个模块开始启动整个项目程序。这样做的关键在于使用如下代码：
+12345def main:    somethingif __name__ == __ma -->
+        <!-- </div> -->
+
+        
+        <p><code>由于我在学习机器学习算法的时候，希望通过Python来对相关的算法进行复现。而自己在此之前其实零零散散不成体系地接触过Python语言，也了解一些基本的东西，但是对于Python中一些语言“特性”方面的东西所知甚少，例如变量的作用域与生命周期，不同模块间的访问等等；此外我对Python风格的代码写法也并不熟悉，其实写什么感觉都是C的味道......于是写下这篇blog用来记录，进一步对相关内容的学习</code></p>
+<h2 id="模块化的Python程序"><a href="#模块化的Python程序" class="headerlink" title="模块化的Python程序"></a>模块化的Python程序</h2><h3 id="内置变量-name"><a href="#内置变量-name" class="headerlink" title="内置变量__name__"></a>内置变量__name__</h3><p>__name__是python模块当中的一个内置变量，每个模块都有。如果你选择当前模块开始执行，那么当前模块内置的__name__会被置为__main__；如果一个模块是被令一个模块import进去的，那么这个模块的__name__会被置为__模块名__，但是不会引入后缀。</p>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>通过__name__我们就可以将我整个项目文件模块化的组织起来。将一个模块作为程序的执行入口，并始终自我约束地从这个模块开始启动整个项目程序。这样做的关键在于使用如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>:</span><br><span class="line">    something</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == __main__:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键点即，不要使用判断__name__以外的任何顶层代码</strong></p>
+<h3 id="一些特性"><a href="#一些特性" class="headerlink" title="一些特性"></a>一些特性</h3><p>Python是一种解释性语言，特点就是不需要编译，而是在运行时通过解释器逐行读取、分析和执行源代码。对应的特点之一就是交互式的编程环境（可以在命令行中输入代码，并立刻看到执行的结果）</p>
+<p>我联想到与这种特点相对应的就是——“顶层代码”，即相关的语句不会被封装在任何函数和类当中，点击运行，便会至上而下地逐行开始执行。</p>
+<p><strong>所以一个关键的特性就是，使用import导入模块化后，该模块的顶层代码会立刻执行。</strong></p>
+<p>启示：编写规范化的工程代码时，除了判断程序执行入口，不要使用顶层代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#k_means.py</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;this is k_means&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#main.py</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;this is mainn&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == main:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><code>this is k_means this is main</code></p>
+<h2 id="变量的作用域和生命周期"><a href="#变量的作用域和生命周期" class="headerlink" title="变量的作用域和生命周期"></a>变量的作用域和生命周期</h2><h3 id="单一模块"><a href="#单一模块" class="headerlink" title="单一模块"></a>单一模块</h3><ol>
+<li><p>全局变量<br>在同一模块当中，定义于模块层的变量（顶层代码部分），对应的是<code>global varible</code>全局变量，这些变量的作用域是全局可见，生命周期是从程序开始执行开始，执行完毕结束。</p>
+</li>
+<li><p>局部变量<br>定义于函数中的变量是<code>local varible</code>局部变量，作用域局部可见。对于嵌套函数，外层变量对内层可见，内层对外层不可见。在Python中这种函数嵌套更加的显然。下面是一个例子：</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">outer_function</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;this is outer&quot;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner_function</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;this is inner&quot;</span>)</span><br><span class="line">    inner_function()</span><br></pre></td></tr></table></figure>
+
+<p>对应变量的生命周期，都是从定义自己的函数开始，到函数执行完毕结束。</p>
+<p><strong>另外值得一提的是，在上面这个例子当中，inner_function不能从顶层代码调用。</strong><br>3. 内置变量<br><code>Built-in varible</code>内置变量的作用域是在任何地方都可以访问，且生命周期贯穿整个程序的运行期，最开始提到的__name__就是一个很好的例子。<br>4. 访问规则<br>python对于变量遵循<code>LEGB</code>的访问规则，即局部、嵌套、全局、内置。当发现了变量，即刻使用。</p>
+<p>最后简单补充以下Python的变量定义规则，变量在“第一次赋值”时被定义。当然这意味着我们要定义一个变量必须考虑一个初始值，如果暂时没有初始值的话可以使用<code>None</code>作为初始值。随后根据需要赋予想要的初始值即可。当然，变量的类型也是根据你赋予的值来确定的。</p>
+<h3 id="多模块"><a href="#多模块" class="headerlink" title="多模块"></a>多模块</h3><p>为了理解多模块情况下相关变量的作用域和生命周期，引入以下概念：</p>
+<ol>
+<li><p>模块对象，在导入模块的时候Python会为模块创建一个对象，这个对象的生命周期由其作用域确定</p>
+</li>
+<li><p>全局导入，模块对象在全局作用域中导入，此时模块变量生命周期同程序一样。作用域同全局变量。</p>
+</li>
+<li><p>局部导入，模块对象在局部作用域中导入，此时模块变量生命周期同导入了它的函数。作用域同相应的局部变量。</p>
+</li>
+<li><p>模块中的顶层代码在被导入时会立刻执行，相应的对应的全局变量会即刻创建，所以对应的全局变量生命周期、作用域，同模块对象。</p>
+</li>
+</ol>
+<p><del>口语化的来说，模块被导入的时候也相当于一个变量（或者是一个类），如果是被主函数所在的模块作为全局变量导入，那么被导入模块的生命周期、作用域同全局变量，如果被作为局部变量导入，也同局部变量。相应的，被导入的时候，被导入模块中的“全局变量”也会即刻被创建，其生命周期同被导入的模块。</del>（毫不精准的表述…）</p>
+<h2 id="名称冲突"><a href="#名称冲突" class="headerlink" title="名称冲突"></a>名称冲突</h2><p>在使用以下代码的时候，名称冲突时常发生。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> somemodule <span class="keyword">import</span> somename</span><br></pre></td></tr></table></figure>
+
+<p>这类似是跳过了模块对象，直接导入了其中某个全局变量，自然就很可能与当前模块已有的全局变量、函数发生名称冲突。</p>
+<p>常用的解决方法，也是我们使用模块化的常用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> somemodule</span><br><span class="line">somemodule.somename <span class="comment">#使用模块对象名来访问相应的变量、函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> somemodule <span class="keyword">import</span> somename <span class="keyword">as</span> another_name <span class="comment">#或者是别名</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列表生成式"><a href="#列表生成式" class="headerlink" title="列表生成式"></a>列表生成式</h2><p>语法如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list_name = [formula <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(start, end)]</span><br><span class="line">list_name = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>这种创建列表的方法成为列表生成式，formula是用于生成列表的表达式，可以是返回一些值的函数，后面的循环是列表中生成元素的次数，循环一次便会调用一次formula。</p>
+<p>当然formula也可以直接是数学表达式，例如第二个例子展示的，用于生成1到9的平方的列表。</p>
+<p>注意end不被包含在内。</p>
+<h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><p>元组（Tuple）是一种内置的数据结构，属于不可变序列类型，用于存储多个元素。与列表（List）不同，<strong>元组一旦创建，其内容就不能更改（即不可变）</strong>。元组常用于存储一组相关的数据，例如函数返回多个值时，可以使用元组来打包这些值。</p>
+<h3 id="元组的创建"><a href="#元组的创建" class="headerlink" title="元组的创建"></a>元组的创建</h3><p>使用<code>()</code>来创建一个元组，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个空元组</span></span><br><span class="line">empty_tuple = ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个包含多个元素的元组</span></span><br><span class="line">example_tuple = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&quot;hello&quot;</span>, <span class="number">4.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个单元素的元组（注意逗号）</span></span><br><span class="line">single_element_tuple = (<span class="number">1</span>,)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以省略小括号，直接用逗号分隔元素</span></span><br><span class="line">another_tuple = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问元素</span></span><br><span class="line"><span class="built_in">print</span>(example_tuple[<span class="number">0</span>])  <span class="comment"># 输出 1</span></span><br><span class="line"><span class="built_in">print</span>(example_tuple[<span class="number">3</span>])  <span class="comment"># 输出 &quot;hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取元组的长度</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(example_tuple))  <span class="comment"># 输出 5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="元组的常见用途"><a href="#元组的常见用途" class="headerlink" title="元组的常见用途"></a>元组的常见用途</h3><ol>
+<li>多值返回，用于让函数返回多个值</li>
+<li>作为字典的键，这是由于元组的不可变性</li>
+</ol>
+<h2 id="函数的参数以及返回值"><a href="#函数的参数以及返回值" class="headerlink" title="函数的参数以及返回值"></a>函数的参数以及返回值</h2><p>在python中函数的参数不需要提前声明类型，同样的返回值也不需要提前进行声明。但是在大型的项目中为了便于程序的维护，以及提供静态的检查，可以使用注解符号。例如，下面这个例子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span>, <span class="type">Tuple</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">k_means</span>(<span class="params">D:<span class="type">List</span>[<span class="type">List</span>[<span class="built_in">float</span>]], n:<span class="built_in">int</span>, k:<span class="built_in">int</span></span>) -&gt; <span class="type">Tuple</span>(<span class="type">List</span>[<span class="type">List</span>[<span class="type">List</span>[<span class="built_in">float</span>]]], Lsit[<span class="type">List</span>[<span class="built_in">float</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>其中typing是类型注解使用的包，如果不需要使用类型进行注解可以不使用这个包。</p>
+<p>常见的类型注解有：</p>
+<ol>
+<li>List     eg: List[int]</li>
+<li>Tuple    eg: Tuple[float,str]</li>
+<li>Dict     eg: Dict[int,str]</li>
+<li>Set      eg: Set[str]<br>还有许多可用的…用到再查吧…</li>
+</ol>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/05/01/Py-learning/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
+      <a href="/2025/04/30/Clustering-learning-route/" class="item-title">Clustering-learning-route</a>
+      
+      <time datetime="2025-04-30T13:35:10.000Z">
+        2025-04-30
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 我从现在开始学习聚类相关的内容，最终目标是希望发表一篇相关的论文。我以现在浅显的眼光给自己定下的学习路线如下1. 完成西瓜书聚类部分的学习，完成的标志是将书上给出的伪代码进行真实地复现2. 阅读综述论文，了解聚类对应的科研领域当前大概的情况3. 阅读聚类有关的顶会论文......我以现在的知识，无法继续制定下面的计划了，因为我并不了解3、往后的真正开始着手科研工作会是怎样的。我目前粗浅的想法是，或许我会了解到一些聚类的具体应用，然后为了完成一篇相关的论文：我也必须将聚类投入到具体的应用当中去，这个时候我不得不学习一些其它领域的知识（当然，目前我并不清楚那些会是什么）；又或许我会做一些对聚类算法进行改进的工作，但是这或许会更加艰难（因为曾经一位厉害的学长告诉我将A运用于B会比将A升级为A+简单许多）此外，我将这篇blog用作自己的学习日志与计划路线
+阶段一2025.4.30
+
+学习西瓜书上有关聚类的基础知识（概念、性能指标）
+学习“k均值算法”、学习“学习向量量化算法”
+
+ -->
+        <!-- </div> -->
+
+        
+        <p><code>我从现在开始学习聚类相关的内容，最终目标是希望发表一篇相关的论文。我以现在浅显的眼光给自己定下的学习路线如下</code><br><code>1. 完成西瓜书聚类部分的学习，完成的标志是将书上给出的伪代码进行真实地复现</code><br><code>2. 阅读综述论文，了解聚类对应的科研领域当前大概的情况</code><br><code>3. 阅读聚类有关的顶会论文......</code><br><code>我以现在的知识，无法继续制定下面的计划了，因为我并不了解3、往后的真正开始着手科研工作会是怎样的。我目前粗浅的想法是，或许我会了解到一些聚类的具体应用，然后为了完成一篇相关的论文：我也必须将聚类投入到具体的应用当中去，这个时候我不得不学习一些其它领域的知识（当然，目前我并不清楚那些会是什么）；又或许我会做一些对聚类算法进行改进的工作，但是这或许会更加艰难（因为曾经一位厉害的学长告诉我将A运用于B会比将A升级为A+简单许多）</code><br><code>此外，我将这篇blog用作自己的学习日志与计划路线</code></p>
+<h2 id="阶段一"><a href="#阶段一" class="headerlink" title="阶段一"></a>阶段一</h2><p>2025.4.30</p>
+<ol>
+<li>学习西瓜书上有关聚类的基础知识（概念、性能指标）</li>
+<li>学习“k均值算法”、学习“学习向量量化算法”</li>
+</ol>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/04/30/Clustering-learning-route/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
+      <a href="/2025/04/30/Clustering-watermelon-book/" class="item-title">Clustering-watermelon-book</a>
+      
+      <time datetime="2025-04-30T11:58:19.000Z">
+        2025-04-30
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 聚类任务简介简单地说，就是要对一个n维向量元素的集合求一个划分，划分后的子集就是一类的（不相交的簇）。
+对于数据集$D &#x3D; {x_1,x_2,…,x_m}$，划分为k个不相交的集合$C_1, C_2, …, C_k$，若$x_i \in C_j$，则$\lambda_i &#x3D; j$，其中$j \in {1,2,…,k}$，对应$\lambda_i$就是$x_i$的标签。聚类任务要做的是就是求出一个聚类结果$\lambda &#x3D; (\lambda_1,\lambda_2,…,\lambda_m)$，其中$\lambda$为数据集的簇标记向量，第$i$个分量标记了$x_i$属于哪一个簇。
+性能度量怎样的聚类是好的：
+
+簇内的样本尽量相似
+簇间的样本尽量不同
+
+外部指标外部指标：将聚类结果和某个“参考模型”进行比较，称为外部指标
+对于数据集$D &#x3D; {x_1,x_2,…,x_m}$，使用聚类模型A，得到簇标记向量$\lambda$，另外使用参考聚类模型B，得到簇标记向量$\lambda^{*}$。
+于是我们可以根据$\lambda_i$与$\lambda_ -->
+        <!-- </div> -->
+
+        
+        <h2 id="聚类任务简介"><a href="#聚类任务简介" class="headerlink" title="聚类任务简介"></a>聚类任务简介</h2><p>简单地说，就是要对一个n维向量元素的集合求一个划分，划分后的子集就是一类的（不相交的簇）。</p>
+<p>对于数据集$D &#x3D; {x_1,x_2,…,x_m}$，划分为k个不相交的集合$C_1, C_2, …, C_k$，若$x_i \in C_j$，则$\lambda_i &#x3D; j$，其中$j \in {1,2,…,k}$，对应$\lambda_i$就是$x_i$的标签。聚类任务要做的是就是求出一个聚类结果$\lambda &#x3D; (\lambda_1,\lambda_2,…,\lambda_m)$，其中$\lambda$为数据集的簇标记向量，第$i$个分量标记了$x_i$属于哪一个簇。</p>
+<h2 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h2><p>怎样的聚类是好的：</p>
+<ol>
+<li>簇内的样本尽量相似</li>
+<li>簇间的样本尽量不同</li>
+</ol>
+<h3 id="外部指标"><a href="#外部指标" class="headerlink" title="外部指标"></a>外部指标</h3><p>外部指标：将聚类结果和某个“参考模型”进行比较，称为外部指标</p>
+<p>对于数据集$D &#x3D; {x_1,x_2,…,x_m}$，使用聚类模型A，得到簇标记向量$\lambda$，另外使用参考聚类模型B，得到簇标记向量$\lambda^{*}$。</p>
+<p>于是我们可以根据$\lambda_i$与$\lambda_j$相同与否的关系以及$\lambda^{<em>}_i$<br>与$\lambda^{</em>}_j$是否相同的关系定义如下集合。</p>
+<p>$DD,DS,SD,SS$一共四个集合，这些集合中的元素类似$(x_i,x_j)$，是一个“向量对”，分别按照如下规则界定类似的向量对是否属于相应的集合</p>
+<ol>
+<li>$x_i$与$x_j$在模型A、B的划分下都属于同一簇，则$(x_i,x_j) \in SS$</li>
+<li>$x_i$与$x_j$在模型A、B的划分下都不属于同一簇，则$(x_i,x_j) \in DD$</li>
+<li>$x_i$与$x_j$在模型A划分下属于同一簇，在B划分下不属于同一簇，则$(x_i,x_j) \in SD$</li>
+<li>$x_i$与$x_j$在模型A划分下不属于同一簇，在B划分下属于同一簇，则$(x_i,x_j) \in DS$</li>
+</ol>
+<p><code>D即different，S即same 这样就非常容易理解了</code></p>
+<p>根据上面的集合，我们可以定义如下过度变量</p>
+<ol>
+<li>$\lvert SS \rvert &#x3D; a$</li>
+<li>$\lvert SD \rvert &#x3D; b$</li>
+<li>$\lvert DS \rvert &#x3D; c$</li>
+<li>$\lvert DD \rvert &#x3D; d$</li>
+</ol>
+<p>进一步，我们定义常用于性能度量的第一组系数</p>
+<ol>
+<li><strong>JC系数</strong> $JC &#x3D; \frac{a}{a+b+c}$</li>
+<li><strong>FMI系数</strong> $FMI &#x3D; \sqrt{\frac{a}{a+b} \ast \frac{a}{a+c}}$</li>
+<li><strong>Rand指数</strong> $RI &#x3D; \frac{2(a+b)}{m(m-1)}$</li>
+</ol>
+<p>这些性能指标的范围都是$[0,1]$，并且越大说明聚类效果越好<br><code>当然，前提是参考的模型是“正确”的</code></p>
+<h3 id="距离计算"><a href="#距离计算" class="headerlink" title="距离计算"></a>距离计算</h3><h4 id="闵可夫斯基距离"><a href="#闵可夫斯基距离" class="headerlink" title="闵可夫斯基距离"></a>闵可夫斯基距离</h4><p>定义函数$dist(\cdot,\cdot)$，用于计算两个向量的距离。则它应该满足下述三个性质</p>
+<ol>
+<li>非负性</li>
+<li>对称性</li>
+<li>直递性</li>
+</ol>
+<p>常用的距离是闵可夫斯基距离</p>
+<p>$dist_mk(x_i,x_j) &#x3D; (\sum_{\mu &#x3D; 1}^{n} \lvert x_{i\mu} - x_{j\mu} \rvert ^{p})^{\frac{1}{p}}$<br>显然当$p &#x3D; 2$时即我们常用的欧氏距离，$p &#x3D; 1$时为曼哈顿距离</p>
+<h4 id="有序属性和无序属性"><a href="#有序属性和无序属性" class="headerlink" title="有序属性和无序属性"></a>有序属性和无序属性</h4><p>在考虑属性之间的距离的时候，序十分重要。这里通过简单的例子引入有序和无序。属性值出自于能够直接计算距离的属性称为有序属性，例如属性定义域为${1,2,3}$，而不能的就是无序属性，例如${货车,西瓜,乐乐}$。</p>
+<p>显然，闵可夫斯基距离是用于衡量有序属性的距离的。</p>
+<h4 id="VDM——衡量无序属性的距离"><a href="#VDM——衡量无序属性的距离" class="headerlink" title="VDM——衡量无序属性的距离"></a>VDM——衡量无序属性的距离</h4><p>假设有$k$个样本簇，$m_\mu,a$表示在属性$\mu$上取值为$a$的样本的个数，$m_\mu,a,i$表示在第i个样本簇中，属性$\mu$取值为$a$的样本个数。定义VDM如下。</p>
+<p>$VDM &#x3D; \sum_{i&#x3D;1}^{k} \lvert \frac{m_\mu,a,i}{m_\mu,a} - \frac{m_\mu,b,i}{m_\mu,b}\rvert ^{p}$</p>
+<p>值得注意的是，这里衡量的只是无序属性的距离，而要衡量两个无序样本$x_i$与$x_j$的距离，即其中的各个属性（类比向量的分量）都是无序属性，我们应该对各个属性的$VDM$求和。</p>
+<h4 id="混合元素的距离"><a href="#混合元素的距离" class="headerlink" title="混合元素的距离"></a>混合元素的距离</h4><p>不失一般性，我们可以定义混合元素的距离如下：<br>$MinkovDM_p(x_i,x_j) &#x3D; (\sum_{\mu&#x3D;1}^{n_c} \lvert x_{i\mu} - x_{j\mu} \rvert ^{p} + \sum_{\mu&#x3D;n_c+1}^{n} VDM_p(x_{i,\mu},x_{j,\mu}))^{\frac{1}{p}}$</p>
+<p>其中$x_i,x_j$为混合属性的元素，$1到n_c$对应为有序属性，$n_c到n$对应为无序属性</p>
+<h3 id="内部指标"><a href="#内部指标" class="headerlink" title="内部指标"></a>内部指标</h3><p>于是我们可以根据元素的不同（有序、无序、混合），选取我们需要的距离函数$dist(\cdot,\cdot)$，定义如下常用于刻画簇的性质的量</p>
+<ol>
+<li>$\mu_i &#x3D; \frac{1}{\lvert C \rvert} \sum_{1 \le i \le \lvert C \rvert} x_i, \mu &#x3D; (\mu_1,\mu_2,…,\mu_m)$为簇$C$的中心点</li>
+<li>$avg(C) &#x3D; \frac{2}{\lvert C \rvert (\lvert C \rvert - 1)} \sum_{1 \le i &lt; j \le \lvert C \rvert} dist(x_i,x_j)$ 簇$C$内样本间的平均距离</li>
+<li>$diam(C) &#x3D; max_{1 \le i &lt; j \le \lvert C \rvert} dist(x_i,x_j)$ 簇$C$内样本间的最远距离</li>
+<li>$d_{min}(C_i,C_j) &#x3D; min_{x_i \in C_i,x_j \in C_j} dist(x_i,x_j)$ 簇$C_i$和簇$C_j$中最近样本的距离</li>
+<li>$d_{cen}(C_i,C_j) &#x3D; dist(\mu_i,\mu_j)$ 簇$C_i$和簇$C_j$的中心点距离</li>
+</ol>
+<p>进一步我们定义一些内部指标如下。</p>
+<ol>
+<li>$DBI &#x3D; \frac{1}{k} \sum_{i&#x3D;1}^{k} max_{j \ne i}(\frac{avg(C_i)+avg(C_j)}{d_{cen}(\mu_i,\mu_j)})$</li>
+<li>$DI &#x3D; min_{1 \le i \le k} { min_{j \ne i}(\frac{d_{min}(C_i,C_j)}{min_{1 \le l \le k} diam(C_i)}) }$</li>
+</ol>
+<p>DB指数越小越好，Dunn指数越大越好</p>
+<h2 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h2><p>原型的概念对应的是空间中的点。原型聚类的前提是认为，数据集中的聚类结构可以通过一组原型来描述。而原型聚类要做的就是通过某些方法找出这组“原型”。常见的原型聚类算法的代表有<code>k-means（k均值算法）</code>、<code>学习向量量化算法</code>等等</p>
+<p>在后续的blog中会记录我复现相关算法的过程</p>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/04/30/Clustering-watermelon-book/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
       <a href="/2025/04/27/Traceroute/" class="item-title">Traceroute</a>
       
       <time datetime="2025-04-27T11:35:01.000Z">
@@ -533,130 +761,12 @@ dec ax
         </div>
 
         
-    
-    <div class="recent-post-item">
-
-      <a href="/2020/01/01/%E8%AF%97/" class="item-title">诗</a>
-      
-      <time datetime="2019-12-31T16:00:00.000Z">
-        2020-01-01
-      </time>
-      
-      <!-- <div class="article-digest"> -->
-        <!-- 壹
-《甲辰正月初一为灵泉诸香客赋》水澹金粼雾舞空，烟锁灵山山囚龙。霰尽芳菲行者至，露上凝珠紫气东。父老提携童子笑，诸君揖互彩云从。香火连天今日有，爆竹声毕夕已终。
-
-~
-
-《危勉》黄烛灯火暗凝香，红袖酥肩幻梦长。醉酒吟誐任疏狂，百落临渊战心惶。前路无光路满霜，苦难同尘藏四方。来年不求万事祥，我愿与之较锋芒。
-
-~
-
-《贻君》春秋五载与君识，几经离别未有知。可怜怎奈书生骨，举杯邀酒话无时。今昔难见来日昶，参商共映明月光。高山流水何其多，相见不言别离长。
-
-贰
-《秋意尽》秋霜一点红，寒露语松榕。越鸟惊乡客，南巢临北冬。遍揲晓风月，满羽繁星空。择地息未有，淡裁碌日中。何日花前酒，携诗青崖诵。
-
-~
-
-《不意雨》云野伴骄阳，仲夏风曦长。身待雨缦缦，旱久难滂滂。卧阴苇下驻，遮乌泮水旁。念死闲行日，不意甘霖降。
-
-叁
-《月夜寄故人》细柳抚荫晓云畔，青山带水过君岸。虽守陌路长相隔，念此故人月上看。
-
-~
-
-《碧波行》见海连天月下开，踏彩逐浪思楼台。台下霓潮绕浪舞，台上金麟为我来。
-
-~
-
-《临钟书阁》长天碧色里，高阁一湖中。传即千古士，行则知无穷。
-
-~
-
-《嘲》携卷履地因风进，卧看长空皓月行。明眸 -->
-        <!-- </div> -->
-
-        
-        <h2 id="壹"><a href="#壹" class="headerlink" title="壹"></a>壹</h2><blockquote>
-<p>《甲辰正月初一为灵泉诸香客赋》<br>水澹金粼雾舞空，烟锁灵山山囚龙。<br>霰尽芳菲行者至，露上凝珠紫气东。<br>父老提携童子笑，诸君揖互彩云从。<br>香火连天今日有，爆竹声毕夕已终。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《危勉》<br>黄烛灯火暗凝香，红袖酥肩幻梦长。<br>醉酒吟誐任疏狂，百落临渊战心惶。<br>前路无光路满霜，苦难同尘藏四方。<br>来年不求万事祥，我愿与之较锋芒。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《贻君》<br>春秋五载与君识，几经离别未有知。<br>可怜怎奈书生骨，举杯邀酒话无时。<br>今昔难见来日昶，参商共映明月光。<br>高山流水何其多，相见不言别离长。</p>
-</blockquote>
-<h2 id="贰"><a href="#贰" class="headerlink" title="贰"></a>贰</h2><blockquote>
-<p>《秋意尽》<br>秋霜一点红，寒露语松榕。<br>越鸟惊乡客，南巢临北冬。<br>遍揲晓风月，满羽繁星空。<br>择地息未有，淡裁碌日中。<br>何日花前酒，携诗青崖诵。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《不意雨》<br>云野伴骄阳，仲夏风曦长。<br>身待雨缦缦，旱久难滂滂。<br>卧阴苇下驻，遮乌泮水旁。<br>念死闲行日，不意甘霖降。</p>
-</blockquote>
-<h2 id="叁"><a href="#叁" class="headerlink" title="叁"></a>叁</h2><blockquote>
-<p>《月夜寄故人》<br>细柳抚荫晓云畔，青山带水过君岸。<br>虽守陌路长相隔，念此故人月上看。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《碧波行》<br>见海连天月下开，踏彩逐浪思楼台。<br>台下霓潮绕浪舞，台上金麟为我来。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《临钟书阁》<br>长天碧色里，高阁一湖中。<br>传即千古士，行则知无穷。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《嘲》<br>携卷履地因风进，卧看长空皓月行。<br>明眸晶莹玉齿杯，蓬头恹面笑长情。</p>
-</blockquote>
-<h2 id="肆"><a href="#肆" class="headerlink" title="肆"></a>肆</h2><blockquote>
-<p>《夏日乱笔》<br>墨上还新山水通，此间独骑临霜松。<br>昨年闻香落笔柔，意与锋芒寄青空。<br>海破日出乾坤动，河汉月邀金乌重。<br>沧浪折煞浮萍起，百波沉浮犬马恸。<br>他日锥断窠臼风，白鹤冲天烟柳中。<br>任子何笑鱼龙游，东风吹我麟阁梦。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《闻雨祭剑》<br>鸣剑八尺，柄灼伤伤。<br>血蚀锈迹，斑斑其煌。<br>剑折剑伤，不改剑刚。<br>素钢以铸，可刻金光。<br>百剑之中，其伤为扬。<br>剑鸣剑光，旦列剑榜。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《田间乱笔》<br>百日随春尽，新曦按夜来。<br>碧草凝寒露，陌上芳菲开。<br>折枝近门扉，黄䤋扶老待。<br>相论无功名，赤子初心在。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《告己书》<br>自负有翅，既委金笼。<br>不绝长空，何异斑鸠！<br>虽离群所，日起当思。<br>衣冠正否，行止绳否。<br>若背师恩，女颜不存。<br>若耽暖衾，女辞为空。<br>而至今日，才非盖世。<br>略有所长，只在微志。<br>今志但弃，形飞神灭。<br>渺渺于世，不知为人。<br>幸生父母，又遇恩师。<br>教吾配兰，视吾圣贤。<br>前见子丘，后瞻东坡。<br>周环吾身，竖子小儿。<br>其钻弥坚？其爱一欢？<br>若以为前，即当顺羽。<br>若就后居，不如便埋！</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>百年征程易难兴，只言片语寥可尽？<br>听罢放翁示儿语，途闻鹏举复国心。<br>鱼耽海者树鸟亲，风化雨兮草木喑。<br>今时往已难可忆，唯叹受多报无冯！</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《白天野》<br>蹇驴踏寒山，欲寻春可安。<br>此去十二载，未觉铁岭难。<br>路别桃花庵，又至神女山。<br>朱唇抿贝齿，纵邀即日欢。<br>谢蛾眉观，仰首望河汉。<br>心驶沧浪处，欲起罢钓竿！</p>
-</blockquote>
-<h2 id="伍"><a href="#伍" class="headerlink" title="伍"></a>伍</h2><blockquote>
-<p>《夏》<br>微月照鬓角，夏风拂过柳眉梢。<br>微踮首，咧嘴笑，花色泛上白裙脚。<br>又是一年蝉鸣时，荏苒莺飞鸟。<br>犹觉夏日胜好。</p>
-</blockquote>
-<p>~</p>
-<blockquote>
-<p>《览逍遥游有感》<br>余见千里之修厚鲲鹏者，以六月之息，适于南冥，一跃而上九万里，水击三千里。<br>余览其逍遥也，见其适者，天时也，非无所依也。然余谓之，己之限及身之短者，了然于胸，明所适者而享逍遥之微寥，不亦 逍遥也？<br>余见蜩与学鸠，以决起而飞，抢树而至，下鲲鹏之所适者，成其逍遥之逍遥也，特不解鲲鹏之所适者也。<br>余谓之，虽是井底之蛙，然于其身者，乐也，见世间万般皆下品，为己独高。于己之界，所达皆可有，所求皆以应，不亦逍遥 也？<br>且夫不死之椿，长生之冥灵，而宋荣子之辈不亦似鲲鹏哉，或有上中下之境焉也。<br>至于至人，神人，圣人，于天地之间无所适，乘万物之正，驾六气之辩者，余谓之人力所莫能及。然拊度其中，乘万物之正者 ，即庄周所言，物我为一，以天地万物之百变为己之息，如己心之动，血之流者。所适者皆如己出，故无所适也，通透哉！而 御六气之变，且夫游于无穷之中，仙人之谓也，非物力所能及。<br>故吾小儿，斗胆列逍遥之次，小，中，大者也。<br>小之逍遥，所限莫所大焉，然其不见，独达于己，鄙薄万物而如稚童，亦有乐者也。<br>中之逍遥，所限或有见微，然其了然，善适万物，夷其所长善之所短，诚然逍遥也。<br>大之逍遥，所限者于己身，通透明达，处之世间，无所不乐无所不适，此真逍遥也。<br>然三者之上，所能有游于无穷者，特为仙人之所处耳，言之何用？<br>小之逍遥，行年必出，中之逍遥，或死无穷。<br>故吾见中之逍遥亦有三般。<br>一曰，蟪蛄已死，化茧成蝶，初出井底，蓦然之余，惶惶之间，不知所为，旦怀为先，嘲之小儿以自饰，宋荣子之辈也。<br>二曰，明于世间，知所何为，明所不为，朝朝暮暮，施力其中，然有所乐，亦有所乏，或感万物之何为，或冥灵大椿也。<br>三曰，旷达自若，气定神闲，可借薄力，而撼世间，明哲处事，善以待人，乐而长命，无所喟叹无所疲，或鲲鹏之状也。<br>然一者之上，二者之下，或鄙之所谓也，目力有限，思有所疲，略省二者寥寥，而思三者谓何，至于大逍遥者，或愚竭毕生之 力而无以及，乃今之人或有一二，故余妄言，见之可由。余之所望，尽己之力，达于三者而望大逍遥者，仙人之风，果然之间 ，或付诸笑谈一二。</p>
-</blockquote>
-
-        
-
-
-        <span>
-          <a class="article-read" href="/2020/01/01/诗/"> Read more -->
-          </span>
-        </div>
-
-        
       </div>
       
 
 
       <div id="recent-posts-paginator">
-        <a class="extend prev" rel="prev" href="/"> </a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/"> </a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"> </a>
       </div>
 
     </div>
@@ -709,23 +819,23 @@ dec ax
       <ul>
         
           <li>
+            <a class="recent_posts-list-link" href="/2025/05/25/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">拜占庭将军问题与计算机系统的一致性</a>
+          </li>
+        
+          <li>
+            <a class="recent_posts-list-link" href="/2025/05/25/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E4%B8%80%E8%87%B4%E6%80%A7/">分布式的原子性与一致性</a>
+          </li>
+        
+          <li>
+            <a class="recent_posts-list-link" href="/2025/05/23/test/">test</a>
+          </li>
+        
+          <li>
             <a class="recent_posts-list-link" href="/2025/05/18/%E6%AF%9B%E6%A6%82%E5%A4%8D%E4%B9%A0/">毛概复习</a>
           </li>
         
           <li>
             <a class="recent_posts-list-link" href="/2025/05/11/MapReduce/">MapReduce</a>
-          </li>
-        
-          <li>
-            <a class="recent_posts-list-link" href="/2025/05/07/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E8%81%9A%E7%B1%BB/">高斯混合聚类</a>
-          </li>
-        
-          <li>
-            <a class="recent_posts-list-link" href="/2025/05/06/%E5%AD%A6%E4%B9%A0%E5%90%91%E9%87%8F%E9%87%8F%E5%8C%96/">学习向量量化</a>
-          </li>
-        
-          <li>
-            <a class="recent_posts-list-link" href="/2025/05/06/%E5%85%AD%E7%BA%A7%E8%AF%8D%E6%B1%87/">六级词汇</a>
           </li>
         
       </ul>
@@ -737,7 +847,7 @@ dec ax
 </aside>
 
 <!-- <div id="paginator"> -->
-<!--   <a class="extend prev" rel="prev" href="/"> </a><a class="page-number" href="/">1</a><span class="page-number current">2</span> -->
+<!--   <a class="extend prev" rel="prev" href="/"> </a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"> </a> -->
 <!-- </div> -->
 
     <script type="text/x-mathjax-config">
@@ -811,5 +921,20 @@ dec ax
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

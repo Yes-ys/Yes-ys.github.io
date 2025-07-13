@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>unity锚点 [ 代码和诗 ]</title>
+	<title>test [ 代码和诗 ]</title>
 	
 	
 	<!-- stylesheets list from _config.yml -->
@@ -109,14 +109,37 @@
 	
 	<article id="details-post">
 		<div id=details-post-item>
-			<h1>unity锚点</h1>
-			<h2 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h2><p>参考文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/Terie/article/details/111433486">https://blog.csdn.net/Terie/article/details/111433486</a></p>
-<p>透过这篇博客，我大概了解到了两个点：<br>pviot：轴心，采用相对坐标系，(0,0)-&gt;(1,1)，位于某ui的方框内，其表征着在ui被自适应缩放的时候，以哪个位置为标准缩放</p>
-<p>锚点：unity提供了三种模式<br>1、四个锚点合在一起的模式<br>该模式下，在屏幕分辨率改变的过程当中，ui相对于锚点的位置不改变，ui的宽、高也不变</p>
-<p>2、四个锚点两两在一起的模式<br>该模式下，ui的对应对于锚点连成的线的距离不改变，宽高比不改变，随之缩放</p>
-<p>3、四个锚点分开的模式<br>该模式下，ui的四个边对应锚点连线矩形的四边距离不改变，宽高随着四向距离的改变，自适应。</p>
-<p>一般情况下，设置Canvas的UI为随屏幕缩放的模式，理解pivot，记住不同位置的ui常用的锚点模式和放置位置就好。</p>
-<p>一下是gpt的建议：<br>a. 确定元素的锚点<br>对于屏幕边缘的UI元素（如按钮、面板），将其Anchors设置在父容器的相应边缘。例如：<br>左上角的按钮：Anchors设为（0，1）到（0，1）<br>右上角的按钮：Anchors设为（1，1）到（1，1）<br>底部中央的按钮：Anchors设为（0.5，0）到（0.5，0）<br>b. 中央对齐的元素<br>对于中心对齐的UI元素（如中心的面板），将其Anchors设置在父容器的中心。例如：<br>中央面板：Anchors设为（0.5，0.5）到（0.5，0.5）<br>c. 保持宽高比例<br>在Inspector中勾选Canvas Scaler组件的“UI Scale Mode”选项，设置为“Scale With Screen Size”，并设置参考分辨率为你设计时的分辨率（如1920x1080）。这样Unity会根据屏幕分辨率自动缩放UI元素。</p>
+			<h1>test</h1>
+			<h3 id="🌟-问题聚焦：第二步结论是否在非最优点也成立？"><a href="#🌟-问题聚焦：第二步结论是否在非最优点也成立？" class="headerlink" title="🌟 问题聚焦：第二步结论是否在非最优点也成立？"></a>🌟 <strong>问题聚焦：第二步结论是否在非最优点也成立？</strong></h3><p>回顾第二步的核心结论：</p>
+<blockquote>
+<p>最优点的梯度满足</p>
+<p>$$<br>$$</p>
+</blockquote>
+<p>\sum_i \frac{1}{\Delta\theta^\top g_i} g_i &#x3D; \lambda \Delta\theta<br>]</p>
+<p>这表示目标函数的梯度是与 $\Delta\theta$ <strong>同方向</strong> 的，即在边界上的最优点，梯度“指向径向”，因为我们正最大化一个函数在球面上的值。</p>
+<hr>
+<h3 id="✅-这是否对任意（非最优）-Delta-theta-成立？"><a href="#✅-这是否对任意（非最优）-Delta-theta-成立？" class="headerlink" title="✅ 这是否对任意（非最优）$\Delta\theta$ 成立？"></a>✅ <strong>这是否对任意（非最优）$\Delta\theta$ 成立？</strong></h3><p><strong>答案：不成立。</strong></p>
+<p>这是一个<strong>必要条件</strong>，只在最优解处成立。原因如下：</p>
+<hr>
+<h3 id="🔍-细致分析"><a href="#🔍-细致分析" class="headerlink" title="🔍 细致分析"></a>🔍 <strong>细致分析</strong></h3><p>我们最大化的目标函数是：</p>
+<p>$$<br>f(\Delta\theta) &#x3D; \sum_i \log(\Delta\theta^\top g_i)<br>\quad \text{subject to } |\Delta\theta| \le \epsilon<br>$$</p>
+<p>我们引入拉格朗日乘子来处理这个约束：</p>
+<p>$$<br>\mathcal{L}(\Delta\theta, \lambda) &#x3D; \sum_i \log(\Delta\theta^\top g_i) - \lambda (|\Delta\theta|^2 - \epsilon^2)<br>$$</p>
+<p>对 $\Delta\theta$ 求梯度并令其为 0：</p>
+<p>$$<br>\nabla_{\Delta\theta} \mathcal{L} &#x3D; \sum_i \frac{g_i}{\Delta\theta^\top g_i} - 2\lambda \Delta\theta &#x3D; 0<br>\Rightarrow<br>\sum_i \frac{g_i}{\Delta\theta^\top g_i} &#x3D; 2\lambda \Delta\theta<br>$$</p>
+<p>我们之前写的是 $\lambda \Delta\theta$，只是缩放不同（也就是说你可以吸收掉常数 $\lambda$，设 $\lambda’ &#x3D; 2\lambda$）。</p>
+<p>所以这 <strong>是一个最优性的一阶必要条件</strong>，只有在最优点（stationary point）处才成立。</p>
+<hr>
+<h3 id="🧠-类比直觉："><a href="#🧠-类比直觉：" class="headerlink" title="🧠 类比直觉："></a>🧠 <strong>类比直觉：</strong></h3><p>就像你在优化一个函数 $f(x)$，你知道在极值点：</p>
+<p>$$<br>\nabla f(x^*) &#x3D; 0<br>$$</p>
+<p>但你不能说 <strong>任意点</strong> 的梯度都等于 0，对吧？同理，在这个 constrained optimization 问题中，这个</p>
+<p>$$<br>\sum_i \frac{g_i}{\Delta\theta^\top g_i} \propto \Delta\theta<br>$$</p>
+<p>的关系只在最优点成立。</p>
+<hr>
+<h3 id="✅-总结回答"><a href="#✅-总结回答" class="headerlink" title="✅ 总结回答"></a>✅ <strong>总结回答</strong></h3><blockquote>
+<p>❓<strong>这个结论是否在非最优点也成立？</strong><br>❌ <strong>不成立</strong>。<br>这是一个一阶最优性条件（来自拉格朗日乘子法），<strong>只在最优点才成立</strong>。在非最优点，梯度方向一般不会刚好与 $\Delta\theta$ 对齐。</p>
+</blockquote>
+<p>如果你想，我们可以用一个二维例子可视化一下这个方向关系的变化。</p>
 
 		</div>
 

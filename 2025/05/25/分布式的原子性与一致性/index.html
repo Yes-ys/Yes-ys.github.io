@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>unity锚点 [ 代码和诗 ]</title>
+	<title>分布式的原子性与一致性 [ 代码和诗 ]</title>
 	
 	
 	<!-- stylesheets list from _config.yml -->
@@ -109,14 +109,29 @@
 	
 	<article id="details-post">
 		<div id=details-post-item>
-			<h1>unity锚点</h1>
-			<h2 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h2><p>参考文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/Terie/article/details/111433486">https://blog.csdn.net/Terie/article/details/111433486</a></p>
-<p>透过这篇博客，我大概了解到了两个点：<br>pviot：轴心，采用相对坐标系，(0,0)-&gt;(1,1)，位于某ui的方框内，其表征着在ui被自适应缩放的时候，以哪个位置为标准缩放</p>
-<p>锚点：unity提供了三种模式<br>1、四个锚点合在一起的模式<br>该模式下，在屏幕分辨率改变的过程当中，ui相对于锚点的位置不改变，ui的宽、高也不变</p>
-<p>2、四个锚点两两在一起的模式<br>该模式下，ui的对应对于锚点连成的线的距离不改变，宽高比不改变，随之缩放</p>
-<p>3、四个锚点分开的模式<br>该模式下，ui的四个边对应锚点连线矩形的四边距离不改变，宽高随着四向距离的改变，自适应。</p>
-<p>一般情况下，设置Canvas的UI为随屏幕缩放的模式，理解pivot，记住不同位置的ui常用的锚点模式和放置位置就好。</p>
-<p>一下是gpt的建议：<br>a. 确定元素的锚点<br>对于屏幕边缘的UI元素（如按钮、面板），将其Anchors设置在父容器的相应边缘。例如：<br>左上角的按钮：Anchors设为（0，1）到（0，1）<br>右上角的按钮：Anchors设为（1，1）到（1，1）<br>底部中央的按钮：Anchors设为（0.5，0）到（0.5，0）<br>b. 中央对齐的元素<br>对于中心对齐的UI元素（如中心的面板），将其Anchors设置在父容器的中心。例如：<br>中央面板：Anchors设为（0.5，0.5）到（0.5，0.5）<br>c. 保持宽高比例<br>在Inspector中勾选Canvas Scaler组件的“UI Scale Mode”选项，设置为“Scale With Screen Size”，并设置参考分辨率为你设计时的分辨率（如1920x1080）。这样Unity会根据屏幕分辨率自动缩放UI元素。</p>
+			<h1>分布式的原子性与一致性</h1>
+			<p><code>一次计算机系统工程导论的习题</code></p>
+<h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><p>选择：A</p>
+<p>因为小明的客户端到S3之间的网络经常停止工作，每次几分钟，而根据伪代码，在更新S3服务器上的信息的时候，while循环会一直尝试直到rpc_OK被置为true为止。所以CLENTWRITE通常需要花费几分钟（S3导致的）或更长的时间（可能不排除S1、S2也有出问题的可能性），去更新服务器。</p>
+<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><p>返回：Breakfast</p>
+<p>因为在系统没有故障的时候，该分布式系统的一致性是有得到保障的，根据题目中串行执行的代码，读取到的内容会是最后一次写入的内容，对应为Breakfast。</p>
+<h2 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h2><p>选择：AB</p>
+<p>对于A，如果客户端计算机是在已经完成最后一次CLENTWRITE操作中对部分服务器的更新，那么当使用CLIENTREAD的时候就可能出现A的结果。</p>
+<p>对于B，如果是在CLIENTWRITE (0,11, “Talk to Frans at 11”)刚刚完成的时候，发生了重启，那么使用CLIENTREAD就可能出现B的结果。</p>
+<p>对于C，Breakfast at 10意味着最后一次更新服务器已经部分完成，这与 Free at 11是矛盾的。</p>
+<p>对于D，与C同理，存在矛盾。</p>
+<h2 id="问题四"><a href="#问题四" class="headerlink" title="问题四"></a>问题四</h2><p>选择：ABD</p>
+<p>对于A，如果所有服务器顺利更新，对应为A的结果</p>
+<p>对于B，如果客户端重启前已经顺利执行完CLIENTWRITE (0,10,”Talk to Frans at 10”)，对应为B的结果。</p>
+<p>对于C，CLIENTWRITE (0,10, “Breakfast at 10”)至少已经对部分服务器完成了更新，这意味着CLIENTWRITE (0,11, “Talk to Frans at 11”)已经对服务器完成了更新，那么不应该出现Free at 11，所以C错误</p>
+<p>对于D，如果CLIENTWRITE (0,10,”Talk to Frans at 10”)只是对部分服务器完成更新例如S1、S2，那么S3中对应保存的仍然是Free at 10。当执行CLIENTREAD的时候，如果第一次从S1或S2顺利读取了结果，但是第二次S1、S2的网络出现了问题，从S3读取了结果，则可能出现这样的情况。</p>
+<h2 id="问题五"><a href="#问题五" class="headerlink" title="问题五"></a>问题五</h2><p>选择：ACD</p>
+<p>对于A，如果所有更新与读取都正常，那么得到的会是A的结果。</p>
+<p>对于B，在第二次读取的时候还没有尝试过“Z”的写入，不会读取到“Z”，故错误。</p>
+<p>对于C，如果第二次更新尝试没有一个服务器成功更新，其它操作均正常，则可能得到C的结果。</p>
+<p>对于D，如果第一次更新均正常，第二次更新部分正常例如S1被更新，第三次没有成功更新任何服务器。第一次读取正常，第二次读取从S1读取到了结果，第三次读取从S2或S3读取到结果，则可能出现这样的情况。</p>
+<h2 id="问题六"><a href="#问题六" class="headerlink" title="问题六"></a>问题六</h2><p>选择：A</p>
+<p>因为小明原本的系统在CLIENTWRITE的时候对每个服务器使用了while循环来确保rpc_OK&#x3D;true，这意味着要么对服务器完成更新，要么客户端一直执行CLIENTWRITE。所以如果顺利读取到三个结果，只能是正确的结果，即A对应的结果，其它情况都不可能出现。</p>
 
 		</div>
 
