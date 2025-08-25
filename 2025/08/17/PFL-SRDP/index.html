@@ -1,0 +1,234 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>PFL-SRDP [ 代码和诗 ]</title>
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>PFL-SRDP</h1>
+			<p><code>最近准备申请一个大创的项目，研究围绕PFL展开，这篇blog用于记录其中的一些思路</code></p>
+<h2 id="PFL相关的基本问题"><a href="#PFL相关的基本问题" class="headerlink" title="PFL相关的基本问题"></a>PFL相关的基本问题</h2><h3 id="PFL的基本类型"><a href="#PFL的基本类型" class="headerlink" title="PFL的基本类型"></a>PFL的基本类型</h3><p>(1) 学习单一全局模型并进行微调的方法<br>这些方法首先学习一个全局共享模型，然后在每个客户端上进行本地微调。</p>
+<h4 id="例子：FedAvg-本地微调"><a href="#例子：FedAvg-本地微调" class="headerlink" title="例子：FedAvg + 本地微调"></a>例子：FedAvg + 本地微调</h4><p>首先，使用联邦平均（Federated Averaging，FedAvg）算法进行全局模型的训练。FedAvg通过在每个客户端本地训练模型，然后将本地模型参数上传到服务器进行平均化，形成全局模型。</p>
+<p>步骤：</p>
+<ol>
+<li>每个客户端在本地数据上训练模型若干轮。</li>
+<li>将本地模型参数上传到服务器。</li>
+<li>服务器对所有客户端上传的模型参数进行平均化，得到新的全局模型。</li>
+<li>将新的全局模型分发给每个客户端。</li>
+<li>每个客户端在全局模型基础上进行本地微调，使用本地数据继续训练若干轮。</li>
+</ol>
+<p><code>第一类要运用Nash-bargaining game来进行聚合的话，基本上与FL的差异不大，因为都是考虑对客户端训练出的参数在服务器上进行聚合。</code></p>
+<p>(2) 学习额外个性化模型的方法<br>这些方法在全局模型的基础上，为每个客户端学习一个额外的个性化模型。</p>
+<h4 id="例子：FedPer"><a href="#例子：FedPer" class="headerlink" title="例子：FedPer"></a>例子：FedPer</h4><p>FedPer（Federated Personalization）方法提出在全局模型的基础上，为每个客户端学习一个个性化的模型头（或最后一层）。</p>
+<p>步骤：</p>
+<ol>
+<li>使用FedAvg算法训练一个共享的全局模型，但仅共享前几层的参数。</li>
+<li>每个客户端保持自己的个性化模型头，该模型头仅在本地数据上训练。</li>
+<li>在每轮通信中，仅共享和更新全局模型的共享层参数，不包括个性化头部参数。</li>
+</ol>
+<p>(3) 通过个性化（本地）聚合学习本地模型的方法<br>这些方法通过个性化聚合来进一步捕捉个性化需求，为每个客户端生成特定的模型。</p>
+<h4 id="例子：FedProx"><a href="#例子：FedProx" class="headerlink" title="例子：FedProx"></a>例子：FedProx</h4><p>FedProx（Federated Proximal）方法通过在本地训练过程中添加一个正则项，来限制本地模型偏离全局模型过多，从而实现个性化。</p>
+<p>步骤：</p>
+<ol>
+<li>每个客户端在本地数据上训练模型时，在损失函数中添加一个正则项，限制模型参数与全局模型参数的差异。</li>
+<li>正则项形式为：loss + μ&#x2F;2 * ||w - w_global||^2，其中w是本地模型参数，w_global是全局模型参数，μ是正则化系数。</li>
+<li>通过这种方法，使得模型在本地数据上训练时，仍然保持一定的全局模型特性。</li>
+</ol>
+<h2 id="设想的算法"><a href="#设想的算法" class="headerlink" title="设想的算法"></a>设想的算法</h2><p><img src="/../_images/MyAlgorithm.jpg" alt="MyAlgorithm"></p>
+<h2 id="研究目的"><a href="#研究目的" class="headerlink" title="研究目的"></a>研究目的</h2><ol>
+<li>有关联邦学习的内容</li>
+<li>为什么需要个性化联邦学习（非独立同分布…）</li>
+<li>个性化联邦学习的常见方法（各种方法对应的参考文献）</li>
+<li>关于NashBargainingGame的一些基本情况，其与相关学习算法的结合</li>
+<li>最终我们的研究目的</li>
+</ol>
+<h2 id="研究内容"><a href="#研究内容" class="headerlink" title="研究内容"></a>研究内容</h2><ol>
+<li>实现基本的FL算法框架（FedAvg）</li>
+<li>考虑第三类PFL，引入Nash-bargaining Game设置个性化聚合方法</li>
+<li>考虑引入权重α，进一步改进算法</li>
+<li>PFL实验评估（通过权威论文，明确PFL算法量化评价指标）</li>
+</ol>
+<h2 id="一些参考文献"><a href="#一些参考文献" class="headerlink" title="一些参考文献"></a>一些参考文献</h2><p>Advances and Open Problems in Federated Learning 联邦学习领域的权威综述，其中把个性化联邦学习作为联邦学习下一个分支，有所提及。</p>
+<h3 id="琐碎的思路"><a href="#琐碎的思路" class="headerlink" title="琐碎的思路"></a>琐碎的思路</h3><p>如果我们不重点考虑隐私问题，或许可以采用数据中心分布式学习的背景框架。这种背景下，我们是要在一个大而扁平的数据集上训练模型，每个客户端是单个集群或数据中心中的计算结点。数据分配的特点是任何客户端都可以读取数据集任意部分。</p>
+
+		</div>
+
+		<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjIyNC8yMjczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

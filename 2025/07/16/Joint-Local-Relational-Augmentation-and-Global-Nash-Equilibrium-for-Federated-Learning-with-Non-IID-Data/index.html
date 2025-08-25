@@ -1,0 +1,291 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Joint Local Relational Augmentation and Global Nash Equilibrium for Federated Learning with Non-IID Data [ 代码和诗 ]</title>
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>Joint Local Relational Augmentation and Global Nash Equilibrium for Federated Learning with Non-IID Data</h1>
+			<p><code>这篇blog用于记录我学习一篇有关运用Nash博弈解决联邦学习有关问题的论文时，学习到的相关知识</code></p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="Federated-Learning"><a href="#Federated-Learning" class="headerlink" title="Federated Learning"></a>Federated Learning</h3><h4 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h4><p>联邦学习的基本架构是Server和Clients</p>
+<p>Server通常没有数据，可以有一些用于评估模型的数据，但是在普通联邦学习中Server没有任何数据</p>
+<p>Clients持有实际的训练数据，Clients的数量取决于有多少分布式的数据要参与训练。Clients会在各自的本地数据集上进行实际训练。</p>
+<p>服务器和客户端都拥有自己的模型副本，前者的称为全局模型，后者的称为局部模型。</p>
+<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><ol>
+<li>服务器初始化全局模型参数</li>
+<li>将该参数发送给客户端</li>
+<li>客户端在本地进行训练，训练较短时间，通常是一个周期（所以不一定达到收敛）</li>
+<li>客户端将改进后的模型参数发送回服务器，服务器收到五个模型参数，考虑不同的权重，进行聚合</li>
+<li>检查是否收敛，否则重复步骤2</li>
+</ol>
+<p>更加规范化的表述是</p>
+<p>1） Initialization:<br>Server initializes the global model</p>
+<p>2） Communication Round:</p>
+<p>For each communication round:<br> Server sends the global model to participating clients</p>
+<p> Each client receives the global model</p>
+<p>3）Client Training and Model Update:<br>For each participating client:</p>
+<p> Client trains the received model on its local dataset</p>
+<p> Client sends its locally updated model to the server</p>
+<p>4） Model Aggregation:<br>Server aggregates the updated models received from all clients using Aggregation Algorithm (for instance, FedAvg)</p>
+<p>5） Convergence Check:<br>If convergence criteria are met, end the FL process</p>
+<p>If not, proceed to the next communication round (step 2)</p>
+<h3 id="non-IID-data"><a href="#non-IID-data" class="headerlink" title="non-IID data"></a>non-IID data</h3><p>在联邦学习（Federated Learning, FL）的背景下，non-IID数据是指数据不是独立同分布（Independent and Identically Distributed, IID）的。IID数据假设每一条数据都是相互独立的，并且来自相同的分布。这种假设在很多传统的机器学习方法中是成立的，但在联邦学习中通常不成立</p>
+<h4 id="可能的原因"><a href="#可能的原因" class="headerlink" title="可能的原因"></a>可能的原因</h4><p>数据来源的异质性：在联邦学习中，数据是分布在不同的客户端（如不同的用户设备）上的。每个客户端的数据可能由于用户的行为、兴趣、地理位置、设备类型等因素不同，从而导致数据分布的差异。</p>
+<p>分布不均衡：某些客户端可能拥有更多的数据，而其他客户端可能只有少量的数据。数据的量级和类别在不同客户端之间可能是高度不均衡的。</p>
+<p>标签分布差异：某些客户端可能只包含特定类别的数据，而其他客户端可能包含不同类别的数据。这种情况下，每个客户端的数据标签分布也是不同的。</p>
+<h3 id="Intra-client-inconsistencies-And-Inter-client-inconsistencies"><a href="#Intra-client-inconsistencies-And-Inter-client-inconsistencies" class="headerlink" title="Intra-client inconsistencies And Inter-client inconsistencies"></a>Intra-client inconsistencies And Inter-client inconsistencies</h3><p>Intra-client Inconsistencies客户端内部不一致性 指的是单个客户端内部的数据分布问题，主要包括以下几个方面：</p>
+<p>数据不平衡：单个客户端内部的不同类别的数据分布可能非常不均衡。例如，某个客户端可能有大量的类别A的数据，但只有少量的类别B的数据。这种不平衡会导致模型在训练过程中对某些类别的泛化能力不足。</p>
+<p>数据稀疏性：客户端内部可能存在数据量不足的问题，特别是对于一些罕见类别的数据，这会影响模型的训练效果和泛化能力。</p>
+<p>数据噪声：客户端内部的数据可能包含噪声或错误标注，这会影响模型的准确性和稳定性。</p>
+<p>Inter-client Inconsistencies客户端之间不一致性 指的是不同客户端之间的数据分布差异，包括以下几个方面：</p>
+<p>数据分布差异：不同客户端的数据可能来自不同的分布。例如，一个客户端可能主要包含城市环境下的数据，而另一个客户端可能主要包含农村环境下的数据。这种分布差异会导致全局模型在不同客户端上的表现不一致。</p>
+<p>标签分布差异：不同客户端的数据类别分布可能不同。例如，一个客户端可能主要关注某些特定类别，而另一个客户端可能关注完全不同的类别。这会导致全局模型难以在所有客户端上都表现良好。</p>
+<p>数据量差异：一些客户端可能拥有大量的数据，而其他客户端可能数据量很少。这种数据量差异也会影响全局模型的训练效果。</p>
+<h3 id="Local-Relational-Augmentation"><a href="#Local-Relational-Augmentation" class="headerlink" title="Local Relational Augmentation"></a>Local Relational Augmentation</h3><p>LRA（局部关系增强）模块的目标是解决客户端内部的不一致性问题。</p>
+<p>数据增强：通过生成或变换现有数据，使得每个客户端的数据分布更加均衡和丰富。这有助于改进模型在少数类别数据上的表现。</p>
+<p>关系建模：在客户端内部建立数据样本之间的关系网络，利用这些关系来增强模型的学习过程。例如，可以通过图神经网络（Graph Neural Networks, GNN）来捕捉数据样本之间的相似性和相关性，从而提升模型的泛化能力。</p>
+<p>摘一段原文的内容：</p>
+<p>LRA first computes the similarity among a batch of data samples, and finds the neighbors of data samples based on the similarity.</p>
+<p>Then LRA enhances the data feature representation via attentive message passing among the neighbors of data samples.</p>
+<p>Besides, LRA conducts contrastive discrimination to maintain the representations correspondence before and after augmentation, for the same sample.</p>
+<h3 id="Global-Nash-Equilibrium"><a href="#Global-Nash-Equilibrium" class="headerlink" title="Global Nash Equilibrium"></a>Global Nash Equilibrium</h3><p>GNE模块的目标是解决客户端之间的不一致性问题。纳什均衡在博弈论中是指在某种策略组合下，没有任何参与者能够通过单方面改变自己的策略来获得更好的结果。</p>
+<p>摘一段原文的内容</p>
+<p>Specifically, GNE collects the updating deviations from different clients to server.</p>
+<p>Then GNE not only seeks a global optimization direction that maximizes the consistency among discrepant local model deviations, but also maintains clients’ optimizations towards their local optimums.</p>
+<h4 id="在联邦学习中，全局纳什均衡的常见作用"><a href="#在联邦学习中，全局纳什均衡的常见作用" class="headerlink" title="在联邦学习中，全局纳什均衡的常见作用"></a>在联邦学习中，全局纳什均衡的常见作用</h4><p>平衡客户端贡献：在模型更新过程中，使各个客户端的贡献达到一种平衡状态，即没有任何一个客户端的更新会对全局模型产生过度的偏差。</p>
+<p>优化全局模型：通过博弈论的方法，找到一种策略组合，使得全局模型在各个客户端的数据分布上都能表现良好。这可能涉及到权重调整、梯度校正等技术。</p>
+<h3 id="representation"><a href="#representation" class="headerlink" title="representation"></a>representation</h3><p>“representation” 通常指的是数据在模型内部某一层次上的表达方式或特征表示。</p>
+<p>特征表示（Feature Representation）：在深度学习模型中，输入数据（如图像、文本、音频等）经过多个层的变换后，每一层都会生成不同的特征表示。这些特征表示是原始数据在模型内部的抽象和高维度表示，能够捕捉到数据的关键特征和模式。</p>
+<p>隐层表示（Hidden Layer Representation）：在神经网络中，隐层（即非输入层和非输出层）会生成中间表示，这些表示是原始输入数据通过网络层级传递和变换后的结果。这些隐层表示在分类、聚类或其他任务中具有重要作用。</p>
+<p>嵌入表示（Embedding Representation）：在自然语言处理（NLP）等领域，词嵌入（如Word2Vec、GloVe）是常见的表示形式，它们将高维的稀疏数据（如单词的一个热编码）映射到低维的稠密向量空间中，从而捕捉词与词之间的语义关系。</p>
+<h3 id="SLIM-method"><a href="#SLIM-method" class="headerlink" title="SLIM method"></a>SLIM method</h3><p>Sparse Linear Methods (SLIM) 是一种在推荐系统中广泛应用的技术，旨在通过稀疏线性模型来挖掘项目与项目之间的关系。SLIM 的核心思想是通过学习一个稀疏的线性权重矩阵来捕捉项目之间的相似性，从而提高推荐的准确性和效率。</p>
+<h4 id="相关基本概念"><a href="#相关基本概念" class="headerlink" title="相关基本概念"></a>相关基本概念</h4><p>稀疏性（Sparsity）：SLIM 假设推荐系统中的大多数项目之间并没有直接的关联，只有少数项目之间存在显著的相似性。因此，SLIM 通过稀疏矩阵来表示这种稀疏性，从而减少计算复杂度和存储需求。</p>
+<p>线性模型（Linear Model）：SLIM 使用线性模型来表示项目与项目之间的关系。具体来说，它通过一个线性组合来预测用户对一个项目的评分，该组合是基于用户对其他相关项目的评分加权得到的。</p>
+<p>低秩性（Low-Rankness）：SLIM 还利用了数据的低秩特性，假设项目之间的关系可以用一个低秩矩阵来近似。这种低秩性有助于捕捉数据中的潜在结构和模式。</p>
+<h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><p>构建相似度矩阵：首先，SLIM 构建一个项目与项目之间的相似度矩阵，可以基于统计相似性（如皮尔逊相关系数）来计算。</p>
+<p>学习稀疏线性权重：然后，SLIM 通过优化算法学习一个稀疏的线性权重矩阵。这个矩阵的每个元素表示一个项目对另一个项目的线性关系权重。</p>
+<p>预测评分：最后，使用学习到的权重矩阵和用户的历史评分数据，SLIM 可以预测用户对未评分项目的评分。</p>
+<h3 id="Pearson-Correlation-Matrix"><a href="#Pearson-Correlation-Matrix" class="headerlink" title="Pearson Correlation Matrix"></a>Pearson Correlation Matrix</h3><p>皮尔逊相关矩阵（Pearson Correlation Matrix） 是一种用于度量数据集中各个变量之间线性关系强度的矩阵。它通过皮尔逊相关系数来衡量不同变量（或数据样本）之间的相关性。相关系数的值范围从 -1 到 +1，其中：</p>
+<p>+1 表示完全正相关，即两个变量的变化方向完全一致。</p>
+<p>0 表示没有线性相关性，即两个变量之间没有任何线性关系。</p>
+<p>-1 表示完全负相关，即两个变量的变化方向完全相反。</p>
+<h4 id="皮尔逊相关系数的计算公式"><a href="#皮尔逊相关系数的计算公式" class="headerlink" title="皮尔逊相关系数的计算公式"></a>皮尔逊相关系数的计算公式</h4><p>皮尔逊相关系数（$r$）的计算公式为：</p>
+<p>$r &#x3D; \frac{\sum (X_i - \bar{X})(Y_i - \bar{Y})}{\sqrt{\sum (X_i - \bar{X})^2 \sum (Y_i - \bar{Y})^2}}$</p>
+<p>其中：</p>
+<p>$X_i$和 $Y_i$分别是样本 $X$ 和 $Y$ 的第 $i$ 个观测值；<br>$\bar{X}$和 $\bar{Y}$分别是样本 $X$ 和 $Y$ 的均值。</p>
+<h4 id="皮尔逊相关矩阵的应用"><a href="#皮尔逊相关矩阵的应用" class="headerlink" title="皮尔逊相关矩阵的应用"></a>皮尔逊相关矩阵的应用</h4><p>特征选择：在机器学习中，相关矩阵可以帮助识别高度相关的特征，进而去除冗余的特征，从而提升模型的性能。</p>
+<h3 id="Frobenius-norm"><a href="#Frobenius-norm" class="headerlink" title="Frobenius norm"></a>Frobenius norm</h3><p>弗罗贝尼乌斯范数：一种用于衡量矩阵大小的范数，计算方法是将矩阵中所有元素的平方和开平方。</p>
+<h3 id="KKT-conditions"><a href="#KKT-conditions" class="headerlink" title="KKT conditions"></a>KKT conditions</h3><p>KKT条件（Karush-Kuhn-Tucker Conditions）是非线性规划问题的一组必要条件，用于找到约束优化问题的最优解。</p>
+<p>对于一个优化问题：</p>
+<p>$\begin{aligned}<br>&amp; \min f(\mathbf{x}), \<br>&amp; \text{subject to} \ g_i(\mathbf{x}) \leq 0, \ i &#x3D; 1, \ldots, m, \<br>&amp; \ \ \ \ \ \ \ \ \ \ \ \ \ h_j(\mathbf{x}) &#x3D; 0, \ j &#x3D; 1, \ldots, p,<br>\end{aligned}$</p>
+<p>KKT条件包括以下几个部分：</p>
+<p>拉格朗日函数：</p>
+<p>构造拉格朗日函数 $L(\mathbf{x}, \mathbf{\lambda}, \mathbf{\mu})$：<br>$L(\mathbf{x}, \mathbf{\lambda}, \mathbf{\mu}) &#x3D; f(\mathbf{x}) + \sum_{i&#x3D;1}^{m} \lambda_i g_i(\mathbf{x}) + \sum_{j&#x3D;1}^{p} \mu_j h_j(\mathbf{x})$</p>
+<p>Stationarity（驻点条件）：</p>
+<p>$\frac{\partial L(\mathbf{x}, \mathbf{\lambda}, \mathbf{\mu})}{\partial \mathbf{x}} &#x3D; 0$</p>
+<p>Primal Feasibility（原始可行性）：</p>
+<p>$g_i(\mathbf{x}) \leq 0, \quad i &#x3D; 1, \ldots, m$</p>
+<p>$h_j(\mathbf{x}) &#x3D; 0, \quad j &#x3D; 1, \ldots, p$</p>
+<p>Dual Feasibility（对偶可行性）：</p>
+<p>$\lambda_i \geq 0, \quad i &#x3D; 1, \ldots, m$</p>
+<p>Complementary Slackness（互补松弛性）：</p>
+<p>$\lambda_i g_i(\mathbf{x}) &#x3D; 0, \quad i &#x3D; 1, \ldots, m$</p>
+<h2 id="词汇"><a href="#词汇" class="headerlink" title="词汇"></a>词汇</h2><p>decentralized：分散管理的</p>
+<p>discrepant：有差异的；矛盾的</p>
+<p>deviation：偏离；偏差</p>
+<p>distributed：分布式的</p>
+<p>paradigm：典范</p>
+<p>unified：一致的</p>
+<p>simultaneously：同时的</p>
+<p>hinder：阻碍</p>
+<p>variance：分歧，不一致；方差（统计学）</p>
+<p>empirical：经验主义的</p>
+<p>conventionally：照惯例</p>
+<p>distinguishable：可辨识的</p>
+<p>sparse：稀少的</p>
+<p>refine：精炼；改善</p>
+<p>contamination：污染</p>
+<p>alleviate：减轻，缓和</p>
+<p>contrastive：对比的</p>
+
+		</div>
+
+		<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjIyNC8yMjczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
