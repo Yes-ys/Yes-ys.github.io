@@ -154,6 +154,14 @@
 </ol>
 <h2 id="一些参考文献"><a href="#一些参考文献" class="headerlink" title="一些参考文献"></a>一些参考文献</h2><p>Advances and Open Problems in Federated Learning 联邦学习领域的权威综述，其中把个性化联邦学习作为联邦学习下一个分支，有所提及。</p>
 <h3 id="琐碎的思路"><a href="#琐碎的思路" class="headerlink" title="琐碎的思路"></a>琐碎的思路</h3><p>如果我们不重点考虑隐私问题，或许可以采用数据中心分布式学习的背景框架。这种背景下，我们是要在一个大而扁平的数据集上训练模型，每个客户端是单个集群或数据中心中的计算结点。数据分配的特点是任何客户端都可以读取数据集任意部分。</p>
+<p>可能的学习路线：</p>
+<ol>
+<li>机器学习入门（基本的线性模型训练过程、梯度下降法）</li>
+<li>神经网络（基本的训练模式，前向传递、后向传递）</li>
+<li>多任务学习+Nash Bargaining Game（大概读懂论文）</li>
+<li>FL+Nash Bargaining Game（理解这种迁移）</li>
+<li>理解我们目前大概的思路</li>
+</ol>
 
 		</div>
 
@@ -230,5 +238,20 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

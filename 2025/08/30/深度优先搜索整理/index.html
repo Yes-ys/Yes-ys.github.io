@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>深度优先搜索整理 [ 代码和诗 ]</title>
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>深度优先搜索整理</h1>
+			<p><code>这篇blog用来整理一些常见的可以使用深度优先搜索的问题模板</code></p>
+<h2 id="写在最前面"><a href="#写在最前面" class="headerlink" title="写在最前面"></a>写在最前面</h2><p>在这篇blog中会高频地出现三个词汇，<strong>DFS、递归、回溯</strong>，实际上DFS与后二者的关联是十分密切的。</p>
+<p>狭义上来说，DFS是在图上面做搜索的一种算法，它使用深度优先，依次处理各个结点。可以用<strong>递归函数的形式</strong>实现，也可以用<strong>循环+栈</strong>的形式实现。</p>
+<p>但是从广义上来说，对于可以枚举状态的问题，问题的状态转移的过程本就可以<strong>抽象成一棵树</strong>，而树本质上就是一个特殊的图。当我们使用递归函数，搜索问题的各个状态的时候，就可以看作，我们是在一张“特殊的”图上，做DFS。</p>
+<p><em>关于回溯与它们的联系，后面再进行补充</em>。</p>
+<h2 id="基本范式"><a href="#基本范式" class="headerlink" title="基本范式"></a>基本范式</h2><p>DFS的模板框架如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">dfs</span><span class="params">(now_state)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(now_state == target_state)</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">return</span> ...;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(... enumerate new_state)&#123;</span><br><span class="line">        <span class="keyword">if</span>(new_state is valid)&#123;</span><br><span class="line">            vis[new_state] = ...;<span class="comment">//标记新状态被访问</span></span><br><span class="line">            dfs(new_state);</span><br><span class="line">            ? vis[new_state] = ...;<span class="comment">//是否需要恢复现场</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(have considered all condition)&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来的部分分几个主要的大类型，每个题目里都会附上对应的练习与解答，结合题目进行总结。</p>
+<h2 id="DFS无需回溯"><a href="#DFS无需回溯" class="headerlink" title="DFS无需回溯"></a>DFS无需回溯</h2><p>DFS无需回溯的情况是少</p>
+<h3 id="红与黑-AcWing-1113"><a href="#红与黑-AcWing-1113" class="headerlink" title="红与黑 AcWing 1113"></a>红与黑 AcWing 1113</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> h,w;</span><br><span class="line"><span class="type">char</span> mp[<span class="number">21</span>][<span class="number">21</span>];</span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> vis[<span class="number">21</span>][<span class="number">21</span>],<span class="type">int</span> posx,<span class="type">int</span> posy)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">4</span>;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">switch</span>(i)&#123;</span><br><span class="line">   <span class="keyword">case</span> <span class="number">1</span>:&#123;</span><br><span class="line">    <span class="type">int</span> x = posx,y = posy<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>(y &gt;= <span class="number">0</span> &amp;&amp; !vis[x][y] &amp;&amp; mp[x][y] == <span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">     vis[x][y] = <span class="number">1</span>;</span><br><span class="line">     cnt++;</span><br><span class="line">     <span class="built_in">dfs</span>(vis,x,y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">case</span> <span class="number">2</span>:&#123;</span><br><span class="line">    <span class="type">int</span> x = posx,y = posy<span class="number">+1</span>;</span><br><span class="line">    <span class="keyword">if</span>(y &lt; w &amp;&amp; !vis[x][y] &amp;&amp; mp[x][y] == <span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">     vis[x][y] = <span class="number">1</span>;</span><br><span class="line">     cnt++;</span><br><span class="line">     <span class="built_in">dfs</span>(vis,x,y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">case</span> <span class="number">3</span>:&#123;</span><br><span class="line">    <span class="type">int</span> x = posx<span class="number">-1</span>,y = posy;</span><br><span class="line">    <span class="keyword">if</span>(x &gt;= <span class="number">0</span> &amp;&amp; !vis[x][y] &amp;&amp; mp[x][y] == <span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">     vis[x][y] = <span class="number">1</span>;</span><br><span class="line">     cnt++;</span><br><span class="line">     <span class="built_in">dfs</span>(vis,x,y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">case</span> <span class="number">4</span>:&#123;</span><br><span class="line">    <span class="type">int</span> x = posx<span class="number">+1</span>,y = posy;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; h &amp;&amp; !vis[x][y] &amp;&amp; mp[x][y] == <span class="string">&#x27;.&#x27;</span>)&#123;</span><br><span class="line">     vis[x][y] = <span class="number">1</span>;</span><br><span class="line">     cnt++;</span><br><span class="line">     <span class="built_in">dfs</span>(vis,x,y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="type">int</span> vis[<span class="number">21</span>][<span class="number">21</span>];</span><br><span class="line"> <span class="type">int</span> posx = <span class="number">0</span>,posy = <span class="number">0</span>;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; h;i++)</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; w;j++)</span><br><span class="line">  &#123;</span><br><span class="line">   vis[i][j] = <span class="number">0</span>;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">//寻找起点</span></span><br><span class="line">   <span class="comment">//cout&lt;&lt;&quot;mp[i][j]:&quot;&lt;&lt;mp[i][j]&lt;&lt;endl;</span></span><br><span class="line">   <span class="keyword">if</span>(mp[i][j] == <span class="string">&#x27;@&#x27;</span>)posx = i,posy = j; </span><br><span class="line">  &#125;</span><br><span class="line"> vis[posx][posy] = <span class="number">1</span>;</span><br><span class="line"> cnt = <span class="number">1</span>;</span><br><span class="line"> <span class="built_in">dfs</span>(vis,posx,posy);</span><br><span class="line"> cout&lt;&lt;cnt&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> string str;</span><br><span class="line"> <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">  cin&gt;&gt;w&gt;&gt;h;</span><br><span class="line">  <span class="keyword">if</span>(w == <span class="number">0</span> &amp;&amp; h == <span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; h;i++)</span><br><span class="line">   &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; w;j++)</span><br><span class="line">     cin&gt;&gt;mp[i][j];</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//输入完成 </span></span><br><span class="line">   <span class="built_in">solve</span>();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<ol>
+<li>关于不需要回溯，<strong>我的一个理解</strong>：由于在每次搜索到的状态，更改的全局变量只有vis数组，而这个更改正是必须的（我们需要一个DFS分支更改的vis影响另一个DFS分支，来确定当前点是否已经到达过了），所以不需要进行回溯。<em>需要回溯的一种情况是，一个分支修改的全局变量对另一个分支没有作用，另一个分支不能直接使用，要自己修改，那么在一个分支结束的时候就应该还原自己修改的全局变量</em></li>
+<li>关于不需要回溯，<strong>另一种理解</strong>：在一个分支下到达的每一个点，在这个分支结束过后就可以抛弃了，因为我们只是统计点的数量不需要再回到这个点；但是需要回溯的情况，例如走迷宫，你在尝试一种路径的时候走过一系列点，这些点不能被抛弃，你在尝试其它路径的时候可能还会来到这些点，所以在每一条路径结束的时候，要将标记访问的vis数组进行还原（具体如何还原见后面的笔记）。</li>
+<li>注意io上的细节实现，由于有多轮数据，所以每轮开始要注意相关变量的初始化</li>
+</ol>
+<h2 id="DFS与回溯"><a href="#DFS与回溯" class="headerlink" title="DFS与回溯"></a>DFS与回溯</h2><h3 id="ACW分成互质组"><a href="#ACW分成互质组" class="headerlink" title="ACW分成互质组"></a>ACW分成互质组</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; g[<span class="number">11</span>];</span><br><span class="line"><span class="type">int</span> num[<span class="number">10</span>];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(x%y == <span class="number">0</span>)<span class="keyword">return</span> y;</span><br><span class="line"> <span class="keyword">else</span> <span class="keyword">return</span> gcd(y,x%y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">check</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line"> <span class="comment">//检查是否可以把数字i放在第j组</span></span><br><span class="line"> <span class="keyword">if</span>(g[j].empty())<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> <span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">0</span>;k &lt; g[j].size();k++)&#123;</span><br><span class="line">   <span class="keyword">if</span>(gcd(num[i],g[j][k]) != <span class="number">1</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> num_g,<span class="type">int</span> now)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(now == n)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line"> <span class="type">int</span> i = now;</span><br><span class="line"> <span class="comment">//i对应当前正在处理数字的索引 </span></span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; num_g;j++)<span class="comment">//把它尝试放入各组中</span></span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">if</span>(check(i,j))&#123;<span class="comment">//如果可以放入第j组 </span></span><br><span class="line">   g[j].push_back(num[now]);</span><br><span class="line">   <span class="keyword">if</span>(dfs(num_g, now+<span class="number">1</span>))<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">   <span class="keyword">else</span> g[j].pop_back();<span class="comment">//尝试放入失败 </span></span><br><span class="line">  &#125;</span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++)</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;num[i];</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> num_g = <span class="number">1</span>;num_g &lt;= n;num_g++)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">if</span>(dfs(num_g,<span class="number">0</span>))&#123;</span><br><span class="line">   <span class="built_in">cout</span>&lt;&lt;num_g&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">   <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125; </span><br><span class="line">  </span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现的思路是从小到大枚举可能的组数，用DFS暴力搜索，把每个数字依次放入每个组的情况。</p>
+<p>本题总结：</p>
+<ol>
+<li>DFS的主线是依次处理每个数字，每处理一个数字就进入到下一个状态，当n个数字处理完毕就可以结束了，当前使用的组数就是最小的组数</li>
+<li>一个反思，在写DFS的时候要想清楚，每层深入的时候，对应的实际意义是什么。这里就是处理过的数字的数量增加。我开始的时候没有想清楚在dfs的for循环外面还套了一层遍历所有数字的循环，不明所以…</li>
+<li>这里就要注意<strong>恢复现场</strong>，即g[j].pop_back()，也是回溯的体现，当一条分支尝试失败了要还原状态。否则当前分支存入第j组的数字，在其它分支总也会存在，显然就会有问题…</li>
+</ol>
+<h3 id="子集-leetcode78-（子集型回溯模板）"><a href="#子集-leetcode78-（子集型回溯模板）" class="headerlink" title="子集 leetcode78 （子集型回溯模板）"></a>子集 leetcode78 （子集型回溯模板）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; &gt;ans;</span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> <span class="title function_">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; cmb, <span class="type">int</span> i)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == len)&#123;</span><br><span class="line">            ans.push_back(cmb);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cmb.push_back(nums[i]);</span><br><span class="line">        dfs(cmb,i+<span class="number">1</span>);</span><br><span class="line">        cmb.pop_back();</span><br><span class="line"></span><br><span class="line">        dfs(cmb,i+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; subsets(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        len = nums.size();</span><br><span class="line">        this-&gt;nums = nums;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; t;</span><br><span class="line">        dfs(t,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这道题可以完美地体现写在blog开头的那段话，问题的状态就是一棵二叉树，递归就是在其上做深搜。同样，回溯体现在还原现场。</p>
+<p>上面代码的此题思路是，从<strong>每个数字</strong>的角度出发，依次考虑选与不选，当所有的数字都被考虑过一遍，我们就可以得到一种答案的组合。</p>
+<p><strong>另一种思路</strong>是从<strong>答案的角度</strong>出发，依次考虑选择哪些数字，每做出一次选择本身就得到了一种答案</p>
+<h3 id="子集模板应用-分割回文串-leetcode-131"><a href="#子集模板应用-分割回文串-leetcode-131" class="headerlink" title="子集模板应用 分割回文串 leetcode 131"></a>子集模板应用 分割回文串 leetcode 131</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">check</span><span class="params">(<span class="built_in">string</span> s)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>,j = s.length()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(;i &lt; s.length() &amp;&amp; j &gt;= <span class="number">0</span>;i++,j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] != s[j])<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; ans;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> <span class="title function_">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; cmb, <span class="type">int</span> i, <span class="type">int</span> j)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == len<span class="number">-1</span>)&#123;<span class="comment">//当执行到应该判断最后一个位置是否要切割的时候</span></span><br><span class="line">            <span class="built_in">string</span> s = str.substr(j+<span class="number">1</span>,i-j);</span><br><span class="line">            <span class="keyword">if</span>(check(s))&#123;</span><br><span class="line">                cmb.push_back(s);</span><br><span class="line">                ans.push_back(cmb);</span><br><span class="line">                cmb.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> s = str.substr(j+<span class="number">1</span>,i-j);</span><br><span class="line">        <span class="keyword">if</span>(check(s))&#123;</span><br><span class="line">            cmb.push_back(s);</span><br><span class="line">            dfs(cmb, i+<span class="number">1</span>,i);</span><br><span class="line">            <span class="comment">//回溯</span></span><br><span class="line">            cmb.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dfs(cmb,i+<span class="number">1</span>,j);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//切割是把当前位置的字符串和上一次切割位置后的字符串切出来</span></span><br><span class="line"><span class="comment">//i是当前考虑是否要切割的位置</span></span><br><span class="line"><span class="comment">//j是上一次进行切割的位置</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; partition(<span class="built_in">string</span> s) &#123;</span><br><span class="line">        this-&gt;len = s.length();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; t;</span><br><span class="line">        this-&gt;str = s;</span><br><span class="line">        dfs(t, <span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这道题的思路是考虑所有可以切割子串的位置的状态，每个位置有两种状态，切或者不切；问题的状态就变成了一棵二叉树，DFS在树上做搜索，但是将一个位置设置为“切”的状态，需要判断得到的新子串是否是回文串，如果是才能切；最后一个位置必须切。</p>
+
+		</div>
+
+		<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjIyNC8yMjczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
