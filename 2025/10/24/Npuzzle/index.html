@@ -1,0 +1,243 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Npuzzle [ 代码和诗 ]</title>
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>Npuzzle</h1>
+			<p><code>这篇blog用于记录我在大三春季学期，修读人工智能导论过程中，进行的一个实验项目，有关Npuzzle问题的求解</code></p>
+<h2 id="主要分工"><a href="#主要分工" class="headerlink" title="主要分工"></a>主要分工</h2><ol>
+<li><p>负责问题建模，准备原始样例数据；实现从原始文本数据到问题实例化对象的过程；实现将问题实例化对象转换回原始文本数据（2个人）</p>
+</li>
+<li><p>负责实现具体的寻路算法，涉及多种算法的实现（2个人）（IDA<em>，Frontier实现，基于不相交数据库模式的A</em>）</p>
+</li>
+<li><p>负责可视化<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1TievzLEG9/?spm_id_from=333.337.search-card.all.click&vd_source=80df09f481ef5f0671e5e0e35d02e33e">参考视频</a>（袁庆康）</p>
+</li>
+<li><p>实验报告撰写、ppt制作，我可以主要负责，需要负责各个部分的同学提供相关视图数据</p>
+</li>
+</ol>
+<h3 id="后期工作"><a href="#后期工作" class="headerlink" title="后期工作"></a>后期工作</h3><ol>
+<li>提高工程代码质量</li>
+<li>测试</li>
+</ol>
+<h2 id="从main函数出发解析代码"><a href="#从main函数出发解析代码" class="headerlink" title="从main函数出发解析代码"></a>从main函数出发解析代码</h2><p>core.runner.Searcher（main函数）主要功能：</p>
+<ol>
+<li>异常处理</li>
+<li>实例化EngineFeeder对象</li>
+<li>文本文件转字符串，再由EngineFeeder对象函数将字符串转为Problem对象</li>
+<li>给定启发函数（由问题类型和任务阶段确定）</li>
+<li>solveProblems，参数有Problem对象，AbstractSearcher对象（由EngineFeeder对象用启发函数构造），启发函数类型；</li>
+</ol>
+<p>core.solver.algorithm.searcher.AbstractSearcher（担任求解器核心组件的对象所属类，继承的抽象类）</p>
+<p>core.solver.algorithm.searcher.BestFirstSearcher（最佳优先搜索算法，继承了上面的类，在老师示例中其对象就是求解器的核心组件）</p>
+<p>最佳优先搜索算法的类暂时应该不需要我们实现，但是我们需要为其对象的构造提供组件，包括：Frontier、Predictor</p>
+<p>core.runner.EngineFeeder（用来提供搜索器所需组件的类，所应遵从规范的，抽象类；其中已经完成了将组件frontier、predictor拼装起来，实例化为搜索器的函数，由final修饰）</p>
+<p>stud.runner.WalkerFeeder（老师示例用的类feeder类，继承了EngineFeeder，负责组件frontier、predictor的提供，为了解耦合，组件对象的具体构造来自其它类）</p>
+<p>stud.queue.ListFrontier（老师实现的一个优先队列，其中包含了最佳优先搜索算法执行时所需队列操作的实现）</p>
+<p>stud.problem.pathfinding.Postion（其中实现了具体的启发式函数predictor，然后通过枚举映射将估值类型映射到启发式函数；而perdictor主要是在problem中使用）</p>
+<h2 id="整体代码框架"><a href="#整体代码框架" class="headerlink" title="整体代码框架"></a>整体代码框架</h2><p>老师编写整个代码框架的思路大概是：1）先确定几个必要的核心组件，以及它们连接起来进行工作的逻辑；2）为每种组件编写规范，使用抽象类或者接口；3）继承规范，为我们编写了一个示例；4）编写SearcherTest类，包含main函数，作为程序入口，对处理完成的组件进行测试的顶层代码</p>
+<h3 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h3><p>算法相关</p>
+<ol>
+<li>搜索器Searcher，main函数中进行测试求解的核心组件，规范为：抽象类AbstarctSearcher</li>
+<li>拼装器？Feeder，负责使用组件优先队列frontier，估值器predictor，完成搜索器Searcher的拼装；问题实例化，规范为：抽象类EngineFeeder</li>
+<li>优先队列Frontier，对应的就是我们课程中学习的fringe，用来按优先级维护节点顺序，规范为：接口Frontier</li>
+<li>估值器Predictor，这个似乎<strong>比较特别</strong>，其规范是接口：Predictor，但是没有单独实现的类，老师的示例中在State的子类Position中使用了一个枚举类型映射到函数的实现</li>
+</ol>
+<p>问题建模相关</p>
+<ol>
+<li>抽象类Problem，示例寻路问题中使用PathingFinding来继承</li>
+<li>抽象类State，示例中是Position进行集成</li>
+<li>抽象类Action，示例中用Move进行继承</li>
+</ol>
+<p>注：这里的“拼装”只是为了便于阐释，并非传统意义的拼装，实际上A+B拼装成C，就是C中包含了A、B对象，当然C也有A、B对象以外自己的一些功能</p>
+<h2 id="第一次会议纪要"><a href="#第一次会议纪要" class="headerlink" title="第一次会议纪要"></a>第一次会议纪要</h2><ol>
+<li>明确了整个项目框架core下定义了抽象类或接口的规范，包括1）代码组织有关：AbstrcatSearcher, EngineFeeder；2）问题定义有关：Problem, State, Action；3）算法有关：Frontier、Predictor</li>
+<li>明确了老师示例的寻路问题是如何实现的，这里对应<strong>1.<strong>中的规范进行描述；1）框架中实现了BestFirstSearcher（最佳优先搜索器，对应的就是课堂上学习的搜索问题一般算法，其具体是什么算法会由Frontier如何维护来决定，</strong>因此我们无需实现自己的搜索器，使用老师的搜索器即可，当我们实现不同的frontier的时候，实际上就实现了不同的算法</strong>）；2）使用WalkerFeeder继承了AbstractSearcher，对PathFinding进行实例化，并完整状态图建立，并提供ListFrontier、Predictor的接口；3）使用PathFinding继承了Problem；4）Position继承了State；5）Move继承了Action，<strong>3）~5）完成了问题建模</strong>；6）使用ListFrontier继承了Frontier实现了优先队列，边缘节点（对应课堂里伪代码中的Fringe）；7）在Position中完成了Predictor接口的实例化（<strong>在老师的示例中，关于Predictor的创建与使用似乎均被集成到了State里</strong>）</li>
+<li>明确了初步分工：1）袁庆康负责可视化的实现；2）刘静洹与汪希负责算法的实现（包括Frontier的实现（Open表优先队列）、Closed表（哈希）、IDA*的实现、基于不相交数据库模式的A*算法实现）；3）汤琦先从EngineFeeder出发，把握一下这个核心组件，尝试Problem、State、Action与EngineFeeder的解耦合；4）杨子程、蔺春名预计与汤琦一起完成核心组件EngineFeeder</li>
+<li>探讨了一些后续可能的工作，包括代码审计，提高质量，以及测试等工作</li>
+<li>GitHub协作开发模式，fork仓库后完成自己负责的文件，申请合并到主仓库，审计合并</li>
+</ol>
+<p>注意事项：1）协作开发的时候尽量不要同时写一个文件；2）当主分支更新的时候及时更新自己的本地仓库，防止自己在旧版本上做较多延申，预防冲突</p>
+
+		</div>
+
+		<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjIyNC8yMjczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

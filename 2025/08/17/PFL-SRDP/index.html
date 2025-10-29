@@ -111,7 +111,7 @@
 		<div id=details-post-item>
 			<h1>PFL-SRDP</h1>
 			<p><code>最近准备申请一个大创的项目，研究围绕PFL展开，这篇blog用于记录其中的一些思路</code></p>
-<h2 id="PFL相关的基本问题"><a href="#PFL相关的基本问题" class="headerlink" title="PFL相关的基本问题"></a>PFL相关的基本问题</h2><h3 id="PFL的基本类型"><a href="#PFL的基本类型" class="headerlink" title="PFL的基本类型"></a>PFL的基本类型</h3><p>(1) 学习单一全局模型并进行微调的方法<br>这些方法首先学习一个全局共享模型，然后在每个客户端上进行本地微调。</p>
+<h2 id="PFL相关的基本问题-阶段0"><a href="#PFL相关的基本问题-阶段0" class="headerlink" title="PFL相关的基本问题(阶段0)"></a>PFL相关的基本问题(阶段0)</h2><h3 id="PFL的基本类型"><a href="#PFL的基本类型" class="headerlink" title="PFL的基本类型"></a>PFL的基本类型</h3><p>(1) 学习单一全局模型并进行微调的方法<br>这些方法首先学习一个全局共享模型，然后在每个客户端上进行本地微调。</p>
 <h4 id="例子：FedAvg-本地微调"><a href="#例子：FedAvg-本地微调" class="headerlink" title="例子：FedAvg + 本地微调"></a>例子：FedAvg + 本地微调</h4><p>首先，使用联邦平均（Federated Averaging，FedAvg）算法进行全局模型的训练。FedAvg通过在每个客户端本地训练模型，然后将本地模型参数上传到服务器进行平均化，形成全局模型。</p>
 <p>步骤：</p>
 <ol>
@@ -153,7 +153,7 @@
 <li>PFL实验评估（通过权威论文，明确PFL算法量化评价指标）</li>
 </ol>
 <h2 id="一些参考文献"><a href="#一些参考文献" class="headerlink" title="一些参考文献"></a>一些参考文献</h2><p>Advances and Open Problems in Federated Learning 联邦学习领域的权威综述，其中把个性化联邦学习作为联邦学习下一个分支，有所提及。</p>
-<h3 id="琐碎的思路"><a href="#琐碎的思路" class="headerlink" title="琐碎的思路"></a>琐碎的思路</h3><p>如果我们不重点考虑隐私问题，或许可以采用数据中心分布式学习的背景框架。这种背景下，我们是要在一个大而扁平的数据集上训练模型，每个客户端是单个集群或数据中心中的计算结点。数据分配的特点是任何客户端都可以读取数据集任意部分。</p>
+<h2 id="琐碎的思路-阶段1"><a href="#琐碎的思路-阶段1" class="headerlink" title="琐碎的思路(阶段1)"></a>琐碎的思路(阶段1)</h2><p>如果我们不重点考虑隐私问题，或许可以采用数据中心分布式学习的背景框架。这种背景下，我们是要在一个大而扁平的数据集上训练模型，每个客户端是单个集群或数据中心中的计算结点。数据分配的特点是任何客户端都可以读取数据集任意部分。</p>
 <p>可能的学习路线：</p>
 <ol>
 <li>机器学习入门（基本的线性模型训练过程、梯度下降法）</li>
@@ -162,6 +162,183 @@
 <li>FL+Nash Bargaining Game（理解这种迁移）</li>
 <li>理解我们目前大概的思路</li>
 </ol>
+<h3 id="论文撰写相关"><a href="#论文撰写相关" class="headerlink" title="论文撰写相关"></a>论文撰写相关</h3><h4 id="个性化联邦学习常用的优化目标"><a href="#个性化联邦学习常用的优化目标" class="headerlink" title="个性化联邦学习常用的优化目标"></a>个性化联邦学习常用的优化目标</h4><p>在个性化联邦学习（PFL）中，正则化项的设计非常关键，它能帮助平衡全局模型和各个客户端的个性化模型之间的关系。常见的正则化项主要有以下几种形式：</p>
+<p>参数距离正则化： 这种方法通过限制个性化模型参数和全局模型参数之间的距离，来保证个性化模型不会偏离全局模型太远。常见的形式有：<br>L2 正则化（欧氏距离）：<br>$\mathcal{R}(w_k, w_g) &#x3D; |w_k - w_g|^2_2$</p>
+<p>L1 正则化：<br>$\mathcal{R}(w_k, w_g) &#x3D; |w_k - w_g|_1$</p>
+<p>混合模型正则化： 这种方法通过将全局模型和本地模型进行线性组合，并对这种组合进行约束：$w_k &#x3D; \lambda w_g + (1 - \lambda)\tilde{w}_k$其中，$\lambda$ 是权重系数，$\tilde{w}_k$是客户端 $k$ 自己训练的模型参数。这种方法可以通过控制 $\lambda$ 的大小来调节全局模型和本地模型的影响。</p>
+<p>多任务学习正则化： 这种方法将个性化建模视为多任务学习问题，通过对不同任务（客户端）的模型参数进行正则化：$\mathcal{R}(w_k, w_g) &#x3D; |v_k|^2_2$其中，$w_k &#x3D; w_g + v_k$，$v_k$是客户端 $k$ 的个性化参数。</p>
+<p>元学习正则化： 元学习方法通过对元模型参数进行调整，以便在少量本地数据上快速适应：$\mathcal{R}(\theta, \mathcal{D}_k) &#x3D; \mathcal{L}<em>k(\theta - \alpha \nabla</em>{\theta} \mathcal{L}_k(\theta; \mathcal{D}_k); \mathcal{D}_k)$其中，$\theta$ 是元模型参数，$\alpha$ 是学习率。</p>
+<p>KL 散度正则化： 这种方法通过衡量个性化模型和全局模型的概率分布之间的差异，来进行正则化：$\mathcal{R}(w_k, w_g) &#x3D; D_{KL}(P(w_k) | P(w_g))$其中，$D_{KL}$是 Kullback-Leibler 散度，$P(w_k)$和 $P(w_g)$ 分别是个性化模型和全局模型的概率分布。</p>
+<h3 id="实验实现相关"><a href="#实验实现相关" class="headerlink" title="实验实现相关"></a>实验实现相关</h3><p>在Server端使用经典的FedAvg算法进行权重的聚合</p>
+<p>在Client端对Server发送过来的权重，结合自己的本地权重，进行正则化</p>
+<p>算法的基本流程：</p>
+<ol>
+<li>（初始化部分）服务器初始化参数，并发送给客户端，作为本地参数</li>
+<li>服务器向客户端发送全局参数</li>
+<li>客户端使用数据集的一个子集，训练更新本地参数；并使用本地参数与全局参数进行后正则化处理（NBG），得到个性化参数，更新本地参数</li>
+<li>客户端向服务器发送个性化参数，服务器对所有的个性化参数使用FedAvg进行聚合，得到新的全局参数</li>
+<li>重复2~4</li>
+</ol>
+<p>改代码的思路：</p>
+<ol>
+<li>实现一个基本的FedAvg算法</li>
+<li>实现基本的正则化（混合模型，后正则化）</li>
+<li>更改混合模型正则化为Nash Bargaining Game</li>
+</ol>
+<p>关于实现基本的正则化的思路：</p>
+<p>关键是要为client多引入一份模型参数，作为个性化参数</p>
+<ol>
+<li>本地参数在初始化的时候和个性化参数一起，用全局参数初始化；后续每次send_model的时候，本地参数不再更新，只更新个性化参数；每次都使用本地参数照常训练，并且在3、的个性化参数更新之后，用个性化参数替代本地参数</li>
+<li>多引入一个个性化参数成员变量，在初始化本地参数的时候，一并将个性化参数做相同设置（都设置为全局参数）：1、加入成员变量（注意初始化）；2、修改set_parameters函数（只设置个性化参数，不再设置本地参数）</li>
+<li>当本地参数训练完成之后（之前的直接复用原代码即可），用个性化参数与本地参数进行正则化处理，得到新的个性化参数（同样也更新本地参数）：1、添加正则化函数（后续在此之上引入NBG）2、更新本地参数</li>
+<li>将个性化参数发送回服务器：1、修改send_model函数，使其返回的是新的个性化参数的成员变量（不用再修改了，因为我们正则化得到个性化参数后也会将其设置为本地参数，send_model会返回本地参数）</li>
+</ol>
+<p>引入Nash Bargaining Game的思路：</p>
+<p>Q：Nash Bargaining Game的源代码实现是多个任务的loss进行聚合后，用weighted_loss，反向传播求梯度，然后进行梯度下降；对应的就等价于论文中的，各个任务的loss先反向传播，得到weighted_loss，再进行聚合；而FL中的Nash Bargaining Game一般是将各个客户端期望的更新参数用于聚合，对应到我的PFLNash中，应该是将local model在local dataset上期望的更新参数&amp;global model在dataset上期望的更新参数进行聚合；期望的更新参数实际上就是loss反向传播求得的梯度乘上学习率，所以期望更新参数的聚合，可以等价于loss求得梯度的聚合（也就是源代码先聚合loss再求梯度），也适用于Nash Bargaining Game的源代码（学习率在梯度下降,即.step()操作的时候引入）</p>
+<ol>
+<li>使用personalized model进行前向传播，并求交叉熵损失得到loss2（loss1已经有了）</li>
+<li>使用loss1与loss2进行聚合得到综合loss，并使用综合loss反向传播求梯度</li>
+<li>使用梯度进行梯度下降，得到新的model</li>
+</ol>
+<p>如何确保聚合后的loss，求梯度下降的时候对于两个模型中结构位对应相同的参数一视同仁。有必要做到一视同仁吗？</p>
+<p>在MTL中，各个任务的损失函数不同，对应即T1,T2,T3对应同一套参数omega的loss1、loss2、loss3不同，但是均可对omega求梯度，得到的梯度使用Nash Bargaining Game进行聚合，用来更新omega</p>
+<p>而在PFL中，只有一个任务&#x2F;损失函数相同，但是有两套参数omega1、omega2，这两套参数可以视作同一个model的两套参数；loss相同（从函数结构上来说），loss对omega1、omega2求梯度，得到的值不同分为loss1、loss2，梯度不同，对应参数的更新方向不同</p>
+<p>MTL中如果直接聚合loss1、loss2、loss3得到loss，然后反向传播，loss是对omega求梯度nabla，再梯度下降，oemga会使用nalba更新自己；而如果PFL中直接聚合loss1、loss2，然后反向传播，其会将omega1、omega2当作两个不同的参数，分别求梯度nabla1、nabla2，然后反向传播，omega1会用nabla1更新自己，omega2会用nabla2更新自己，得到omega1’，omega2’</p>
+<p>或许我应该再令omega2 &#x3D; omega2 + (omega2’-omega2)+(omega1’-omega1)，这样来完成更新。</p>
+<p>实际上我使用的personalized_model来临时存储global_model，所以应该是omega2 &#x3D; omega1 + (omega1’ - omega1) + (omega2’ - omega2)</p>
+<p>因为PFL中loss1、loss2聚合的时候Nash Bargaining Game为它们确定的系数会在实质上影响到nabla1、nabla2的值，而最基础的聚合也可以直接看作对nabla1、nabla2求一个加权和</p>
+<p>对比最初我的设想是这样的：<code>实际上我这里并没有共享参数，我的loss1是由model1得到的、loss2是由model2得到的，model1与model2是结构完全相同的模型（尽管具体对应参数的数值可能不相同，但在初始化的时候model2是由model1deep copy得到的）；然后此时我想使用这个NashMTL对loss1、loss2进行聚合，完成之后只需要更新model2。</code>但这应该是错误的，聚合后的loss不可能只更新model2，这意为着将model1、model2中结构位相同的参数当作同一个参数进行处理，但这实际上是不行的。假设这是可以的，我们在对结构位相同的参数1求梯度的时候可能需要用到参数2，在相同的结构位上，model1、model2的参数2值可能是不同的，这个时候就无法确定应该用model1还是model2的参数2的值了。所以这是不行的。</p>
+<h4 id="最终的实现思路"><a href="#最终的实现思路" class="headerlink" title="最终的实现思路"></a>最终的实现思路</h4><p>一个client保存了4个model，分别是个性化模型、本地模型，以及两个模型的备份（主要是用来备份参数）</p>
+<p>为了使用MTL，我将本地模型的参数omega1、个性化模型的参数omega2，拼接成了一个大的共享参数网络(omega1,omega2)，然后传入个性化模型、本地模型分别求得的loss1、loss2，传入作为losses，(omega1,omega2)作为shared_parameters，进行nash_mtl.backward()。内部的运行逻辑是，将loss1、loss2通过Nash Bargaining Game聚合后得到一个loss，用loss分别对(omega1,omega2)中的各个参数求偏导得到梯度，更新(omega1,omega2)（这样，对应相同结构位的参数并不会视作同一个参数，而是当作不同参数处理）。</p>
+<p>而在此之前，我将omega1、omega2分别用两个备份模型进行了保存，当omega1、omega2更新完成后，再依次对个性化模型的各个参数进行操作，更新为：omega2 &#x3D; omega2 + (omega2’-omega2)+(omega1’-omega1)。最后将个性化模型深拷贝给本地模型，完成更新</p>
+<h2 id="琐碎的思路-阶段2"><a href="#琐碎的思路-阶段2" class="headerlink" title="琐碎的思路(阶段2)"></a>琐碎的思路(阶段2)</h2><p>当前我已经完成的任务：</p>
+<ol>
+<li>问题的建模（method部分的论文初稿）</li>
+<li>编写算法的代码，在MINST数据集上完成了测试，并参照了一些评价指标</li>
+</ol>
+<p>接下来我需要做的事情是对PFLNash的优点进行论述，老师给了我以下建议：</p>
+<h3 id="考虑PFL中的典型评价方式"><a href="#考虑PFL中的典型评价方式" class="headerlink" title="考虑PFL中的典型评价方式"></a>考虑PFL中的典型评价方式</h3><p>通信（次数、复杂性）、收敛性、最优性、精度下限…，具体的需要我进一步查阅资料</p>
+<p>通信次数的比较可以通过横向比较，相同通信次数下的收敛率（Loss趋于一个较低的稳定值的情况）</p>
+<p>通信复杂性是和通信次数相关的，通常通信复杂性取决于：</p>
+<ol>
+<li>模型大小（每次通信发送模型参数的数量）</li>
+<li>通信的次数</li>
+<li>参与客户端个数</li>
+</ol>
+<p>复杂性可以定义为 R×N×b（通信次数、参与客户端个数、模型参数个数）</p>
+<p>优化的方法：</p>
+<ol>
+<li>通信协议（采用一些压缩技术对模型参数进行压缩，不太了解…）</li>
+<li>增加本地模型训练轮数</li>
+<li>让客户端部分参与</li>
+</ol>
+<p>关于收敛性分析或许可以参考一下这个视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ks1PYGEu5/?spm_id_from=333.1387.upload.video_card.click&vd_source=80df09f481ef5f0671e5e0e35d02e33e">联邦学习收敛性分析</a></p>
+<h3 id="参考当前方法中不好的点"><a href="#参考当前方法中不好的点" class="headerlink" title="参考当前方法中不好的点"></a>参考当前方法中不好的点</h3><p>考虑我参考方法中的缺点，描述自己是如何在前人基础上进行改进的</p>
+<p>具体的方向应该是去找一些有关通过正则化方法实现PFL的算法中存在的缺陷</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>最后老师提到了自己的研究生曾经做过的一个工作，通过知识蒸馏提取个性化特征，与全局模型进行融合，得到个性化模型。并且告诉我可以思考自己的方法较这个方法的优点是什么，类似于在第二个方向中给了我一个更加具体的方向。值得留意。</p>
+<h3 id="当前阶段阅读的一些参考文献"><a href="#当前阶段阅读的一些参考文献" class="headerlink" title="当前阶段阅读的一些参考文献"></a>当前阶段阅读的一些参考文献</h3><h4 id="FedAvgM"><a href="#FedAvgM" class="headerlink" title="FedAvgM"></a>FedAvgM</h4><p>这篇文章主要做了两个工作</p>
+<ol>
+<li>在服务器端引入了动量来更新权重, 提升了FedAVG算法对非独立同分布数据的训练效果</li>
+<li>基于狄利克雷分布，提出了一种Non-IID数据生成的方法，用来对FedAVGM以及FedAVG进行测试</li>
+</ol>
+<p>主要的优点在于accuracy的提高</p>
+<p>给我的一个启发是它的实现，实验测试了通信次数-准确率的表现，并且以centralized learning作为了一个衡量标准（我是否可以把centralized learning最终的结果作为一个optimal accuracy的表现？）</p>
+<h4 id="Per-FedAvg"><a href="#Per-FedAvg" class="headerlink" title="Per-FedAvg"></a>Per-FedAvg</h4><p>这篇文章的主要工作是把FedAvg算法与meta-learning的框架结合起来，实现了个性化的效果，比较注重理论，严格地证明了算法的收敛性。</p>
+<p>实验方法，主要是对比了accuracy，对比的算法是FedAvg+本地微调与PerFedAvg算法</p>
+<h3 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h3><p>目前翻阅了多篇较为经典的论文，里面的实验大多数都是聚焦于accuracy这一指标。我大概的想法也是将PFLNash的accuracy与一些basline（混合模型正则化、Fedprox…）做对比。此外，还可以从loss-通信轮次的角度来对比，loss收敛时的通信轮次，来说明通信方法的优点。最后，我可能需要仔细学习一下收敛性证明方法的理论，来对PFLNash是否可以从数学层面进行严格的收敛性证明进行一个评估。</p>
+<p>具体来说，于是接下来我有两个主要工作：</p>
+<ol>
+<li>学习FedAvg算法的收敛性证明，考虑是否可以应用到PFLNash中</li>
+<li>实验角度，主要是两个实验，一个是accuracy的，一个是loss的，对比混合模型正则化、Fedprox…</li>
+</ol>
+<p>最后选定了基线模型之后，还可以考虑一些其它的优点，比如避免了引入一些需要人为设置且变动影响不是很清晰的超参数…</p>
+<h4 id="关于收敛性证明"><a href="#关于收敛性证明" class="headerlink" title="关于收敛性证明"></a>关于收敛性证明</h4><p>在三大假设的基础之上，集中数据集中的GD收敛性是可以得到保证的；经典的FedAvg算法实际上是一种分布式数据集上的SGD。于是FedAvg与GD的差异主要来源于两个方面</p>
+<ol>
+<li>分布式训练参数带来的误差</li>
+<li>分布式参数聚合时的误差</li>
+</ol>
+<p>我们的证明思路可以是先考虑1、中产生的误差存在一个bound，再证明2、中产生的误差也存在一个bound，并且这两个bound都是可以收敛到0的，那么最终FedAvg的训练效果会收敛到集中化数据集下GD的训练效果，于是收敛性可以得到保证。</p>
+<p>现在我参考的资料FedAvg的收敛性已经证明完毕，我要考虑PFLNash的收敛性证明，其中多的一项误差可能是NBG带来的。</p>
+<h4 id="关于实验"><a href="#关于实验" class="headerlink" title="关于实验"></a>关于实验</h4><p>首先我要选择一些合适的算法作为我的基线模型；从三种PFL的实现思路，分别找三种经典的算法</p>
+<ol>
+<li>FL+本地微调（FedAvg）</li>
+<li>仅使用全局参数，更新本地模型的部分层参数，本地模型有自己的任务头，仅通过本地数据进行训练（FedPer）</li>
+<li>使用全局模型与本地模型进行个性化聚合（例如在本地模型训练的过程中在目标函数中加入正则化项）（FedProx）</li>
+</ol>
+<p>实验部分设想（三类实验）</p>
+<ol>
+<li>第一类实验使用PFLNash与一些经典的算法，在平均准确率与损失函数收敛上进行横向对比，分析相关的性能表现、实验收敛性以及通信复杂性；</li>
+<li>第二类实验，通过调整一些超参数，对比相应情况下PFLNash的各项表现，进行相应的敏感性分析；</li>
+<li>第三类实验，类比实际的场景，测试了不同客户端数量下PFLNash的表现，同时考虑了客户端可能掉线的情况。</li>
+</ol>
+<p>可选用数据集：<br>AGNews、AmazonReview、Camelyon、Cifar10、Cifar100、Country211、COVIDx、Digit5、DomainNet、EMNIST、FashionMNIST、FEMNIST、Flower102、GTSBR、HAR、iWildCam、kvasir、MNIST、Omniglot、PAMAP2、Shakespeare、SogouNews、StanfordCars、TinyImagenet</p>
+<p>可选用模型：<br>MLR、CNN、DNN、ResNet18、ResNet10、ResNet34、AlexNet、GooleNet、MobileNet、LSTM、BiLSTM、fastText、TextCNN、Transformer、AmazonMLP、HARCNN</p>
+<p>第一类实验使用数据集</p>
+<p><strong>图像识别相关数据集</strong>：</p>
+<ol>
+<li>MNIST</li>
+<li>EMNIST</li>
+<li>Cifar10</li>
+<li>Cifar100</li>
+</ol>
+<p><strong>文本分类相关数据集</strong>：</p>
+<p>AGNews（新闻文本分类数据集）<br>数据类型：新闻文章标题与描述<br>标签：文章类别标签，四类，World、Sports、Business、Sci&#x2F;Tech<br>模型：TextCNN、fastText</p>
+<p><strong>医疗和生物数据</strong>：</p>
+<p>COVIDx（新冠肺炎检测图像数据集）<br>数据类型：胸部X光片（CXR）图像<br>标签：COVID-19阳性、COVID-19阴性、正常<br>模型：CNN、ResNet34</p>
+<p><strong>传感器数据</strong>：</p>
+<p>HAR（只能收集传感器数据的人体活动识别数据集）<br>数据类型：只能收集内置加速度计和陀螺仪采集的数据<br>标签：标注为不同的物理活动，包括：走路、上楼、下楼、坐着、站着、躺着<br>模型：LSTM、HARCNN</p>
+<p>考虑选用数据集：<br>AGNews、AmazonReview、Camelyon、Cifar10、Cifar100、Country211、COVIDx、Digit5、DomainNet、EMNIST、FashionMNIST、FEMNIST、Flower102、GTSBR、HAR、iWildCam、kvasir、MNIST、Omniglot、PAMAP2、Shakespeare、SogouNews、StanfordCars、TinyImagenet</p>
+<p>注：<strong>可以考虑异质性数据（狄利克雷+非平衡划分）和非异质性数据（平衡划分）</strong></p>
+<p>具体任务划分</p>
+<ol>
+<li>租聘云服务器，完成实验环境搭建</li>
+<li>学习使用py处理h5文件，完成训练结果的可视化展示</li>
+<li>训练比较效果</li>
+<li>完成实验部分论文内容</li>
+</ol>
+<p>下面记录一下经典论文中的实验信息</p>
+<p>FedAvg+本地微调（FedAvgM）：</p>
+<p>客户端数量：40<br>通信次数：10000<br>本地训练次数：1~5<br>模型：CNN<br>数据集：CIFAR-10<br>观测指标：acc-round、best_acc-local_epoch</p>
+<p>个性化任务头</p>
+<p>FedPer</p>
+<p>客户端数量：10、10、30<br>通信次数：50、50、20<br>本地训练次数：1<br>模型：ResNet-34、MobileNet-v1<br>数据集：CIFAR-10、CIFAR-100、FLICKR-AES（均有iid划分、non-iid划分）<br>观测指标：acc-rounds（还通过调整网络结构、调整一些参数例如class_num做了对比）</p>
+<p>个性化聚合</p>
+<p>FedProx：</p>
+<p>客户端数量：1000、1000、200、143、772（对应数据集）<br>通信次数：200、100、200、40、800<br>本地训练次数：1<br>模型：LSTM（不同实验外加了许多自己的调整）<br>数据集：Symnthetic、MNIST、FEMNIST、Shakespeare、Sent140<br>观测指标：loss-rounds、acc-rounds</p>
+<p>根据我使用的数据集记录实验条件</p>
+<p><strong>MNIST</strong>：<br>local epoch 1；global epoch：30；<br>client nums：20；joining rotio：100%；<br>class nums：10；Model：CNN（2conv、2fc）；<br>partition：non-iid（dir）；non-blance；<br>learning-rate：0.005 (ldg 0.99)</p>
+<p><strong>Cifar100</strong>：<br>local epoch 1；global epoch：100；<br>client nums：20；joining rotio：100%；<br>class nums：10；Model：CNN（2conv、2fc）；<br>partition：non-iid（dir）；non-blance；<br>learning-rate：0.005 (ldg 0.99)<br><strong>已经测试过的算法：</strong><br>FedProx<br>FedAS：mean for Best accuracy. 0.4542910447761194<br>FedALA：mean for best accuracy: 0.5360474413646056（<em>）<br>Ditto：mean for best accuracy: 0.4754131130063966<br>FedPAC: mean for best 0.5436433901918977（</em>）</p>
+<p><strong>实验选择的对比算法：</strong></p>
+<p>FedProx、FedPer、FedAvg（经典的）<br>FedAS、FedALA、Ditto、FedPAC、MOON、FedRep、FedPHP、FedFomo、pFedME</p>
+<h2 id="实验部分论文"><a href="#实验部分论文" class="headerlink" title="实验部分论文"></a>实验部分论文</h2><p><code>这里先统一都用文字阐释，写到overleaf里面的时候再做修改，在需要的地方补充数学符号，显得更加专业</code><br><code>让AI帮忙写的时候先学习一下经典论文的文风</code></p>
+<p>我们对PFLNash做了许多测试，在多个数据集上均取得了较好的效果，在这一部分我们对实验的细节情况进行说明。我们一共设置了三类实验，第一类实验使用PFLNash与一些经典的算法，在平均准确率与损失函数收敛上进行了横向对比，分析了相关的性能表现、实验收敛性以及通信复杂性；第二类实验我们通过调整一些超参数，对比相应情况下PFLNash的各项表现，进行了相应的敏感性分析；第三类实验，我们充分类比了实际的场景，测试了不同客户端数量下PFLNash的表现，同时考虑了客户端可能掉线的情况。</p>
+<p>PFLNash与经典算法的对比</p>
+<p>我们挑选了一些个性化联邦学习的经典算法，包括FedProx，该算法与PFLNash类似，并不直接使用全局参数更新本地参数，而是为本地训练的过程中引入了一个正则化项，来限制本地参数在训练的过程中过远的偏离全局参数，在此基础上尽可能地使用本地数据训练本地参数，从而达成个性化的效果。与该算法相比PFLNash所作的是后正则化，并不在训练的过程中考虑本地参数与全局参数的偏差，而是在本地训练完成之后使用Nash Bargaining Game让本地参数与全局参数协商出一个平衡的结果。FedPer，该算法通过仅让本地参数与全局参数共享网络的前几层参数，而保留个性化任务头的参数，来实现个性化的效果。FedAvg+本地微调，这是为了实现个性化最经典的做法，在全局模型的基础上用本地数据进一步训练。实际上对比的这几种算法对应了三种实现个性化联邦学习的常见策略，即个性化聚合的方法、学习额外个性化模型的方法、全局训练结合本地微调的方法，具有典型的代表作用。</p>
+<p>为了评估模型的个性化情况，我们测试的平均准确率是个性化准确率，即每个客户端个性化模型的准确率按照样本数量进行加权平均。我们使用的测试数据集包括MNIST、EMNIST、Cifar100、Cifar10，我们分别考虑服从独立同分布的数据情况以及具有异质性的数据情况。后者是使用狄利克雷方法对数据集进行非平衡的划分，最终使各个客户端持有的数据集不服从独立同分布性，且数据集大小不一。</p>
+<p>对于MNIST数据集，我们考虑了20个客户端，每个客户端每次迭代进行E轮本地训练，$E\in[1,5]$。本地训练使用SGD，设置batch_size大小为10，本地学习率设置为0.005。全局模型进行30轮迭代，每轮全局迭代之后对模型进行评估，测试当前的准确率以及损失函数的大小。使用的模型是经典的CNN网络，其具有两个卷积层，两个全连接层，可以用来完成简单的图像分类工作。</p>
+<h2 id="会议-期刊"><a href="#会议-期刊" class="headerlink" title="会议&#x2F;期刊"></a>会议&#x2F;期刊</h2><h3 id="会议"><a href="#会议" class="headerlink" title="会议"></a>会议</h3><p><strong>ICDCS</strong> (IEEE International Conference on Distributed Computing Systems) - CCF-B</p>
+<p>相关介绍：ICDCS 是分布式计算领域的会议，联邦学习本质上是分布式机器学习，是其核心关注方向之一。近年来关于联邦学习优化、隐私、效率、个性化（如模型个性化、梯度个性化）的论文非常多。</p>
+<p>DDL：ICDCS(2026) 2025-12-13</p>
+<p><strong>ECML-PKDD</strong> (European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases) - CCF-B</p>
+<p>相关介绍：欧洲顶级的机器学习与数据挖掘联合会议，涵盖面非常广。联邦学习和个性化学习是其核心关注领域的热点方向。论文质量要求很高。</p>
+<p>DDL:1st Submission Deadline: 30 October 2025 2nd Submission Deadline: 15 January 2026</p>
+<p><strong>BDCAT</strong> (IEEE&#x2F;ACM International Conference on Big Data Computing, Applications and Technologies) - CCF-C</p>
+<p>相关介绍：关注大数据计算、应用和技术。联邦学习作为处理分布式、隐私敏感大数据的关键技术，是其核心主题。个性化建模也是大数据应用的重要需求。</p>
+<p>DDL：DDL (2026预估)： 主会DDL通常在7月左右</p>
+<p><strong>ICA3PP</strong> (International Conference on Algorithms and Architectures for Parallel Processing) - CCF-C</p>
+<p>相关介绍： 专注于并行处理的算法和架构。联邦学习涉及分布式并行计算，如果你的工作侧重于底层的并行优化算法（如通信压缩、异步更新、个性化聚合的高效实现）或特定的并行架构适配，则很契合。</p>
+<p>DDL：DDL (2026预估)： ICA3PP通常在5月或6月截稿</p>
+<h3 id="期刊"><a href="#期刊" class="headerlink" title="期刊"></a>期刊</h3><p>IEEE Transactions on Neural Networks and Learning Systems (TNNLS) - CCF-B</p>
+<p>相关介绍：专注于神经网络和机器学习系统。对联邦学习（尤其是优化算法、个性化建模）、分布式学习、自适应学习系统等方向非常友好。</p>
+<p>Future Generation Computer Systems (FGCS) - CCF-C (但常被对标更高)</p>
+<p>相关介绍：虽然是C类，但其在联邦学习社区非常热门，影响因子和分区(JCR Q1&#x2F;Q2)常优于部分B类期刊。强烈关注未来计算系统，联邦学习及其应用（包括个性化）是其核心。</p>
+<h2 id="NBG-代码重写"><a href="#NBG-代码重写" class="headerlink" title="NBG 代码重写"></a>NBG 代码重写</h2><p>在实验过程中遇到了一个比较严峻的问题，我在复用MTL-Nash代码的过程，最终将NBG的一般解转换为了一个优化问题，优化问题的结果是一个<strong>更新梯度</strong>的权重矩阵。</p>
+<p>出现的问题是：</p>
+<p>1）梯度爆炸<br>2）权重矩阵最后始终呈现出1，1的异常值，即最终的更新梯度（同样也是更新向量），会直接相加；<br>3）我通过一系列debug发现原因在NBG转换为优化问题了之后，优化问题无法成功求解，一直用异常处理令alpha_param &#x3D; prevs_alpha_param，导致权重实际上一直处于初始值</p>
+<p>我分析代码，注意到 我复用的代码-我起初设想的算法-我最终敲定的算法 三者间皆存在差距，但最有问题的是复用即实验的代码与我最终敲定的算法存在差距</p>
+<p>由于在小型模型上，实验代码呈现出了不错的效果，所以起初我没有注意到这个问题，或许是因为对于小型模型异常的更新方式不足以导致梯度爆炸</p>
+<p>尝试了许多debug的方法，最终更换了一个优化器，初步解决了问题，不知道有没有其它隐患，我查看了权重alpha的值，看起来表现得是比较正常的</p>
+<p>但是对于Cifar100数据集，梯度爆炸的问题仍然存在，先停止debug，先做一些其它种类数据集上的实验</p>
 
 		</div>
 
@@ -238,20 +415,5 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

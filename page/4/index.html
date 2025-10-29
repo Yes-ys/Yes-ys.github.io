@@ -115,6 +115,272 @@
     
     <div class="recent-post-item">
 
+      <a href="/2025/04/30/Clustering-watermelon-book/" class="item-title">Clustering-watermelon-book</a>
+      
+      <time datetime="2025-04-30T11:58:19.000Z">
+        2025-04-30
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 聚类任务简介简单地说，就是要对一个n维向量元素的集合求一个划分，划分后的子集就是一类的（不相交的簇）。
+对于数据集$D &#x3D; {x_1,x_2,…,x_m}$，划分为k个不相交的集合$C_1, C_2, …, C_k$，若$x_i \in C_j$，则$\lambda_i &#x3D; j$，其中$j \in {1,2,…,k}$，对应$\lambda_i$就是$x_i$的标签。聚类任务要做的是就是求出一个聚类结果$\lambda &#x3D; (\lambda_1,\lambda_2,…,\lambda_m)$，其中$\lambda$为数据集的簇标记向量，第$i$个分量标记了$x_i$属于哪一个簇。
+性能度量怎样的聚类是好的：
+
+簇内的样本尽量相似
+簇间的样本尽量不同
+
+外部指标外部指标：将聚类结果和某个“参考模型”进行比较，称为外部指标
+对于数据集$D &#x3D; {x_1,x_2,…,x_m}$，使用聚类模型A，得到簇标记向量$\lambda$，另外使用参考聚类模型B，得到簇标记向量$\lambda^{*}$。
+于是我们可以根据$\lambda_i$与$\lambda_ -->
+        <!-- </div> -->
+
+        
+        <h2 id="聚类任务简介"><a href="#聚类任务简介" class="headerlink" title="聚类任务简介"></a>聚类任务简介</h2><p>简单地说，就是要对一个n维向量元素的集合求一个划分，划分后的子集就是一类的（不相交的簇）。</p>
+<p>对于数据集$D &#x3D; {x_1,x_2,…,x_m}$，划分为k个不相交的集合$C_1, C_2, …, C_k$，若$x_i \in C_j$，则$\lambda_i &#x3D; j$，其中$j \in {1,2,…,k}$，对应$\lambda_i$就是$x_i$的标签。聚类任务要做的是就是求出一个聚类结果$\lambda &#x3D; (\lambda_1,\lambda_2,…,\lambda_m)$，其中$\lambda$为数据集的簇标记向量，第$i$个分量标记了$x_i$属于哪一个簇。</p>
+<h2 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h2><p>怎样的聚类是好的：</p>
+<ol>
+<li>簇内的样本尽量相似</li>
+<li>簇间的样本尽量不同</li>
+</ol>
+<h3 id="外部指标"><a href="#外部指标" class="headerlink" title="外部指标"></a>外部指标</h3><p>外部指标：将聚类结果和某个“参考模型”进行比较，称为外部指标</p>
+<p>对于数据集$D &#x3D; {x_1,x_2,…,x_m}$，使用聚类模型A，得到簇标记向量$\lambda$，另外使用参考聚类模型B，得到簇标记向量$\lambda^{*}$。</p>
+<p>于是我们可以根据$\lambda_i$与$\lambda_j$相同与否的关系以及$\lambda^{<em>}_i$<br>与$\lambda^{</em>}_j$是否相同的关系定义如下集合。</p>
+<p>$DD,DS,SD,SS$一共四个集合，这些集合中的元素类似$(x_i,x_j)$，是一个“向量对”，分别按照如下规则界定类似的向量对是否属于相应的集合</p>
+<ol>
+<li>$x_i$与$x_j$在模型A、B的划分下都属于同一簇，则$(x_i,x_j) \in SS$</li>
+<li>$x_i$与$x_j$在模型A、B的划分下都不属于同一簇，则$(x_i,x_j) \in DD$</li>
+<li>$x_i$与$x_j$在模型A划分下属于同一簇，在B划分下不属于同一簇，则$(x_i,x_j) \in SD$</li>
+<li>$x_i$与$x_j$在模型A划分下不属于同一簇，在B划分下属于同一簇，则$(x_i,x_j) \in DS$</li>
+</ol>
+<p><code>D即different，S即same 这样就非常容易理解了</code></p>
+<p>根据上面的集合，我们可以定义如下过度变量</p>
+<ol>
+<li>$\lvert SS \rvert &#x3D; a$</li>
+<li>$\lvert SD \rvert &#x3D; b$</li>
+<li>$\lvert DS \rvert &#x3D; c$</li>
+<li>$\lvert DD \rvert &#x3D; d$</li>
+</ol>
+<p>进一步，我们定义常用于性能度量的第一组系数</p>
+<ol>
+<li><strong>JC系数</strong> $JC &#x3D; \frac{a}{a+b+c}$</li>
+<li><strong>FMI系数</strong> $FMI &#x3D; \sqrt{\frac{a}{a+b} \ast \frac{a}{a+c}}$</li>
+<li><strong>Rand指数</strong> $RI &#x3D; \frac{2(a+b)}{m(m-1)}$</li>
+</ol>
+<p>这些性能指标的范围都是$[0,1]$，并且越大说明聚类效果越好<br><code>当然，前提是参考的模型是“正确”的</code></p>
+<h3 id="距离计算"><a href="#距离计算" class="headerlink" title="距离计算"></a>距离计算</h3><h4 id="闵可夫斯基距离"><a href="#闵可夫斯基距离" class="headerlink" title="闵可夫斯基距离"></a>闵可夫斯基距离</h4><p>定义函数$dist(\cdot,\cdot)$，用于计算两个向量的距离。则它应该满足下述三个性质</p>
+<ol>
+<li>非负性</li>
+<li>对称性</li>
+<li>直递性</li>
+</ol>
+<p>常用的距离是闵可夫斯基距离</p>
+<p>$dist_mk(x_i,x_j) &#x3D; (\sum_{\mu &#x3D; 1}^{n} \lvert x_{i\mu} - x_{j\mu} \rvert ^{p})^{\frac{1}{p}}$<br>显然当$p &#x3D; 2$时即我们常用的欧氏距离，$p &#x3D; 1$时为曼哈顿距离</p>
+<h4 id="有序属性和无序属性"><a href="#有序属性和无序属性" class="headerlink" title="有序属性和无序属性"></a>有序属性和无序属性</h4><p>在考虑属性之间的距离的时候，序十分重要。这里通过简单的例子引入有序和无序。属性值出自于能够直接计算距离的属性称为有序属性，例如属性定义域为${1,2,3}$，而不能的就是无序属性，例如${货车,西瓜,乐乐}$。</p>
+<p>显然，闵可夫斯基距离是用于衡量有序属性的距离的。</p>
+<h4 id="VDM——衡量无序属性的距离"><a href="#VDM——衡量无序属性的距离" class="headerlink" title="VDM——衡量无序属性的距离"></a>VDM——衡量无序属性的距离</h4><p>假设有$k$个样本簇，$m_\mu,a$表示在属性$\mu$上取值为$a$的样本的个数，$m_\mu,a,i$表示在第i个样本簇中，属性$\mu$取值为$a$的样本个数。定义VDM如下。</p>
+<p>$VDM &#x3D; \sum_{i&#x3D;1}^{k} \lvert \frac{m_\mu,a,i}{m_\mu,a} - \frac{m_\mu,b,i}{m_\mu,b}\rvert ^{p}$</p>
+<p>值得注意的是，这里衡量的只是无序属性的距离，而要衡量两个无序样本$x_i$与$x_j$的距离，即其中的各个属性（类比向量的分量）都是无序属性，我们应该对各个属性的$VDM$求和。</p>
+<h4 id="混合元素的距离"><a href="#混合元素的距离" class="headerlink" title="混合元素的距离"></a>混合元素的距离</h4><p>不失一般性，我们可以定义混合元素的距离如下：<br>$MinkovDM_p(x_i,x_j) &#x3D; (\sum_{\mu&#x3D;1}^{n_c} \lvert x_{i\mu} - x_{j\mu} \rvert ^{p} + \sum_{\mu&#x3D;n_c+1}^{n} VDM_p(x_{i,\mu},x_{j,\mu}))^{\frac{1}{p}}$</p>
+<p>其中$x_i,x_j$为混合属性的元素，$1到n_c$对应为有序属性，$n_c到n$对应为无序属性</p>
+<h3 id="内部指标"><a href="#内部指标" class="headerlink" title="内部指标"></a>内部指标</h3><p>于是我们可以根据元素的不同（有序、无序、混合），选取我们需要的距离函数$dist(\cdot,\cdot)$，定义如下常用于刻画簇的性质的量</p>
+<ol>
+<li>$\mu_i &#x3D; \frac{1}{\lvert C \rvert} \sum_{1 \le i \le \lvert C \rvert} x_i, \mu &#x3D; (\mu_1,\mu_2,…,\mu_m)$为簇$C$的中心点</li>
+<li>$avg(C) &#x3D; \frac{2}{\lvert C \rvert (\lvert C \rvert - 1)} \sum_{1 \le i &lt; j \le \lvert C \rvert} dist(x_i,x_j)$ 簇$C$内样本间的平均距离</li>
+<li>$diam(C) &#x3D; max_{1 \le i &lt; j \le \lvert C \rvert} dist(x_i,x_j)$ 簇$C$内样本间的最远距离</li>
+<li>$d_{min}(C_i,C_j) &#x3D; min_{x_i \in C_i,x_j \in C_j} dist(x_i,x_j)$ 簇$C_i$和簇$C_j$中最近样本的距离</li>
+<li>$d_{cen}(C_i,C_j) &#x3D; dist(\mu_i,\mu_j)$ 簇$C_i$和簇$C_j$的中心点距离</li>
+</ol>
+<p>进一步我们定义一些内部指标如下。</p>
+<ol>
+<li>$DBI &#x3D; \frac{1}{k} \sum_{i&#x3D;1}^{k} max_{j \ne i}(\frac{avg(C_i)+avg(C_j)}{d_{cen}(\mu_i,\mu_j)})$</li>
+<li>$DI &#x3D; min_{1 \le i \le k} { min_{j \ne i}(\frac{d_{min}(C_i,C_j)}{min_{1 \le l \le k} diam(C_i)}) }$</li>
+</ol>
+<p>DB指数越小越好，Dunn指数越大越好</p>
+<h2 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h2><p>原型的概念对应的是空间中的点。原型聚类的前提是认为，数据集中的聚类结构可以通过一组原型来描述。而原型聚类要做的就是通过某些方法找出这组“原型”。常见的原型聚类算法的代表有<code>k-means（k均值算法）</code>、<code>学习向量量化算法</code>等等</p>
+<p>在后续的blog中会记录我复现相关算法的过程</p>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/04/30/Clustering-watermelon-book/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
+      <a href="/2025/04/27/Traceroute/" class="item-title">Traceroute</a>
+      
+      <time datetime="2025-04-27T11:35:01.000Z">
+        2025-04-27
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 这篇blog用于记录我在学习计算机工程系统导论时，一个与网络有关的实验。
+实验目的
+学习Ping和Traceroute工具的使用，能够在网络开发和维护中熟练使用该工具获取网络状态和进行错误排查。
+巩固课堂学习的因特网分层设计实现知识，理解因特网的分组转发网络的特性，通过分析互联网数据包因转发而产生的时延，加深理解尽力而为的因特网设计思想。
+通过分析ICMP协议，学习在分层设计中进行跨层通信的设计实现方法，思考因特网网络层在错误处理上的折中设计和处理技巧。
+通过Traceroute工具基于错误处理包进行路径探测功能的设计，体会在实践中体会设计方案在解决问题的同时是如何带来新的设计机会的。
+
+实验过程与习题ping应用
+用不超过200字简要概括ping命令ping命令用于向主机或网关发送请求，使用的是ICMP协议的ECHO_REQUSET数据包，并且会接收ICMP ECHO_RESPONSE作为回应。其中ECHO_REQUSET数据包包含了IP和ICMP头部，其后是一个timeval结构以及若干的填充字节。ping命令支持IPv6以及IPv4协议，其中对IPv6节点的信息查询是根据RFC4 -->
+        <!-- </div> -->
+
+        
+        <p>这篇blog用于记录我在学习计算机工程系统导论时，一个与网络有关的实验。</p>
+<h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><ol>
+<li>学习Ping和Traceroute工具的使用，能够在网络开发和维护中熟练使用该工具获取网络状态和进行错误排查。</li>
+<li>巩固课堂学习的因特网分层设计实现知识，理解因特网的分组转发网络的特性，通过分析互联网数据包因转发而产生的时延，加深理解尽力而为的因特网设计思想。</li>
+<li>通过分析ICMP协议，学习在分层设计中进行跨层通信的设计实现方法，思考因特网网络层在错误处理上的折中设计和处理技巧。</li>
+<li>通过Traceroute工具基于错误处理包进行路径探测功能的设计，体会在实践中体会设计方案在解决问题的同时是如何带来新的设计机会的。</li>
+</ol>
+<h2 id="实验过程与习题"><a href="#实验过程与习题" class="headerlink" title="实验过程与习题"></a>实验过程与习题</h2><h3 id="ping应用"><a href="#ping应用" class="headerlink" title="ping应用"></a>ping应用</h3><ol>
+<li><p><strong>用不超过200字简要概括ping命令</strong><br>ping命令用于向主机或网关发送请求，使用的是ICMP协议的ECHO_REQUSET数据包，并且会接收ICMP ECHO_RESPONSE作为回应。其中ECHO_REQUSET数据包包含了IP和ICMP头部，其后是一个timeval结构以及若干的填充字节。ping命令支持IPv6以及IPv4协议，其中对IPv6节点的信息查询是根据RFC4620进行的，但是由于IPv6源路由被起用，中间跳点可能不被允许。<br><em><code>man ping</code>结果如图1所示</em></p>
+</li>
+<li><p><strong>说明实验现象背后的原因</strong><br>我使用ping命令，分别对<code>www.sud.edu.cn</code>和<code>www.ouc.edu.cn</code>进行了10次<code>ping</code>操作，每次都发送了56字节的数据包。从结果可以看出，到<code>www.sud.edu.cn</code>的网络连接是通畅的，每一次都成功受到了回复，没有丢包发生。但是延迟时间在10.9ms-170ms之间不等，这可能是由于网络拥塞或者其它网络干扰因素导致的。但是发送到<code>www.ouc.edu.cn</code>始终没有得到回复，可能是因为OUC的网络配置了防火墙或者其它网络安全策略，阻止了<code>ping</code>请求。<br><em>实验现象如图2所示</em></p>
+</li>
+<li><p><strong>通过查询资料，画出所使用ICMP数据包的结构</strong><br>其中相关部分说明如下<br>(1)Type，8bits，用于指定ICMP消息类型，例如0表示<code>Echo Reply</code>，8表示<code>Echo Requset</code><br>(2)Code，8bits，用于对消息类型进行更详细的说明，例如目的地不可达，网络不可达等等<br>(3)Checksum，16bits，用于错误检查<br>(4)Identifier，16bits，用来匹配请求和响应<br>(5)Data，可变长度，包含可选的附加数据。<br><em>ICMP数据包如图3所示</em></p>
+</li>
+</ol>
+<h3 id="traceroute应用"><a href="#traceroute应用" class="headerlink" title="traceroute应用"></a>traceroute应用</h3><ol>
+<li><p><strong>不超过200字简要概括traceroute命令</strong><br>traceroute可以用于追踪数据包从源主机到目标主机的网络路径中，它通过发送一个含有TTL字段的IP数据包进行工作，数据包每传递到一个路由器TTL就会减1，当TTL为0的时候路由器就会丢弃该数据包，并给源主机发送一个ICMP（超时响应），其中包含了当前路由器的地址。traceroute在整个工作流程中会从TTL为1开始发送数据包，每次收到ICMP响应后就增大TTL值（2、3、4…），直到收到目的主机的响应。于是根据每一次收到的ICMP响应，traceroute就可以知晓从源主机到目标主机经过的每个路由器，并且显示相应的IP地址和响应时间。<br><em><code>man traceroute</code>结果如图4所示</em></p>
+</li>
+<li><p><strong>确定并说明从源计算机到<code>www.baidu.com</code>的路径</strong><br>源计算机到<code>www.baidu.com</code>实现路径探测，结果如下图如下图，一共经过了30跳，其中第一跳<code>172.19.0.1</code>是源计算机ip，第三、四、五跳<code>10.149.32.1</code>和<code>10.70.7.2</code>以及<code>10.90.0.4</code>是内部网络路由器，之后经过了若干公网路由器，最终到达目标服务器。显示为<code>***</code>的，可能是由于网络设备被配置为了不响应ICMP请求，所以路径不能完全确定。<br><em><code>traceroute www.baidu.com</code>结果如图5所示</em></p>
+</li>
+<li><p><strong>说明输出结果每个字段的意义</strong><br>(1)<code>traceroute to www.baidu.com (182.61.200.108)</code>为traceroute命令输出说明，目标的IP地址为182.61.200.108<br>(2)<code>30 hops max</code>指最多经过30跳<br>(3)<code>60 byte packets</code>指每个数据包大小为60字节<br>往下是每一跳的详细信息，以第一跳为例<br>(4)<code>1 1(172.19.0.1) 0.647ms 1.041ms 1.285ms</code><br>第一个数字1代表第一跳，172.19.0.1代表第一跳的设备IP，后续三个时间是三个ICMP包的往返时间；后续存在<code>***</code>的输出对应没有收到该跳的ICMP回复（或者是网络拥塞导致的丢包）。</p>
+</li>
+</ol>
+<h3 id="traceroute探索"><a href="#traceroute探索" class="headerlink" title="traceroute探索"></a>traceroute探索</h3><p><code>注：这部分实验，我先是在自己本地的电脑上进行的实验，所以后续的描述是根据本地的输出来的，实验截图也是使用的本地截图</code></p>
+<ol>
+<li><strong>解释traceroute 18.31.0.200的输出</strong><br>通过这条指令，我们使用traceroute追踪了一条从本地网络，通过ISP、NAT字段、跨越国际骨干网再进入教育和研究网络的传输路径，最终到达了目标IP（18.31.0.200）</li>
+</ol>
+<p>以下按照每一跳对路径进行分析<br>(1)（1-3跳）<br>hop1是本地网络，hop2、hop3是私有IP（10.x.x.x），可能对应内部网络路由器、防火墙等<br>(2)（4跳）<br>显示为<code>***</code>，路由器没有响应ICMP请求（或者是丢包）<br>(3)（5-12跳）<br>hop5-hop12对应的是公网地址，数据包是在ISP网络中传输的（211.64.x.x和101.4.x.x地址段对应ISP或骨干网提供商，100.64.x.x属于共享地址空间，通常用于ISP内部的网络地址转换）<br>(4)（13-30跳）<br>hop13对应<code>***</code>同样可能没有响应ICMP请求或丢包；hop14开始数据包进入国际网络，延迟有显著的增加（20ms左右，到后续数百毫秒）；hop19开始数据包进入了亚洲太平洋先进网络（APAN网络），之后进入了教育和研究网络（Internet2），可以看到最后已经显示出了较高的延迟（200~400ms左右）<br><em><code>traceroute 18.31.0.200的输出</code>结果如图6所示</em><br>2. <strong>说明从源地址到<code>www.baidu.com</code>和到<code>cn.bing.com</code>的网络路径差异</strong><br>两者的网络路径在初始几跳上有共同点（除去<code>***</code>，至少前10跳是相同的），在进入外部网络之后，路径显然会分道扬镳（除去<code>***</code>，从第14跳开始不相同）；到<code>cn.bing.com</code>后续经过了一些国际骨干网，（例如202.97.x.x的IP地址属于中国电信骨干网），而到<code>www.baidu.com</code>主要是在国内网络中传输的。<br><em><code>traceroute www.baidu.com</code>与<code>traceroute cn.bing.com</code>的结果如图7、8所示</em><br>3. <strong>如果IPv6上实现路径探测，应该使用包头的哪个字段</strong><br>在IPv6网络中进行路径探测，主要依赖IPv6包头中的Hop limit字段，这个字段是“跳限字段”，其作用和IPv4中的TTL（生存周期）字段相同，用来限制数据包在网络传输的跳数，每经过一个路由器，这个字段的值都会减1，当减为0后数据包就会被丢弃，并且通常会返回一个ICMPv6的超时消息给源地址。</p>
+<h2 id="遇到的问题及解决方法"><a href="#遇到的问题及解决方法" class="headerlink" title="遇到的问题及解决方法"></a>遇到的问题及解决方法</h2><p>在实验过程中我主要遇到了问题是在<code>ping www.ouc.edu.cn</code>始终无法收到返回的结果，掉包率总是100%。经过查阅相关资料，我推测应该是我们学校的服务器配置了防火墙或者其它安全策略，拒绝向ping发送的数据包进行响应。并且我使用<code>traceroute www.ouc.edu.cn</code>尝试追踪，我发现结果从第7跳开始往后始终都只返回<code>***</code>，这间接作证了我的猜测。（因为它们都使用的ICMP数据包）<br><em>结果如图9所示</em></p>
+<h2 id="课后实验与思考"><a href="#课后实验与思考" class="headerlink" title="课后实验与思考"></a>课后实验与思考</h2><h3 id="Traceroute在网络故障排查中有哪些应用场景"><a href="#Traceroute在网络故障排查中有哪些应用场景" class="headerlink" title="Traceroute在网络故障排查中有哪些应用场景"></a>Traceroute在网络故障排查中有哪些应用场景</h3><p>Traceroute的主要应用场景有路径发现（它可以用于追踪整个网络路径）、网络延迟分析（可以识别在哪一条引入了延迟，可以判断哪一条延迟较大）、故障点识别（确定数据包在哪一条丢失或无法到达，例如<code>***</code>的出现可能就是这个原因）、路由问题诊断（找到可能存在的路由环路）、网络性能评估（综合以上功能可以进行网络性能评估）等</p>
+<h3 id="Traceroute中如何通过修改参数来优化网络诊断效果"><a href="#Traceroute中如何通过修改参数来优化网络诊断效果" class="headerlink" title="Traceroute中如何通过修改参数来优化网络诊断效果"></a>Traceroute中如何通过修改参数来优化网络诊断效果</h3><p>(1)修改初始TTL值<br><code>traceroute -f 5 example.com</code> 使用参数f可以完成这种操作，用来跳过已知的安全路径<br>(2)设置最大TTL值<br><code>traceorute -m 20 example.com</code> 使用参数m可以完成这种操作，用于避免弹错过长的路径<br>(3)修改探测包的数量<br><code>traceroute -q 5 example.com</code> 使用参数q可以完成这种操作，用来减少或增加探测粒度</p>
+<p>其它的还有使用不同的协议、修改探测包的端口号等等</p>
+<h3 id="Traceroute交换源节点和目标结点，在同一时刻探测到两条路径是相同的吗"><a href="#Traceroute交换源节点和目标结点，在同一时刻探测到两条路径是相同的吗" class="headerlink" title="Traceroute交换源节点和目标结点，在同一时刻探测到两条路径是相同的吗"></a>Traceroute交换源节点和目标结点，在同一时刻探测到两条路径是相同的吗</h3><p>由于网络路由的动态性、负载均衡、多路径路由等因素，网络路径一般是非堆成的，即A到B的路径和B返回A的路径可能会经过不同的路由器以及有不同的跳数。所以一般情况下上述两条路径不会相同</p>
+<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><p>通过本次实验我掌握了<code>ping</code>和<code>traceroute</code>命令的基础使用方法，例如<code>traceroute</code>的一些常见参数的使用（f、m、q、l等）。并且能够分析两条命令的输出信息，例如ping命令输出的掉包率、时延等等，通过这个过程，我更深刻地体会了网络的结构，以及数据包在网络上传递的整个过程。此外我还了解了两条命令的基本实现原理，例如traceroute就是不断通过增大ICMP数据包的TTL，使其能够传播得更远，并每一次都记录返回的响应，最终形成完整的路径，作为信息进行输出。最后，我掌握了ICMP数据包的结构，对数据包有了更加清晰的认识。</p>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/04/27/Traceroute/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
+      <a href="/2025/02/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%A0%91/" class="item-title">数据结构与算法——树</a>
+      
+      <time datetime="2025-02-03T10:42:16.000Z">
+        2025-02-03
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 如何输入一棵树在这里记录一些算法题中常见的树的输入方法
+*输入格式一第一行输入一个正整数n，代表树中结点的数量。第二行输入n个正整数w1…wn，代表i点的权重接下来n行，每行输入两个整数，其中第i行的li、ri表示i点的左儿子与右儿子，若为-1则表示不存在。
+如何存储一颗树在这里记录常见的树的存储方法
+*存储方式一我们可以使用一个树结点的结构体，通过将这些结构体使用指针连接起来，从而构建一棵完整的树。
+12345struct tree_node&#123;    int value;    tree_node * ls;    tree_node * rs;&#125;
+ -->
+        <!-- </div> -->
+
+        
+        <h2 id="如何输入一棵树"><a href="#如何输入一棵树" class="headerlink" title="如何输入一棵树"></a>如何输入一棵树</h2><p>在这里记录一些算法题中常见的树的输入方法</p>
+<p>*输入格式一<br>第一行输入一个正整数n，代表树中结点的数量。<br>第二行输入n个正整数w1…wn，代表i点的权重<br>接下来n行，每行输入两个整数，其中第i行的li、ri表示i点的左儿子与右儿子，若为-1则表示不存在。</p>
+<h2 id="如何存储一颗树"><a href="#如何存储一颗树" class="headerlink" title="如何存储一颗树"></a>如何存储一颗树</h2><p>在这里记录常见的树的存储方法</p>
+<p>*存储方式一<br>我们可以使用一个树结点的结构体，通过将这些结构体使用指针连接起来，从而构建一棵完整的树。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">tree_node</span>&#123;</span><br><span class="line">    <span class="type">int</span> value;</span><br><span class="line">    tree_node * ls;</span><br><span class="line">    tree_node * rs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/02/03/数据结构与算法——树/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
+      <a href="/2025/02/03/unity%E9%94%9A%E7%82%B9/" class="item-title">unity锚点</a>
+      
+      <time datetime="2025-02-03T10:38:50.000Z">
+        2025-02-03
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 如下参考文章https://blog.csdn.net/Terie/article/details/111433486
+透过这篇博客，我大概了解到了两个点：pviot：轴心，采用相对坐标系，(0,0)-&gt;(1,1)，位于某ui的方框内，其表征着在ui被自适应缩放的时候，以哪个位置为标准缩放
+锚点：unity提供了三种模式1、四个锚点合在一起的模式该模式下，在屏幕分辨率改变的过程当中，ui相对于锚点的位置不改变，ui的宽、高也不变
+2、四个锚点两两在一起的模式该模式下，ui的对应对于锚点连成的线的距离不改变，宽高比不改变，随之缩放
+3、四个锚点分开的模式该模式下，ui的四个边对应锚点连线矩形的四边距离不改变，宽高随着四向距离的改变，自适应。
+一般情况下，设置Canvas的UI为随屏幕缩放的模式，理解pivot，记住不同位置的ui常用的锚点模式和放置位置就好。
+一下是gpt的建议：a. 确定元素的锚点对于屏幕边缘的UI元素（如按钮、面板），将其Anchors设置在父容器的相应边缘。例如：左上角的按钮：Anchors设为（0，1）到（0，1）右上角的按钮：Anchors设为（1，1）到 -->
+        <!-- </div> -->
+
+        
+        <h2 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h2><p>参考文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/Terie/article/details/111433486">https://blog.csdn.net/Terie/article/details/111433486</a></p>
+<p>透过这篇博客，我大概了解到了两个点：<br>pviot：轴心，采用相对坐标系，(0,0)-&gt;(1,1)，位于某ui的方框内，其表征着在ui被自适应缩放的时候，以哪个位置为标准缩放</p>
+<p>锚点：unity提供了三种模式<br>1、四个锚点合在一起的模式<br>该模式下，在屏幕分辨率改变的过程当中，ui相对于锚点的位置不改变，ui的宽、高也不变</p>
+<p>2、四个锚点两两在一起的模式<br>该模式下，ui的对应对于锚点连成的线的距离不改变，宽高比不改变，随之缩放</p>
+<p>3、四个锚点分开的模式<br>该模式下，ui的四个边对应锚点连线矩形的四边距离不改变，宽高随着四向距离的改变，自适应。</p>
+<p>一般情况下，设置Canvas的UI为随屏幕缩放的模式，理解pivot，记住不同位置的ui常用的锚点模式和放置位置就好。</p>
+<p>一下是gpt的建议：<br>a. 确定元素的锚点<br>对于屏幕边缘的UI元素（如按钮、面板），将其Anchors设置在父容器的相应边缘。例如：<br>左上角的按钮：Anchors设为（0，1）到（0，1）<br>右上角的按钮：Anchors设为（1，1）到（1，1）<br>底部中央的按钮：Anchors设为（0.5，0）到（0.5，0）<br>b. 中央对齐的元素<br>对于中心对齐的UI元素（如中心的面板），将其Anchors设置在父容器的中心。例如：<br>中央面板：Anchors设为（0.5，0.5）到（0.5，0.5）<br>c. 保持宽高比例<br>在Inspector中勾选Canvas Scaler组件的“UI Scale Mode”选项，设置为“Scale With Screen Size”，并设置参考分辨率为你设计时的分辨率（如1920x1080）。这样Unity会根据屏幕分辨率自动缩放UI元素。</p>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/02/03/unity锚点/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
+      <a href="/2024/10/27/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%A4%8D%E6%9D%82%E6%B8%AF%E5%8F%A3%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E6%97%A0%E4%BA%BA%E8%88%B9%E8%87%AA%E4%B8%BB%E9%9D%A0%E6%B3%8A%E6%9C%80%E4%BC%98%E6%8E%A7%E5%88%B6%E6%96%B9%E6%A1%88%E7%A0%94%E7%A9%B6/" class="item-title">论文阅读：基于复杂港口环境下的无人船自主靠泊最优控制方案研究</a>
+      
+      <time datetime="2024-10-27T08:51:39.000Z">
+        2024-10-27
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 论文阅读过程当中新了解的知识1、无人船MMG模型：一种用于模拟和分析船舶在水中运动行为的数学模型。
+MMG模型的基本思想是将船舶的运动分解为船体本身、推进系统（如螺旋桨）和舵等操纵装置的独立贡献，然后将这些贡献综合起来，以描述船舶的整体运动。
+主要包括四个部分：船体动力学模型：描述船体在水中的基本运动特性，包括水动力、惯性力和阻力等。螺旋桨模型：描述推进装置（如螺旋桨）对船舶的推力和转矩输出，这些输出通常与螺旋桨的转速和船速等参数相关。舵模型：描述舵对船舶的横向力和转矩输出，这些输出通常与舵角和水流速度等参数有关。干扰力模型：包括环境中的风、浪、流等对船舶运动的影响。
+2、横荡、纵荡和艏摇：横荡（Sway）：横荡指船舶沿着横向（即垂直于船体中心线）的运动。对于一艘在水中的船舶来说，横荡运动通常是侧向的滑动，可能由于外部作用力（如侧风、侧流或舵面调整）而发生。横荡是三自由度（3-DOF）船舶动力学模型中的一个重要运动分量。纵荡是指船舶沿着船体中心线方向的运动，即船舶的前进或后退运动。纵荡通常由船舶的推进装置（如螺旋桨）提供的推力驱动。纵荡运动决定了船舶的航速变化，在无人船中，通过调整纵荡 -->
+        <!-- </div> -->
+
+        
+        <h2 id="论文阅读过程当中新了解的知识"><a href="#论文阅读过程当中新了解的知识" class="headerlink" title="论文阅读过程当中新了解的知识"></a>论文阅读过程当中新了解的知识</h2><p>1、无人船MMG模型：<br>一种用于模拟和分析船舶在水中运动行为的数学模型。</p>
+<p>MMG模型的基本思想是将船舶的运动分解为船体本身、推进系统（如螺旋桨）和舵等操纵装置的独立贡献，然后将这些贡献综合起来，以描述船舶的整体运动。</p>
+<p>主要包括四个部分：<br>船体动力学模型：描述船体在水中的基本运动特性，包括水动力、惯性力和阻力等。<br>螺旋桨模型：描述推进装置（如螺旋桨）对船舶的推力和转矩输出，这些输出通常与螺旋桨的转速和船速等参数相关。<br>舵模型：描述舵对船舶的横向力和转矩输出，这些输出通常与舵角和水流速度等参数有关。<br>干扰力模型：包括环境中的风、浪、流等对船舶运动的影响。</p>
+<p>2、横荡、纵荡和艏摇：<br>横荡（Sway）：<br>横荡指船舶沿着横向（即垂直于船体中心线）的运动。对于一艘在水中的船舶来说，横荡运动通常是侧向的滑动，可能由于外部作用力（如侧风、侧流或舵面调整）而发生。横荡是三自由度（3-DOF）船舶动力学模型中的一个重要运动分量。<br>纵荡是指船舶沿着船体中心线方向的运动，即船舶的前进或后退运动。纵荡通常由船舶的推进装置（如螺旋桨）提供的推力驱动。纵荡运动决定了船舶的航速变化，在无人船中，通过调整纵荡速度可以实现对速度的控制和调整。<br>艏摇是指船舶围绕垂直轴的旋转运动，即船首（艏）左右摇摆的运动。艏摇角度的变化决定了船舶的航向。艏摇运动通常是由舵角调整或推进系统产生的转矩导致的，它是船舶操纵中控制航向的重要参数。无人船的自动导航系统会通过控制艏摇运动来实现精确的航向调整和路径跟踪。<br>3、航向角 艏摇角 舵角 漂流角 绝对风舷角和相对风舷角</p>
+<p>4、无量纲化处理 运动参数和无量纲参数的对应关系<br>无量纲化处理的核心思想是通过适当选择基准量（如长度、时间、质量等），将物理量转换为无量纲量。这样做的目的是减少方程中的变量数量，揭示系统的内在规律，并使得不同尺度的系统可以进行比较和分析。</p>
+<p>选择一组基准量，例如特征长度。无量纲变量的定义：将原始变量除以相应的基准量。</p>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2024/10/27/论文阅读：基于复杂港口环境下的无人船自主靠泊最优控制方案研究/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
       <a href="/2024/10/17/srdp/" class="item-title">srdp</a>
       
       <time datetime="2024-10-17T11:01:38.000Z">
@@ -513,7 +779,7 @@ dec ax
   <div class="widget-box">
     <h3 class="widget-title-tag">tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E5%AD%A6/" rel="tag">大学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88MTL%EF%BC%89/" rel="tag">机器学习（MTL）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%83%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（元学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（强化学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（联邦学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%81%9A%E7%B1%BB%EF%BC%89/" rel="tag">机器学习（聚类）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%97%E6%AD%8C/" rel="tag">诗歌</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E5%AD%A6/" rel="tag">大学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95/" rel="tag">智能算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88MTL%EF%BC%89/" rel="tag">机器学习（MTL）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%83%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（元学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（强化学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（联邦学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%81%9A%E7%B1%BB%EF%BC%89/" rel="tag">机器学习（聚类）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%97%E6%AD%8C/" rel="tag">诗歌</a></li></ul>
     </div>
   </div>
 
@@ -525,7 +791,7 @@ dec ax
   <div class="widget-box">
     <h3 class="widget-title-archive">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">July 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">September 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">July 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
     </div>
   </div>
 
@@ -539,23 +805,23 @@ dec ax
       <ul>
         
           <li>
-            <a class="recent_posts-list-link" href="/2025/08/30/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E6%95%B4%E7%90%86/">深度优先搜索整理</a>
+            <a class="recent_posts-list-link" href="/2025/10/24/Npuzzle/">Npuzzle</a>
           </li>
         
           <li>
-            <a class="recent_posts-list-link" href="/2025/08/30/%E5%9B%BE%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">图的数据结构与算法</a>
+            <a class="recent_posts-list-link" href="/2025/10/23/OS/">OS</a>
           </li>
         
           <li>
-            <a class="recent_posts-list-link" href="/2025/08/29/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/">杂七杂八的小算法</a>
+            <a class="recent_posts-list-link" href="/2025/09/30/DBS/">DBS</a>
           </li>
         
           <li>
-            <a class="recent_posts-list-link" href="/2025/08/29/%E7%AE%97%E6%B3%95%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E4%B8%AD%E7%9A%84%E5%B7%A5%E5%85%B7/">算法题常用库中的工具</a>
+            <a class="recent_posts-list-link" href="/2025/09/04/csp%E4%B9%A0%E9%A2%98%E9%9B%86/">csp习题集</a>
           </li>
         
           <li>
-            <a class="recent_posts-list-link" href="/2025/08/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9F%BA%E7%A1%80/">动态规划基础</a>
+            <a class="recent_posts-list-link" href="/2025/09/01/DFS-DP%E5%88%B7%E9%A2%98%E7%BB%83%E4%B9%A0/">DFS&amp;DP刷题练习</a>
           </li>
         
       </ul>
@@ -641,20 +907,5 @@ dec ax
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

@@ -1,0 +1,282 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>OS [ 代码和诗 ]</title>
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>OS</h1>
+			<p><code>这篇blog用来记录我于大三秋季学期，学习操作系统时，了解到的知识，以备复习以及增强自己的专业素养</code></p>
+<h2 id="操作系统的基本概念L1"><a href="#操作系统的基本概念L1" class="headerlink" title="操作系统的基本概念L1"></a>操作系统的基本概念L1</h2><h3 id="操作系统需要解决的问题"><a href="#操作系统需要解决的问题" class="headerlink" title="操作系统需要解决的问题"></a>操作系统需要解决的问题</h3><ol>
+<li>作为用户与计算机硬件系统之间的接口（例如上层的编程者使用系统调用完成相关工作）</li>
+<li>对计算机系统资源进行管理（eg. 管理硬件CPU、存储器、外设，管理软件程序、数据；管理资源状态，如PCB、TCB；采取相关策略，对资源分配、回收等）</li>
+<li>在需要的时候马上对计算机资源进行抽象（通过逻辑功能扩展物理功能，如在裸机上附加外设管理、文件管理、存储管理、处理器管理）</li>
+</ol>
+<p>一些启发的问题：</p>
+<ol>
+<li>直接使用计算机是很不方便的，因为计算机是一个复杂精密的仪器，而大部分人只需要计算机的部分功能，无需去了解整个计算机系统的工作原理</li>
+<li>计算机衍生出各种不同的资源，显示器、音响、打印机，各种外设，资源多样意味着，1）资源管理复杂，那么管理应该落到谁身上？使用者？某种软件？；2）不同厂家生产的设备需要纳入计算机的体系协同工作，缺少统一标准，谁来负责与不同的接口交互？</li>
+</ol>
+<h3 id="操作系统的位置"><a href="#操作系统的位置" class="headerlink" title="操作系统的位置"></a>操作系统的位置</h3><ol>
+<li>OS是配置在硬件上的第一层软件，是对硬件系统的首次扩充</li>
+<li>OS工作在内核态</li>
+</ol>
+<h3 id="操作系统的发展过程"><a href="#操作系统的发展过程" class="headerlink" title="操作系统的发展过程"></a>操作系统的发展过程</h3><h4 id="未配置操作系统的计算机系统"><a href="#未配置操作系统的计算机系统" class="headerlink" title="未配置操作系统的计算机系统"></a>未配置操作系统的计算机系统</h4><p>工作方式：用户作为计算机专业人员，使用机器语言编程，输入输出如纸带。</p>
+<p>工作特点：用户独占资源，资源不能在用户间共享；CPU等待用户手工装、卸纸带，利用率很低。</p>
+<h4 id="单道批处理系统"><a href="#单道批处理系统" class="headerlink" title="单道批处理系统"></a>单道批处理系统</h4><p>动机：为充分利用计算机系统，应尽量让系统连续运行，以减少空闲时间</p>
+<p>工作方式：一批作业，脱机输入道磁带，监督程序控制有序处理</p>
+<p>工作特点：内存中只保持一个作业运行，先进先出（单道）；成批处理作业（批处理，或许是指一批作业同时输入）</p>
+<p><strong>注</strong>：单道批处理系统是最早出现的一种OS，单严格来说只能算OS前身，并非人们现在所理解的OS</p>
+<h4 id="多道批处理系统"><a href="#多道批处理系统" class="headerlink" title="多道批处理系统"></a>多道批处理系统</h4><p>动机：单道批处理系统中内存中仅有一道作业，每次处理完一个作业，程序发出I&#x2F;O请求的时候CPU都处于等待状态，无法充分利用资源</p>
+<p>工作方式：作业成批进入内存，按照一定策略由程序调度，轮流使用CPU</p>
+<p>工作特点：内存中维护多个作业，交替使用CPU（多道性）；作业进出顺序不定（无序性）；作业经历两次调度（作业调度、进程调度）</p>
+<p><strong>注</strong>：为了完成这样的工作方式，实际上牵扯到许多问题，包括处理器争用、内存分配和保护、IO设备分配、文件组织管理、作业管理、用户与系统接口等等，<strong>所以应该增加一组软件来解决这些问题，于是这些软件构成了现代意义上的操作系统</strong></p>
+<h4 id="分时系统"><a href="#分时系统" class="headerlink" title="分时系统"></a>分时系统</h4><p>动机：多个程序员围着一台批处理系统的主机，缺乏一些机制来很好地为每个用户作业分配时间、为程序员提供良好的交互体验，有时一个逗号的编译错误会浪费程序员半天的时间，他们希望自己的程序可以更快地得到响应</p>
+<p>工作方式：在多道批处理系统的基础上，将系统资源在时间上进行分割，每个时间段称为一个时间片，每个用户依次轮流使用时间片</p>
+<p>工作特点：多个终端共享一个主机（多路性）；各个用户独立操作，互不干扰（独立性）；请求能在很短的时间得到响应（及时性）；用户可以通过中断与系统进行人机交互（交互性）</p>
+<p><strong>注</strong>：实际上分时系统已经很接近如今我们使用的操作系统了，或者说就是在其基础上加入了更多的现代化改进，而下面的实时系统则是为了应对一些特殊的场景</p>
+<h4 id="实时系统（特殊，仅作了解）"><a href="#实时系统（特殊，仅作了解）" class="headerlink" title="实时系统（特殊，仅作了解）"></a>实时系统（特殊，仅作了解）</h4><p>动机：在一些场景下我们特别强调作业处理的及时响应，甚至不再是及时性，而是实时性与可靠性，例如武器装备、订票系统等场景</p>
+<p>实时任务种类：硬实时任务、软实时任务，前者要求系统必须满足任务对截止日期的要求，后者可以偶尔错过截止日期</p>
+<h4 id="微机操作系统（了解存在）"><a href="#微机操作系统（了解存在）" class="headerlink" title="微机操作系统（了解存在）"></a>微机操作系统（了解存在）</h4><p>略</p>
+<h2 id="操作系统的特性"><a href="#操作系统的特性" class="headerlink" title="操作系统的特性"></a>操作系统的特性</h2><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><p>并发的含义：指处理多个同时性活动的能力</p>
+<ol>
+<li>针对单核CPU讨论，具体来说：宏观上是这些程序同时在执行，微观上是每个时刻实际只有一个程序在执行，程序轮流使用CPU</li>
+<li>并发不同于并行，后者是不同程序同一时刻在多个硬件部件上执行，例如多核CPU</li>
+</ol>
+<h3 id="共享"><a href="#共享" class="headerlink" title="共享"></a>共享</h3><p>共享的含义：操作系统与多个用户的程序共同使用计算机中的有限资源</p>
+<p>共享的分类：互斥共享（打印机）、同时共享（读文件）</p>
+<h3 id="虚拟"><a href="#虚拟" class="headerlink" title="虚拟"></a>虚拟</h3><p>虚拟的含义：一个物理实体映射为若干多个对应逻辑实体</p>
+<p>虚拟的实现方法：分时 分空间</p>
+<p>对应的具体例子：时分CPU，在每个进程看来是一个虚拟处理机；空分存储器，每个进程拥有独立的虚拟地址空间；</p>
+<h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><p>异步的含义：操作系统必须随时对不可预测的次序发生的事件进行响应和处理</p>
+<ol>
+<li>多个进程发生与运行速度的不可知，导致了在操作系统视角下，整个系统在每时每刻的状态都是难以重现的</li>
+<li>操作系统需要保证，只要环境相同，进程的运行结果就要一致（进程对复杂、不可重现的整个系统是感知不到的，系统对进程是透明的）</li>
+<li>更准确一点来说，异步是操作系统面对的挑战</li>
+</ol>
+<h2 id="操作系统的功能"><a href="#操作系统的功能" class="headerlink" title="操作系统的功能"></a>操作系统的功能</h2><p>总的来说，其需要保证多道程序，有条不紊地运行，提高系统中各种资源的利用率，并方便用户的交互。</p>
+<h3 id="处理器管理"><a href="#处理器管理" class="headerlink" title="处理器管理"></a>处理器管理</h3><p>进程控制：以进程为基本单位进行处理机的分配和运行</p>
+<p>具体而言：</p>
+<ol>
+<li>为作业创建进程</li>
+<li>撤销已经结束的进程</li>
+<li>控制进程在运行过程中的状态转换</li>
+</ol>
+<p>注：在现代OS中，进程控制除了这些以外还有关于线程的管理，后续会学习到</p>
+<p>进程同步：通过<strong>进程同步机制</strong>，协调进程间的资源共享，推进并发进程执行</p>
+<p>进程同步的主要方式：</p>
+<ol>
+<li>互斥方式，各进程在对<strong>临界资源</strong>访问的时候应该采取互斥的方式</li>
+<li>同步方式，有的进程之间需要<strong>相互合作</strong>，同步机制来协调她们的次序</li>
+</ol>
+<p>进程通信：让多个相互协作的进程可以交换信息</p>
+<p>例如：I-C-P，三个进程互相通信，I为C提供数据，C为P提供结果，P进行打印</p>
+<p>进程调度：控制作业、进程的运行切换，从而高效地利用处理机资源提高系统性能</p>
+<ol>
+<li>作业调度：从<strong>后备队列</strong>上按照一定的算法，选择出若干个作业，为其分配必要的资源</li>
+<li>进程调度：从<strong>就绪队列</strong>上，挑选出一个新进程，将处理机分配给它，并为其设置好运行现场，使其投入运行</li>
+</ol>
+<h3 id="存储器管理"><a href="#存储器管理" class="headerlink" title="存储器管理"></a>存储器管理</h3><p>内存分配：为多道程序分配内存，提高存储器利用率</p>
+<ol>
+<li>静态分配：内存空间在作业装入时确定，不允许作业再申请新的内存空间，也不允许作业在空间中移动</li>
+<li>动态分配：允许作业在运行过程中申请新的内存空间，适应程序和数据的动态增长，也允许作业在内存中“移动”</li>
+</ol>
+<p>内存保护：确保每个进程在自己的内存空间运行，互不干扰</p>
+<p>例如：设置两个界限寄存器，用来存放正在执行进程的上下界，系统对每条指令访问的地址进行检查，如果有越界行为则停止程序执行</p>
+<p>地址映射：将逻辑地址分配给进程，让用户可以通过逻辑地址透明地访问物理地址</p>
+<p>实际上就是一种虚拟化</p>
+<p>内存扩充：借助<strong>虚拟存储技术</strong>，从逻辑上扩充内存容量，让用户感知道的内存容量比实际容量大得多</p>
+<h3 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h3><p>管理计算机所有的外围设备</p>
+<p>缓冲区管理：解决CPU和I&#x2F;O设备速度不匹配的问题</p>
+<p>设备分配：控制设备的分配和回收</p>
+<p>设备处理：实现CPU和设备控制器之间的通信</p>
+<p>（设备在操作系统中同样会被映射为地址）</p>
+<h3 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h3><p>文件存储空间管理：为每个文件分配必要的外存空间，对空间进行回收（通常采用离散分配的方式）</p>
+<p>目录管理：就为了让用户能方便地在外存上找到所需文件，系统为文件建立目录项</p>
+<p>读写保护：文件读写管理，以及防止文件被非法窃取、破坏</p>
+<h3 id="用户接口"><a href="#用户接口" class="headerlink" title="用户接口"></a>用户接口</h3><p>联机用户接口：为联机用户提供的接口，由一组键盘命令及命令解释程序组成</p>
+<p>脱机用户接口：为批处理作业的用户提供的接口（这类用户无需实时交互）</p>
+<h3 id="其它功能"><a href="#其它功能" class="headerlink" title="其它功能"></a>其它功能</h3><p>系统安全、网络功能与服务、支持多媒体</p>
+<p><code>写在操作系统功能的最后：实际上操作系统功能这一块可以作为一张地图使用，我们后续的学习实际上就是在这个框架上的展开，一步步去学习操作系统是怎么具体地将这些功能进行实现的</code></p>
+
+		</div>
+
+		<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjIyNC8yMjczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

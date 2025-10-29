@@ -195,38 +195,6 @@
 <li>Independence of Irrelevant Alternatives (IIA)：不相关选择的独立性，如果在解集合$U$中加入其它<strong>不相关</strong>选项，最优解仍然是$(u_1(x),…,u_k(x))$，不会改变。</li>
 <li>Invariance to affine transformation：仿射变换的不变性，将每个效用函数 $u_i(x)$转换为 $u_i(x) &#x3D; c_i u_i(x) + b_i$且 $c_i &gt; 0$，那么如果原始协议的效用是 $(y_1,…,y_k)$，则经过变换后的协议效用将是 $(c_1 y_1 + b_1,…, c_k y_k + b_k)$。</li>
 </ol>
-<p>你问得非常好！我们来深入讨论：</p>
-<hr>
-<h3 id="🌟-问题聚焦：第二步结论是否在非最优点也成立？"><a href="#🌟-问题聚焦：第二步结论是否在非最优点也成立？" class="headerlink" title="🌟 问题聚焦：第二步结论是否在非最优点也成立？"></a>🌟 <strong>问题聚焦：第二步结论是否在非最优点也成立？</strong></h3><p>回顾第二步的核心结论：</p>
-<blockquote>
-<p>最优点的梯度满足</p>
-<p>$$<br>$$</p>
-</blockquote>
-<p>\sum_i \frac{1}{\Delta\theta^\top g_i} g_i &#x3D; \lambda \Delta\theta<br>]</p>
-<p>这表示目标函数的梯度是与 $\Delta\theta$ <strong>同方向</strong> 的，即在边界上的最优点，梯度“指向径向”，因为我们正最大化一个函数在球面上的值。</p>
-<hr>
-<h3 id="✅-这是否对任意（非最优）-Delta-theta-成立？"><a href="#✅-这是否对任意（非最优）-Delta-theta-成立？" class="headerlink" title="✅ 这是否对任意（非最优）$\Delta\theta$ 成立？"></a>✅ <strong>这是否对任意（非最优）$\Delta\theta$ 成立？</strong></h3><p><strong>答案：不成立。</strong></p>
-<p>这是一个<strong>必要条件</strong>，只在最优解处成立。原因如下：</p>
-<hr>
-<h3 id="🔍-细致分析"><a href="#🔍-细致分析" class="headerlink" title="🔍 细致分析"></a>🔍 <strong>细致分析</strong></h3><p>我们最大化的目标函数是：</p>
-<p>$$<br>f(\Delta\theta) &#x3D; \sum_i \log(\Delta\theta^\top g_i)<br>\quad \text{subject to } |\Delta\theta| \le \epsilon<br>$$</p>
-<p>我们引入拉格朗日乘子来处理这个约束：</p>
-<p>$$<br>\mathcal{L}(\Delta\theta, \lambda) &#x3D; \sum_i \log(\Delta\theta^\top g_i) - \lambda (|\Delta\theta|^2 - \epsilon^2)<br>$$</p>
-<p>对 $\Delta\theta$ 求梯度并令其为 0：</p>
-<p>$$<br>\nabla_{\Delta\theta} \mathcal{L} &#x3D; \sum_i \frac{g_i}{\Delta\theta^\top g_i} - 2\lambda \Delta\theta &#x3D; 0<br>\Rightarrow<br>\sum_i \frac{g_i}{\Delta\theta^\top g_i} &#x3D; 2\lambda \Delta\theta<br>$$</p>
-<p>我们之前写的是 $\lambda \Delta\theta$，只是缩放不同（也就是说你可以吸收掉常数 $\lambda$，设 $\lambda’ &#x3D; 2\lambda$）。</p>
-<p>所以这 <strong>是一个最优性的一阶必要条件</strong>，只有在最优点（stationary point）处才成立。</p>
-<hr>
-<h3 id="🧠-类比直觉："><a href="#🧠-类比直觉：" class="headerlink" title="🧠 类比直觉："></a>🧠 <strong>类比直觉：</strong></h3><p>就像你在优化一个函数 $f(x)$，你知道在极值点：</p>
-<p>$$<br>\nabla f(x^*) &#x3D; 0<br>$$</p>
-<p>但你不能说 <strong>任意点</strong> 的梯度都等于 0，对吧？同理，在这个 constrained optimization 问题中，这个</p>
-<p>$$<br>\sum_i \frac{g_i}{\Delta\theta^\top g_i} \propto \Delta\theta<br>$$</p>
-<p>的关系只在最优点成立。</p>
-<hr>
-<h3 id="✅-总结回答"><a href="#✅-总结回答" class="headerlink" title="✅ 总结回答"></a>✅ <strong>总结回答</strong></h3><blockquote>
-<p>❓<strong>这个结论是否在非最优点也成立？</strong><br>❌ <strong>不成立</strong>。<br>这是一个一阶最优性条件（来自拉格朗日乘子法），<strong>只在最优点才成立</strong>。在非最优点，梯度方向一般不会刚好与 $\Delta\theta$ 对齐。</p>
-</blockquote>
-<p>如果你想，我们可以用一个二维例子可视化一下这个方向关系的变化。</p>
 
 		</div>
 
@@ -303,20 +271,5 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
