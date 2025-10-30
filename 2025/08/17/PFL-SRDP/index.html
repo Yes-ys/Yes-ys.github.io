@@ -306,10 +306,41 @@
 <p>FedProx：</p>
 <p>客户端数量：1000、1000、200、143、772（对应数据集）<br>通信次数：200、100、200、40、800<br>本地训练次数：1<br>模型：LSTM（不同实验外加了许多自己的调整）<br>数据集：Symnthetic、MNIST、FEMNIST、Shakespeare、Sent140<br>观测指标：loss-rounds、acc-rounds</p>
 <p>根据我使用的数据集记录实验条件</p>
-<p><strong>MNIST</strong>：<br>local epoch 1；global epoch：30；<br>client nums：20；joining rotio：100%；<br>class nums：10；Model：CNN（2conv、2fc）；<br>partition：non-iid（dir）；non-blance；<br>learning-rate：0.005 (ldg 0.99)</p>
-<p><strong>Cifar100</strong>：<br>local epoch 1；global epoch：100；<br>client nums：20；joining rotio：100%；<br>class nums：10；Model：CNN（2conv、2fc）；<br>partition：non-iid（dir）；non-blance；<br>learning-rate：0.005 (ldg 0.99)<br><strong>已经测试过的算法：</strong><br>FedProx<br>FedAS：mean for Best accuracy. 0.4542910447761194<br>FedALA：mean for best accuracy: 0.5360474413646056（<em>）<br>Ditto：mean for best accuracy: 0.4754131130063966<br>FedPAC: mean for best 0.5436433901918977（</em>）</p>
+<p><strong>已经测试过的算法</strong>：</p>
+<p>老师要求，再明确一下个性化联邦学习的评价标准是怎样的</p>
+<p><strong>FedNash：</strong>mean for best accuracy: 0.995887594242632</p>
+<ol>
+<li>FedAvg：mean for best accuracy: 0.99011348192059012</li>
+<li>FedProx：mean for best accuracy: 0.9911355198267598</li>
+<li>FedPer：mean for best accuracy: 0.99323784539187598</li>
+<li>FedAS：mean for best accuracy: 0.992348979183749142</li>
+<li>FedALA：mean for best accuracy: 0.9945739090701393(*)</li>
+<li>Ditto：mean for best accuracy: 0.9917751884852639(*)</li>
+<li>FedPAC：mean for best accuracy: 0.9921178889650446(*)</li>
+<li>MOON：mean for best accuracy: 0.9611606122915238</li>
+<li>FedPep：mean for best accuracy: 0.9936600411240576</li>
+<li>FedFomo：mean for best accuracy: 0.9911469042723327</li>
+</ol>
+<p><strong>Cifar100</strong>：<br>local epoch 1；global epoch：100；<br>client nums：20；joining rotio：100%；<br>class nums：10；Model：CNN（2conv、2fc）；<br>partition：non-iid（dir）；non-blance；<br>learning-rate：0.005 (ldg 0.99)<br>model：CNN</p>
+<p><strong>已经测试过的算法</strong>：</p>
+<p><strong>PFLNash：</strong>mean for best accuracy: 0.5981476545842217</p>
+<ol>
+<li>FedAvg: mean for best accuracy: 0.25866204690831557（*）</li>
+<li>FedProx：mean for best accuracy: 0.30810234541577824</li>
+<li>FedPer：mean for best accuracy: 0.4931369936034115</li>
+<li>FedAS：mean for Best accuracy. 0.4542910447761194</li>
+<li>FedALA：mean for best accuracy: 0.5360474413646056（*）</li>
+<li>Ditto：mean for best accuracy: 0.4754131130063966</li>
+<li>FedPAC: mean for best 0.5436433901918977（*）</li>
+<li>MOON: mean for best accuracy: 0.25912846481876334</li>
+<li>FedPep：mean for best accuracy: 0.5059968017057569</li>
+<li>FedFomo：mean for best accuracy: 0.44869402985074625（*）</li>
+</ol>
+<p><strong>MNIST</strong>：<br>local epoch 1；global epoch：30；<br>client nums：20；joining rotio：100%；<br>class nums：10；Model：CNN（2conv、2fc）；<br>partition：non-iid（dir）；non-blance；<br>learning-rate：0.005 (ldg 0.99)<br>model：CNN</p>
 <p><strong>实验选择的对比算法：</strong></p>
 <p>FedProx、FedPer、FedAvg（经典的）<br>FedAS、FedALA、Ditto、FedPAC、MOON、FedRep、FedPHP、FedFomo、pFedME</p>
+<p><strong>各算法准确率测试标准</strong>：</p>
+<p>(AAAI)FedALA：个性化准确率<br>(ICLR)FedPAC：泛化准确率</p>
 <h2 id="实验部分论文"><a href="#实验部分论文" class="headerlink" title="实验部分论文"></a>实验部分论文</h2><p><code>这里先统一都用文字阐释，写到overleaf里面的时候再做修改，在需要的地方补充数学符号，显得更加专业</code><br><code>让AI帮忙写的时候先学习一下经典论文的文风</code></p>
 <p>我们对PFLNash做了许多测试，在多个数据集上均取得了较好的效果，在这一部分我们对实验的细节情况进行说明。我们一共设置了三类实验，第一类实验使用PFLNash与一些经典的算法，在平均准确率与损失函数收敛上进行了横向对比，分析了相关的性能表现、实验收敛性以及通信复杂性；第二类实验我们通过调整一些超参数，对比相应情况下PFLNash的各项表现，进行了相应的敏感性分析；第三类实验，我们充分类比了实际的场景，测试了不同客户端数量下PFLNash的表现，同时考虑了客户端可能掉线的情况。</p>
 <p>PFLNash与经典算法的对比</p>
@@ -339,6 +370,12 @@
 <p>由于在小型模型上，实验代码呈现出了不错的效果，所以起初我没有注意到这个问题，或许是因为对于小型模型异常的更新方式不足以导致梯度爆炸</p>
 <p>尝试了许多debug的方法，最终更换了一个优化器，初步解决了问题，不知道有没有其它隐患，我查看了权重alpha的值，看起来表现得是比较正常的</p>
 <p>但是对于Cifar100数据集，梯度爆炸的问题仍然存在，先停止debug，先做一些其它种类数据集上的实验</p>
+<p><strong>经过一系列debug之后让代码可以按照我的逻辑正确执行，但是取得的效果并不好</strong>！</p>
+<h2 id="最终的修改方案"><a href="#最终的修改方案" class="headerlink" title="最终的修改方案"></a>最终的修改方案</h2><p><strong>对原来的算法进行了修改：</strong>记录每次epoch中的得到的聚合权重，累加之，再归一化到[0,1]区间上，最后用于全局模型与本地模型的聚合，得到个性化模型。<br>（原来的算法是对全局模型与本地模型使用本地数据集训练时得出的更新向量进行聚合，然后得到一个个性化模型的个性向量，用来更新维护的个性化模型）</p>
+<p>关键修改：</p>
+<p>$\omega_p &#x3D; \alpha_1 \omega_g + \alpha_2 \omega_l$</p>
+<p>$\omega_p \leftarrow \omega_p + \Delta\omega_p$</p>
+<p>$\quad \Delta\omega_p &#x3D; \alpha_1 \Delta\omega_g + \alpha_2 \Delta\omega_l$</p>
 
 		</div>
 
@@ -415,5 +452,20 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

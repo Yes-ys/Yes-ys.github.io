@@ -368,8 +368,8 @@ OS工作在内核态
         
         <p><code>我在大学三年级的秋季学期选修了数据库系统导论这门课程，这篇blog用来记录：1）我对于相关知识点复习的梳理；2）一些习题；3）考试的重点</code></p>
 <h2 id="复习梳理"><a href="#复习梳理" class="headerlink" title="复习梳理"></a>复习梳理</h2><p><code>复习梳理≠照搬原文，内容阐释点到为止，最重要的是达成两个目的1）梳理整体知识脉络，形成框架；2）标记重点，便于回到资料中复习；所以最后阶段的背诵记忆，应该用这份梳理为参考结合老师的资料进行</code></p>
-<h3 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h3><p>这一章主要有4个部分，从前往后，1）在数据库系统概述中了解了与数据库有关的基本概念；2）在此基础上，为了把现实世界中的事物抽象为数据保存，我们学习了数据模型；3）有了抽象的数据模型之后，我们回到抽象的数据库系统，从整体上，探讨了数据库系统的三级模式；4）最后从细节上，了解了数据库系统的组成</p>
-<h4 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h4><p><code>一些与数据库有关的基本概念</code></p>
+<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>这一章主要有4个部分，从前往后，1）在数据库系统概述中了解了与数据库有关的基本概念；2）在此基础上，为了把现实世界中的事物抽象为数据保存，我们学习了数据模型；3）有了抽象的数据模型之后，我们回到抽象的数据库系统，从整体上，探讨了数据库系统的三级模式；4）最后从细节上，了解了数据库系统的组成</p>
+<h3 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h3><p><code>一些与数据库有关的基本概念</code></p>
 <p>数据：定义&amp;基本对象、特点（语义）</p>
 <p>数据库：定义（具有4个特点的集合）</p>
 <p>数据库管理系统：定义（某位置的软件）；缩写DBMS；能力（了解）</p>
@@ -388,7 +388,7 @@ OS工作在内核态
 <p>共享程度：面向整个系统，多个用户、应用</p>
 <p>独立性：物理独立性（数据物理存储、应用程序）；逻辑独立性（数据库逻辑结构、应用程序）；保障（二级映像）</p>
 <p>数据由DBMS统一管理：安全性、完整性、并发控制、错误恢复（稍微了解概念，每一点在后面都会作为章节展开）</p>
-<h4 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h4><p>数据模型：通俗概念；工具定位</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>数据模型：通俗概念；工具定位</p>
 <p><strong>数据模型的分类</strong>：</p>
 <p>两类数据模型：概念模型（信息模型）&amp;逻辑模型和物理模型</p>
 <p>概念模型的一种表示方法：实体-联系方法</p>
@@ -418,18 +418,39 @@ OS工作在内核态
 <p>关系模型的缺点：存取路径对用户隐蔽，可能导致用户使用效率较低的查询</p>
 <p>关系的描述：关系模式；</p>
 <p>关系的规范化：必需确保；<em>最基本的规范条件是，关系的每一个分量是不可分的数据项，绝不允许表中有表。否则就是非规范关系</em></p>
-<h4 id="数据库系统的结构"><a href="#数据库系统的结构" class="headerlink" title="数据库系统的结构"></a>数据库系统的结构</h4><p>数据库系统的结构：三级模式结构，外模式-模式-内模式，外模式&#x2F;模式映像（逻辑独立性），模式&#x2F;内模式映像（物理独立性）</p>
+<h3 id="数据库系统的结构"><a href="#数据库系统的结构" class="headerlink" title="数据库系统的结构"></a>数据库系统的结构</h3><p>数据库系统的结构：三级模式结构，外模式-模式-内模式，外模式&#x2F;模式映像（逻辑独立性），模式&#x2F;内模式映像（物理独立性）</p>
 <p>模式：数据库中<strong>全体数据</strong>的逻辑结构和特征的描述；需要对型进行描述；相对稳定；反映数据结构和联系</p>
 <p>外模式：用户能够看见的局部数据的逻辑结构和特征描述</p>
 <p>内模式：数据物理结构和存储方式的描述</p>
 <p>型：对数据结构及属性的说明；（类比实体型，都是类似于“类”的概念）</p>
 <p>值：型的具体赋值</p>
 <p>实例：将模式整体看作一个型，实例就是值；反映了数据库某一个时刻的状态</p>
-<h4 id="数据库系统的组成"><a href="#数据库系统的组成" class="headerlink" title="数据库系统的组成"></a>数据库系统的组成</h4><p>组成：数据库DB、数据库管理系统（及开发工具）DBMS、应用系统、数据库管理员DBA</p>
-<h4 id="小结重点"><a href="#小结重点" class="headerlink" title="小结重点"></a>小结重点</h4><p>数据库系统概述：1）数据库基本概念；2）数据管理的发展过程</p>
+<h3 id="数据库系统的组成"><a href="#数据库系统的组成" class="headerlink" title="数据库系统的组成"></a>数据库系统的组成</h3><p>组成：数据库DB、数据库管理系统（及开发工具）DBMS、应用系统、数据库管理员DBA</p>
+<h3 id="小结重点"><a href="#小结重点" class="headerlink" title="小结重点"></a>小结重点</h3><p>数据库系统概述：1）数据库基本概念；2）数据管理的发展过程</p>
 <p>数据模型：1）数据模型的三要素；2）概念模型，E-R模型；3）三种主要数据库模型（层次、网状、关系，当然关系最重要）</p>
 <p>数据库系统的结构：1）三级模式结构；2）数据库系统两层映像系统结构</p>
 <p>数据库系统的组成</p>
+<h2 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h2><h3 id="关系数据结构及形式化定义"><a href="#关系数据结构及形式化定义" class="headerlink" title="关系数据结构及形式化定义"></a>关系数据结构及形式化定义</h3><h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p>关系模型的数据结构：关系，<strong>在用户角度</strong>，关系是一张二维表，列对应属性，行对应元组</p>
+<p>关系定义的前置知识：</p>
+<ol>
+<li>域（Domain）：一组具有相同数据类型的值的集合</li>
+<li>笛卡尔积：给定一组域，其笛卡尔积为一个集合，其中的元素形式为(d1,d2,…,dn)，di为分量，是来自域Di的值，将所有域中的进行组合得到类似的元素，然后形成的集合就是笛卡尔积</li>
+<li>元组，2.中提到的元素就是元组</li>
+<li>分量，元组的分量的值，简称分量</li>
+</ol>
+<p>于是，笛卡尔积可以表示为一个二维表，其中的每一行对应一个元组，每一列的值来自一个域</p>
+<p>关系：域D1、D2、…、Dn的笛卡尔积的子集，即在D1，D2，…，Dn上的关系，表示为R(D1,D2,…,Dn)，其中R就是关系名，而n可以叫做<strong>关系的目或度</strong>（n&#x3D;1时为单元关系，n&#x3D;2时为二元关系）</p>
+<p>元组的表示：通常用t进行标识</p>
+<p>关系的表示：可以将关系看作一个二维表，行对应元组，列对应域</p>
+<p>属性：属性的引入是类似给域取了一个名字，毕竟域作为一个值的集合本身并没有名字，我们给它取一个名字可以反映这组值代表的含义。（这也是我们通常更关注的东西，例如对于一列元组的字符串分量值，比起关心它们都是字符串，我们更关心它们的实际含义，例如它们都代表名字）</p>
+<p>码：</p>
+<ol>
+<li>候选码：关系中某一属性组的值能够唯一标识一个元组，则该属性组是候选码</li>
+<li>全码：当一个关系的候选码是所有属性构成的属性组时，该属性组称为全码</li>
+<li>主码：如果一个关系有多个候选码的时候，则选定一个作为主码（注意，候选码本身也可能是属性组）</li>
+<li>主属性：候选码对应属性组中的各个属性都是主属性（主属性不是主码的属性）</li>
+<li>非主属性：不包含在任何候选码中的属性，即非主属性</li>
+</ol>
 <h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><p><code>视每次作业的情况而定，我可能会在这里写我最初版的作业，最终提交则是在此之上加以改进；同时会附加一些我在完成作业的过程中学习到的知识</code></p>
 <h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><p>习题1，描述数据、数据库、数据库管理系统、数据库系统的概念</p>
 <ol>
@@ -510,6 +531,14 @@ OS工作在内核态
 <li>聚集函数</li>
 <li>GROUP BY子句</li>
 </ol>
+<p><strong>关于GROUP BY，我本地的mysql和教材的SQL标准存在一些偏差</strong>：做如下记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sno</span><br><span class="line">FROM SC</span><br><span class="line">GROUP BY Sno;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上面的查询语句本地的mysql显示的结果会自动去重，和我理解的按照Sno属性是否相同将对应元组放在一张表里面，而不改变元组的个数有一些不同；<strong>但是使用COUNT语句能够正确统计出各组元组的个数，和课本上一致。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sno,Cno</span><br><span class="line">FROM SC</span><br><span class="line">GROUP BY Sno</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>本地上是会报错的，老师说按照课本的逻辑这应该是可以执行的，并且查询的结果会是没有分组的Sno、Cno</p>
+<p><strong>总是，GROUP BY语句大多数时候还是配合聚集函数使用的，直接显示结果比较少</strong>。</p>
 <h4 id="查询若干列"><a href="#查询若干列" class="headerlink" title="查询若干列"></a>查询若干列</h4><p>eg1 查询全体学生的姓名和学号</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sno</span><br><span class="line">From Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -1555,5 +1584,20 @@ step2于是我们可以有如下递推式
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
