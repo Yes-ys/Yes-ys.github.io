@@ -115,6 +115,30 @@
     
     <div class="recent-post-item">
 
+      <a href="/2025/11/02/%E6%90%AD%E5%BB%BA%E5%90%84%E7%A7%8D%E7%8E%AF%E5%A2%83%E7%9A%84%E8%AE%B0%E5%BD%95/" class="item-title">搭建各种环境的记录</a>
+      
+      <time datetime="2025-11-02T08:50:02.000Z">
+        2025-11-02
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!--  -->
+        <!-- </div> -->
+
+        
+        
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/11/02/搭建各种环境的记录/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
       <a href="/2025/10/24/Npuzzle/" class="item-title">Npuzzle</a>
       
       <time datetime="2025-10-24T02:57:13.000Z">
@@ -1341,104 +1365,6 @@ string数字转换为int数字 -->
         </div>
 
         
-    
-    <div class="recent-post-item">
-
-      <a href="/2025/08/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9F%BA%E7%A1%80/" class="item-title">动态规划基础</a>
-      
-      <time datetime="2025-08-29T11:24:22.000Z">
-        2025-08-29
-      </time>
-      
-      <!-- <div class="article-digest"> -->
-        <!-- 之前零零散散地接触过一些动态规划的问题，用这篇blog来稍微系统性的记录一下
-动态规划的基本步骤
-定义数组的基本含义（模板或是灵感）
-找到数组元素间的关系（dp的递推式，模板或是灵感）
-找到边界的初始值（基本含义定义好了这个通常不难）
-递推填表得到需要的元素（结合初始值以及递推式，考虑应该如何进行递推填表，确保新填一个元素需要用到其它元素的时候，其它元素的值已经被填过了）
-
-背包问题01背包（二维解法）问题描述：有n种物品，每种物品只有一个。每个物品有自己的重量和价值。有一个给定容量的背包，问这个背包最多能装的最大价值是多少。
-step1定义数组元素的含义
-1dp[i][j]//背包容量为j时，考虑1~i种物品，所能承载的最大价值
-
-step2于是我们可以有如下递推式
-1dp[i][j] = max(dp[i-1][j], dp[i-1][j-weight[i]] + val[i])
-
-因为从前i-1种物品考虑到第i种物品，只有两种情况：
-
-拿第i种物品，那么前i-1种物品还剩下的可用容量是j-weight[i]，根据数组元素的意义，有dp[i][j] &#x3D; max(dp[i- -->
-        <!-- </div> -->
-
-        
-        <p><code>之前零零散散地接触过一些动态规划的问题，用这篇blog来稍微系统性的记录一下</code></p>
-<h2 id="动态规划的基本步骤"><a href="#动态规划的基本步骤" class="headerlink" title="动态规划的基本步骤"></a>动态规划的基本步骤</h2><ol>
-<li>定义数组的基本含义（模板或是灵感）</li>
-<li>找到数组元素间的关系（dp的递推式，模板或是灵感）</li>
-<li>找到边界的初始值（基本含义定义好了这个通常不难）</li>
-<li>递推填表得到需要的元素（结合初始值以及递推式，考虑应该如何进行递推填表，确保新填一个元素需要用到其它元素的时候，其它元素的值已经被填过了）</li>
-</ol>
-<h2 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h2><h3 id="01背包（二维解法）"><a href="#01背包（二维解法）" class="headerlink" title="01背包（二维解法）"></a>01背包（二维解法）</h3><p>问题描述：有n种物品，每种物品只有一个。每个物品有自己的重量和价值。有一个给定容量的背包，问这个背包最多能装的最大价值是多少。</p>
-<h4 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h4><p>定义数组元素的含义</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j]<span class="comment">//背包容量为j时，考虑1~i种物品，所能承载的最大价值</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h4><p>于是我们可以有如下递推式</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = max(dp[i<span class="number">-1</span>][j], dp[i<span class="number">-1</span>][j-weight[i]] + val[i])</span><br></pre></td></tr></table></figure>
-
-<p>因为从前i-1种物品考虑到第i种物品，只有两种情况：</p>
-<ol>
-<li>拿第i种物品，那么前i-1种物品还剩下的可用容量是j-weight[i]，根据数组元素的意义，有dp[i][j] &#x3D; max(dp[i-1][j-weight[i]] + val[i])</li>
-<li>不拿第i种物品，前i-1种物品剩下的可用容量是j，根据数组元素的意义，有dp[i][j] &#x3D; dp[i-1][j]</li>
-</ol>
-<p>所以取两种情况中较大的一者，就是dp[i][j]的结果。<strong>注意，第一种情况应该满足条件j&gt;&#x3D;weight[i]，这是显然成立的，于变成而言不满足这个条件数组会发生越界，于实际意义而言，你要装下物品i，意味着你的背包容量至少要大于等于w[i]</strong></p>
-<h4 id="step3"><a href="#step3" class="headerlink" title="step3"></a>step3</h4><p>不难发现边界条件的初始值是</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>][any_j] == <span class="number">0</span> &amp;&amp; dp[any_i][j] == <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="step4"><a href="#step4" class="headerlink" title="step4"></a>step4</h4><p>根据递推关系式，我们发现在填元素dp[i][j]的时候，使用到的元素的1、2维索引一定分别小于i、j，于是按照最简单的从左往右，从上往下填表即可。</p>
-<h4 id="例题与代码实现-01背包（二维解法）"><a href="#例题与代码实现-01背包（二维解法）" class="headerlink" title="例题与代码实现 01背包（二维解法）"></a>例题与代码实现 01背包（二维解法）</h4><p>洛谷：P1060 [NOIP 2006 普及组] 开心的金明</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll m,n;</span><br><span class="line">ll v[<span class="number">26</span>],w[<span class="number">26</span>];</span><br><span class="line">ll dp[<span class="number">26</span>][<span class="number">30001</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  ll t;</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;v[i]&gt;&gt;t;</span><br><span class="line">  w[i] = v[i];</span><br><span class="line">  v[i]*=t;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= n;j++)</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="keyword">if</span>(j &gt;= w[i])dp[i][j] = max(dp[i<span class="number">-1</span>][j], dp[i<span class="number">-1</span>][j-w[i]]+v[i]);</span><br><span class="line">   <span class="keyword">else</span> dp[i][j] = dp[i<span class="number">-1</span>][j];</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">cout</span>&lt;&lt;dp[m][n];</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="01背包（一维解法）"><a href="#01背包（一维解法）" class="headerlink" title="01背包（一维解法）"></a>01背包（一维解法）</h3><p>根据上面的状态转移式，我们可以发现在填表的过程中，<strong>每新的一行，仅仅依赖于上一行的数据</strong>，所以我们可以考虑使用1维表格。</p>
-<p>即数组dp[j]，在二维表格的意义基础上描述对应元素的意义是：当前你正在更新行的元素数据，例如更新到第i行后，那么dp[j]对应就是dp[i][j]。当然这只是粗略的描述。</p>
-<p>实际上，假设你当前正在更新第i行，并考虑更新dp[j]，在其更新之前，其对应的应该是dp[i-1][j]，更新完成后才是dp[i][j]。<strong>理解这一点很关键</strong>，有如下两点原因。</p>
-<ol>
-<li>dp[i][j]更新只依赖于i-1行的数据，而根据这个更新过程，i-1行的数据是可以同时被保存于这个一维表格的，那么只使用这个一维表格是可能的；</li>
-<li>由于dp[i][j]的更新，从列上来看，其依赖的有1）dp[i][j-1]，在dp[j]于第i行更新中没有完成时，其代表的就是第i-1行的元素，所以dp[i-1][j]可以在需要时从表格中获取；2）dp[i-1][j-w[i]]，这就要求在dp[j]于第i行更新时，任何小于j的列k（0&lt;&#x3D; k &lt; j）没有完成更新，即dp[k]还保存的i-1行的元素，<strong>所以我们要从后往前更新表格</strong></li>
-</ol>
-<p>在第2点的基础上，只要我们从后往前更新1维表格，就可以确保<strong>表格中每个数据更新的时候，其需要的数据都存在于表格中（关键点）</strong>，于是使用一维数组替换二维数组是可行的。</p>
-<p><em>这也是一般的dp需要考虑填表的方式的原因，你知道了递推式，你需要考虑如何递推才能满足，在求解一个元素的时候其它需要的元素一定是已经求解过了。</em></p>
-<h4 id="例题与代码实现-01背包（一维解法）"><a href="#例题与代码实现-01背包（一维解法）" class="headerlink" title="例题与代码实现 01背包（一维解法）"></a>例题与代码实现 01背包（一维解法）</h4><p>洛谷：P1060 [NOIP 2006 普及组] 开心的金明</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line">ll m,n;</span><br><span class="line">ll v[<span class="number">26</span>],w[<span class="number">26</span>];</span><br><span class="line">ll dp[<span class="number">30001</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  ll t;</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;v[i]&gt;&gt;t;</span><br><span class="line">  w[i] = v[i];</span><br><span class="line">  v[i]*=t;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> j = n;j &gt;= <span class="number">0</span>;j--)<span class="comment">//注意从后往前递推</span></span><br><span class="line">   <span class="keyword">if</span>(j &gt;= w[i])dp[j] = max(dp[j],dp[j-w[i]]+v[i]);</span><br><span class="line">   <span class="comment">//else dp[j] = dp[j]，对应的就是dp[j] = dp[j-1]，当然没有写的必要 </span></span><br><span class="line"> <span class="built_in">cout</span>&lt;&lt;dp[n];</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><p>01背包之所以叫01背包，是因为对于每种物品只有1个，或选或不选；而完全背包唯一区别于01背包的一点就是，每一种可以选择的物品都是无限的。</p>
-<p>采用与01背包相同的dp数组定义，可以想到以下递推式</p>
-<p>即考虑前i种物品时对于第i种物品，考虑选择其数量为0到正无穷的情况，对此进行枚举</p>
-<p>$dp[i][j] &#x3D; max^∞_{k&#x3D;0}(dp[i - 1][j - k<em>w[i]]+ k</em>v[i])$</p>
-<p>当然对于每一次枚举，我们有终止条件</p>
-<p>$j&#x2F;k &gt; w[i]$</p>
-<p>但是这样的算法复杂度是$n^3$，通常会TLE</p>
-<p>可以考虑优化</p>
-<p>$dp[i][j] &#x3D; max(dp[i-1][j],dp[i][j-w[i]]+v[i])$</p>
-<p>这里涉及两个情况</p>
-<ol>
-<li>不拿第i种物品的时候$dp[i][j] &#x3D; dp[i-1][j]$显然成立</li>
-<li>拿第i种物品的时候，拿1件物品i时的值，已经由$dp[i][j-2*w[i]]$更新过了，依次类推，拿任意件物品i（至于边界情况，拿尽可能多）对应的情况都被考虑在其中了。而$dp[i][j-w[i]]$的更新一定在$dp[i][j]$之前（直接考虑顺序递推），所以可行。</li>
-</ol>
-<p>上面的第二点，从朴素一点的角度，可以从你定义好数组的含义之后，填表更新的过程来理解，填$dp[i][j-w[i]]$的时候，根据状态转移方程的情况2，就需要考虑$dp[i][j-2*w[i]]$，而后者一定是比前者先填好的。</p>
-<h4 id="例题与代码实现"><a href="#例题与代码实现" class="headerlink" title="例题与代码实现"></a>例题与代码实现</h4><p>第37次CCF CSP认证 Task2 机器人饲养指南</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line">ll n,m;</span><br><span class="line">ll v[<span class="number">101</span>];</span><br><span class="line">ll w[<span class="number">101</span>];</span><br><span class="line">ll dp[<span class="number">101</span>][<span class="number">100001</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;v[i];</span><br><span class="line">  w[i] = i;</span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= n;j++)</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="keyword">if</span>(j &gt;= w[i])dp[i][j] = max(dp[i<span class="number">-1</span>][j],dp[i][j-w[i]]+v[i]);<span class="comment">//记住转移方程，其它按部就班即可</span></span><br><span class="line">   <span class="keyword">else</span> dp[i][j] = dp[i<span class="number">-1</span>][j];</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="built_in">cout</span>&lt;&lt;dp[m][n];</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这道题就是一个完全背包的模板，理解题意还原到完全背包，苹果的数量就是容量，投喂的数量就是物品的重量，投喂数量对应的受益就是物品的价值。</p>
-
-        
-
-
-        <span>
-          <a class="article-read" href="/2025/08/29/动态规划基础/"> Read more -->
-          </span>
-        </div>
-
-        
       </div>
       
 
@@ -1483,7 +1409,7 @@ step2于是我们可以有如下递推式
   <div class="widget-box">
     <h3 class="widget-title-archive">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">September 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">July 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">September 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">July 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
     </div>
   </div>
 
@@ -1495,6 +1421,10 @@ step2于是我们可以有如下递推式
     <h3 class="widget-title-post">recent_posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a class="recent_posts-list-link" href="/2025/11/02/%E6%90%AD%E5%BB%BA%E5%90%84%E7%A7%8D%E7%8E%AF%E5%A2%83%E7%9A%84%E8%AE%B0%E5%BD%95/">搭建各种环境的记录</a>
+          </li>
         
           <li>
             <a class="recent_posts-list-link" href="/2025/10/24/Npuzzle/">Npuzzle</a>
@@ -1510,10 +1440,6 @@ step2于是我们可以有如下递推式
         
           <li>
             <a class="recent_posts-list-link" href="/2025/09/04/csp%E4%B9%A0%E9%A2%98%E9%9B%86/">csp习题集</a>
-          </li>
-        
-          <li>
-            <a class="recent_posts-list-link" href="/2025/09/01/DFS-DP%E5%88%B7%E9%A2%98%E7%BB%83%E4%B9%A0/">DFS&amp;DP刷题练习</a>
           </li>
         
       </ul>

@@ -115,6 +115,104 @@
     
     <div class="recent-post-item">
 
+      <a href="/2025/08/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9F%BA%E7%A1%80/" class="item-title">动态规划基础</a>
+      
+      <time datetime="2025-08-29T11:24:22.000Z">
+        2025-08-29
+      </time>
+      
+      <!-- <div class="article-digest"> -->
+        <!-- 之前零零散散地接触过一些动态规划的问题，用这篇blog来稍微系统性的记录一下
+动态规划的基本步骤
+定义数组的基本含义（模板或是灵感）
+找到数组元素间的关系（dp的递推式，模板或是灵感）
+找到边界的初始值（基本含义定义好了这个通常不难）
+递推填表得到需要的元素（结合初始值以及递推式，考虑应该如何进行递推填表，确保新填一个元素需要用到其它元素的时候，其它元素的值已经被填过了）
+
+背包问题01背包（二维解法）问题描述：有n种物品，每种物品只有一个。每个物品有自己的重量和价值。有一个给定容量的背包，问这个背包最多能装的最大价值是多少。
+step1定义数组元素的含义
+1dp[i][j]//背包容量为j时，考虑1~i种物品，所能承载的最大价值
+
+step2于是我们可以有如下递推式
+1dp[i][j] = max(dp[i-1][j], dp[i-1][j-weight[i]] + val[i])
+
+因为从前i-1种物品考虑到第i种物品，只有两种情况：
+
+拿第i种物品，那么前i-1种物品还剩下的可用容量是j-weight[i]，根据数组元素的意义，有dp[i][j] &#x3D; max(dp[i- -->
+        <!-- </div> -->
+
+        
+        <p><code>之前零零散散地接触过一些动态规划的问题，用这篇blog来稍微系统性的记录一下</code></p>
+<h2 id="动态规划的基本步骤"><a href="#动态规划的基本步骤" class="headerlink" title="动态规划的基本步骤"></a>动态规划的基本步骤</h2><ol>
+<li>定义数组的基本含义（模板或是灵感）</li>
+<li>找到数组元素间的关系（dp的递推式，模板或是灵感）</li>
+<li>找到边界的初始值（基本含义定义好了这个通常不难）</li>
+<li>递推填表得到需要的元素（结合初始值以及递推式，考虑应该如何进行递推填表，确保新填一个元素需要用到其它元素的时候，其它元素的值已经被填过了）</li>
+</ol>
+<h2 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h2><h3 id="01背包（二维解法）"><a href="#01背包（二维解法）" class="headerlink" title="01背包（二维解法）"></a>01背包（二维解法）</h3><p>问题描述：有n种物品，每种物品只有一个。每个物品有自己的重量和价值。有一个给定容量的背包，问这个背包最多能装的最大价值是多少。</p>
+<h4 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h4><p>定义数组元素的含义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j]<span class="comment">//背包容量为j时，考虑1~i种物品，所能承载的最大价值</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h4><p>于是我们可以有如下递推式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = max(dp[i<span class="number">-1</span>][j], dp[i<span class="number">-1</span>][j-weight[i]] + val[i])</span><br></pre></td></tr></table></figure>
+
+<p>因为从前i-1种物品考虑到第i种物品，只有两种情况：</p>
+<ol>
+<li>拿第i种物品，那么前i-1种物品还剩下的可用容量是j-weight[i]，根据数组元素的意义，有dp[i][j] &#x3D; max(dp[i-1][j-weight[i]] + val[i])</li>
+<li>不拿第i种物品，前i-1种物品剩下的可用容量是j，根据数组元素的意义，有dp[i][j] &#x3D; dp[i-1][j]</li>
+</ol>
+<p>所以取两种情况中较大的一者，就是dp[i][j]的结果。<strong>注意，第一种情况应该满足条件j&gt;&#x3D;weight[i]，这是显然成立的，于变成而言不满足这个条件数组会发生越界，于实际意义而言，你要装下物品i，意味着你的背包容量至少要大于等于w[i]</strong></p>
+<h4 id="step3"><a href="#step3" class="headerlink" title="step3"></a>step3</h4><p>不难发现边界条件的初始值是</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>][any_j] == <span class="number">0</span> &amp;&amp; dp[any_i][j] == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="step4"><a href="#step4" class="headerlink" title="step4"></a>step4</h4><p>根据递推关系式，我们发现在填元素dp[i][j]的时候，使用到的元素的1、2维索引一定分别小于i、j，于是按照最简单的从左往右，从上往下填表即可。</p>
+<h4 id="例题与代码实现-01背包（二维解法）"><a href="#例题与代码实现-01背包（二维解法）" class="headerlink" title="例题与代码实现 01背包（二维解法）"></a>例题与代码实现 01背包（二维解法）</h4><p>洛谷：P1060 [NOIP 2006 普及组] 开心的金明</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll m,n;</span><br><span class="line">ll v[<span class="number">26</span>],w[<span class="number">26</span>];</span><br><span class="line">ll dp[<span class="number">26</span>][<span class="number">30001</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  ll t;</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;v[i]&gt;&gt;t;</span><br><span class="line">  w[i] = v[i];</span><br><span class="line">  v[i]*=t;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= n;j++)</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="keyword">if</span>(j &gt;= w[i])dp[i][j] = max(dp[i<span class="number">-1</span>][j], dp[i<span class="number">-1</span>][j-w[i]]+v[i]);</span><br><span class="line">   <span class="keyword">else</span> dp[i][j] = dp[i<span class="number">-1</span>][j];</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">cout</span>&lt;&lt;dp[m][n];</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="01背包（一维解法）"><a href="#01背包（一维解法）" class="headerlink" title="01背包（一维解法）"></a>01背包（一维解法）</h3><p>根据上面的状态转移式，我们可以发现在填表的过程中，<strong>每新的一行，仅仅依赖于上一行的数据</strong>，所以我们可以考虑使用1维表格。</p>
+<p>即数组dp[j]，在二维表格的意义基础上描述对应元素的意义是：当前你正在更新行的元素数据，例如更新到第i行后，那么dp[j]对应就是dp[i][j]。当然这只是粗略的描述。</p>
+<p>实际上，假设你当前正在更新第i行，并考虑更新dp[j]，在其更新之前，其对应的应该是dp[i-1][j]，更新完成后才是dp[i][j]。<strong>理解这一点很关键</strong>，有如下两点原因。</p>
+<ol>
+<li>dp[i][j]更新只依赖于i-1行的数据，而根据这个更新过程，i-1行的数据是可以同时被保存于这个一维表格的，那么只使用这个一维表格是可能的；</li>
+<li>由于dp[i][j]的更新，从列上来看，其依赖的有1）dp[i][j-1]，在dp[j]于第i行更新中没有完成时，其代表的就是第i-1行的元素，所以dp[i-1][j]可以在需要时从表格中获取；2）dp[i-1][j-w[i]]，这就要求在dp[j]于第i行更新时，任何小于j的列k（0&lt;&#x3D; k &lt; j）没有完成更新，即dp[k]还保存的i-1行的元素，<strong>所以我们要从后往前更新表格</strong></li>
+</ol>
+<p>在第2点的基础上，只要我们从后往前更新1维表格，就可以确保<strong>表格中每个数据更新的时候，其需要的数据都存在于表格中（关键点）</strong>，于是使用一维数组替换二维数组是可行的。</p>
+<p><em>这也是一般的dp需要考虑填表的方式的原因，你知道了递推式，你需要考虑如何递推才能满足，在求解一个元素的时候其它需要的元素一定是已经求解过了。</em></p>
+<h4 id="例题与代码实现-01背包（一维解法）"><a href="#例题与代码实现-01背包（一维解法）" class="headerlink" title="例题与代码实现 01背包（一维解法）"></a>例题与代码实现 01背包（一维解法）</h4><p>洛谷：P1060 [NOIP 2006 普及组] 开心的金明</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line">ll m,n;</span><br><span class="line">ll v[<span class="number">26</span>],w[<span class="number">26</span>];</span><br><span class="line">ll dp[<span class="number">30001</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  ll t;</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;v[i]&gt;&gt;t;</span><br><span class="line">  w[i] = v[i];</span><br><span class="line">  v[i]*=t;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> j = n;j &gt;= <span class="number">0</span>;j--)<span class="comment">//注意从后往前递推</span></span><br><span class="line">   <span class="keyword">if</span>(j &gt;= w[i])dp[j] = max(dp[j],dp[j-w[i]]+v[i]);</span><br><span class="line">   <span class="comment">//else dp[j] = dp[j]，对应的就是dp[j] = dp[j-1]，当然没有写的必要 </span></span><br><span class="line"> <span class="built_in">cout</span>&lt;&lt;dp[n];</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><p>01背包之所以叫01背包，是因为对于每种物品只有1个，或选或不选；而完全背包唯一区别于01背包的一点就是，每一种可以选择的物品都是无限的。</p>
+<p>采用与01背包相同的dp数组定义，可以想到以下递推式</p>
+<p>即考虑前i种物品时对于第i种物品，考虑选择其数量为0到正无穷的情况，对此进行枚举</p>
+<p>$dp[i][j] &#x3D; max^∞_{k&#x3D;0}(dp[i - 1][j - k<em>w[i]]+ k</em>v[i])$</p>
+<p>当然对于每一次枚举，我们有终止条件</p>
+<p>$j&#x2F;k &gt; w[i]$</p>
+<p>但是这样的算法复杂度是$n^3$，通常会TLE</p>
+<p>可以考虑优化</p>
+<p>$dp[i][j] &#x3D; max(dp[i-1][j],dp[i][j-w[i]]+v[i])$</p>
+<p>这里涉及两个情况</p>
+<ol>
+<li>不拿第i种物品的时候$dp[i][j] &#x3D; dp[i-1][j]$显然成立</li>
+<li>拿第i种物品的时候，拿1件物品i时的值，已经由$dp[i][j-2*w[i]]$更新过了，依次类推，拿任意件物品i（至于边界情况，拿尽可能多）对应的情况都被考虑在其中了。而$dp[i][j-w[i]]$的更新一定在$dp[i][j]$之前（直接考虑顺序递推），所以可行。</li>
+</ol>
+<p>上面的第二点，从朴素一点的角度，可以从你定义好数组的含义之后，填表更新的过程来理解，填$dp[i][j-w[i]]$的时候，根据状态转移方程的情况2，就需要考虑$dp[i][j-2*w[i]]$，而后者一定是比前者先填好的。</p>
+<h4 id="例题与代码实现"><a href="#例题与代码实现" class="headerlink" title="例题与代码实现"></a>例题与代码实现</h4><p>第37次CCF CSP认证 Task2 机器人饲养指南</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line">ll n,m;</span><br><span class="line">ll v[<span class="number">101</span>];</span><br><span class="line">ll w[<span class="number">101</span>];</span><br><span class="line">ll dp[<span class="number">101</span>][<span class="number">100001</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;v[i];</span><br><span class="line">  w[i] = i;</span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= n;j++)</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="keyword">if</span>(j &gt;= w[i])dp[i][j] = max(dp[i<span class="number">-1</span>][j],dp[i][j-w[i]]+v[i]);<span class="comment">//记住转移方程，其它按部就班即可</span></span><br><span class="line">   <span class="keyword">else</span> dp[i][j] = dp[i<span class="number">-1</span>][j];</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="built_in">cout</span>&lt;&lt;dp[m][n];</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这道题就是一个完全背包的模板，理解题意还原到完全背包，苹果的数量就是容量，投喂的数量就是物品的重量，投喂数量对应的受益就是物品的价值。</p>
+
+        
+
+
+        <span>
+          <a class="article-read" href="/2025/08/29/动态规划基础/"> Read more -->
+          </span>
+        </div>
+
+        
+    
+    <div class="recent-post-item">
+
       <a href="/2025/08/25/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="item-title">联邦学习基础知识</a>
       
       <time datetime="2025-08-25T08:55:39.000Z">
@@ -1133,190 +1231,6 @@ Fairness o -->
         </div>
 
         
-    
-    <div class="recent-post-item">
-
-      <a href="/2025/05/18/%E6%AF%9B%E6%A6%82%E5%A4%8D%E4%B9%A0/" class="item-title">毛概复习</a>
-      
-      <time datetime="2025-05-18T03:26:21.000Z">
-        2025-05-18
-      </time>
-      
-      <!-- <div class="article-digest"> -->
-        <!-- 用于记录我线上练习时遇到的知识点，以供日后复习的时候对照书本查看毛概与习概的复习思路都是先线上练习，记录知识点，期末的时候对照书本查看小题，同时背诵大题复习的时候要注意可能的题目变形
-第二阶段题库二十届三中全会1
-
-2024年7月15至18日，二十届三中全会在北京举行。全会指出，到2029年，完成《决定》提出的改革任务。
-
-2
-
-二十届三中全会提出，要健全因地制宜发展新质生产力体制机制，推动技术革命性突破，生产要素创新性配置和产业深度转型升级。（没有实体经济数字化，可以想想，确实实体经济难道一定要数字化吗？有的经济可能本身就不适合数字化…）
-
-3
-
-党的二十届三中全会指出，坚持系统观念处理好经济和社会、政府和市场、效率和公平、活力和秩序、发展和安全等重大关系，增强改革系统性、整体性、协同性。（坚持系统观念可以帮助处理一系列重大关系）
-
-4
-
-二十届三中全会指出，推动生产关系和生产力、上层建筑和经济基础、治理体系和治理能力更好相适应，为中国式现代化提供强大动力和制度保证。（错误）
-
-5
-
-中国式现代化的鲜明标志是开放（正确）
-
-第五章1
-
-下列属于邓小平南方谈话终提出的重要论断的有1）要 -->
-        <!-- </div> -->
-
-        
-        <p><code>用于记录我线上练习时遇到的知识点，以供日后复习的时候对照书本查看</code><br><code>毛概与习概的复习思路都是先线上练习，记录知识点，期末的时候对照书本查看小题，同时背诵大题</code><br><code>复习的时候要注意可能的题目变形</code></p>
-<h2 id="第二阶段题库"><a href="#第二阶段题库" class="headerlink" title="第二阶段题库"></a>第二阶段题库</h2><h3 id="二十届三中全会"><a href="#二十届三中全会" class="headerlink" title="二十届三中全会"></a>二十届三中全会</h3><p>1</p>
-<blockquote>
-<p>2024年7月15至18日，二十届三中全会在北京举行。全会指出，到<strong>2029</strong>年，完成《决定》提出的改革任务。</p>
-</blockquote>
-<p>2</p>
-<blockquote>
-<p>二十届三中全会提出，要健全因地制宜发展新质生产力体制机制，推动<strong>技术革命性突破</strong>，<strong>生产要素创新性配置</strong>和<strong>产业深度转型升级</strong>。<br>（没有实体经济数字化，可以想想，确实实体经济难道一定要数字化吗？有的经济可能本身就不适合数字化…）</p>
-</blockquote>
-<p>3</p>
-<blockquote>
-<p>党的二十届三中全会指出，<strong>坚持系统观念</strong>处理好经济和社会、政府和市场、效率和公平、活力和秩序、发展和安全等重大关系，增强改革系统性、整体性、协同性。<br>（坚持系统观念可以帮助处理一系列重大关系）</p>
-</blockquote>
-<p>4</p>
-<blockquote>
-<p>二十届三中全会指出，推动生产关系和生产力、上层建筑和经济基础、治理体系和治理能力更好相适应，为中国式现代化提供强大动力和制度<br>保证。（<strong>错误</strong>）</p>
-</blockquote>
-<p>5</p>
-<blockquote>
-<p>中国式现代化的鲜明标志是开放（<strong>正确</strong>）</p>
-</blockquote>
-<h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><p>1</p>
-<blockquote>
-<p>下列属于邓小平南方谈话终提出的重要论断的有<br>1）要提倡科学，靠科学才有希望<br>2）革命是解放生产力，改革也是解放生产力<br>3）“三个有利于”标准<br>4）社会主义可以搞市场经济</p>
-</blockquote>
-<p>2</p>
-<blockquote>
-<p>2000年的宪法修正案正式将邓小平理论载入宪法（<strong>错误</strong>）</p>
-</blockquote>
-<p>3</p>
-<blockquote>
-<p>党的十七大把科学发展观确立为党必须长期坚持的指导思想（<strong>错误</strong>）</p>
-</blockquote>
-<p>4</p>
-<blockquote>
-<p>邓小平在<strong>党的十二大</strong>上提出“走自己的道路，建设有中国特色的社会主义”的论断，中国特色社会主义成为了党的全部理论和实践创新主题。</p>
-</blockquote>
-<p>5</p>
-<blockquote>
-<p>新世纪新阶段，我国进入<strong>发展关键期、改革攻坚期和矛盾凸显期</strong>，经济社会发展呈现一系列新的阶段性特征。<br>（没有开放活跃期）</p>
-</blockquote>
-<p>6</p>
-<blockquote>
-<p>中国特色社会主义理论体系形成时期的时代主题是<strong>和平与发展</strong></p>
-</blockquote>
-<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><p>1</p>
-<blockquote>
-<p>邓小平指出社会主义的本质是<br>1）解放生产力，发展生产力<br>2）消灭剥削，消除两极分化<br>3）最终达到共同富裕<br><strong>没有以经济建设为中心</strong></p>
-</blockquote>
-<p>2</p>
-<blockquote>
-<p>1978年12月召开的党的十一届三中全会，做出了以下重大决策<br>1）重新确立了解放思想、实事求是的思想路线<br>2）批评了“两个凡是”的错误方针<br>3）确定把党和国家的工作重点转移到社会主义现代化建设上来的战略决策<br><strong>因为是“决策”，所以没有“提高了对科学社会主义的认识”</strong></p>
-</blockquote>
-<p>3</p>
-<blockquote>
-<p>发展社会主义市场经济是当代中国的鲜明标志和活力源泉，是决定中国命运的关键一招（<strong>错误</strong>）</p>
-</blockquote>
-<p>4</p>
-<blockquote>
-<p>邓小平认为和平是东西问题，发展是南北问题（<strong>正确</strong>）</p>
-</blockquote>
-<p>5</p>
-<blockquote>
-<p>1997年党的十五大指出不发达的社会生产力水平是中国最大的实际（<strong>错</strong>）</p>
-</blockquote>
-<p>6</p>
-<blockquote>
-<p>党的十四大把<strong>建立社会主义市场经济体制</strong>作为我国经济体制改革的目标</p>
-</blockquote>
-<p>7</p>
-<blockquote>
-<p>在社会主义的依靠力量上，<strong>人民群众</strong>是我们党的力量源泉和胜利之本</p>
-</blockquote>
-<p>8</p>
-<blockquote>
-<p>为了更好实现“三步走”的现代化发展战略，邓小平提出了以重点带动全局的思想。1982年他提出了三个战略重点，包括了<strong>农业、能源和交通、教育和科学</strong><br>（没有文化与技术、工业与金融）</p>
-</blockquote>
-<p>9</p>
-<blockquote>
-<p>以经济建设为中心是改变我国不发达现状的需要，也体现了社会主义奋斗精神。（<strong>错误</strong>）<br>（我国的现状不是不发达，人民日益增长的…）</p>
-</blockquote>
-<h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><p>1</p>
-<blockquote>
-<p>贯彻“三个代表”重要思想，关键在<strong>坚持与时俱进</strong><br>(或许核心在执政为民)</p>
-</blockquote>
-<p>2</p>
-<blockquote>
-<p>坚持中国共产党的领导，就是要<br>1）2）3）4）</p>
-</blockquote>
-<p>3</p>
-<blockquote>
-<p>社会主义的根本任务是<strong>发展社会生产力</strong><br>（不是实现共同富裕）</p>
-</blockquote>
-<p>4</p>
-<blockquote>
-<p>建设社会主义政治文明，最根本的就是要<strong>坚持党的领导、人民当家作主和依法治国的有机统一。</strong></p>
-</blockquote>
-<p>5</p>
-<blockquote>
-<p>江泽民强调，我们想做事，做工作，想得对不对，做得好不好，根本的衡量尺度就是<br>1）2）3）4） 人民…</p>
-</blockquote>
-<p>6</p>
-<blockquote>
-<p>党的领导是人民当家做主和依法治国的根本保证（<strong>正确</strong>）</p>
-</blockquote>
-<p>7</p>
-<blockquote>
-<p>推进党的建设新的伟大工程，重点是加强<strong>党的执政能力建设</strong></p>
-</blockquote>
-<p>8</p>
-<blockquote>
-<p>始终做到“三个代表”，是我们党的<strong>立党之本、执政之基和力量之源</strong><br>（没有兴国之要）</p>
-</blockquote>
-<h3 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h3><p>1</p>
-<blockquote>
-<p><strong>科学技术</strong>是先进生产力的集中体现和主要标志</p>
-</blockquote>
-<p>2</p>
-<blockquote>
-<p>以<strong>科学发展</strong>为主题，是时代的要求，关系改革开放和现代化建设全局</p>
-</blockquote>
-<p>3</p>
-<blockquote>
-<p><strong>自主创新</strong>是科技发展的灵魂，是一个民族发展的不竭动力，是支撑国家崛起的筋骨</p>
-</blockquote>
-<p>4</p>
-<blockquote>
-<p>坚持统筹兼顾，妥善处理社会主义事业重大关系，包括<br>1）统筹城乡发展<br>2）统筹区域发展<br>3）统筹经济社会发展<br>4）统筹国内发展和对外开放<br>5）统筹人与自然和谐发展</p>
-</blockquote>
-<p>5</p>
-<blockquote>
-<p><strong>扩大内需</strong>是我国经济社会发展的基本立足点和长期战略方针，也是调整经济结构的首要任务。</p>
-</blockquote>
-<p>6</p>
-<blockquote>
-<p><strong>建设生态文明</strong>关系人民福祉，关乎民族未来的长远大计</p>
-</blockquote>
-
-        
-
-
-        <span>
-          <a class="article-read" href="/2025/05/18/毛概复习/"> Read more -->
-          </span>
-        </div>
-
-        
       </div>
       
 
@@ -1361,7 +1275,7 @@ Fairness o -->
   <div class="widget-box">
     <h3 class="widget-title-archive">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">September 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">July 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">October 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">September 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">July 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">April 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
     </div>
   </div>
 
@@ -1373,6 +1287,10 @@ Fairness o -->
     <h3 class="widget-title-post">recent_posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a class="recent_posts-list-link" href="/2025/11/02/%E6%90%AD%E5%BB%BA%E5%90%84%E7%A7%8D%E7%8E%AF%E5%A2%83%E7%9A%84%E8%AE%B0%E5%BD%95/">搭建各种环境的记录</a>
+          </li>
         
           <li>
             <a class="recent_posts-list-link" href="/2025/10/24/Npuzzle/">Npuzzle</a>
@@ -1388,10 +1306,6 @@ Fairness o -->
         
           <li>
             <a class="recent_posts-list-link" href="/2025/09/04/csp%E4%B9%A0%E9%A2%98%E9%9B%86/">csp习题集</a>
-          </li>
-        
-          <li>
-            <a class="recent_posts-list-link" href="/2025/09/01/DFS-DP%E5%88%B7%E9%A2%98%E7%BB%83%E4%B9%A0/">DFS&amp;DP刷题练习</a>
           </li>
         
       </ul>
