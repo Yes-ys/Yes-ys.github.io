@@ -179,6 +179,15 @@
 <li>客户端向服务器发送个性化参数，服务器对所有的个性化参数使用FedAvg进行聚合，得到新的全局参数</li>
 <li>重复2~4</li>
 </ol>
+<p><strong>算法的基本流程（改）</strong>：</p>
+<ol>
+<li>（初始化部分）服务器初始化参数，并发送给客户端，作为本地参数</li>
+<li>服务器向客户端发送全局参数</li>
+<li>客户端使用数据集的一个子集，训练<strong>更新本地参数、全局参数</strong>（梯度下降步，此处的全局参数由本地维护，与客户端的全局参数无关）；并使用本地参数的更新梯度与全局参数的更新梯度进行Nash Bargaining Game，全局模型效用函数为$u_g &#x3D; \nabla\omega_g^T\Delta\omega$，本地模型效用函数为$u_l &#x3D; \nabla\omega_l^T\Delta\omega$，其中Nash Bargaining Game的通解是$\Delta\omega &#x3D; \alpha1\nabla\omega_l+\alpha2\nabla\omega_g $，其中$G^TG\alpha &#x3D; 1$对应$\alpha$权重矩阵</li>
+<li>求解Nash Bargaining Game，得到$\alpha$，用于聚合本地参数与全局参数，更新本地参数，使其包含更多的个性化信息$\omega_l &#x3D; \alpha1\omega_l + \alpha2\omega_g$（类似混合模型的方法）</li>
+<li>客户端向服务器发送本地参数$\omega_l$，服务器对所有的个性化参数进行加权聚合（以样本量为权重），得到新的全局参数$\omega_g$</li>
+<li>重复2~5</li>
+</ol>
 <p>改代码的思路：</p>
 <ol>
 <li>实现一个基本的FedAvg算法</li>
@@ -325,7 +334,7 @@
 <p><strong>已经测试过的算法</strong>：</p>
 <p><strong>PFLNash：</strong>mean for best accuracy: 0.5981476545842217</p>
 <ol>
-<li>FedAvg: mean for best accuracy: 0.25866204690831557（*）</li>
+<li>FedAvg: mean for best accuracy: 0.30810234541577824</li>
 <li>FedProx：mean for best accuracy: 0.30810234541577824</li>
 <li>FedPer：mean for best accuracy: 0.4931369936034115</li>
 <li>FedAS：mean for Best accuracy. 0.4542910447761194</li>
@@ -376,6 +385,7 @@
 <p>$\omega_p &#x3D; \alpha_1 \omega_g + \alpha_2 \omega_l$</p>
 <p>$\omega_p \leftarrow \omega_p + \Delta\omega_p$</p>
 <p>$\quad \Delta\omega_p &#x3D; \alpha_1 \Delta\omega_g + \alpha_2 \Delta\omega_l$</p>
+<p>为修改做一些理论上的说明：</p>
 
 		</div>
 
