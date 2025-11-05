@@ -122,11 +122,35 @@
       </time>
       
       <!-- <div class="article-digest"> -->
-        <!--  -->
+        <!-- 随着大学课程的进行，每学期总是会被要求搭建各种各样的运行环境，但在学习完成之后通常我不会再用到它们，所以用这篇blog来记录我搭建过的一些环境，简单描述它们的过程，以便我后续能记得我做过哪些改动，从而可以更好地管理我的电脑空间。
+搭建hexo（Mac）
+从github上clone了homebrew的仓库
+在用户目录下，修改了.zshrc与.bashrc文件，配置了homebrew在tuna的镜像源
+运行了homebrew仓库的脚本文件，安装了homebrew，另外仓库中还有卸载用的文件
+使用包管理器homebrew安装了node以及其附带的nmp
+使用nmp为全局配置了hexo环境
+将为win上的blog源码打包，传到Mac上，并使用nmp install，索引到package.json文件，完成了依赖包的安装
+使用git为全局配置了用户名与邮箱
+使用ssh-keygen -t rsa -C 我的邮箱，生成了公私钥，同时在本地设置了访问该私钥的密码，相关文件均在用户目录中隐藏，密码同我的Mac密码
+在github我的主页setting中，添加了访问仓库用的公钥
+完成了所有配置，并写下这 -->
         <!-- </div> -->
 
         
-        
+        <p><code>随着大学课程的进行，每学期总是会被要求搭建各种各样的运行环境，但在学习完成之后通常我不会再用到它们，所以用这篇blog来记录我搭建过的一些环境，简单描述它们的过程，以便我后续能记得我做过哪些改动，从而可以更好地管理我的电脑空间。</code></p>
+<h2 id="搭建hexo（Mac）"><a href="#搭建hexo（Mac）" class="headerlink" title="搭建hexo（Mac）"></a>搭建hexo（Mac）</h2><ol>
+<li>从github上clone了homebrew的仓库</li>
+<li>在用户目录下，修改了.zshrc与.bashrc文件，配置了homebrew在tuna的镜像源</li>
+<li>运行了homebrew仓库的脚本文件，安装了homebrew，另外<strong>仓库中还有卸载用的文件</strong></li>
+<li>使用包管理器homebrew安装了node以及其附带的nmp</li>
+<li>使用nmp为全局配置了hexo环境</li>
+<li>将为win上的blog源码打包，传到Mac上，并使用<code>nmp install</code>，索引到package.json文件，完成了依赖包的安装</li>
+<li>使用git为全局配置了用户名与邮箱</li>
+<li>使用<code>ssh-keygen -t rsa -C 我的邮箱</code>，生成了公私钥，<strong>同时在本地设置了访问该私钥的密码</strong>，相关文件均在用户目录中隐藏，密码同我的Mac密码</li>
+<li>在github我的主页setting中，添加了访问仓库用的公钥</li>
+<li>完成了所有配置，并写下这篇blog，上传到了github</li>
+</ol>
+
         
 
 
@@ -372,6 +396,119 @@ OS工作在内核态
 <p>脱机用户接口：为批处理作业的用户提供的接口（这类用户无需实时交互）</p>
 <h3 id="其它功能"><a href="#其它功能" class="headerlink" title="其它功能"></a>其它功能</h3><p>系统安全、网络功能与服务、支持多媒体</p>
 <p><code>写在操作系统功能的最后：实际上操作系统功能这一块可以作为一张地图使用，我们后续的学习实际上就是在这个框架上的展开，一步步去学习操作系统是怎么具体地将这些功能进行实现的</code></p>
+<h2 id="L3进程的基础概念"><a href="#L3进程的基础概念" class="headerlink" title="L3进程的基础概念"></a>L3进程的基础概念</h2><h3 id="进程引入的原因"><a href="#进程引入的原因" class="headerlink" title="进程引入的原因"></a>进程引入的原因</h3><p>引入进程的根本原因，程序的并发执行会破坏程序执行的：</p>
+<ol>
+<li>顺序性；</li>
+<li>封闭性；</li>
+<li>可再现性</li>
+</ol>
+<p>前驱图：</p>
+<ol>
+<li>节点：表示1）一句语句；2）程序段；3）进程</li>
+<li>有箭头的边：节点之间的前躯关系，后继节点的执行一定是依赖于前躯节点的</li>
+<li>初始节点、终止节点：没有前躯、后继的节点</li>
+</ol>
+<p>并发执行的程序：</p>
+<ol>
+<li>执行过程交替进行</li>
+<li>共享资源部具有封闭性</li>
+<li>不具有可再现性（当然是在当前，我们没有加任何限制条件）</li>
+<li>程序之间<strong>间接或直接相互制约</strong></li>
+</ol>
+<p>我们以程序为基础，为了让程序可以并发执行，引入进程的概念，来对并发程序进行描述与控制</p>
+<h3 id="进程的描述"><a href="#进程的描述" class="headerlink" title="进程的描述"></a>进程的描述</h3><h4 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h4><p>进程 &#x3D; <strong>程序（数据段+程序段）+ PCB（进程控制模块）</strong></p>
+<p>创建、撤销进程：实际上就是创建、撤销了PCB模块</p>
+<p>进程的严格定义：进程是进程实体的运行过程，是系统进行资源分配和调度的基本单位</p>
+<p>进程的特性：</p>
+<ol>
+<li>动态性</li>
+<li>并发性</li>
+<li>独立性（资源调度）</li>
+<li>异步性（各进程间的执行情况）</li>
+</ol>
+<p>一个程序可以对应多个进程，一个进程可以包含多个程序</p>
+<h4 id="进程的基本状态与转换"><a href="#进程的基本状态与转换" class="headerlink" title="进程的基本状态与转换"></a>进程的基本状态与转换</h4><ol>
+<li>创建状态：为要执行的程序作业创建PCB，创建进程</li>
+<li>终止状态：执行完毕，回收相关资源</li>
+<li>就绪状态：进入了就绪队列，等待执行，得到了除CPU以外的所有资源</li>
+<li>执行状态：获得了CPU，正在被执行</li>
+<li>阻塞状态：因为某些原因无法继续执行，放弃了CPU了使用，进入了一种暂停等待的状态</li>
+</ol>
+<p>相关状态转换如下图：</p>
+<p><img src="/OS/ProcessStateTransform1.png" alt="进程状态转换1"></p>
+<p>挂起：将内存中的进程临时保存到外存</p>
+<p>当由于某些原因，例如内存不够了、用户需要等等，这时就需要做挂起操作</p>
+<p>有了挂起之后进程有7种基本状态，其中活动、静止分别对应 在内存中 和 被挂起</p>
+<ol>
+<li>创建状态</li>
+<li>终止状态</li>
+<li>活动就绪状态</li>
+<li>静止就绪状态</li>
+<li>活动阻塞状态</li>
+<li>静止阻塞状态</li>
+<li>执行状态</li>
+</ol>
+<p>相关状态转换如下图：</p>
+<p><img src="/OS/ProcessStateTransform2.png" alt="进程状态转换2"></p>
+<p>注意：<strong>各状态的转换要很熟悉</strong></p>
+<p>其实可以记住以下几个关键点：</p>
+<p>无挂起</p>
+<ol>
+<li>执行可以到 就绪 阻塞</li>
+<li>就绪可以到 执行</li>
+<li>阻塞可以到 就绪</li>
+</ol>
+<p>在无挂起的基础上，有挂起</p>
+<ol>
+<li>静止到对应的活动 静止阻塞可以到静止就绪</li>
+<li>执行可以到静止就绪，不能到静止阻塞</li>
+</ol>
+<p>此外，作为阻塞原因的常用例子是<strong>IO</strong></p>
+<h4 id="进程管理到数据结构"><a href="#进程管理到数据结构" class="headerlink" title="进程管理到数据结构"></a>进程管理到数据结构</h4><ol>
+<li>操作系统管理进程的数据结构：资源信息表&#x2F;进程信息表</li>
+<li>进程自己的数据结构：PCB的数据结构</li>
+</ol>
+<p>关于PCB</p>
+<ol>
+<li>PCB是进程存在的唯一标识</li>
+<li>能提供进程控制、调度、互相通信的信息</li>
+<li>能够用于实现间断运行</li>
+</ol>
+<h3 id="进程的控制"><a href="#进程的控制" class="headerlink" title="进程的控制"></a>进程的控制</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>进程控制：进程的创建、终止以及状态的切换（基本状态和挂起）</p>
+<p>进程控制的实现：操作系统<strong>内核</strong>中的原语来实现的</p>
+<p>用户态：目态，权限较低，执行规定指令，访问指定寄存器和存储区；一般应用程序的执行状态，不去执行OS区域与指令</p>
+<p>管态：内核态，高特权，执行所有指令，访问所有寄存器和存储区；传统OS都在管态，<strong>常驻于内存之中</strong></p>
+<p>操作系统内核提供的功能：</p>
+<ol>
+<li>中断处理</li>
+<li>时钟管理</li>
+<li>原语操作</li>
+</ol>
+<p>操作系统内核依托于自己的功能进行的管理：</p>
+<ol>
+<li>进程管理</li>
+<li>存储器管理</li>
+<li>设备管理</li>
+</ol>
+<h4 id="进程的创建"><a href="#进程的创建" class="headerlink" title="进程的创建"></a>进程的创建</h4><p>一个典型的例子：多道批处理系统中，内核进行作业调度，将作业装入内存</p>
+<p>创建的步骤：申请空PCB、分配资源、初始化PCB信息、插入就绪队列</p>
+<p>进程可以继续创建进程，于是就有了父进程与子进程</p>
+<h4 id="进程的终止"><a href="#进程的终止" class="headerlink" title="进程的终止"></a>进程的终止</h4><ol>
+<li>正常终止</li>
+<li>异常终止（出现错误）</li>
+<li>外界干预（如死锁时）</li>
+</ol>
+<h4 id="阻塞与唤醒"><a href="#阻塞与唤醒" class="headerlink" title="阻塞与唤醒"></a>阻塞与唤醒</h4><p>原语是<strong>block和wakeup</strong></p>
+<p>引起阻塞的事件：（这个可以仔细了解一下）</p>
+<ol>
+<li>请求OS服务，不能立刻被满足，如IO</li>
+<li>启动OS的某种操作，等待OS操作完成</li>
+<li>数据尚未到达</li>
+<li>无新工作可做</li>
+</ol>
+<p>引起唤醒的事件与引起阻塞的事件相对应</p>
+<h4 id="挂起与激活"><a href="#挂起与激活" class="headerlink" title="挂起与激活"></a>挂起与激活</h4><p>原语时<strong>suspend和active</strong></p>
+<p>阻塞与激活一般是OS进行处理，挂起和激活可以由用户干预</p>
 
         
 
@@ -490,6 +627,127 @@ OS工作在内核态
 <li>主属性：候选码对应属性组中的各个属性都是主属性（主属性不是主码的属性）</li>
 <li>非主属性：不包含在任何候选码中的属性，即非主属性</li>
 </ol>
+<p>三类关系：</p>
+<ol>
+<li>基本关系：基本表，实际存在的表</li>
+<li>查询表</li>
+<li>视图表：由基本表或其他视图表导出的表，是虚表，不对应实际存储的数据</li>
+</ol>
+<p>基本关系的性质：</p>
+<ol>
+<li>列是同质的（相同数据类型、性质）</li>
+<li>不同列可以出自同一个Domain</li>
+<li>行、列顺序无所谓</li>
+<li>任意两个元组的候选码不能相同</li>
+<li>分量必须取原子量，不可再分（不能表中有表）</li>
+</ol>
+<h4 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h4><p>关系模式实际上就是对关系的描述，关系模式是型，关系是值</p>
+<p>关系模式形式化表示：R(U,D,DOM,F)</p>
+<ol>
+<li>R关系名</li>
+<li>U属性名集合</li>
+<li>D属性 来自的 域 的集合</li>
+<li>DOM属性向域的映像集合</li>
+<li>F属性间依赖关系集合</li>
+</ol>
+<p>关系模式常用表示：R(A1,A2,…,An)</p>
+<ol>
+<li>R是关系名</li>
+<li>A1～An是属性名<br>（实际使用的时候通常将候选码写在前面，分别用下划线强调；如果是关系组形成的候选码则下划线不间断）</li>
+</ol>
+<p>关系模式是静态的、稳定的；关系是动态的、变化的</p>
+<h4 id="关系数据库-1"><a href="#关系数据库-1" class="headerlink" title="关系数据库"></a>关系数据库</h4><p>定义：给定应用领域，所有实体及实体之间的联系 的关系 的集合 构成一个关系数据库<br><strong>结合实验1进行理解</strong></p>
+<h3 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h3><p>常用操作分为两大类：</p>
+<ol>
+<li>查询</li>
+<li>数据更新</li>
+</ol>
+<p>查询包括：1）选择；2）投影；3）并；4）差；5）笛卡尔积；6）连接；7）除；8）交</p>
+<p>注：<strong>上述前五种是基本操作</strong></p>
+<p>数据更新包括：1）插入；2）删除；3）修改</p>
+<p>关系操作的特点：操作的所有对象以及结果都是<strong>集合</strong>（这是很自然的，因为关系本身就是集合）</p>
+<p>常用的关系数据库语言：</p>
+<ol>
+<li>关系代数语言ISBL</li>
+<li>关系演算语言</li>
+<li>具有1、2的双重的语言，如SQL</li>
+</ol>
+<h3 id="关系的完整性"><a href="#关系的完整性" class="headerlink" title="关系的完整性"></a>关系的完整性</h3><p>关系有三类完整性约束：</p>
+<h4 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h4><p>实体完整性规则：一个或一组属性A是<strong>基本关系</strong>R的<strong>主属性</strong>，则A<strong>不能取空值</strong></p>
+<p>细节说明：</p>
+<ol>
+<li>实体完整性针对基本表（对应现实世界实体集合）</li>
+<li>主码不可重复，让实体可区分</li>
+<li>关系模型中主码作为唯一标识（这里已经不再强调候选码了，尽管其仍然存在）</li>
+<li>主属性不能取空值</li>
+</ol>
+<h4 id="参照完整性"><a href="#参照完整性" class="headerlink" title="参照完整性"></a>参照完整性</h4><p>关系间的引用：由于实体 实体间的联系 都被抽象为关系，所以可能存在关系间的引用（尤其是在表示联系的时候，考虑一下SC和Student、Course就明白了）</p>
+<p>外码：F是R的属性，且非主码  对应了S的主码   则F是R的外码</p>
+<ol>
+<li>F是参照关系</li>
+<li>S是被参照关系</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>参照关系与被参照关系不一定是不同关系（班长的例子）</li>
+<li>外码 与 对应的主码 一定在同一Domain</li>
+<li>通常：1）若参照关系与被参照关系上同一关系，外码与对应主码不同名；2）若参照关系与被参照关系不是同一关系，外码与主码同名</li>
+</ol>
+<p>参照完整性约束：若属性是基本关系的外码，则其 或取空值 或等于对应主码的某个值</p>
+<h4 id="用户定义的完整性约束"><a href="#用户定义的完整性约束" class="headerlink" title="用户定义的完整性约束"></a>用户定义的完整性约束</h4><p>结合实验2的表项自己的限制 or 表项之间的限制 理解即可</p>
+<h3 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h3><p>关系代数是一种具体的关系数据库语言，具备相应的关系操作（<strong>关系代数中称为关系运算</strong>），以及完整性约束？或许，总之在这一部分我们学习了一种具体的关系数据库语言，并且着重关注其中的关系运算部分。（后续还有关系演算、SQL标准语言）</p>
+<h4 id="运算符的前置知识"><a href="#运算符的前置知识" class="headerlink" title="运算符的前置知识"></a>运算符的前置知识</h4><p>它们的作用主要是作为一种语言，来对下面的各个运算符进行定义</p>
+<ol>
+<li>关系$R$</li>
+<li>元组$t$</li>
+<li>属性$A$</li>
+<li>元组的属性值$t[A_i]$</li>
+<li>剩余属性组</li>
+<li>$t_r$与$t_s$连接的新元组</li>
+<li><strong>象集</strong>$Z_x$，若属性Z、X谁关系R的属性，则在R上象集$Z_x$是X属性值为x的元组的Z属性值的集合</li>
+</ol>
+<p>象集对于理解除运算很重要，其实就是属性值的集合，只是要明白这个属性值时如何取出来的</p>
+<h4 id="集合运算符"><a href="#集合运算符" class="headerlink" title="集合运算符"></a>集合运算符</h4><ol>
+<li>并 $\cup$</li>
+<li>交 $\cap$</li>
+<li>差 $\sub$</li>
+<li>笛卡尔积 $\times$</li>
+</ol>
+<p>并、交、差：若关系R、S进行前三种运算，则R、S具有的属性一定相同<br>笛卡尔积：$R\times S$，运算规则类似双重for循环，对R的每一个元组，与S的每一个元组完成一次组合，生成一个新的元组，其各属性名为$R.XXX…S.YYY…$</p>
+<h4 id="专门的关系运算符"><a href="#专门的关系运算符" class="headerlink" title="专门的关系运算符"></a>专门的关系运算符</h4><ol>
+<li>选择 $\sigma_F$</li>
+<li>投影 $\Pi_A$</li>
+<li>连接 $\bowtie$（自然连接的符号）</li>
+<li>除 $\div$</li>
+</ol>
+<p>前三个符号的说明：</p>
+<ol>
+<li>选择是单目运算符 运算时对每个元组 判断逻辑表达式F对真假 为真则选中保留进入结果表格</li>
+<li>投影是单目运算符 运算时对整个关系 保留选定的属性（组）A 进入结果表格</li>
+<li>连接符号是双目运算符 运算时对关系R的每个元组 进行类似笛卡尔积时的双重循环 但完成一对元组的连接并纳入结果表 条件是逻辑表达式F被满足（普通的连接符号在$\bowtie$下面有逻辑表达式F）</li>
+</ol>
+<p>对连接进行补充：</p>
+<ol>
+<li>自然连接 额外的条件是进行运算的两个关系一定有相同的属性（组），连接条件默认是元组的相同属性（组）值，相同即连接</li>
+<li>左外连接，以左边为准进行双重for循环的遍历，即使右侧没有出现满足条件的元组，可以让外层for循环，当前选中的左侧元组，也要保留该元组值，对应新元组的右侧关系属性值设置为NULL</li>
+<li>右外连接，与左外连接类似，以右侧为标准（将右侧关系的元组放在双重for循环的外层）</li>
+<li>外连接，左外连接与右外连接结果的并</li>
+</ol>
+<p>注：上面对for循环的描述只是为了大脑思考的时候便于理解，实际上把谁放在外层循环，先做后做都是等价的</p>
+<p><strong>关于除运算</strong>：</p>
+<ol>
+<li>R与S进行除运算的条件，R与S有相同的属性（组）</li>
+<li>$R(X,Y)\div S(Y,Z)$的结果是以$X$的属性值，形成的元组的集合</li>
+<li>满足条件的属性值，要求关系S的$Y$是R上象集$Y_x$的子集</li>
+</ol>
+<p>除运算的过程，对于R的每一个元组，找到其X属性值，然后看一看对应的象集$Y_x$，即同样具有该属性值的所有元组的所有Y值有哪些，如果这些值覆盖了S的所有Y值，那么该X属性值可以纳入结果。</p>
+<h3 id="关系演算"><a href="#关系演算" class="headerlink" title="关系演算"></a>关系演算</h3><p>以数理逻辑的谓词演算为基础，主要是两种类型</p>
+<ol>
+<li>元组关系演算（ALPHA）</li>
+<li>域关系演算（QBE）</li>
+</ol>
+<p>我们学习过的是元组关系演算</p>
+<p><strong>这一部分可以稍作了解，但是最重要的是明确——理解关系演算对SQL查询语句的执行很有帮助</strong>。</p>
 <h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><p><code>视每次作业的情况而定，我可能会在这里写我最初版的作业，最终提交则是在此之上加以改进；同时会附加一些我在完成作业的过程中学习到的知识</code></p>
 <h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><p>习题1，描述数据、数据库、数据库管理系统、数据库系统的概念</p>
 <ol>
@@ -1397,7 +1655,7 @@ string数字转换为int数字 -->
   <div class="widget-box">
     <h3 class="widget-title-tag">tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E5%AD%A6/" rel="tag">大学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95/" rel="tag">智能算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88MTL%EF%BC%89/" rel="tag">机器学习（MTL）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%83%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（元学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（强化学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（联邦学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%81%9A%E7%B1%BB%EF%BC%89/" rel="tag">机器学习（聚类）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%97%E6%AD%8C/" rel="tag">诗歌</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E5%AD%A6/" rel="tag">大学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95/" rel="tag">智能算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88MTL%EF%BC%89/" rel="tag">机器学习（MTL）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%83%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（元学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（强化学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%EF%BC%89/" rel="tag">机器学习（联邦学习）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E8%81%9A%E7%B1%BB%EF%BC%89/" rel="tag">机器学习（聚类）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%97%E6%AD%8C/" rel="tag">诗歌</a></li></ul>
     </div>
   </div>
 

@@ -110,7 +110,20 @@
 	<article id="details-post">
 		<div id=details-post-item>
 			<h1>搭建各种环境的记录</h1>
-			
+			<p><code>随着大学课程的进行，每学期总是会被要求搭建各种各样的运行环境，但在学习完成之后通常我不会再用到它们，所以用这篇blog来记录我搭建过的一些环境，简单描述它们的过程，以便我后续能记得我做过哪些改动，从而可以更好地管理我的电脑空间。</code></p>
+<h2 id="搭建hexo（Mac）"><a href="#搭建hexo（Mac）" class="headerlink" title="搭建hexo（Mac）"></a>搭建hexo（Mac）</h2><ol>
+<li>从github上clone了homebrew的仓库</li>
+<li>在用户目录下，修改了.zshrc与.bashrc文件，配置了homebrew在tuna的镜像源</li>
+<li>运行了homebrew仓库的脚本文件，安装了homebrew，另外<strong>仓库中还有卸载用的文件</strong></li>
+<li>使用包管理器homebrew安装了node以及其附带的nmp</li>
+<li>使用nmp为全局配置了hexo环境</li>
+<li>将为win上的blog源码打包，传到Mac上，并使用<code>nmp install</code>，索引到package.json文件，完成了依赖包的安装</li>
+<li>使用git为全局配置了用户名与邮箱</li>
+<li>使用<code>ssh-keygen -t rsa -C 我的邮箱</code>，生成了公私钥，<strong>同时在本地设置了访问该私钥的密码</strong>，相关文件均在用户目录中隐藏，密码同我的Mac密码</li>
+<li>在github我的主页setting中，添加了访问仓库用的公钥</li>
+<li>完成了所有配置，并写下这篇blog，上传到了github</li>
+</ol>
+
 		</div>
 
 		<!-- 来必力City版安装代码 -->
