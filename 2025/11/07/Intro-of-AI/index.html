@@ -110,17 +110,22 @@
 	<article id="details-post">
 		<div id=details-post-item>
 			<h1>Intro_of_AI</h1>
-			<h2 id="ch1-绪论"><a href="#ch1-绪论" class="headerlink" title="ch1 绪论"></a>ch1 绪论</h2><h2 id="ch2-搜索"><a href="#ch2-搜索" class="headerlink" title="ch2 搜索"></a>ch2 搜索</h2><p>什么是搜索问题：<br>    搜索问题的本质：探索替代方案，基于知识表示提供的信息，遍历所有可能的解决方案空间；</p>
+			<h2 id="ch1-绪论"><a href="#ch1-绪论" class="headerlink" title="ch1 绪论"></a>ch1 绪论</h2><h2 id="ch2-搜索"><a href="#ch2-搜索" class="headerlink" title="ch2 搜索"></a>ch2 搜索</h2><h3 id="搜索概述"><a href="#搜索概述" class="headerlink" title="搜索概述"></a>搜索概述</h3><p>什么是搜索问题：<br>    搜索问题的本质：探索替代方案，基于知识表示提供的信息，遍历所有可能的解决方案空间；</p>
 <p>搜索问题如何求解：<br>    在状态图中找到一条从起点到终点的路径；<br>    关于这个解（路径）：<br>        1）代价就是路径上所有边的耗散值之和；<br>        2）最优解拥有最小的代价；</p>
 <p>什么是状态图：<br>    状态图：用图结构描述问题的状态空间以及状态之间的转换关系，是AI搜索算法的基础；<br>    状态图构成要素：<br>        1）节点：问题的状态与状态图中的节点一一对应；<br>        （例如8数码问题中每种棋局就是一种状态，对应状态图中的一个节点）；<br>        2）边：代表状态的转移，如果节点s‘是节点s的后继状态，则用有向弧链接s和s‘；<br>        3）状态图可能包含多个连通分量，即图中互相无法到达的子图；<br>    如何针对具体问题建模状态图：<br>        明确状态空间：问题的所有可能状态的集合；<br>        设计后继函数：将一个状态映射到状态空间中的另一个状态，完成状态的转移；<br>        确定初始状态：问题的初始状态；<br>        规定目标测试：如何判断当前状态是否是目标状态；<br>        考虑边的耗散值：一次状态转移的代价，可以用于衡量最后解路径的代价；</p>
 <p>搜索树：<br>    含义：将在状态图中进行搜索的过程，即节点的转移，按照当前节点是父节点转移后的节点是子节点的方式，展开为树；<br>    注意：<br>        1）可能会有状态图中的重复节点在树上不加以区分，仍然按照上述方式展开；<br>        2）因此，如果允许状态被重新访问，即便状态空间是有限的，搜索树也可能是无限的；<br>        3）通常这种情况容易引发搜索的死循环，在实际开发过程中会采用记录已访问节点的方式；<br>    相关概念（数据结构）：<br>        1）节点：<br>            1）状态封装而成的数据结构，在搜索算法中使用；<br>            2）注意区别状态图中的节点，前者是“图论中的概念”，这里是真实存在（可以编程实现的）数据结构；<br>            （后续搜索所说的节点，基本上都是这个节点）；<br>        2）节点的深度：从树的根节点到节点N的边的数量；<br>        3）节点的扩展：<br>            1）对节点的状态调用后继函数，生成后继状态；<br>            2）对于每个后继状态，生成相应的子节点；<br>        4）节点的生成：<br>            1）将状态信息封装为节点这一数据结构；<br>            2）它是节点扩展中的关键一步，但是同于节点的扩展；<br>        5）边缘队列Fringe：<br>            1）搜索树上还没有扩展的节点的集合；<br>            2）边缘队列中的节点不同于叶节点；<br>        6）叶节点：<br>            无法扩展的节点；</p>
-<p>图搜索的一般过程：<br>    搜索算法1:<br>        1）检查初始节点，是否到达目标状态，是则返回；<br>        2）将初始节点插入边缘队列；<br>        3）循环：<br>            1）检查，如果边缘队列为空，则返回失败；<br>            2）从边缘队列中取出节点N；<br>            3）取出节点N对应的状态s；<br>            4）对s使用后继函数，对每一个后继状态：<br>                1）生成一个新的节点N’，作为N的子节点；<br>                2）检查当前后继状态s’是否是目标状态，是则返回解路径 or 状态；<br>                3）将N’插入边缘队列；<br>    注意：<br>        1）搜索策略的决定因素：边缘队列中节点的排序方式；（<strong>主要区别</strong>）；<br>        2）返回的是解路径 or 状态取决于问题本身；<br>            1）有的问题状态本身就是解，例如8皇后；<br>            2）有的问题就需要一条解的路径，例如8数码；</p>
+<h3 id="无信息搜索"><a href="#无信息搜索" class="headerlink" title="无信息搜索"></a>无信息搜索</h3><p>图搜索的一般过程：<br>    搜索算法1:<br>        1）检查初始节点，是否到达目标状态，是则返回；<br>        2）将初始节点插入边缘队列；<br>        3）循环：<br>            1）检查，如果边缘队列为空，则返回失败；<br>            2）从边缘队列中取出节点N；<br>            3）取出节点N对应的状态s；<br>            4）对s使用后继函数，对每一个后继状态：<br>                1）生成一个新的节点N’，作为N的子节点；<br>                2）检查当前后继状态s’是否是目标状态，是则返回解路径 or 状态；<br>                3）将N’插入边缘队列；<br>    注意：<br>        1）搜索策略的决定因素：边缘队列中节点的排序方式；（<strong>主要区别</strong>）；<br>        2）返回的是解路径 or 状态取决于问题本身；<br>            1）有的问题状态本身就是解，例如8皇后；<br>            2）有的问题就需要一条解的路径，例如8数码；</p>
 <p>算法性能度量：<br>    完备性：有解必能找到；<br>    最优性：总能返回代价最小的路径；<br>    复杂性：时间复杂性和空间复杂性；<br>        时间复杂性：对应需要访问的节点的总数；<br>        空间复杂性：边缘队列中最多同时存储的节点数；<br>    搜索算法的评估：<br>        搜索算法的参数：<br>            1）分支因子数b：描述搜索树中每个节点能扩展出的子节点的最大数量；<br>            2）最浅目标节点深度d：从初始节点到达目标节点的所有路径中，路径长度最短的那条路径所对应的目标节点的深度；<br>            （注意，路径长度最短不一定代价最小）；<br>            3）叶子节点最大深度m：搜索树中不可扩展的所有叶子节点对应的最大深度；<br>        常用搜索算法的评估：<br>            1）宽度优先搜索：<br>                1）具有完备性；<br>                2）最优性，只在边的耗散值为1的时候成立；<br>                3）时间复杂度$O(b^d)$；<br>                4）空间复杂度$O(b^d)$；<br>            2）双向宽度优先搜索：<br>                1）时间复杂度$O(b^{d&#x2F;2})$；<br>                2）空间复杂度$O(b^{d&#x2F;2})$；<br>            3）深度优先搜索：<br>                1）完备性，对于有限的搜索树是成立的；<br>                2）最优性，不具备；<br>                1）时间复杂度：$O(b^m)$；<br>                2）空间复杂度：$O(bm)$或者说$O(m)$；<br>            4）迭代加深搜索：<br>                1）完备性，具备；<br>                2）最优性，只在边的耗散值为1的时候成立；<br>                3）时间复杂度：$O(b^d)$；<br>                4）空间复杂度：$O(bd)$或者说$O(d)$；<br>            通常认为：<br>                1）BFS是完备且最优的，但是空间复杂度很高；<br>                2）DFS空间复杂度低，但是不完备、不最优；<br>                3）IDS空间复杂度较低，并且具有完备性、最优性；</p>
 <p>无信息搜索：<br>    不利用状态描述来对边缘队列中的节点进行排序，仅依据节点在搜索树中的位置来决定处理顺序；<br>    （例如参考节点的深度、节点被先后生成的顺序；）</p>
 <p>常用的无信息搜索算法：<br>    1）宽度优先搜索；<br>    2）双向宽度优先搜索；<br>    3）深度优先搜索；<br>    4）迭代加深搜索；<br>    5）一致代价搜索；<br>    （这一部分最好自己画一下）；</p>
 <p>一致代价搜索：<br>    目标：找到一条路径代价最小的解；<br>    关键：<br>        1）路径代价是从根节点到当前节点到所有边的耗散值之和g(N)；<br>        2）边缘队列中的节点按照g(N)的升序进行排列；<br>    使用的算法框架：<br>        路径搜索算法2:<br>            1）将初始节点插入边缘队列；<br>            2）循环：<br>                1）检查，边缘队列为空则返回失败；<br>                2）从边缘队列中取出节点N；<br>                3）从节点N中取出状态s；<br>                4）<strong>检查</strong>，状态s是否是目标状态，是则返回解路径 or 状态；<br>                5）对于s的每一个后继状态：<br>                    1）生成节点；<br>                    2）将节点插入边缘队列；<br>        注意：<br>            1）路径搜索算法2与1的不同点在于状态是否是目标状态的检查时机，2是在从边缘队列中取出来的时候检查，1是由后继函数生成的时候进行检查；<br>            2）因此，2不需要在开始时对初始节点做检查；<br>    一致代价搜索的性质：<br>        对于任意状态s，当其对应的节点N被选中扩展时，所走过的路径就是从根节点状态到状态s对应节点的最佳路径；        </p>
 <p>如何避免访问重复的节点：<br>    1）维护一个闭表，在节点从边缘队列（开表）中取出，完成扩展之后，就放入闭表；<br>    2）后续如果出现一个节点，其状态和闭表中某个节点对应的状态相同，则丢弃该节点；</p>
 <p>常用的概念：<br>    开表，边缘队列，fringe、frontier、open table；<br>    闭表，closed table，explored table；</p>
+<h3 id="启发式搜索"><a href="#启发式搜索" class="headerlink" title="启发式搜索"></a>启发式搜索</h3><p>最佳优先搜索<br>    1）引入评估函数f，将当前问题状态信息映射为一个实数；<br>    2）f是根据当前问题的状态描述来评估当前搜索节点好坏的指标（越小越好，f代表代价）；（<strong>评估函数定义</strong>）<br>    3）最佳优先搜索算法就是在搜索算法2的基础上，按照f从小到大为边缘队列中的节点排序；<br>    性质：<br>        1）若状态空间无限，则BS搜索不完备；<br>        2）若状态空间有限，但是不丢弃重复访问的节点，BS搜索不完备；<br>        3）若状态空间有限，切丢弃重复访问节点，则BS搜索完备；<br>    （BS搜索无法保证完备性和最优性）；<br>    拓展性质：<br>        1）如果启发式函数h是可纳的，f &#x3D; g+h，则BS搜索能够找到最优解；</p>
+<p>评估函数f的构造方式：<br>    f(N) &#x3D; g(N)+h(N)；<br>    其中：<br>        1）g是初始节点到节点N的实际代价；<br>        2）h是初始节点到目标节点路径代价的估值，也就是启发式函数；</p>
+<p>启发式函数h：<br>    定义：是对从当前状态到目标状态的路径耗散值的一个估计；（<strong>启发式函数定义</strong>）；<br>    注意：h的值与当前搜索树无关，只与当前状态和目标状态有关；</p>
+<p>可采纳的启发式函数：<br>    1）h<em>：从当前节点到目标节点的最优路径代价；<br>    2）如果启发式函数是可纳的，则0 &lt;&#x3D; h &lt;&#x3D; h</em>；<br>    注意：<br>        本质上是一种乐观估计，估计的代价永远小于实际最优的代价；</p>
+<p>N-puzzle问题的启发式函数：<br>    1）不在位将牌；（可纳）；<br>    2）曼哈顿距离；（可纳）；<br>    3）逆序对数；（不可纳）；</p>
 <h2 id="ch3：对抗搜索及博弈"><a href="#ch3：对抗搜索及博弈" class="headerlink" title="ch3：对抗搜索及博弈"></a>ch3：对抗搜索及博弈</h2><h3 id="棋类介绍及分类"><a href="#棋类介绍及分类" class="headerlink" title="棋类介绍及分类"></a>棋类介绍及分类</h3><p>棋类：完备信息的动态博弈；<br>牌类：不完备信息的动态博弈；</p>
 <p>棋类的特点：<br>    可以决出胜负；<br>    规则简单明确；<br>    博弈过程透明、公平；<br>    智力与经验决定胜负；<br>    变化无穷；</p>
 <p>一些具体的棋类特点：<br>    象棋：60步不吃子判和；<br>    国际象棋：相对子力；<br>    围棋：规则最简单，计算机博弈难度最大；（19<em>19）；<br>    五子棋：已被证明先手必胜，有禁手；（15</em>15）；<br>    六子棋：先手下一子，之后每手下两子；（19*19）；</p>
@@ -184,20 +189,27 @@
 <li>alpha剪枝，MIN节点的beta 小于等于 <strong>先辈</strong>的MAX节点的alpha；则终止MIN子节点向下的搜索，令其估值为beta</li>
 <li>beta剪枝，MAX节点的alpha 大于等于 <strong>先辈</strong>的MIN节点的beta；则终止MAX子节点向下的搜索，令其估值为alpha</li>
 </ol>
+<p>算法过程（参考图示笔记）；</p>
+<p>算法过程注意：<br>    0）每个节点都会维护alpha、beta、v；<br>    1）向前扩展时将alpha、beta传下去；<br>    2）向后更新的时候传播v；<br>    3）MAX层更新alpha；<br>    4）MIN层更新beta；<br>    5）MAX、MIN层都会更新v<br>        MAX层v取 子层中v或自己的v 的最大值；<br>        MIN层v取 子层中v或自己的v 的最小值；<br>    6）剪枝在更新完成后发生：<br>        if(alpha &gt;&#x3D; beta) return v；</p>
 <p>注意：</p>
 <ol>
-<li>仅在MAX、MIN两种不同类型的节点间比较，同一类型不能比较</li>
-<li>不仅要和直接的父节点比较，要和直系的所有先辈比较</li>
+<li>仅在MAX、MIN两种不同类型的节点间比较，alpha、beta之间不能比较</li>
+<li>不仅要和直接的父节点比较，要和直系的所有先辈比较（这里对应的是算法中alpha、beta是上面传递下来的）；</li>
 <li>当估值被确定后，才能向上传递</li>
 <li>这种剪枝方法的结果和极小极大的方法是一致的</li>
 </ol>
-<h3 id="负极大值搜索"><a href="#负极大值搜索" class="headerlink" title="负极大值搜索"></a>负极大值搜索</h3><h4 id="负极大值搜索的思想"><a href="#负极大值搜索的思想" class="headerlink" title="负极大值搜索的思想"></a>负极大值搜索的思想</h4><p>父节点的估值是各子节点估值的变号极大值，从而避免奇数层极大、偶数层极小的情况。（实际上这样的话每次只用从子节点中挑选MIN的估值，对MAX节点的子节点，MIN意味着负的越多，取正越大；对MIN节点的子节点，MIN意味着正的越少，取负越大）</p>
-<p>并且由于实际上，这样处理估值后，无论MAX、MIN都是做的MIN节点的搜索，找子节点中估值最小的，于是只需要实现beta剪枝</p>
-<h3 id="蒙特卡洛树搜索"><a href="#蒙特卡洛树搜索" class="headerlink" title="蒙特卡洛树搜索"></a>蒙特卡洛树搜索</h3><h4 id="Mento-Carlo的基本思想"><a href="#Mento-Carlo的基本思想" class="headerlink" title="Mento Carlo的基本思想"></a>Mento Carlo的基本思想</h4><ol>
+<h3 id="负极大值搜索"><a href="#负极大值搜索" class="headerlink" title="负极大值搜索"></a>负极大值搜索</h3><p>思想：<br>    1）父节点的估值是各子节点估值的变号极大值，从而避免奇数层极大、偶数层极小的情况。（实际上这样的话每次只用从子节点中挑选MIN的估值，对MAX节点的子节点，MIN意味着负的越多，取正越大；对MIN节点的子节点，MIN意味着正的越少，取负越大）<br>    2）并且由于实际上，这样处理估值后，无论MAX、MIN都是做的MIN节点的搜索，找子节点中估值最小的，于是只需要实现beta剪枝</p>
+<p>关键点：<br>    1）估值函数的处理：<br>        红方：RedValue-BlackValue；<br>        黑方：BlackValue-RedValue；<br>    2）返回的不再是value而是-value；<br>    3）反向更新的时候，中间节点的估值是子节点估值的负数（-value）中的最大值；<br>    4）前向传播的时候子节点的beta，alpha &#x3D; 父节点的-alpha，-beta；<br>    5）反向更新的时候只更新alpha的值对应的也是 子节点估值的负值 自己的alpha值 中最大的（和value更新类似）；<br>    （参考下面的伪代码…）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">negamax_alpha_beta</span>(<span class="params">node, depth, alpha, beta, color</span>):</span><br><span class="line">    <span class="keyword">if</span> depth == <span class="number">0</span> <span class="keyword">or</span> node.is_terminal():</span><br><span class="line">        <span class="keyword">return</span> color * evaluate(node)</span><br><span class="line">    </span><br><span class="line">    value = -<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> node.children():</span><br><span class="line">        child_value = -negamax_alpha_beta(child, depth-<span class="number">1</span>, -beta, -alpha, -color)</span><br><span class="line">        value = <span class="built_in">max</span>(value, child_value)</span><br><span class="line">        alpha = <span class="built_in">max</span>(alpha, value)</span><br><span class="line">        <span class="keyword">if</span> alpha &gt;= beta:</span><br><span class="line">            <span class="keyword">break</span>  <span class="comment"># 这就是唯一的剪枝条件</span></span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="蒙特卡洛树搜索"><a href="#蒙特卡洛树搜索" class="headerlink" title="蒙特卡洛树搜索"></a>蒙特卡洛树搜索</h3><p>基本思想：</p>
+<ol>
 <li>从某一棋局出发，随机走棋</li>
 <li>走棋必须按照对应的规则，但不需要任何策略</li>
 <li>进行非常多次对局后，可以基于统计，给出该棋局的固有胜率和胜率最高的着法</li>
 </ol>
+<p>基本步骤：<br>    1）选择：<br>        从根节点（当前局面）开始，递归选择子节点，直到到达：<br>            1）一个未完全展开的节点（还有未探索的着法）；<br>            2）或一个终端节点（游戏结束）；<br>    2）扩展：<br>        当选择一个未完全展开的非终端节点时，扩展一个或多个子节点（添加新的着法到树中）；<br>    3）模拟：<br>        1）模拟之前要选择从哪个新扩展的节点开始，依据可以是 UCB1 的值；<br>        2）从新扩展的节点开始，进行随机模拟直到游戏结束；<br>        3）记录最终结果（胜、负、平）；<br>    4）反向传播：<br>        1）将模拟结果沿着选择路径反向传播到根节点；<br>        2）更新路径上所有节点的统计信息；<br>        3）通常更新：访问次数N和获胜次数W；</p>
+<p><strong>回去问问老师吧，就让老师按照ppt上的例子解释…</strong></p>
 <h2 id="ch4：局部搜索"><a href="#ch4：局部搜索" class="headerlink" title="ch4：局部搜索"></a>ch4：局部搜索</h2><p>引入：<br>    无信息or有信息的搜索：<br>        1）问题的解是一个路径（动作序列）；<br>        2）关注的是路径的代价；<br>        3）环境是可观测的、确定、静态、已知的；<br>    局部搜索：<br>        1）问题的解是一个状态；<br>        2）不需要关注到达该状态的过程；<br>        eg：<br>            1）八皇后问题，只关注最终皇后的排列位置；<br>            2）优化问题求解，只关注最终的解是什么；<br>            3）作业空间调度，只关注调度的方案是什么；<br>            4）旅行商问题，寻找一条满足条件的路径；<br>        （注意甄别，问题的解是路径，这里的路径是指搜索过程的状态序列 or 动作序列；当然动作序列就对应了状态序列，只需要按照动作依次进行状态转移即可；而不是指具体的什么路径。虽然旅行商问题中最终也要找到一条路径，但是那条路径实际上是一个状态）<br>    局部搜索算法的思想：<br>        1）目标：在状态空间（所有状态的集合）中搜索一个最大的状态；<br>        2）思想：从单独的一个状态出发，通常只移动到与之相邻的状态，并且不保留解的路径；<br>        （简单来说，维持当前状态，不断改进；）<br>    局部搜索算法的优点：<br>        1）需要很少的内存；<br>        2）可以从很大、无限的状态空间中找到合适的解；</p>
 <p>优化问题与状态空间地形图：<br>    优化问题：<br>        1）目标函数的目标：最高峰，全局最大值；<br>        2）代价函数的目标：最低谷，全局最小值；<br>    目标函数对应的状态空间地形图：<br>        1）shoulder；<br>        2）Global maximum；<br>        3）Local maximum；<br>        4）“flat” local maximum；<br>    对应如图：<br>    <img src="/Intro-of-AI/p1.png" alt="状态空间地形图">;</p>
 <p>局部搜索算法1：爬山法<br>    思想：随机选择一个位置爬山，每次朝着更高的方向移动，直到到达山顶；<br>    具体的算法：<br>        1）将当前节点的估值与邻居节点进行比较；<br>        2）如果当前节点估值最好，则返回当前节点作为最大值（山峰）<br>        3）否则使用估值更好的邻居节点，替换当前节点；<br>        4）循环这个过程直到退出；<br>    伪代码如图所示：<br>    <img src="/Intro-of-AI/p2.png" alt="爬山搜索"><br>    eg：<br>        8皇后问题：<br>            目标：任何一个皇后都不会攻击到其他的皇后；<br>            耗散值h：存在冲突的皇后对数；<br>            状态转移（决定相邻节点）：<br>                考虑皇后只能在该列上移动，$8\times 8$的棋盘，则有56个后继状态；<br>            局部搜索求解：<br>                每次考虑相邻状态中耗散值最小的，直到找到耗散值为0的状态，即目标状态；<br>    存在的问题：<br>        局部最优解问题，locl maximum or flat local maximum（山脊与高原）；</p>
@@ -311,6 +323,37 @@
 <!-- <div id="paginator"> -->
 <!-- 	 -->
 <!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 
 			</div>
@@ -354,5 +397,20 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

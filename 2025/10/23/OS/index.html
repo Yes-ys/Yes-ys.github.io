@@ -603,7 +603,7 @@
 <p>共享段表（分段的特色所在）<br>    由于段是面向程序划分的，所以段可以支持进程的共享（如需要访问相同的库函数）<br>    工作方式：<br>        分配：当某进程需要访问某段时，如果内存中没有则调入；会在共享段表中存储其信息，当其他进程需要的时候优先查共享段表，如果有的话直接使用；共享段表中会记录当前使用该段的进程和进程数量<br>        回收：一个进程不再使用该段的时候会在共享段表中消除它的记录，当共享段表中记录进程数量为0的时候，对应段的内存空间就被回收。<br>    注意：<br>        区别共享段表和进程自己使用的段表项</p>
 <p>分段保护：<br>    共享段表需要进行保护<br>        1）越界检查；<br>        2）存取控制检查；<br>        3）环保护</p>
 <h2 id="输入输出系统"><a href="#输入输出系统" class="headerlink" title="输入输出系统"></a>输入输出系统</h2><h3 id="I-O系统的功能、模型和接口"><a href="#I-O系统的功能、模型和接口" class="headerlink" title="I&#x2F;O系统的功能、模型和接口"></a>I&#x2F;O系统的功能、模型和接口</h3><p>I&#x2F;O系统的功能<br>    管理I&#x2F;O设备，包括打印机、键盘、屏幕等交互设备，以及磁盘等存储设备；<br>    基本功能：<br>        1）隐藏物理设备细节；<br>        2）与设备无关性；<br>        3）提高处理器和I&#x2F;O设备等利用率；<br>        4）设备控制；<br>        5）设备共享；<br>        6）错误处理；</p>
-<p>I&#x2F;O软件的层次：<br>    1）用户层软件：产生I&#x2F;O请求、格式化I&#x2F;O、Spooling（假脱机系统）；<br>    2）设备独立性软件：主要是几个表，为了实现设备无关性；<br>    3）设备驱动程序：操作系统的一部分，用来启动设备<br>    4）中断处理程序：执行I&#x2F;O时用户进程、驱动程序被阻塞，I&#x2F;O完成后触发中断，由CPU唤醒驱动程序进行后续处理；<br>    5）硬件：执行I&#x2F;O操作；</p>
+<p>I&#x2F;O软件的层次：<br>    1）用户层软件：产生I&#x2F;O请求、格式化I&#x2F;O、Spooling（假脱机系统）；<br>    2）设备独立性软件：主要是几个表，为了实现设备无关性；（缓冲区是设备无关层）<br>    3）设备驱动程序：操作系统的一部分，用来启动设备<br>    4）中断处理程序：执行I&#x2F;O时用户进程、驱动程序被阻塞，I&#x2F;O完成后触发中断，由CPU唤醒驱动程序进行后续处理；<br>    5）硬件：执行I&#x2F;O操作；</p>
 <h3 id="I-O设备和设备控制器"><a href="#I-O设备和设备控制器" class="headerlink" title="I&#x2F;O设备和设备控制器"></a>I&#x2F;O设备和设备控制器</h3><p>I&#x2F;O设备的类型：<br>    数据传输单位分：<br>        1）块设备；<br>        2）流设备（字符设备）；<br>    共享属性上分：<br>        1）独占设备；<br>        2）共享设备；</p>
 <p>控制方式<br>    1）无通道：<br>        CPU与设备控制器通信；<br>        设备控制器与设备通信；<br>    2）有通道<br>        I&#x2F;O通道：可以通过访问内存，取指令执行；<br>            1）算一种特殊的处理机；<br>            2）但是可执行指令单一，并且没有自己的内存（和CPU共享内存）；<br>        CPU向通道发出一条I&#x2F;O指令，通道直接访问内存，从中取出本次所需的I&#x2F;O程序执行，执行完毕后再触发中断告诉CPU；</p>
 <p>I&#x2F;O设备寻址问题：<br>    I&#x2F;O设备寻址的时候，CPU怎么定位I&#x2F;O设备里的寄存器；<br>    1）特定I&#x2F;O指令，定制指令集，因为访问的内存不一样；<br>    2）内存映象I&#x2F;O，在编制方式上不去分内存和设备控制器的寄存器地址，进行统一编址，只是范围不同，例如以n为界限；</p>
@@ -904,6 +904,37 @@
 <!-- <div id="paginator"> -->
 <!-- 	 -->
 <!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 
 			</div>
@@ -947,5 +978,20 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

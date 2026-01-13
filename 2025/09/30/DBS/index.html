@@ -407,7 +407,7 @@
 <p>空值的判断<br>    1）IS NULL<br>    2）IS NOT NULL</p>
 <p>空值的约束<br>    1）CREATE语句中若对属性列使用了NOT NULL、UNIQUE进行限制，不能取空值<br>    2）码属性不能为空值（PRIMARY KEY）</p>
 <p>空值的运算<br>    1）有空值的算数运算为空值<br>    2）有空值的比较运算为UNKNOWN<br>    3）有空值的逻辑运算为True或FALSE或Unkonw：<br>        类似于：F&gt;U&gt;T(AND);T&gt;U&gt;F(AND);!U&#x3D;U</p>
-<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>视图<br>    定义：虚表，是从一个或几个基本表（或视图）导出的表，数据库中只存放其定义，不存放相应的数据<br>    注意：<br>        如果一个视图是从一个基本表导出来的，则它是行列子集视图</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>视图<br>    定义：虚表，是从一个或几个基本表（或视图）导出的表，数据库中只存放其定义，不存放相应的数据<br>    注意：<br>        如果一个视图是从一个基本表导出来的，则它是<strong>行列子集视图</strong></p>
 <p>视图定义<br>    CREATE VIEW …（不指定对应全部列 or 指定列）<br>    AS …（子查询，要与VIEW后的对应列相匹配）<br>    …<br>    （WITH CHECK OPTION，可选的，一般在子查询中存在WHERE语句的时候启用，启用后对视图的插入和修改会保证元组满足WHERE条件）<br>    注意：<br>        1）创建的时候可以基于多个表，只需在子查询中指定即可，但无论如何子查询返回的数据要与VIEW的属性列相匹配<br>        2）创建的时候也可以基于视图，子查询中对视图查询即可<br>        3）子查询中对属性列可以使用表达式；子查询中可以使用分组+聚集函数；都是为了满足视图的信息需要</p>
 <p>删除视图<br>    DROP VIEW 视图名 …（是否用CASCADE）<br>    注意：<br>        1）对应删除了视图的定义<br>        2）如果该视图上导出了其他视图，要用CASCADE及联删除</p>
 <p>查询视图<br>    与查询基本表相同</p>
@@ -661,6 +661,37 @@
 <!-- <div id="paginator"> -->
 <!-- 	 -->
 <!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 
 			</div>
@@ -704,5 +735,20 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

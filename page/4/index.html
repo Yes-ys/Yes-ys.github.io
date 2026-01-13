@@ -115,6 +115,29 @@
     
     <div class="recent-post-item">
 
+      <a href="/2025/05/08/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%9A%84%E5%A4%8D%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/" class="item-title">论文精读：基于博弈论的复任务学习</a>
+      
+      <time datetime="2025-05-08T06:32:32.000Z">
+        2025-05-08
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇文献的原名是《Multi-Task Learning as a Bargaining Game》，这是我第一次尝试直接通篇阅读英文原文的文献，中间或许会遇到许多困难。我通过这篇blog来记录阅读的过程中遇到的概念，以及简单地对文章整体的脉络进行梳理。最终我希望对论文提到的算法进行复现，这篇blog将会是一个参考。 概念部分这一部分用于记录阅读时遇到的概念型词汇，并做一些补充解释。困难在于，有的词汇我并不清楚是否是概念型的专业词汇，亦或是只需理解表面含义的词汇... gradients梯度，包含某函数相对自身所有自变量的偏导数。 对于损失函数$L$梯度...</p>
+      </div>
+      
+
+      <p class="article-more-link">
+        <a class="article-read" href="/2025/05/08/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%9A%84%E5%A4%8D%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/">Read more</a>
+      </p>
+
+    </div>
+
+    
+    
+    <div class="recent-post-item">
+
       <a href="/2025/05/07/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E8%81%9A%E7%B1%BB/" class="item-title">高斯混合聚类</a>
       
       <time datetime="2025-05-07T07:16:00.000Z">
@@ -319,29 +342,6 @@
     </div>
 
     
-    
-    <div class="recent-post-item">
-
-      <a href="/2025/02/03/unity%E9%94%9A%E7%82%B9/" class="item-title">unity锚点</a>
-      
-      <time datetime="2025-02-03T10:38:50.000Z">
-        2025-02-03
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>如下参考文章https://blog.csdn.net/Terie/article/details/111433486 透过这篇博客，我大概了解到了两个点：pviot：轴心，采用相对坐标系，(0,0)-&amp;gt;(1,1)，位于某ui的方框内，其表征着在ui被自适应缩放的时候，以哪个位置为标准缩放 锚点：unity提供了三种模式1、四个锚点合在一起的模式该模式下，在屏幕分辨率改变的过程当中，ui相对于锚点的位置不改变，ui的宽、高也不变 2、四个锚点两两在一起的模式该模式下，ui的对应对于锚点连成的线的距离不改变，宽高比不改变，随之缩放 3、四个锚点分开的...</p>
-      </div>
-      
-
-      <p class="article-more-link">
-        <a class="article-read" href="/2025/02/03/unity%E9%94%9A%E7%82%B9/">Read more</a>
-      </p>
-
-    </div>
-
-    
   </div>
   
 
@@ -399,6 +399,10 @@
       <ul>
         
           <li>
+            <a class="recent_posts-list-link" href="/2026/01/12/%E4%B8%AD%E5%9B%BD%E5%93%B2%E5%AD%A6%E7%AE%80%E5%8F%B2/">中国哲学简史</a>
+          </li>
+        
+          <li>
             <a class="recent_posts-list-link" href="/2026/01/05/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/">软件工程导论</a>
           </li>
         
@@ -412,10 +416,6 @@
         
           <li>
             <a class="recent_posts-list-link" href="/2025/12/05/Double-Cross/">Double Cross</a>
-          </li>
-        
-          <li>
-            <a class="recent_posts-list-link" href="/2025/12/01/Computer%20Network/">Computer Network</a>
           </li>
         
       </ul>
@@ -501,5 +501,20 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

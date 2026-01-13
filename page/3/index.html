@@ -115,6 +115,29 @@
     
     <div class="recent-post-item">
 
+      <a href="/2025/07/29/PFL/" class="item-title">PFL</a>
+      
+      <time datetime="2025-07-29T07:33:06.000Z">
+        2025-07-29
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇blog用于记录我阅读论文《 Improve global generalization for personalized federated learning within a Stackelberg game》过程中学习到的一些基础知识。 基本概念PFL个性化联邦学习：在联邦学习(FL)的基础上， PFL的目标是为每个客户端训练一个个性化模型，适应每个客户端的特定数据分布和需求。PFL适用于各客户端数据分布差异较大，且每个客户端需要一个定制化模型的场景。不同于FL训练一个全局共享的模型，希望是该模型在所有客户端上表现良好。 PFL分类“Towar...</p>
+      </div>
+      
+
+      <p class="article-more-link">
+        <a class="article-read" href="/2025/07/29/PFL/">Read more</a>
+      </p>
+
+    </div>
+
+    
+    
+    <div class="recent-post-item">
+
       <a href="/2025/07/16/Joint-Local-Relational-Augmentation-and-Global-Nash-Equilibrium-for-Federated-Learning-with-Non-IID-Data/" class="item-title">Joint Local Relational Augmentation and Global Nash Equilibrium for Federated Learning with Non-IID Data</a>
       
       <time datetime="2025-07-16T02:39:55.000Z">
@@ -319,29 +342,6 @@
     </div>
 
     
-    
-    <div class="recent-post-item">
-
-      <a href="/2025/05/08/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%9A%84%E5%A4%8D%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/" class="item-title">论文精读：基于博弈论的复任务学习</a>
-      
-      <time datetime="2025-05-08T06:32:32.000Z">
-        2025-05-08
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>这篇文献的原名是《Multi-Task Learning as a Bargaining Game》，这是我第一次尝试直接通篇阅读英文原文的文献，中间或许会遇到许多困难。我通过这篇blog来记录阅读的过程中遇到的概念，以及简单地对文章整体的脉络进行梳理。最终我希望对论文提到的算法进行复现，这篇blog将会是一个参考。 概念部分这一部分用于记录阅读时遇到的概念型词汇，并做一些补充解释。困难在于，有的词汇我并不清楚是否是概念型的专业词汇，亦或是只需理解表面含义的词汇... gradients梯度，包含某函数相对自身所有自变量的偏导数。 对于损失函数$L$梯度...</p>
-      </div>
-      
-
-      <p class="article-more-link">
-        <a class="article-read" href="/2025/05/08/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%9A%84%E5%A4%8D%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/">Read more</a>
-      </p>
-
-    </div>
-
-    
   </div>
   
 
@@ -399,6 +399,10 @@
       <ul>
         
           <li>
+            <a class="recent_posts-list-link" href="/2026/01/12/%E4%B8%AD%E5%9B%BD%E5%93%B2%E5%AD%A6%E7%AE%80%E5%8F%B2/">中国哲学简史</a>
+          </li>
+        
+          <li>
             <a class="recent_posts-list-link" href="/2026/01/05/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/">软件工程导论</a>
           </li>
         
@@ -412,10 +416,6 @@
         
           <li>
             <a class="recent_posts-list-link" href="/2025/12/05/Double-Cross/">Double Cross</a>
-          </li>
-        
-          <li>
-            <a class="recent_posts-list-link" href="/2025/12/01/Computer%20Network/">Computer Network</a>
           </li>
         
       </ul>
@@ -501,5 +501,20 @@
 
 	<script>hljs.initHighlightingOnLoad();</script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
