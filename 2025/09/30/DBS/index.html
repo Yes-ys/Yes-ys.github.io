@@ -112,44 +112,45 @@
 			<h1>DBS</h1>
 			<p><code>我在大学三年级的秋季学期选修了数据库系统导论这门课程，这篇blog用来记录：1）我对于相关知识点复习的梳理；2）一些习题；3）考试的重点</code></p>
 <h2 id="复习梳理"><a href="#复习梳理" class="headerlink" title="复习梳理"></a>复习梳理</h2><p><code>复习梳理≠照搬原文，内容阐释点到为止，最重要的是达成两个目的1）梳理整体知识脉络，形成框架；2）标记重点，便于回到资料中复习；所以最后阶段的背诵记忆，应该用这份梳理为参考结合老师的资料进行</code></p>
+<p><strong>期末：1）过一遍要背的；2）练习时间多关注关系代数、SQL、综合分析（关系数据理论）</strong>；</p>
 <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>这一章主要有4个部分，从前往后，1）在数据库系统概述中了解了与数据库有关的基本概念；2）在此基础上，为了把现实世界中的事物抽象为数据保存，我们学习了数据模型；3）有了抽象的数据模型之后，我们回到抽象的数据库系统，从整体上，探讨了数据库系统的三级模式；4）最后从细节上，了解了数据库系统的组成</p>
 <h3 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h3><p><code>一些与数据库有关的基本概念</code></p>
-<p>数据：定义&amp;基本对象、特点（语义）<br>    数据库中存储的基本对象，描述事物的符号记录；<br>数据库：定义（具有4个特点的集合）<br>    数据库是<strong>长期存储</strong>在计算机内部的，<strong>有组织</strong>、<strong>可共享</strong>的<strong>大量数据</strong>的集合；<br>数据库管理系统：定义（某位置的软件）；缩写DBMS；能力（了解）<br>    位于用户与操作系统之间的一层数据库管理软件；<br>数据库系统：定义；构成（4）<br>    数据库+数据库管理系统+应用系统+数据库管理员；<br><em>关于数据库系统定义的理解（例如使用MySQL来管理数据的基础上，开发了一个实际的应用，就可以叫做数据库系统）</em>；</p>
+<p><strong>数据：定义&amp;基本对象、特点（语义）</strong><br>    定义：数据库中存储的基本对象，描述事物的<strong>符号记录</strong>；<br>    特点：<strong>数据与语义</strong>是不可分的；<br><strong>数据库：定义（具有4个特点的集合）</strong><br>    数据库是<strong>长期存储</strong>在计算机内部的，<strong>有组织</strong>、<strong>可共享</strong>的<strong>大量数据</strong>的集合；<br>数据库管理系统：定义（某位置的软件）；缩写DBMS；能力（了解）<br>    位于用户与操作系统之间的一层数据库管理软件；<br>数据库系统：定义；构成（4）<br>    数据库+数据库管理系统+应用系统+数据库管理员；<br><em>关于数据库系统定义的理解（例如使用MySQL来管理数据的基础上，开发了一个实际的应用，就可以叫做数据库系统）</em>；</p>
 <p><code>关于数据管理技术的发展，主要得注意DBS阶段和文件系统阶段的对比，以及数据库系统的特点</code></p>
 <p>发展的阶段（3个阶段）</p>
-<p><strong>阶段对比</strong>：</p>
+<p>阶段对比：</p>
 <p>共享程度（无共享，很多冗余-差共享，多冗余-多共享，低冗余）；</p>
 <p>独立性（不独立，依赖程序-差独立，数据逻辑结构改变需修改程序-高度物理独立性与一定的逻辑独立性）；</p>
 <p>结构化情况（无结构-记录内有结构，整体无结构-整体结构化）；</p>
 <p>数据控制能力（应用控制-应用控制-数据库管理系统自己控制）</p>
 <p><em>讨论独立性的时候，讨论的是数据与应用程序的独立性</em>；</p>
 <p><strong>数据库系统的特点（4个特点，对应前面四种对比的维度）</strong>：</p>
-<p>数据结构化：主要特点之一；不局限某一个应用；最小存取单位，数据项</p>
-<p>共享程度：面向整个系统，多个用户、应用</p>
-<p>独立性：物理独立性（数据物理存储、应用程序）；逻辑独立性（数据库逻辑结构、应用程序）；保障（二级映像）</p>
-<p>数据由DBMS统一管理：安全性、完整性、并发控制、错误恢复（稍微了解概念，每一点在后面都会作为章节展开）</p>
+<p>数据<strong>结构化</strong>：主要特点之一；不局限某一个应用；最小存取单位，数据项</p>
+<p>数据的<strong>共享度高</strong>，<strong>冗余性低</strong>，易<strong>扩充</strong>；<br>（共享程度：面向整个系统，多个用户、应用）</p>
+<p>数据的<strong>独立性</strong>高；<br>（独立性：物理独立性（数据物理存储、应用程序）；逻辑独立性（数据库逻辑结构、应用程序）；保障（二级映像））</p>
+<p>数据由<strong>数据库管理系统</strong>（DBMS）<strong>统一管理</strong>：安全性、完整性、并发控制、错误恢复（稍微了解概念，每一点在后面都会作为章节展开）</p>
 <h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>数据模型：通俗概念；工具定位</p>
-<p><strong>数据模型的分类</strong>：</p>
+<p>数据模型的分类：</p>
 <p>两类数据模型：概念模型（信息模型）&amp;逻辑模型和物理模型</p>
 <p>概念模型的一种表示方法：实体-联系方法</p>
-<p>逻辑模型包括：层次、网状、关系、面向对象、对象关系模型（逻辑模型是常用的，其中的关系模型更是我们重点学习的，因为其可以用于DBMS的实现）；<em>它们都是常用的数据模型</em></p>
+<p><strong>逻辑模型</strong>包括：<strong>层次、网状、关系、面向对象、对象关系模型</strong>（逻辑模型是常用的，其中的关系模型更是我们重点学习的，因为其可以用于DBMS的实现）；<em>它们都是常用的数据模型</em></p>
 <p>物理模型定位：对数据的最底层抽象，数据在系统内部或磁盘磁带上的存储方式与存取方法</p>
 <p><strong>数据模型的组成要素</strong>：</p>
-<p>数据结构：定义；对系统静态特性的描述</p>
-<p>数据操作：定义；操作类型（查询、更新：插入、删除、修改）；对系统动态特性的描述</p>
-<p>数据的完整性约束条件：定义（一组完整性规则的集合）；目的（数据正确、有效、相容）<br><em>有效对应符合规定的条件，相容对应满足数据间的一致性</em></p>
-<p><strong>概念模型</strong>：</p>
+<p><strong>数据结构</strong>：定义；对系统静态特性的描述</p>
+<p><strong>数据操作</strong>：定义；操作类型（查询、更新：插入、删除、修改）；对系统动态特性的描述</p>
+<p>数据的<strong>完整性约束条件</strong>：定义（一组完整性规则的集合）；目的（数据正确、有效、相容）<br><em>有效对应符合规定的条件，相容对应满足数据间的一致性</em></p>
+<p>概念模型：</p>
 <p>概念模型用途：信息世界建模</p>
 <p>信息世界基本概念：实体（客观存在、可区别的事物）；属性（实体的特性）；码（<strong>唯一</strong>标识实体的<strong>属性集</strong>）；域（属性取值范围）；实体型；实体集；联系（事物内部、事物之间-属性间、实体集间）</p>
 <p>联系的分类：一对一联系、一对多联系、多对多联系</p>
-<p>E-R图：基本图形表示；各类联系的表示；码的表示；联系可以有属性</p>
-<p><strong>层次模型</strong>：</p>
+<p><strong>E-R图</strong>：基本图形表示；各类联系的表示；码的表示；联系可以有属性；<br>（注意多对多联系在E-R图中，联系的属性有什么，<strong>学生选课联系作为多对多联系的属性只有Grade</strong>）；</p>
+<p>层次模型：</p>
 <p>数据库系统中最早出现的数据模型</p>
 <p>满足的基本条件：1）有且仅有一个结点没有双亲结点，根结点；2）除根结点，其它结点有且只有一个双亲</p>
-<p><strong>网状模型</strong>：</p>
+<p>网状模型：</p>
 <p>网状数据库系统的组织方式，网状模型；<em>层次模型是网状模型的特例</em></p>
 <p>满足的基本条件：1）允许一个以上的结点无双亲；2）一个结点可以有多于一个双亲结点</p>
-<p><strong>关系模型</strong>：</p>
+<p>关系模型：</p>
 <p>关系数据库系统的组织方式，关系模型；<em>几乎与所有计算机厂商退出的DBMS都支持关系模型，伟大无需多言~</em></p>
 <p>关系模型的数据结构：关系（对应一张表，元组的集合）；元组（表中的一行）；属性（表中的一列，有名字）；码（属性组，唯一确定元组）；域；分量（元组的一个属性值）；</p>
 <p>关系模型的操作：查询、插入、删除、更新；<em>集合操作，操作对象与结果都是关系，即元组的集合</em></p>
@@ -157,10 +158,10 @@
 <p>关系模型的存储结构：实体以及联系都用表来进行（这也是关系模型的优点，概念单一）；<em>突然出现实体、联系的描述，我的理解：概念模型完成了对信息的建模，现在使用逻辑模型中的关系模型让这些抽象的信息建模具有逻辑关系，这里的逻辑关系指的是面向计算机编程的抽象逻辑，其对立面是真实的物理情况，而非抽象信息建模之间的逻辑关系（在概念模型的阶段就完成了）</em></p>
 <p>关系模型的缺点：存取路径对用户隐蔽，可能导致用户使用效率较低的查询<br>关系的描述：关系模式；</p>
 <p>关系的规范化：必需确保；<em>最基本的规范条件是，关系的每一个分量是不可分的数据项，绝不允许表中有表。否则就是非规范关系</em></p>
-<h3 id="数据库系统的结构"><a href="#数据库系统的结构" class="headerlink" title="数据库系统的结构"></a>数据库系统的结构</h3><p>数据库系统的结构：三级模式结构，外模式-模式-内模式，外模式&#x2F;模式映像（逻辑独立性），模式&#x2F;内模式映像（物理独立性）</p>
-<p>模式：数据库中<strong>全体数据</strong>的逻辑结构和特征的描述；需要对型进行描述；相对稳定；反映数据结构和联系</p>
-<p>外模式：用户能够看见的局部数据的逻辑结构和特征描述</p>
-<p>内模式：数据物理结构和存储方式的描述</p>
+<h3 id="数据库系统的结构"><a href="#数据库系统的结构" class="headerlink" title="数据库系统的结构"></a>数据库系统的结构</h3><p><strong>数据库系统的结构****：三级模式结构</strong>，外模式-模式-内模式，外模式&#x2F;模式映像（逻辑独立性），模式&#x2F;内模式映像（物理独立性）</p>
+<p>模式：数据库中全体数据的逻辑结构和特征的描述；需要对型进行描述；相对稳定；反映数据结构和联系</p>
+<p>外模式：<strong>用户能够看见的</strong>局部数据的逻辑结构和特征描述</p>
+<p>内模式：数据<strong>物理结构和存储方式</strong>的描述</p>
 <p>型：对数据结构及属性的说明；（类比实体型，都是类似于“类”的概念）</p>
 <p>值：型的具体赋值</p>
 <p>实例：将模式整体看作一个型，实例就是值；反映了数据库某一个时刻的状态</p>
@@ -169,19 +170,19 @@
 <p>数据模型：1）数据模型的三要素；2）概念模型，E-R模型；3）三种主要数据库模型（层次、网状、关系，当然关系最重要）</p>
 <p>数据库系统的结构：1）三级模式结构；2）数据库系统两层映像系统结构</p>
 <p>数据库系统的组成</p>
-<h2 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h2><h3 id="关系数据结构及形式化定义"><a href="#关系数据结构及形式化定义" class="headerlink" title="关系数据结构及形式化定义"></a>关系数据结构及形式化定义</h3><h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p>关系模型的数据结构：关系，<strong>在用户角度</strong>，关系是一张二维表，列对应属性，行对应元组</p>
+<h2 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h2><h3 id="关系数据结构及形式化定义"><a href="#关系数据结构及形式化定义" class="headerlink" title="关系数据结构及形式化定义"></a>关系数据结构及形式化定义</h3><h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p>关系模型的数据结构：关系，在用户角度，关系是一张二维表，列对应属性，行对应元组</p>
 <p>关系定义的前置知识：</p>
 <ol>
-<li>域（Domain）：一组具有相同数据类型的值的集合</li>
-<li>笛卡尔积：给定一组域，其笛卡尔积为一个集合，其中的元素形式为(d1,d2,…,dn)，di为分量，是来自域Di的值，将所有域中的进行组合得到类似的元素，然后形成的集合就是笛卡尔积</li>
-<li>元组，2.中提到的元素就是元组</li>
+<li><strong>域（Domain）</strong>：一组具有相同数据类型的值的集合</li>
+<li><strong>笛卡尔积</strong>：给定一组域，其笛卡尔积为一个集合，其中的元素形式为(d1,d2,…,dn)，di为分量，是来自域Di的值，将所有域中的进行组合得到类似的元素，然后形成的集合就是笛卡尔积</li>
+<li><strong>元组</strong>，2.中提到的元素就是元组</li>
 <li>分量，元组的分量的值，简称分量</li>
 </ol>
 <p>于是，笛卡尔积可以表示为一个二维表，其中的每一行对应一个元组，每一列的值来自一个域</p>
-<p>关系：域D1、D2、…、Dn的笛卡尔积的子集，即在D1，D2，…，Dn上的关系，表示为R(D1,D2,…,Dn)，其中R就是关系名，而n可以叫做<strong>关系的目或度</strong>（n&#x3D;1时为单元关系，n&#x3D;2时为二元关系）</p>
+<p><strong>关系</strong>：域D1、D2、…、Dn的笛卡尔积的子集，即在D1，D2，…，Dn上的关系，表示为R(D1,D2,…,Dn)，其中R就是关系名，而n可以叫做关系的目或度（n&#x3D;1时为单元关系，n&#x3D;2时为二元关系）</p>
 <p>元组的表示：通常用t进行标识</p>
 <p>关系的表示：可以将关系看作一个二维表，行对应元组，列对应域</p>
-<p>属性：属性的引入是类似给域取了一个名字，毕竟域作为一个值的集合本身并没有名字，我们给它取一个名字可以反映这组值代表的含义。（这也是我们通常更关注的东西，例如对于一列元组的字符串分量值，比起关心它们都是字符串，我们更关心它们的实际含义，例如它们都代表名字）</p>
+<p><strong>属性</strong>：属性的引入是类似给域取了一个名字，毕竟域作为一个值的集合本身并没有名字，我们给它取一个名字可以反映这组值代表的含义。（这也是我们通常更关注的东西，例如对于一列元组的字符串分量值，比起关心它们都是字符串，我们更关心它们的实际含义，例如它们都代表名字）</p>
 <p>码：<br><em>后面的章节中有更加严谨的定义，这里看看就好</em>；</p>
 <ol>
 <li>候选码：关系中某一属性组的值能够唯一标识一个元组，则该属性组是候选码</li>
@@ -204,7 +205,7 @@
 <li>任意两个元组的候选码不能相同</li>
 <li>分量必须取原子量，不可再分（不能表中有表）</li>
 </ol>
-<h4 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h4><p>关系模式实际上就是对关系的描述，<strong>关系模式是型，关系是值</strong></p>
+<h4 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h4><p>关系模式实际上就是对关系的描述，关系模式是型，关系是值</p>
 <p>关系模式形式化表示：R(U,D,DOM,F)</p>
 <ol>
 <li>R关系名</li>
@@ -216,16 +217,16 @@
 <p>关系模式常用表示：R(A1,A2,…,An)</p>
 <ol>
 <li>R是关系名</li>
-<li>A1～An是属性名<br>（实际使用的时候通常将<strong>候选码写在前面，分别用下划线强调</strong>；如果是关系组形成的候选码则下划线不间断）</li>
+<li>A1～An是属性名<br>（实际使用的时候通常将候选码写在前面，分别用下划线强调；如果是关系组形成的候选码则下划线不间断）</li>
 </ol>
 <p>关系模式是静态的、稳定的；关系是动态的、变化的</p>
-<h4 id="关系数据库-1"><a href="#关系数据库-1" class="headerlink" title="关系数据库"></a>关系数据库</h4><p>定义：给定应用领域，所有实体及实体之间的联系 的关系 的集合 构成一个关系数据库<br><strong>结合实验1进行理解</strong></p>
+<h4 id="关系数据库-1"><a href="#关系数据库-1" class="headerlink" title="关系数据库"></a>关系数据库</h4><p>定义：给定应用领域，所有实体及实体之间的联系 的关系 的集合 构成一个关系数据库<br><code>结合实验1进行理解</code></p>
 <h3 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h3><p>常用操作分为两大类：</p>
 <ol>
 <li>查询</li>
 <li>数据更新</li>
 </ol>
-<p>查询包括：1）选择；2）投影；3）并；4）差；5）笛卡尔积；6）连接；7）除；8）交</p>
+<p>查询包括：<strong>1）选择；2）投影；3）并；4）差；5）笛卡尔积；6）连接；7）除；8）交</strong></p>
 <p>注：<strong>上述前五种是基本操作</strong></p>
 <p>数据更新包括：1）插入；2）删除；3）修改</p>
 <p>关系操作的特点：操作的所有对象以及结果都是<strong>集合</strong>（这是很自然的，因为关系本身就是集合）</p>
@@ -236,7 +237,7 @@
 <li>具有1、2的双重的语言，如SQL</li>
 </ol>
 <h3 id="关系的完整性"><a href="#关系的完整性" class="headerlink" title="关系的完整性"></a>关系的完整性</h3><p>关系有三类完整性约束：</p>
-<h4 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h4><p>实体完整性规则：一个或一组属性A是<strong>基本关系</strong>R的<strong>主属性</strong>，则A<strong>不能取空值</strong></p>
+<h4 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h4><p>实体完整性规则：一个或一组属性A是基本关系R的主属性，则A不能取空值</p>
 <p>细节说明：</p>
 <ol>
 <li>实体完整性针对基本表（对应现实世界实体集合）</li>
@@ -245,21 +246,21 @@
 <li>主属性不能取空值</li>
 </ol>
 <h4 id="参照完整性"><a href="#参照完整性" class="headerlink" title="参照完整性"></a>参照完整性</h4><p>关系间的引用：由于实体 实体间的联系 都被抽象为关系，所以可能存在关系间的引用（尤其是在表示联系的时候，考虑一下SC和Student、Course就明白了）</p>
-<p><strong>外码</strong>：F是R的属性，且非主码  对应了S的主码   则F是R的外码</p>
+<p>外码：F是R的属性，且非主码  对应了S的主码   则F是R的外码</p>
 <ol>
-<li>R是<strong>参照关系</strong></li>
-<li>S是<strong>被参照关系</strong></li>
+<li>R是参照关系</li>
+<li>S是被参照关系</li>
 </ol>
 <p>注意：</p>
 <ol>
-<li>参照关系与被参照关系<strong>不一定是不同关系</strong>（班长的例子）</li>
+<li>参照关系与被参照关系不一定是不同关系（班长的例子）</li>
 <li>外码 与 对应的主码 一定在同一Domain</li>
 <li>通常：1）若参照关系与被参照关系上同一关系，外码与对应主码不同名；2）若参照关系与被参照关系不是同一关系，外码与主码同名</li>
 </ol>
-<p><strong>参照完整性约束</strong>：若属性是基本关系的<strong>外码</strong>，则其 或<strong>取空值</strong> 或等于<strong>对应主码的某个值</strong></p>
+<p>参照完整性约束：若属性是基本关系的外码，则其 或取空值 或等于对应主码的某个值</p>
 <h4 id="用户定义的完整性约束"><a href="#用户定义的完整性约束" class="headerlink" title="用户定义的完整性约束"></a>用户定义的完整性约束</h4><p>结合实验2的表项自己的限制 or 表项之间的限制 理解即可</p>
 <h3 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h3><p><em>这里的笔记只是一些基础概念，要结合试题进行练习，期末会考察10分</em></p>
-<p>关系代数是一种具体的关系数据库语言，具备相应的关系操作（<strong>关系代数中称为关系运算</strong>），以及完整性约束？或许，总之在这一部分我们学习了一种具体的关系数据库语言，并且着重关注其中的关系运算部分。（后续还有关系演算、SQL标准语言）</p>
+<p>关系代数是一种具体的关系数据库语言，具备相应的关系操作（关系代数中称为关系运算），以及完整性约束？或许，总之在这一部分我们学习了一种具体的关系数据库语言，并且着重关注其中的关系运算部分。（后续还有关系演算、SQL标准语言）</p>
 <h4 id="运算符的前置知识"><a href="#运算符的前置知识" class="headerlink" title="运算符的前置知识"></a>运算符的前置知识</h4><p>它们的作用主要是作为一种语言，来对下面的各个运算符进行定义</p>
 <ol>
 <li>关系$R$</li>
@@ -268,17 +269,19 @@
 <li>元组的属性值$t[A_i]$</li>
 <li>剩余属性组</li>
 <li>$t_r$与$t_s$连接的新元组</li>
-<li><strong>象集</strong>$Z_x$，若属性Z、X是关系R的属性，则在R上象集$Z_x$是X属性值为x的元组的Z属性值的集合</li>
+<li>象集$Z_x$，若属性Z、X是关系R的属性，则在R上象集$Z_x$是X属性值为x的元组的Z属性值的集合</li>
 </ol>
 <p>象集对于理解除运算很重要，其实就是属性值的集合，只是要明白这个属性值时如何取出来的</p>
-<h4 id="集合运算符"><a href="#集合运算符" class="headerlink" title="集合运算符"></a>集合运算符</h4><ol>
+<h4 id="集合运算符"><a href="#集合运算符" class="headerlink" title="集合运算符"></a>集合运算符</h4><p><strong>集合运算符：</strong></p>
+<ol>
 <li>并 $\cup$</li>
 <li>交 $\cap$</li>
 <li>差 $\sub$</li>
 <li>笛卡尔积 $\times$</li>
 </ol>
 <p>并、交、差：若关系R、S进行前三种运算，则<strong>R、S具有的属性一定相同</strong><br>笛卡尔积：$R\times S$，运算规则类似双重for循环，对R的每一个元组，与S的每一个元组完成一次组合，生成一个新的元组，其各属性名为$R.XXX…S.YYY…$</p>
-<h4 id="专门的关系运算符"><a href="#专门的关系运算符" class="headerlink" title="专门的关系运算符"></a>专门的关系运算符</h4><ol>
+<h4 id="专门的关系运算符"><a href="#专门的关系运算符" class="headerlink" title="专门的关系运算符"></a>专门的关系运算符</h4><p><strong>专门的关系运算符：</strong></p>
+<ol>
 <li>选择 $\sigma_F$</li>
 <li>投影 $\Pi_A$</li>
 <li>连接 $\bowtie$（自然连接的符号）</li>
@@ -298,6 +301,7 @@
 <li>外连接，左外连接与右外连接结果的并</li>
 </ol>
 <p>注：上面对for循环的描述只是为了大脑思考的时候便于理解，实际上把谁放在外层循环，先做后做都是等价的</p>
+<p>涉及逻辑表达式的部分会有：<br>    1）<strong>算数比较符</strong>；<br>    2）<strong>逻辑运算符</strong>；</p>
 <p><strong>关于除运算</strong>：</p>
 <ol>
 <li>R与S进行除运算的条件，R与S有相同的属性（组）</li>
@@ -311,16 +315,16 @@
 <li>域关系演算（QBE）</li>
 </ol>
 <p>我们学习过的是元组关系演算</p>
-<p><strong>这一部分可以稍作了解，但是最重要的是明确——理解关系演算对SQL查询语句的执行很有帮助</strong>。</p>
+<p>这一部分可以稍作了解，但是最重要的是明确——理解关系演算对SQL查询语句的执行很有帮助。</p>
 <h2 id="数据库系统"><a href="#数据库系统" class="headerlink" title="数据库系统"></a>数据库系统</h2><h3 id="SQL概述"><a href="#SQL概述" class="headerlink" title="SQL概述"></a>SQL概述</h3><p><em>SQL语句拿不准的要写注释</em></p>
 <p>SQL：结构化查语言，关系数据库的标准语言</p>
-<p>SQL的特点：</p>
+<p><strong>SQL的特点</strong>：</p>
 <ol>
-<li>综合统一：DDL、DQL、DML、DCL集于一体</li>
+<li><strong>综合统一</strong>：DDL、DQL、DML、DCL集于一体</li>
 <li><strong>高度非过程化</strong>：只需要注意做什么，无需关注怎么做</li>
-<li>面向集合的操作方式：操作的对象与结果都是元组的集合</li>
-<li>同一种结构提供多种功能：既是独立语言也是嵌入式语言</li>
-<li>语言简洁，易学易用：9个核心动词，完成核心功能（对应的就是<strong>DDL</strong> CREATE DROP ALTER、<strong>DQL</strong> SELECT、<strong>DML</strong> INSERT DELETE UPDATE、<strong>DCL</strong> GRANT REVOKE）</li>
+<li><strong>面向集合的操作方式</strong>：操作的对象与结果都是元组的集合</li>
+<li>同一种结构提供<strong>多种使用方式</strong>：<strong>交互式、嵌入式</strong>；<br> （多种功能，既是独立于言又是嵌入式语言）；</li>
+<li><strong>语言简洁，易学易用</strong>：9个核心动词，完成核心功能（对应的就是<strong>DDL</strong> CREATE DROP ALTER、<strong>DQL</strong> SELECT、<strong>DML</strong> INSERT DELETE UPDATE、<strong>DCL</strong> GRANT REVOKE）<br><code>145 2 3</code></li>
 </ol>
 <p>注意理解<strong>非过程化</strong>、<strong>面向集合</strong></p>
 <p>SQL对于关系模式数据库的支持：SQL的存储文件对应内模式、基本表对应模式、视图对应外模式，由SQL统一管理</p>
@@ -336,14 +340,14 @@
 <li>DROP</li>
 <li>ALTER</li>
 </ol>
-<h4 id="模式DDL"><a href="#模式DDL" class="headerlink" title="模式DDL"></a>模式DDL</h4><p>这一部分了解就好，知道有一个<strong>模式</strong>SCHEMA的存在，类似于命名空间。</p>
+<h4 id="模式DDL"><a href="#模式DDL" class="headerlink" title="模式DDL"></a>模式DDL</h4><p>这一部分了解就好，知道有一个模式SCHEMA的存在，类似于命名空间。</p>
 <p>每一个基本表都属于某一个模式</p>
 <p>一个模式可以包含多个基本表</p>
-<h4 id="基本表DDL"><a href="#基本表DDL" class="headerlink" title="基本表DDL"></a>基本表DDL</h4><p><strong>创建基本表</strong>的基本范式</p>
+<h4 id="基本表DDL"><a href="#基本表DDL" class="headerlink" title="基本表DDL"></a>基本表DDL</h4><p><strong>创建基本表的基本范式</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE &lt;name &gt;</span><br><span class="line">(</span><br><span class="line">    &lt;col name &gt; &lt;data <span class="built_in">type</span> &gt; [列级完整性约束]</span><br><span class="line">    [, ...] [...]</span><br><span class="line">    [, 表级完整性约束]</span><br><span class="line">    [, ...]</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>注：如果完整性约束涉及多个列，那必须定义在表级</p>
-<p>在这一部分<strong>应该掌握的语句</strong></p>
+<p>在这一部分应该掌握的语句</p>
 <ol>
 <li>基本范式的最基础使用</li>
 <li>常用的data type：CHAR(length) SMALLINT INT REAL DATE TIME</li>
@@ -352,7 +356,10 @@
 <li>指定某一列不能为空值</li>
 <li>指定外码</li>
 </ol>
-<p><strong>修改基本表</strong>的基本范式</p>
+<p><strong>修改基本表的基本范式</strong></p>
+<p>ALTER TABLE Student<br>DROP Sname <strong>UNIQUE</strong>;</p>
+<p>ALTER TABLE Student<br>ADD Ssex CHAR(2) CHECK IN (‘F’,’M’);</p>
+<p>ALTER TABLE Student<br>ALTER <strong>COLUMN</strong> Ssex CHAR(10);</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE &lt;name &gt;</span><br><span class="line">[ADD &lt;col name&gt; &lt;data <span class="built_in">type</span>&gt; &lt;完整性约束&gt;] //增加新列</span><br><span class="line">[DROP &lt;col name&gt; &lt;完整性约束&gt;] //删除列，注意删除的时候要附上该列的完整性约束</span><br><span class="line">[ALTER COLUMN &lt;col name&gt; &lt;data <span class="built_in">type</span>&gt;]; //更改列的数据类型</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>注：</p>
@@ -360,7 +367,7 @@
 <li>新增加的列在已有元组中默认为空值NULL</li>
 <li>ADD有直接添加完整性约束的用法，类似<code>ADD UNIQUE(Cname)</code></li>
 </ol>
-<p><strong>删除基本表</strong>的基本范式</p>
+<p><strong>删除基本表的基本范式</strong><br>    CASCADE&#x2F;RESTRICT</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DROP TBALE &lt;name &gt;</span><br><span class="line">[CASCADE | RESTRICT];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>注：</p>
@@ -377,32 +384,33 @@
 <li>聚簇索引</li>
 </ol>
 <p>索引是关系数据库的内部实现技术，属于内模式的范畴，常用的实现方式有B+树索引、HASH索引等</p>
-<p>注：<strong>一个基本表上最多只能建立一个聚簇索引</strong></p>
+<p>注：一个基本表上最多只能建立一个聚簇索引</p>
 <h3 id="DQL语句"><a href="#DQL语句" class="headerlink" title="DQL语句"></a>DQL语句</h3><p>这一部分是数据查询语言，基本上都是在基本表上进行的</p>
-<p>基本范式：</p>
+<p><strong>基本范式：</strong></p>
+<p>DISTINCT&#x2F;ALL;<br>ASC&#x2F;DESC;</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT [DISTINCT|ALL]&lt;目标列表表达式 &gt; [,&lt;目标列表表达式&gt;...] </span><br><span class="line">FROM &lt;表名 or 视图名 &gt; [,&lt;表名 or 视图名 &gt;...]</span><br><span class="line">[WHERE &lt;条件表达式&gt;]</span><br><span class="line">[GROUP BY &lt;col name&gt;]</span><br><span class="line">[HAVING &lt;条件表达式&gt;]</span><br><span class="line">[ORDER BY &lt;col name&gt; [ASC|DESC]];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h4 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h4><p><code>单表查询部分在逻辑上理解不困难，难点主要是掌握各种语句的用法，这里主要采用列举例题与对应知识点的形式，复习的时候要做到看到例题能够想到考察的知识点与对应的查询语句是什么</code></p>
-<p>选择指定列<br>    eg：查询学生表中的学号、姓名；</p>
-<p>查询全部列<br>    eg：查询学生表的信息；</p>
-<p>查询经过计算的表达式<br>    算数表达式<br>        eg：查询学生的出生年份<br>    字符串常量<br>        主要作用是对结果进行修饰，对应输入的字符串常量在结果中单独占一列，其相对于其他列的位置由查询语句确定，独占的一列从属性名到所有的属性值都是该字符串常量<br>    函数：LOWER、UPPER等（作用是对相应的属性列中的属性值，全部显示经过函数处理该属性值的结果）<br>        eg：查询学生姓名以及对应的所在院系，院系名称全部用小写<br>    列别名：别名紧跟在属性名之后，不加逗号；（对比查询不同属性列时用逗号隔开）<br>        eg：查询所有学生的出生日期，并使用列别名让结果对用户更友好</p>
-<p>选中表中的若干元组<br>    对查询结果去重与否<br>        SELECT DISTINCT&#x2F;ALL Sno…（缺省默认ALL）<br>    查询满足条件的元组<br>        WHERE<br>            比较：&#x3D; &gt; &lt; &gt;&#x3D; &lt;&#x3D; !&#x3D; &lt;&gt; !&gt; !&lt;<br>                eg：查询计算机专业的学生<br>            确定范围：BETWEEN AND&#x2F; NOT BETWEEN AND<br>                eg：查询年龄在13到15的学生<br>            与集合的关系：IN&#x2F; NOT IN<br>                eg：查询是计算机或信息技术或数学系的学生<br>            字符匹配：LIKE&#x2F; NOT LIKE<br>                eg：查询姓刘的学生；查询姓欧阳并且全名三个字的学生<br>            空值：IS NULL&#x2F; IS NOT NULL<br>            多重条件：AND&#x2F; OR&#x2F; NOT</p>
-<p>对查询结果排序<br>    ORDER BY 指定排序参考的属性，默认ASC升序、DESC是降序<br>    当排序含有空值的时候，若为ASC空值会最后显示；若为DESC空值会最先显示（空值被作为了最大值）<br>    可以有多个排序条件（靠前的条件优先级更高，当靠前的条件对应的属性值是相同的时候则会使用下一个条件进一步排序；结果就好像每个元组被分为了一个个整体，并且整体内有序）<br>    eg：查询全体学生情况，结果按所在系的系号升序排序，同一系中的学生按年龄降序排序</p>
-<p>对查询的属性列使用聚集函数<br>    COUNT<br>        DISTINCT&#x2F; ALL是可选的，后者是默认的；<br>        COUNT的效果是统计查询到的元组的个数 or 某属性列值的个数，对应的结果是仅有一个数字属性的元组，代表原先有多少元组；<br>        所以COUNT一般是单独使用的；<br>        eg：查询学生的总人数；查询选修了课程的学生人数<br>    SUM<br>        DISTINCT&#x2F; ALL是可选的，前者是默认的；<br>        计算一列值的总和，要用于数值型的属性列<br>        eg：查询1号学生选修课程的总学分<br>    AVG<br>        DISTINCT&#x2F; ALL是可选的，前者是默认的；<br>        计算一列值的平均值，要用于数值型的属性列<br>        eg：计算1号学生的平均成绩<br>    MAX<br>        求一列中的最大值，一般用于数值型<br>        eg：查询1号学生选修课程的最高分<br>    MIN<br>        求一列中的最小值，一般用于数值型</p>
-<p>分组查询<br>    GROUP BY语句，目的是为了让聚集函数可以更加细粒度地进行使用<br>    一般不会单独使用，不会有视觉上的“分组效果”，如果要有的话应该使用多层排序<br>    两种用法：<br>        分组+聚集函数，聚集函数的作用效果上组内的所有元组<br>            eg：查询选修每个课程对应的学生人数<br>        分组+聚集函数+筛选组，HAVING语句，以组为单位进行筛选<br>            eg：找出选修了5门及以上课程的学生学号<br>            （注意HAVING与WHERE的区别）</p>
+<p>选择<strong>指定列</strong><br>    eg：查询学生表中的学号、姓名；</p>
+<p>查询<strong>全部列</strong><br>    eg：查询学生表的信息；</p>
+<p>查询<strong>经过计算的表达式</strong><br>    <strong>算数表达式</strong><br>        eg：查询学生的出生年份<br>    <strong>字符串常量</strong><br>        主要作用是对结果进行修饰，对应输入的字符串常量在结果中<strong>单独占一列</strong>，其相对于其他列的位置由查询语句确定，独占的一列从属性名到所有的属性值都是该字符串常量<br>    <strong>函数</strong>：LOWER、UPPER等（作用是对相应的属性列中的属性值，全部显示经过函数处理该属性值的结果）<br>        eg：查询学生姓名以及对应的所在院系，院系名称全部用小写<br>            <strong>时间操作有关函数？</strong><br>            1）当前日期&#x2F;时间：CURRENT_DATE&#x2F;CURRENT_TIME；<br>            2）时间的运算：<br>                提取时间直接运算：<br>                    EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM BitrhDate);<br>                使用时间间隔符：<br>                    CURRENT_DATE - INTERVAL ‘3’ YEAR&#x2F;MONTH&#x2F;DAY;&#x2F;&#x2F;字符数字代表对应的时间度量，后面的关键字用来指定年月日单位；<br>            3）计算两个日期的天数差：<br>                DATEDIFF(CURDATE,BirthDATE);&#x2F;&#x2F;MySQL语法；<br>    列别名：<strong>别名紧跟在属性名</strong>之后，不加逗号；（对比查询不同属性列时用逗号隔开）<br>        eg：查询所有学生的出生日期，并使用列别名让结果对用户更友好</p>
+<p>选中表中的若干元组<br>    对查询结果去重与否<br>        SELECT DISTINCT&#x2F;ALL Sno…（缺省默认ALL）<br>    查询满足条件的元组<br>        WHERE<br>            比较：&#x3D; &gt; &lt; &gt;&#x3D; &lt;&#x3D; !&#x3D; &lt;&gt; !&gt; !&lt;<br>                eg：查询计算机专业的学生<br>            确定范围：<strong>BETWEEN AND&#x2F; NOT BETWEEN AND</strong><br>                eg：查询年龄在13到15的学生<br>            与集合的关系：<strong>IN&#x2F; NOT IN</strong><br>                eg：查询是计算机或信息技术或数学系的学生<br>            字符匹配：<strong>LIKE&#x2F; NOT LIKE</strong><br>                eg：查询姓刘的学生；查询姓欧阳并且全名三个字的学生<br>            空值：<strong>IS NULL&#x2F; IS NOT NULL</strong><br>            多重条件：<strong>AND&#x2F; OR&#x2F; NOT</strong></p>
+<p>对<strong>查询结果排序</strong><br>    ORDER BY 指定排序参考的属性，<strong>默认ASC升序</strong>、DESC是降序<br>    当排序含有空值的时候，若为ASC空值会最后显示；若为DESC空值会最先显示（<strong>空值被作为了最大值</strong>）<br>    可以有<strong>多个排序条件</strong>（靠前的条件优先级更高，当靠前的条件对应的属性值是相同的时候则会使用下一个条件进一步排序；结果就好像每个元组被分为了一个个整体，并且整体内有序）<br>    eg：查询全体学生情况，结果按所在系的系号升序排序，同一系中的学生按年龄降序排序<br>        **OREDER BY Sdept (ASC), Sage DESC;**（ASC可以默认省略）；</p>
+<p>对查询的属性列使用<strong>聚集函数</strong>（这里主要体现于<strong>用在SELECT之后</strong>）<br>    COUNT<br>        <strong>DISTINCT&#x2F; ALL是可选的</strong>，后者是默认的；<br>        COUNT的效果是统计查询到的元组的个数 or 某属性列值的个数，对应的结果是仅有一个数字属性的元组，代表原先有多少元组；<br>        所以COUNT一般是单独使用的；<br>        eg：查询学生的总人数；查询选修了课程的学生人数<br>            SELECT COUNT(<em>) FROM Student;<br>            SELECT COUNT(DISTINCT Sno) FROM SC;（**注意DISTINCT和COUNT的使用位置 和 实际的用法，</em>或指定具体的列**）；<br>    SUM<br>        <strong>DISTINCT&#x2F; ALL是可选的</strong>，前者是默认的；<br>        计算一列值的总和，要用于数值型的属性列<br>        eg：查询1号学生选修课程的总学分<br>    AVG<br>        <strong>DISTINCT&#x2F; ALL是可选的</strong>，前者是默认的；<br>        计算一列值的平均值，要用于数值型的属性列<br>        eg：计算1号学生的平均成绩<br>    MAX<br>        <strong>求一列中的最大值，一般用于数值型</strong><br>        eg：查询1号学生选修课程的最高分<br>    MIN<br>        <strong>求一列中的最小值，一般用于数值型</strong></p>
+<p>分组查询<br>    GROUP BY语句，目的是为了让<strong>聚集函数可以更加细粒度地进行使用</strong><br>    一般不会单独使用，不会有视觉上的“分组效果”，如果要有的话应该使用多层排序<br>    两种用法：<br>        分组+聚集函数，聚集函数的作用效果上组内的所有元组<br>            eg：查询选修每个课程对应的学生人数<br>            SELECT <strong>DISTINCT</strong> Cno,COUNT(<em>)<br>            FROM SC<br>            GROUP BY Cno;<br>            注意：<br>                1）这里<strong>不需要使用DISTINCT</strong>，因为GROUP BY强制要求对于每一组在结果集合中只有一条数据，而这里使用的Cno以及聚集函数作为结果，对应分组条件，天然的每组就只有一条数据；<br>                2）如果SELECT语句中除了分组列和聚合函数（如COUNT(</em>)）之外，还有其他列，那么这些列可能来自分组内的不同行，这时可能需要使用聚合函数（如MAX, MIN, AVG等）来处理，否则在某些数据库系统中会报错（因为非分组列在分组后有多值，而结果集要求一行只能有一个值）。<br>        分组+聚集函数+筛选组，HAVING语句，以组为单位进行筛选<br>            eg：找出选修了5门及以上课程的学生学号<br>            （注意HAVING与WHERE的区别）<br>            SELECT Sno<br>            FROM Student<br>            GROUP BY Sno<br>            HAVING COUNT(*)&gt;&#x3D;5;</p>
 <h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p><code>要求与单表查询类似，只是要深入理解连接的作用与效果</code></p>
-<p>各种连接查询的共同点<br>    在FROM之后有多个表<br>    如果表中有相同的属性的话，使用的时候要用TABLE_NAME.COL的形式<br>    在WHERE之后使用来自各表中的属性，规定连接条件<br>    在脑海中考虑连接查询的过程，要先根据连接条件在脑子里有一个连接后的表的印象，然后将其考虑为单表，在其上进一步查询</p>
-<p>等值连接（自然连接）与非等值连接<br>    等值连接<br>        在WHERE连接条件中，出现来自各表等属性满足“&#x3D;”关系<br>    自然连接<br>        在等值连接的基础上，来自各表的属性是同一属性<br>        eg：查询每个学生及其选修课的情况<br>    非等值连接（不常用）</p>
-<p>自身连接<br>    一个表与自己连接，要求：给表取别名，用别名访问属性，这样才能区别开<br>    eg：查询一门课的先修课的先修课</p>
-<p>外连接<br>    使用语句FROM ? LEFT OUTER JOIN ? ON (F)，这是左外连接，左边的是主表，F是外连接的条件；区别在于即使不满足条件的时候也会将主表保留下来，对应元组在连接后的表中没有的属性值置为空值<br>    类似的还有RIGHT OUTER JOIN<br>    eg：查询每个学生及其选修课程（当然不能因为没选修课程而将对应的学生忽略）</p>
-<p>多表连接<br>    FROM后跟有多个表名，对应的要在WHERE中注明连接条件<br>    考虑的时候，可以先考虑两个表连接成一张大表，在考虑这张大表与下一张表做对应的连接</p>
-<h4 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h4><p>查询块：<br>    一个SELECT语句作为一个完整的查询块（当然可以配套其他关键字使用）</p>
-<p>嵌套查询：<br>    将一个查询块嵌套在另一个查询块的WHERE子句或者HAVING短语条件中<br>    eg：查询选修了课程名为IS的课程的学生的学号</p>
-<p>不相关子查询：<br>    定义：子查询的查询条件不依赖于父查询<br>    处理：这种可以逐层考虑，因为各层查询基本上是独立的</p>
-<p>相关子查询<br>    定义：子查询的条件依赖于父查询<br>    处理：<br>        1）这种考虑的时候通常，按上层查询的元组进行考虑，对于上层查询的每一个元组会做一次子查询；而元组则作为子查询可能用到的条件（就像将元组作为参数去调用作为函数的查询一样）<br>        2）上层查询和下层查询如果用到了同一关系，需要给关系取别名<br>    eg：查询学生选课记录中，学生高于自己选修课程的平均分的选课记录中的学号和课程号</p>
-<p>子查询的限制：<br>    1）不能使用ORDER BY子句，因为ORDER BY子句只能对最终结果进行排序<br>    2）子查询一定要在比较符之后（写SQL语句的时候，不能头重脚轻）</p>
-<p>常见的嵌套查询：<br>    1）带IN谓词的子查询<br>        应用场景：通常用于检查上层查询中的某个元组的某属性是否在一些满足特定条件的集合中，由于集合的构造逻辑比较复杂所以要用一个子查询来进行描述。<br>        eg：<br>            1）查询所有与刘晨同学在相同系进行学习的学生学号、姓名和年龄<br>            2）查询选修了“信息系统”这门课程的学生的学号和姓名<br>    2）带有比较运算符的子查询<br>        应用场景：<br>            一般是用于上层元组的可比较属性需要满足特定条件时，该条件的构造比较复杂所以用子查询描述；<br>            子查询要返回一个单值；<br>            需要使用IN的场景，并且子查询返回的是单值，可以用”&#x3D;”<br>        eg：<br>            查询每个学生超过他自己所有选修课程的平均成绩的课程号<br>    3）带有ANY（SOME）或ALL谓词的子查询<br>        应用场景：<br>            常与带有比较运算符的子查询一起用，使用ANY（SOME）or ALL来描述上层查询需要满足的更加复杂的条件<br>            ANY和SOME是等价的，只是两种记法。和比较运算符一起用的常见情况：<br>                1）&gt;ANY，大于子查询中某个值即可<br>                2）&gt;ALL，大于子查询中所有的值<br>                （其他比较类似，ANY要求有某个子查询的结果满足就可以视上层元组满足条件；ALL则要求子查询的所有结果都满足才行）<br>        eg：<br>            1）查询其他系中比计算机科学系所有学生年龄都小的学生姓名及年龄（比年龄最小的还小）<br>        注意：<br>            ANY和ALL可以实现的效果，也可以在带有比较运算符中运用MIN、MAX聚集函数来实现（语义上的等价，很好理解）<br>    4）带有EXISTS谓词的子查询<br>        应用场景：<br>            带有EXISTS谓词的子查询不会返回任何数据，只会返回true or false（子查询有数据 or 没有数据），作为对上层元组是否满足条件的判断；<br>            由于上述特点，所以其应用场景一般是相关子查询，要用上层查询的元组与子查询构造条件<br>        eg：<br>            1）查询所有选修了1号课程的学生姓名<br>            2）查询没有选修1号课程的学生姓名<br>            3）查询与刘晨在同一个系学习的学生<br>        注意：<br>            1）NOT EXISTS的用法和EXISTS类似，只是返回true、false的情况是反着的；<br>            2）由于使用EXISTS谓词不会关注其返回的信息，所以子查询通常用SELECT *；<br>            3）前面所有的子查询都可以用EXISTS实现</p>
-<h3 id="DML语句"><a href="#DML语句" class="headerlink" title="DML语句"></a>DML语句</h3><p>对数据（元组）的操作<br>    插入数据<br>        INSERT INTO … VALUES…<br>        （省略号处是表名和属性列；VALUES后要使用对应属性列的常量）<br>        注意：<br>            1）带子查询的插入数据：对应VALUES…部分由SELECT语句替换，该语句要返回与INTO后指定的各列一致的数据<br>        eg：<br>            1）将张成名的信息插入Student表<br>            2）对于每一个系，求学生的平均年龄，插入表格中；对应属性（系名，平均年龄）<br>    修改数据<br>        UPDATE…（指定表名）<br>        SET…（设置列名对应的属性值，属性值可以是表达式）<br>        …（WHERE附加的条件）<br>        注意：<br>            1）附加的条件一般来说是必要的，否则就是对整列进行修改<br>            2）带子查询的修改，一般是将相关子查询用在WHERE中，构造较为复杂的修改判断条件<br>        eg：<br>            1）将学生200215121的年龄修改为22岁<br>            2）将计算机系全体学生成绩置0<br>    删除数据<br>        DELETE<br>        FROM…<br>        …（WHERE附加的条件）<br>        注意：<br>            1）与修改数据类似，在不附加条件的情况下会删除所有元组，但是表仍然存在<br>            2）子查询与修改不同的点，DELETE实际上是要用WHERE指定特定的删除对象的<br>            （通常是用WHERE条件指定候选码，从而删除指定的元组；毕竟是以元组为单位操作的，如果单独删除某列数据没有意义，这与UPDATE不同）<br>        eg：<br>            1）删除计算机系所有学生的选课记录<br>            2）删除计算机系所有学生的选课记录</p>
+<p>各种<strong>连接查询</strong>的共同点<br>    在<strong>FROM</strong>之后有多个表<br>    如果表中有相同的属性的话，使用的时候要用<strong>TABLE_NAME.COL</strong>的形式<br>    在WHERE之后<strong>使用来自各表中的属性，规定连接条件</strong><br>    在脑海中考虑连接查询的过程，要先根据连接条件在脑子里有一个<strong>连接后的表的印象，然后将其考虑为单表，在其上进一步查询</strong></p>
+<p>等值连接（自然连接）与非等值连接<br>    <strong>等值连接</strong><br>        在WHERE连接条件中，出现来自各表等属性满足“&#x3D;”关系<br>    <strong>自然连接</strong><br>        在等值连接的基础上，通过指定列手动实现；<br>        （连接条件是，相同的属性值相等）；<br>        （指定的列满足，在保留两个关系所有列的基础上，去掉重复的列）；<br>        eg：查询每个学生及其选修课的情况<br>    非等值连接（不常用）</p>
+<p><strong>自身连接</strong><br>    一个表与自己连接，要求：<strong>给表取别名，用别名访问属性</strong>，这样才能区别开<br>    eg：查询一门课的先修课的先修课<br>    SELECT a.Cno, b.pre<br>    FROM Course a,Course b<br>    WHERE a.pre &#x3D; b.Cno;</p>
+<p><strong>外连接</strong><br>    使用语句<strong>FROM ? LEFT OUTER JOIN ? ON (F)<strong>，这是左外连接，左边的是主表，F是外连接的条件；区别在于即使不满足条件的时候也会将主表保留下来，对应元组在连接后的表中没有的属性值置为空值<br>    类似的还有</strong>RIGHT OUTER JOIN</strong><br>    eg：查询每个学生及其选修课程（当然不能因为没选修课程而将对应的学生忽略）</p>
+<p><strong>多表连接</strong><br>    FROM后跟有多个表名，对应的要在WHERE中注明连接条件<br>    考虑的时候，可以先考虑两个表连接成一张大表，在考虑这张大表与下一张表做对应的连接</p>
+<h4 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h4><p><strong>查询块：</strong><br>    一个SELECT-FROM-WHERE语句作为一个完整的查询块（当然可以配套其他关键字使用）</p>
+<p><strong>嵌套查询：</strong><br>    将<strong>一个查询块嵌套在另一个查询块</strong>的<strong>WHERE子句</strong>或者<strong>HAVING短语</strong>条件中<br>    eg：查询选修了课程名为IS的课程的学生的学号</p>
+<p><strong>不相关子查询：</strong><br>    定义：子查询的查询条件不依赖于父查询<br>    处理：这种可以逐层考虑，因为各层查询基本上是独立的</p>
+<p><strong>相关子查询</strong><br>    定义：子查询的条件依赖于父查询<br>    处理：<br>        1）这种考虑的时候通常，按上层查询的元组进行考虑，对于<strong>上层查询的每一个元组</strong>会<strong>做一次子查询</strong>；而元组则作为子查询可能用到的条件（就像将元组作为参数去调用作为函数的查询一样）<br>        2）上层查询和下层查询如果用到了同一关系，需要给关系取别名<br>    eg：查询学生选课记录中，学生高于自己选修课程的平均分的选课记录中的学号和课程号</p>
+<p><strong>子查询的限制：</strong><br>    1）不能使用ORDER BY子句，因为ORDER BY子句只能对最终结果进行排序<br>    2）子查询一定要在比较符之后（写SQL语句的时候，不能头重脚轻）</p>
+<p><strong>常见的嵌套查询：</strong><br>    1）带IN谓词的子查询<br>        应用场景：通常用于检查上层查询中的某个元组的某属性是否在一些满足特定条件的集合中，由于集合的构造逻辑比较复杂所以要用一个子查询来进行描述。<br>        eg：<br>            1）查询所有与刘晨同学在相同系进行学习的学生学号、姓名和年龄<br>            2）查询选修了“信息系统”这门课程的学生的学号和姓名<br>    2）带有比较运算符的子查询<br>        应用场景：<br>            一般是用于上层元组的可比较属性需要满足特定条件时，该条件的构造比较复杂所以用子查询描述；<br>            子查询要返回一个单值；<br>            需要使用IN的场景，并且子查询返回的是单值，可以用”&#x3D;”<br>        eg：<br>            查询每个学生超过他自己所有选修课程的平均成绩的课程号<br>    3）带有ANY（SOME）或ALL谓词的子查询<br>        应用场景：<br>            常与带有比较运算符的子查询一起用，使用ANY（SOME）or ALL来描述上层查询需要满足的更加复杂的条件<br>            ANY和SOME是等价的，只是两种记法。和比较运算符一起用的常见情况：<br>                1）&gt;ANY，大于子查询中某个值即可<br>                2）&gt;ALL，大于子查询中所有的值<br>                （其他比较类似，ANY要求有某个子查询的结果满足就可以视上层元组满足条件；ALL则要求子查询的所有结果都满足才行）<br>        eg：<br>            1）查询其他系中比计算机科学系所有学生年龄都小的学生姓名及年龄（比年龄最小的还小）<br>        注意：<br>            ANY和ALL可以实现的效果，也可以在带有比较运算符中运用MIN、MAX聚集函数来实现（语义上的等价，很好理解）<br>    4）带有EXISTS谓词的子查询<br>        应用场景：<br>            带有EXISTS谓词的子查询不会返回任何数据，只会返回true or false（子查询有数据 or 没有数据），作为对上层元组是否满足条件的判断；<br>            由于上述特点，所以其应用场景一般是相关子查询，要用上层查询的元组与子查询构造条件<br>        eg：<br>            1）查询所有选修了1号课程的学生姓名<br>            2）查询没有选修1号课程的学生姓名<br>            3）查询与刘晨在同一个系学习的学生<br>        注意：<br>            1）NOT EXISTS的用法和EXISTS类似，只是返回true、false的情况是反着的；<br>            2）由于使用EXISTS谓词不会关注其返回的信息，所以子查询通常用SELECT *；<br>            3）前面所有的子查询都可以用EXISTS实现</p>
+<h3 id="DML语句"><a href="#DML语句" class="headerlink" title="DML语句"></a>DML语句</h3><p>对数据（元组）的操作<br>    <strong>插入数据</strong><br>        INSERT INTO … VALUES…<br>        （省略号处是表名和属性列；VALUES后要使用对应属性列的常量）<br>        注意：<br>            1）带子查询的插入数据：对应VALUES…部分由SELECT语句替换，该语句要返回与INTO后指定的各列一致的数据<br>        eg：<br>            1）将张成名的信息插入Student表<br>                INSERT INTO Student Sno,Sname,Sage,Ssex,Sdept<br>                VALUES (S001,’张成名’,18,’男’,’CS’);<br>            2）对于每一个系，求学生的平均年龄，插入表格中；对应属性（系名，平均年龄）<br>    修改数据<br>        UPDATE…（指定表名）<br>        SET…（设置列名对应的属性值，属性值可以是表达式）<br>        …（WHERE附加的条件）<br>        注意：<br>            1）附加的条件一般来说是必要的，否则就是对整列进行修改<br>            2）带子查询的修改，一般是将相关子查询用在WHERE中，构造较为复杂的修改判断条件<br>        eg：<br>            1）将学生200215121的年龄修改为22岁<br>            2）将计算机系全体学生成绩置0<br>    删除数据<br>        DELETE<br>        FROM…<br>        …（WHERE附加的条件）<br>        注意：<br>            1）与修改数据类似，在不附加条件的情况下会删除所有元组，但是表仍然存在<br>            2）子查询与修改不同的点，DELETE实际上是要用WHERE指定特定的删除对象的<br>            （通常是用WHERE条件指定候选码，从而删除指定的元组；毕竟是以元组为单位操作的，如果单独删除某列数据没有意义，这与UPDATE不同）<br>        eg：<br>            1）删除计算机系所有学生的选课记录<br>            2）删除计算机系所有学生的选课记录</p>
 <h3 id="空值处理"><a href="#空值处理" class="headerlink" title="空值处理"></a>空值处理</h3><p>空值的产生<br>    1）插入<br>    2）修改</p>
 <p>空值的判断<br>    1）IS NULL<br>    2）IS NOT NULL</p>
 <p>空值的约束<br>    1）CREATE语句中若对属性列使用了NOT NULL、UNIQUE进行限制，不能取空值<br>    2）码属性不能为空值（PRIMARY KEY）</p>
