@@ -1,6 +1,20 @@
-#toc ul{
+#toc {
 	position: sticky;
-	top: 0;
+	top: 20px;
+	align-self: flex-start;
+	max-height: 90vh;
+	overflow-y: auto;
+}
+
+#toc::-webkit-scrollbar {
+	width: 6px;
+}
+#toc::-webkit-scrollbar-thumb {
+	background: #ccc;
+	border-radius: 3px;
+}
+#toc::-webkit-scrollbar-track {
+	background: transparent;
 }
 
 #toc a{
