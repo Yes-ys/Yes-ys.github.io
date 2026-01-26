@@ -1,7 +1,8 @@
 #menu-outer {
 	width: 100%;
 	height: 2.5em;
-	background-color: rgba(159, 200, 243, 0.5);
+	/* background-color: rgba(159, 200, 243, 0.5); */
+    background-color: rgba(159, 200, 243, 0.2); /* Much lighter, let glass show */
 }
 
 #menu-inner {
@@ -21,10 +22,25 @@
 	text-decoration: none;
 	font-size: 1.5em;
 	margin: auto;
-	/*background-color: green;*/
+	position: relative;
+	z-index: 2;
 }
 
-.menu-item a:hover{
-	color: white;
-	background-color: black;
+.menu-item.particle-effect-btn {
+	position: relative;
+}
+
+.menu-item a:hover {
+	color: #23527c;
+}
+
+/* Particle Canvas Container */
+.particle-effect-btn canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	pointer-events: none;
 }

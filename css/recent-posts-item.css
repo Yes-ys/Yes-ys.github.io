@@ -1,15 +1,51 @@
-.recent-post-item a {
-	color: black;
+.recent-post-item .item-title {
+	color: #333;
 	font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
 }
 
 .recent-post-item time {
-	color: black;
-	font-size: 1.5em;
+	color: #444;
+	font-size: 1.2em;
 	float: right;
+    font-weight: 500;
 }
 
-.recent-post-item a:hover {
-	color: white;
-	background-color: black;
+.recent-post-item {
+    cursor: url('/images/link1.png'), pointer;
+    
+    /* Frosted Glass Effect - Static */
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden; /* Contains the gradient if it spills */
+}
+
+.recent-post-item:hover {
+    /* Glassy Spotlight Effect */
+    /* Brighter/more opaque at mouse center, fading out to base glass opacity */
+    background: radial-gradient(
+        circle at var(--x, 50%) var(--y, 50%), 
+        rgba(255, 255, 255, 0.95) 0%, 
+        rgba(255, 255, 255, 0.4) 120%
+    );
+    
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.article-digest {
+    color: #222;
+    line-height: 1.6;
 }

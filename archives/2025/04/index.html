@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
 	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
 	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
 	
 	
@@ -54,58 +56,68 @@
 
 	<div id="">
 		
-		<div id="top-bar">
-			
-			<div id="avatar-box">
-				<img 
-				class="avatar"
-				src="/images/my-avatar.jpg" //网站头像
-				alt="avatar">
-			</div>
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
 
-			<div id="top-bar-text">
-				<div id="top-bar-title">
-					阳生。
-				</div>
-				<div id="top-bar-slogan">
-					风毛丛劲节，只上尽头竿。
-				</div>
-			</div>
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
 
-		</div>
+            </div>
 
-		<div id="menu-outer">
-			<div id="menu-inner">
-				
-				
-				<div class="menu-item">
-					<a href="/">Home</a>
-				</div>
-				
-				<div class="menu-item">
-					<a href="/about">About</a>
-				</div>
-				
-				<div class="menu-item">
-					<a href="/archives">Archives</a>
-				</div>
-				
-				<div class="menu-item">
-					<a href="/plans">Plans</a>
-				</div>
-				
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
 
-				<div class="menu-item menu-item-search">
-					
+                    <div class="menu-item menu-item-search">
+                        
   <span class="local-search local-search-google local-search-plugin">
       <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
       <div id="local-search-result" class="local-search-result-cls"></div>
   </span>
 	
-				</div>
+                    </div>
 
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
 
 		<div id="content-outer">
 			<div id="content-inner">
@@ -160,13 +172,13 @@
 			</div>
 		</div>
 
-		<div id="bottom-outer">
+		<!-- <div id="bottom-outer">
 			<div id="bottom-inner">
 				Site by 阳生 | 
 				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
 				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
 			</div>
-		</div>
+		</div> -->
 
 		
 	</div>
@@ -195,6 +207,10 @@
 	<script src="/js/clipboard.min.js"></script>
 	
 	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
 
 	<script>hljs.initHighlightingOnLoad();</script>
 

@@ -1,20 +1,37 @@
 #content-outer {
 	width: 100%;
 	/*background-color: #bfa;*/
+    padding-top: 150px; /* Offset for fixed header */
 }
 
 #content-inner {
 	padding: 30px;
 	display: flex;
+    align-items: flex-start; /* Required for sticky sidebar */
 }
 
 #recent-posts-box {
-	flex: 8;
+	flex: 6; /* Reduced from 8 to 6 */
+    min-width: 0;
 	overflow: auto;
 }
 
 #sidebar {
-	flex: 2;
+	flex: 2; /* Sidebar width */
+    min-width: 0;
+    overflow: visible; /* Allow sticky to work */
+    position: sticky;
+    position: -webkit-sticky;
+    top: 145px; /* Closer to header (140px) */
+    height: fit-content;
+    z-index: 10;
+} 
+
+#sidebar .widget-title {
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 #sidebar a {
@@ -42,9 +59,13 @@ h3[class^="widget-title-"] {
 }
 
 .widget-box {
-	margin-top: 50px;
+	margin-top: 15px; /* Reduced specific gap between widgets */
 	border-radius: 16px;
 	background-color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-box:first-child {
+    margin-top: 0; /* Remove top gap for the first widget */
 }
 
 #details {
@@ -143,6 +164,7 @@ h3[class^="widget-title-"] {
 #other-paginator {
 	margin-top: 50px;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    background: transparent;
 }
 

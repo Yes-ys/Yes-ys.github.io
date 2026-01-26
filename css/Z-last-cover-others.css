@@ -1,5 +1,5 @@
 .menu-item-search {
-  display: none;
+  display: flex !important; /* Force display */
 }
 
 /* #################### 自适应 #################### */
