@@ -1,0 +1,356 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Computer Network [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/plans">Plans</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>Computer Network</h1>
+			<p><code>期末复习，知识点记录</code></p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>端口号的作用；<br>在TCP、UDP中的使用（SOCKET嵌套字）；<br>熟知端口号范围；<br>端口号的独立性；</p>
+<p>传输层的功能；<br>传输层复用和分用的体现；<br>TCP与UDP差错检测的区别；<br>传输层向应用层提供的两种服务的特点</p>
+<p>常见应用层协议使用的传输层端口号：HTTP、FTP、TFTP、DNS；TELENT、SMTP；SNMP</p>
+<p>有连接的传输、无连接的传输；<br>可靠的传输、不可靠的传输；</p>
+<p>UDP首部格式（8B）；<br>伪首部的格式（12B）；<br>UDP校验和计算方式（伪首部，0，17）；<br>UDP使用校验和检错；</p>
+<p>UDP与TCP的对比：<br>1）首部长度<br>2）是否支持报文的拆分、重装<br>3）连接？可靠？拥塞控制？<br>4）一对一？一对多？</p>
+<p>TCP是面向字节流的（报文Y报文Z的例子）；<br>MSS的含义（通常不会太大，避免IP分段；双方可以不同）</p>
+<p>TCP报文：<br>1）源端口、目的端口<br>2）序号，含义（不一定从0开始）<br>3）确认号，含义<br>4）数据偏移，含义，单位<br>5）URG，ACK，PSH，RST，SYN，FIN，含义；出现的时机；对应报文段段别称<br>6）rwnd含义，具体情况下的计算<br>7）TCP校验和计算（伪首部，0，6）；<br>8）紧急指针，含义<br>9）选项的作用（在握手1、2协商MSS etc）<br>10）填充段的长度计算（tip：数据偏移）</p>
+<p>TCP校验和计算、UDP校验和计算 对比 IP校验和计算，相同点，不同点</p>
+<p>TCP协议的主要阶段：<br>1）三次握手<br>2）全双工<br>3）四次挥手</p>
+<p>三次握手的细节：<br>1）SYN、ACK、seq、ack的变化<br>2）第3次握手携带数据，携带多少B消耗多少序号，否则不消耗序号<br>3）第1、2次握手会消耗序号（影响seq、ack）<br>4）客户端、服务器开始发送数据的最短时间</p>
+<p>四次挥手的细节：<br>1）FIN、ACK、seq、ack<br>2）挥手1、3可以不携带数据，但也要消耗一个序号<br>3）挥手2可以携带数据，挥手4不能携带数据<br>4）收到挥手4的一方立刻CLOSE；收到挥手3的一方，要等待2MSL时间（重新计时？）<br>5）服务器可以先发出挥手1<br>6）客户端从挥手1到CLOSE，最短RTT+2MSL；服务器从挥手1到CLOSE，最短1.5RTT（挥手2、3连续发出）</p>
+<p>重传机制中的问题：<br>1）确认报文丢失<br>2）超时定时器设置过短</p>
+<p>基本的超时定时器（重传时间）设置：<br>1）大于RTT<br>2）指数加权滑动平均法<br>3）超时倍增</p>
+<p>TCP的流量控制：<br>1）流量控制的含义<br>2）流量控制的基本要求（公式，发送的字节数小于上次收到的窗口字段）<br>3）rwnd在流量控制中的作用（rwnd、seq、ack在互相发送过程中的变化）<br>4）零通知窗口与持续计时器<br>5）TCP报文发送的时机：3种控制方式</p>
+<p>UDP没有流量控制</p>
+<p>网络的拥塞控制<br>1）拥塞控制的含义<br>2）拥塞控制的方法（2个，哪个说TCP采用的）</p>
+<p>TCP拥塞控制原理<br>1）最大发送窗口的设置（拥塞窗口、通知窗口）<br>2）有效发送窗口的计算<br>3）拥塞窗口的设置：累次增加、成倍减少（方法、问题）；慢开始（方法、问题）；拥塞避免（方法、阈值计算）<br>4）慢开始-&gt;到阈值-&gt;累次增加-&gt;超时重传-&gt;成倍减少(拥塞窗口？、阈值)-&gt;慢开始-&gt;累次增加-&gt;拥塞窗口到达最大的通知窗口值<br>5）？拥塞窗口减半 or 改为初始值，前者对应快重传（出现时机）<br>（<strong>综合运用，理解是否正确？</strong>）</p>
+<h3 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h3><p>TCP数据偏移、UDP长度字段、MSS；对应的含义比较</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>网络层的作用（目的）</p>
+<p>网络层的功能（发送端和接收端；主机和路由器；执行、规划、建立连接）</p>
+<p>网络层服务模型：虚电路网络、数据报网络</p>
+<p>虚电路工作原理（转发表、信令协议）</p>
+<p>路由器的主要功能：软件、硬件（输入端口（转发、排队）、交换结构、输出端口（缓存、调度机制））</p>
+<p>路由器的三种交换结构：内存交换、总线交换、网络式交换</p>
+<p>网络层的三大组件：<br>    IP协议（选路规则、数据报处理规则）<br>    路由协议（内部网关协议、外部网关协议）<br>    网络控制协议（ICMP）</p>
+<p>接口interface（主机、路由器，对应IP）</p>
+<p>IP点分十进制记法</p>
+<p>几类地址的判断<br>    方法：IP地址第一Byte<br>    类型：A（0，8+24）、B（10，16+16）、C(110,24+8)、多播、实验开发</p>
+<p>特殊：<br>网络号码，（全0本网络、0+111..环回测试），A类地址范围<br>主机号码，（全0当前主机、全1所有主机）</p>
+<p>一些保留地址：本地主机测试、私有地址</p>
+<p>ARP协议使用的背景</p>
+<p>ARP表（表项的TTL）</p>
+<p>ARP表的建立（广播查找 ARP请求、单播回应 ARP响应、TTL内使用）</p>
+<p>DHCP协议（应用层，分配ID阶段、核实ID阶段）<br>    discover，68、654<br>    offer，67、654<br>    request，68、655<br>    ack，67、655<br>    （yiaddr、transaction ID）</p>
+<p>IP数据报<br>    长度相关Header length、Datagram length（通常报头长度20B）<br>    Identifier、Flags、Offset（为什么要分组，如何分，8B）<br>    Upper-layer protocol(6 TCP、17 UDP)<br>    校验和（计算、检验）</p>
+<p>常见数据链路可以承载的最大传输单元（MTU）<br>    与MSS类似，都是对应该层的最大数据长度（要考虑IP报头）；（与最大帧的区别是不考虑链路层报头）<br>    以太网1500B</p>
+<p>路由器转发表、最长匹配原则（最佳匹配）</p>
+<p>子网划分、网络地址计算（子网掩码）</p>
+<p>Ipv4地址，CIDR表示法</p>
+<p>分组转发算法（直接交付、特定主机路由、特定网络路由、默认路由；使用子网掩码匹配）；默认路由的子网掩码</p>
+<p>超网聚合、路由聚合（多个C类地址子网聚合成超网），聚合后的地址数（注意去掉两个特殊的主机号）</p>
+<p>路由聚合的好处（找到对应规模的网络地址所需的路由表项数目极大地减少）</p>
+<p>最佳聚合（尽可能地将子网聚合在一起）</p>
+<p>ICMP协议（网络层）：<br>    使用场景，网络中出现错误时进行测试<br>    测试过程（<br>        主机不断发送UDP报文，<br>        TTL逐渐增大，<br>        路由器据TTL丢弃报文并返回ICMP报文，<br>        主机计算对应RTT，<br>        直到目的主机返回ICMP “dest port unreachable”，因为目的端口通常使用较高的端口，不会有应用程序来处理它）<br>    ICMP报文由IP报文包裹（具体的信息处在IP的可选字段处）</p>
+<p>路由选择协议（应用层，OSPF除外）<br>    关注：如何构建转发表（对比前面我们讨论的是如何转发）<br>    选路算法（全局 or 分布式；静态 or 动态）<br>        链路状态广播（LS），原理是Dijkstra；信息传播快，但是不易实现<br>        距离向量（DV），原理是Bellman-Ford方程；好消息传得快，坏消息传得慢（注意为什么）<br>    层次选路<br>        自治系统（路由器聚合而来），网关路由器（运行两种协议）<br>        intra-AS协议（域内选路协议，为内部节点设置表项目）、inter-AS协议（域间选路协议，为外部节点设置表项）</p>
+<p>域内选路协议：IGP（内部网关协议）<br>    RIP协议<br>        基于DV，距离向量信息每30s通过响应报文在相邻节点间交换<br>        每次通告，距离向量最多包含25个AS内部的目的网络信息（Dx(y)，y可取的符号最多有25个，对应经过x可达的25个目的网络）<br>        由UDP提供服务<br>        好消息传播快，坏消息传播慢<br>    OSPF协议<br>        基于LS，使用可靠洪泛法（注意如何实现）将链路状态转发到所有其他相邻的路由器<br>        支持负载均衡（因为每个节点有全局信息）<br>        IP为其提供服务<br>        解决RIP坏消息传播慢的问题<br>    层次化的OSPF协议（Hierarchical OSPF）<br>        边界路由器，连接其他AS；<br>        主干路由器，主干网络上运行OSPF选路<br>        区域边界路由器，汇总自己到各网络的距离，通知其他区域边界路由器<br>        区域内路由器，区域内运行OSPF选路</p>
+<p>域间选路协议：BGP（外部网关协议）<br>    路径向量协议<br>        边界网关通告它到达目的地的整个路径（边界网关X，目的地Z，Path(X,Z) &#x3D; X,Y1,Y2,…,Z））<br>        边界网关X可以发送路径向量给对等的边界网关W，推荐从X出发的路径（Path(W,Z) &#x3D; W,Path(X,Z)）<br>        eBGP，iBGP（不同AS的对等网关、相同AS的对等网关）</p>
+<p>IPv6<br>    128位地址空间<br>    报头没有校验和<br>    没有分片机制</p>
+<p>NAT网络地址翻译？</p>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p>物理层功能：高效地传输和接收01比特流，尽量不要出错，为数据链路层提供服务</p>
+<p>数据通信模型<br>    全双工：点到点链路上可以同时传输两个比特流，每个方向传输一个<br>    半双工：一次仅支持数据向一个方向传输的点到点链路</p>
+<p>网络适配器（数据链路层）<br>    网卡驱动程序对其进行管理<br>    基于网络的操作系统会完成网络协议的代码实现，为用户提供接口</p>
+<p>物理层传输的具体链路<br>    物理介质：双绞线（电话线）、同轴电缆（电视连线）、光纤（高带宽、长距离）、空间（无线电破、微波、红外线电波等）</p>
+<p>调制解调器<br>    功能：将代表01点信号放到链路上<br>    核心要求：抗干扰（因为发送到基带信号在传输过程中会失真，必须要求能够还原失真信号）<br>    调制方法：<br>        调幅（eg，幅度大是1，小是0）<br>        调频（eg，高频是1，低频是0）<br>        调相（eg，相位的不同变化对应0和1）</p>
+<p>数据传输相关理论<br>    奈式准则<br>        理想低通信道的极限码元传输速率B&#x3D;2W（W是带宽）<br>        B的单位是Baud（码元&#x2F;秒）<br>        W的单位是Hz<br>        一个码元可能对应多个bit，和具体的信息调制、编码方式有关<br>    香农定理<br>        信道极限传输速率C&#x3D;Wlog2（1+S&#x2F;N）<br>        B的单位是bps<br>        S&#x2F;N是信噪比，转换为db做单位公式是10log10（S&#x2F;N）<br>    一个信号（码元）表示的bit数<br>        B&#x2F;C（对应该信号可能的状态有2^(B&#x2F;C)种）<br>        当B&#x2F;C不是整数的时候一般是向下取值，如果题目中有具体的暗示可能需要向上取值<br>    W是带宽，W&#x3D;频谱上限-频谱下限</p>
+<p>正交振幅调制QAM<br>    含义：用振幅和相位对应一个信号（码元）<br>    M信号状态对应log2（M）个比特<br>    （书上16个信息状态的例子）</p>
+<p>信道共享技术<br>    时分复用<br>        同步时分复用TDM（每个用户使用固定的时隙）<br>        统计时分复用技术SM（同意用户发送的数据帧不一定使用同一个时隙，但是要在时隙中加上目的地址）<br>    波分复用WDM<br>        常用于光纤中，不同波长的光波对应不同的信号<br>        掺耳光纤放大器：对衰减的光信号进行放大（物理层）<br>        DWDM，密集波分复用技术；eg，一根光缆中，放入100根一定速率的光纤，每根光纤使用16倍的DWDM（一个光纤同步传播16个不同波长的光线，对应16个不同的信号）<br>    码分复用技术CDMA<br>        每个用户使用不同的码型，使用相同的频带进行通信，但是互不干扰<br>        基本原理：<br>            一个比特划分成m个时间片（码片序列），序列中0对应-1，1对应+1<br>            用向量S表示该码片序列，其他用户的向量T，S与T”*“运算总为0，与原码卷积为1，与反码的卷积为-1<br>        传输：<br>            传输的过程中，传输方若使用S对应的码片序列，如果要传输0则用S反码，如果要传输1则用S对原码<br>            接收方接受到码片序列M，与S卷积运算，1）如果为0则是其他用户的数据，忽略；2）如果是+1则为1；3）如果是-1则为0</p>
+<h2 id="期末重点"><a href="#期末重点" class="headerlink" title="期末重点"></a>期末重点</h2><p><code>根据老师划的重点整理的内容</code></p>
+<h3 id="物理层-1"><a href="#物理层-1" class="headerlink" title="物理层"></a>物理层</h3><p>物理层的功能：<br>    <strong>高效、正确地传输01比特流</strong>，为链路层提供服务；</p>
+<p>不同信道复用技术的区别：<br>    信道复用技术：<br>        频分复用、时分复用、统计时分复用、波分复用、码分复用；<br>        1）(<strong>FDM</strong>)<strong>频分复用</strong>的各路信号再<strong>同样的时间</strong>占用<strong>不同的带宽资源</strong>（频率带宽而非发送速率）；<br>        2）(<strong>TDM</strong>)<strong>时分复用</strong>的所有用户是在<strong>不同的时间</strong>占用<strong>同样的频带宽度</strong>；<br>        3）(<strong>FDMA</strong>)<strong>频分多址复用</strong>：在频分复用的基础上<strong>多个用户可以轮流使用同一频带</strong>，其中要包含<strong>地址信息</strong>；<br>        4）(<strong>TDMA</strong>)<strong>时分多址复用</strong>：在时分复用的基础上<strong>多个用户可以轮流使用同一时隙</strong>，其中要包含<strong>地址信息</strong>；<br>        5）(<strong>STDM</strong>)<strong>统计时分复用</strong>：使用STDM帧来传送数据，STDM帧<strong>不固定分配时隙</strong>，按需<strong>为每个用户动态分配时隙</strong>，其中要<strong>包含地址信息</strong>；<br>        （基本原理是一个STDM帧中有多个时隙，但小于总用户数量，用户有想发的数据就往集中器中发，集中器按顺序扫描输入缓冲，放入STDM帧的各个时隙中，当一个STDM帧的数据放满了就发送出去）<br>        6）(<strong>WDM</strong>)<strong>波分复用</strong>就是<strong>光的频分复用</strong>，但是由于光的频率很高，所以<strong>习惯用波长</strong>而不用频率这一概念，所以描述为波分复用；</p>
+<p>FDM、TDM、FDMA、TDMA、STDM哪种效率高：<br>    统计时分复用<strong>STDM的效率高</strong>，因为其对于每个用户<strong>没有固定使用的时隙</strong>，总是<strong>动态的进行分配</strong>，保证<strong>每一帧的时隙都被占用满</strong>，避免存在时隙有空便发送信号的情况，所以这种效率高；</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>数据链路层的功能：<br>    <strong>正确地</strong>传输<strong>数据帧</strong>；</p>
+<p>为了实现正确传输数据帧需要解决的<strong>三个基本问题</strong>：<br>    <strong>封装成帧</strong>、<strong>透明传输</strong>、<strong>差错检测</strong>；</p>
+<p><strong>封装成帧的含义</strong>：<br>    封装成帧就是在<strong>一段数据</strong>的前后分别添加<strong>首部和尾部</strong>，<strong>构成一个帧</strong>，使得接收方能够在收到物理层上交的比特流之后<strong>根据</strong>首部和尾部的<strong>标记</strong>，<strong>识别</strong>出帧的<strong>开始和结束</strong>；<br>    （首部、尾部的主要作用是<strong>帧定界</strong>）；<br>    （帧的数据部分有长度上限<strong>MTU</strong>，eg：以太网是<strong>1500B</strong>）；</p>
+<p><strong>透明传输的含义</strong>：<br>    无论什么样比特组合的数据，都能够按照原样没有差错地通过数据链路层进行正确地传输，不会因为数据中出现了与<strong>帧定界符相同</strong>的比特组合而导致传输的<strong>错误</strong>；</p>
+<p><strong>透明传输的方法</strong>：<br>    使用转义字符”<strong>ESC</strong>“，十六进制是<strong>0x1B</strong>；<br>    如果数据中有比特组合呈现出：<strong>SOH:0x01或EOT:0x04</strong>，则前面加上转义字符；<br>    如果数据中出现了ESC，也在前面加上ESC；</p>
+<p><strong>差错检测的含义</strong>：<br>    由于实际通信的链路并非是理想的，存在误码率，为了保证数据传输的<strong>可靠性</strong>，在计算机网络传输数据时，必须采用的手段，用于检测是否存在差错；</p>
+<p>差错检测的方法：<br>    <strong>CRC循环冗余校验；</strong><br>    发送方：<br>        1）原始k位01串数据；<br>        2）<strong>除数P</strong>，事先商量好n位；<br>        3）k位原数据+(n-1)个0作为<strong>被除数</strong>；<br>        4）被除数对除数进行<strong>模2除法</strong>；<br>        5）最终得到的<strong>n-1位余数</strong>，就是FCS（帧检验序列）<br>        6）k位原始数据+n-1位FCS，构成<strong>最终发送的数据</strong>；<br>    接收放：<br>        1）使用<strong>k+n-1位数据对约定好的除数做除法</strong>；<br>        2）如果<strong>余数为0</strong>则没有差错；<br>        3）否则存在差错；<br>    注意：<br>        1）n位除数可以用多项式生成，对应<strong>最高为X的n-1次方的多项式</strong>（因为有个常数）；<br>        2）eg：$p(X) &#x3D; X^3 + X^2$，对应：1100</p>
+<p><strong>传输差错：</strong><br>    1）<strong>比特差错，差错检验</strong>可以避免；<br>    2）帧丢失、帧重复、帧失序；<br>        解决它们意味着：<br>            实现了<strong>可靠传输</strong>：数据链路层发送端发送什么，接收端就接收什么；<br>    注意：<br>        <strong>差错检验</strong>可以解决比特差错，但是这并<strong>不确保可靠传输</strong>；</p>
+<p><strong>PPP协议的组成：</strong><br>    1）一个将<strong>IP数据包</strong>封装到<strong>串行链路</strong>的<strong>方法</strong>；<br>    （既支持<strong>同步传输</strong>（一连串比特连续传送），又支持<strong>异步传输</strong>（逐个字符的传输，8bit一字符，没有奇偶校验）<br>    2）用来<strong>建立、配置和测试数据链路连接</strong>的<strong>链路控制协议LCP</strong>；<br>    3）一套<strong>网络控制协议NCP</strong><br>    （其中的每个协议支持不同的网络层协议，例如IP、OSI的网络层）</p>
+<p>PPP协议的<strong>数据帧</strong>：<br>    首部字段从前往后：<br>        1）标志字段F：<strong>0x7E</strong>（对应的就是首尾<strong>帧定界符</strong>）；<br>        2）地址字段A：0xFF，固定；<br>        3）控制字段C：0x03，固定；<br>        4）<strong>协议字段：</strong><br>            1）紧接着控制字段；<br>            2）2个字节；<br>            3）表征当前信息字段的含义：<br>                <strong>0x0021</strong>，对应<strong>IP数据报</strong>；<br>                <strong>0xC021</strong>，对应链路控制协议<strong>LCP的数据</strong>；<br>                <strong>0x8021</strong>，对应网络层的控制数据（<strong>NCP</strong>协议）；<br>    尾部字段从前往后：<br>        1）<strong>FCS</strong>，两个字节，使用CRC；<br>        2）标志字段F：<strong>0x7E</strong></p>
+<p>PPP协议如何完成<strong>透明传输</strong>：<br>    对应的是组成的第一部分的作用（透明传输）；<br>    方法：<br>        <strong>字节填充</strong>：转义字符0x7D；<br>            1）若有<strong>0x7E</strong>，则修改为：<strong>0x7D，0x5E</strong>；<br>            2）若有<strong>0x7D</strong>，则修改为：<strong>0x7D，0x5D</strong>；<br>            3）若有<strong>小于0x20</strong>的字符，则修改为：<strong>0x7D，0x20+原字符</strong>；<br>        <strong>零比特填充</strong>：<br>            1）尤其适用于同步传输的场景，传输一连串比特串；<br>            2）对于信息字段，只要发现有<strong>5个连续的1，则填入一个0</strong>（填在连续的1后面）<br>    通过这些方法：<br>        在所传送的数据比特流中可以传送任意组合的比特流，而不会引起对帧边界的错误判断；</p>
+<p><strong>LCP</strong>链路配置协议的作用：<br>    用来<strong>建立、配置和测试数据链路连接</strong>；</p>
+<p><strong>NCP</strong>网络控制协议的作用：<br>    为新接入的用户个人电脑<strong>分配一个临时的IP地址</strong>；</p>
+<p>PPP协议的工作状态：<br>    <strong>链路静止</strong>：<br>        1）PPP协议的<strong>起始和终止状态</strong>，这时用户个人电脑和ISP路由器<strong>不存在物理层的连接</strong>；<br>    <strong>链路静止-&gt;链路建立</strong>：<br>        <strong>个人电脑</strong>通过调制解调器<strong>呼叫路由器</strong>，路由器检测对应的载波信号，建立<strong>物理连接</strong>；<br>    <strong>链路建立-&gt;鉴别：</strong><br>        进行<strong>LCP配置协商：</strong><br>            链路的<strong>一端发送LCP配置请求帧</strong>，信息字段携带有特定的<strong>配置请求</strong>；<br>                eg：<br>                    1）最大帧长；<br>                    2）所使用的鉴别协议；<br>                    3）不使用PPP协议的地址和控制字段；<br>            链路的另一端发送：<br>                1）配置<strong>确认帧Ack</strong>：所有选项都<strong>接受</strong>；<br>                2）配置<strong>否认帧Nck</strong>：所有选项都理解但<strong>不接受</strong>；<br>                3）配置<strong>拒绝帧Reject</strong>：选项有的不能识别或无法接受，需要<strong>协商</strong>；<br>        注意：<br>            如果配置协商失败，<strong>链路建立-&gt;链路静止</strong>；<br>    <strong>鉴别：</strong><br>        该状态只允许<strong>传送LCP协议的分组</strong>，<strong>鉴别协议</strong>的分组以及<strong>监测链路</strong>质量的分组；<br>        eg：<br>            使用PAP口令鉴别协议：<br>                要求发起通信方，发送身份标识符和口令，系统允许用户重试多次；<br>    <strong>鉴别-&gt;网络层协议：</strong><br>        如果鉴别成功 or 不需要鉴别；<br>        注意：<br>            如果鉴别失败，<strong>鉴别-&gt;链路终止</strong>；<br>    <strong>网络层协议：</strong><br>        PPP协议的<strong>两端的网络控制协议NCP</strong>根据网络层不同的协议，<strong>交换网络层特定的网络控制分组</strong>；<br>        （重要的一步，是<strong>路由器能够同时支持多种网络层协议</strong>的关键，从而让PPP协议两端端网络层在使用不同网络层协议的基础上，仍然使用同一个PPP协议进行通信）；<br>        eg：<br>            如果使用IP协议，则使用NCP中支持IP协议的IPCP（IP控制协议），将其封装成PPP帧，在链路上传送；<br>    <strong>网络层协议-&gt;链路打开：</strong><br>        NCP配置协商完成；<br>    <strong>链路打开：</strong><br>        1）链路的<strong>两个PPP端点可以向彼此发送分组</strong>；<br>        2）也可以发送给回送请求、回送回答对应的<strong>LCP分组，来检查链路状态</strong>；<br>    <strong>链路打开-&gt;链路终止：</strong><br>        终止请求：<br>            1）数据传输结束后，由链路的一方发送<strong>终止请求LCP分组</strong>，请求终止链路；<br>            2）接收到终止请求的一方，发送<strong>终止确认LCP分组</strong>，确认终止；<br>            3）转到链路终止状态；<br>        链路故障；<br>    <strong>链路终止-&gt;链路静止：</strong><br>        调制解调器的<strong>载波停止</strong>；</p>
+<p>CSMA&#x2F;CD协议（<strong>载波监听多点接入&#x2F;碰撞检测</strong> 协议）<br>    背景：<br>        计算机之间在数据链路层端到端的通信，是通过总线实现的；<br>            尽力而为：<br>                1）这是无连接的工作方式，适配器对数据帧不编号、不要求确认，仅发送；<br>                2）以太网提供了尽<strong>最大努力的交付</strong>（不可靠交付），出现差错是否重传由高层决定；<br>                3）即使<strong>有重传帧，以太网也不知道</strong>，只是当作新的数据帧传输；<br>            总线传输：<br>                1）共用一个总线，在<strong>同一时间</strong>只能允许<strong>一台计算机发送数据</strong>；<br>                2）<strong>半双工通信</strong>；<br>            编码：<br>                使用<strong>曼彻斯特编码</strong>，用跳变来代表01<br>                （代表0&#x2F;1的跳变：差分曼彻斯特编码跳变发生在虚线处，有跳变0无跳变1、曼彻斯特编码跳变发生在虚线间，低跳高1，高跳低0）；<br>                （差分曼彻斯特编码实际上会在时钟周期之间用跳变来同步时钟信号）；<br>    CSMA&#x2F;CD协议的作用：<br>        在上述背景下，以太网采用最简单的随机接入，所以需要一个协议来减少冲突发生的概率；<br>        （好像一个没有主持人的会议，大家想发言就发言，但是要找到一个规则，让大家的发言尽可能不同时发生，产生冲突；于是有了CSMA&#x2F;CD协议）；<br>    各部分的含义：<br>        CS：载波监听；<br>            <strong>边发送边监听</strong>，站点不管在发送数据之前，还是在发送数据之中，每个站都必须不停地检测信道；<br>            （在发送之前监听，是为了<strong>碰撞避免</strong>）；<br>            （在发送中监听，是为了<strong>碰撞检测</strong>）；<br>        MA：多点接入；<br>            说明这是<strong>总线型网络</strong>，许多计算机以多点点方式连接在一根总线上；（这就是一个背景，CS、CD才是协议的实质关键）；<br>        CD：碰撞检测；<br>            <strong>适配器</strong>边发送数据边<strong>检测</strong>信道上的信号<strong>电压变化</strong>情况；<br>            （当两个站点同时发送数据的时候，总线上信号电压的幅度会变大）<br>    CSMA&#x2F;CD协议的内容：<br>        1）准备发送：网卡从网络层接收数据报，封装成帧；<br>        2）检测信道：<br>            如果网卡监听到<strong>信道空闲</strong>（<strong>96比特时间</strong>，信道上没有信号），则开始传送帧；<br>            如果监听到<strong>信道忙</strong>，则<strong>等待</strong>信道空闲（从没有信号开始，经过96比特时间）才开始传送帧；<br>            96比特时间称为<strong>帧间最小间隔</strong>；<br>        3）边听边发：<br>            如果在<strong>争用期</strong>内一直未检测到碰撞，就认为发送成功（尽管此时可能还没发送完，接着发送完毕即可），回到1）；<br>            （接收方如果发现数据帧有差错就直接丢弃，等待高层来处理）；<br>            如果<strong>争用期</strong>内检测到碰撞，就立刻停止发送数据，并按规定发送<strong>人为干扰信号</strong>，然后适配器执行<strong>截断二进制指数退避算法</strong>，等待r倍争用期之后，回到步骤2）；<br>            如果重传达到<strong>16次</strong>，仍然不能成功，停止重传向上报错；<br>            （在<strong>10Base5</strong>以太网中，对应的争用期是<strong>512比特时间</strong>，计算如下）；<br>            <img src="/Computer-Network/p1.png" alt="争用期计算"><br>        关键概念：<br>            1）帧间最小间隔，96比特时间；<br>            2）争用期：<br>                1）是对于发送端而言的时间概念；<br>                2）<strong>从发送端开始发送，一个RTT的时间</strong>（2倍总线端到端的传播时延）；<br>                3）这个时间就是发送站发送数据之后，最迟要经过多长的时间才能知道自己发送的数据和其他站发送的数据有没有发生碰撞；<br>            3）截断二进制指数退避算法：<br>                作用：决定冲突后等待，重新开始检测信道的时间；<br>                算法：<br>                    1）从离散集合 $[0,1,\dots,2^k-1]$ 中随机挑选一个数r；<br>                    2）其中 $k &#x3D; min(10，重传次数)$；<br>                    3）推后r倍的争用期（ $r \times RTT$ ），然后开始重新检测信道；<br>                （当重传次数达到16次之后会停止重传，向高层汇报）；<br>            4）强化碰撞：<br>                发送<strong>32比特或48比特</strong>的人为干扰信号，以便让所有用户都知道现在已经发送了碰撞；<br>            5）最短帧长：<br>                目的：为了确保载波监听可以发现争用期内的冲突；<br>                eg：<br>                    如果某站发送了<strong>一个很短的帧</strong>，但在发送完毕之前没有检测出碰撞（即载波监听时间内没有发现冲突），但是在向前传播到目的站之前和别的站发生了冲突（目前<strong>仍然在争用期</strong>以内），因而目的站会接收到有差错的帧，并将它丢弃；但是发送站不知道这个帧发生了碰撞，因而不会重传这个帧；<br>                本质原因：<br>                    1）发送的帧太短了，完全用不了一个争用期的时间；<br>                    2）而载波监听只会在发的时候进行；<br>                    3）如果有冲突发生，理论最迟监听到的时间是一个争用期的时间；<br>                    4）所以至少要让发送时间大于一个争用期；<br>                于是最短帧长：<br>                    <strong>L&#x2F;发送速率 &gt;&#x3D; RTT（争用期）；</strong><br>                注意：<br>                    1）如果发送的数据不足最短帧长，则必须加入一些<strong>填充字节</strong>；<br>                    2）<strong>小于最短帧长</strong>的数据都被站点认为是，由于冲突而异常终止的<strong>无效帧</strong>，收到后会立刻丢弃；<br>                    （<strong>10Base5的以太网</strong>，对应的就是64字节，<strong>512比特</strong>）；</p>
+<p>相关设备：<br>    <strong>网桥（链路层）</strong>：<br>        作用：对收到的帧根据<strong>MAC帧</strong>目的地址进行<strong>转发和过滤</strong>；<br>        <strong>可以隔离冲突域，不能隔离广播域</strong>；<br>    <strong>转发器、集线器</strong>（物理层）：<br>        <strong>不能隔离冲突域</strong>；<br>    <strong>以太网交换机</strong>（链路层）<br>        实质：多端口网桥；<br>        工作方式：<strong>全双工</strong>；<br>        作用：让相互通信的主机可以独占传输媒体，无碰撞地传输数据；<br>        原理：<br>            多端口负责接收数据和转发数据，自学习构建转发表；<br>            存储支持暂存再发送，从而隔离冲突域，用户尽管往交换机发；<br>        <strong>可以隔离冲突域，不能隔离广播域；</strong><br>    <strong>路由器</strong>（网络层）<br>        可以<strong>隔离冲突域，隔离广播域</strong>；<br>    （如果可以冲突域，考虑平均带宽，<em>练习题目</em>）；</p>
+<p>以太网交换机的转发原理：<br>    1）以太网交换机具有<strong>自学习功能</strong>；<br>    2）转发原理：<br>        1）交换机中维护一个<strong>MAC地址-端口表</strong>，用来指示对于目的地址是某个MAC地址的数据帧应该从哪个端口发出去；<br>        2）若有一个<strong>数据帧</strong>发来，数据帧中有（<strong>源MAC地址，目的MAC地址</strong>），并且是从一个交换机可以感知的<strong>端口号进入</strong>的；<br>        3）<strong>更新</strong>表项：<br>            检查该数据帧的<strong>源MAC地址与对应端口号</strong>（进入端口号）是否在表中，如果<strong>不在则记录</strong>；<br>        4）尝试<strong>转发</strong>：<br>            1）如果表中有目的MAC地址对应的端口号则从<strong>对应端口发出</strong>；<br>            2）如果表中没有目的地址对应的端口号，则从除了进入端口号以外的所有端口号<strong>广播出去</strong>；<br>    注意：<br>        1）广播发送可以保证，目的MAC地址方能够接收到；<br>        2）对于不是目的MAC地址方的，会将这个数据帧丢弃，即<strong>过滤</strong>；<br>        3）交换机更新表项的能力就称为<strong>自学习能力</strong>；</p>
+<h3 id="网络层-1"><a href="#网络层-1" class="headerlink" title="网络层"></a>网络层</h3><p>网络层的主要功能：<br>    完成不同网络中的<strong>两个主机之间的通信</strong>；</p>
+<p>路由器之间传送信息：<br>    1）转发<strong>源主机和目的主机</strong>之间所<strong>传送的数据</strong>（将源主机发送的分组一个一个路由器的转发，直到转发到目的主机）；<br>    2）传送<strong>路由器信息</strong>（根据路由选择协议所使用的路由算法，彼此不断地交换路由信息分组，从而建立路由表）；</p>
+<p>ipv4几个类网络地址：<br>    网络地址+主机地址；开头；<br>    1）A：<strong>8+24</strong>；0；<br>    2）B：<strong>16+16</strong>；10；<br>    3）C：<strong>24+8</strong>；110；<br>    其他：<br>        1）D：1110+多播地址；<br>        2）E：1111+实验开发；<br>    注意：<br>        <strong>如何通过开头的地址判断网络类型</strong>；<br>    特殊号码：<br>        1）A类中00000000网络号码，代表<strong>本网络</strong>；<br>        2）A类中01111111网络号码，代表<strong>本地环回测试</strong>；<br>        （B类、C类没有这个问题）；<br>        3）网络号不为全0主机号为全0，代表某个<strong>特定网络</strong>；<br>        4）网络号为全0主机号不为全0，代表<strong>当前网络特定主机</strong>；<br>        5）网络号和主机号均为0，代表<strong>当前主机</strong>；<br>        6）网络号不为全1，主机号为全1，<strong>特定网络的所有主机</strong>；<br>        7）网络号全为1，主机号全为1，代表<strong>当前网络所有主机</strong>；<br>        （注意6、7都可以指广播地址，要注意具体的应用场景）；<br>        8）<strong>127.0.0.1</strong>，本地主机测试地址；<br>    按照某类地址给<strong>机构划分子网</strong>：<br>        1）可以使用二叉树划分法；<br>        2）注意划分的时候主机号全0全1不能用；<br>        （对应特殊号码的3、6，<em>练习题目</em>）</p>
+<p>ARP协议<br>    作用：根据机器的IP地址，找到相应的MAC地址，使得数据能够通过链路层传输；<br>    背景：<br>        1）IP地址与MAC地址格式不同，<strong>前者32位，后者48位</strong>，不存在简单的映射关系；<br>        2）一个网络上可能经常有新的主机加入进来，或撤走一些主机；<br>        3）更换网络适配器也会使主机的MAC地址改变（主机的<strong>MAC地址</strong>实际上就来自其<strong>网络适配器的MAC地址</strong>）；<br>    ARP协议的思想：<br>        在主机中维护一个<strong>ARP高速缓存</strong>，存放一个从IP地址到MAC地址到映射表，这个映射表可以动态更新（新增或超时删除）；<br>    协议具体工作流程：<br>        1）检<strong>查ARP高速缓存表</strong>：<br>            当主机A要向本局域网的某台主机B发送IP数据包时，检查自己的ARP高速缓存，如果其中有B的IP地址对应的MAC地址，则将数据包封装的MAC帧发送到对应的地址，否则进入2）；<br>            （注意，这一步实际上是没有用到ARP协议的）；<br>        2）运行ARP：<br>            1）ARP进程在杂本局域网上<strong>广播发送一个ARP请求分组</strong>（其中写入了A自己的IP地址、MAC地址，想要请求的MAC地址对应的IP地址）；<br>            （这个ARP请求分组的MAC帧目的地址是FF-FF-FF-FF-FF-FF）；<br>            2）局域网上所有运行ARP进程的主机都会收到这个分组；<br>            3）收到ARP请求分组的主机，检查其中请求MAC地址对应的IP地址是否与自己的<strong>IP地址一致</strong>，如果一致就向A<strong>发送ARP响应分组</strong>；<br>            （注意，ARP请求分组虽然是广播发送的，但是ARP响应分组是单播，因为有A确定的MAC地址）；<br>            （注意，为了<strong>减少网络上的通信量</strong>，会采取一种<strong>策略</strong>，即让B在收到A的请求分组后，将A的IP地址和对应MAC地址写入ARP高速缓存中，因为后续B很可能会和A通信）；<br>            4）A收到B的响应分组后，将B的IP地址和对应的MAC地址<strong>写入</strong>自己的ARP高速缓存表中；</p>
+<p>ipv4 IP数据包报头：<br>    1）Version（版本号）：<br>        1）<strong>0100</strong>-ipv4；<br>        2）<strong>0110</strong>-ipv6；<br>    2）Header length（首部长度）：<br>        1）标识首部长度，<strong>单位是4字节</strong>，ip数据报头<strong>最短是20字节</strong>，所以该<strong>字段最小为5</strong>；<br>    3）type of service（区分服务）：<br>        1）一般情况下不会使用这个字段；<br>    4）datagram length（数据报）：<br>        1）<strong>数据包总长度</strong>，<strong>单位是字节</strong>，该字段是16位，所以ip数据包最长是<strong>65535字节</strong>；<br>        2）如果ip数据包进行了<strong>分片</strong>，则该字段1是<strong>当前分片（ip报头+分片数据）的总长度</strong>；<br>    5）identifier（标识）：<br>        1）当ip数据报需要分片的时候，来自于<strong>同一数据报</strong>的分片数据报该<strong>字段相同</strong>，用来<strong>标识分片身份</strong>；<br>        2）实际的赋值机制，是每产生一个数据报计数器就加1（未分片），然后对该数据报进行分片，完成后，将这个字段的值复制到每一个分片；<br>    6）flag（标志）：<br>        1）3位只有<strong>两位</strong>有意义；<br>        2）最低位MF，1代表后面<strong>还有分片</strong>，0代表<strong>没有分片</strong>；<br>        3）中间位DF，1代表<strong>不能分片</strong>，0代表<strong>可以分片</strong>；<br>    7）Fragmentation offset（位偏移）：<br>        1）指出分片后，当前<strong>分片在原始数据报中的相对位置</strong>；<br>        2）偏移<strong>单位是8字节</strong>，也就是说除了最后一个分片其他分片的长度一定是8的倍数；<br>        3）该字段实际使用的时候，字段值是多少就代表该分片的数据部分，第一个字节，在原始数据中是第<strong>字段值乘8+1</strong>字节；<br>            eg：offset &#x3D; 0，则原来是第一个字节；<br>                offset &#x3D; 1，则原来是第65个字节；<br>        （当然如果直接考虑偏移量，使用第0个字节的表述，并以其作为开头的话，实际上offset<em>8的值就代表，当前分片开始的字节，在原始数据报中是第几个字节）；<br>        4）在分片的时候不能忘记，每个分片都要添加报头，<strong>报头在考虑最大分片长度</strong>的时候很重要；<br>        5）但是在计算offset的时候，不能加入报头，<strong>offset纯粹的使用数据部分进行计算</strong>；<br>        6）<strong>当前分片offset值 &#x3D; 前面所有分片的数据部分和，字节数&#x2F;8</strong>；<br>    8）TTL（生存时间）<br>        1）功能是作为<strong>跳数限制</strong>，<strong>防止</strong>不能到达目的地的IP数据报在互联网中<strong>兜圈子，浪费资源</strong>；<br>        2）当数据报到达一个路由器，<strong>在路由器转发它之前将TTL–，然后检查TTL是否等于0</strong>，如果等于0则丢弃；<br>        3）如果一个数据报只允许在局域网中转发，那么将TTL设置为1（到达该局域网的路由器的时候，TTL减为0就会被丢弃）；<br>        4）一个数据报能经过（到达）的路由器<strong>最大数量是255</strong>；<br>    9）upper-layer protocal（协议）<br>        1）指出当前IP数据报携带的数据来自于什么上层协议；<br>        2）常用的：<br>            ICMP-1；<strong>TCP-6；UDP-17</strong>；EGP-8；IGP-9；OSPF-89；<br>    10）check sum（首部检验和）<br>        1）只检验数据报的首部，不包括数据部分；<br>        2）每<strong>经过一个路由器</strong>就要<strong>重新计算</strong>首部检验和；<br>        3）计算方法是<strong>16位一组</strong>，相加，<strong>最高位有进位要回卷</strong>，<strong>结果取反</strong>；<br>        （接收方检验方法是<strong>16位一组相加，再取反</strong>，如果<strong>结果是0则没有出错</strong>，否则认为出错，丢弃；</em>题目练习*）<br>        注意：<br>            1）如果最后一组不足16位，那么在低位补0；<br>            2）在计算之前check sum字段置0；<br>    11）source address（源地址）<br>        1）32位，发送主机的IP地址；<br>        2）32位，接收主机的IP地址；</p>
+<p>最长前缀匹配<br>    1）<strong>原则：</strong><br>        在采用CIDR编址时，如果一个分组在转发表中可以找到<strong>多个匹配的前缀</strong>，那么就应当<strong>选择</strong>前缀<strong>最长</strong>的一个作为匹配的前缀。这个原则称为最长前缀匹配；<br>    2）思想：<br>        网络前缀越长，其地址块就越小，因而路由越具体；</p>
+<p><strong>分组转发算法</strong> 路由表项的排列 特定主机路由 默认路由（若有 若无）<br>    分组转发算法：<br>        1）从收到的分组的首部提取<strong>目的主机的IP地址</strong>；<br>        2）查找是否有<strong>特定主机路由</strong>，对应该IP地址，若有责直接按照下一跳转发；<br>        3）否则，从转发表中<strong>下一行开始</strong>进行检查：<br>            1）将这一行的子网掩码与目的地址AND运算；<br>            2）如果结果和本行<strong>前缀匹配</strong>则按下一跳转发（或直接交付本网络上的目的主机，或转发给下一跳路由器）；<br>            3）如果不匹配则继续检查下一行；<br>        4）如果检查结果均不匹配，则来到最后的<strong>默认路由</strong>，按照指定的接口进行转发；<br>    一些说明：<br>        关于3）：<br>            1）这里查找转发表的逻辑实际上涉及路由表项的排列；<br>            2）路由表项中按照前缀的长度进行排列，由长到短递减；<br>            3）这样的基础上从上到下检查不断“下一行”检查，本身就契合了最长前缀匹配；<br>            4）这样排列也契合了，先检查特定路由，然后进行匹配，最后考虑默认路由；<br>            （因为特定路由等价于前缀长度32，最长；进行匹配就是前缀长度长到短排列；默认路由0.0.0.0是其子网掩码，实际上就等价于前缀长度是0，最短）；<br>        关于1）、4）：<br>            1）特定主机路由和默认主机路由其实都是可选的，不一定存在；<br>            2）尤其是如果默认主机路由不存在，又找不到转发的接口，那么就会报告转发分组错误；</p>
+<p>二叉线索查找转发表：<br>    背景：<br>        1）使用CIDR完成路由聚合后，由于不知道目的网络前缀，让转发表的查找变复杂了；<br>        2）在转发表项目数很大的时候，怎样缩短转发表查找实践是一个非常重要的问题；<br>        3）普通情况，无分类编址的转发表，最简单的查找算法就是对所有前缀进行循环查找，逐行检查网络前缀；<br>    二叉线索查找思想：<br>        1）将无分类编址的转发表存入一种层次数据结构中，然后自上而下地按层次查找；<br>        2）好处就是可以一次排除“一类”前缀，避免不必要的AND运算；<br>    使用方法：<br>        1）用<strong>给定的几个网络前缀</strong>构造<strong>二叉线索树</strong>；<br>        2）是否与<strong>唯一前缀匹配</strong>；（对应到叶节点）；<br>        （转发时用目的地址与唯一前缀进行匹配，对目的地址按照高位到低位的顺序，查看0&#x2F;1，选择二叉树上对应的边，从根节点出发持续向下，直到到达叶节点，如果不能到达叶节点则直接丢弃，因为一定没有匹配的前缀）<br>        3）与掩码运算-&gt;是否与<strong>网络前缀匹配</strong>；<br>        （到达叶节点了之后，只是说明唯一前缀匹配上了，还要查看网络是否匹配）；<br>        4）<strong>转发</strong> or 默认转发 or <strong>丢弃</strong>；<br>        （如果匹配上了就转发，没有的话看有没有默认转发，没有则丢弃，报错）；</p>
+<p>DHCP协议（应用层 C&#x2F;S模式 UDP协议为其提供服务）<br>    作用：<br>        1）<strong>动态主机配置协议</strong>；<br>        2）为<strong>新</strong>进入一个网络的<strong>主机</strong>分配<strong>本网络内的IP地址</strong>；<br>    工作原理：<br>        1）DHCP <strong>discover</strong>：<br>            新到来的主机发送DHCP报文：<br>                1）src: 0.0.0.0:68；（<strong>全0代表本地址</strong>，<strong>68</strong>客户端端口）<br>                2）dest: 255.255.255.255:67；（<strong>全1代表广播地址</strong>，<strong>67</strong>服务器端口）<br>                3）<strong>yiaddr</strong>: 0.0.0.0；（等待服务器分配的地址）<br>                4） transaction ID：654；（代表这是获得动态主机IP地址的请求报文）；<br>        2）DHCP <strong>offer</strong>：<br>            服务器收到discover后回复：<br>                1）src：223.1.2.5，67；<br>                2）dest：255.255.255.255，68；<br>                3）yiaddr：223.1.2.4（<strong>动态分配的ip地址</strong>）；<br>                4）transaction ID：654；（代表这是回复动态主机IP地址请求的应答）；<br>                5）<strong>Lifetime</strong>：3600（动态IP使用时间）；<br>        3）DHCP <strong>requst</strong>：<br>            客户端收到offer后再与服务器<strong>核实</strong>：<br>                1）src：0.0.0.0，68；<br>                2）dest：255.255.255.255，67；<br>                3）yiaddr：223.1.2.4；<br>                4）transaction ID：655；（代表这是核实IP的请求）；<br>                5）Lifetime：3600；<br>        4）DHCP <strong>ACK</strong>：<br>            服务器<strong>回复核实报文</strong>：<br>                1）src：223.1.2.5，67；<br>                2）dest：255.255.255.255，68；<br>                3）yiaddr：223.1.2.4；<br>                4）transaction ID：655；<br>                5）Lifetime：3600；</p>
+<p>RIP协议<br>    基本知识：<br>        1）中文名是<strong>路由信息协议</strong>；<br>        2）是一种<strong>基于距离向量</strong>的选路协议；<br>        3）RIP适用于小型网络，因为不可达距离只有16；<br>    <strong>距离的定义</strong>（跳数、路由器数）：<br>        1）从路由器到直接连接到网络距离为1；<br>        2）从一个主机到非直接连接到网络距离是<strong>路由器数量+1</strong>；<br>        （+1是因为直接相连定义了距离为1）；<br>        3）不可达距离 16<br>    交换信息（特点）：和谁交换信息？交换哪些信息？（1、2、3）何时交换信息（1、2）？<br>        协议是通过交换信息工作的，使用RIP协议的路由器有如下特点：<br>            1）<strong>仅和相邻路由器</strong>交换信息；<br>            2）交换的信息是本路由器知道的全部信息，即自己的路由表（到本自治系统中所有网络的最短距离，对应的下一跳路由器）；<br>            3）按固定的时间间隔交换信息：<br>                1）每隔<strong>30秒</strong>会交换信息；<br>                2）当<strong>网络拓扑结构发生变</strong>化时，交换信息；<br>        注意：<br>            1）<strong>主机</strong>也运行RIP协议的话，它只能被动的接收信息，不能发出自己的信息，因为它没有转发功能；<br>            2）刚<strong>开始的时候</strong>，路由器中路由表是空的，然后可以直接得出与其直接相连的几个网络的距离（定义为1）；     </p>
+<p>距离向量算法：<br>    1）路由器维护的表项目、交换报文（RIP报文）的内容（1、2、3）；<br>        路由器中维护的<strong>表项信息</strong>，就是交换报文中的主要项目信息；<br>            1）<strong>目的网络</strong>Neti：代表往这个方向转发的最终目的地；<br>            2）<strong>下一跳路由器</strong>Ri：要前往目的地下一跳应该向哪个路由器转发；<br>            3）<strong>距离</strong>d：从当前路由器到达目的地的最终距离；<br>    2）收到报文的操作（项目信息(Neti,Ri,d)）：<br>        1）<strong>修改</strong>报文项目（1、2）；<br>            1）将Ri改为该报文的发送路由器Rj；<br>            2）距离d &#x3D; d+1；<br>        2）若<strong>无目的网络</strong>-更新表项目；<br>            如果当前路由器的转发表中没有能够到达Neti的转发表项，则直接将报文项目加入自己的转发表中；<br>        3）若<strong>有目的网络</strong>-下一跳路由器？<br>            如果当前路由器转发表中有能够到达Neti的表项目：<br>                1）如果对应表项的<strong>下一跳是Rj</strong>，则直接将新的报文项目替换这个旧的；<br>                2）如果对应表项<strong>下一跳不是Rj</strong>，谁的距离更小保留谁；<br>    3）3分钟-不可达；<br>        如果<strong>3分钟没有收到</strong>相邻路由器的更新路由表，则把此相邻路由器，标记为不可达路由器，距离设置为16；<br>    注意：<br>        1）一个RIP报文最多25个路由-25个表项，超过25个报文要再用一个发；<br>        （即实际上上述交换的一个RIP报文，不止有一个表项信息）</p>
+<p>坏消息传得慢-例子（RIP报原始内容）<br>    <em>习题练习</em>；</p>
+<p>OSPF：<br>    基本知识：<br>        1）使用<strong>链路状态协议</strong>；<br>    交换信息（特点）：<br>        1）向本自治系统中的<strong>所有路由器</strong>发送信息，使用洪泛法；<br>        2）发送的信息：<br>            1）相邻的所有路由器的链路状态；<br>            2）其中包括链路的度量，用来表示代价；<br>            （可以选择费用、距离、时延等等信息来作为这个度量）；<br>            3）每隔一段时间（<strong>30分钟</strong>） 或者 <strong>链路状态发生变化</strong>的时候，向所有路由器使用可靠的洪泛法发送链路状态信息<br>            （和谁交换信息（可靠的洪泛法）、交换哪些信息（1、2）、何时交换信息（30分钟））<br>    注意：<br>        1）实际上，所有的路由器最终都能建立一个链路状态数据库，对应的就是全网的拓扑结构图，并且这个结构在全网范围是一致的；<br>        （最直接的结果就是，可以直接看作在一个静态的图上面做Dijkstra算法搜索最短路，或者说对于我们应试来说，在使用OSPF路由的时候，我们可以直接看哪条路最短，来确定下一跳路由器）；<br>        2）OSPF收敛得快；<br>        3）OSPF能够适用于大规模网络；<br>        4）OSPF能够实现<strong>负载均衡：</strong><br>            <strong>如果到同一个目的网络有多条相同代价的路径，那么可以将通信量分配给这几条路径；</strong></p>
+<p>OSPF使用层次结构区域划分：<br>    好处：在使用洪泛法的时候将链路状态信息的范围局限在一个区域中，而不是整个自治系统，减少整个网络上的通信量；<br>    1）<strong>主干区域：</strong><br>        <strong>标识符</strong>规定0.0.0.0（本自治系统内生效）；<br>    2）其他区域：<br>        主干区域以外的其他各个区域，标识符自定，例如0.0.0.1，0.0.0.2；<br>        （当然都是本自治系统内生效）；<br>    3）相关路由器：<br>        1）<strong>主干区域路由器</strong>，主干区域内的路由器；<br>        2）<strong>区域边界路由器</strong>，一个区域的边界路由器，负责将当前区域和其他区域连接起来；<br>        3）<strong>自治系统边界路由器</strong>，一个自治系统的边界的路由器，负责将当前AS和其他AS连接起来；<br>        注意：<br>            自治系统边界路由器一般在主干区域中，可以<strong>同时是</strong>主干区域路由器、自治系统边界路由器、区域边界路由器；</p>
+<p>OSPF五种类型的分组：<br>    物种类型分组：<br>        1）<strong>问候分组</strong>（10s一次，40s没有则不可达）；作用？（初始时）；<br>            作用：用来发现和维持邻站的可达性；<br>        2）<strong>数据库描述分组</strong>；（交换链路状态摘要信息，用来确认哪些没有）；<br>            作用：向邻站给出自己链路状态数据库中所有链路状态项目的摘要信息；<br>        3）<strong>链路状态请求分组</strong>；（针对没有的请求）；<br>            作用：向对方请求发送某些链路状态的详细信息；<br>        4）<strong>链路状态更新分组</strong>；<br>            作用：在洪泛法中使用的分组，用来更新全网链路状态；<br>        5）<strong>链路状态确认分组</strong>；<br>            作用：对链路更新分组的确认，也会在洪泛法中使用；<br>    OSPF的工作过程：<br>        1）使用问候分组判断可达与否：<br>            1）相邻路由器每<strong>10s</strong>必须交换一次问候分组，从而明确哪些邻站是可达达；<br>            2）如果<strong>40s</strong>没有收到某个邻站的问候分组，则认为不可达，立即修改链路状态数据库计算新的路由表；<br>            （可达是基本要求，只有可达邻站的链路状态信息才会存入链路状态数据库，路由表是根据链路状态数据库计算出来的）；<br>        2）使用其他分组进行链路状态数据库的同步：<br>            同步的概念：<br>                1）不同路由器的链路状态数据库内容是一样的；<br>                2）两个同步的路由器被称作是<strong>完全邻接</strong>的；<br>                （不完全邻接的路由器可能只是物理上相邻的）；<br>            过程：<br>                1）每个路由器使用数据库描述分组和相邻路由器<strong>交换</strong>本数据库中已有的链路状态<strong>摘要信息</strong>；<br>                2）路由器拿到对方的链路状态描述分组后，根据其中内容<strong>检查</strong>自己<strong>缺少</strong>的某些链路状态；<br>                3）向对方发送链路状态请求分组，<strong>请求</strong>对应自己没有的链路状态信息；<br>                4）收到链路状态请求分组的路由器，按照对方请求的链路状态，用<strong>单播</strong>的方式，将对应链路状态信息发送给请求方；<br>                5）<strong>洪泛法</strong>的启用：<br>                    1）当一个路由器的链路状态发生变化的时候（或经过了30分钟），开始使用洪泛法发送信息；<br>                    2）路由器对所有相邻的路由器<strong>发送</strong>自己的链路状态<strong>更新</strong>分组；<br>                    3）收到该分组的路由器对链路状态更新分组进<strong>行转发</strong>（转发到<strong>排除上游</strong>路由器对所有相邻路由器）；<br>                    4）收到链路状态更新分组的路由器，向给自己发送该分组的路由器发送<strong>确认</strong>信号；<br>                    （确认是<strong>可靠</strong>的洪泛法所必要的，而OSPF就是采用可靠的洪泛法）；<br>                    （收到<strong>重复</strong>的更新分组，只用发送<strong>一次确认</strong>）；</p>
+<p>可靠的洪泛法：<br>    1）发送；<br>    2）转发（除了上游）；<br>    3）确认（忽略重复）；</p>
+<p>BGP协议：<br>    基本知识：<br>        1）BGP是<strong>外部网关协议</strong>；<br>        （RIP、OSPF协议都是<strong>内部网关协议</strong>）；<br>        2）用于<strong>不同AS之间</strong>的路由选择；<br>        3）采用的是<strong>路径向量路由选择协议</strong>；<br>    作用：<br>        选择出一条<strong>能够到达</strong>目的网络前缀且比较好的路由（不兜圈子），而<strong>不是非要</strong>计算出一条<strong>最佳</strong>路由；<br>        为什么不是最佳路由？<br>            1）互联网的规模太大，使得自治系统AS之间的路由选择非常困难；<br>            （例如不同AS中的代价度量不同，比较合理地做法是考虑可达性）；<br>            2）自治系统AS之间的路由选择必须考虑有关策略；<br>            （即考虑多种路由选择策略，包括政治、安全或经济方面；）<br>    相关路由器：<br>        1）AS中有<strong>边界路由器</strong>和<strong>内部路由器</strong>；（这里的边界路由器对应的就是前面的自治系统边界路由器）；<br>        2）一个AS至少有一个边界路由器和相邻AS的边界路由器直接相连；<br>        3）正是有了边界路由器，AS之间才能利用协议BGP交换可达性路由信息；<br>    <strong>BGP路由的一般格式</strong>：<br>        1）这里的路由指的是BGP协议报中有关选路的信息，就类似于RIP报文中的信息；<br>        2）<strong>格式</strong>：“前缀，BGP信息” &#x3D; “前缀，AS-PATH，NEXT-HOP”；<br>        3）其中：<br>            1）前缀，对应的是BGP路由终点的子网前缀；<br>            2）AS-PATH，是自治系统路径，通告BGP路由所经过的自治系统；<br>            3）NEXT-HOP，下一跳，对应当前BGP路由的起点；<br>    BGP协议的使用：<br>        1）<strong>两个边界路由器</strong>建立TCP连接；<br>        2）边界路由器作为对等端通过<strong>eBGP协议</strong>互相发送BGP路由；<br>            注意：<br>                1）例如，BGP路由：“X，AS1，R1”，代表可以到达网络前缀位X的网络，经过AS1，下一跳是R1；<br>                2）边界路由器R2就知道下一跳R1，会进入AS1中的，X前缀对应的网络；<br>                3）建立eBGP的两个路由，即不同AS之间的对等端建立了BGP连接；<br>        3）<strong>边界路由器</strong>收到BGP路由后，更新自己的转发表，然后：<br>            1）<strong>与AS内的路由</strong>两两之间均建立<strong>iBGP连接</strong>；<br>                注意：<br>                    1）这种连接是全连通的，即使物理上没有连通；<br>                    2）建立iBGP的两个路由器，即同一AS中的对等端建立了BGP连接；<br>            2）边界路由器通过iBGP将BGP路由发送给AS内的对等端；<br>        3）内部路由器收到BGP路由后，<strong>构建转发表</strong>：<br>            关键是修改BGP路由中的下一跳信息；<br>            （例如AS2中的R4，不能直接用原始的BGP路由信息中的R1，作为下一跳的转发，因为根本没连接）；<br>            1）通过<strong>两次递归查询</strong>，找到可用的下一跳路由器；<br>                1）找到<strong>非自己所在AS的边界路由器的对等端</strong>，即在自己的AS中的边界路由器，且与BGP路由中的边界路由器相连；<br>                （例如R1在AS1中，R4不清楚R1的位置，就找到R1对应的边界路由器R2）；<br>                2）使用IGP（内部网关协议），查询从自己<strong>到达边界路由器的最佳路由</strong>；<br>                （例如R4要到R2，查看转发表到达R2的最好下一跳发现是R3）；<br>            2）用对应的路由器<strong>修改该BGP路由信息，存入自己的转发表中</strong>；<br>            （例如，最终BGP路由中有“X，R3”，存放在R4的转发表中）<br>    注意：<br>        1）上面的BGP协议使用，我们主要关注了各个路由器如何使用BGP路由来更新自己的路由表；<br>        2）但是BGP路由的AS信息也是需要维护的，每新到一个自治系统，该AS会被加入BGP路由的AS-PATH中；<br>        （例如上面的例子，最终的”X,R3”，实际上是”X,AS2-AS1,R3”）；</p>
+<p>为什么使用BGP？<br>    1）巨大规模的互联网，自制系统AS之间选路；<br>    2）考虑相关策略（可达性而非代价）</p>
+<p>BGP使用：路径向量选路策略</p>
+<p>BGP报文内容（到达AS1对应的前缀、发送报文的路由器、路由器所在的自治系统AS1）<br>BGP协议路由表（前缀X，下一跳路由器）-含义是下一跳经过路由器，前缀X可达；</p>
+<p>eBGP、iBGP（区别，<strong>适用路由器</strong>）</p>
+<p>iBGP的全连通</p>
+<p>RIP OSPF BGP区别对比<br>1）RIP不能使用<strong>多条路由</strong> OSPF可以<strong>负载均衡</strong>，每一个路由器都知道全网有多少路由器，哪些是相连的，代价是多少；<br>2）RIP、OSPF是工作在一个<strong>AS内</strong>的 BGP工作在不同<strong>AS之间</strong>；<br>3）使用的<strong>协议不同</strong>；<br>4）OSPF在网络层 RIP、BGP在应用层（分别由UDP、TCP服务）；<br>5）OSPF、RIP属于IGP 对应BGP；<br>6）OSPF知道<strong>全网的拓扑结构</strong>，RIP不知道；</p>
+<h3 id="传输层-1"><a href="#传输层-1" class="headerlink" title="传输层"></a>传输层</h3><p>运输层的两个主要协议：<br>    1）<strong>TCP传输控制</strong>协议：提供<strong>可靠的</strong>、<strong>面向连接的</strong>运输服务；<br>    2）<strong>UDP用户数据报</strong>协议：<strong>无连接</strong>，<strong>实时</strong>、<strong>快速高效</strong>；</p>
+<p>TCP报文中有一个可选项MSS：<br>    这是<strong>最大报文长度字段</strong>，代表的是数据字段的最大长度，这个字段要加上TCP首部的长度才是TCP报文的总的最大长度；<br>    <em>考虑这个字段与拥塞控制的关系</em>；</p>
+<p>TCP流量控制<br>    1）含义：让发送方的速率不要太快，要让接收方来得及接收；<br>    2）实现方式：滑动窗口；<br>    3）一些细节：<br>        1）发送方的发送窗口大小不能超过接收方给出的接收窗口rwnd；<br>        2）TCP窗口单位是字节不是报文段；<br>        3）当rwnd为0时对应零窗口报文段，发送方不允许再发送数据，直到接收方重新发送一个新的窗口值为止；<br>    4）什么时候会发送零窗口通知：<br>        1）接收端将接收到的数据放入缓冲区，如果上层应用不及时读取，缓冲区满了的时候；<br>        2）当接收方检测到可用窗口为0的时候；<br>        3）出现1、2两种情况的时候发送方在对于先前数据的确认报文中会通知rwnd&#x3D;0；<br>    5）<strong>零窗口的死锁问题</strong>：<br>        描述：<br>            接收方向发送方发送了零窗口报文段之后不久，接收方<strong>释放了一些空间</strong>，向发送方发送了rwnd&#x3D;400的报文段；但是<strong>报文段在传送中丢失了</strong>，发送方一直在等待接收方发送非零窗口报文段，接收方一直在等待发送方发送数据，陷入死锁；<br>        解决方法：<br>            TCP为每个链接设立的——持续时间计时器；<br>            机制：<br>                只要TCP连接的一方<strong>收到</strong>了<strong>零窗口</strong>报文段，就<strong>启动持续计时器</strong>，如果计时器时间到了就发送一个<strong>零窗口探测报文段</strong>（仅携带1字节数据），对方会在确认探测报文段时给出当前窗口值，如果仍是零，则重置计时器，否则死锁局面解除；</p>
+<p>TCP的拥塞控制<br>    基本概念：<br>        1）<strong>拥塞</strong>：在某段时间，若对网络中的某一资<strong>源的需求</strong>超过了该<strong>资源所能提供的可用部分</strong>，网络的<strong>性能就会变坏</strong>，这种情况就叫做拥塞。<br>        2）拥塞控制：<br>            1）含义：防止过多的数据注入到网络中，这样可以使网络中的路由器或链路不至于过载。<br>            2）前提：网络能够承载现有的负荷（负载）；<br>            3）特点：这是一个全局性的过程，对比<strong>流量控制是点对点</strong>的通信量控制（是<strong>端到端</strong>的过程）；<br>        3）<strong>网络负载</strong>：提供给网络的负载，也称为<strong>输入负载</strong>；<br>            （常用于 <strong>网络负载-吞吐量</strong> 图中）；<br>        4）网络的几种状态（用负载和吞吐量进行判定）：<br>            1）理想情况：吞吐量饱和之前，网络吞吐量&#x3D;网络负载，吞吐量曲线是45度的直线；<br>            2）轻度拥塞状态：网络吞吐量还未到饱和，但是已经有分组被丢弃了，网络吞吐量明显小于理想吞吐量；<br>            3）拥塞状态：网络吞吐量随着负载增减开始减少，而不是理想情况下保持饱和不变；<br>            4）死锁：当网络负载增大到一定数量的时候，吞吐量下降到零；<br>    TCP拥塞控制方法：<br>        假定（理想情况方便讨论算法）：<br>            1）数据是单向发送的，对方只传送确认报文；<br>            2）接收方有足够大的缓存空间，因而发送窗口的大小由网络的拥塞程度来决定；<br>            （实际情况发送方接收窗口的上限 &#x3D; min(rwnd,cwnd)，其中rwnd是接收方报文中规定的接收窗口大小）；<br>        基本思想：<br>            1）基于窗口进行拥塞控制，发送方维持一个拥塞窗口cwnd，随着网络拥塞程度动态变化，让发送窗口等于拥塞窗口；<br>            2）只要网络没有拥塞，拥塞窗口就可以增大一些以便发送更多的分组，只要出现了拥塞，拥塞窗口就减小一些，以缓解拥塞；<br>        <strong>慢开始</strong>：<br>            1）设置<strong>初始拥塞窗口大小</strong>：<br>                1）旧规定：将初始cwnd设置为1～2个SMSS（发送方最大报文长度）；<br>                2）新规定：将初始cwnd设置为2～4个SMSS；<br>                    1）如果SMSS &gt; 2190B，则cwnd &#x3D; 2*SMSS；（不得超过两个报文段）；<br>                    2）如果1095 &lt; SMSS &lt;&#x3D; 2190，则cwnd &#x3D; 3*SMSS；（不得超过三个报文段）；<br>                    3）如果SMSS &lt;&#x3D; 1095，则cwnd &#x3D; 4*SMSS；（不得超过四个报文段）；<br>            2）拥塞窗口<strong>增大机制<strong>：<br>                1）在每收到一个对新的报文段的确认后，可以把拥塞窗口增加最多一个SMSS的数值；<br>                2）具体来说，拥塞窗口cwnd每次的增加量 &#x3D; min(N,SMSS)，其中N是原来未被确认的、但是现在刚收到的确认报文段，所确认的字节数；<br>                3）显然，这种规定下，理想情况cwnd在慢开始阶段是成倍增长的（每次扩大为原来的两倍）；<br>            3）慢开始阶段的表现：<br>                1）虽然TCP是用字节数作为窗口大小的单位的，但是拥塞控制中为了方便叙述，通常使用报文段个数作为单位；<br>                2）开始时cwnd&#x3D;1；<br>                3）发送方每收到一个对新报文段段确认（对重传的确认不算），cwnd就加1；<br>                4）那么一个RTT后，cwnd&#x3D;2，允许连续发送两个报文段，再一个RTT后收到两个确认，cwnd&#x3D;4，允许连续发送4个报文段，…以此类推；<br>                （注意，显然发送方不是要在所有的确认都收齐了之后才调整其拥塞窗口，而是收到一个确认就调整一下拥塞窗口，这是里面的细节）；<br>            4）慢开始</strong>门限ssthresh**：<br>                1）当cwnd &lt; ssthresh时使用慢开始算法；<br>                2）当cwnd &gt; ssthresh时停止慢开始算法，启用拥塞避免算法；<br>                3）当cwnd &#x3D; ssthresh时，可以选择一个用，决定下一个时刻的行为；<br>        <strong>拥塞避免</strong>：<br>            1）加法增大：<br>                1）每经过一个RTT的时间，发送方的cwnd大小就增大1，而不是像慢开始那样成倍增长；<br>                2）这样做可以让cwnd缓慢增大；<br>            2）拥塞避免阶段的表现：<br>                cwnd按线性规律缓慢增长；<br>        <strong>超时处理</strong>：<br>            1）超时</strong>标志<strong>：<br>                1）超时重传计时器启动；<br>                2）判断网络出现了拥塞；<br>            2）处理机制：<br>                1）慢开始门限ssthresh设置为cwnd的一半（</strong>ssthresh &#x3D; cwnd&#x2F;2<strong>）；（</strong>乘法减少<strong>）；<br>                2）拥塞窗口置一，</strong>cwnd &#x3D; 1<strong>；<br>                3）重新开始</strong>慢开始<strong>；<br>            注意：<br>                1）</strong>超时的发生不一定就是网络发生了拥塞<strong>，也可能是因为传输出现了差错，而导致分组被丢弃；<br>                2）尽管现代通信线路传输质量都很好，因为传输差错而丢弃分组的概率远小于1%。这也是为什么用超时来判断拥塞，因为超时大概率是拥塞造成的；<br>                3）因此设置了快重传机制；<br>        <strong>快重传与快恢复</strong>：<br>            1）算法要求：<br>                1）</strong>接收方<strong>不要等待自己发送数据时才稍带确认，而是在收到报文后立即发送确认；<br>                2）即使收到的失序的报文段也要立即发出对已收到报文段的重复确认；（尽管本来可以什么都不做）；<br>            2）</strong>快重传<strong>：<br>                1）在接收方一连收到</strong>3个重复确认<strong>之后，判断网络没有出现拥塞，但是接收方少了一个报文段M；<br>                2）对方却少的是被重复确认的报文段的下一个报文段，例如重复确认三次M2，那么缺少了M3；<br>                3）发送方</strong>立即重新发送接收方缺少的报文段<strong>；<br>            3）</strong>快恢复<strong>：<br>                1）在快重传之后启动快恢复；<br>                2）设置慢启动门限为拥塞窗口的一半</strong>ssthresh &#x3D; cwnd&#x2F;2<strong>；<br>                3）将cwnd减小，通常有两种方法：（这个过程称为</strong>乘法减少<strong>）；<br>                    1）</strong>cwnd &#x3D; ssthresh**；（课本上主要阐释的这种）；<br>                    2）cwnd &#x3D; ssthresh + 3MSS；<br>        <img src="/Computer-Network/p1.jpeg" alt="TCP拥塞控制算法流程图">;</p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>DNS的作用：<br>    进行<strong>域名解析</strong>；</p>
+<p>DNS协议依赖的下层协议：<br>    传输层：<strong>UDP协议</strong>；<br>    网络层：<strong>IP协议</strong>；<br>    数据链路层（以太网）：<strong>CSMA&#x2F;CD协议</strong>；</p>
+<p>HTTP协议依赖的下层协议：<br>    传输层：<strong>TCP协议</strong>；<br>    网络层：<strong>IP协议</strong>；<br>    数据链路层：<strong>CSMA&#x2F;CD协议</strong>；</p>
+<p>使用一个协议就要封装一个协议的数据包（例如使用DNS协议的时候封装了4层数据包）；</p>
+<h3 id="无线网络"><a href="#无线网络" class="headerlink" title="无线网络"></a>无线网络</h3><p><strong>隐蔽站&#x2F;暴露站</strong><br><em>举出一个具体的例子</em></p>
+<p>CSMA&#x2F;CA协议：<br>    背景：<br>        1）无线局域网使用的数据链路比较特殊，对应的是无线信号的信道，但是和物理链路一样也要考虑信道上信号的碰撞问题，同一时刻同一信道上应该只有一种信号；<br>        2）无线局域网的特点：<br>            1）无线局域网的适配器<strong>无法实现碰撞检测</strong>；<br>            2）检测到信道空闲，起始信道可能<strong>并不空闲</strong>；<br>            3）即使我们能够在硬件上实现无线局域网的碰撞检测功能，也无法检测出<strong>隐蔽站问题</strong>带来的碰撞；<br>        3）所以实际上CSMA&#x2F;CA协议不是载波监听多路复用&#x2F;碰撞检测协议，而是载波监听多路复用&#x2F;碰撞避免协议（尽量减少碰撞发生的概率）；<br>    独特的MAC层：<br>        1）802.11标准为CSMA&#x2F;CA协议中设计了<strong>独特的MAC层</strong>；<br>        2）其中集成了协调功能所必需的字段：<br>            1）<strong>DCF：分布式协调功能</strong>，这是为了后面的争用服务必需实现的字段；（重点）；<br>            2）PCF：点协调功能，无争用服务选用；<br>    CSMA&#x2F;CA协议要点：<br>        1）站点如果要发送数据，必须先监听信道，如果信道在DIFS内均空闲，则发送整个数据帧；<br>        2）否则，<strong>争用信道</strong>；<br>            站点选择<strong>随机数</strong>，设置<strong>退避计时器</strong>；<br>            如果信道<strong>忙则冻结</strong>计时器；<br>            如果信道空闲，且<strong>在DIFS内均空闲</strong>，则<strong>启动</strong>计时器；<br>            当计时器减到零，则发送数据帧；<br>        3）如果发送方站点，接收到却认帧，且后续还有帧要发送，再次进入2），但是要在<strong>更大范围</strong>选择随机数；<br>    要点补充：<br>        1）关于DIFS：假设A給B发送数据帧DATA；<br>            1）B接收到数据帧要发送确认ACK；<br>            2）确认发送时间必然滞后于B接收完DATA的时间，因为有CRC校验等；<br>            3）考虑滞后时间统一设置一个标准为SIFS（最短帧间间隔）；（<strong>接收方的行为！</strong>）<br>            4）那么实际上SIFS这段时间内信道是空闲的；<br>            5）为了保证这段空闲时间内其他站点不发送数据，使用更长的DIFS（<strong>分布式协调帧间间隔</strong>）；<br>            6）空闲时间其他站点想发送数据必须等待DIFS的时间；<br>        2）关于监听（确定信道在忙的具体方法）：<br>            1）802.11标准要求每个站必须同时使用两个方法；<br>            2）第一是，虚拟载波监听（软件实现）：<br>                1）源站（发送站）：将自己占用信道的时间（DATA+SIFS+ACK）写入数据帧；<br>                2）广播范围内的各站能够接收到该信息，创建自己的<strong>NAV</strong>（网络分配向量），指出信道在忙的时间，除了源站和目的站在这一时间内不能使用信道；<br>            3）第二是，载波监听（物理层实现）：<br>                每个站检测接收到的信号强度是否超过一定门限数值，由此判断是否有其他移动站在信道上发送数据；<br>        3）关于<strong>争用期的触发</strong>：<br>            1）要<strong>发送数据时检测到信道在忙</strong>；<br>            2）已发送到数据帧未收到确认，要<strong>重传数据帧</strong>；<br>            3）发送了一个数据帧要<strong>接着发送</strong>后续的数据帧；（为了防止一个站点长期垄断信道）；<br>            （其他情况，当站点想要发送数据，并检测到信道空闲时间超过DIFS可以直接发送，不用经过争用期）；<br>        4）争用信道的过程（争用期）：<br>            1）使用<strong>争用窗口CW</strong>，它由许多时隙组成；<br>                （802.11g规定一个时隙为9微秒，SIFS是10微秒，DIFS是28微秒）；<br>            2）退避：<br>                进入争用期（信道空闲）时，<strong>在0～CW的时隙中随机生成时隙个数</strong>，设置退避计时器；<br>            3）推迟接入：<br>                1）退避计时器先降为0的，开始发送数据帧，信道转为忙；<br>                2）正在退避的站，冻结计时器，保留数值不变，等待下一次争用期接着继续倒计时；<br>        5）关于争用窗口CW的维护：<br>            1）<strong>CW需要增大</strong>的两种情况：<br>                1）<strong>紧接着发</strong>送后续帧；<br>                2）每一次<strong>重传</strong>；<br>            2）具体操作：<br>                1）在每次增大的时候CW会<strong>近似翻倍</strong>；<br>                2）例如初始时CW &#x3D; 15 &#x3D; 2^4 - 1，那么<strong>第i次增大的时候CW &#x3D; 2^(4+i) - 1</strong>；<br>                3）通常802.11建议：CW最小取15，最大取1023，当到达<strong>1023之后CW不会再增大</strong>；<br>    信道预约技术：<br>        目的：更好地避免隐蔽站问题；<br>        具体方法：假设A給B发送数据；<br>            1）对于无线局域网，移动站点都会接入一个AP，用来充当站点之间的中介进行信息转发；<br>            2）A在与B通信之前，<strong>A向AP发送RTS</strong>（请求发送）；<br>            3）AP收到之后，经过SIFS，<strong>回复CTS</strong>（允许发送）；<br>            4）其他所有能够收到AP的CTS的站点，都会知道在一段时间内信道被A、B的通信占用，并以此<strong>设置其NAV</strong>；<br>            （实际上这与前面的虚拟载波监听、载波监听，互为一个补充）；</p>
+<p>关于802.11数据帧的地址</p>
+<p>移动IP：<br>    背景：<br>        1）如果我们需要在移动中浏览网页，那么移动站建立的TCP连接，在移动站漫游时，应当一直保持连接，否则移动站与网站的连接就会变为断断续续的（因为建立TCP连接，不可能瞬间就建立好）；<br>        2）移动IP就是要解决“TCP连接在移动站漫游时如何一直保持”这个问题；<br>    区别：<br>        1）便携式的笔记本电脑，可以带到各种地方办公上网，这个过程会使用DHCP动态主机配置协议，自动获取新的IP地址；<br>        2）这里虽然电脑移动了，但是IP并没有移动，这只是用户在不同地点用不同IP上网，和传统的固定地点上网没有本质区别；<br>    相关概念：<br>        1）永久地址（归属地址）：移动站的原始地址；<br>        （类似于老同学们保留彼此父母的家庭地址，在未来即使没有在具体的联系地址，也总是能够通过家庭地址询问对方父母取得联系）；<br>        2）归属网络：移动站原始连接的网络；<br>        （永久地址就是移动站在归属网络中的地址，这个关联是不会变的）；<br>        3）归属代理：为移动IP提供代理服务，从而实现移动站地址的改变，对互联网的其余部分保持透明；<br>        （通常这个代理就是移动站归属网络的路由器，作为代理的特定功能是在应用层完成的，归属代理既是路由器又是主机）；<br>        4）被访网络（外地网络）：移动站移动到另一个地点所接入到网络；<br>        5）外地代理：移动站在被访问网络中的代理；<br>        （通常也是被访网络的路由器，当然也是主机）；<br>        6）转交地址：外地代理为移动站创建的临时地址；<br>            注意：<br>                1）转交地址仅供移动站、归属代理、外地代理使用；<br>                2）转交地址不具有唯一性，这不会出现问题，因为外地代理给移动站发送数据的时候，不会用类似ARP协议的方法来解析转交地址，而是直接通过移动站的MAC地址发送数据；<br>                3）转交地址的网络号要和被访网络的网络号一致；<br>        7）同址转交地址：移动站本身作为外地代理的情况，这时的转交地址就是同址转交地址；<br>        （这种情况的移动站可以移动到任何网络，而不必担心外地代理是否可用）；<br>    相关工作过程：<br>        1）相关准备：<br>            1）移动站进入被访网络，并向外地代理登记；<br>            2）外地代理将移动站在被放网络中的转交地址告诉归属代理；<br>        2）通信者向移动站通信：<br>            1）通信者发送给移动站数据报，目的地址使用移动站的归属地址；<br>            2）数据报被归属代理截获，归属代理使用转交地址对数据报封装，通过隧道技术发送给外地代理；<br>            3）外地代理将数据报拆封，得到目的地址为移动站归属地址的数据报，转交给移动站；<br>        3）移动站向通信者通信：<br>            1）移动站使用自己的归属地址作为源地址，使用通信者的IP地址作为目的地址，直接发送，不必经过归属代理；<br>    为了支持移动网络，网络层新增功能：<br>        1）移动站到外地代理的协议：<br>            1）移动站进入被访网络的时候，向外地代理进行登记，从而获得一个转交地址；<br>            2）移动站离开被访网络的时候，注销原来的登记；<br>        2）外地代理到归属代理的协议：<br>            1）外地代理向归属代理提供移动站的转交地址；<br>            2）注意：外地代理不会向归属代理注销转交地址，因为移动站到新的被访网络的时候新的外地代理会向归属代理提供新的转交地址，覆盖原来的地址；<br>        3）归属代理数据报封装协议：<br>            1）归属代理收到发送给移动站的数据报后要将其封装成新的数据报；<br>            2）通过隧道将新数据报转交给外地代理；<br>        4）外地代理拆封协议：<br>            1）外地代理收到归属代理封装的数据报后要进行拆封，将原始的数据报给移动站；<br>        注意：<br>            1）这种过程又叫做间接路由选择，因为通信者所在的源站不知道移动站的当前地址，而是将数据报发送给归属网络，以后的寻址工作都由归属代理完成；<br>    三角形路由选择问题：<br>        使用间接路由选择，可能会引起数据报转发的低效，因为：<br>            1）如果通信者和移动站本来有一条更加有效的路由；<br>            2）极端情况是通信者和移动站就在同一个网络中，即通信者在被访网络中；<br>            3）完全可以通过网络直接交付；<br>            4）但是仍然使用移动IP的方法，会让数据报两次穿越广域网，浪费时间还增加通信量；<br>        解决方法：<br>            直接路由选择；<br>            1）通信者创建一个通信者代理；<br>            2）通信者代理向归属代理，询问移动站在被访网络的转交地址；<br>            3）通信者代理，使用隧道技术，即将数据报发送到外地代理；<br>        需要考虑的问题：<br>            1）增加移动用户定位协议：用来让通信者代理向移动站的归属代理查询转交地址；<br>            2）当移动站移动到其他网络的时候，获得移动站的位置信息：<br>                1）将移动站首次使用的外地代理，称为锚外地代理；<br>                2）通信者代理，将要发送的数据报再封装后，发送给锚外地代理；<br>                3）锚外地代理，拆封，转交给移动站；<br>                4）移动站移动到另一个被访网络后，向新外地代理登记；<br>                5）新外地代理将新转交地址告诉锚外地代理；<br>                6）通信者代理仍然使用锚外地代理，当锚外地代理收到封装的数据报后，转发给新外地代理，新外地代理拆封后交给移动站；<br>    注意：上面的问题可以统称移动性管理；</p>
+<h2 id="try-yourself"><a href="#try-yourself" class="headerlink" title="try yourself"></a>try yourself</h2><p><code>if you make sure you&#39;re ready, just try this</code></p>
+<p>辨认一下这些数字的意义：</p>
+<ol>
+<li>1500B </li>
+<li>0x1B&#x2F;0x01&#x2F;0x04</li>
+<li>0x7E</li>
+<li>0x0021&#x2F;0xC021&#x2F;0x8021</li>
+<li>0x7D,0x5D&#x2F;0x7D,0x5E&#x2F;0x7D,0x20</li>
+<li>96比特时间&#x2F;10Mbps,512比特时间</li>
+<li>0&#x2F;10&#x2F;110</li>
+<li>8,24&#x2F;16,16&#x2F;24,8</li>
+<li>32,48</li>
+<li>16,30,3</li>
+</ol>
+<p>透明传输的含义是什么？</p>
+<p>PPP协议的组成是什么？</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,788 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>DBS [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/plans">Plans</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>DBS</h1>
+			<p><code>我在大学三年级的秋季学期选修了数据库系统导论这门课程，这篇blog用来记录：1）我对于相关知识点复习的梳理；2）一些习题；3）考试的重点</code></p>
+<h2 id="复习梳理"><a href="#复习梳理" class="headerlink" title="复习梳理"></a>复习梳理</h2><p><code>复习梳理≠照搬原文，内容阐释点到为止，最重要的是达成两个目的1）梳理整体知识脉络，形成框架；2）标记重点，便于回到资料中复习；所以最后阶段的背诵记忆，应该用这份梳理为参考结合老师的资料进行</code></p>
+<p><strong>期末：1）过一遍要背的；2）练习时间多关注关系代数、SQL、综合分析（关系数据理论）</strong>；</p>
+<h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>这一章主要有4个部分，从前往后，1）在数据库系统概述中了解了与数据库有关的基本概念；2）在此基础上，为了把现实世界中的事物抽象为数据保存，我们学习了数据模型；3）有了抽象的数据模型之后，我们回到抽象的数据库系统，从整体上，探讨了数据库系统的三级模式；4）最后从细节上，了解了数据库系统的组成</p>
+<h3 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h3><p><code>一些与数据库有关的基本概念</code></p>
+<p><strong>数据：定义&amp;基本对象、特点（语义）</strong><br>    定义：数据库中存储的基本对象，描述事物的<strong>符号记录</strong>；<br>    特点：<strong>数据与语义</strong>是不可分的；<br><strong>数据库：定义（具有4个特点的集合）</strong><br>    数据库是<strong>长期存储</strong>在计算机内部的，<strong>有组织</strong>、<strong>可共享</strong>的<strong>大量数据</strong>的集合；<br>数据库管理系统：定义（某位置的软件）；缩写DBMS；能力（了解）<br>    位于用户与操作系统之间的一层数据库管理软件；<br>数据库系统：定义；构成（4）<br>    数据库+数据库管理系统+应用系统+数据库管理员；<br><em>关于数据库系统定义的理解（例如使用MySQL来管理数据的基础上，开发了一个实际的应用，就可以叫做数据库系统）</em>；</p>
+<p><code>关于数据管理技术的发展，主要得注意DBS阶段和文件系统阶段的对比，以及数据库系统的特点</code></p>
+<p>发展的阶段（3个阶段）</p>
+<p>阶段对比：</p>
+<p>共享程度（无共享，很多冗余-差共享，多冗余-多共享，低冗余）；</p>
+<p>独立性（不独立，依赖程序-差独立，数据逻辑结构改变需修改程序-高度物理独立性与一定的逻辑独立性）；</p>
+<p>结构化情况（无结构-记录内有结构，整体无结构-整体结构化）；</p>
+<p>数据控制能力（应用控制-应用控制-数据库管理系统自己控制）</p>
+<p><em>讨论独立性的时候，讨论的是数据与应用程序的独立性</em>；</p>
+<p><strong>数据库系统的特点（4个特点，对应前面四种对比的维度）</strong>：</p>
+<p>数据<strong>结构化</strong>：主要特点之一；不局限某一个应用；最小存取单位，数据项</p>
+<p>数据的<strong>共享度高</strong>，<strong>冗余性低</strong>，易<strong>扩充</strong>；<br>（共享程度：面向整个系统，多个用户、应用）</p>
+<p>数据的<strong>独立性</strong>高；<br>（独立性：物理独立性（数据物理存储、应用程序）；逻辑独立性（数据库逻辑结构、应用程序）；保障（二级映像））</p>
+<p>数据由<strong>数据库管理系统</strong>（DBMS）<strong>统一管理</strong>：安全性、完整性、并发控制、错误恢复（稍微了解概念，每一点在后面都会作为章节展开）</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>数据模型：通俗概念；工具定位</p>
+<p>数据模型的分类：</p>
+<p>两类数据模型：概念模型（信息模型）&amp;逻辑模型和物理模型</p>
+<p>概念模型的一种表示方法：实体-联系方法</p>
+<p><strong>逻辑模型</strong>包括：<strong>层次、网状、关系、面向对象、对象关系模型</strong>（逻辑模型是常用的，其中的关系模型更是我们重点学习的，因为其可以用于DBMS的实现）；<em>它们都是常用的数据模型</em></p>
+<p>物理模型定位：对数据的最底层抽象，数据在系统内部或磁盘磁带上的存储方式与存取方法</p>
+<p><strong>数据模型的组成要素</strong>：</p>
+<p><strong>数据结构</strong>：定义；对系统静态特性的描述</p>
+<p><strong>数据操作</strong>：定义；操作类型（查询、更新：插入、删除、修改）；对系统动态特性的描述</p>
+<p>数据的<strong>完整性约束条件</strong>：定义（一组完整性规则的集合）；目的（数据正确、有效、相容）<br><em>有效对应符合规定的条件，相容对应满足数据间的一致性</em></p>
+<p>概念模型：</p>
+<p>概念模型用途：信息世界建模</p>
+<p>信息世界基本概念：实体（客观存在、可区别的事物）；属性（实体的特性）；码（<strong>唯一</strong>标识实体的<strong>属性集</strong>）；域（属性取值范围）；实体型；实体集；联系（事物内部、事物之间-属性间、实体集间）</p>
+<p>联系的分类：一对一联系、一对多联系、多对多联系</p>
+<p><strong>E-R图</strong>：基本图形表示；各类联系的表示；码的表示；联系可以有属性；<br>（注意多对多联系在E-R图中，联系的属性有什么，<strong>学生选课联系作为多对多联系的属性只有Grade</strong>）；</p>
+<p>层次模型：</p>
+<p>数据库系统中最早出现的数据模型</p>
+<p>满足的基本条件：1）有且仅有一个结点没有双亲结点，根结点；2）除根结点，其它结点有且只有一个双亲</p>
+<p>网状模型：</p>
+<p>网状数据库系统的组织方式，网状模型；<em>层次模型是网状模型的特例</em></p>
+<p>满足的基本条件：1）允许一个以上的结点无双亲；2）一个结点可以有多于一个双亲结点</p>
+<p>关系模型：</p>
+<p>关系数据库系统的组织方式，关系模型；<em>几乎与所有计算机厂商退出的DBMS都支持关系模型，伟大无需多言~</em></p>
+<p>关系模型的数据结构：关系（对应一张表，元组的集合）；元组（表中的一行）；属性（表中的一列，有名字）；码（属性组，唯一确定元组）；域；分量（元组的一个属性值）；</p>
+<p>关系模型的操作：查询、插入、删除、更新；<em>集合操作，操作对象与结果都是关系，即元组的集合</em></p>
+<p>关系模型的完整性约束：实体完整性、参照完整性、用户定义的完整性</p>
+<p>关系模型的存储结构：实体以及联系都用表来进行（这也是关系模型的优点，概念单一）；<em>突然出现实体、联系的描述，我的理解：概念模型完成了对信息的建模，现在使用逻辑模型中的关系模型让这些抽象的信息建模具有逻辑关系，这里的逻辑关系指的是面向计算机编程的抽象逻辑，其对立面是真实的物理情况，而非抽象信息建模之间的逻辑关系（在概念模型的阶段就完成了）</em></p>
+<p>关系模型的缺点：存取路径对用户隐蔽，可能导致用户使用效率较低的查询<br>关系的描述：关系模式；</p>
+<p>关系的规范化：必需确保；<em>最基本的规范条件是，关系的每一个分量是不可分的数据项，绝不允许表中有表。否则就是非规范关系</em></p>
+<h3 id="数据库系统的结构"><a href="#数据库系统的结构" class="headerlink" title="数据库系统的结构"></a>数据库系统的结构</h3><p><strong>数据库系统的结构****：三级模式结构</strong>，<strong>外模式-模式-内模式</strong>，<strong>外模式&#x2F;模式映像</strong>（逻辑独立性），<strong>模式&#x2F;内模式映像</strong>（物理独立性）</p>
+<p>模式：<strong>数据库中全体数据</strong>的<strong>逻辑结构和特征的描述</strong>；需要对型进行描述；相对稳定；反映数据结构和联系</p>
+<p>外模式：<strong>用户能够看见的</strong>局部数据的<strong>逻辑结构和特征描述</strong></p>
+<p>内模式：数据<strong>物理结构和存储方式</strong>的描述</p>
+<p><strong>逻辑独立性</strong>：<br>    1）当<strong>模式改变</strong>时，数据库管理员<strong>修改有关的模式&#x2F;外模式映像</strong>，使<strong>外模式保持不变</strong>；<br>    2）应用程序是依据数据的外模式编写的，从而<strong>应用程序不必修改</strong>，保证了<strong>数据与程序的逻辑独立性</strong>；</p>
+<p><strong>物理独立性</strong>：<br>    1）当数据库的<strong>存储结构改变</strong>了，数据库管理员<strong>修改模式&#x2F;内模式映像</strong>，使<strong>模式保持不变</strong>；<br>    2）<strong>应用程序不受影响</strong>，保证了<strong>数据与程序的物理独立性</strong>；</p>
+<p><em>三级模式结构的优点 来自ds</em><br>    1）保证了数据的逻辑独立性；<br>    2）保证了数据的物理独立性；<br>    3）简化了用户接口，方便共享；<br>    4）有利于数据的安全与保密；<br>    5）便于数据的集中管理；</p>
+<p>型：对数据结构及属性的说明；（类比实体型，都是类似于“类”的概念）</p>
+<p>值：型的具体赋值</p>
+<p>实例：将模式整体看作一个型，实例就是值；反映了数据库某一个时刻的状态</p>
+<h3 id="数据库系统的组成"><a href="#数据库系统的组成" class="headerlink" title="数据库系统的组成"></a>数据库系统的组成</h3><p>组成：数据库DB、数据库管理系统（及开发工具）DBMS、应用系统、数据库管理员DBA</p>
+<h3 id="小结重点"><a href="#小结重点" class="headerlink" title="小结重点"></a>小结重点</h3><p>数据库系统概述：1）数据库基本概念；2）数据管理的发展过程</p>
+<p>数据模型：1）数据模型的三要素；2）概念模型，E-R模型；3）三种主要数据库模型（层次、网状、关系，当然关系最重要）</p>
+<p>数据库系统的结构：1）三级模式结构；2）数据库系统两层映像系统结构</p>
+<p>数据库系统的组成</p>
+<h2 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h2><h3 id="关系数据结构及形式化定义"><a href="#关系数据结构及形式化定义" class="headerlink" title="关系数据结构及形式化定义"></a>关系数据结构及形式化定义</h3><h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p>关系模型的数据结构：关系，在用户角度，关系是一张二维表，列对应属性，行对应元组</p>
+<p>关系定义的前置知识：</p>
+<ol>
+<li><strong>域（Domain）</strong>：一组具有相同数据类型的值的集合</li>
+<li><strong>笛卡尔积</strong>：给定一组域，其笛卡尔积为一个集合，其中的元素形式为(d1,d2,…,dn)，di为分量，是来自域Di的值，将所有域中的进行组合得到类似的元素，然后形成的集合就是笛卡尔积</li>
+<li><strong>元组</strong>，2.中提到的元素就是元组</li>
+<li>分量，元组的分量的值，简称分量</li>
+</ol>
+<p>于是，笛卡尔积可以表示为一个二维表，其中的每一行对应一个元组，每一列的值来自一个域</p>
+<p><strong>关系</strong>：域D1、D2、…、Dn的笛卡尔积的子集，即在D1，D2，…，Dn上的关系，表示为R(D1,D2,…,Dn)，其中R就是关系名，而n可以叫做关系的目或度（n&#x3D;1时为单元关系，n&#x3D;2时为二元关系）</p>
+<p>元组的表示：通常用t进行标识</p>
+<p>关系的表示：可以将关系看作一个二维表，行对应元组，列对应域</p>
+<p><strong>属性</strong>：属性的引入是类似给域取了一个名字，毕竟域作为一个值的集合本身并没有名字，我们给它取一个名字可以反映这组值代表的含义。（这也是我们通常更关注的东西，例如对于一列元组的字符串分量值，比起关心它们都是字符串，我们更关心它们的实际含义，例如它们都代表名字）</p>
+<p>码：<br><em>后面的章节中有更加严谨的定义，这里看看就好</em>；</p>
+<ol>
+<li>候选码：关系中某一属性组的值能够唯一标识一个元组，则该属性组是候选码</li>
+<li>全码：当一个关系的候选码是所有属性构成的属性组时，该属性组称为全码</li>
+<li>主码：如果一个关系有多个候选码的时候，则选定一个作为主码（注意，候选码本身也可能是属性组）</li>
+<li>主属性：候选码对应属性组中的各个属性都是主属性（主属性不是主码的属性）</li>
+<li>非主属性：不包含在任何候选码中的属性，即非主属性</li>
+</ol>
+<p>三类关系：</p>
+<ol>
+<li>基本关系：基本表，实际存在的表</li>
+<li>查询表</li>
+<li>视图表：由基本表或其他视图表导出的表，是虚表，不对应实际存储的数据</li>
+</ol>
+<p>基本关系的性质：</p>
+<ol>
+<li>列是同质的（相同数据类型、性质）</li>
+<li>不同列可以出自同一个Domain</li>
+<li>行、列顺序无所谓</li>
+<li>任意两个元组的候选码不能相同</li>
+<li>分量必须取原子量，不可再分（不能表中有表）</li>
+</ol>
+<h4 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h4><p>关系模式实际上就是对关系的描述，关系模式是型，关系是值</p>
+<p>关系模式形式化表示：R(U,D,DOM,F)</p>
+<ol>
+<li>R关系名</li>
+<li>U属性名集合</li>
+<li>D属性 来自的 域 的集合</li>
+<li>DOM属性向域的映像集合</li>
+<li>F属性间依赖关系集合</li>
+</ol>
+<p>关系模式常用表示：R(A1,A2,…,An)</p>
+<ol>
+<li>R是关系名</li>
+<li>A1～An是属性名<br>（实际使用的时候通常将候选码写在前面，分别用下划线强调；如果是关系组形成的候选码则下划线不间断）</li>
+</ol>
+<p>关系模式是静态的、稳定的；关系是动态的、变化的</p>
+<h4 id="关系数据库-1"><a href="#关系数据库-1" class="headerlink" title="关系数据库"></a>关系数据库</h4><p>定义：给定应用领域，所有实体及实体之间的联系 的关系 的集合 构成一个关系数据库<br><code>结合实验1进行理解</code></p>
+<h3 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h3><p>常用操作分为两大类：</p>
+<ol>
+<li>查询</li>
+<li>数据更新</li>
+</ol>
+<p>查询包括：<strong>1）选择；2）投影；3）并；4）差；5）笛卡尔积；6）连接；7）除；8）交</strong></p>
+<p>注：<strong>上述前五种是基本操作</strong></p>
+<p>数据更新包括：1）插入；2）删除；3）修改</p>
+<p>关系操作的特点：操作的所有对象以及结果都是<strong>集合</strong>（这是很自然的，因为关系本身就是集合）</p>
+<p>常用的关系数据库语言：</p>
+<ol>
+<li>关系代数语言ISBL</li>
+<li>关系演算语言</li>
+<li>具有1、2的双重的语言，如SQL</li>
+</ol>
+<h3 id="关系的完整性"><a href="#关系的完整性" class="headerlink" title="关系的完整性"></a>关系的完整性</h3><p>关系有三类完整性约束：</p>
+<h4 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h4><p>实体完整性规则：一个或一组属性A是基本关系R的主属性，则A不能取空值</p>
+<p>细节说明：</p>
+<ol>
+<li>实体完整性针对基本表（对应现实世界实体集合）</li>
+<li>主码不可重复，让实体可区分</li>
+<li>关系模型中主码作为唯一标识（这里已经不再强调候选码了，尽管其仍然存在）</li>
+<li>主属性不能取空值</li>
+</ol>
+<h4 id="参照完整性"><a href="#参照完整性" class="headerlink" title="参照完整性"></a>参照完整性</h4><p>关系间的引用：由于实体 实体间的联系 都被抽象为关系，所以可能存在关系间的引用（尤其是在表示联系的时候，考虑一下SC和Student、Course就明白了）</p>
+<p>外码：F是R的属性，且非主码  对应了S的主码   则F是R的外码</p>
+<ol>
+<li>R是参照关系</li>
+<li>S是被参照关系</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>参照关系与被参照关系不一定是不同关系（班长的例子）</li>
+<li>外码 与 对应的主码 一定在同一Domain</li>
+<li>通常：1）若参照关系与被参照关系上同一关系，外码与对应主码不同名；2）若参照关系与被参照关系不是同一关系，外码与主码同名</li>
+</ol>
+<p>参照完整性约束：若属性是基本关系的外码，则其 或取空值 或等于对应主码的某个值</p>
+<h4 id="用户定义的完整性约束"><a href="#用户定义的完整性约束" class="headerlink" title="用户定义的完整性约束"></a>用户定义的完整性约束</h4><p>结合实验2的表项自己的限制 or 表项之间的限制 理解即可</p>
+<h3 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h3><p><em>这里的笔记只是一些基础概念，要结合试题进行练习，期末会考察10分</em></p>
+<p>关系代数是一种具体的关系数据库语言，具备相应的关系操作（关系代数中称为关系运算），以及完整性约束？或许，总之在这一部分我们学习了一种具体的关系数据库语言，并且着重关注其中的关系运算部分。（后续还有关系演算、SQL标准语言）</p>
+<h4 id="运算符的前置知识"><a href="#运算符的前置知识" class="headerlink" title="运算符的前置知识"></a>运算符的前置知识</h4><p>它们的作用主要是作为一种语言，来对下面的各个运算符进行定义</p>
+<ol>
+<li>关系$R$</li>
+<li>元组$t$</li>
+<li>属性$A$</li>
+<li>元组的属性值$t[A_i]$</li>
+<li>剩余属性组</li>
+<li>$t_r$与$t_s$连接的新元组</li>
+<li>象集$Z_x$，若属性Z、X是关系R的属性，则在R上象集$Z_x$是X属性值为x的元组的Z属性值的集合</li>
+</ol>
+<p>象集对于理解除运算很重要，其实就是属性值的集合，只是要明白这个属性值时如何取出来的</p>
+<h4 id="集合运算符"><a href="#集合运算符" class="headerlink" title="集合运算符"></a>集合运算符</h4><p><strong>集合运算符：</strong></p>
+<ol>
+<li>并 $\cup$</li>
+<li>交 $\cap$</li>
+<li>差 $\sub$</li>
+<li>笛卡尔积 $\times$</li>
+</ol>
+<p>并、交、差：若关系R、S进行前三种运算，则<strong>R、S具有的属性一定相同</strong><br>笛卡尔积：$R\times S$，运算规则类似双重for循环，对R的每一个元组，与S的每一个元组完成一次组合，生成一个新的元组，其各属性名为$R.XXX…S.YYY…$</p>
+<h4 id="专门的关系运算符"><a href="#专门的关系运算符" class="headerlink" title="专门的关系运算符"></a>专门的关系运算符</h4><p><strong>专门的关系运算符：</strong></p>
+<ol>
+<li>选择 $\sigma_F$</li>
+<li>投影 $\Pi_A$</li>
+<li>连接 $\bowtie$（自然连接的符号）</li>
+<li>除 $\div$</li>
+</ol>
+<p>前三个符号的说明：</p>
+<ol>
+<li>选择是单目运算符 运算时对每个元组 判断逻辑表达式F对真假 为真则选中保留进入结果表格</li>
+<li>投影是单目运算符 运算时对整个关系 保留选定的属性（组）A 进入结果表格</li>
+<li>连接符号是双目运算符 运算时对关系R的每个元组 进行类似笛卡尔积时的双重循环 但完成一对元组的连接并纳入结果表 条件是逻辑表达式F被满足（普通的连接符号在$\bowtie$下面有逻辑表达式F）</li>
+</ol>
+<p>对连接进行补充：</p>
+<ol>
+<li>自然连接 额外的条件是进行运算的两个关系<strong>一定有相同的属性（组）</strong>，连接条件默认是元组的相同属性（组）值，相同即连接</li>
+<li>左外连接，以左边为准进行双重for循环的遍历，即使右侧没有出现满足条件的元组，可以让外层for循环，当前选中的左侧元组，也要保留该元组值，对应新元组的右侧关系属性值设置为NULL</li>
+<li>右外连接，与左外连接类似，以右侧为标准（将右侧关系的元组放在双重for循环的外层）</li>
+<li>外连接，左外连接与右外连接结果的并</li>
+</ol>
+<p>注：上面对for循环的描述只是为了大脑思考的时候便于理解，实际上把谁放在外层循环，先做后做都是等价的</p>
+<p>涉及逻辑表达式的部分会有：<br>    1）<strong>算数比较符</strong>；<br>    2）<strong>逻辑运算符</strong>；</p>
+<p><strong>关于除运算</strong>：</p>
+<ol>
+<li>R与S进行除运算的条件，R与S有相同的属性（组）</li>
+<li>$R(X,Y)\div S(Y,Z)$的结果是以$X$的属性值，形成的元组的集合</li>
+<li>满足条件的属性值，要求关系S的$Y$是R上象集$Y_x$的子集</li>
+</ol>
+<p>除运算的过程，对于R的每一个元组，找到其X属性值，然后看一看对应的象集$Y_x$，即同样具有该属性值的所有元组的所有Y值有哪些，如果这些值覆盖了S的所有Y值，那么该X属性值可以纳入结果。</p>
+<h3 id="关系演算"><a href="#关系演算" class="headerlink" title="关系演算"></a>关系演算</h3><p>以数理逻辑的谓词演算为基础，主要是两种类型</p>
+<ol>
+<li>元组关系演算（ALPHA）</li>
+<li>域关系演算（QBE）</li>
+</ol>
+<p>我们学习过的是元组关系演算</p>
+<p>这一部分可以稍作了解，但是最重要的是明确——理解关系演算对SQL查询语句的执行很有帮助。</p>
+<h2 id="数据库系统"><a href="#数据库系统" class="headerlink" title="数据库系统"></a>数据库系统</h2><h3 id="SQL概述"><a href="#SQL概述" class="headerlink" title="SQL概述"></a>SQL概述</h3><p><em>SQL语句拿不准的要写注释</em></p>
+<p>SQL：结构化查语言，关系数据库的标准语言</p>
+<p><strong>SQL的特点</strong>：</p>
+<ol>
+<li><strong>综合统一</strong>：DDL、DQL、DML、DCL集于一体</li>
+<li><strong>高度非过程化</strong>：只需要注意做什么，无需关注怎么做</li>
+<li><strong>面向集合的操作方式</strong>：操作的对象与结果都是元组的集合</li>
+<li>同一种结构提供<strong>多种使用方式</strong>：<strong>交互式、嵌入式</strong>；<br> （多种功能，既是独立于言又是嵌入式语言）；</li>
+<li><strong>语言简洁，易学易用</strong>：9个核心动词，完成核心功能（对应的就是<strong>DDL</strong> CREATE DROP ALTER、<strong>DQL</strong> SELECT、<strong>DML</strong> INSERT DELETE UPDATE、<strong>DCL</strong> GRANT REVOKE）<br><code>145 2 3</code></li>
+</ol>
+<p>注意理解<strong>非过程化</strong>、<strong>面向集合</strong></p>
+<p>SQL对于关系模式数据库的支持：SQL的存储文件对应内模式、基本表对应模式、视图对应外模式，由SQL统一管理</p>
+<ol>
+<li>存储数据库组织关系数据库的内模式、物理结构对用户透明</li>
+<li>基本表，对应SQL一个关系，本身独立存在</li>
+<li>视图，数据库中只存放视图的定义，不存放视图对应的数据，视图是一个虚表</li>
+</ol>
+<h3 id="DDL语句"><a href="#DDL语句" class="headerlink" title="DDL语句"></a>DDL语句</h3><p>DDL：数据定义语言</p>
+<p>在SQL的DDL语言如下</p>
+<ol>
+<li>CREATE</li>
+<li>DROP</li>
+<li>ALTER</li>
+</ol>
+<h4 id="模式DDL"><a href="#模式DDL" class="headerlink" title="模式DDL"></a>模式DDL</h4><p>这一部分了解就好，知道有一个模式SCHEMA的存在，类似于命名空间。</p>
+<p>每一个基本表都属于某一个模式</p>
+<p>一个模式可以包含多个基本表</p>
+<h4 id="基本表DDL"><a href="#基本表DDL" class="headerlink" title="基本表DDL"></a>基本表DDL</h4><p><strong>创建基本表的基本范式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE &lt;name &gt;</span><br><span class="line">(</span><br><span class="line">    &lt;col name &gt; &lt;data <span class="built_in">type</span> &gt; [列级完整性约束]</span><br><span class="line">    [, ...] [...]</span><br><span class="line">    [, 表级完整性约束]</span><br><span class="line">    [, ...]</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注：如果完整性约束涉及多个列，那必须定义在表级</p>
+<p>在这一部分应该掌握的语句</p>
+<ol>
+<li>基本范式的最基础使用</li>
+<li>常用的data type：CHAR(length) SMALLINT INT REAL DATE TIME</li>
+<li>指定某一列为主码，指定多个列一起作为主码</li>
+<li>指定某一列取值唯一</li>
+<li>指定某一列不能为空值</li>
+<li>指定外码</li>
+</ol>
+<p><strong>修改基本表的基本范式</strong></p>
+<p>ALTER TABLE Student<br>DROP Sname <strong>UNIQUE</strong>;</p>
+<p>ALTER TABLE Student<br>ADD Ssex CHAR(2) CHECK IN (‘F’,’M’);</p>
+<p>ALTER TABLE Student<br>ALTER <strong>COLUMN</strong> Ssex CHAR(10);</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE &lt;name &gt;</span><br><span class="line">[ADD &lt;col name&gt; &lt;data <span class="built_in">type</span>&gt; &lt;完整性约束&gt;] //增加新列</span><br><span class="line">[DROP &lt;col name&gt; &lt;完整性约束&gt;] //删除列，注意删除的时候要附上该列的完整性约束</span><br><span class="line">[ALTER COLUMN &lt;col name&gt; &lt;data <span class="built_in">type</span>&gt;]; //更改列的数据类型</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注：</p>
+<ol>
+<li>新增加的列在已有元组中默认为空值NULL</li>
+<li>ADD有直接添加完整性约束的用法，类似<code>ADD UNIQUE(Cname)</code></li>
+</ol>
+<p><strong>删除基本表的基本范式</strong><br>    CASCADE&#x2F;RESTRICT</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DROP TBALE &lt;name &gt;</span><br><span class="line">[CASCADE | RESTRICT];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注：</p>
+<ol>
+<li>CASCADE对应级联删除，删除该表的同时其所有的依赖对象（FOREIGN KEY引用、VIEW…都会被一起删除）</li>
+<li>RESTRICT，如果该表还有其他依赖的话则erro，否则删除</li>
+</ol>
+<h4 id="索引DDL"><a href="#索引DDL" class="headerlink" title="索引DDL"></a>索引DDL</h4><p><code>关于索引也是了解就好，知道有这个东西的存在</code></p>
+<p>索引的目的：加快查询速度</p>
+<p>索引的分类</p>
+<ol>
+<li>唯一索引</li>
+<li>非唯一索引</li>
+<li>聚簇索引</li>
+</ol>
+<p>索引是关系数据库的内部实现技术，属于内模式的范畴，常用的实现方式有B+树索引、HASH索引等</p>
+<p>注：一个基本表上最多只能建立一个聚簇索引</p>
+<h3 id="DQL语句"><a href="#DQL语句" class="headerlink" title="DQL语句"></a>DQL语句</h3><p>这一部分是数据查询语言，基本上都是在基本表上进行的</p>
+<p><strong>基本范式：</strong></p>
+<p>DISTINCT&#x2F;ALL;<br>ASC&#x2F;DESC;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT [DISTINCT|ALL]&lt;目标列表表达式 &gt; [,&lt;目标列表表达式&gt;...] </span><br><span class="line">FROM &lt;表名 or 视图名 &gt; [,&lt;表名 or 视图名 &gt;...]</span><br><span class="line">[WHERE &lt;条件表达式&gt;]</span><br><span class="line">[GROUP BY &lt;col name&gt;]</span><br><span class="line">[HAVING &lt;条件表达式&gt;]</span><br><span class="line">[ORDER BY &lt;col name&gt; [ASC|DESC]];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h4><p><code>单表查询部分在逻辑上理解不困难，难点主要是掌握各种语句的用法，这里主要采用列举例题与对应知识点的形式，复习的时候要做到看到例题能够想到考察的知识点与对应的查询语句是什么</code></p>
+<p>选择<strong>指定列</strong><br>    eg：查询学生表中的学号、姓名；</p>
+<p>查询<strong>全部列</strong><br>    eg：查询学生表的信息；</p>
+<p>查询<strong>经过计算的表达式</strong><br>    <strong>算数表达式</strong><br>        eg：查询学生的出生年份<br>    <strong>字符串常量</strong><br>        主要作用是对结果进行修饰，对应输入的字符串常量在结果中<strong>单独占一列</strong>，其相对于其他列的位置由查询语句确定，独占的一列从属性名到所有的属性值都是该字符串常量<br>    <strong>函数</strong>：LOWER、UPPER等（作用是对相应的属性列中的属性值，全部显示经过函数处理该属性值的结果）<br>        eg：查询学生姓名以及对应的所在院系，院系名称全部用小写<br>            <strong>时间操作有关函数？</strong><br>            1）当前日期&#x2F;时间：CURRENT_DATE&#x2F;CURRENT_TIME；<br>            2）时间的运算：<br>                <strong>提取时间直接运算</strong>：<br>                    EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM BitrhDate);<br>                <strong>使用时间间隔符</strong>：<br>                    CURRENT_DATE - INTERVAL ‘3’ YEAR&#x2F;MONTH&#x2F;DAY;&#x2F;&#x2F;字符数字代表对应的时间度量，后面的关键字用来指定年月日单位；<br>            3）计算两个日期的天数差：<br>                DATEDIFF(CURDATE,BirthDATE);&#x2F;&#x2F;MySQL语法；<br>    列别名：<strong>别名紧跟在属性名</strong>之后，不加逗号；（对比查询不同属性列时用逗号隔开）<br>        eg：查询所有学生的出生日期，并使用列别名让结果对用户更友好</p>
+<p>选中表中的若干元组<br>    对查询结果去重与否<br>        SELECT DISTINCT&#x2F;ALL Sno…（缺省默认ALL）<br>    查询满足条件的元组<br>        WHERE<br>            比较：&#x3D; &gt; &lt; &gt;&#x3D; &lt;&#x3D; !&#x3D; &lt;&gt; !&gt; !&lt;<br>                eg：查询计算机专业的学生<br>            确定范围：<strong>BETWEEN AND&#x2F; NOT BETWEEN AND</strong><br>                eg：查询年龄在13到15的学生<br>            与集合的关系：<strong>IN&#x2F; NOT IN</strong><br>                eg：查询是计算机或信息技术或数学系的学生<br>            字符匹配：<strong>LIKE&#x2F; NOT LIKE</strong><br>                eg：查询姓刘的学生；查询姓欧阳并且全名三个字的学生<br>            空值：<strong>IS NULL&#x2F; IS NOT NULL</strong><br>            多重条件：<strong>AND&#x2F; OR&#x2F; NOT</strong></p>
+<p>对<strong>查询结果排序</strong><br>    ORDER BY 指定排序参考的属性，<strong>默认ASC升序</strong>、DESC是降序<br>    当排序含有空值的时候，若为ASC空值会最后显示；若为DESC空值会最先显示（<strong>空值被作为了最大值</strong>）<br>    可以有<strong>多个排序条件</strong>（靠前的条件优先级更高，当靠前的条件对应的属性值是相同的时候则会使用下一个条件进一步排序；结果就好像每个元组被分为了一个个整体，并且整体内有序）<br>    eg：查询全体学生情况，结果按所在系的系号升序排序，同一系中的学生按年龄降序排序<br>        **OREDER BY Sdept (ASC), Sage DESC;**（ASC可以默认省略）；</p>
+<p>对查询的属性列使用<strong>聚集函数</strong>（这里主要体现于<strong>用在SELECT之后</strong>）<br>    COUNT<br>        <strong>DISTINCT&#x2F; ALL是可选的</strong>，后者是默认的；<br>        COUNT的效果是统计查询到的元组的个数 or 某属性列值的个数，对应的结果是仅有一个数字属性的元组，代表原先有多少元组；<br>        所以COUNT一般是单独使用的；<br>        eg：查询学生的总人数；查询选修了课程的学生人数<br>            SELECT COUNT(<em>) FROM Student;<br>            SELECT COUNT(DISTINCT Sno) FROM SC;（**注意DISTINCT和COUNT的使用位置 和 实际的用法，</em>或指定具体的列**）；<br>    SUM<br>        <strong>DISTINCT&#x2F; ALL是可选的</strong>，前者是默认的；<br>        计算一列值的总和，要用于数值型的属性列<br>        eg：查询1号学生选修课程的总学分<br>    AVG<br>        <strong>DISTINCT&#x2F; ALL是可选的</strong>，前者是默认的；<br>        计算一列值的平均值，要用于数值型的属性列<br>        eg：计算1号学生的平均成绩<br>    MAX<br>        <strong>求一列中的最大值，一般用于数值型</strong><br>        eg：查询1号学生选修课程的最高分<br>    MIN<br>        <strong>求一列中的最小值，一般用于数值型</strong></p>
+<p>分组查询<br>    GROUP BY语句，目的是为了让<strong>聚集函数可以更加细粒度地进行使用</strong><br>    一般不会单独使用，不会有视觉上的“分组效果”，如果要有的话应该使用多层排序<br>    两种用法：<br>        分组+聚集函数，聚集函数的作用效果上组内的所有元组<br>            eg：查询选修每个课程对应的学生人数<br>            SELECT <strong>DISTINCT</strong> Cno,COUNT(<em>)<br>            FROM SC<br>            GROUP BY Cno;<br>            注意：<br>                1）这里<strong>不需要使用DISTINCT</strong>，因为GROUP BY强制要求对于每一组在结果集合中只有一条数据，而这里使用的Cno以及聚集函数作为结果，对应分组条件，天然的每组就只有一条数据；<br>                2）如果SELECT语句中除了分组列和聚合函数（如COUNT(</em>)）之外，还有其他列，那么这些列可能来自分组内的不同行，这时可能需要使用聚合函数（如MAX, MIN, AVG等）来处理，否则在某些数据库系统中会报错（因为非分组列在分组后有多值，而结果集要求一行只能有一个值）。<br>        分组+聚集函数+筛选组，HAVING语句，以组为单位进行筛选<br>            eg：找出选修了5门及以上课程的学生学号<br>            （注意HAVING与WHERE的区别）<br>            SELECT Sno<br>            FROM Student<br>            GROUP BY Sno<br>            HAVING COUNT(*)&gt;&#x3D;5;</p>
+<h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p><code>要求与单表查询类似，只是要深入理解连接的作用与效果</code></p>
+<p>各种<strong>连接查询</strong>的共同点<br>    在<strong>FROM</strong>之后有多个表<br>    如果表中有相同的属性的话，使用的时候要用<strong>TABLE_NAME.COL</strong>的形式<br>    在WHERE之后<strong>使用来自各表中的属性，规定连接条件</strong><br>    在脑海中考虑连接查询的过程，要先根据连接条件在脑子里有一个<strong>连接后的表的印象，然后将其考虑为单表，在其上进一步查询</strong></p>
+<p>等值连接（自然连接）与非等值连接<br>    <strong>等值连接</strong><br>        在WHERE连接条件中，出现来自各表等属性满足“&#x3D;”关系<br>    <strong>自然连接</strong><br>        在等值连接的基础上，通过指定列手动实现；<br>        （连接条件是，相同的属性值相等）；<br>        （指定的列满足，在保留两个关系所有列的基础上，去掉重复的列）；<br>        eg：查询每个学生及其选修课的情况<br>    非等值连接（不常用）</p>
+<p><strong>自身连接</strong><br>    一个表与自己连接，要求：<strong>给表取别名，用别名访问属性</strong>，这样才能区别开<br>    eg：查询一门课的先修课的先修课<br>    SELECT a.Cno, b.pre<br>    FROM Course a,Course b<br>    WHERE a.pre &#x3D; b.Cno;</p>
+<p><strong>外连接</strong><br>    使用语句<strong>FROM ? LEFT OUTER JOIN ? ON (F)<strong>，这是左外连接，左边的是主表，F是外连接的条件；区别在于即使不满足条件的时候也会将主表保留下来，对应元组在连接后的表中没有的属性值置为空值<br>    类似的还有</strong>RIGHT OUTER JOIN</strong><br>    eg：查询每个学生及其选修课程（当然不能因为没选修课程而将对应的学生忽略）</p>
+<p><strong>多表连接</strong><br>    FROM后跟有多个表名，对应的要在WHERE中注明连接条件<br>    考虑的时候，可以先考虑两个表连接成一张大表，在考虑这张大表与下一张表做对应的连接</p>
+<h4 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h4><p><strong>查询块：</strong><br>    一个SELECT-FROM-WHERE语句作为一个完整的查询块（当然可以配套其他关键字使用）</p>
+<p><strong>嵌套查询：</strong><br>    将<strong>一个查询块嵌套在另一个查询块</strong>的<strong>WHERE子句</strong>或者<strong>HAVING短语</strong>条件中<br>    eg：查询选修了课程名为IS的课程的学生的学号</p>
+<p><strong>不相关子查询：</strong><br>    定义：子查询的查询条件不依赖于父查询<br>    处理：这种可以逐层考虑，因为各层查询基本上是独立的</p>
+<p><strong>相关子查询</strong><br>    定义：子查询的条件依赖于父查询<br>    处理：<br>        1）这种考虑的时候通常，按上层查询的元组进行考虑，对于<strong>上层查询的每一个元组</strong>会<strong>做一次子查询</strong>；而元组则作为子查询可能用到的条件（就像将元组作为参数去调用作为函数的查询一样）<br>        2）上层查询和下层查询如果用到了同一关系，需要给关系取别名<br>    eg：查询学生选课记录中，学生高于自己选修课程的平均分的选课记录中的学号和课程号</p>
+<p><strong>子查询的限制：</strong><br>    1）不能使用ORDER BY子句，因为ORDER BY子句只能对最终结果进行排序<br>    2）子查询一定要在比较符之后（写SQL语句的时候，不能头重脚轻）</p>
+<p><strong>常见的嵌套查询：</strong><br>    1）带IN谓词的子查询<br>        应用场景：通常用于检查上层查询中的某个元组的某属性是否在一些满足特定条件的集合中，由于集合的构造逻辑比较复杂所以要用一个子查询来进行描述。<br>        eg：<br>            1）查询所有与刘晨同学在相同系进行学习的学生学号、姓名和年龄<br>            2）查询选修了“信息系统”这门课程的学生的学号和姓名<br>    2）带有比较运算符的子查询<br>        应用场景：<br>            一般是用于上层元组的可比较属性需要满足特定条件时，该条件的构造比较复杂所以用子查询描述；<br>            子查询要返回一个单值；<br>            需要使用IN的场景，并且子查询返回的是单值，可以用”&#x3D;”<br>        eg：<br>            查询每个学生超过他自己所有选修课程的平均成绩的课程号<br>    3）带有ANY（SOME）或ALL谓词的子查询<br>        应用场景：<br>            常与带有比较运算符的子查询一起用，使用ANY（SOME）or ALL来描述上层查询需要满足的更加复杂的条件<br>            ANY和SOME是等价的，只是两种记法。和比较运算符一起用的常见情况：<br>                1）&gt;ANY，大于子查询中某个值即可<br>                2）&gt;ALL，大于子查询中所有的值<br>                （其他比较类似，ANY要求有某个子查询的结果满足就可以视上层元组满足条件；ALL则要求子查询的所有结果都满足才行）<br>        eg：<br>            1）查询其他系中比计算机科学系所有学生年龄都小的学生姓名及年龄（比年龄最小的还小）<br>        注意：<br>            ANY和ALL可以实现的效果，也可以在带有比较运算符中运用MIN、MAX聚集函数来实现（语义上的等价，很好理解）<br>    4）带有EXISTS谓词的子查询<br>        应用场景：<br>            带有EXISTS谓词的子查询不会返回任何数据，只会返回true or false（子查询有数据 or 没有数据），作为对上层元组是否满足条件的判断；<br>            由于上述特点，所以其应用场景一般是相关子查询，要用上层查询的元组与子查询构造条件<br>        eg：<br>            1）查询所有选修了1号课程的学生姓名<br>            2）查询没有选修1号课程的学生姓名<br>            3）查询与刘晨在同一个系学习的学生<br>        注意：<br>            1）NOT EXISTS的用法和EXISTS类似，只是返回true、false的情况是反着的；<br>            2）由于使用EXISTS谓词不会关注其返回的信息，所以子查询通常用SELECT *；<br>            3）前面所有的子查询都可以用EXISTS实现</p>
+<h3 id="DML语句"><a href="#DML语句" class="headerlink" title="DML语句"></a>DML语句</h3><p>对数据（元组）的操作<br>    <strong>插入数据</strong><br>        INSERT INTO … VALUES…<br>        （省略号处是表名和属性列；VALUES后要使用对应属性列的常量）<br>        注意：<br>            1）带子查询的插入数据：对应VALUES…部分由SELECT语句替换，该语句要返回与INTO后指定的各列一致的数据<br>        eg：<br>            1）将张成名的信息插入Student表<br>                INSERT INTO Student Sno,Sname,Sage,Ssex,Sdept<br>                VALUES (S001,’张成名’,18,’男’,’CS’);<br>            2）对于每一个系，求学生的平均年龄，插入表格中；对应属性（系名，平均年龄）<br>    <strong>修改数据</strong><br>        UPDATE…（指定表名）<br>        SET…（设置列名对应的属性值，属性值可以是表达式）<br>        …（WHERE附加的条件）<br>        注意：<br>            1）附加的条件一般来说是必要的，否则就是对整列进行修改<br>            2）<strong>带子查询的修改</strong>，一般是将相关子查询用在WHERE中，构造较为复杂的修改判断条件<br>        eg：<br>            1）将学生200215121的年龄修改为22岁<br>            2）将计算机系全体学生成绩置0<br>    <strong>删除数据</strong><br>        DELETE<br>        FROM…<br>        …（WHERE附加的条件）<br>        注意：<br>            1）与修改数据类似，在不附加条件的情况下会删除所有元组，但是表仍然存在<br>            2）<strong>子查询</strong>与修改不同的点，DELETE实际上是要用WHERE指定特定的删除对象的（本质上相同，都是选中）<br>            （通常是用WHERE条件指定候选码，从而删除指定的元组；毕竟是以元组为单位操作的，如果单独删除某列数据没有意义，这与UPDATE不同）<br>        eg：<br>            1）删除计算机系所有学生的选课记录<br>            2）删除计算机系所有学生的选课记录</p>
+<h3 id="空值处理"><a href="#空值处理" class="headerlink" title="空值处理"></a>空值处理</h3><p>空值的产生<br>    1）插入<br>    2）修改</p>
+<p><strong>空值的判断</strong><br>    1）IS NULL<br>    2）IS NOT NULL</p>
+<p><strong>空值的约束</strong><br>    1）CREATE语句中若对属性列使用了NOT NULL、UNIQUE进行限制，不能取空值<br>    2）码属性不能为空值（PRIMARY KEY）</p>
+<p>空值的运算<br>    1）有空值的算数运算为空值<br>    2）有空值的比较运算为UNKNOWN<br>    3）有空值的逻辑运算为True或FALSE或Unkonw：<br>        类似于：F&gt;U&gt;T(AND);T&gt;U&gt;F(AND);!U&#x3D;U</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p><strong>视图</strong><br>    <strong>定义</strong>：<strong>虚表</strong>，是<strong>从一个或几个基本表（或视图）导出的表</strong>，数据库中<strong>只存放其定义，不存放相应的数据</strong>；<br>    注意：<br>        如果<strong>一个视图是从一个基本表导出来</strong>的，则它是<strong>行列子集视图</strong></p>
+<p><strong>视图定义</strong><br>    CREATE VIEW NAME …（不指定对应全部列 or 指定列）<br>    AS …（子查询，要与VIEW后的对应列相匹配&#x2F;如果不指定列的话则直接使用子查询的列 以及对应的列名）<br>    …<br>    （<strong>WITH CHECK OPTION</strong>，可选的，一般在子查询中存在WHERE语句的时候启用，<strong>启用后对视图的插入和修改会保证元组满足WHERE条件</strong>）<br>    注意：<br>        1）创建的时候可以基于多个表，只需在子查询中指定即可，但无论如何子查询返回的数据要与VIEW的属性列相匹配<br>        2）创建的时候也可以基于视图，子查询中对视图查询即可<br>        3）子查询中对属性列可以使用表达式；子查询中可以使用分组+聚集函数；都是为了满足视图的信息需要</p>
+<p><strong>删除视图</strong><br>    DROP VIEW 视图名 …（是否用CASCADE）<br>    注意：<br>        1）对应删除了视图的定义<br>        2）如果该视图上导出了其他视图，要用CASCADE及联删除</p>
+<p><strong>查询视图</strong><br>    与查询基本表相同</p>
+<p><strong>更新视图</strong><br>    对视图使用INSERT、UPDATE、DELETE起头的语句，即视图的更新<br>    注意：<br>        1）行列子集视图可以进行更新<br>        2）常见的不能更新的视图：<br>            视图由两个以上基本表导出；<br>            视图上定义的视图不能更新；<br>            视图中的一个元组的数据对应来自基本表中的多个数据不能更新（这种情况可能由子查询有聚集函数、GROUP BY语句、DISTINCT短语…导致）</p>
+<p><strong>视图的作用</strong>：<br>    1）能够<strong>简化</strong>用户的操作<br>    2）使用户以<strong>多种视角</strong>看待同一数据<br>    3）对<strong>重构</strong>数据库提供了一定程度的<strong>逻辑独立性</strong><br>    4）对机密数据提供<strong>安全保护</strong><br>    5）更清晰地表达<strong>查询</strong></p>
+<h2 id="数据库安全性"><a href="#数据库安全性" class="headerlink" title="数据库安全性"></a>数据库安全性</h2><p><code>重点是数据库安全的策略、SQL授权语句</code></p>
+<p><strong>数据库安全性</strong>：数据库安全性是指<strong>保护数据库</strong>，防止<strong>不合法使用</strong>所造成的<strong>数据泄露、更改或破坏</strong>；</p>
+<p><strong>数据库安全性控制的常用方法</strong>：<br>    1）<strong>用户身份鉴别</strong>；<br>        地位：DBMS提供的最外层安全保护措施；<br>        含义：<br>            每个用户在系统中有一个用户标识，由用户名和用户标识号组成（user name 和 UID），对此标识进行鉴别，确定是否是对应用户；<br>        常用方法：<br>            静态口令，eg：密码；<br>            动态口令，eg：短信密码、动态令牌；<br>            生物特征，eg：指纹；<br>            智能卡，不可复制的硬件；<br>    2）多层存取控制；<br>        <strong>存取控制</strong>：<br>            机制组成：<br>                1）用户权限的定义；<br>                2）合法权限的检查；<br>        自主存取控制方法（DAC）；<br>            <strong>含义</strong>：<br>                通过SQL的GRANT和REVOKE<strong>语句定义用户存取权限</strong>，明确用户可以在哪些<strong>数据库对象</strong>上进行何种<strong>类型操作</strong>；<br>                （<em>用户对不同的数据对象有不同的存取权限，不同用户对同一对象有不同存取权限，可以转授存取权限</em>）<br>            <strong>特点（缺点）</strong>：<br>                可能存在数据的<strong>无意泄露</strong>，因为仅通过对数据的<strong>存取权限</strong>来进行安全控制，而<strong>数据本身并无安全标记</strong>；<br>            安全等级：C2，灵活<br>            实现方式：<br>                GRANT、REVOKE语句；<br>        <strong>强制存取控制方法</strong>（MAC）；<br>            <strong>含义</strong>：<br>                一种保证更高程度的安全性，<strong>用户不能直接感知或直接进行控制</strong>，适用于对<strong>数据有严格而固定密级对</strong>部门对存取控制方法；<br>                （<em>每一对象以一定的密级，每一用户对应某一级别的许可证，只有合法许可证的用户才可存取某一对象</em>）<br>            <strong>特点</strong>：<br>                无论数据如何复制，<strong>标记与数据是一个密不可分的整体</strong>；<br>            安全等级：B1，严格<br>            适用于对数据由严格而固定密级分类的部分，例如军事部门、政府部门；<br>                方法：<br>                    <strong>主体</strong>：系统中<strong>活动的实体</strong>；<br>                        eg：DBMS所管理的<strong>实际用户</strong>、代表用户的各<strong>进程</strong>；<br>                    <strong>客体</strong>：系统中的<strong>被动实体，是受主体操纵的</strong>；<br>                        eg：操作文件、基本表、索引、视图；<br>                    敏感度标记：<br>                        1）绝密；<br>                        2）机密；<br>                        3）可信；<br>                        4）公开；<br>                        注意：<br>                            1）主体与客体都有敏感度标记；<br>                            2）主体的称为：许可证级别；<br>                            3）客体的称为：密级；<br>                    <strong>规则</strong>：<br>                        1）读取：仅当主体许可证级别<strong>大于或等于</strong>对应客体的密级，才能让主体读取客体；<br>                        2）写入：仅当主体许可证级别<strong>等于</strong>对应客体时才能写入<br>                        3）<strong>同级读写，高级可读</strong>；<br>    3）<strong>审计</strong>；<br>        审计日志：<br>            保存用户的所有操作记录，DBA可以找到非法存取数据的人、时间、内容；<br>        用户级审计：<br>            针对自己创建的数据库表或视图进行审计；<br>        系统级审计：<br>            检测成功或失败的登陆要求；<br>            检测GRANT、REVOKE操作以及其他数据库级权限下的操作；<br>    4）<strong>视图</strong>；<br>        将要保密的数据对无权存取这些数据对用户隐藏起来，对数据提供一定程度的安全保护；<br>    5）<strong>数据加密</strong>；<br>        根据一定的算法将原始数据变换为不可直接识别的格式；<br>        存储加密、传输加密；</p>
+<p>自主存取控制：<br>    <strong>GRANT语句的使用</strong>；<br>        1）<strong>一般用法</strong>；<br>        2）<strong>授权所有权限</strong>：GRANT ALL PRIVILEGES …<br>        3）<strong>授权给所有人</strong>：… TO PUBLIC；<br>        4）<strong>授权特定列</strong>：GRANT UPDATE(Sno) …<br>        5）<strong>授予人将相同权限授予出去的能力</strong>：… WITH GRANT OPTION;<br>    <strong>REVOKE语句的使用</strong>：<br>        1）<strong>一般用法</strong>；<br>        2）<strong>从所有用户收回</strong>：… FROM PUBLIC;<br>        3）<strong>级联收回</strong>：… FROM U5 CASCADE;<br>    <strong>角色</strong>：<br>        <strong>创建</strong>：<br>            CREATE ROLE &lt;角色名&gt;<br>    <strong>授予、回收权限</strong>：<br>        将角色名用在<strong>用户</strong>的位置；<br>    <strong>将角色授予其他角色或用户</strong>：<br>        将角色名用在<strong>权限</strong>的位置；<br>        <strong>可选的转授能力</strong>：<br>            [WITH ADMIN OPTION]</p>
+<p>注意：<br>    WITH GRANT OPTION不能出现<strong>循环授权</strong>；<br>    （或许WITH ADMIN OPTIOPN也是）；</p>
+<p>GRANT一般用法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限 &gt;[,...]</span><br><span class="line">ON &lt;对象类型 &gt; &lt;对象名 &gt;[,...] <span class="comment"># 对象类型一般是TABLE（有时可能是VIEW）</span></span><br><span class="line">TO &lt;USER &gt;[,...]</span><br><span class="line">[WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
+<p>注意对象类型，因为不一定是基本表，也可以是视图等；</p>
+<p>REVOKE一般用法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限 &gt;[,...]</span><br><span class="line">ON &lt;对象类型 &gt; &lt;对象名 &gt;[,...]</span><br><span class="line">FROM &lt;用户 &gt;[,...];</span><br></pre></td></tr></table></figure>
+
+<p>角色的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE ROLE R1;</span><br><span class="line"></span><br><span class="line">GRANT UPDATE(Sname)</span><br><span class="line">ON TABLE Student</span><br><span class="line">TO R1;</span><br><span class="line"></span><br><span class="line">CREATE USER U1;</span><br><span class="line"></span><br><span class="line">GRANT R1</span><br><span class="line">TO U1;</span><br><span class="line">WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库完整性"><a href="#数据库完整性" class="headerlink" title="数据库完整性"></a>数据库完整性</h2><p><code>实际上我们在前面的关系部分也有关系的完整性约束，尝试进行对比。</code></p>
+<p>数据库完整性：<br>    <strong>定义</strong>：数据的<strong>正确、有效和相容</strong>；（<em>也是数据库的一致性</em>）；<br>        1）正确：数据要<strong>符合语义</strong>；<br>        2）有效：数据有<strong>有效期限</strong>；（eg，验证码过了时效就不能用了）；<br>        3）相容：同一关系同一元组，同一关系不同元组，不同关系不同元组，之间的数据<strong>一致性</strong>；<br>        （<em>似乎对于完整性ppt上没有有效这个点</em>）；<br>    面对的场景：<br>        1）合法用户合法操作；<br>        2）不合语义、不正确的数据；<br>    （注意与安全性的对比）；<br>    <strong>DBMS确保完整性的方法：</strong><br>        1）提供<strong>定义</strong>完整性约束条件的机制；<br>        2）提供<strong>完整性检查</strong>的方法；<br>        3）<strong>违约处理</strong>；<br>    包括：<br>        1）实体完整性约束；<br>        2）参照完整性约束；<br>        3）用户定义的完整性约束；</p>
+<p><strong>完整性与安全性的区别与联系</strong>：<br>    完整性：<br>        1）防止数据库中存在<strong>不符合语义</strong>的数据，也就是防止数据库中存在<strong>不正确</strong>的<strong>数据</strong>；<br>        2）防范对象：不合语义、不正确的数据（针对<strong>合法用户、合法操作</strong>）；<br>    安全性：<br>        1）保护数据库防止<strong>恶意破坏</strong>和<strong>非法存取</strong>；<br>        2）防范对象：<strong>非法用户非法操作</strong>；</p>
+<p><strong>实体完整性</strong>：<br>    <strong>定义</strong>：若属性（组）是关系的<strong>主属性</strong>，则其<strong>不能为空</strong>；<br>    相关SQL语句：<br>        1）使用PRIMARY KEY进行实体完整性约束的定义；<br>        2）可以在列级别定义（创建表时直接定义在属性之后）；<br>        3）可以定义在表级别（创建表时定义在所有属性之后，定义要使用扩号）；<br>        eg：<br>            创建SC表，将Sno,Cno属性定义为码；<br>    完整性检查：<br>        1）插入或修改时检查<strong>主码值是不是唯一</strong>；<br>        2）插入或修改时检查<strong>主属性是否为空</strong>；<br>    <strong>违约处理</strong>：<br>        1）如果主码不唯一则<strong>拒绝</strong>插入或修改；<br>        2）如果主属性为空则<strong>拒绝</strong>插入或修改；</p>
+<p>参照完整性：<br>    外码：如果F是关系R到属性（组），但是F不是R的码，并且F与关系S到码Ks相对应，那么F就是关系R的外码；<br>        其中：<br>            1）R称为参照关系；<br>            2）S称为被参照关系；<br>    <strong>参照完整性定义</strong>：<br>        如果<strong>F是关系R的外码</strong>，并且与关系S的主<strong>码Ks相对应</strong>，那么F的取值，必须：<br>            1）或者为<strong>空值</strong>；<br>            2）或者为<strong>某个元组Ks的值</strong>；<br>    相关SQL语句：<br>        1）使用FOREIGN KEY(…) REFERENCEES 关系(…);<br>            （第一个括号中为指定为外码的属性，第二个括号中为在某关系上对应参照的属性）；<br>        2）参照完整性约束都是定义在表级的；<br>        eg：<br>            创建SC表，其中Cno参照Course(Cno)，Sno参照Student(Sno)；<br>    完整性检查：<br>        1）插入参照表的时候；<br>        2）修改参照表外码的时候；<br>        3）删除被参照表元组的时候；<br>        4）修改被参照表候选码的时候；<br>    违约处理：<br>        1）对于<strong>参照表</strong>的操作如果违反了参照完整性约束，直接<strong>拒绝</strong>操作；<br>        2）对于<strong>被参照表</strong>的操作如果违反了参照完整性约束：<br>            1）<strong>拒绝</strong>操作；<br>                eg：<br>                    1）（FOREIGN KEY(Sno) REFERENCE Student(Sno) ON UPDATE NO ACTION）；<br>            2）对被参照表<strong>级联修改&#x2F;删除</strong>；<br>                eg：<br>                    1）（FOREIGN KEY(Cno) REFERENCES Cource(Cno) ON UPDATE CASCADE;）<br>                    2）（FOREIGN KEY(Sno) REFERENCES Student(Sno) ON DELETE CASCADE;）<br>            3）对被参照表对应<strong>设置为空</strong>；<br>        涉及违约处理的SQL：<br>            FOREIGN KEY(…) REFERENCE 关系(…) ON 操作 NO ACTION&#x2F;CASCADE;<br>            （其中操作时UPDATE或DELETE）</p>
+<p><strong>用户定义的完整性约束</strong>：<br>    1）在属性上定义：<br>        1）NOT NULL 非空；<br>        2）UNIQUE 唯一；<br>        3）CHECK(…) 布尔表达式；<br>            eg：<br>                创建Student表，要求Sname唯一，Sage不能为空，Ssex只能为’男’或’女’；<br>    2）在元组上定义：<br>        使用CHECK进行定义，约束可以是一个属性的条件，或者多个属性之间的条件（取值相互约束）；<br>            eg：<br>                创建Student表，当学生Sage为’男’时，Sname不能以’Ms.’开头；<br>    违约处理：<br>        如果任何操作违反用户定义的完整性约束则拒绝；</p>
+<p>完整性约束命名子句：<br>    SQL语句：<br>        CONSTRAINT &lt;完整性约束条件名&gt; &lt;完整性约束条件&gt;;<br>    其中条件可以是：<br>        NOT NULL&#x2F;UNQUE&#x2F;PRIMARY&#x2F;FROEIGN KEY&#x2F;CHECK等；<br>    （好处在于对于复杂的约束条件对构造，可以利用约束条件名对定义过的约束进行复用）</p>
+<p>修改表中的完整性限制：<br>    ALTER语句（详情见前面“基本表的DDL语句，ALTER的用法，ADD的注意事项”）；</p>
+<p>域的使用：<br>    创建一个DOMAIN类似创建了一个数据类型，后续创建基本表的时候属性的类型可以用域进行定义；<br>    SQL语句：<br>        CREATE DOMAIN 域名 CHECK(限制条件);<br>    优点是：使用域定义属性类型，自带约束条件；</p>
+<p><strong>可能触发触发器的事件</strong>：<br>    INSERT、DELETE、UPDATE；</p>
+<h2 id="关系数据理论"><a href="#关系数据理论" class="headerlink" title="关系数据理论"></a>关系数据理论</h2><p>关系数据库逻辑设计：<br>    针对一个具体问题，如何构造一个适合于它的数据模式（构造几个关系模式？每个关系模式由哪些属性组成？）；<br>    数据库逻辑设计的有力工具——<strong>关系数据库规范化理论</strong>；</p>
+<p>关系模式的形式化定义：<br>    R(D,DOM,U,F);<br>        1）R关系名；<br>        2）D域；<br>        3）DOM，U到D到映射；<br>        4）U，属性；<br>        5）F数据依赖；<br>    关系模式简化表示：<br>        R&lt;U,F&gt;；</p>
+<p>完整性约束的表现形式；<br>    1）限定属性取值范围；<br>    2）属性值之间相互关联存在数据依赖的情况（主要是属性值相等的条件）；<br>    <strong>数据依赖</strong>：<br>        1）一个<strong>关系内部</strong>的<strong>属性与属性</strong>之间的<strong>约束</strong>；<br>        2）通过<strong>属性间值的相等</strong>与否<strong>体现</strong>出来的数据间相关联系；<br>    <strong>数据依赖的类型</strong>：<br>        1）函数依赖；<br>        2）多值依赖；<br>        （其他，条件函数依赖等）</p>
+<p>数据依赖造成的关系模式设计问题：<br>    1）问题背景：<br>        1）关系模式Student(Sno,Sname,Mname,Cno,Grade)；<br>        2）其中Mname是所在院系管理员的名字，一个院系只有一个；<br>    2）<strong>问题</strong>：<br>        1）<strong>删除异常</strong>，当某个院系的所有学生都毕业了，删除学生后，院系对应管理员也不清楚了；<br>        2）<strong>插入异常</strong>，当某个院系还没有学生的时候，但是管理员是确定的，可是不能插入；<br>        3）<strong>修改复杂（更新复杂）</strong>，当院系的管理员更换的时候，对该院系所有学生的元组都要进行修改；<br>        4）<strong>数据冗余度大</strong>，每个学生元组中都记录了院系管理员的信息，数据冗余；<br>        注意：<br>            1）判断<strong>数据冗余的技巧</strong>是看两个条件，如果<strong>重复出现</strong>，并且对具体的元组<strong>删除一个没有影响</strong>，那就是冗余。<br>            （所以院系不是冗余，但是院系管理员是冗余）；<br>            2）修改复杂对应例子理解，并且<strong>修改复杂通常是和数据冗余一起出现</strong>的；<br>            3）删除异常、插入异常对应例子理解；<br>    3）总结：上面的Student关系不是好的关系，原因是某些不好的数据依赖，可以通过<strong>关系模式分解</strong>（后面会重点讨论，工具就是规范化理论），消除这些数据依赖；<br>    4）解决方法：规范化<br>        规范化理论是用来改造关系模式，通过分解关系模式来消除其中不合适的数据依赖，以解决插入异常、删除异常、更新异常和数据冗余问题。</p>
+<p>函数依赖：<br>    基本概念：<br>        <strong>X函数确定Y</strong>；<br>        <strong>Y函数依赖X</strong>；<br>        X函数决定Y；<br>        $X \rightarrow Y$；<br>        <strong>定义</strong>：设R(U)是属性集U上的关系模式。X, Y是U的子集。若对于R(U)的任意一个可能的关系r，r中不可能存在两个元组在X上的属性值相等，而在Y上的属性值不等。<br>        注意：<br>        1）关系模式是结构，是不变的；<br>        2）关系是变化的，由具体有哪些元组确定，也就是说所有关系实例都要满足；<br>        3）函数依赖是语义范畴；<br>        4）在上面的函数依赖关系中X就是函数决定属性组（决定因素）<br>        5）X函数确定Y 且 Y函数确定X的记法（X与Y等价）；<br>        6）X不能函数确定Y的记法；<br>    <strong>平凡与非平凡</strong>：<br>        <strong>平凡函数依赖</strong>：如果Y是X的子集则函数依赖是平凡的；<br>        <strong>非平凡函数依赖</strong>：如果Y不是X的子集则函数依赖是非平凡的；<br>        注意：<br>            1）平凡的函数依赖是显然成立的；<br>            2）(Cpno)不是(Cno)的子集，属性组的集合成分是由属性来度量的，而不是属性的具体取值；<br>    <strong>完全与部分</strong>：<br>        <strong>完全函数依赖</strong>：对于属性组X的任何子集都不能函数确定Y；<br>        <strong>部分函数依赖</strong>：不是完全函数依赖；<br>        注意：<br>            相关的记法，在箭头上加F、P；<br>    <strong>传递函数依赖</strong>：<br>        1）X函数确定Y；<br>        2）<strong>Y不是X的子集</strong>；<br>        3）<strong>Y不能函数确定X</strong>；<br>        4）Y函数确定Z；<br>        5）<strong>Z不是Y的子集</strong>；<br>        （Y非平凡函数依赖于X，X不函数依赖于Y，Z非平凡函数依赖于Y）    </p>
+<p><strong>候选码</strong>：对于关系模式R(U)，U完全函数依赖于某个U的子集属性组K，则K是候选码；</p>
+<p><strong>主属性</strong>：候选码属性组中的属性都是主属性；</p>
+<p><strong>非主属性</strong>：不包含在任何候选码中的属性；</p>
+<p><strong>全码</strong>：U是候选码；</p>
+<p><strong>外码</strong>：R中属性组X并非R的码，但是是其他关系模式的码；</p>
+<p>范式：<br>    定义：符合某一种级别的关系模式的集合，关系数据库的关系必须满足的要求，不同级别的范式有不同的要求；<br>    1）<strong>1NF</strong><br>        定义：关系模式R的每个属性都是不可再分的数据项；<br>        注意：对关系模式最起码的要求，不满足不能称为关系数据库；<br>    2）<strong>2NF</strong><br>        定义：1NF之上，每个<strong>非主属性</strong>完全函数依赖于候选码；<br>        （实际上是，1NF基础上消除了非主属性对码的部分函数依赖）<br>    3）<strong>3NF</strong><br>        定义：（<em>2NF之上</em>）不存在<strong>非主属性</strong>对候选码的传递函数依赖；<br>        （实际上是2NF之上消除了非主属性对码的传递函数依赖）<br>        （实际的定义没有2NF之上的表述，而是类似于不满足部分函数依赖的描述，但是少了一个Y是X的子集的条件，即只有部分函数依赖的四个条件，少的这个条件如果成立的话，则不满足2NF，所以应该是默认满足2NF）<br>            0）X码，属性组Y，非主属性Z；<br>            1）X函数确定Y；<br>            2）Y不能函数确定X；<br>            3）Y函数确定Z；<br>            4）Z不是Y的子集；<br>        eg：S-L(Sno,Sdept,Sloc)，满足2NF，不满足3NF；<br>        （Sdept函数确定Sloc）<br>    4）BCNF<br>        定义：1NF之上，任何（<em>非平凡的</em>）函数依赖的决定因素都必须包含码；<br>        注意：<br>            1）实际上是在3NF之上，消除了<strong>主属性</strong>对候选码的部分函数依赖和传递函数依赖；<br>            2）似乎一般没强调非平凡，但是这确实是原始定义里有的；<br>        eg：<br>            1）STJ(S,T,J)满足3NF，不满足BCNF<br>                1）(S,J)-&gt;T，T-&gt;J<br>                （一个老师只能教一门课程，但是一门课程可以由不同的老师来教）<br>                2）候选码，S、J、T，<strong>没有非主属性</strong>，所以满足3NF；<br>                3）存在主属性对码的部分函数依赖(S,T)-&gt;J，所以不满足BCNF；<br>            2）SJP(S,J,P)满足BCNF；<br>                1）(S,J)-&gt;P，(J,P)-&gt;S；<br>                （一个学生一门课程有唯一一个名次，一个课程的一个名次也只能有一个学生（不考虑并列））<br>                2）候选码，S、J、P，<strong>没有非主属性</strong>，满足3NF；<br>                3）且所有函数依赖都包含码；<br>    注意<strong>这些例子对帮助理解和构造类似满足范式的关系很有帮助</strong>；<br>    判断满足四种范式的方法：<br>        1）1NF，略；<br>        2）2NF，找是否有非主属性部分函数依赖于某个码；<br>        3）3NF，找是否有非主属性传递函数依赖于某个码；<br>        4）BCNF，看是否所有的函数依赖决定因素都含有码；看是否有主属性部分&#x2F;传递函数依赖于码；<br>    3NF与BCNF的等价条件：<br>        <strong>当关系模式有且仅有一个候选码的时候，3NF与BCNF是等价的</strong>；</p>
+<p><strong>多值依赖</strong><br>    定义：设R(U)是属性集U上的一个关系模式。<strong>X, Y, Z是U的子集</strong>，并且<strong>Z&#x3D;U-X-Y</strong>。关系模式R(U)中多值依赖 <strong>X-&gt;-&gt;Y</strong>成立，当且仅当对R(U)的任一关系r，<strong>给定一对(x, z)值，有一组Y的值，这组值仅仅决定于x值而与z值无关</strong>。<br>    <strong>针对例子理解</strong>：<br>        关系模式CTB(C,T,B)<br>        1）属性含义：C课程，T老师，B参考资料；<br>        2）条件：一门课程可以由多个老师讲授，他们必须使用相同的一套参考资料；<br>        3）注意：每个老师可以讲授不同的课程，每种参考书也可以供多门课程使用（因为这并不是重点）；<br>        存在的多值依赖：<br>            1）C-&gt;-&gt;T，对于给定一个课程，都有一组老师与其对应而与使用参考书的情况无关；<br>            （假如有一个老师使用的是和其他老师不同的参考书，那就不满足多值依赖了，因为根据参考书的情况会影响老师的情况）<br>            2）C-&gt;-&gt;B，对于给定一个课程，有一组参考书与之对应<br>    等价的定义：在R (U)的任一关系r中，如果存在元组t, s 使得t[X]&#x3D;s[X]，那么就必然存在元组w，v在r中，(w，v可以与s，t相同)，使得w[X] &#x3D; v[X] &#x3D; t[X]，而w[Y]&#x3D;t[Y]，w[Z]&#x3D;s[Z]，v[Y]&#x3D;s[Y]，v[Z]&#x3D;t[Z]（<strong>一句话：对于任意X属性组相等的元组s、t，交换s，t元组的Y值（X、Z值不改变）所得的两个新元组必在r中</strong>）；<br>        eg：<br>            1）对应到CBT到例子，对于(C,T1,B1)&#x2F;(C,T2,B2)，必然存在元组(C,T2,B1)&#x2F;(C,T1,B2)；<br>            2）但是如果有老师有用和别打老师不一样的教科书，在课程一样的时候，交换老师这一属性，得到课程-另一个老师-原老师独有的教科书，那这一元组显然是不存在的；<br>    平凡与非平凡：<br>        1）如果Z为空集，则多值依赖X-&gt;-&gt;Y是平凡的；<br>        2）否则是非平凡的；<br>    多值依赖的性质：<br>        1）对称性，X-&gt;-&gt;Y则X-&gt;-&gt;Z；<br>    4NF：对于每一个非平凡的多值依赖X-&gt;-&gt;Y，X中都包含候选码；<br>        注意：<br>            1）判断方法：在BCNF基础上，不允许有非平凡且非函数依赖的多值依赖；<br>            2）如果R满足4NF，则R满足BCNF；<br>    <strong>多值依赖的有效性与属性集的范围有关</strong>：<br>        1）如果X-&gt;-&gt;Y在U上成立，则在W上一定成立（<strong>W属性组包含X、Y属性组，且是U属性组的子集</strong>）；<br>        2）如果X-&gt;-&gt;Y在W上成立，则在U上不一定成立；<br>        （本质原因是<strong>前者减小了Z的范围，后者扩大了Z的范围</strong>，在大范围内成立在小范围内一定成立，反之不然）；<br>    <strong>多值依赖与函数依赖的区别、联系</strong>：<br>        1）函数依赖X-&gt;Y成立，则对任何Y对子集Y’，X-&gt;Y’成立，但是换成多值依赖这是不行的；<br>        （本质上还是伴随着Y对减小，Z对范围可能扩大）<br>        2）函数依赖是多值依赖的特殊情况，若X-&gt;Y则X-&gt;-&gt;Y；<br>        （挺好理解的，对于函数依赖，X确定的时候Y的值也确定了，所以Z的值根本无所谓，因为根本没有X对应的其他Y值来体现Z的不同）；</p>
+<p>从1NF、2NF、3NF、BCNF、4NF，规范化程度越来越高，但是不是规范化程度越高关系模式就越好；</p>
+<p><strong>注意，BCNF、多值依赖，对应三个例子很重要：STJ&#x2F;SJP&#x2F;CTB</strong>；</p>
+<p>Amstrong公理系统<br>    定义：对于满足一组函数依赖F 的关系模式R &lt;U, F&gt;，其任何一个关系r，若函数依赖X→Y都成立, (即r中任意两元组t，s，若t[X] &#x3D; s[X]，则t[Y]&#x3D;s[Y])，则称F逻辑蕴含X→Y。<br>    基本定律：<br>        1）自反律：若Y是X的子集，X是U的子集，则X-&gt;Y；<br>        2）增广律：若X-&gt;Y，Z是U的子集，则XZ-&gt;YZ<br>        （其中类似XZ的表达，可以理解为两个属性组拼成了一个大属性组）<br>        3）传递律：若X-&gt;Y，Y-&gt;Z则X-&gt;Z；<br>    推理规则：<br>        1）合并规则：若X-&gt;Y，X-&gt;Z则X-&gt;YZ；<br>        2）伪传递规则：若X-&gt;Y,WY-&gt;Z则WX-&gt;Z；<br>        3）分解规则：若X-&gt;Y且Z是Y的子集则X-&gt;Z；<br>        （三个推理规则从属性组的层面来说都很好理解）；<br>    <strong>定律与推理，得出的新函数依赖都被原来的函数依赖F所“蕴含”</strong>；<br>    Amstrong公理系统是<strong>有效的、完备的</strong>；<br>    极小函数依赖集：<br>        函数依赖集F为极小函数依赖集当且仅当：<br>            1）F中任意函数的右部只含有一个属性；<br>            2）F中不存在函数依赖X-&gt;A，使得F与F-{X-&gt;A}等价；<br>            3）F中不存在函数依赖X-&gt;A，使得X存在真子集Z，满足F-{X-&gt;A}并上{Z-&gt;A}与F等价；<br>                等价的含义：<br>                    1）函数依赖集F等价于G 等价于 F的闭包与G的闭包相等；<br>                    2）函数依赖集的闭包是函数依赖集所蕴含的函数依赖全体；<br>        （简单理解极小函数依赖集，在现有的函数依赖集中不断地去掉函数依赖，若去掉的函数依赖不能由剩下的导出，那么它就是必要的，保留所有必要的函数依赖，得到的就是极小函数依赖集）<br>        性质：<br>            1）每一个函数依赖集F均等价于一个极小函数依赖集Fm，Fm称为最小依赖集；<br>            2）F的最小依赖集Fm不是唯一的；<br>        极小化过程：<br>            找出F的最小依赖集Fm（基本上就是按照函数依赖集F的简单理解）；</p>
+<p><strong>多值依赖的性质</strong>：<br>    <em>参考复习ppt</em>；</p>
+<p><strong>模式分解</strong>：<br>    含义：<br>        1）将关系R分为几个关系，划分出的关系中的属性没有包含和被包含关系，且所有这些属性的并是关系R到属性；<br>        2）划分出的关系中的数据依赖，是关系R到数据依赖F在各关系所含属性上的投影；<br>    关系模式分解的标准（要求）：<br>        1）<strong>具有无损连接性</strong>：划分出的所有关系做自然连接，得到原始关系；<br>        2）<strong>保持函数依赖</strong>：F所蕴含的某个函数依赖，也一定由某个划分出的关系的数据依赖所蕴含；<br>        （典型的例如(Sno,Sname,Sdept,Mname)划分为(Sno,Sname,Sdept) (Sno,Mname)，这就丢失了Sdept-&gt;Mname）<br>        3）<strong>既具有无损连接性，又能保持函数依赖</strong>；<br>    注意：<br>        1）无损连接性可以保证信息不丢失；<br>        2）保持函数依赖可以减轻、解决异常情况；<br>        3）无损连接性和保持函数依赖是两个独立的性质，具备一个不一定具备另一个；<br>    (<em>模式分解和数据依赖带来的问题要一起考虑，融汇贯通</em>)</p>
+<p><em>chase算法判断无损连接性</em>：<br>    1）建立初始表；<br>        1）行对应关系，列对应属性；<br>        2）i行j列处，如果j对应属性在i对应关系中，则填aj，否则填bij；<br>    2）根据划分后的关系的函数依赖更新表格；<br>        1）“chase”操作，使用分解之前的原始函数依赖；<br>        2）对于每一个函数依赖Xi-&gt;Yi，检查决定项目Xi对应的列；<br>        3）找到Xi对应列，有相同元素的行w1 w2；<br>        4）找到Yi对应的列，这一列对应刚刚找到的行，即w1,Yi w2,Yi两个位置，更新为一样的；<br>        5）如果有一个是a?则全部更新为a?，否则全部更新为bmj，其中m取当前有的b?j，?的最小值；<br>    3）若出现a1、a2、…、an的行则具有无损连接性；<br>    <img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/DBS/p2.png" alt="chase算法例子"></p>
+<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><p><strong>数据库设计6个阶段及主要任务</strong>：<br>    1）<strong>需求分析</strong>：<br>        主要任务：准确了解与分析用户<strong>需求</strong>（包括数据处理）；<br>    2）<strong>概念结构设计</strong>：<br>        主要任务：通过对用户需求进行综合、归纳与抽象，形成一个独立于具体DBMS的<strong>概念模型</strong>；<br>    3）<strong>逻辑结构设计</strong>：<br>        主要任务：将概念结构转换为<strong>某个DBMS所支持的数据模型</strong>，并对其优化；<br>    4）<strong>数据库物理设计</strong>：<br>        主要任务：为逻辑模型选取一个最适合应用环境的<strong>物理结构（</strong>包括存储和存取控制）；<br>    5）<strong>数据库实施</strong>：<br>        主要任务：运行DBMS提供的数据库语言及宿主语言，<strong>根据逻辑设计和物理设计的结果</strong>：1）建立数据库、2）编制与调试应用程序、3）组织数据入库、4）<strong>进行试运行</strong>；<br>    6）<strong>数据库运行和维护</strong>：<br>        主要任务：经过试运行之后数据库可以<strong>正式投入运行</strong>，运行过程中必须不断<strong>评价、调整与修改</strong>；<br>    注意：<br>        1）需求分析和概念结构设计独立于任何DBMS；<br>        2）逻辑结构设计和物理结构设计与DBMS紧密相关；<br>        3）需求分析处理数据，会使用数据字典；<br>        4）概念结构设计会使用E-R图；</p>
+<p><strong>E-R图</strong>：</p>
+<p>DBMS常用的存取方法：<br>    1）B+树索引；<br>    2）聚簇索引；<br>    3）HASH方法；</p>
+<h2 id="数据库编程"><a href="#数据库编程" class="headerlink" title="数据库编程"></a>数据库编程</h2><p><strong>嵌入式SQL</strong>：<br>    将SQL语句嵌入程序设计语言中，被嵌入的语言被称为程序设计语言称为<strong>宿主语言</strong>（主语言）；</p>
+<p><strong>游标</strong>：<br>    背景：<br>        1）嵌入式<strong>SQL</strong>使用<strong>主语言的程序变量</strong>来输入或输出数据（<strong>主变量</strong>）；<br>        2）SQL语言是面向集合的，一条SQL语句可以产生多个记录；<br>        3）主语言是面向记录的，一组主变量一次只能存放一条记录；<br>        4）仅使用主变量不能完全满足SQL语句的要求，引入游标来协调；<br>    含义：<br>        1）系统为用户开设的一个<strong>数据缓冲区</strong>，<strong>存放SQL语句的执行结果</strong>；<br>        2）每个游标都有一个名字；<br>        3）用户可以使用SQL语句<strong>逐一从游标中获取记录</strong>，赋<strong>给主变量，由主语言进一步处理</strong>；</p>
+<h2 id="关系数据库存储管理"><a href="#关系数据库存储管理" class="headerlink" title="关系数据库存储管理"></a>关系数据库存储管理</h2><p><strong>顺序表索引</strong>：<br>    含义：在<strong>顺序表</strong>的排<strong>序属性</strong>（组）上建立索引；<br>    注意：也称主索引 or 聚簇索引；</p>
+<p><strong>稠密索引</strong>：<br>    索引块中存放<strong>每条件记录</strong>的<strong>索引属性值</strong>以及指向相应记录的<strong>指针</strong>；</p>
+<h2 id="关系查询处理与查询优化"><a href="#关系查询处理与查询优化" class="headerlink" title="关系查询处理与查询优化"></a>关系查询处理与查询优化</h2><p><strong>查询处理的步骤</strong>：<br>    1）<strong>查询分析</strong>；<br>        包括语法分析、词法分析、语义分析、符号名转换；<br>    2）<strong>查询检查</strong>；<br>        包括安全性检查、完整性检查；<br>    3）<strong>查询优化</strong>；<br>        包括代数优化、物理优化；<br>    4）<strong>查询执行</strong>；<br>        最终查询的代码生成，并执行；</p>
+<p><strong>连接操作的实现方法</strong>：<br>    1）<strong>嵌套循环方法</strong>：<br>        选中外层循环的每一个元组，检查内层循环的每一个元组，对应的连接属性是否相等，如果是的话则串接后输出到结果中；<br>    2）<strong>排序-合并方法</strong>：<br>        1）对外层循环表、内层循环表，均按照连接属性进行排序；<br>        2）对外层循环表的每一个元组，依次扫描内层循环表中具有相同连接属性的元组，连接起来输出到结果中；<br>        3）直到在内层中扫描到第一个连接属性不同的元组；<br>        4）退出内层循环，给予检查外层循环中的下一个元组；<br>    3）<strong>索引连接方法</strong>：<br>        1）在一个表上建立连接属性的索引；<br>        2）根据另一个表当前选中的元组的连接属性，查询索引，找到相应的另一个表上的元组；<br>        3）连接起来输出到结果中；<br>    4）<strong>哈希连接方法</strong>：<br>        思想：把连接属性作为hash码，用同一个hash函数把R和S中的元组散列到同一个hash文件中；<br>        1）划分阶段：<br>            对具有较少元组的表进行一遍遍历，将元组按照hash函数散列到hash表的桶中；<br>        2）连接阶段：<br>            对另一个表进行一遍处理，将元组散列到适当的hash桶中，把元组与桶中来自之前那个表、且相匹配的元组，连接起来；</p>
+<p>查询语法树：<br>    <em>内容见笔记</em>；</p>
+<p><strong>启发式规则</strong>：<br>    1）选择运算应尽可能先做；<br>    2）投影运算和选择运算同时进行；<br>    3）将投影同其前或其后的双目运算结合起来执行；<br>    4）将某些选择同在它前面要执行的笛卡儿积结合起来成为一个连接运算；<br>    5）找出公共子表达式；<br>    6）选取合适的连接算法；</p>
+<h2 id="数据库恢复技术"><a href="#数据库恢复技术" class="headerlink" title="数据库恢复技术"></a>数据库恢复技术</h2><p><strong>事务</strong>：用户定义的一个数据库<strong>操作序列</strong>，这些操作<strong>要么全做要么全不做</strong>，是一个<strong>不可分割的工作单位</strong>；</p>
+<p><strong>事务的特性</strong>：<br>    <strong>原子性</strong>：事务是数据库的逻辑工作单位，事务中包括的各个操作要么都做要么都不做；<br>    <strong>一致性</strong>：事务执行的结果必须使数据库从一个一致状态转变为另一个一致状态；<br>    （<em>数据库一致的状态——正确、有效、相容</em>）；<br>    （注意：在完整性处首次描述了正确、有效、相容，其中一致性对应相容，但是老师多次把一致描述为：正确、有效、相容）；<br>    <strong>隔离性</strong>：一个事务的执行不能被其他事务干扰；<br>    <strong>持续性</strong>：一个事务一旦提交，它对数据库的改变永久不变，接下来的其他操作或故障不会对其执行结果有任何影响；</p>
+<p><strong>恢复技术</strong>能够保证事务的<strong>原子性、持续性</strong>；<br><strong>并发控制技术</strong>能够保证事务的<strong>一致性、隔离性</strong>；</p>
+<p><strong>数据转储</strong>：<br>    定义：指DBA将<strong>整个数据库****复制</strong>到磁带或另一个磁盘上<strong>保存</strong>起来的过程，<strong>备用数据称为后备副本</strong>或后援副本；<br>    静态 or 动态：<br>        <strong>静态转储</strong>：<br>            1）在系统中无运行事务时进行的转储操作，转储开始时数据库处于一致状态；<br>            2）转储期间不允许对数据库进行任何存取、修改活动，得到的是一个数据一致性副本；<br>        <strong>动态转储</strong>：<br>            1）转储操作与用户事务并发执行；<br>            2）转储期间允许对数据库进行存取或修改；<br>        （利用动态转储的副本进行故障恢复，需要把动态转储期间事务的修改登记，建立日志文件，后备副本+日志文件才能把系统恢复到某一时刻的正确状态）；<br>    <strong>海量 or 增量</strong>：<br>        海量转储：每次转储全部数据库；<br>        增量装纯：只转储上次转储后更新过的数据；<br>        （从恢复角度看，海量转储恢复更加方便，但是如果数据很大，增量转储更加实用有效）；</p>
+<p><strong>日志文件的定义</strong>：用来记录事务对<strong>数据库更新操作</strong>的文件；<br>    以记录为单位日志文件：<br>        每条日志记录中有：<br>        1）各个事务有开始的标记BEGIN TRANSACTION；<br>        2）各个事务有结束的标记COMMIT或ROLLBACK<br>        3）开始和结束之间记录了各个事务的所有更新操作；<br>    以数据块为单位的日志文件：<br>        每条日志记录中有：<br>        1）使用事务标识表面是哪个事务；<br>        2）被更新的数据块；</p>
+<p>日志文件的作用：<br>    1）进行<strong>事务故障</strong>恢复；<br>    2）进行<strong>系统故障</strong>恢复；<br>    3）协助<strong>后备副本</strong>进行<strong>介质故障</strong>恢复；（动态转储）；</p>
+<p>登记日志的原则——<strong>先写日志后写数据库</strong>：<br>    1）如果先写数据库可能出现写入数据库的值未写入日志，当发生了错误想要修改回去，就不清楚上一个正确状态的值是多少了；<br>    2）但是如果先写日志而没有写数据库，按日志文件恢复只是多了一次额外的UNDO操作，不影响数据库的正确性；</p>
+<h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><p>三类不一致性问题：<br>    <strong>丢失修改</strong>：<br>        1）定义：两个事务T1和T2读入同一数据并修改，<strong>T2的提交破坏了T1提交的结果</strong>，导致T1的修改丢失；<br>        2）为什么会出现这种情况：<br>    脏读：<br>        1）定义：事务T1修改某数据并写入磁盘，<strong>事务T2读取同一数据但是T1的修改因为某些原因被撤销</strong>，T1修改过的数据恢复原值T2读到的数据就与数据库中的数据不一致，T2读到的就是脏数据即不正确的数据；<br>        2）为什么会出现这种情况：<br>    不可重复读：<br>        1）定义：事务<strong>T1读取数据后，T2执行更新操作</strong>，使T1无法再现前一次的读取结果；<br>        2）为什么会出现这种情况：</p>
+<p>两种基本锁：<br>    X锁：<br>        1）排他型锁，写锁；<br>        2）若事务T对数据对象A加上X锁，则只允许T<strong>读取和修改</strong>A，<strong>其他任何事物都不能再对A加任何类型的锁</strong>，直到T释放A上的锁；<br>        3）保证其他事务在T释放A上的锁之前，不能再读取和修改A；<br>    S锁：<br>        1）共享型锁，读锁；<br>        2）若事务T对数据对象加上S锁，则事务T<strong>可以读取A但是不能修改A</strong>，<strong>其他事务只能对A加S锁</strong>，不能加X锁，直到T释放A上的S锁；<br>        3）保证其他事务可以读A，但是T释放A上的S锁之前，不能对A做任何修改；</p>
+<p>三级封锁协议：<br>    <strong>一级封锁协议</strong>：<br>        1）事务T在<strong>修改数据R</strong>之前必须对其<strong>加X锁</strong>，直到<strong>事务结束才释放</strong>；<br>        2）可以<strong>防止丢失修改</strong>，保证事务T是可恢复的；<br>    二级封锁协议：<br>        1）<strong>一级封锁协议</strong>的基础上，增加事务T在<strong>读取数据R</strong>之前必须先对其<strong>加S锁</strong>，<strong>读完之后即可释放S锁</strong>；<br>        2）可以防止<strong>丢失修改和脏读</strong>；<br>    三级封锁协议：<br>        1）<strong>一级封锁协议</strong>的基础上，增加事务T在<strong>读取数据R之前必须先对其加S锁</strong>，直到<strong>事务结束才释放</strong>；<br>        2）可以防止<strong>丢失修改、脏读和不可重复读</strong>；</p>
+<p>可串行化调度：<br>    多个并发事务的执行结果是正确的，当且仅当其结果与按某一次序串行地执行这些事务时的结果相同；<br>    （<em>n个事务并发执行的调度S对结果等价于让这n个事务按某种顺序串行执行的调度S‘的结果，S就是一个可串行化调度</em>）<br>    可串行性：<br>        1）是并发事务正确调度的准则；<br>        2）一个给定的并发调度，<strong>当且仅当它是可串行化的，才被认为是正确调度</strong>；<br>    eg：<br>        事务T1有操作A、B，事务T2有操作C，D；<br>        1）串行调度的结果：T1，T2（A，B，C，D）结果是a；<br>        2）某调度Sc（A，C，B，D），如果结果也是a，那么调度Sc是可串行化调度，是一个正确的调度；<br>        （当然Sc的结果如果是b，且调度T2，T1的顺序也是b，那么Sc也是一个可串行化调度）；</p>
+<p>并发调度的冲突操作：<br>    指<strong>不同的事务</strong>对<strong>同一数据</strong>的<strong>读写操作</strong>和<strong>写写操作</strong>；<br>    例如：<br>        Ri(x),Wj(x);<br>        Wi(x),Wj(x);<br>    （其他操作不是冲突操作）；<br>    注意：<br>        冲突的两个操作和同一事务的两个操作都是不能交换的操作；</p>
+<p><strong>冲突可串行化调度</strong>：<br>    一个调度Sc在<strong>保证冲突操作的次序不变</strong>的情况下，通过<strong>交换两个事务的不冲突操作</strong>的次序得到<strong>另一个调度Sc‘，如果Sc‘是串行的</strong>，则称Sc是冲突可串行化调度；<br>    注意：<br>        1）如果一个调度是冲突可串行化的，则它一定是可串行化的；<br>    例如：<br>        1）事务T1有操作X1、S1，事务T2有操作S2，X2；<br>        2）有一个调度Sc（X1，S2，S1，X2）；<br>        3）由于S2，S1不是冲突的操作，交换它们的次序；<br>        4）得到调度（X1，S1，S2，X2），对应的调度就是T1，T2，这是串行的调度；<br>        5）所以Sc是冲突可串行化的调度；</p>
+<p>对比：<br>    1）串行的调度，强调操作顺序，调度的操作的顺序就是各个事务顺序执行的顺序；<br>    2）可串行化的调度，强调结果，调度的操作结果和某种串行调度的结果相同；<br>    3）冲突可串行化的调度，强调操作顺序，修改不冲突的操作的顺序得到的新调度就是一个串行的调度；</p>
+<p>死锁的诊断与解除：<br>    诊断：<br>        1）超时法：<br>            如果一个事务的等待时间超过了规定的时限，就认为发生了死锁；<br>            优点：实现简单；<br>            缺点：有可能误判，规定时间过长有可能无法及时诊断；<br>        2）<strong>事务等待图</strong>：<br>            1）事务等待图是一个有向图G&#x3D;(T,U);<br>            2）<strong>T</strong>是节点的集合，表示<strong>正在运行的事务</strong>；<br>            3）<strong>U</strong>是边的集合，代表<strong>事务等待的情况</strong>；<br>            4）<strong>若T1等待T2，则有一条边从T1指向T2</strong>；<br>            并发控制子系统周期性地生成事务等待图，检测事务。如果发现图中<strong>存在回路，则表示系统中出现了死锁</strong>。<br>    <strong>解除</strong>：<br>        1）选择一个处理<strong>死锁代价较小</strong>的事务，将其<strong>回滚</strong>；<br>        2）<strong>释放此事务持有的所有锁</strong>，使其他事务能够进行下去；        </p>
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><p><code>视每次作业的情况而定，我可能会在这里写我最初版的作业，最终提交则是在此之上加以改进；同时会附加一些我在完成作业的过程中学习到的知识</code></p>
+<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><p>习题1，描述数据、数据库、数据库管理系统、数据库系统的概念</p>
+<ol>
+<li>数据是用来描述事物的符号记录，是数据库中存储的基本对象。</li>
+<li>数据库是长期存储在计算机内、有组织、可共享的大量数据的集合。</li>
+<li>数据库管理系统是位于用户和操作系统之间的一层数据管理软件，和操作系统一样是计算机的基础软件，是一个大型且复杂的软件系统。</li>
+<li>数据库系统是指在计算机系统中引入数据库后的系统。</li>
+</ol>
+<p>习题2，描述文件系统和数据库系统的区别和联系</p>
+<ol>
+<li>区别：主要在共享性、冗余度、结构化上，文件系统共享性差，冗余度高，记录内有结构但是整体无结构；数据库系统共享性好，冗余度低，整体结构化。</li>
+<li>联系：数据库系统和文件系统都属于数据管理技术，并且前者是后者的继承与发展；在硬件实现方面它们都可以使用磁盘，处理方式上都支持联机实时处理与批处理，都是系统本身作为数据的管理者等等。</li>
+</ol>
+<p>习题8，描述数据模型的概念，作用及其包含的三个要素</p>
+<ol>
+<li>概念：数据模型是数据库中用于抽象、表示和处理现实世界中的数据和信息的工具，是现实世界的模拟，满足能比较真实地模拟现实世界、容易为人所理解、便于在计算机上实现这三个条件。</li>
+<li>作用：用于抽象、表示和处理现实世界中的数据和信息。</li>
+<li>三个要素：数据结构、数据操作以及数据的完整性约束。</li>
+</ol>
+<p><code>这个概念或许需要进一步明确一下</code></p>
+<p>习题14，描述数据库系统的三级模式结构，并说明这种结构的优点是什么</p>
+<ol>
+<li>三级模式结构：主要是指内模式，模式，外模式的三级结构，其中内模式是数据物理结构和存储方式的描述，模式是全体数据的逻辑结构和特征描述，外模式是数据库用户能看见和使用的局部数据的逻辑结构和特征的描述；内模式与模式之间由，模式&#x2F;内模式映像连接。模式与外模式之间由外模式&#x2F;模式映像连接。</li>
+<li>优点：使用了映像连接，在内模式修改的时候，同时修改模式&#x2F;内模式映像，可以确保物理独立性；在模式修改的时候，同时修改外模式&#x2F;模式映像，可以确保逻辑独立性。</li>
+</ol>
+<p>习题15，描述数据与程序的物理独立性和逻辑独立性。为什么是数据库系统具有较强的数据与程序的独立性。</p>
+<ol>
+<li>物理独立性：用户的应用与存储在磁盘上的数据库中的数据是相互独立的，当数据物理存储改变了，应用程序不用改变。</li>
+<li>逻辑独立性：用户的应用程序与数据库的逻辑结构是相互独立的，数据的逻辑结构改变了，用户程序可以不变。</li>
+<li>较好的数据与程序的逻辑独立性，是因为应用程序依据数据的外模式进行编写，当模式改变的时候，数据库管理员通过修改外模式&#x2F;模式映像，使外模式保持不变从而让应用程序不必修改。</li>
+<li>较好的数据与程序的物理独立性，是因为当数据库的存储结构改变了，数据库管理员可以修改模式&#x2F;内模式映像，让模式保持不变，从而让应用程序不受影响。</li>
+</ol>
+<h2 id="SQL练习（创建、修改、删除）"><a href="#SQL练习（创建、修改、删除）" class="headerlink" title="SQL练习（创建、修改、删除）"></a>SQL练习（创建、修改、删除）</h2><h3 id="创建基本表"><a href="#创建基本表" class="headerlink" title="创建基本表"></a>创建基本表</h3><p>其基本语言规范是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line">(</span><br><span class="line">    &lt;列名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">    &lt;列名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">    [表级完整性约束]</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="eg5-建立学生数据表"><a href="#eg5-建立学生数据表" class="headerlink" title="eg5 建立学生数据表"></a>eg5 建立学生数据表</h4><p>要求：</p>
+<ol>
+<li>学号是主键</li>
+<li>姓名不能重复</li>
+<li>性别是一个汉字（对应旧版本mysql两个字符）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE Student</span><br><span class="line">(</span><br><span class="line">    Sno CHAR(10) PRIMARY KEY,</span><br><span class="line">    Sname CHAR(20) UNIQUE,</span><br><span class="line">    Ssex CHAR(2),</span><br><span class="line">    Sage SMALLINT,</span><br><span class="line">    Sdept CHAR(20)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="eg6-建立课程数据表"><a href="#eg6-建立课程数据表" class="headerlink" title="eg6 建立课程数据表"></a>eg6 建立课程数据表</h4><p>要求：</p>
+<ol>
+<li>课程号是主键CHAR(4)</li>
+<li>课程名不允许为空</li>
+<li>先修课是外码，参照的是自己的课程号属性</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE Course</span><br><span class="line">(</span><br><span class="line">    Cno CHAR(4) PRIMARY KEY,</span><br><span class="line">    Cname CHAR(40) NOT NULL,</span><br><span class="line">    Cpno CHAR(4),</span><br><span class="line">    Ccredit SMALLINT,</span><br><span class="line">    FOREIGN KEY (Cpno)</span><br><span class="line">    REFERENCES Course Cno</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>错误修正</strong>：<code>REFERENCES Course Cno</code>应该是<code>REFERENCES Course(Cno)</code></p>
+<h4 id="eg7-建立选课表"><a href="#eg7-建立选课表" class="headerlink" title="eg7 建立选课表"></a>eg7 建立选课表</h4><p>要求：</p>
+<ol>
+<li>主键由两个Sno、Cno两个属性构成</li>
+<li>Sno、Cno还分别是外键，参考前面两个表中的对应属性</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE SC</span><br><span class="line">(</span><br><span class="line">    Sno CHAR(10),</span><br><span class="line">    Cno CHAR(4),</span><br><span class="line">    Grade SMALLINT,</span><br><span class="line">    PRIMARY KEY (Sno,Cno),</span><br><span class="line">    FOREIGN KEY (Sno)</span><br><span class="line">    REFERENCES Student(Sno),</span><br><span class="line">    FOREIGN KEY (Cno)</span><br><span class="line">    REFERENCES Course(Cno)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意创建主键为多个属性组合时的写法：</strong><code>PRIMARY KEY (Sno,Cno)</code></p>
+<h3 id="修改基本表"><a href="#修改基本表" class="headerlink" title="修改基本表"></a>修改基本表</h3><p>基本规范如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE &lt;表名&gt;</span><br><span class="line">[ADD &lt;列名&gt; &lt;数据类型&gt; [完整性约束]]</span><br><span class="line">[DROP &lt;列名&gt; &lt;数据类型&gt;]</span><br><span class="line">[ALTER COLUMN &lt;列名&gt; &lt;数据类型&gt;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="eg8-向学生表增加入学时间"><a href="#eg8-向学生表增加入学时间" class="headerlink" title="eg8 向学生表增加入学时间"></a>eg8 向学生表增加入学时间</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE Student</span><br><span class="line">ADD S_entrance DATA;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>错误修正：</strong>时间的数据类型应该是<code>DATE</code>而不是<code>DATA</code></p>
+<h4 id="eg9-将学生表中的年龄属性转换为INT类型"><a href="#eg9-将学生表中的年龄属性转换为INT类型" class="headerlink" title="eg9 将学生表中的年龄属性转换为INT类型"></a>eg9 将学生表中的年龄属性转换为INT类型</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE Student</span><br><span class="line">ALTER COLUMN Sage INT;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意以下事项</strong>：</p>
+<ol>
+<li>COLUMN的拼写</li>
+<li>在MYSQL中似乎对列的修改不是ALTER，而是MODIFY，即<code>MODIFY COLUMN Sage INT;</code></li>
+</ol>
+<h2 id="SQL练习（查询）"><a href="#SQL练习（查询）" class="headerlink" title="SQL练习（查询）"></a>SQL练习（查询）</h2><h3 id="单表查询-1"><a href="#单表查询-1" class="headerlink" title="单表查询"></a>单表查询</h3><ol>
+<li>选择表的若干列</li>
+<li>选择表的若干元组</li>
+<li>ORDER BY 子句</li>
+<li>聚集函数</li>
+<li>GROUP BY子句</li>
+</ol>
+<p><strong>关于GROUP BY，我本地的mysql和教材的SQL标准存在一些偏差</strong>：做如下记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sno</span><br><span class="line">FROM SC</span><br><span class="line">GROUP BY Sno;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上面的查询语句本地的mysql显示的结果会自动去重，和我理解的按照Sno属性是否相同将对应元组放在一张表里面，而不改变元组的个数有一些不同；<strong>但是使用COUNT语句能够正确统计出各组元组的个数，和课本上一致。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sno,Cno</span><br><span class="line">FROM SC</span><br><span class="line">GROUP BY Sno</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>本地上是会报错的，老师说按照课本的逻辑这应该是可以执行的，并且查询的结果会是没有分组的Sno、Cno</p>
+<p><strong>总是，GROUP BY语句大多数时候还是配合聚集函数使用的，直接显示结果比较少</strong>。</p>
+<h4 id="查询若干列"><a href="#查询若干列" class="headerlink" title="查询若干列"></a>查询若干列</h4><p>eg1 查询全体学生的姓名和学号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sno</span><br><span class="line">From Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg2 查询全体学生的姓名、学号和所在系</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sno,Sdept</span><br><span class="line">FROM Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg3 查询全体学生的详细记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLECT * FROM Student;</span><br></pre></td></tr></table></figure>
+
+<p><strong>查询若干列的时候，不仅可以直接查询，还可以查询经过计算的表达式</strong>，常用的表达式如下：</p>
+<ol>
+<li>算术表达式，例如<code>SELECT 2024 - Sage FROM Student;</code>，结果显示Sage列，并且每一个元组下的值都是2024-对应值</li>
+<li>字符串常量，例如<code>SELECT &#39;birth of date&#39;,Birth,2024 - Sage FROM Student;</code>，结果会显示两列，在Sage列前会新增一列，名为Birth，其下的值均为字符串’birth of date’，第二列名为Sage，其下的值都是2024-Sage</li>
+<li>函数，例如<code>SELECT LOWER(Sdept) FROM Student;</code>，结果显示Sdept列，结果是其下对应元组值中的字符串无论大小写均使用小写</li>
+<li>列别名，规范<code>SELECT &lt;列名&gt; &lt;列别名&gt;</code>，显示的时候会自然将对应的列作别名显示</li>
+</ol>
+<p>eg4 查询全体学生的姓名及出生年份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,<span class="string">&#x27;birth of date:&#x27;</span> BIRTH,2025-Sage BIRTHDAY</span><br><span class="line">FROM Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg5 查询学生的姓名、出生年份和所在院系，要求小写字母表示所有系名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,<span class="string">&#x27;birth of date:&#x27;</span> BIRTH,2025-Sage BIRTHDAY,LOWER(Sdept)</span><br><span class="line">FROM Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="选择表中的若干元组"><a href="#选择表中的若干元组" class="headerlink" title="选择表中的若干元组"></a>选择表中的若干元组</h4><p><strong>关于DISTINCT和ALL</strong>：如果没有规定DISTINCT，则默认为ALL，前者会消除重复行，后者会保留所有在原始基本表中查询到的满足条件的元组</p>
+<p>eg6 查询选修了课程的学生学号</p>
+<p>eg6思路：对于SC课程表查询Sno，并去重</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT DISTINCT Sno</span><br><span class="line">FROM SC;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong><code>DISTINCT</code>出现的位置，不是在列名之后，否则就变成别名了</p>
+<p><strong>关于选择元组常用的查询条件（比较）</strong>：</p>
+<ol>
+<li>比较：<code>&lt;, &gt;, =, !=, &lt;&gt;, !&gt;, !&lt;, NOT</code>，小于、大于、等于、不等于、不等于、不大于、不小于、否定布尔表达式（<code>NOT(布尔表达式)</code>常见用法）</li>
+<li>确定范围：<code>BETWEEN AND, NOT BETWEEN AND</code></li>
+<li>确定集合：<code>IN, NOT IN</code></li>
+<li>字符匹配：<code>LIKE, NOT LIKE</code></li>
+<li>空值：<code>IS NULL, IS NOT NULL</code></li>
+<li>多重条件（逻辑运算）：<code>AND, OR, NOT</code></li>
+</ol>
+<p>eg7 查询计算机科学系全体学生的名单</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sdept = <span class="string">&#x27;CS&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg8 查询所有年龄在20岁以下学生姓名及年龄</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sage</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sage&lt;20;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg9 查询考试成绩有不及格的学生学号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT DISTINCT Sno</span><br><span class="line">FROM SC</span><br><span class="line">WHERE Grade&lt;60;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于选择元组常用的查询条件（确定范围）</strong>：<code>BETWEEN...AND...</code>和<code>NOT BETWEEN...AND...</code>，注意<code>BETWEEN...AND...</code>是包含边界的！</p>
+<p>eg10 查询年龄在20~23岁之间的学生姓名、系别和年龄</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sdept,Sage</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sage BETWEEN 20 AND 23;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg11 查询年龄不在20~23岁之间的学生姓名、系别和年龄</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sdept,Sage</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sage NOT BETWEEN 20 AND 23;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于选择元组常用的查询条件（确定集合）</strong>：<code>IN &lt;值表&gt;</code>，<code>NOT IN &lt;值表&gt;</code>，例如，对于字符串的值，值表写法是<code>(&#39;1&#39;,&#39;2&#39;,&#39;3&#39;)</code></p>
+<p>eg12 查询信息系IS、数学系MA和计算机科学系CS，学生姓名和系别</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sdept</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sdept IN (<span class="string">&#x27;IS&#x27;</span>,<span class="string">&#x27;MA&#x27;</span>,<span class="string">&#x27;CS&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg13 查询既不是信息系、数学系也不是计算机科学系的学生姓名和性别</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Ssex</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sdept NOT IN (<span class="string">&#x27;IS&#x27;</span>,<span class="string">&#x27;MA&#x27;</span>,<span class="string">&#x27;CS&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于选择元组常用的查询条件（字符匹配）</strong>：</p>
+<ol>
+<li>基本的用法是<code>[NOT] LIKE &#39;&lt;匹配串&gt;&#39;</code>，值得注意的是匹配串中可以有通配符，有两种分别是：<code>%</code>和<code>_</code>，前者可以代表任意数量的任意字符，后者代表一个任意字符</li>
+<li><code>ESCAPE &#39;&lt;转义字符&gt;&#39;</code>，指定的转义字符用于通配符前面，用来将通配符当作一个普通的字符，但是值得注意的是<strong>如果转义字符单独出现那么它只会被当作普通字符</strong>，这与一些常见语言的处理方式是不同的，不需要两个转义字符来表示其本身</li>
+</ol>
+<p>eg14 查询学号为200215121学生的详细情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sno LIKE <span class="string">&#x27;200215121&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg15查询所有姓刘学生的姓名、学号和性别</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sno,Ssex</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sname LIKE <span class="string">&#x27;刘%&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg16查询姓“欧阳”且全名为三个汉字的学生的姓名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sname LIKE <span class="string">&#x27;欧阳__&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：实际上现在经过测试，MySQL做了适配，一个下划线就可以对应一个汉字字符，从前要用两个，是因为在编码的时候汉字有内外码，一个汉字对应两个字符长度</p>
+<p>eg18 查询所有不姓刘的学生姓名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sname NOT LIKE <span class="string">&#x27;刘%&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg19 查询DB_Design课程的课程号和学分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Cno,Credit</span><br><span class="line">FROM Course</span><br><span class="line">WHERE Cname LIKE <span class="string">&#x27;DB\_Design&#x27;</span></span><br><span class="line">ESCAPE <span class="string">&#x27;\&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>eg20 查询以’DB_’开头，且倒数第3个字符为’i’的课程的详细情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM Course</span><br><span class="line">WHERE Cname LIKE <span class="string">&#x27;DB\_%i__&#x27;</span></span><br><span class="line">ESCAPE <span class="string">&#x27;\&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于选择元组常用的查询条件（涉及空值）</strong>：使用语句<code>IS NULL</code>或<code>IS NOT NULL</code>，这里的<code>IS</code>不能够用<code>=</code>来代替，简单理解就是，<code>NULL</code>是一个对象而不是一个值</p>
+<p>eg21 查询缺少成绩的学生的学号和相应的课程号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sno,Cno</span><br><span class="line">FROM SC</span><br><span class="line">WHERE Grade IS NULL;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于选择元组常用的查询条件（多重条件查询）</strong>：</p>
+<ol>
+<li>主要使用逻辑运算符AND和OR，用它们两个来连接布尔表达式（由各种查询条件构成的）</li>
+<li>默认情况下AND的优先级高于OR的优先级，可以使用括号来改变优先级</li>
+</ol>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

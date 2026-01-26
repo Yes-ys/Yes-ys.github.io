@@ -1,0 +1,293 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>按位运算相关内容 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/plans">Plans</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>按位运算相关内容</h1>
+			<h2 id="logs"><a href="#logs" class="headerlink" title="logs"></a>logs</h2><p>目前的打算是先更新思路，然后在有图片处空出，后续补充图片。</p>
+<h2 id="使用算数右移实现逻辑右移"><a href="#使用算数右移实现逻辑右移" class="headerlink" title="使用算数右移实现逻辑右移"></a>使用算数右移实现逻辑右移</h2><p>以int 32位为例</p>
+<p>我们清楚，当进行算数右移的时候，对于符号位为1的情况下，右移之后符号位、第32位的1，被移动到31位后，32位右被补上了1</p>
+<p>而逻辑右移与之不同的是，逻辑右移后，最高位、32位会被补0</p>
+<p>现在要用算数右移实现逻辑右移，看代码：</p>
+<pre><code>x = x &gt;&gt; n;
+y = ~((1 &lt;&lt; 31) &gt;&gt; n &lt;&lt; 1);  
+x = x&amp;y;
+</code></pre>
+<p>1、x符号位为0，算数右移动n位后，x为 0..（n+1个0）XXXXXXX…<br>2、x符号位为1，算数右移动n位后，x为 1..（n+1个1）XXXXXXX…<br>而对于逻辑右移n位后，无论x符号位是0还是1，都是算数右移中1、的情况</p>
+<blockquote>
+<p>所以我们只需要：x &#x3D; x&amp;0..（n+1个0）1111..1就可以将算数右移的结果转换为逻辑右移的结果。<br>关键在于凑出掩码0..（n+1个0）1111..1，即y处的操作。</p>
+</blockquote>
+<h2 id="分治法求二进制数中1的个数"><a href="#分治法求二进制数中1的个数" class="headerlink" title="分治法求二进制数中1的个数"></a>分治法求二进制数中1的个数</h2><p>分治法的思想：一个复杂的问题分解成若干个规模较小但相似的子问题，“递归”地解决这些子问题，然后将这些子问题的解组合起来，得到原问题的解。</p>
+<p>让我们先以8位二进制数为例子：</p>
+<blockquote>
+<p>原问题：11011110 整体这个数（或者说“一”部分）有几个1<br>分解：求 1101 1110 两部分，分别有几个1<br>分解：求 11 01 11 10 四部分，分别有几个1<br>分解：求 1 1 0 1 1 1 1 0 八部分，分别有几个1</p>
+</blockquote>
+<p>显然，对于上一个问题，各个部分的数字0 or 1就代表了这个部分有几个1，即八个部分时各个部分有几个1已经清楚。最小问题的答案已知，考虑如何利用将最小问题的答案合并，求解上层的问题。</p>
+<p>注意：“各个部分的数字0 or 1就代表了这个部分有几个1”正是八部分时最大的特点，记住这个特点，因为我们的目标是“让‘一’部分时，该部分的数字就代表该部分有几个1。”</p>
+<p>下面开始合并，使用到的关系是：上一个问题中各个部分有几个1 &#x3D; 当前问题中相邻两个部分1的个数相加</p>
+<p>采用上面的关系对问题合并，我们会发现每解决一个问题后，问题中各个部分的数字，就代表原来该部分有几个1。</p>
+<blockquote>
+<p>合并： 四部分状况的问题的答案：10 01 10 01<br>合并： 二部分状况的问题的答案：0011 0011<br>合并： “一”部分（原问题）的答案：00000110</p>
+</blockquote>
+<p>根据前面的描述，00000110即原本1的个数。</p>
+<p>下面是具体的实现代码</p>
+<pre><code>cin&gt;&gt;x
+int x1,x2,x3,x4,x5,s,m;
+s = x &gt;&gt; 1;
+m = ~((1 &lt;&lt; 31));
+x1 = s&amp;m;
+x = (x &amp; 0x55555555) + (x1 &amp; 0x55555555);
+s = x &gt;&gt; 2;
+m = ~((1 &lt;&lt; 31) &gt;&gt; 1);
+x2 = s&amp;m;
+x = (x &amp; 0x33333333) + (x2 &amp; 0x33333333);
+s = x &gt;&gt; 4;
+m = ~((1 &lt;&lt; 31) &gt;&gt; 3);
+x3 = s&amp;m;
+x = (x &amp; 0x0F0F0F0F) + (x3 &amp; 0x0F0F0F0F);
+s = x &gt;&gt; 8;
+m = ~((1 &lt;&lt; 31) &gt;&gt; 7);
+x4 = s&amp;m;
+x = (x &amp; 0x00FF00FF) + (x4 &amp; 0x00FF00FF);
+s = x &gt;&gt; 16;
+m = ~((1 &lt;&lt; 31) &gt;&gt; 15);
+x5 = s&amp;m;
+x = (x &amp; 0x0000FFFF) + (x5 &amp; 0x0000FFFF);
+return x;
+</code></pre>
+<p>关键在于理解如何实现“上一个问题中各个部分有几个1 &#x3D; 当前问题中相邻两个部分1的个数相加”之中，相邻两部分相加。<br>不难想到，我们可以使用掩码。<br>例如：</p>
+<blockquote>
+<p>01010101和10101010（相邻的两位相加，结果为四部分状况答案）<br>x &#x3D; x&amp;0b01010101 + x&amp;0b10101010<br>00110011和11001100（相邻的四位相加，结果为两部分状况答案）<br>x &#x3D; x&amp;0b00110011 + x&amp;0b11001100<br>00001111和11110000（相邻的四位相加，结果为“一”部分状况、最终答案）<br>x &#x3D; x&amp;0b00001111 + x&amp;0b11110000</p>
+</blockquote>
+<p>当然这只是对最开始用例的解释，对于具体的计算机当中的int类型，32位可以如此类比。<br>最终我们需要合并使用当前问题的答案求解上一个问题5次（32 &#x3D; 2^5），对应代码中5处使用了掩码的位置。<br>值得一提的是，也可以在一次计算当中不更换掩码，但是要将x左或右移（逻辑右移！）对应的位数，就像我在代码中的那样。</p>
+<h2 id="按位运算实现对数值变量实现逻辑Not"><a href="#按位运算实现对数值变量实现逻辑Not" class="headerlink" title="按位运算实现对数值变量实现逻辑Not"></a>按位运算实现对数值变量实现逻辑Not</h2><p>具体要求：对于数值型数据x，若x &#x3D;&#x3D; 0x00000000，则输出 0b00000000000000000000000000000001，否则输出0b00000000000000000000000000000000<br>注：上面的常数均为补码值，用于做相等的比较的时候也是用的x的补码值，而非真值。</p>
+<p>思路：对于非0数，其相反数的符号位一定与原数的符号位不同。考虑原数与相反数相或后考虑符号位的情况，来判断x本身是否为0。</p>
+<h2 id="7-fitsBits-判断x可否使用n位补码表示"><a href="#7-fitsBits-判断x可否使用n位补码表示" class="headerlink" title="7 fitsBits 判断x可否使用n位补码表示"></a>7 fitsBits 判断x可否使用n位补码表示</h2><p>思路：<br>1、我们知道n位补码的表示范围是-2^n~2^n-1，因此我们需要判断x是否在这个范围之内。<br>2、在当前环境下，x是由32位二进制补码储存在计算机当中的，我们不难发现：如果x只需要n位补码，那么在计算机当中前面的32-n位补码是空闲的，所以我们可以将x在计算机当中的补码，先左移32-n位，再右移动还原，通过判断这样操作之后得到的补码与x的补码是否仍然相同，来判断x是否只需要n位补码<br>3、最后加上一点补充，来更好地这个问题：<br>上面的思路对于正数来说是可以直接使用的，并且也是好理解的（因为闲置位置上的补码都是0，包括符号位也是0）</p>
+<p>但是对于负数而言，最高位是1（符号位），我们或许会下意识认为，对于实际上的计算机而言，（从右往左，以下都是）第32位是没有闲置的，对于只需要n位补码的负数x，在32位的环境下，实际上被闲置的是第31位到第n位，而非和正数一样的第32位到第n+1位。进一步，我们会下意识认为，闲置的位置都是0，那么第31位是0，一旦左移符号位1就会被弃置，而再左移回来时在大多数情况下，符号位都只会是1，而认为由于32位环境最高位表示负数符号位的特殊性，导致了对于负数这样的“左移右移”无法解决问题。</p>
+<p>显然，这样的理解是错误的，举个简单的反例，-1在32位中的补码是111…11（32个1），并非我们理解的闲置位置是0，所以其实对于一般的负数，我们会发现当它只需要n位补码表示的时候，在32位的环境下，其闲置的位置都是1，这样就不会出现我们认为的错误的情况，所以这个方法对于负数也是适用的。</p>
+<pre><code>int l = 32 + ~n + 1; 
+return !(x ^ (x &lt;&lt; l &gt;&gt; l));
+</code></pre>
+<h2 id="按位运算计算-x-2-n-，向0取整"><a href="#按位运算计算-x-2-n-，向0取整" class="headerlink" title="按位运算计算 x&#x2F;2^n ，向0取整"></a>按位运算计算 x&#x2F;2^n ，向0取整</h2><p>思路：<br>1、首先我们要思考为什么有取整的问题，答案很简单，从一种简化的形式来说，答案可以用“1除以2除不尽（整数范围）”来概括，于是我们要考虑，该如何处理一下，让这个算式有一个结果。处理的方法就是向下取整（1&#x2F;2 &#x3D; 0）或者向上取整(1&#x2F;2 &#x3D; 1)<br>2、为了后面描述方便，我们在此前先看看向上、下取整，在1、在二进制下的形式。<br>不妨考虑（默认二进制，十进制末尾用D表示）奇数：XXXXX11（末位为1），除以2D，即右移1。XXXXX011&#x2F;2D &#x3D; (XXXXX010&#x2F;2D)+1&#x2F;2D，这就回到了1、，且更具有一般性。<br>如果要向下取整即1&#x2F;2D &#x3D; 1，在这个过程当中实际上等效于将1，当作10使用，即对XXXXX011进行了加1操作后进行XXXXX110&gt;&gt;1 &#x3D; XXXXXX11，而不同于原来的XXXXX011&gt;&gt;1 &#x3D; XXXXXX01<br>如果要向上取整，也就是直接抛弃最低位1，仍由右移时将它弃置。<br>3、所以1、中的情况在二进制下实际上就是考虑，要不要让末尾的1在一次右移当中被抛弃，如果是的话则对应向下取整，直接右移即可，如果不是的话则应该加1，让1-&gt;10，从而在除以2D时达到1D当作2D用的效果<br>4、所以一般地，对于除以2^n，即要右移动n次，是否要将前n位可能的1直接抛弃，就对应了是否要向下取整，所以我们直接对原数在前n位分别加上1，确保它们都有“1D当2D用的效果”即可达到向上取整的目的。<br>5、题目要求向0取整，对于正数而言向0取整就是向下取整，对于负数而言是向上取整。所以对正数直接右移n位，对负数在第n位后加1，再右移动n位。</p>
+<h2 id="按位操作求-x"><a href="#按位操作求-x" class="headerlink" title="按位操作求-x"></a>按位操作求-x</h2><p>思路：原数的负数对应的补码，等于原数的补码取反再加1。</p>
+<h2 id="按位运算判断x是否是正数"><a href="#按位运算判断x是否是正数" class="headerlink" title="按位运算判断x是否是正数"></a>按位运算判断x是否是正数</h2><p>思路：<br>1、考虑x的相反数，正数的相反数的补码符号位一定是1，负数及0的相反数的补码一定是0。<br>2、但是注意有一个特殊的负数存在，及-2^(n-1) - 1 &#x3D; -2147483648(32位)，这个负数是在32位补码对应的表示范围之内没有对应的相反数，按照常规的求相反数的补码（按位取反再加1）之后，得到的仍然是它本身，符号位不会改变。<br>3、所以在我们求完x的相反数y之后，只需要在最后查看y的符号（1则x为正，0则x为负或0）时：(y&gt;&gt;31)&amp;1（用于查看符号），加上(y&amp;(y^x)&gt;&gt;31)&amp;1（似乎还有一点问题）即可。因为y^x，的相当于查看x与其相反数的符号位是否相同，如果相同y^x的符号位是0，否则是1，即对-2147483648进行了特判。</p>
+<h2 id="按位运算判断x是否小于等于y"><a href="#按位运算判断x是否小于等于y" class="headerlink" title="按位运算判断x是否小于等于y"></a>按位运算判断x是否小于等于y</h2><p>思路：<br>1、这道题要分三种情况考虑，我最开始想到的是情况1，直接判断x-y（即x + ~y + 1）的符号位是什么，如果是0，则x &gt; y，如果是1，则x &lt; y。<br>2、显然，上面的做法存在问题，很容易发现，无法处理x &#x3D;&#x3D; y的情况，这种情况下，对应x-y的符号位是0，而不同于x &lt; y时题目种要求的1。<br>所以我考虑了第二种情况，x &#x3D;&#x3D; y时，只需要判断!(x^y)的状态，如果是0则，x、y不等，这时交给1、判断，如果是1则x、y相等，只需要将1、2、中两个式子用|连接，如果2、中得到1则会直接得出答案，如果2、中得出0，也不会影响1、中的判断结果（零一律）。<br>3、然而还有一种情况是我们没有考虑到的，那就是在x、y异号的时候，可能出现的overflow，比如-2147483648，让其减去任意的负数，在32位补码的情况下，它都会变成一个正数（符号位为0），而这种情况是只会在x、y异号的时候出现的（同号时，只要是减法，都只会向0靠近，而不会向边界靠近，出现overflow），所以我们只需要和2、中一样，在加上一种情况的式子，并用|与前两个式子连接即可。所加的式子，首先判断x、y是否异号，如果是的话，我们可以直接通过x的符号给出答案，因为负数一定小于正数，所以第三种情况对应的式子是：((x^y)&gt;&gt;31&amp;1&amp;(x&gt;&gt;31&amp;1))，其中(x^y)&gt;&gt;31&amp;1在第一位给出了x、y符号是否相异，如果是的话，为1，后者(x&gt;&gt;31&amp;1)会在第一位给出x的符号；否则为0，整个式子为0，当前的大小情况交给1、2、来判断。</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

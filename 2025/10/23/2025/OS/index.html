@@ -1,0 +1,1171 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>OS [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/plans">Plans</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>OS</h1>
+			<p><code>这篇blog用来记录我于大三秋季学期，学习操作系统时，了解到的知识，以备复习以及增强自己的专业素养</code></p>
+<h2 id="操作系统的基本概念L1"><a href="#操作系统的基本概念L1" class="headerlink" title="操作系统的基本概念L1"></a>操作系统的基本概念L1</h2><h3 id="操作系统需要解决的问题"><a href="#操作系统需要解决的问题" class="headerlink" title="操作系统需要解决的问题"></a>操作系统需要解决的问题</h3><p><strong>操作系统的功能？</strong></p>
+<ol>
+<li>作为<strong>用户与计算机硬件系统之间的接口</strong>（例如上层的编程者使用系统调用完成相关工作）</li>
+<li>对计算机系统<strong>资源进行管理</strong>（eg. 管理硬件CPU、存储器、外设，管理软件程序、数据；管理资源状态，如PCB、TCB；采取相关策略，对资源分配、回收等）</li>
+<li>在需要的时候马上对计算机<strong>资源进行抽象</strong>（通过逻辑功能扩展物理功能，如在裸机上附加外设管理、文件管理、存储管理、处理器管理）</li>
+</ol>
+<p>一些启发的问题：</p>
+<ol>
+<li>直接使用计算机是很不方便的，因为计算机是一个复杂精密的仪器，而大部分人只需要计算机的部分功能，无需去了解整个计算机系统的工作原理</li>
+<li>计算机衍生出各种不同的资源，显示器、音响、打印机，各种外设，资源多样意味着，1）资源管理复杂，那么管理应该落到谁身上？使用者？某种软件？；2）不同厂家生产的设备需要纳入计算机的体系协同工作，缺少统一标准，谁来负责与不同的接口交互？</li>
+</ol>
+<h3 id="操作系统的位置"><a href="#操作系统的位置" class="headerlink" title="操作系统的位置"></a>操作系统的位置</h3><ol>
+<li>OS是配置在<strong>硬件上的第一层软件，是对硬件系统的首次扩充</strong>（<strong>操作系统是什么？</strong>）</li>
+<li>OS工作在<strong>内核态</strong></li>
+</ol>
+<h3 id="操作系统的发展过程"><a href="#操作系统的发展过程" class="headerlink" title="操作系统的发展过程"></a>操作系统的发展过程</h3><p><strong>操作系统发展的过程？</strong><br><strong>各个阶段的特点？</strong></p>
+<h4 id="未配置操作系统的计算机系统"><a href="#未配置操作系统的计算机系统" class="headerlink" title="未配置操作系统的计算机系统"></a>未配置操作系统的计算机系统</h4><p>工作方式：用户作为计算机专业人员，使用机器语言编程，输入输出如纸带。</p>
+<p>工作特点：用户独占资源，资源不能在用户间共享；CPU等待用户手工装、卸纸带，利用率很低。</p>
+<h4 id="单道批处理系统"><a href="#单道批处理系统" class="headerlink" title="单道批处理系统"></a>单道批处理系统</h4><p>动机：为充分利用计算机系统，应尽量让系统连续运行，以减少空闲时间</p>
+<p>工作方式：一批作业，<strong>脱机输入</strong>道磁带，监督程序控制有序处理</p>
+<p>工作特点：内存中只保持<strong>一个作业运行</strong>，先进先出（单道）；成批处理作业（批处理，或许是指一批作业同时输入）<br>（<em>单道批处理系统需要作业调度</em>）</p>
+<p><strong>注</strong>：单道批处理系统是最早出现的一种OS，单严格来说只能算OS前身，并非人们现在所理解的OS</p>
+<h4 id="多道批处理系统"><a href="#多道批处理系统" class="headerlink" title="多道批处理系统"></a>多道批处理系统</h4><p>动机：单道批处理系统中内存中仅有一道作业，每次处理完一个作业，程序发出I&#x2F;O请求的时候CPU都处于等待状态，无法充分利用资源</p>
+<p>工作方式：作业成批进入内存，按照一定策略由程序调度，轮流使用CPU</p>
+<p>工作特点：内存中维护<strong>多个作业，交替使用CPU</strong>（多道性）；<strong>作业进出顺序不定</strong>（无序性）；<strong>作业经历两次调度</strong>（作业调度、进程调度）</p>
+<p><strong>注</strong>：为了完成这样的工作方式，实际上牵扯到许多问题，包括处理器争用、内存分配和保护、IO设备分配、文件组织管理、作业管理、用户与系统接口等等，<strong>所以应该增加一组软件来解决这些问题，于是这些软件构成了现代意义上的操作系统</strong></p>
+<h4 id="分时系统"><a href="#分时系统" class="headerlink" title="分时系统"></a>分时系统</h4><p>动机：多个程序员围着一台批处理系统的主机，缺乏一些机制来很好地为每个用户作业分配时间、为程序员提供良好的<strong>交互</strong>体验，有时一个逗号的编译错误会浪费程序员半天的时间，他们希望自己的程序可以更快地得到响应</p>
+<p>工作方式：在多道批处理系统的基础上，将系统资源在时间上进行分割，每个时间段称为一个时间片，每个用户依次轮流使用时间片</p>
+<p>工作特点：<strong>多个终端共享一个主机</strong>（多路性）；<strong>各个用户独立操作，互不干扰</strong>（独立性）；请求能在<strong>很短的时间得到响应</strong>（及时性）；用户可以通过中断与系统进行<strong>人机交互</strong>（交互性）</p>
+<p><strong>注</strong>：实际上分时系统已经很接近如今我们使用的操作系统了，或者说就是在其基础上加入了更多的现代化改进，而下面的实时系统则是为了应对一些特殊的场景</p>
+<h4 id="实时系统（特殊，仅作了解）"><a href="#实时系统（特殊，仅作了解）" class="headerlink" title="实时系统（特殊，仅作了解）"></a>实时系统（特殊，仅作了解）</h4><p>动机：在一些场景下我们特别强调作业处理的及时响应，甚至不再是及时性，而是实时性与可靠性，例如武器装备、订票系统等场景</p>
+<p>实时任务种类：硬实时任务、软实时任务，前者要求系统<strong>必须满足任务对截止日期</strong>的要求，后者可以偶尔错过截止日期</p>
+<h4 id="微机操作系统（了解存在）"><a href="#微机操作系统（了解存在）" class="headerlink" title="微机操作系统（了解存在）"></a>微机操作系统（了解存在）</h4><p>略</p>
+<h2 id="操作系统的特性"><a href="#操作系统的特性" class="headerlink" title="操作系统的特性"></a>操作系统的特性</h2><p><strong>四大特征？两个基本特征？</strong></p>
+<p>并发、共享是最<strong>基本的特征</strong></p>
+<h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><p>并发的含义：指处理多个同时性活动的能力</p>
+<ol>
+<li>针对单核CPU讨论，具体来说：<strong>宏观</strong>上是这些程序同时在执行，<strong>微观</strong>上是每个时刻实际只有一个程序在执行，<strong>程序轮流使用CPU</strong></li>
+<li><strong>并发不同于并行</strong>，后者是不同程序同一时刻在多个硬件部件上执行，例如多核CPU</li>
+<li><strong>并发不同于同步</strong>，两个完全不同的概念，同步指的是<strong>协调并发执行的任务</strong>（进程&#x2F;线程）之间的执行顺序和共享资源的访问，以防止出现竞态条件或数据不一致。</li>
+</ol>
+<h3 id="共享"><a href="#共享" class="headerlink" title="共享"></a>共享</h3><p>共享的含义：<strong>操作系统与多个用户的程序</strong>共同使用计算机中的有限资源</p>
+<p>共享的分类：互斥共享（打印机）、同时共享（读文件）</p>
+<h3 id="虚拟"><a href="#虚拟" class="headerlink" title="虚拟"></a>虚拟</h3><p>虚拟的含义：<strong>一个物理实体</strong>映射为若干<strong>多个对应逻辑实体</strong></p>
+<p>虚拟的实现方法：分时 分空间</p>
+<p>对应的具体例子：<strong>时分CPU</strong>，在每个进程看来是一个虚拟处理机；<strong>空分存储器</strong>，每个进程拥有独立的虚拟地址空间；</p>
+<h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><p>异步的含义：操作系统必须随时对<strong>不可预测的次序</strong>发生的<strong>事件</strong>进行<strong>响应和处理</strong></p>
+<ol>
+<li>多个进程发生与运行速度的不可知，导致了在<strong>操作系统视角下</strong>，整个系统在每时每刻的状态都是<strong>难以重现</strong>的</li>
+<li>操作系统需要保证，只要<strong>环境相同</strong>，进程的<strong>运行结果就要一致</strong>（进程对复杂、不可重现的整个系统是感知不到的，系统对进程是透明的）</li>
+<li>更准确一点来说，异步是操作系统面对的挑战</li>
+</ol>
+<h2 id="操作系统的功能"><a href="#操作系统的功能" class="headerlink" title="操作系统的功能"></a>操作系统的功能</h2><p>总的来说，其需要保证多道程序，有条不紊地运行，提高系统中各种资源的利用率，并方便用户的交互。</p>
+<h3 id="处理器管理"><a href="#处理器管理" class="headerlink" title="处理器管理"></a>处理器管理</h3><p>进程控制：以进程为基本单位进行处理机的分配和运行</p>
+<p>具体而言：</p>
+<ol>
+<li>为作业创建进程</li>
+<li>撤销已经结束的进程</li>
+<li>控制进程在运行过程中的状态转换</li>
+</ol>
+<p>注：在现代OS中，进程控制除了这些以外还有关于线程的管理，后续会学习到</p>
+<p>进程同步：通过进程同步机制，协调进程间的资源共享，推进并发进程执行</p>
+<p>进程同步的主要方式：</p>
+<ol>
+<li>互斥方式，各进程在对临界资源访问的时候应该采取互斥的方式</li>
+<li>同步方式，有的进程之间需要相互合作，同步机制来协调她们的次序</li>
+</ol>
+<p>进程通信：让多个相互协作的进程可以交换信息</p>
+<p>例如：I-C-P，三个进程互相通信，I为C提供数据，C为P提供结果，P进行打印</p>
+<p>进程调度：控制作业、进程的运行切换，从而高效地利用处理机资源提高系统性能</p>
+<ol>
+<li>作业调度：从后备队列上按照一定的算法，选择出若干个作业，为其分配必要的资源</li>
+<li>进程调度：从就绪队列上，挑选出一个新进程，将处理机分配给它，并为其设置好运行现场，使其投入运行</li>
+</ol>
+<h3 id="存储器管理"><a href="#存储器管理" class="headerlink" title="存储器管理"></a>存储器管理</h3><p>内存分配：为多道程序分配内存，提高存储器利用率</p>
+<ol>
+<li>静态分配：内存空间在作业装入时确定，不允许作业再申请新的内存空间，也不允许作业在空间中移动</li>
+<li>动态分配：允许作业在运行过程中申请新的内存空间，适应程序和数据的动态增长，也允许作业在内存中“移动”</li>
+</ol>
+<p>内存保护：确保每个进程在自己的内存空间运行，互不干扰</p>
+<p>例如：设置两个界限寄存器，用来存放正在执行进程的上下界，系统对每条指令访问的地址进行检查，如果有越界行为则停止程序执行</p>
+<p>地址映射：将逻辑地址分配给进程，让用户可以通过逻辑地址透明地访问物理地址</p>
+<p>实际上就是一种虚拟化</p>
+<p>内存扩充：借助虚拟存储技术，从逻辑上扩充内存容量，让用户感知道的内存容量比实际容量大得多</p>
+<h3 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h3><p>管理计算机所有的外围设备</p>
+<p>缓冲区管理：解决CPU和I&#x2F;O设备速度不匹配的问题</p>
+<p>设备分配：控制设备的分配和回收</p>
+<p>设备处理：实现CPU和设备控制器之间的通信</p>
+<p>（设备在操作系统中同样会被映射为地址）</p>
+<h3 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h3><p>文件存储空间管理：为每个文件分配必要的外存空间，对空间进行回收（通常采用离散分配的方式）</p>
+<p>目录管理：就为了让用户能方便地在外存上找到所需文件，系统为文件建立目录项</p>
+<p>读写保护：文件读写管理，以及防止文件被非法窃取、破坏</p>
+<h3 id="用户接口"><a href="#用户接口" class="headerlink" title="用户接口"></a>用户接口</h3><p>联机用户接口：为联机用户提供的接口，由一组键盘命令及命令解释程序组成</p>
+<p>脱机用户接口：为批处理作业的用户提供的接口（这类用户无需实时交互）</p>
+<h3 id="其它功能"><a href="#其它功能" class="headerlink" title="其它功能"></a>其它功能</h3><p>系统安全、网络功能与服务、支持多媒体</p>
+<p><code>写在操作系统功能的最后：实际上操作系统功能这一块可以作为一张地图使用，我们后续的学习实际上就是在这个框架上的展开，一步步去学习操作系统是怎么具体地将这些功能进行实现的</code></p>
+<h2 id="操作系统的结构设计"><a href="#操作系统的结构设计" class="headerlink" title="操作系统的结构设计"></a>操作系统的结构设计</h2><p><strong>操作系统的几种架构？</strong>；<br><strong>微内核？</strong>；</p>
+<p><strong>结构发展过程</strong>：<br>    1）<strong>无结构</strong>；<br>    2）<strong>模块化OS结构</strong>；<br>    3）<strong>层次式OS</strong>；<br>    4）<strong>客户服务器模式</strong>；<br>    5）<strong>采用面向对象的程序方法设计</strong>；<br>    6）<strong>微内核OS</strong>；<br>    注意：<br>        1）第一代～第三代称为<strong>传统OS结构</strong>；<br>        2）微内核称为<strong>现代OS结构</strong>；</p>
+<p>模块化OS结构：<br>    1）将模块作为组成操作系统的基本单位；<br>    2）按照功能需求根据程序和数据特性将系统分解为若干个模块；<br>    3）模块可以分为若干子模块，每个模块具有独立性，所有模块组成完整的操作系统；</p>
+<p>分层式的OS：<br>    1）将单一的OS按照功能划分为不同的层次，底层的功能为紧临的上一个层次提供服务；</p>
+<p><strong>微内核</strong>：<br>   1）微内核是经过精心设计的，实现现代OS<strong>核心功能</strong>的<strong>小型内核</strong>；<br>   2）并非完整的OS，是构建通用OS的一个重要基础；<br>   3）在微内核中通常采用<strong>客户服务器模式</strong>；<br>   （OS的大部分功能通过若干服务器实现，例如文件服务器、作业服务器、网络服务器）；<br>    微内核的结构特征：<br>        以<strong>微内核为OS的核心</strong>，以<strong>客户服务器模式为基础</strong>，采用<strong>面向对象的程序设计方法</strong>；<br>    微内核的功能：<br>        进程管理、存储器管理、进程通信管理、I&#x2F;O设备管理；</p>
+<p>客户服务器模式：<br>    基本思想：将操作系统分为两大部分<br>        1）运行在<strong>用户态</strong>，以<strong>客户&#x2F;服务器方式活动的进程</strong>；<br>        2）运行在<strong>内核态</strong>的<strong>内核</strong>；<br>    <strong>内核态包括</strong>：<br>        微内核、计算机硬件；<br>    <strong>用户态包括</strong>：<br>        用户进程、<strong>操作系统服务进程</strong>；<br>    注意：在这种模式下：<br>        1）除了微内核，<strong>操作系统的其他部分</strong>被分为相对独立的若干进程，称为服务进程，和用户进程一起活动<strong>在用户态</strong>；<br>        2）用户进程和服务进程的<strong>交互要通过微内核</strong>，用户请求服务，服务回应进程，都是微内核做中介；<br>    优点：<br>        将操作系统在很多模块（进程管理、存储器管理…）应有的功能从内核中抽离出来作为服务进程，在内核中保留最<strong>基本的功能</strong>，让内核变得<strong>简洁可靠</strong>；<br>    eg：<br>        <strong>假脱机系统</strong>就是客户服务器模式的典型代表；</p>
+<p>采用面向对象的程序设计思想：<br>    <strong>文件、进程、内存块</strong>都被认为是一种<strong>对象</strong>；</p>
+<h2 id="L3进程的基础概念"><a href="#L3进程的基础概念" class="headerlink" title="L3进程的基础概念"></a>L3进程的基础概念</h2><h3 id="进程引入的原因"><a href="#进程引入的原因" class="headerlink" title="进程引入的原因"></a>进程引入的原因</h3><p>引入进程的根本原因，程序的并发执行会破坏程序执行的：</p>
+<ol>
+<li>顺序性；</li>
+<li>封闭性；</li>
+<li>可再现性</li>
+</ol>
+<p><strong>前驱图</strong>：</p>
+<ol>
+<li>节点：表示1）一句语句；2）程序段；3）进程</li>
+<li>有箭头的边：节点之间的前躯关系，后继节点的执行一定是依赖于前躯节点的</li>
+<li>初始节点、终止节点：没有前躯、后继的节点</li>
+</ol>
+<p>并发执行的程序：</p>
+<ol>
+<li>执行过程交替进行</li>
+<li>共享资源部具有封闭性</li>
+<li>不具有可再现性（当然是在当前，我们没有加任何限制条件）</li>
+<li>程序之间间接或直接相互制约</li>
+</ol>
+<p>我们以程序为基础，为了让程序可以并发执行，引入进程的概念，来对并发程序进行描述与控制</p>
+<h3 id="进程的描述"><a href="#进程的描述" class="headerlink" title="进程的描述"></a>进程的描述</h3><h4 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h4><p>进程 &#x3D; <strong>程序（数据段+程序段）+ PCB（进程控制模块）</strong></p>
+<p>进程的严格定义：进程是<strong>进程实体的运行过程</strong>，是系统进行<strong>资源分配</strong>和<strong>调度</strong>的基本单位</p>
+<p>创建、撤销进程：实际上就是创建、撤销了PCB模块</p>
+<p>（除了最小微内核作为程序始终存放在内存中一直运行，例如原语操作、时钟管理、进程管理等，其他都作为进程管理）</p>
+<p>进程的<strong>特性</strong>：</p>
+<ol>
+<li>动态性</li>
+<li><strong>并发性</strong></li>
+<li>独立性（资源调度）</li>
+<li><strong>异步性</strong>（各进程间的执行情况）<br>（操作系统的特性是：并发、异步、虚拟、共享，并发和异步与进程的特性相同）</li>
+</ol>
+<p>一个程序可以对应多个进程，一个进程可以包含多个程序</p>
+<p><strong>进程和程序的区别</strong>：</p>
+<ol>
+<li>进程是动态概念，强调的是<strong>执行</strong>，有创建和撤销，存在是<strong>暂时的</strong>；程序是静态概念，程序是指令的<strong>有序集合</strong>，<strong>永远存在</strong>；</li>
+<li>进程具有<strong>并发性</strong>；程序不具有并发性；</li>
+<li>进程是<strong>接收计算机资源</strong>的基本单位；程序仅仅是程序；</li>
+</ol>
+<h4 id="进程的基本状态与转换"><a href="#进程的基本状态与转换" class="headerlink" title="进程的基本状态与转换"></a>进程的基本状态与转换</h4><ol>
+<li><strong>创建状态</strong>：为要执行的程序作业创建PCB，创建进程</li>
+<li><strong>终止状态</strong>：执行完毕，回收相关资源</li>
+<li><strong>就绪状态</strong>：进入了就绪队列，等待执行，得到了除CPU以外的所有资源</li>
+<li><strong>执行状态</strong>：获得了CPU，正在被执行</li>
+<li><strong>阻塞状态</strong>：因为某些原因无法继续执行，放弃了CPU了使用，进入了一种暂停等待的状态</li>
+</ol>
+<p>若考虑三种基本状态：<strong>就绪、执行、阻塞</strong>；</p>
+<p><strong>相关状态</strong>转换如下图：</p>
+<p><img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/ProcessStateTransform1.png" alt="进程状态转换1"><br>（就绪和执行之间的切换涉及调度、时间片）</p>
+<p>挂起：将内存中的进程临时保存到外存</p>
+<p>当由于某些原因，例如内存不够了、用户需要等等，这时就需要做挂起操作</p>
+<p>有了挂起之后进程有<strong>7种基本状态</strong>，其中活动、静止分别对应 在内存中 和 被挂起</p>
+<ol>
+<li><strong>创建状态</strong></li>
+<li><strong>终止状态</strong></li>
+<li><strong>活动就绪状态</strong></li>
+<li><strong>静止就绪状态</strong></li>
+<li><strong>活动阻塞状态</strong></li>
+<li><strong>静止阻塞状态</strong></li>
+<li><strong>执行状态</strong></li>
+</ol>
+<p><strong>相关状态转</strong>换如下图：</p>
+<p><img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/ProcessStateTransform2.png" alt="进程状态转换2"></p>
+<p>注意：各状态的转换要很熟悉</p>
+<p>其实可以记住以下几个关键点：</p>
+<p>无挂起</p>
+<ol>
+<li>执行可以到 就绪 阻塞</li>
+<li>就绪可以到 执行</li>
+<li>阻塞可以到 就绪</li>
+</ol>
+<p>在无挂起的基础上，有挂起</p>
+<ol>
+<li>静止到对应的活动 静止阻塞可以到静止就绪</li>
+<li>执行可以到静止就绪，不能到静止阻塞</li>
+</ol>
+<p>此外，作为阻塞原因的常用例子是IO</p>
+<h4 id="进程管理到数据结构"><a href="#进程管理到数据结构" class="headerlink" title="进程管理到数据结构"></a>进程管理到数据结构</h4><ol>
+<li>操作系统管理进程的数据结构：资源信息表&#x2F;进程信息表</li>
+<li>进程自己的数据结构：PCB的数据结构</li>
+</ol>
+<p>关于PCB</p>
+<ol>
+<li><strong>PCB是进程存在的唯一标识</strong></li>
+<li>能提供<strong>进程控制</strong>、调度、互相通信的信息</li>
+<li>能够用于实现间断运行</li>
+</ol>
+<h3 id="进程的控制"><a href="#进程的控制" class="headerlink" title="进程的控制"></a>进程的控制</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>进程控制：进程的创建、终止以及状态的切换（基本状态和挂起）</p>
+<p><strong>进程控制</strong>的实现：操作系统<strong>内核</strong>中的原语来实现的<br>（所以<strong>PCB工作在内核态</strong>，进程的数据、程序工作在<strong>用户态</strong>）；</p>
+<p><strong>用户态</strong>：目态，权限较低，执行规定指令，访问指定寄存器和存储区；一般应用程序的执行状态，不去执行OS区域与指令</p>
+<p>管态：<strong>内核态</strong>，高特权，执行所有指令，访问所有寄存器和存储区；传统OS都在管态，常驻于内存之中</p>
+<p>操作系统内核提供的功能：</p>
+<ol>
+<li>中断处理</li>
+<li>时钟管理</li>
+<li>原语操作</li>
+</ol>
+<p>操作系统内核依托于自己的功能进行的管理：</p>
+<ol>
+<li>进程管理</li>
+<li>存储器管理</li>
+<li>设备管理</li>
+</ol>
+<h4 id="进程的创建"><a href="#进程的创建" class="headerlink" title="进程的创建"></a>进程的创建</h4><p>一个典型的例子：多道批处理系统中，内核进行作业调度，将作业装入内存</p>
+<p>创建的步骤：申请空PCB、分配资源、初始化PCB信息、插入就绪队列</p>
+<p>进程可以继续创建进程，于是就有了父进程与子进程</p>
+<h4 id="进程的终止"><a href="#进程的终止" class="headerlink" title="进程的终止"></a>进程的终止</h4><ol>
+<li>正常终止</li>
+<li>异常终止（出现错误）</li>
+<li>外界干预（如死锁时）</li>
+</ol>
+<h4 id="阻塞与唤醒"><a href="#阻塞与唤醒" class="headerlink" title="阻塞与唤醒"></a>阻塞与唤醒</h4><p>原语是block和wakeup</p>
+<p>引起阻塞的事件：（这个可以仔细了解一下）</p>
+<ol>
+<li>请求OS服务，不能立刻被满足，如IO</li>
+<li>启动OS的某种操作，等待OS操作完成</li>
+<li>数据尚未到达</li>
+<li>无新工作可做</li>
+</ol>
+<p>引起唤醒的事件与引起阻塞的事件相对应</p>
+<h4 id="挂起与激活"><a href="#挂起与激活" class="headerlink" title="挂起与激活"></a>挂起与激活</h4><p>原语是suspend和active</p>
+<p>挂起与激活一般是OS进行处理，挂起和激活可以由用户干预</p>
+<h2 id="L4–L5进程同步和经典同步问题"><a href="#L4–L5进程同步和经典同步问题" class="headerlink" title="L4–L5进程同步和经典同步问题"></a>L4–L5进程同步和经典同步问题</h2><h3 id="进程同步（进本概念）"><a href="#进程同步（进本概念）" class="headerlink" title="进程同步（进本概念）"></a>进程同步（进本概念）</h3><p><strong>进程同步的基本概念</strong>：对多个相关进程在执行次序上进行协调，使并发执行的诸进程之间能够按照一定的规则（或时序）<strong>共享系统资源</strong>，并能很好的<strong>相互合作</strong>，从而使得程序的执行具有<strong>可再现性</strong>。<br>（进程同步的主要任务：使并发执行的诸进程有效地<strong>共享资源</strong>和<strong>相互合作</strong>，从而使程序的执行具有<strong>可再现性</strong>）；</p>
+<p>两种形式的制约关系</p>
+<ol>
+<li>直接相互制约关系（源于进程之间的合作）</li>
+<li>间接相互制约关系（源于进程对资源共享）</li>
+</ol>
+<p>临界资源：多个进程采用互斥的方式访问的资源（例如打印机）</p>
+<p>对临界资源要进行互斥访问：即一个进程在使用该资源的时候其他进程不允许使用该资源</p>
+<p><strong>临界区</strong>：每个进程中访问临界资源的代码段</p>
+<p>实现互斥访问临界资源：保证每个进程互斥地进入自己的临界区</p>
+<p>同步机制：进程互斥地进入自己临界区的机制</p>
+<p><strong>同步机制要遵循的规则</strong></p>
+<ol>
+<li><strong>空闲让进</strong>（临界资源<strong>空闲</strong>的时候，<strong>允许</strong>希望访问的进程<strong>进入</strong>自己的临界区）</li>
+<li><strong>忙则等待</strong>（临界资源被<strong>占用</strong>的时候，希望访问的进程<strong>不能进入</strong>临界区，而需要等待）</li>
+<li><strong>有限等待</strong>（等待的进程<strong>不能一直等待</strong>，最终一定要能够访问到临界资源）</li>
+<li><strong>让权等待</strong>（拿不到临界资源的进程要释放处理机，<strong>不要忙等</strong>）</li>
+</ol>
+<p>当无进程处于临界区时，表明临界资源处于空闲状态，应允许一个请求进入临界区的进程立即进入自己的临界区。</p>
+<p>当已有进程进入临界区时，表明临界资源正被访问，因而其它试图进入临界区的进程必须等待，以保证对临界资源的互斥访问。</p>
+<p>对要求访问临界资源的进程，应保证在有限的时间内能进入自己的临界区，以免陷入“死等”状态。</p>
+<p>当进程不能进入自己的临界区时，应立即释放处理机，以免进程陷入“忙等”状态。</p>
+<h3 id="进程同步机制：硬件机制"><a href="#进程同步机制：硬件机制" class="headerlink" title="进程同步机制：硬件机制"></a>进程同步机制：硬件机制</h3><ol>
+<li><strong>关中断</strong></li>
+<li><strong>Test and Set</strong>指令</li>
+<li><strong>Swap</strong>指令</li>
+</ol>
+<p>硬件实现<strong>不可被打断</strong></p>
+<p>后面两种方法的共同点是为临界资源维护公共变量lock</p>
+<p>硬件实现的缺点：当临界资源被占用的时候，其他进程会不断进程测试，浪费处理器资源，属于<strong>忙等状态</strong>，不符合让权等待。</p>
+<h4 id="关中断"><a href="#关中断" class="headerlink" title="关中断"></a>关中断</h4><p>在进入锁测试前关闭中断，直到完成锁测试才能打开中断。这样，进程在临界区执行期间，计算机系统不响应中断，从而不会发生调度。</p>
+<p>缺点很多：限制CPU交叉执行能力、在多核CPU中不适用</p>
+<h4 id="Test-and-Set指令"><a href="#Test-and-Set指令" class="headerlink" title="Test and Set指令"></a>Test and Set指令</h4><p>lock是临界资源的全局boolean变量</p>
+<p>记忆点就在while(TS(&amp;lock));</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">while</span>(TS(&amp;lock));</span><br><span class="line">    critical section;</span><br><span class="line">    lock = FALSE;</span><br><span class="line">    remainder section;</span><br><span class="line">&#125;<span class="keyword">while</span>(TRUE)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">boolean TS(boolean *lock)&#123;</span><br><span class="line">    boolean old = *lock;</span><br><span class="line">    *lock = TRUE;</span><br><span class="line">    <span class="built_in">return</span> old;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Swap指令"><a href="#Swap指令" class="headerlink" title="Swap指令"></a>Swap指令</h4><p>lock是临界资源的全局boolean变量</p>
+<p>swap就是单纯的交换功能</p>
+<p>关键的记忆点在do{…}while(key !&#x3D; FALSE)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    key = TRUE;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        swap(&amp;lock,&amp;key);</span><br><span class="line">    &#125;<span class="keyword">while</span>(key != FALSE)</span><br><span class="line">    critical section;</span><br><span class="line">    lock = FALSE;</span><br><span class="line">    ...</span><br><span class="line">&#125;<span class="keyword">while</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void swap(boolean* lock, boolean* key)&#123;</span><br><span class="line">    boolean temp = *lock;</span><br><span class="line">    lock = *key;</span><br><span class="line">    key = *temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="进程同步机制：信号量机制（Semaphore）"><a href="#进程同步机制：信号量机制（Semaphore）" class="headerlink" title="进程同步机制：信号量机制（Semaphore）"></a>进程同步机制：信号量机制（Semaphore）</h3><h4 id="整型信号量"><a href="#整型信号量" class="headerlink" title="整型信号量"></a>整型信号量</h4><p>基本思想：在OS中维护一个整型变量作为信号量，通过改变<strong>整型变量</strong>的值来<strong>标记临界资源</strong>是否可以访问。</p>
+<p>实现细节：</p>
+<ol>
+<li>整型变量S只能通过wait(S), signal(S)来访问</li>
+<li>S的初始值只能是<strong>1或者更大值</strong>，来标记临界资源的<strong>剩余量</strong></li>
+<li>wait、signal操作由系统原语实现，执行时不可中断</li>
+</ol>
+<p>关于wait、signal</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">wait</span>(S):&#123;</span><br><span class="line">    <span class="keyword">while</span>(S&lt;0);</span><br><span class="line">    S--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">signal(S):&#123;</span><br><span class="line">    S++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>整型信号量</strong>的缺点在于<strong>不满足让权等待</strong>，没有获得处理器的进程会不断执行while循环，访问信号量</p>
+<h4 id="记录型信号量"><a href="#记录型信号量" class="headerlink" title="记录型信号量"></a>记录型信号量</h4><p>基本思想：使用一个整型变量value保存剩余临界资源的数量，维护一个链表L对应阻塞队列，将无法获得临界资源的进程进行阻塞，防止忙等。</p>
+<p>实现细节：</p>
+<ol>
+<li>整型变量value，与整型信号量类似，只能用signal、wait访问（但signal、wait实现有所不同）</li>
+<li>维护一个<strong>等待进程的队列</strong></li>
+</ol>
+<p><strong>为什么记录型信号量可以实现让权等待</strong>：<br>    因为记录型信号量除了用整型变量value代表资源数目外，还引入了一个链表L<strong>将等待该资源的进程组成阻塞队列</strong>；<br>    如果<strong>想访问的资源已经分配完毕，进程就自我阻塞，并进入阻塞队列进行等待</strong>；<br>    当其他持<strong>有资源的进程释放资源时，就检查是否有等待的进程，如果有则唤醒一个进程</strong>；<br>    这样的方式就实现了让权等待；</p>
+<p><strong>关于数据结构</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">type</span> semaphore = record</span><br><span class="line">value <span class="built_in">integer</span>;</span><br><span class="line">L : list of process;</span><br><span class="line">end</span><br><span class="line">//其实落到做题上不一定要这样写</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于wait、siganl</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">wait</span>(S):</span><br><span class="line"></span><br><span class="line">var S:semaphore;</span><br><span class="line">begin</span><br><span class="line">    S.value := S.value-1;</span><br><span class="line">    <span class="keyword">if</span> S.value &lt; 0 <span class="keyword">then</span></span><br><span class="line">        block(S.L);</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">signal(S):</span><br><span class="line"></span><br><span class="line">var S:semaphore:</span><br><span class="line">begin</span><br><span class="line">    S.value := S.value+1;</span><br><span class="line">    <span class="keyword">if</span> S.value &gt;= 0 <span class="keyword">then</span></span><br><span class="line">        wakeup(S.l);</span><br><span class="line">end</span><br><span class="line">//不需要完全背住这两个实现，但是在多个进程运行的情况下，理解它们对<span class="built_in">wait</span>、signal的调用以及执行效果，对于理解这种信号量机制的运行原理很有帮助；</span><br><span class="line">//后续同步问题会直接将它们作为一种默认的存在直接调用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>记录型信号量的缺点是如果操作不当<strong>可能出现死锁</strong>，例如进程A、B执行均需要两个临界资源，<strong>A、B各自拿到一个</strong>，等待另一个点时候陷入阻塞且持有资源，于是A、B死锁，谁也无法继续下去。这种情况尤其容易在两个进程的wait顺序不同时发生</p>
+<p>注意：</p>
+<ol>
+<li>记录型信号量虽然有缺点，但是缺点是在不当的代码编写时发生的；不像整型信号量的硬性缺陷；所以这种方式还是比较常用的，并且我们后续各种同步问题的解决，基本上都是用这种方法</li>
+<li>使用的时候要自己定义value的数据结构，但是L、wait、signal不用自己声明，它们上默认存在的</li>
+</ol>
+<h4 id="AND型信号量"><a href="#AND型信号量" class="headerlink" title="AND型信号量"></a>AND型信号量</h4><p>基本思想：AND型信号量是为了<strong>解决记录型信号量可能导致死锁</strong>而引入的，方法就是将<strong>所有的临界资源一次性分配</strong>给需要的进程，不允许一个进程一次持有部分临界资源，<strong>要么全有了，要么一个都没有</strong>。</p>
+<p><strong>原语操作：</strong></p>
+<ol>
+<li>Swait(s1,s2,…,sn)</li>
+<li>Ssignal(s1,s2,…,sn)</li>
+</ol>
+<h4 id="信号量集"><a href="#信号量集" class="headerlink" title="信号量集"></a>信号量集</h4><p>提出的背景；可能产生<strong>死锁</strong>？<br>    在一次申请N个同类资源的时候，例如<strong>甲、乙，在20个资源</strong>的情况下，均需要15个资源才能执行，交替循环使用wait，导致<strong>双方各拿到10个</strong>，死锁；</p>
+<p>信号量集解决死锁的原因：<br>    信号量集一次可以申请<strong>分配多个同一资源</strong>，但是要<strong>测试</strong>资源数量是否<strong>大于下限</strong>，如果<strong>不是的话则不予以分配</strong>，不会出现拿到部分数量的资源的情况；<br>（<em>感觉也是破坏了请求和保持</em>）</p>
+<p><strong>原语操作</strong></p>
+<ol>
+<li>Swait(s1,t1,d1,s2,t2,d2,…,sn,tn,dn)</li>
+<li>Ssignal(s1,d1,s2,d2,…,sn,dn)</li>
+</ol>
+<p><strong>s、t、d的含义</strong></p>
+<ol>
+<li>s：整型量的变量名，用来标识分配的整型量；</li>
+<li>t：下限值，如果资源数少于t的话就不予分配；</li>
+<li>d：申请的资源量，期望分到的d份资源；</li>
+</ol>
+<p>注：t作为进程设置的下限，如果资源量低于该下限还给对应的进程分配，可能造成死锁，想一想提出的背景</p>
+<p><strong>几种特殊的信号量集合</strong></p>
+<ol>
+<li>**Swait(S,d,d)**：对于资源S，如果少于d则不予分配，每次分配d份；</li>
+<li>**Swait(S,1,1)**：对于资源S，如果少于1则不予分配，每次分配1份，实际上就是一个一般的记录型信号量（S &#x3D; 1）；</li>
+<li>**Swait(S,1,0)**：对于资源S，如果少于1则不予分配，每次分配1份，实际上这是一个开关，进程通过其他方式设置S的值再用该原语进行约束，可以实现：1）如果有S&gt;&#x3D;1，则允许多个进程执行约束的代码段，2）如果S&#x3D;0，则不允许任何进程执行约束的代码段；</li>
+</ol>
+<h4 id="信号量机制的应用"><a href="#信号量机制的应用" class="headerlink" title="信号量机制的应用"></a>信号量机制的应用</h4><p><strong>进程互斥：</strong></p>
+<ol>
+<li>定义信号量（这里要做初始化），<strong>通常初始化为1</strong></li>
+<li>分进程，<strong>wait与signal在同一进程中成对出现</strong></li>
+<li>将各进程对临界资源访问的代码放在wait和signal之间<br>注意：</li>
+<li>缺少wait导致系统混乱</li>
+<li>缺少signal导致阻塞进程无法被唤醒</li>
+<li>此时信号量称为<strong>互斥信号量</strong></li>
+</ol>
+<p><strong>进程协调：</strong></p>
+<ol>
+<li>定义信号量初始化，<strong>通常初始化为0</strong></li>
+<li>分进程，<strong>wait与signal在两个进程中分别出现，作为一对</strong>（先执行的完成后signal，后执行的先wait）</li>
+<li>signal出现在对临界资源访问的代码之后，wait出现在对临界资源访问的代码之前<br>注意：</li>
+<li>此时信号量称为<strong>同步信号量</strong></li>
+<li>应用同步信号量可以实现复杂前驱关系</li>
+</ol>
+<p>通常我们说到<strong>互斥信号量</strong>的时候，对应的就是<strong>进程互斥</strong>；<br>说到<strong>同步信号量</strong>的时候，就是<strong>前驱关系</strong>；</p>
+<p><strong>信号量S的含义</strong>：</p>
+<ol>
+<li>S&gt;0，<strong>可用资源</strong>的数量</li>
+<li>S&#x3D;0，<strong>无可用资源，无等待进程</strong></li>
+<li>S&lt;0，|S|为<strong>阻塞的进程数量</strong></li>
+</ol>
+<h3 id="管程机制：另一种进程同步的方法"><a href="#管程机制：另一种进程同步的方法" class="headerlink" title="管程机制：另一种进程同步的方法"></a>管程机制：另一种进程同步的方法</h3><p>基本印象&amp;与信号量机制的点：</p>
+<ol>
+<li>管程外面有锁，开则可以进入管程，关则进程在锁队列上等待；对应互斥信号量</li>
+<li>管程使用公共变量记录资源数量；对应信号量</li>
+<li>管程使用条件变量实现进程同步；对应同步信号量</li>
+<li>管程的wait、signal操作只会阻塞、唤醒进程；没有类似对信号量的操作</li>
+</ol>
+<h2 id="L6经典的进程同步问题"><a href="#L6经典的进程同步问题" class="headerlink" title="L6经典的进程同步问题"></a>L6经典的进程同步问题</h2><p>问题入手的思路（一般情况下）：<br>    考虑存在的问题：互斥？同步？局部资源？<br>        其中局部资源可以类比到哲学家用餐问题，所有哲学家持有自己左边的筷子时；即大家都持有局部的资源而不释放造成的死锁问题；<br>    考虑设置几个信号量：<br>        互斥问题：一个互斥信号量对应一个临界资源；<br>        同步问题：一个同步信号量对应一个前驱关系；<br>    信号量如何初始化？<br>    使用什么信号量机制？<br>    是否需要更加复杂的逻辑？<br>        例如应对局部资源问题；<br>    其他必要的变量和初始化？</p>
+<p><strong>生产者消费者问题：</strong><br>    背景：<br>        数据结构：环形缓冲区；<br>            缓冲区：buffer[0,…,n-1]；<br>            缓冲区满：counter&#x3D;n;<br>            缓冲区空：counter&#x3D;0;<br>        生产者：生产商品放置到缓冲区；<br>            放入一个商品：in &#x3D; (in+1)mod n;<br>        消费者：从缓冲区取走商品；<br>            取走一个商品：out &#x3D; (out+1)mod n;<br>    存在的问题：<br>        进程互斥：缓冲区不能同时被多个进程访问；（因为这些进程都要修改缓冲区，相当于都要写，不能同时写）<br>        进程同步：在特殊情况下存在前驱关系，即缓冲区空时，只能先生产再消费；缓冲区满时，只能先消费再生产；<br>    使用的信号量：<br>        互斥信号量：<br>            mutex，用于缓冲区的互斥访问；<br>        同步信号量：<br>            full，标识缓冲区中是否有商品，对应前驱关系：生产-&gt;消费；<br>            empty，标识缓冲区是否有空位，对应前驱关系：消费-&gt;生产；<br>    解决方案1：<strong>使用记录型信号量</strong><br>        相关代码在最后；<br>        注意事项：<br>            1）wait(mutex)和signal(mutex)成对出现；<br>            2）wait(full)和signal(full)在消费者和生产者之间成对出现；<br>            3）wait(empty)和signal(empty)在生产者和消费者之间成对出现；<br>            4）注意mutex、empty、full的初始化；<br>            5）一种约定成俗对互斥变量的操作写在最靠近对临界资源的访问的位置；<br>    解决方案2：<strong>使用AND型信号量</strong><br>        相关代码在最后；<br>        注意事项：<br>            1）注意Swait、Signal的使用方法</p>
+<p><strong>生产者消费者要会写原型，关键点：</strong></p>
+<ol>
+<li>使用到的数据结构与初始化</li>
+<li>信号量的初始化与使用</li>
+<li>模拟生产者消费者的指针操作</li>
+</ol>
+<p>生产者消费者问题：记录型信号量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ini：</span></span><br><span class="line"><span class="type">int</span> mutex = <span class="number">1</span>;<span class="comment">//互斥访问缓冲区</span></span><br><span class="line"><span class="type">int</span> empty = n;<span class="comment">//可用的空位</span></span><br><span class="line"><span class="type">int</span> full = <span class="number">0</span>;<span class="comment">//可用的商品</span></span><br><span class="line"><span class="type">int</span> in,out = <span class="number">0</span>;<span class="comment">//初始指针；</span></span><br><span class="line">Array buffer[n];<span class="comment">//缓冲区0～n-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//生产者</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(empty);<span class="comment">//能够操作（有空），再尝试访问互斥区</span></span><br><span class="line">    wait(mutex);</span><br><span class="line">    buffer[in] = product;</span><br><span class="line">    in = (in+<span class="number">1</span>) mod n;<span class="comment">//指针操作</span></span><br><span class="line">    signal(mutex);</span><br><span class="line">    signal(full);</span><br><span class="line">    <span class="keyword">if</span>(stop)<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//消费者</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(full);<span class="comment">//能够操作（有商品），再尝试访问互斥区</span></span><br><span class="line">    wait(mutex);</span><br><span class="line">    product = buffer[out];<span class="comment">//指针操作</span></span><br><span class="line">    out = (out+<span class="number">1</span>)mod n;</span><br><span class="line">    siganl(mutex);</span><br><span class="line">    signal(empty);</span><br><span class="line">    </span><br><span class="line">    consume(product);</span><br><span class="line">    <span class="keyword">if</span>(stop)<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>生产者消费者问题：AND型信号量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ini：</span></span><br><span class="line"><span class="type">int</span> mutex = <span class="number">1</span>;<span class="comment">//互斥访问缓冲区</span></span><br><span class="line"><span class="type">int</span> empty = n;<span class="comment">//可用的空位</span></span><br><span class="line"><span class="type">int</span> full = <span class="number">0</span>;<span class="comment">//可用的商品</span></span><br><span class="line"><span class="type">int</span> in,out = <span class="number">0</span>;<span class="comment">//初始指针；</span></span><br><span class="line">Array buffer[n];<span class="comment">//缓冲区0～n-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//生产者</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    Swait(empty,mutex);</span><br><span class="line">    buffer[in] = product;</span><br><span class="line">    in = (in+<span class="number">1</span>) mod n;</span><br><span class="line">    Ssiganl(full,mutex);</span><br><span class="line">    <span class="keyword">if</span>(stop)<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//消费者</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    Swait(full,mutex);</span><br><span class="line">    product = buffer[out];</span><br><span class="line">    out = (out+<span class="number">1</span>) mod n;</span><br><span class="line">    Ssignal(empty,mutex);</span><br><span class="line">    consume(product);</span><br><span class="line">    <span class="keyword">if</span>(stop)<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>哲学家进餐问题：<br>    背景：<br>        哲学家与筷子：<br>            1）5个哲学家围成一圈，进行吃饭和思考；<br>            2）相邻哲学家之间有一支筷子，一共有5支筷子；<br>            3）哲学家吃饭的时候要拿起与自己相邻的两只筷子；<br>            4）哲学家吃饭和思考交替进行；<br>    存在的问题：<br>        1）进程互斥：筷子是公共资源，不能同时访问；<br>        2）局部资源：只有一支筷子不能进餐，需要避免所有人都获得部分资源而不释放，造成死锁的情况；<br>    使用的信号量：<br>        1）互斥信号量：<br>            chpsitck[i]，对应第i支筷子的互斥信号量<br>    <strong>解决方案1：</strong><br>        <strong>记录型信号量</strong>，至多4位哲学家拿起左边的筷子；（<strong>破坏环路等待</strong>）<br>        需要额外使用的信号量：<br>            互斥信号量：conut，左边的筷子最多同时被四个进程访问；<br>            （相当于抽象了一个资源数量为4的临界资源，这个操作的逻辑要互斥锁来实现）；<br>    <strong>解决方案2：</strong><br>        <strong>AND型信号量</strong>；（<strong>破坏请求和保持</strong>）<br>    <strong>解决方案3：</strong><br>        <strong>记录型信号量</strong>，区分奇偶编号，奇数哲学家先拿左边的筷子，偶数哲学家先拿右边的筷子；（<strong>破坏环路等待</strong>）<br>    注意事项：<br>        1）访问左边筷子与右边筷子的下标（i与i+1）；<br>        2）一定要拿到左右筷子之后才能吃饭；<br>    解决方案4：<em>25年试题上出现的方案</em><br>        <strong>哲学家在获取资源的时候先对资源使用MIN、MAX排序，按顺序拿；（破坏环路等待）</strong></p>
+<p><strong>哲学家要会写原型，关键点：</strong></p>
+<ol>
+<li>使用到的数据结构与初始化</li>
+<li>信号量的初始化与使用</li>
+<li>模拟生产者消费者的指针操作</li>
+</ol>
+<p>解决方案1:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ini</span></span><br><span class="line"><span class="type">int</span> count = <span class="number">4</span>;<span class="comment">//限制人数时用到的信号量</span></span><br><span class="line"><span class="type">int</span> chopstick[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="comment">//第i个哲学家</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(count);</span><br><span class="line">    wait(chopstick[i]);<span class="comment">//左边的筷子;</span></span><br><span class="line">    wait(chopstick[i+<span class="number">1</span>]);<span class="comment">//右边的筷子</span></span><br><span class="line">    eat();</span><br><span class="line">    signal(chopstick[i]);</span><br><span class="line">    signal(chopstick[i+<span class="number">1</span>]);</span><br><span class="line">    siganl(count);</span><br><span class="line">    think();</span><br><span class="line">    <span class="keyword">if</span>(stop)<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决方案2:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ini</span></span><br><span class="line"><span class="type">int</span> chopstick[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="comment">//第i个哲学家</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    Swait(chopstick[i],chopstick[i+<span class="number">1</span>]);</span><br><span class="line">    eat();</span><br><span class="line">    Ssignal(chopstick[i],chopstick[i+<span class="number">1</span>]);</span><br><span class="line">    think();</span><br><span class="line">    <span class="keyword">if</span>(stop)<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决方案3:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ini</span></span><br><span class="line"><span class="type">int</span> chopstick[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i mod <span class="number">2</span> == <span class="number">0</span>)&#123;<span class="comment">//偶数哲学家，一般以i+1为右边，i为左边</span></span><br><span class="line">        wait(chopstick[i+<span class="number">1</span>]);</span><br><span class="line">        wait(chopstick[i]);</span><br><span class="line">        eat();</span><br><span class="line">        signal(chopstick[i]);</span><br><span class="line">        signal(chopstick[i+<span class="number">1</span>]);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        wait(chopstick[i]);</span><br><span class="line">        wait(chopstick[i+<span class="number">1</span>]);</span><br><span class="line">        eat();</span><br><span class="line">        signal(chopstick[i+<span class="number">1</span>]);</span><br><span class="line">        signal(chopstick[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    think();</span><br><span class="line">    <span class="keyword">if</span>(stop)<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读者写者问题：<br>    问题背景：<br>        1）读者进程，可以读取数据文件；<br>        2）写者进程，可以写入数据文件；<br>    存在问题：<br>        1）多个读者进程可以同时访问；<br>        2）只要有一个写者进程访问，其他读者进程、写者进程就不能访问；<br>    <strong>解决方案1:</strong><br>        1）维护一个<strong>写锁write</strong>；<br>        2）<strong>写进程获取</strong>write的时候<strong>其他进程都只能等待</strong>；<br>        3）<strong>读进程获取</strong>到write的时候，<strong>其他读进程可以访问</strong>临界区，<strong>写进程需要等待</strong>；<br>            1）维护读者计数器<strong>reader_count</strong>，表示当前在读进程；<br>            2）只需要检查reader_count的情况就可以判断当前是否有读进程在工作；<br>            3）如果有读进程在工作，其他读进程可以直接访问临界区；<br>            4）对于reader_count作为公共资源，也需要一个锁来控制；<br>            （注意reader_count的维护，意味着对于读者进程来说，第一个开始读的进程要负责获取到write，最后一个读完的进程要负责释放write）<br>        存在的问题：<br>            1）读者优先；<br>            2）可以看作读者和写者都在一个队列上；<br>            3）但是只要前面有读者，那么新来的读者就会插队到写者的前面；<br>    <strong>解决方案2：</strong><br>        1）在解决方案1的基础上维护一个<strong>排队排队信号量prior</strong>，放在开始；<br>        2）<strong>无论读者写者</strong>，<strong>获得</strong>这个信号量<strong>才能往下执行</strong>；<br>        3）这样在写者持有prior的时候读者就不能直接增加reader_count，导致“插队”了；<br>        存在的问题：<br>            1）读写平等；<br>            2）大多数情况下写意味着更高的权限，所以应该是写者优先，而不应该是平等；<br>    解决方案3:<br>        1）在解决方案2的基础上维护一个<strong>写者计数writer_count</strong>；<br>        （按照解决方案一中读者持有写锁的时候，其他读者之用修改计数器的思路，让<strong>写者优先排队</strong>）；<br>        2）如果有写者获得了prior的排队权，那么后面的写者可以直接排队；<br>        3）第一个写者等待prior，最后一个写者释放prior；<br>        4）读者必须要等待到prior才能开始排队；</p>
+<p>解决方案1:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ini:</span></span><br><span class="line"><span class="type">int</span> mutex = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> reader_count = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> write = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//reader:</span></span><br><span class="line"><span class="comment">//我写的这种似乎有点问题，因为要访问reader_count的值都应该在获取到mutex之后；</span></span><br><span class="line"><span class="comment">//就好像没有拿到锁就直接读取了文件数据</span></span><br><span class="line"><span class="comment">// while(1)&#123;</span></span><br><span class="line"><span class="comment">//     if(reader_count &gt; 0)&#123;</span></span><br><span class="line"><span class="comment">//         wait(mutex);</span></span><br><span class="line"><span class="comment">//         reader_count++;</span></span><br><span class="line"><span class="comment">//         signal(mutex);</span></span><br><span class="line"><span class="comment">//         read_file();</span></span><br><span class="line"><span class="comment">//         wait(mutex);</span></span><br><span class="line"><span class="comment">//         reader_count--;</span></span><br><span class="line"><span class="comment">//         signal(mutex);</span></span><br><span class="line"><span class="comment">//     &#125;else&#123;</span></span><br><span class="line"><span class="comment">//         wait(write);</span></span><br><span class="line"><span class="comment">//         wait(mutex);</span></span><br><span class="line"><span class="comment">//         reader_count++;</span></span><br><span class="line"><span class="comment">//         signal(mutex);</span></span><br><span class="line"><span class="comment">//         read_file();</span></span><br><span class="line"><span class="comment">//         wait(mutex);</span></span><br><span class="line"><span class="comment">//         readr_count--;</span></span><br><span class="line"><span class="comment">//         signal(mutex);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     if(readr_count==0)</span></span><br><span class="line"><span class="comment">//         signal(write);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//reader:（教材上的写法）</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(mutex);</span><br><span class="line">    <span class="keyword">if</span>(reader_count == <span class="number">0</span>)</span><br><span class="line">        wait(write);</span><br><span class="line">    reader_count++;</span><br><span class="line">    signal(mutex);</span><br><span class="line">    read_file();</span><br><span class="line">    wait(mutex);</span><br><span class="line">    reader_count--;</span><br><span class="line">    <span class="keyword">if</span>(reader_count == <span class="number">0</span>)</span><br><span class="line">        signal(write);</span><br><span class="line">    signal(mutex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//writer:</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(write);</span><br><span class="line">    write_file();</span><br><span class="line">    signal(write);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决方案2:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ini:</span></span><br><span class="line"><span class="type">int</span> reader_count = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> write = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> mutex = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> prior = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//reader:</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(prior);<span class="comment">//注意读者中排队信号量的使用位置</span></span><br><span class="line">    wait(mutex);</span><br><span class="line">    <span class="keyword">if</span>(reader_count == <span class="number">0</span>)</span><br><span class="line">        wait(write);</span><br><span class="line">    reader_count++;</span><br><span class="line">    signal(mutex);</span><br><span class="line">    signal(prior);</span><br><span class="line"></span><br><span class="line">    read_file();</span><br><span class="line">    wait(mutex);</span><br><span class="line">    reader_count--;</span><br><span class="line">    <span class="keyword">if</span>(reader_count == <span class="number">0</span>)</span><br><span class="line">        signal(write);</span><br><span class="line">    signal(mutex);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//writer:</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(prior);</span><br><span class="line">    wait(write);</span><br><span class="line">    write_file();</span><br><span class="line">    signal(write);</span><br><span class="line">    signal(prior);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//prior释放的位置应该比较随意，只要确保，wait(prior)和signal(prior)将wait(write)和reader_count++包裹了就好；</span></span><br><span class="line"><span class="comment">//wait(write)理解为排队，那么prior就是来防止插队的，reade_count++就是在插队，所以要将其获取给包裹起来；</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>解决方案3</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ini:</span></span><br><span class="line"><span class="type">int</span> reader_count = <span class="number">0</span>,writer_count = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> reader_mutex = <span class="number">1</span>,writer_mutex = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> prior = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> writer = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//reader:</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(prior);</span><br><span class="line">    wait(reader_mutex);</span><br><span class="line">    <span class="keyword">if</span>(reader_count == <span class="number">0</span>)</span><br><span class="line">        wait(write);</span><br><span class="line">    reader_count++;</span><br><span class="line">    signal(reader_mutex);</span><br><span class="line">    read_file();</span><br><span class="line">    signal(prior);</span><br><span class="line">    wait(read_mutex);</span><br><span class="line">    reader_count--l</span><br><span class="line">    <span class="title function_">if</span><span class="params">(reader_count == <span class="number">0</span>)</span></span><br><span class="line">        <span class="title function_">signal</span><span class="params">(write)</span>;</span><br><span class="line">    signal(read_mutex);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//writer:</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    wait(writer_mutex);</span><br><span class="line">    <span class="keyword">if</span>(writer_count == <span class="number">0</span>)</span><br><span class="line">    <span class="comment">//&#123;</span></span><br><span class="line">        wait(prior);</span><br><span class="line">        <span class="comment">//wait(write);</span></span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">    writer_count++;</span><br><span class="line">    signal(writer_mutex);</span><br><span class="line">    wait(write);<span class="comment">//注意writer优先获取的只是排队权；注释掉的逻辑其实是一个写者有了write，其他也可以写，这显然错误；</span></span><br><span class="line">    write_file();</span><br><span class="line">    signal(write);</span><br><span class="line">    wait(writer_mutex);</span><br><span class="line">    write_count--;</span><br><span class="line">    <span class="keyword">if</span>(write_count == <span class="number">0</span>)</span><br><span class="line">        signal(prior);</span><br><span class="line">    signal(wirter_mutex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><h3 id="进程通信的类型"><a href="#进程通信的类型" class="headerlink" title="进程通信的类型"></a>进程通信的类型</h3><p><em>可以简单看看实验涉及的函数</em></p>
+<p>进程通信的含义：<br>    高效大量且方便（透明）的进程之间消息交换；<br>    eg：<br>        进程同步（可以看作一种低级的信号机制，信号量机制就是一种简单的消息，并且不透明，用户感知得到，并且需要用户操作；并发时手动上锁belike）</p>
+<p>进程通信的类型：<br>    共享存储器系统：<br>        1）基于共享数据结构的通信方式；<br>        （低效、适合少量数据传输，程序员手动管理）<br>        2）基于共享存储区的通信方式；<br>        （高级，进程通过对存储区数据的读写来进行通信）<br>    管道系统：<br>        首创于UNIX，一切皆文件的思想；<br>        管道：<br>            一个共享文件（pipe文件），用来连接一个发送进程和一个接收进程，实现通信；<br>        管道的性质：<br>            1）互斥，一个进程读写管道，其他进程必须等待；<br>            2）同步，发送进程，写入一定数量后就会阻塞自己，接收进程接收后再唤醒；接收进程遇到空管道会阻塞，等待有内容后再唤醒；<br>            3）可靠性，双方都确认对方存在再通信；<br>        （管道的性质机制由管道自己控制，不由通信双方控制，满足透明性）<br>        消息传递系统：<br>            进程不借助任何共享存储区或数据结构，使用message格式数据进行交换，由OS提供通信命令；<br>            方式：<br>                1）直接通信方式：直接消息传递系统；<br>                    方法：OS提供相关原语；<br>                        1）Send(Receiver,message);<br>                        2）Receive(Sender,message);<br>                2）间接通信方式：信箱通信；<br>                    方法：通过共享数据结构——信箱，用消息暂存的方式实现通信；<br>                        1）信箱创建、撤销；<br>                        2）发送原语：send(receiver,a);&#x2F;&#x2F;a是发送区地址；<br>                        3）接收原语：receive(b);&#x2F;&#x2F;b是接收区地址</p>
+<h3 id="线程的基本概念和实现方式"><a href="#线程的基本概念和实现方式" class="headerlink" title="线程的基本概念和实现方式"></a>线程的基本概念和实现方式</h3><p>引入线程的原因：（<strong>为什么引入线程</strong>）<br>    使用进程<strong>效率太低了</strong>：<br>        1）进程独立拥有资源，创建消亡的时候需要<strong>分配</strong>和<strong>回收</strong>进程；<br>        2）进程<strong>切换</strong>需要<strong>CPU保存状态</strong>代价巨大；<br>    如果不独立分配资源呢？<br>        共享资源依赖于进程通信，依然很复杂，就像我们上一节讨论的一样；</p>
+<p>线程：<br>    线程 &#x3D; 进程-共享资源；<br>    线程的特性：<br>        1）实体之间并发地执行；<br>        2）实体之间共享相同的地址空间；<br>    与进程的关系：<br>        1）资源与调度；<br>            1）引入线程后，进程最主要的作用是将一组相关的资源组合起来，形成资源平台（代码段、数据段、打开文件的操作），线程就是进程中真正执行的流程；<br>            2）所以，资源分配&#x2F;调度 的基本单位：进程&#x2F;线程<br>            3）但是线程还是必须持有必不可少的，保证独立运行的资源；<br>                eg：TCB（线程控制模块）、PC、保留局部变量、状态参数以及返回地址的一组寄存器和堆栈；<br>                （这些就像进程在堆栈中动态分配时所需要的，只是免去了大量的静态资源）；<br>        2）并发性：<br>            1）支持多线程的OS中，同一进程不同线程可以并发；<br>            2）多CPU系统中，单进程多线程可以多核并发；<br>        3）独立性：<br>            1）进程和进程之间独立；<br>            2）线程和线程之间不独立；<br>        4）系统开销：<br>            1）进程切换开销大，线程切换开销小；<br>            2）进程通信开销大，同一进程不同线程通信开销小。<br>        5）安全性：<br>            1）只使用进程更安全，在使用线程的时候一个线程崩溃，会导致整个进程崩溃；<br>        6）高效性：<br>            1）使用线程更加高效，可以减少并发执行的时间和空间；<br>            （线程的并发可以在很多情况下代替从前需要进程并发执行的工作）<br>            eg：<br>                MP3播放软件，三个核心模块（从MP3中读取数据、解压数据、将解压后的数据转换为音频数据播放）</p>
+<p><strong>进程和线程的区别</strong>（在有线程的时候）：<br>    进程是资源分配的单位；<br>    线程是调度、独立运行的单位；</p>
+<p>线程的状态：<br>    三个基本状态：执行、就绪、阻塞；<br>    TCB：线程控制模块</p>
+<p>操作系统角度看线程：<br>    等价概念：<br>        1）传统的进程——单线程方法；<br>        eg：传统的UNIX；<br>        2）每个进程支持多个线程——多线程方法；<br>        eg：Windows2000<br>    如何看待进程：<br>        进程是拥有资源的基本单位，是一个不可执行的实体，进程的状态是线程执行的状态；</p>
+<p>线程的实现方式：<br>    1）内核支持线程KST；<br>        内核完成线程的管理；<br>    2）用户级线程ULT；<br>        一组用户级的线程库函数，帮助用户自己管理线程的管理；<br>    3）组合方式ULT&#x2F;KST；</p>
+<h2 id="处理机调度"><a href="#处理机调度" class="headerlink" title="处理机调度"></a>处理机调度</h2><h3 id="处理机调度的层次和调度算法的目标"><a href="#处理机调度的层次和调度算法的目标" class="headerlink" title="处理机调度的层次和调度算法的目标"></a>处理机调度的层次和调度算法的目标</h3><p>处理机调度：<br>    含义：采用一定的算法从就绪队列中，选择一个作业&#x2F;进程，让CPU执行它；<br>    （本质就是面对大量作业&#x2F;进程，如何将有限的CPU合理地分配给它们使用）<br>    层次：<br>        1）<strong>高级调度</strong><br>            别名：<strong>作业调度、长程调度</strong>；<br>            调度对象：作业；<br>            <strong>适用的操作系统：多道批处理系统；（分时系统没有，单道批处理系统中也需要作业调度）；</strong><br>            发生的时机：在一批作业已运行完毕退出，需要将一批新的作业调入内存的时候；<br>            特点：运行频率较低、允许较复杂；<br>        2）<strong>中级调度</strong><br>            别名：<strong>内存调度</strong>（<strong>挂起和激活，对应存储器管理那一块</strong>）；<br>            调度对象：进程；<br>            发生的时机：<br>                1）内存紧张的时候，将暂时不能运行的进程调至外存；<br>                2）内存空闲的时候，将具备运行条件的进程重新调入内存；<br>            特点：运行频率适中，算法复杂度适中；<br>        3）<strong>低级调度</strong><br>            别名：<strong>进程调度、短程调度</strong>；<br>            调度对象：进程（内核级线程）；<br>            <strong>使用操作系统：多道批处理、单道、分时都有；</strong><br>            发生的时机：决定就绪队列中哪个进程获得处理机；<br>            特点：运行频率非常高，不允许很复杂；<br>        从进程调状态看调度层次：<br>            <img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p1.png" alt="处理机调度层次"><br>    目标：<br>        批处理系统：<br>            平均周转时间短、系统吞吐量高、处理机利用率高；<br>                相关概念：<br>                    <strong>周转时间：</strong><br>                        1）作业提交给OS的时间到作业完成的时间；<br>                        2）作业在后备队列的时间+作业在就绪队列的等待时间+作业在阻塞队列的等待时间+作业的执行时间；<br>                    <strong>平均周转时间：</strong><br>                        1）周转时间按照作业数量平均；<br>                    <strong>带权周转时间：</strong><br>                        1）针对一个作业；<br>                        2）作业周转时间&#x2F;作业获得CPU的时间（执行时间即服务时间）；<br>                        （<strong>越大效率越低</strong>）<br>                    <strong>平均带权周转时间：</strong><br>                        带权周转时间按照作业数量平均；<br>                    <strong>系统吞吐量：</strong><br>                        单位时间内系统完成的作业数；<br>                    <strong>到达时间、服务时间</strong>；（进程也有这两项）；<br>        分时系统：<br>            响应时间快、均衡性好；<br>                注意：<br>                    均衡性对应根据任务的复杂度不同，等待的容忍度不同；<br>                        1）复杂任务允许等待时间长；<br>                        2）简单任务允许等待时间短；<br>                （买15个煎饼果子的人愿意等买1个多，反之不然）；<br>        实时系统：<br>            截止时间的保证、可预测性；<br>        共同目标：<br>            1）<strong>资源利用率：CPU利用率 &#x3D; CPU有效工作时间&#x2F;(CPU有效工作时间+CPU空闲等待时间)</strong><br>                （计算量大的作业越多，即长作业越多，上下文切换的工作量会减少，CPU利用率越高）<br>            2）公平性：每个进程都应该获得合理的CPU时间，不会发生进程饥饿现象；<br>            3）平衡性：CPU和I&#x2F;O设备都能经常处于忙碌状态，系统资源使用平衡；<br>            4）策略强制执行；</p>
+<h3 id="作业与作业调度"><a href="#作业与作业调度" class="headerlink" title="作业与作业调度"></a>作业与作业调度</h3><p>作业：<br>    定义：程序+数据+作业说明书；<br>        1）作业是从外存调入内存的基本单位；<br>        2）调入之前称为作业，调入之后就是进程；<br>    作业步：<br>        编译-链接装配-运行；<br>        （调入之前必要的步骤）<br>    作业控制块：JCB；<br>    作业多三个阶段和三种状态：<br>        1）收容阶段：<br>            1）对应后备状态；<br>            2）系统把用户提交的作业放入硬盘，建立JCB，放入后备队列；<br>        2）运行阶段：<br>            1）对应运行状态；<br>            2）作业被选中，为其分配资源，建立进程，进入就绪队列；<br>            3）从第一次进入就绪队列到运行完毕，都属于运行阶段（状态）；<br>        3）完成阶段：<br>            1）对应完成状态；<br>            2）系统回收资源和JCB；<br>            3）作业结果形成输出文件后输出；</p>
+<p>作业调度：<br>    挑战：作业数量多少的平衡；<br>        1）如果数量少，并行（发？）效率低，CPU利用率低；<br>        2）如果数量多，中断多，上下午切换频繁，CPU利用率低；<br>    相关算法：<br>        1）<strong>FCFS先来先服务算法</strong><br>            思想：谁先来，先服务；<br>            特点：<strong>有利于长作业，不利于短作业</strong>；长作业愿意等短作业，反之不然；<br>            相关计算：<br>                1）到达时间（给定）；<br>                2）服务时间（给定）；<br>                3）开始执行时间（上一个进程的的完成时间）；<br>                4）完成时间（开始执行时间+服务时间）；<br>                5）周转时间（完成时间-到达时间）；<br>                6）带权周转时间（周转时间&#x2F;服务时间）；<br>            eg：<br>                <img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p2.png" alt="FCFS例题">；<br>        2）<strong>SJ(P)F短作业优先算法</strong><br>            思想：作业越短优先级越高；<br>            特点：利于短作业，长作业可能会出现饥饿现象；<br>        3）PSA优先级调度算法<br>            思想：基于作业等紧迫程度，外部赋予作业优先级；<br>            类型：静态优先级、动态优先级；<br>            动态优先级算法：<br>                <strong>高响应比优先算法(HRRN)：</strong><br>                    <strong>优先权 &#x3D; (等待时间+要求服务时间)&#x2F;要求服务时间;</strong><br>                特点：<br>                    1）等待时间相同，要求服务时间越短优先权越高，有利于短作业；<br>                    2）要求服务时间相同，长作业随着等待时间越长，优先权增大，不会让其出现饥饿现象；<br>                    （<em>每次优先权在什么时候计算？或许是一次调度开始的时候</em>）；</p>
+<h3 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h3><p>进程调度实现的关键机制：<br>    1）排队器：<br>        1）按照策略将进程分为一个或多个队列；<br>        2）排出就绪队列；<br>    2）分派器：<br>        1）按照策略从队列中选出特定的进程；<br>        2）是从就绪队列中选；<br>    3）上下文切换：<br>        1）切换的时候不只要保存执行的进程还要保存分派器的进程；<br>        2）主要是对PCB与相关寄存器的操作；</p>
+<p>进程调度的方式：<br>    1）非抢占式调度；<br>        一旦CPU分配个某个进程，就一直运行它；<br>        发生调度的原因：<br>            1）进程执行完毕；<br>            2）I&#x2F;O请求；<br>            3）wait、block、wakeup等系统调用；<br>            4）其他不能继续执行的原因；<br>    2）抢占式调度：<br>        按照某种原则暂停当前进程，执行另一个；<br>        常见抢占原则：<br>            1）优先权；<br>            2）短进程抢占长进程；<br>            3）时间片原则；<br>        抢占的实现机制：中断</p>
+<p>进程调度算法：<br>    1）<strong>轮转调度算法：</strong><br>        1）系统将就绪进程按先来先服务排成队列；<br>        2）每次调度将CPU按一个时间片分给队首进程；<br>        3）时间片完成，中断，更新队列（队首到队尾）<br>        4）重复上述步骤；<br>        注意：<br>            1）时间片大小选择很重要，<strong>过短有利于短作业但是上下文切换频繁</strong>，<strong>过长有利于长作业但是退化为FCFS</strong>；<br>            2）TIP：选择略大于一次典型交互所需的时间为时间片大小；<br>        计算：<br>            1）RR Q时间片大小；<br>            2）其他关键量化值与作业调度中FCFS一样；<br>            3）计算的时候要注意时间片的切换；<br>            eg：<img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p3.png" alt="轮转调度算法">；<br>            （<em>注意，图中计算有错误</em>）；<br>            （<em>如果在一个时间片内，进程完成，时间片还没有结束，会立刻进行上下文切换</em>）；<br>    2）优先级调度算法：<br>        1）静态；<br>        2）动态；<br>        注意：都不常用，因为进程调度追求简单；<br>    3）多级反馈队列调度算法：<br>        1）设置多个就绪队列（按优先级划分），优先级越高（队列序号小），获得时间片越小，反之越大；<br>        2）新进程进入系统后，放入第一个队列，按FCFS原则等待；<br>        3）进程在第i个队列的时间片执行完成，就放入i+1队列的队尾；<br>        4）当前面的队列为空的时候，从后面的队列进行调度（可以抢占式）；<br>        特点：<br>            1）性能较好；<br>            2）能满足各类用户需求，短进程在一两个时间片完成，长进程不用担心长期得不到处理；<br>    4）基于公平原则的调度算法<br>        1）<strong>保证调度算法：</strong><br>            思想：系统中有n个进程，保证每个进程都获得处理机时间的1&#x2F;n；<br>            算法：<br>                1）计算每个进程自创建以来应该获得处理机的时间：<br>                    <strong>应获得处理机时间 &#x3D; 创建以来时间&#x2F;n；</strong><br>                2）计算实际执行时间和应获得时间的比率：<br>                    <strong>实际执行时间&#x2F;应获得时间</strong>；<br>                3）选择比率值最小的调度获得时间片；<br>            注意：<br>                1）应获得处理机时间的n，要分段考虑，因为进程进入的时间不同，在前面的时间段不会考虑后面时间段才出现的进程；<br>                2）根据比率情况，可能有多个最小比率相等的，对应有多个应该最优先调度的进程。（这时实际的处理是随机选择一个）<br>            计算：<br>                哪个进程是当前应该优先调度的；<br>                eg：<img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p4.png" alt="保证调度算法"><br>            缺点：<br>                在每个用户拥有进程数不同的时候，按照保证调度的方法分配，对用户不公平；<br>        2）公平分享调度算法：<br>            思想：分别按照顺序，依次对不同用户的进程按照保证调度算法进行调度；<br>            eg：<br>                用户1有ABCD四个进程，用户2有E；<br>                则：A E B E C E D E调度；<br>            注意：<br>                当然根据一些具体的情况，可以设置轮到一个用户的时候允许调度的次数；<br>                eg：<br>                    用户1付了两倍的钱；<br>                    则A B E C D E调度；<br>        （<em>什么时候重新计算一次优先权，或许是在一个时间片完的时候</em>）</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="死锁的基本概念"><a href="#死锁的基本概念" class="headerlink" title="死锁的基本概念"></a>死锁的基本概念</h3><p>死锁：<br>    <strong>含义：多个进程在运行过程中，因争夺资源而造成的一种僵局。当进程处于这种僵持状态时，如果没有外力作用，它们都无法再向前推进；</strong><br>    死锁的例子：<br>        1）竞争不可抢占资源引起死锁；（P1持有R1，需要R2，P2持有R2，需要R1）<br>        2）竞争可消耗资源引起死锁；（P1消耗S1来制造S2，P2要消耗S2才能制造S1）<br>        3）不合理的有限资源分配引起死锁；<br>            <img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p5.png" alt="资源分配图1"><br>            <img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p6.png" alt="资源分配图2"></p>
+<p>造成死锁的原因：<br>    四大必要条件：只有同时满足时，才会死锁；<br>        1）<strong>互斥条件</strong>：<br>            进程使用某资源的时候，不允许其他进程使用；<br>        2）<strong>请求和保持</strong>：请求保持了一个自己获得的资源，请求另一个资源的时候，无法获得，<strong>不释放自己的资源便进行阻塞</strong>；<br>        3）<strong>不剥夺条件</strong>：资源使用完之前，<strong>不允许剥夺，直至用完</strong>；<br>        4）<strong>环路等待条件（循环等待）</strong>：发生死锁，一定会有“进程-资源”的环形链；<br>        （<em>理解请求和保持 不剥夺条件——前者是没有运行但是持有资源且不允许别人使用，后者是在运行持有资源且不允许别人使用</em>）<br>        （如果要破坏不剥夺条件的话，一种方法是，拿走你的资源让你回退，数据库的并发控制章节有一个类似的东西）</p>
+<p><strong>处理死锁的方法：</strong><br>    四种类型：对应的是不同的处理方法；<br>    1）<strong>预防死锁：</strong><br>        设置限制条件，<strong>破坏四个条件中的一个或几个</strong>；<br>        问题：限制条件比较严格，会影响效率；<br>        eg：哲学家用餐问题，通过一定的规则确保一定不会出现死锁；<br>    2）<strong>避免死锁：</strong><br>        按照一定条件动态分配资源时，防止系统推进过程中进入不安全状态；<br>        问题：实现较难；<br>        eg：<strong>银行家算法</strong>，天才的Dijkstra～<br>    3）<strong>检测死锁：</strong><br>        不用任何限制条件，不检查系统是否进入安全区。允许死锁发生，使用机制及时检测；<br>        eg：<strong>资源分配图</strong>；<br>    4）解除死锁：<br>        撤销或挂起一些进程，以便回收资源，再将其重新分配给陷入死锁的进程；<br>    （其中3、4一般是一起使用的）；</p>
+<h3 id="预防死锁"><a href="#预防死锁" class="headerlink" title="预防死锁"></a>预防死锁</h3><p>依次考虑<strong>破坏四个必要条件</strong>：<br>    1）<strong>互斥条件：</strong><br>        <strong>不可破坏</strong>：因为<strong>资源的互斥是非共享设备必须的属性</strong>，是<strong>OS的重点保护对象</strong>，所以不可破坏；<br>        （无法让一个打印机同时打印两份资料）<br>    2）<strong>请求和保持条件：</strong><br>        1）协议一：运行前，必须<strong>一次性获得整个运行过程的所有资源</strong>；<br>            1）如果获得了，不再申请，破坏请求条件；<br>            2）只要一种不能获得，其他也不允许分配，破坏保持条件；<br>            问题：浪费资源，进程饥饿；<br>        2）协议二：进程获得初期的资源后开始运行，<strong>必须释放全部资源后才能申请新的</strong>；（这种比较难实现）<br>    3）<strong>不可抢占性（不剥夺）</strong>：<br>        1）当已经保持的某些不可抢占资源时，如果请求的<strong>新资源不能满足，则必须释放自己的不可抢占资源</strong>；（<em>通过释放资源并回退实现</em>）<br>        问题：<br>            1）实现机制复杂，代价极大；<br>            2）有些不可抢占资源如果前段失效，后面的工作是无法继续的；<br>            （比如打印机，你不能要求它只打印一半）；<br>    4）<strong>环路等待条件（循环等待）</strong><br>        1）对系统中的所有资源进行<strong>线性排序</strong>，对每个资源赋予唯一的一个序号，每个进程必须按照资源递增的顺序进行资源的获取；<br>        问题：<br>            1）如果系统有新增资源，排序无法稳定；<br>            2）资源的使用顺序和系统排序有出入时造成资源的浪费（没有意义的申请）；<br>            3）对用户不透明，破坏了虚拟化和共享，用户需要了解到资源编号才能正确编程；<br>        2）凡是<strong>逻辑上构成了等待环路的</strong>，<strong>使用一些方法避免</strong>了出现这些环路，都可以算作环路等等；<br>            eg：<strong>哲学家用餐问题</strong>，限制最大为4、分奇偶、排序；<br>    问题：<br>        总的来说，预防死锁添加的限制比较多，代价比较大；</p>
+<h3 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h3><p>基本概念：<br>    避免死锁含义：按照一定条件动态分配资源，防止系统推进过程中进入不安全的状态；<br>    避免死锁实质：避免安全状态向不安全状态的转换；<br>    安全序列：<br>        系统能按某种进程的顺序，为各个进程分配所需的资源，分配时满足每个进程对资源的最大需求，最终每个进程都可以顺利完成。这这组进程顺序就是一个安全序列。<br>    系统安全状态：<br>        如果系统能够找到一个安全序列，则系统处于安全状态，否则系统处于不安全状态；<br>        （当我们考虑一个时刻系统是否安全的时候，实际上是考虑是否能够找到一个安全序列）</p>
+<p>避免死锁的算法：银行家算法<br>    思想：<br>        用户申请一组资源的时候，系统首先判断如果把这些资源分配出去，系统是否处于安全状态。如果是则可以分配，如果不是则申请暂时不予满足；<br>    使用的数据结构：<br>        1）<strong>可用资源向量</strong>Available[1…m]：<br>            1）初始值是第1～m个资源的全部数量；<br>            2）系统运行过程中保存的是当前可用的数量；<br>        2）<strong>最大需求矩阵</strong>Max[1…n,1…m]<br>            1）Max[i,j]代表第i个进程对于第j个资源的最大需求量；<br>        3）<strong>已分配矩阵</strong>Allocation[1…n,1…m]<br>            1）Allocation[i,j]代表第i个进程对于第j个资源已经获得的数量；<br>            2）Allocation也可以称作Work<br>        4）<strong>需求矩阵</strong>Need[1…n,1…m]<br>            1）Need[i,j]代表第i个进程对于第j个资源还需要多少个；<br>        显然，根据定义上述<strong>数据满足</strong>：<br>            $Max[i,j] &#x3D; Allocation[i,j]+Need[i,j]$<br>    算法步骤：<br>        1）进程申请资源：<br>            进程i使用Request[j]向系统申请资源j<br>        2）<strong>合理性检查</strong>：<br>            系统检查Request[j]是否小于等于Need[i,j]，如果是则分配；否则认为进程申请了不必要的资源，拒绝；<br>        3）<strong>资源存量检查</strong>：<br>            系统检查Request[j]是否小于等于Allocation[j]，如果是则予以分配；否则系统认为资源存量不足以分配，进程必须等待；<br>        4）<strong>虚拟分配</strong>：<br>            将资源分配给该进程，更新数据结构：Available、Allocation、Need；<br>        5）<strong>安全性算法</strong>：<br>            检查此次资源分配后，系统是否处于安全状态。如果安全则真正分配，如果不安全则不予分配，进程必须等待；<br>    <strong>安全性算法</strong>：<br>        1）可以在任何时刻，根据Allocation(Work)、Need、Available、Max执行安全性算法，判断系统在当前时刻是否安全；<br>        2）主要是掌握表格的结构，有多种可用的表格结构，在最后展示一种我常用的；<br>        3）注意有时候Need需要根据Max和Allocation进行推导，Max一般不用于表格中；<br>        4）Allocation+Available是比较特别但是必要的，代表该进程结束后，系统的可用资源情况，可以看作一个过渡的中间变量，其会作为考虑下一个进程时的Available；<br>        5）按照安全序列的定义，<strong>在寻找安全序列的时候有一定顺序</strong>，但是实际考察通常使用顺序执行；</p>
+<p><strong>银行家算法-安全性算法表格结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>进程 \ 资源</th>
+<th>Work</th>
+<th>Need</th>
+<th>Allocation</th>
+<th>Work+Allocation</th>
+<th>Finish</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P1</td>
+<td>(1,2,3)</td>
+<td>(0,0,1)</td>
+<td>(1,1,1)</td>
+<td>….</td>
+<td>true</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>….</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<p><em>老师推荐的也是这种表结构，注意使用的时候按照分配资源的进程顺序填入表格</em></p>
+<h3 id="死锁的检测与解除"><a href="#死锁的检测与解除" class="headerlink" title="死锁的检测与解除"></a>死锁的检测与解除</h3><p><strong>资源分配图（RAG）：用于检测死锁的工具；</strong><br>    定义：RAG是一个有向图，其中的点集合V对应的是进程集合，边集合E对应的是资源集合；<br>    边点类型：<br>        1）<strong>分配边缘</strong>：由<strong>资源指向进程</strong>；<br>        2）<strong>请求边缘</strong>：由<strong>进程指向资源</strong>；<br>        （注意都是有向边）；<br>    具体表示：<br>        1）<strong>进程点</strong>，通常使用圆形；<br>        2）<strong>资源点</strong>，通常使用矩形，矩形中有点，点的数量代表资源的数量；<br>        3）<strong>分配边缘</strong>，由资源的点，指向具体的进程；<br>        4）<strong>请求边缘</strong>，由进程指向代表资源的矩形；</p>
+<p><strong>死锁检测：</strong><br>    通过<strong>资源分配的化简</strong>，如果能化简则不存在死锁，如果不能化简则存在死锁；<br>    <strong>化简方法：</strong><br>        1）在资源分配图中<strong>找到，一个仅持有资源，不请求资源点非孤立进程点</strong>；该进程持有所有必须的资源，可以正常执行，<strong>释放它持有的资源</strong>，将它变成<strong>孤立点</strong>；<br>        2）进行资源分配，将1）中释放的资源也纳入考虑，考虑当前<strong>剩余资源的数量</strong>，考虑<strong>分配给可以满足的进程</strong>；得到必须资源的进程，可以正常执行，释放它持有的资源，将它变成孤立点；<br>        3）<strong>重复1）、2），直到所有点都变成孤立点</strong>，则化简成功过；否则化简失败；<br>    应用：<br>        主要是合理地将进程和资源进行抽象，然后对对应到资源分配图的情况，考虑是否可以化简；<br>        eg：<img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p7.png" alt="资源分配图的应用">；</p>
+<p>死锁解除算法：<br>    思想：按照某种顺序，逐个终止进程，知道拥有足够的资源，打破循环等待，将系统从死锁状态解除；<br>    问题：终止所有死锁进程代价巨大；<br>    选择终止进程的原则：<br>        1）进程优先级；<br>        2）进程已经执行的时间；<br>        3）进程已使用的资源和未来要使用的资源；<br>        4）进程是交互式还是批处理式；</p>
+<h2 id="存储器管理-1"><a href="#存储器管理-1" class="headerlink" title="存储器管理"></a>存储器管理</h2><h3 id="存储器的层次结构"><a href="#存储器的层次结构" class="headerlink" title="存储器的层次结构"></a>存储器的层次结构</h3><p>内存和外存的区别：<br>1）易失？<br>2）容量<br>3）速度<br>4）CPU操作方式</p>
+<p><strong>存储器层次结构：</strong><br>1）<strong>6个层次</strong><br>    1）寄存器；<br>    2）高速缓存；<br>    3）主存储器；<br>    4）磁盘缓存；<br>    5）固定磁盘；<br>    6）可移动存储介质；<br>2）三种类别<br>    1）<strong>CPU</strong>：寄存器；<br>    2）<strong>Memory</strong>：高速缓存、主存储器、磁盘缓存；<br>    3）<strong>Storage</strong>：固定磁盘、可移动存储介质；<br>3）所在位置</p>
+<p><strong>高速缓存的作用</strong>？<br>    高速缓存介于寄存器和存储器之间，用于<strong>缓和CPU和内存之间的速度的矛盾</strong>；</p>
+<p><strong>磁盘缓存的作用</strong>？<strong>真实存在</strong>？<br>    作用：<strong>缓解内存和外存访问速度</strong>的差异；<br>    利用了<strong>虚拟技术在内存中开辟了磁盘缓存</strong>；</p>
+<h3 id="程序的装入和链接"><a href="#程序的装入和链接" class="headerlink" title="程序的装入和链接"></a>程序的装入和链接</h3><p>源程序运行需要经过的步骤？<br>    1）编译：<br>        由编译程序对用户源程序进行编译，形成若干个目标模块；（.obj文件）<br>    2）链接：<br>        由链接程序将编译后的一组目标模块以及需要的库函数，链接在一起，形成完整的装入模块；（如果是静态链接，可以得到.exe文件）；<br>    3）装入：<br>        由装入程序将装入模块装入内存；</p>
+<p><strong>什么是装入</strong>？<br>    本质：<strong>将逻辑地址修改为物理地址</strong>；<br>    （源程序编译的时候使用的是逻辑地址空间，程序有从0开始的自己单独的地址空间）；</p>
+<p>三种装入方式：（<em>从什么时候改地址的角度把握</em>）<br>1）<strong>绝对装入</strong>（含义）<br>    <strong>程序员</strong>明确<strong>知道</strong>装入内存中的<strong>物理地址</strong>，整个<strong>程序用绝对地址编码</strong>；<br>2）<strong>可重定位装入</strong>（含义，运行时地址不变）<br>    程序从<strong>零地址开始编码</strong>，<strong>装入内存时</strong>将逻辑地址<strong>改</strong>为物理地址，<strong>一旦装入不能在内存中移动</strong>；<br>3）<strong>动态运行时的装入</strong>（含义，重定位寄存器作用）<br>    <strong>装入内存</strong>时<strong>不改</strong>变地址，<strong>运行</strong>时才将逻辑地址<strong>改</strong>成物理地址；<br>    （因为运行时每次都要计算物理地址，需要一个<strong>重定位寄存器</strong>来保障执行速度）；</p>
+<p><strong>什么是链接</strong>？<br>    将一组<strong>独立编址的目标文件</strong>合成一个<strong>统一编址的目标文件</strong>；</p>
+<p>三种链接方式：<br>1）静态链接（含义，缺点）<br>    含义：<strong>事先将几个目标模块链接成一个装入模块</strong>，以后不再拆分；<br>    缺点：可共享的目标文件需要复制，形成多个副本，无法实现单个文件的共享；<br>    （<strong>可以直接得到.exe文件</strong>）<br>2）装入时动态链接（含义，优点，缺点）<br>    含义：在<strong>装入的过程中</strong>，如果发现需要<strong>链接</strong>一个新的目标文件，则发生一个外部模块调用事件，将目标模块装入内存；<br>    优点：可以实现对于目标文件的<strong>共享</strong>；<br>    缺点：有的代码用不到，比如错误处理，类似很多分支的情况所有模块都要链接；<br>3）运行时动态链接（含义，优点）<br>    含义：<strong>运行的过程</strong>中需要哪个目标文件，就将哪个文件<strong>装入</strong>内存进行链接，运行无关的模块不装入也不链接；<br>    优点：<strong>节省空间</strong>，提高内存利用率，加速装入过程，<strong>支持共享</strong>；<br>（<em>链接是在装入之间，编译、链接、装入、运行，装入之后基本上就是把程序对应的进程放到内存上去了</em>）</p>
+<h3 id="连续分配存储管理方式"><a href="#连续分配存储管理方式" class="headerlink" title="连续分配存储管理方式"></a>连续分配存储管理方式</h3><p>什么是连续分配？<br>    为一个进程分配连续的内存空间；</p>
+<p><strong>四种连续分配存储</strong>的方式：<br>1）<strong>单一连续分配</strong>（内存情况，缺点）<br>    内存情况：<br>        1）把内存分为<strong>系统区和用户区</strong>，前者给OS使用，后者给用户使用；<br>        2）OS可以存放在内存的两端（高地址 or 低地址区域）；<br>        3）每次仅允许放入一个进程；<br>    缺点：<br>        1）每次只能有一个程序进入内存，内存利用率低，工作效率低；<br>        2）如果程序所需内存必用户区大，则不能运行；<br>        3）只适用于<strong>单道OS</strong>；<br>2）<strong>固定分区分配</strong>（分区相等、分区不等；内存情况，缺点）<br>    内存情况：<br>        把内存划分为一些<strong>大小固定的分区</strong>，每个进程可以使用一个分区，实现并发；<br>        1）大小相等的分区；<br>        2）大小不等的分区；<br>    内存分配：<br>        1）每次<strong>从头到尾检查分区，如果分区大小满足进程需要，则分配给进程</strong>；<br>        2）分配出去的分区就是已分配状态，不再空闲（即使里面有没有使用的内存）；<br>    缺点：<br>        1）如果大小相等，那么十分不灵活；<br>        2）固定分区分配浪费较大；<br>3）<strong>动态分区分配</strong>（空闲分区表 or 链）；<br>    使用的数据结构：<br>        1）空闲分区表：<br>            1）只记录空闲分区；<br>            2）起始地址、长度、标志（未分配）；<br>        2）空闲分区链：<br>            将所有的空闲分区表链接成一个双向链表；<br>    算法：<br>        1）<strong>首次适应算法</strong>：内存情况，最小不可分区域，优点，缺点<br>            1）以地址递增次序查找空闲分区；<br>            2）找到第一个满足请求大小的分区，从中划出请求大小的空间，余下仍然留在空闲分区中；<br>            缺点：<br>                低地址不断被划分，会留下很多难以利用的小空闲分区，下次查找会浪费时间；<br>        2）<strong>循环首次适应算法</strong>：内存情况，查找指针，优点，缺点<br>            1）从上次找到的空闲分区的下一个空闲分区查找；<br>            2）需要设置<strong>查找指针</strong>，来指示下次从哪开始找；（指的是分配了的<strong>当前位置</strong>）<br>        3）<strong>最佳适应算法</strong>：内存情况，分后排序<br>            1）找到能满足分配的最小空闲分区；<br>            2）每次分配之后对空闲分区按照从小到大（<strong>递增顺序</strong>）进行<strong>排序</strong>；<br>            缺点：<br>                每次分割下的空闲分区总是最小的，难以利用；<br>        4）<strong>最坏适应算</strong>法：内存情况，分后排序；<br>            1）找到能满足分配的最大空闲分区；<br>            2）每次分配之后对空闲分区按照从大到小（<strong>递减顺序</strong>）进行<strong>排序</strong>；<br>            缺点：<br>                缺乏较大的空闲分区；<br>        5）<strong>回收合并</strong>（4种相邻情况）<br>            当一个进程终止时，OS会回收它所占用且未释放的所有空间，以便供其他请求者使用；<br>            回收时四<strong>种邻接情况</strong>：<br>                1）回收区与插入的前一个空闲分区相邻；<br>                2）与后一个相邻；<br>                3）与前后两个空闲分区相邻；<br>                4）前后都没有相邻的；<br>                关键：如果有相邻的，回收了之后得到的新空闲区要和相邻的合并；<br>        6）伙伴系统（判断前一块 or 后一块）<br>4）<strong>动态可重定位分区分配</strong>（与动态分区分配的区别）<br>    1）主要是针对前面的连续分配算法，会在完成一系列分配任务之后，让系统只剩下若干小的分区，即使这些分区总和大于程序，也无法分配；<br>    2）该算法能够<strong>紧凑</strong>，即，将各程序（前面已经分配了空间的程序）移动位置并拼凑到一起，从而使小分区组成大分区；</p>
+<h3 id="对换"><a href="#对换" class="headerlink" title="对换"></a>对换</h3><p>对换的含义</p>
+<p>两种对换方式：<br>1）整体对换（含义）<br>2）部分对换（含义）</p>
+<p>文件区与对换区：作用、区别</p>
+<h3 id="分页存储管理方式"><a href="#分页存储管理方式" class="headerlink" title="分页存储管理方式"></a>分页存储管理方式</h3><p>进程逻辑地址空间、内存物理地址空间，分页（块）处理<br>（页大小与块大小一致，通常前者划分称页、后者划分称块）</p>
+<p>页面小～大，优点、缺点</p>
+<p>地址结构：页号、位移量；计算</p>
+<p>页表：内容？给谁建立？建立的时机？保存的位置？用什么找到页表？</p>
+<p>地址变化机构：<br>    作用？重定位；<br>    操作过程，无快表（两次访问内存）<br>    快表，使用方式</p>
+<p><code>这一部分之前记得不太完善，下面直接根据考点记成一个大点</code></p>
+<p><strong>基本分页存储管理</strong>：<br>    基本概念：<br>        1）页面&#x2F;页：将进程的逻辑地址空间划分成若干大小相等的片，称为页面 or 页，从0开始编址；<br>        2）块&#x2F;页框&#x2F;物理块：将内存的存储空间划分成与页相同大小的片，编号从0开始；<br>        3）进程分配空间的单位：块；<br>        注意：<br>            1）每一页的页内地址也是相对于0开始；<br>            2）调度的时候必须把进程的所有页一次性装入到内存的块中；<br>    <strong>页表</strong>：<br>        1）OS为每个进程建立一张页表；<br>        2）<strong>页表的表头</strong>：页号-块号；<br>        3）页表的作用：保存页号和块号的映射关系；<br>        注意：<br>            1）页表通常保存在系统区；<br>    <strong>地址变换机构</strong>：<br>        作用：借助页表，将页号转变为物理块号；<br>        （解决将逻辑地址转变为物理地址的重定位问题）；<br>        过程：<br>            1）前置准备：<br>                1）当进程被调度的时候，属于进程的页表的首地址和长度（对应有多少个表项）被保存在PCB中；<br>                2）进程调度被执行的时候，页表首地址和长度被取出放入页表寄存器PTR中；<br>            2）执行进程的时候，要访问一个逻辑地址（页号+页内地址）；<br>            3）地址变换机构通过PTR找到进程的页表，通过页表找到逻辑地址页号，对应的物理块号；<br>            4）将页号：页内偏移 改成 物理块号：偏移的形式，得到物理地址；<br>            注意：<br>                1）具体的地址变换过程结合<em>例题理解</em>；<br>                2）如果发生了页号不存在于页表中的情况，即触发缺页中断：<br>                    1）执行时发生缺页，陷入，调用缺页中断；<br>                    2）从外存将页面调进来；<br>                    3） 如果内存空间足够的话直接调入，修改页表（如果有快表同步修改），中断响应完了，就从阻塞状态恢复到就绪状态，再次执行刚才发生了中断的指令（PC指在原位置）；<br>                    4） 如果内存空间不够的话，使用页面置换算法完成页面的置换，将页面调进来，修改页表（有快表同步修改），进程阻塞到恢复（再次执行刚才发生了中断的指令）；<br>                    （所有的页面变化都要改页表，PC会指到原位置，再次访问页面）；</p>
+<h3 id="分段存储管理方式"><a href="#分段存储管理方式" class="headerlink" title="分段存储管理方式"></a>分段存储管理方式</h3><p>分段与分页的区别（划分依据？大小固定？地址空间维度？）</p>
+<p>分段的优势（支持共享）</p>
+<p>地址结构：段号、偏移量</p>
+<p>段表：内容？</p>
+<p>地址变换过程（两次访问内存）</p>
+<p>段页式存储：<br>    如何划分<br>    地址结构<br>    地址变换过程（3次访问内存，2维地址空间）</p>
+<p>基本分段存储管理：<br>    段表：<br>        <strong>段表的表头</strong>：段号-段长-基址-存取控制；<br>        （比页表多了段长、存取控制，因为段的大小不固定，并且段支持共享要设置一些权限，基址实际上就类似于块号）；</p>
+<h2 id="虚拟存储管理"><a href="#虚拟存储管理" class="headerlink" title="虚拟存储管理"></a>虚拟存储管理</h2><h3 id="虚拟存储器概述"><a href="#虚拟存储器概述" class="headerlink" title="虚拟存储器概述"></a>虚拟存储器概述</h3><p>为什么要引入虚拟存储管理？<br>    常规存储管理要求一次性和驻留性，这对于作业很大、很多作业需要同时执行的场景是有问题的，并且与局部性原理相矛盾；<br>    一次性，即程序一次性装入内存；驻留性，即程序运行期间一直被保存在内存中；<br>    局部性原理<br>        时间局部性：某条指令，该指令及其上下指令很可能再次被访问<br>        空间局部性：一旦程序访问了某个存储单元，这不久后附近的存储单元也将被访问</p>
+<p>虚拟存储器的定义？<br>    功能描述上来说：虚拟存储技术允许程序、数据、堆栈能够超过内存大小，用户程序可以在自己感知到的充足的空间下运行；<br>    具体实现来说：但实际的内存没有那么大的空间，而是通过“常规分页（段）存储器+请求调入功能+置换功能”实现了虚拟存储器<br>        当有了虚拟存储之后，CPU访问对应的内存单元，会将地址发送给MMU（由MMU将虚拟地址翻译为物理地址，并进行缺页处理等操作，再供CPU访问）<br>        而不是直接将地址送到内存地址总线上进行访问</p>
+<p>虚拟存储的逻辑容量：内存容量+外部扩充的存储量<br>    其最大容量是由计算机的地址结构决定的（总线位数）</p>
+<p>虚拟存储器的优点：<br>    让程序足以执行的充足空间<br>    为每个用户建立一个虚拟存储器，每个用户可以在自己的地址空间中编程</p>
+<p>虚拟存储器的实现方式：<br>    <strong>请求分页系统</strong>：硬件（<strong>页表、缺页中断机构、地址变换机构</strong>）；软件（<strong>请求调页、页置换</strong>）<br>    <strong>请求分段系统</strong>：硬件（<strong>段表、缺段中断机构、地址变换机构</strong>）；软件（<strong>请求调段、段置换</strong>）<br>    虚拟段页系统</p>
+<h3 id="请求分页存储管理方式"><a href="#请求分页存储管理方式" class="headerlink" title="请求分页存储管理方式"></a>请求分页存储管理方式</h3><p><code>上面三个虚拟存储器中，我们重点了解请求分页系统</code></p>
+<p>页表（PT）<br>    入参：虚拟页号（VPN）<br>    输出：物理页号（PPN）<br>    页表项（PTE）<br>        页号：物理块号：<strong>状态位P：访问字段A：修改位M：外存地址</strong>（相较于基本页表多的）<br>            P，该页<strong>是否调入内存</strong><br>            <strong>A</strong>，该页在<strong>一定时间内的被访问次数</strong><br>            M，该页调<strong>入内存后是否被修改过</strong><br>            <strong>外存地址</strong>，该页在外存上的地址</p>
+<p>缺页中断机构（由硬件支持）<br>    处理流程：<br>        1）访问页面不在内存中；2）产生缺页中断；3）保存现场；4）分析中断原因；5）转入中断处理程序；6）调入页面<br>    缺页中断与一般的中断不同：<br>        其是在指令执行的过程中产生和处理中断信号；而不同于一般的中断是在每次指令之后检测是否有中断；<br>        一次指令执行可能产生多次缺页中断；<br>        交换操作：<br>            缺页中断除了保护现场以外还需要判断内存中是否有足够的存储空间来保存所需的段或页，然后再调入内存，否则需要执行交换操作；<br>            而一般的只需要保护现场；<br>        返回位置：缺页中断返回时，执行产生中断的当前指令（保存返回地址的时候是当前指令的地址）；一般的是执行下一条<br>        <em>相关操作会对页表进行对应的修改，如果有块表的话会同步地修改块表</em>；</p>
+<p>地址变换机构的工作流程<br>    页命中<br>        1）CPU生成虚拟地址VA；2）VA给到MMU，查询到对应的页表项地址PTEA给到CPU；3）CPU读取PTE，给到MMU；4）MMU将PTE中的物理页框号（PPN）复制到寄存器高位，并将PTE中的偏移量（VPO）复制到寄存器低位，构成物理地址，供CPU访问；5）CPU根据物理地址访问数据<br>    页未命中<br>        在上面的4）中，发现PTE有效位是0，转入缺页中断处理；<br>        缺页程序检查，虚拟页号是否合法，是否有空闲的物理页框PPN可以映射给虚拟页面，否则进行置换<br>        从磁盘调入新的页面到内存，更新PTE<br>        重新执行先前的指令<br>    有快表且快表命中<br>        在页命中的流程中，2）MMU直接根据VA从TLB中取出PTE，执行后面的步骤<br>    有快表且快表未命中<br>        3）MMU拿到PTE之后，会放入快表TLB，供下次使用（可能需要置换）<br>（主要注意，MMU要借助CPU在内存或快表中找到PTE，以及物理地址使用了虚拟地址中的偏移量）</p>
+<p>请求分页中的内存分配：<br>    保证进程运行的最小物理块数<br>        直接寻址：指令页面和数据页至少两个；<br>        间接寻址：指令页面、地址页面、数据页面，至少三个<br>        （长指令可能会跨页面，具体的块数主要取决于指令的格式、功能和寻址方式）<br>    进程执行过程中分配给进程的物理块数是固定的还是可变的？<br>        固定分配局部置换，分配固定的物理块数，置换的时候置换自己的<br>        可变分配全局置换，根据具体情况，分配需要的物理块数，运行的时候根据需要从所有页面中进行置换<br>        可变分配局部置换，根据具体情况分配需要需要的物理块数，运行的时候从自己的页面中进行置换<br>    内存给进程分配物理块遵循的原则？<br>        平均分配：按照进程数量<br>        按比例分配：按照进程所占页面的比例分配<br>        优先权分配：按照重要性和紧迫性</p>
+<p>内存调入策略<br>    系统应该在何时调入：预调页策略、请求调页（发生缺页时调入，主流）<br>    系统从哪里调入：<br>        1）如果有足够的对换区，全部放到对换区，结束后写入文件区<br>        2）如果对换区不够，不会被修改的从文件区调入，可能被修改的换出放在对换区，调入从对换区调入，结束后写入文件区<br>        3）UNXI方式，未运行过的，从文件区读，运行过又被换出的，放到对换区<br>    如何调入：页面置换算法</p>
+<h3 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h3><p><code>前面提到了内存调入策略的关键问题是如何进行调入，对应的就是页面置换算法，这一部分重点讨论这些</code></p>
+<p>什么时候需要置换：当内存空间用完之后，或者是分配给某个进程的空间用完了。</p>
+<p><strong>涉及的算法：</strong></p>
+<ol>
+<li>最佳置换算法</li>
+<li>先进先出置换算法</li>
+<li>最近最久未使用算法</li>
+<li>Clock置换算法</li>
+</ol>
+<p><strong>最佳置换算法</strong><br>    方法：从内存中移除永远不需要再访问的页面 or 最长时间不需要访问的页面<br>    注意：不是实际上的方法，具有理论上的最佳意义，可以作为衡量优劣的标准</p>
+<p><strong>FIFO算法</strong><br>    方法：先进入内存的页面先淘汰<br>    注意：可能出现Belady现象，分配的页面数增多，缺页率反而提高</p>
+<p><strong>最近最久未使用算法（LRU）</strong><br>    方法：选择最近一段时间内最久不使用的页面进行淘汰<br>    实现机制<br>        1）寄存器实现：为每个页面配置一个移位寄存器，每次访问所有移位寄存器右移1位，访问到的页面的寄存器最高位置1；挑选寄存器中值最小的淘汰；<br>        2）栈实现：保存页号，访问的时候从栈内取出，再压入栈顶；淘汰的时候淘汰栈底对应的页面</p>
+<p>Clcok置换算法<br>    1）在发生缺页的时候：<br>        检查表指针指向的页面，如果R&#x3D;0则淘汰该页面替换入新页面，新页面R&#x3D;1；如果R&#x3D;1，则令R&#x3D;1；<br>        表指针向下移动<br>    2）没有发生缺页的时候：<br>        被访问的页面R&#x3D;1<br>    注：Clock算法有一种改进<br>        改进：考虑置换代价，将前面的R替换为(A,M)，A与R功能类似，M代表页面是否有被修改过；具体来说(0,0)&#x2F;(0,1)&#x2F;(1,0)&#x2F;(1,1)分别对应：1）最近未被访问，未修改，置换代价最小，优先置换；2）最近未被访问，被修改过，置换代价较大，可以置换；3）、4）最近被访问过不宜置换，尤其是4）被访问同时也被修改过<br>        被修改意味着：将该页换处的时候要将修改内容写回磁盘上，这个样子的话花费较多</p>
+<p>评价指标：<br>    1）缺页次数（原本没有该页面也算缺页）；<br>    2）缺页率：缺页次数&#x2F;访问次数</p>
+<p>访问内存的有效时间EAT（查找快表的时间：$\lambda$，访问实际物理地址的时间$t$，缺页中断的时间$\epsilon$）</p>
+<ol>
+<li>页表项在快表中，页在内存中：$EAT &#x3D; \lambda + t$</li>
+<li>页表项不在快表中，页在内存中：$EAT &#x3D; \lambda+t+\lambda+t$</li>
+<li>页不在内存中：$EAT &#x3D; \lambda + t + \epsilon + \lambda + t$（缺页中断可以将内存、快表一并补齐）</li>
+<li>快表命中率$\alpha$，缺页率$f$，考虑EAT期望（<em>可以问一下老师，当时上课讲的好像有一点问题，但可能不是那么重要</em>）</li>
+</ol>
+<h3 id="抖动与工作集"><a href="#抖动与工作集" class="headerlink" title="抖动与工作集"></a>抖动与工作集</h3><p><strong>抖动</strong><br>    <strong>定义：页面在内存与磁盘之间频繁地调度，使得调度页面所需的时间比进程实际运行的时间还多，系统效率极具下降</strong><br>    造成的结果：随着多道程序度的增加，处理器的利用率先上升后下降的现象<br>    产生的原因：页面置换算法、页面本身的大小、程序编制的方式（行优先、列优先）、驻留集的大小</p>
+<p>驻留集<br>    定义：分配给进程使用的物理块的数量（可以对应到前面考虑各种置换算法的时候，同一时刻最多维持的页面的数量）<br>    注意：通常情况下，缺页率随着驻留集的增大而下降，但是这种效果逐渐减弱</p>
+<p>工作集<br>    定义：在某段时间间隔$\Delta$里，进程实际要访问的页面的集合<br>    符号记法：工作集$W(t,\Delta)$，其中$t$是时刻，$\Delta$是尺窗口（要会找工作集对应的页）<br>    注意：<br>        1）工作集是基于局部性原理提出的，程序对页面的访问并不均匀；<br>        2）工作集的大小会变化<br>        3）对于变化而言相对稳定和快速变化的阶段会交替出现（一段时间稳定在一个局部性的页面，当局部位置变化的时候工作集快速变化，然后又进入一段时间的稳定）<br>        4）找到一个作业的最大工作集，可以帮助设计驻留集的大小</p>
+<p>预防抖动的方法<br>    1）局部置换策略<br>    2）将工作集算法融入处理器调度中<br>    3）尽量让平均的执行时间等于缺页服务的时间，如果前者过大内存可能利用不够充分（因为相当于充足的内存给到了部分进程，其实还可以同时执行其他进程的）；如果后者过大，缺页过多，缺页服务时间太长，系统效率下降</p>
+<h3 id="请求分段的存储方式"><a href="#请求分段的存储方式" class="headerlink" title="请求分段的存储方式"></a>请求分段的存储方式</h3><p>请求分段的存储方式<br>    构成：在基本分段方式上加入了：1）请求分段；2）段置换机制</p>
+<p>硬件机制：<br>    1）请求段表机制；<br>    2）缺段中断机制；<br>    3）地址变换机构；</p>
+<p>请求段表机制：<br>    <strong>段表与页表的不同点</strong>：<br>        <strong>在原本表项中加入了：1）存取方式（只读&#x2F;只写&#x2F;读写）；2）增补位（是否动态增长）</strong><br>        （新增表项切合了段面向程序划分的需求）<br>        （增补位是主要的不同）；</p>
+<p>缺段中断机构：<br>    缺段中断与缺页中断的区别：<br>        1）不会出现一条指令或一组信息在两个段的情况（页可能有这种情况）</p>
+<p>地址变换机构：<br>    分段的地址变换与分页的区别：<br>        1）段的长度不是固定的</p>
+<p>共享段表（分段的特色所在）<br>    由于段是面向程序划分的，所以段可以支持进程的共享（如需要访问相同的库函数）<br>    工作方式：<br>        分配：当某进程需要访问某段时，如果内存中没有则调入；会在共享段表中存储其信息，当其他进程需要的时候优先查共享段表，如果有的话直接使用；共享段表中会记录当前使用该段的进程和进程数量<br>        回收：一个进程不再使用该段的时候会在共享段表中消除它的记录，当共享段表中记录进程数量为0的时候，对应段的内存空间就被回收。<br>    注意：<br>        区别共享段表和进程自己使用的段表项</p>
+<p>分段保护：<br>    共享段表需要进行保护<br>        1）越界检查；<br>        2）存取控制检查；<br>        3）环保护</p>
+<h2 id="输入输出系统"><a href="#输入输出系统" class="headerlink" title="输入输出系统"></a>输入输出系统</h2><h3 id="I-O系统的功能、模型和接口"><a href="#I-O系统的功能、模型和接口" class="headerlink" title="I&#x2F;O系统的功能、模型和接口"></a>I&#x2F;O系统的功能、模型和接口</h3><p>I&#x2F;O系统的功能<br>    管理I&#x2F;O设备，包括打印机、键盘、屏幕等交互设备，以及磁盘等存储设备；<br>    基本功能：<br>        1）隐藏物理设备细节；<br>        2）与设备无关性；<br>        3）提高处理器和I&#x2F;O设备等利用率；<br>        4）设备控制；<br>        5）设备共享；<br>        6）错误处理；</p>
+<p>I&#x2F;O软件的层次：<br>    1）<strong>用户层软件</strong>：产生I&#x2F;O请求、格式化I&#x2F;O、Spooling（<strong>假脱机</strong>系统）；<br>    2）<strong>设备独立性软件</strong>：主要是几个表，为了实现设备无关性；（<strong>缓冲区</strong>是设备无关层）<br>    3）<strong>设备驱动程序</strong>：操作系统的一部分，用来启动设备<br>    4）<strong>中断处理程序</strong>：执行I&#x2F;O时用户进程、驱动程序被阻塞，I&#x2F;O完成后触发中断，由CPU唤醒驱动程序进行后续处理；<br>    5）<strong>硬件</strong>：执行I&#x2F;O操作；</p>
+<p>（硬件上面四层可以说是I&#x2F;O系统的软件组织 or I&#x2F;O管理中的软件）</p>
+<h3 id="I-O设备和设备控制器"><a href="#I-O设备和设备控制器" class="headerlink" title="I&#x2F;O设备和设备控制器"></a>I&#x2F;O设备和设备控制器</h3><p>I&#x2F;O设备的类型：<br>    数据传输单位分：<br>        1）<strong>块设备</strong>；<br>        2）<strong>流设备</strong>（<strong>字符设备</strong>）；<br>    共享属性上分：<br>        1）独占设备；<br>        2）共享设备；</p>
+<p>控制方式<br>    1）无通道：<br>        CPU与设备控制器通信；<br>        设备控制器与设备通信；<br>    2）有通道<br>        <strong>I&#x2F;O通道</strong>：可以通过访问内存，取指令执行；<br>            1）算<strong>一种特殊的处理机</strong>；<br>            2）但是可执行指令单一，并且<strong>没有自己的内存</strong>（和CPU共享内存）；<br>        CPU向通道发出一条I&#x2F;O指令，通道直接访问内存，从中取出本次所需的I&#x2F;O程序执行，执行完毕后再触发中断告诉CPU；</p>
+<p><strong>I&#x2F;O设备寻址问题</strong>：<br>    I&#x2F;O设备寻址的时候，<strong>CPU怎么定位I&#x2F;O设备里的寄存器</strong>；<br>    1）<strong>特定I&#x2F;O指令</strong>，定制指令集，因为访问的内存不一样；<br>    2）<strong>内存映象I&#x2F;O</strong>，在编制方式上不去分内存和设备控制器的寄存器地址，进行统一编址，只是范围不同，例如以n为界限；</p>
+<h3 id="中断机构和中断处理程序"><a href="#中断机构和中断处理程序" class="headerlink" title="中断机构和中断处理程序"></a>中断机构和中断处理程序</h3><p>与I&#x2F;O相关的中断应用场景：<br>    阻塞式系统调用：用户进程、驱动程序即将开始进行I&#x2F;O操作，调用I&#x2F;O程序然后将自己阻塞，当I&#x2F;O程序执行完毕之后，使用中断让CPU恢复用户进程、驱动程序；</p>
+<p>中断处理的过程：<br>    中断处理程序：<br>        1）每当指令执行完，检测是否有未处理的中断信号；若有则转入中断处理程序；<br>        2）保护现场，保护CPU当前执行到的地址、寄存器的状态等；<br>        3）转入处理程序，找到中断源，发出确认信号，取消中断信号；<br>        4）中断处理；<br>        5）恢复线程并退出中断；</p>
+<p>一个大概的I&#x2F;O过程：<br>    1）用户进程请求I&#x2F;O设备；<br>    2）操作系统调用驱动程序；<br>    3）驱动程序启动设备，发出控制命令，将自己阻塞，继而用户进程也被阻塞；<br>    4）进程切换，CPU执行其他进程；<br>    5）I&#x2F;O设备执行完成，发出中断信号；<br>    6）CPU检测到中断信号，开始处理：<br>        唤醒驱动、确认中断源、取消中断信号，驱动程序进行后续处理（这就是在中断处理）、恢复现场…</p>
+<h3 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h3><p>设备驱动程序的作用：<br>    1）通信程序：驱动程序是I&#x2F;O系统的高层和设备控制器之间的通信程序；<br>    2）指令转换：接收抽象的I&#x2F;O指令，将其转换为具体的适合硬件的指令和参数；</p>
+<p><strong>驱动程序对I&#x2F;O设备的控制方式</strong>：<br>    1）<strong>程序控制方式</strong>；<br>        使用轮询的可编程I&#x2F;O方式：<br>            基本思想：CPU发出一条I&#x2F;O指令之后，令寄存器busy&#x3D;1；CPU不断对busy进行检查，如果busy为1则一个字符的I&#x2F;O没有完成，直到busy&#x3D;0，CPU才继续处理下一个字符的IO；<br>        缺点：<strong>忙等</strong>，CPU一直在询问，无法解脱；<br>    2）<strong>中断驱动方式</strong>；<br>        使用中断的可编程I&#x2F;O方式<br>            基本思想：I&#x2F;O设备处理数据中，无需CPU干预，CPU与I&#x2F;O设备并行工作，只有I&#x2F;O完成之后CPU才回来用极少的时间处理中断信号；<br>            （具体的过程和前面中断部分，I&#x2F;O的大概过程类似）；<br>        缺点：按字为单位进行的I&#x2F;O，<strong>每个输入完成之后就会有一次中断</strong>，效率本应该更高；<br>    3）<strong>DMA方式</strong>；<br>        直接存储器方式：<br>            基本思想，增大传输的基本单位，CPU与I&#x2F;O设备之间每次至少传输一个数据块，数据由DMA控制器控制，直接送入内存；只在每个数据块处理的开始和结束需要CPU的干预；<br>        优点：<br>            仅<strong>在传送一个或多个数据块多开始和结束为止需要使用到中断</strong>，大大提高了效率；<br>        （2、3对比：前者以字节为单位，后者以数据块为单位；前者数据传送到内存，由CPU控制，后者由DMA控制器控制）；<br>        缺点：<br>            DMA方式是以数据块为单位，这意味着<strong>每个数据块的开始和结束时需要CPU进行干预</strong>，如果一次能直接处理一组数据块会更加高效；<br>    4）<strong>I&#x2F;O通道方式</strong>；<br>        基本思想：属于DMA方式的发展，把对一个数据块的读写改为对一组数据块的读写；<strong>CPU要执行一组数据块的读写的时候，给通道发送一条指令</strong>，给出通道程序首地址和设备号，通道自行执行通道程序，并操作内存；</p>
+<h3 id="与设备无关的I-O软件"><a href="#与设备无关的I-O软件" class="headerlink" title="与设备无关的I&#x2F;O软件"></a>与设备无关的I&#x2F;O软件</h3><p>与设备无关的I&#x2F;O软件主要目的是实现：<br>    1）对独立设备的分配和回收（实现设备的复用）；<br>    2）主要的方式使用独立于设备的逻辑数据块（隐藏设备的具体参数细节向高层提供统一操作的“对象”）；</p>
+<p>主要的表与表结构：<br>    <strong>设备控制表</strong>（DCT）：每个I&#x2F;O设备都有自己的控制表，里面有设备相关的信息；<br>    <strong>控制器控制表</strong>（COCT）：例如DMA控制器；<br>    <strong>通道控制表</strong>（CHCT）：例如I&#x2F;O通道；<br>    （指向关系：DCT-&gt;COCT-&gt;CHCT）；<br>    <strong>系统控制表</strong>（SCT）：全局表，DCT可以看作SCT都表目；<br>    <strong>逻辑设备表</strong>（LUT）：为每个用户分配的，里面的表项是相关设备的逻辑名称以及对应的物理名词；</p>
+<p><strong>设备分配的过程</strong>：<br>    1）用户在自己的LUT中找到要用设备的逻辑名，以及对应的物理名，例如&#x2F;dev&#x2F;打印机对应5；<br>    2）使用物理名去查SCT，找到对应的DCT；<br>    3）DCT找到对应的COCT，COCT找到对应的CHCT；<br>    4）全部确认没问题了，<strong>先分配：设备，再分配：控制器，最后分配：通道</strong>；</p>
+<h3 id="用户层软件"><a href="#用户层软件" class="headerlink" title="用户层软件"></a>用户层软件</h3><p><strong>假脱机系统</strong>：<br>    组成：<br>        1）<strong>输入井和输出井</strong>：在硬盘上分出的存储区域；<br>        2）<strong>输入缓冲区和输出缓冲区</strong>：在内存上的数据中转站；<br>        3）<strong>输入进程和输出进程</strong>：模拟外围机；<br>        4）<strong>井管理程序</strong>：直接和用户打交道；<br>    使用流程：<br>        1）输入进程 输入数据 到用户进程：<br>            1）<strong>输入进程</strong>控制设备输入到<strong>输入缓冲区</strong>；<br>            2）然后转移到<strong>输入井</strong>；<br>            3）<strong>用户进程通过井管理程序从输入井中读取数据</strong>；<br>        2）用户进程 输出数据 到输出设备：<br>            1）<strong>用户进程通过井管理程序输出到输出井</strong>；<br>            2）<strong>输出进程</strong>从<strong>输出井</strong>将数据读入<strong>输出缓冲区</strong>；（在设备空闲时）<br>            3）<strong>输出设备读取输出缓冲区的数据输出</strong>；</p>
+<h3 id="缓冲区的管理"><a href="#缓冲区的管理" class="headerlink" title="缓冲区的管理"></a>缓冲区的管理</h3><p><strong>缓冲区是设备独立性软件管</strong>理的资源；<br>（属于设备无关层，设备独立性软件层）</p>
+<p><strong>引入缓冲区的原因</strong>：<br>    1）缓解CPU和I&#x2F;O设备速<strong>度</strong>不匹配的问题；<br>    2）减少CPU的<strong>中断频率</strong>；<br>    3）解决<strong>数据粒度</strong>不匹配的问题；<br>    4）提高CPU与I&#x2F;O设备的<strong>并行性</strong>；（越多并行越强）；</p>
+<h3 id="磁盘存储器的性能和调度"><a href="#磁盘存储器的性能和调度" class="headerlink" title="磁盘存储器的性能和调度"></a>磁盘存储器的性能和调度</h3><p><strong>磁盘的基本结构</strong>：<br>    1）<strong>磁盘</strong>包括一个或多个<strong>盘面</strong>；<br>    2）每个<strong>盘面</strong>有两个<strong>存储面</strong>；<br>    3）每个面按同心圆环组织，对应环就是<strong>磁道</strong>，每条磁道上存储相同数目的二进制位；<br>    4）每条磁道从逻辑上划分为多个<strong>扇区</strong>，<strong>一个扇区称为一个盘块</strong>；</p>
+<p><strong>磁盘容量的计算</strong>：<br>    已知：1）8个双面盘片，2）每面16384个磁道，3）64个扇区，4）每个扇区512个字节；<br>    按照基本结构：<br>        容量 &#x3D; 8 2 16384 64 512B 累乘 -&gt; 8GB<br>    （注意64个扇区是指每个磁道64个扇区）；</p>
+<p>注意：现代磁盘为了提升容量不会将内外磁道算作相同的存储容量，外磁道显然会大一些，提供给OS的是抽象后的几何信息，这些会由驱动器处理；</p>
+<p>磁盘调度算法：<br>    衡量指标：<br>        磁道x，y之间的距离（磁头从x-&gt;y的移动距离） &#x3D; |x-y|；（其中x、y是编号）；<br>        平均寻道长度 &#x3D; 一系列磁道读写完成之后，磁头移动距离之和 &#x2F; 磁头移动次数；<br>    1）<strong>FCFS</strong>（先来先服务）：<br>        按照对于磁道请求读写的时间顺序先后，依次移动磁头道对应磁道进行读写；<br>    2）<strong>SSTF</strong>（最短寻道优先算法）：<br>        按照一系列磁道读写请求中，距离当前所在磁道的距离进行选择，下一次选择距离当前最近的磁道；<br>    3）<strong>SCAN</strong>（扫描算法）：<br>        对于一系列读写请求，磁头按照当前读取方向（磁道号增大或减小），继续读取同一方向的磁道，直到读完该方向最大&#x2F;最小 的磁道，<strong>再改变反向</strong>；<br>        （注意方向，以及改变方向不是轮回，而是掉头）；<br>    4）<strong>CSCAN</strong>（循环扫描算法）：<br>        对于一系列读写请求，磁头总是沿着一个方向移动，增大&#x2F;减小，直到最大&#x2F;最小，<strong>磁头立马移动道最小&#x2F;最大处（当然这个距离也算移动距离）</strong>，重新开始；<br>        （注意方向，并且这个改变方向也是掉头，只是掉头直接走到底，再重新扫一遍）；</p>
+<h2 id="文件管理-1"><a href="#文件管理-1" class="headerlink" title="文件管理"></a>文件管理</h2><p>文件的相关操作：<br>    1）最基本操作：<br>        1）创建文件；<br>        2）删除文件；<br>        3）读文件；<br>        4）写文件；<br>        5）设置文件读&#x2F;写位置；<br>    2）文件的“打开”和“关闭”操作；<br>    3）其他操作；</p>
+<p>文件的打开操作：<br>    引：<br>        1）在<strong>没有打开操作</strong>之前，对文件操作我们需要检索目录，找到文件的属性和它在外存上的属性；<br>        2）缺点是<strong>对文件进行多次操作，每次都要重新检索目录</strong>，于是OS发明了“打开”文件这一概念；<br>    文件的打开：<br>        1）OS将指定文件的<strong>属性</strong>（包括物理位置）从外存拷贝到内存的“<strong>打开文件表</strong>”，作为一个表目，并将这个<strong>表目的索引&#x2F;编号，返回给用户</strong>；<br>        2）让用户对文件操作的时候，可以使用这个索引向OS进行请求，OS可以直接利用这个<strong>索引查找</strong>到对应的文件，<strong>避免了二次检索</strong>；</p>
+<p>文件的关闭操作：<br>    对应着打开：<br>        当用户不需要对该文件再操作时，利用关闭的系统调用，将文件关闭，OS把该文件对应的表目从“<strong>打开文件表</strong>”中删除；</p>
+<p><strong>文件的逻辑结构</strong>：<br>    <strong>作用：记录数据在一个文件中的组织方式</strong>；<br>    按照记录的组织方式划分：<br>        1）<strong>顺序文件</strong>：<br>            含义：一条接一条的记录顺序组合在一起；<br>            两种结构：<br>                1）串结构：依据时间最先存储的作为第一个记录，然后是第二个记录，以此类推；<br>                2）顺序结构：按照关键字（词）排序，例如关键词长短、英文的顺序；<br>            两种寻址方式：<br>                1）隐式寻址：一条一条记录查找，直到找到想要的记录；<br>                2）显示寻址：对记录实现直接或随机访问（可以直接定位到记录）；<br>                注意：<strong>显示寻址只能对定长的记录实现</strong>，不能对变长的记录实现（注意变长是指一个记录的长度可以变，而一个文件有多个记录）；<br>        2）<strong>索引文件</strong>：<br>            含义：针对变长记录文件，配备一个索引表，按记录的关键字排序，表项可以直接索引到记录；<br>            （为解决变长记录文件的直接存取低效问题，为变长记录文件建立<strong>索引</strong>，用以记录关键信息）<br>            注意：<strong>索引表本身是一个定长记录文件</strong>；（表项长度固定）；<br>        3）<strong>索引顺序文件</strong>：<br>            含义：将顺序文件中的所有记录分组，为每组建立一个索引项，指向每组的第一个记录；<br>            本质上就是有一定额外逻辑结构，但是没有记全的索引文件（它们的结构实际上也是一样的）；<br>            优点：克服了在文件中记录较多时，出现大量索引的，检索费事的问题；</p>
+<p><strong>（索引顺序文件）多级索引下文件访问时间问题</strong>：<br>    1）n条记录的文件，顺序访问，平均查找次数是n&#x2F;2；<br>    2）建立了一级索引：均分的来说，应该有$\sqrt{n}$个索引项，对应每组有$\sqrt{n}$条索引记录；<br>        所以平均查找次数是 $\sqrt{n}&#x2F;2 + \sqrt{n}&#x2F;2 &#x3D; \sqrt{n}$；<br>    3）如果建立了二级索引，考虑均分，应该有 $n^{1&#x2F;3}$ 个二级索引，每个二级索引对应同样数量个一级索引，每个一级索引对应同样数量个记录项；<br>        所以平均查找次数是 $n^{1&#x2F;3}*3&#x2F;2$</p>
+<p><strong>文件目录</strong>：<br>    本质：<strong>定长顺序文件</strong>；<br>    组成：<strong>文件控制块（FCB）</strong>；<br>        1）基本信息：文件名、文件物理位置、文件逻辑结构、文件物理结构；<br>        2）存取控制信息：各种用户的存取权限；<br>        3）使用信息：例如上一次修改的日期、创建日期etc.<br>        （文件控制块就是“文件目录”这个定长顺序文件中的记录）；<br>    改进：<br>        问题：<strong>如果文件较多，文件目录中记录很多，导致系统将文件目录调入内存时占用空间很大，效率很低；</strong><br>            （操作系统开机的时候就是读取目录，后续根据需要读取文件）；<br>        解决方案：<strong>索引节点</strong>；<br>            1）<strong>索引节点中记录FCB中的信息</strong>（UNIX中称为i节点）；<br>            2）<strong>文件目录中只记录文件名和索引节点的编号</strong>；<br>            （相当于在需要一个文件详细记录的时候，再根据索引节点编号，索引到索引节点，其中记录了原始FCB会有的信息）；<br>    常见的文件目录：<br>        1）<strong>一级文件目录</strong>：<br>            <strong>整个文件系统建立一张目录表</strong>，每个文件占一个目录项，目录项中是文件的meta info；<br>            优点：<br>                实现了<strong>按名存取</strong>；<br>            缺点：<br>                速度慢，不允许重名；<br>        2）<strong>二级文件目录</strong>：<br>            <strong>为每个用户单独建立一个文件目录表UFD，系统中建立一个主文件目录MFD</strong>，MFD中存了用户名和对应的指针，UFD中存到是文件名以及对应的指针（索引），类似于索引节点的方式；<br>            优点：<br>                1）提高了检索速度，不同用户可以使用相同文件名；<br>                2）不同用户可以使用不同用户名来访问共享文件；<br>        3）<strong>树形文件目录</strong>：<br>            <strong>唯一的根目录，其他每个文件、目录有唯一的父目录</strong>；一个目录中指向子目录的记录类似于MFD，指向文件的记录类似于UFD（即类似索引节点）；<br>            （其中文件是树叶、目录是树的节点）；<br>            路径名：<br>                1）<strong>绝对路径名</strong>：在树形文件目录中，从根目录到任何数据文件都有唯一的路径名；<br>                2）<strong>相对路径名</strong>：从当前目录开始直到数据文件为止构成的路径名；<br>            路径名的表示方式：<br>                1） “.&#x2F;“ 当前目录；<br>                2） “..&#x2F;“ 上级目录；<br>                3） “&#x2F;“ 根目录；<br>            <img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p8.png" alt="文件路径名的例子">；</p>
+<p>文件目录的查找：<br>    注意哈希法不适用于有通配符的模糊查找；<br>    （<em>扩展检索支持模糊查找</em>）；</p>
+<p>文件共享：<br>    含义：系统应该允许多个用户共享一个文件，这样系统只用保存一份文件的副本；<br>    基于索引节点实现共享：<br>        利用索引节点，只需要不同用户的某个记录项索引指向同一索引节点，即可实现文件共享；<br>    改进：基于<strong>符号链接（符号链）</strong>Link文件实现共享：<br>        问题：<br>            这种方式需要记录一个当前文件的用户使用数量，只有在数量为0的时候才删除文件；这带来了拥有者问题，当一个文件的Onwer不需要该文件了，如果有其他用户在共享这个文件，那么文件就无法删除，这是不公平的（A消费，B买单）；而强行删除的话会带来<strong>指针悬浮</strong>问题；<br>        方法：<br>            <strong>只有拥有者指向索引节点，共享者创建一个Link型文件用于记录指向实际文件的路径，共享者可以访问到的是该Link型文件的索引节点；</strong><br>            （相当于共享者只有共享文件的路径，实际的文件掌握在拥有者手中，如果拥有者删除文件，系统就会因为找不到文件而访问失败，让用户删除自己是失效的Link型文件）；</p>
+<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><p>这一节讲的是<strong>数据在磁盘上的物理组织方式，要和上一章文件管理的逻辑组织区别开来</strong>；</p>
+<h3 id="外存的组织方式"><a href="#外存的组织方式" class="headerlink" title="外存的组织方式"></a>外存的组织方式</h3><p><strong>连续组织方式</strong>：<br>    要求为<strong>每个文件分配一组相邻的盘块</strong>，又称为连续分配的方式；<br>    优点：<br>        顺序访问容易、速度快；<br>    缺点：<br>        必须事先知道文件的长度；<br>        不能灵活地删除和插入记录；<br>        无法组织动态增长的文件；</p>
+<p><strong>链接组织方式</strong>：<br>    可以将文件装到多个离散的盘块，对于这些不连续的盘块，通过盘块上的指针链接成一个链表，形成完整的文件；<br>    优点：<br>        不需要连续空间，提高了外存利用率；<br>        插入删除相对容易，可以应对动态增长的文件；<br>    类别：<br>        1）<strong>隐式链接</strong>：<br>            文件中目录项，含有指向第一个盘块和最后一个盘块的指针；<br>            （相当于访问的时候目录项索引到第一个盘块，然后用读取链表的方式依次访问）；<br>            缺点：<br>                只能顺序访问效率低；<br>                <strong>可靠性低，某个盘块的指针出问题了，整个文件后续的信息就丢失了</strong>；<br>        2）<strong>显示链接</strong>：<br>            在内存中维护一张链接表，将链接文件物理盘块的各指针，显示地存放在表中；<br>            <strong>FAT技术</strong>：<br>                显示链接使用FAT，<strong>将整个盘块作为基本分配单位，FAT中记录各个盘块的索引</strong>（指针）；<br>                计算<strong>FAT表的容量</strong>：<br>                    实质：<strong>计算FAT表记录管理的盘块空间有多大</strong>；<br>                    FAT12：<br>                        1）<strong>以盘块</strong>为基本管理单位；<br>                        2）表项是12位；<br>                        3）<strong>最大容量空间</strong>：$2^12 * Block_size$；<br>                    FAT16：<br>                        1）<strong>以簇为</strong>基本管理单位；<br>                        2）<strong>一个簇可以有多个扇区</strong>；<br>                        3）表项是16位；<br>                        4）<br>                            <strong>最大容量空间</strong>：$2^16 * number_sector * size_sector$；（number_sector是一个簇有几个扇区，size_sector是扇区大小）；<br>                            或者 $2^16 * size_cluster$；（size_cluster直接考虑一个簇的大小）；<br>                    <strong>FAT32</strong>：与FAT16类似，只是表项是32位，容量计算方式也是对应的；<br>            缺点：<br>                FAT占用较大的内存空间；</p>
+<p>索引组织方式：<br>    实质：在显示链接FAT方式上的改进；<br>    1）为每一个文件分配一个索引盘块，记录文件所有内容所在的盘块（对应前面FAT中对应当前文件的表项）；<br>    2）打开文件的时候只需要将该文件占用的编号调入，没有必要调入整个FAT表（FAT表中存储了所有文件的所有内容所在盘块的信息）；<br>    3）为了找到文件的索引盘块，建立文件的时候在FCB中存储索引块指针；<br>    增量式索引组织方式：<br>        基本上比较贴近现在的技术了，UNIX V操作系统中用的就是这个；<br>        采取多级组织方式，小文件索引盘块的指针直接存储在FCB中，中型文件使用单级索引（FCB中的指针索引到 一个盘块，该盘块中存放的是一些指针，这些指针又索引到一些盘块，这些盘块就是最开始的索引盘块，其中存放了文件内容的索引），大型文件使用的是二级或三级索引（基本上就是通过增加索引次数扩大最终对应的空间）；</p>
+<h3 id="文件存储空间的管理"><a href="#文件存储空间的管理" class="headerlink" title="文件存储空间的管理"></a>文件存储空间的管理</h3><p>文件存储空间的管理方式：<br>    磁盘是如何分配和回收相应的空间的；<br>        空闲表法；<br>        空闲链表法；<br>        位示图法；<br>    （对应类似内存空间的管理方式，外存的管理知道有这几种方法即可）；</p>
+<h3 id="提高磁盘I-O速度的途径"><a href="#提高磁盘I-O速度的途径" class="headerlink" title="提高磁盘I&#x2F;O速度的途径"></a>提高磁盘I&#x2F;O速度的途径</h3><p><strong>RAID技术</strong>；<br>    廉价磁盘冗余阵列：利用一台磁盘阵列控制器，统一管理和控制一组(几台到几十台)磁盘驱动器，组成一个高度可靠、快速的大容量磁盘系统；<br>    （如果改进一个组件很难在性能上取得提升，那么可以通过重复使用多个相同的组件来达到性能提升的效果；）<br>    <strong>RAID0</strong>：最早提出的RAID技术；<br>        1）使用了<strong>数据分条技术</strong>；<br>        2）需要<strong>2块</strong>磁盘；<br>        3）目标是<strong>提高整个磁盘的性能、吞吐量</strong>，<strong>没有提供冗余和错误修复</strong>的能力；<br>        4）可靠性对应单独的一块硬盘，只要有一块硬盘故障，整个系统都会出问题；<br>    <strong>RAID1</strong>：<br>        1）使用了<strong>磁盘镜像技术</strong>；<br>        2）需要<strong>2块</strong>磁盘；<br>        3）目标是保证系统的可靠性和可修复性；<br>        4）性能与单块硬盘性能相同，可靠性高；<br>    <strong>RAID2</strong>：<br>        1）在RAID0上的改进，使用了<strong>汉明码</strong>提升可靠性；<br>        2）需要<strong>3块</strong>磁盘；<br>        3）目标是<strong>在RAID0性能提升的基础上增加可靠性</strong>；<br>        4）整体数据容量大一些，按位存储校验信息，至少要3块磁盘；<br>    <strong>RAID3</strong>：<br>        1）<strong>在RAID2基础上使用了奇偶校验</strong>，并且单独使用盘块存放校验信息，更加可靠；<br>        2）需要<strong>3块</strong>磁盘；<br>    <strong>RAID4</strong>：<br>        与RAID3类似，需要<strong>3块</strong>磁盘；<br>    <strong>RAID5</strong>：<br>        <strong>校验信息螺旋分布</strong>，需要<strong>3块</strong>磁盘；<br>    <strong>RAID6</strong>：<br>        在RAID5的基础上增加了一个独立的奇偶校验块，需要<strong>4块磁盘</strong>；<br>    特殊的组合：<br>        <strong>RAID01</strong>：<br>            1）先做条带再做镜像；<br>            2）需要<strong>4块</strong>磁盘；<br>            3）如果有一块磁盘坏了，那该组中另一块也不能用了，退化成了RAID0，如果另一组中坏一个就不能用了；（<em>XY XY</em>）<br>        <strong>RAID10</strong>：<br>            1）先做镜像再做条带；<br>            2）需要<strong>4块</strong>磁盘；<br>            3）如果有一块磁盘坏了，该组中另一块还能用，如果该组另一块也坏了，或者另一组两块都坏了才不能用；（<em>XX YY</em>）<br>        总结：RAID10比RADI01更加安全；<br>        参考下图：<br>            <img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/OS/p9.png" alt="RAID01与RAID10">；</p>
+<h3 id="数据一致控制"><a href="#数据一致控制" class="headerlink" title="数据一致控制"></a>数据一致控制</h3><p><strong>事务</strong>：用于控制和修改各种数据项的一个程序单位，可以看作一系列相关读写操作；</p>
+<h2 id="随堂测试"><a href="#随堂测试" class="headerlink" title="随堂测试"></a>随堂测试</h2><p><code>这门课老师貌似不布置作业，但其实随堂测试基本上涵盖了每一章的知识点，在这里进行记录</code></p>
+<h3 id="第四次随堂测试：存储器管理"><a href="#第四次随堂测试：存储器管理" class="headerlink" title="第四次随堂测试：存储器管理"></a>第四次随堂测试：存储器管理</h3><h4 id="1-1）"><a href="#1-1）" class="headerlink" title="1.1）"></a>1.1）</h4><p>动态分区分配中，系统回收一块内存需要修改空闲分区表，造成空闲区数减1的是：</p>
+<p>C. 既有上邻空闲区，也有下邻空闲区。</p>
+<p>原因是当内存回收后，新增的一块和原来的两块合并成一块了，就相较于原来少了一块。</p>
+<h4 id="1-2）"><a href="#1-2）" class="headerlink" title="1.2）"></a>1.2）</h4><p>在页式存储管理方案中，使用？实现地址变换</p>
+<p>页表</p>
+<h4 id="1-3）"><a href="#1-3）" class="headerlink" title="1.3）"></a>1.3）</h4><p>根据存储区分配所用基本单位的不同，可以将离散分配方式为？</p>
+<p>分页、分段、段页式</p>
+<h4 id="1-4）"><a href="#1-4）" class="headerlink" title="1.4）"></a>1.4）</h4><p>在一个页式存储管理系统中，页表内容如图。若页大小为4K，则地址变换机构将逻辑地址0变换为物理地址为？</p>
+<p>页号    块号<br>0       2<br>1       1<br>2       6<br>3       3<br>4       7</p>
+<p>4K * 2 &#x3D; 8K &#x3D; 8 * 1024 &#x3D; 8192</p>
+<h4 id="1-5）"><a href="#1-5）" class="headerlink" title="1.5）"></a>1.5）</h4><p>在一个页式存储管理系统中，页表保存在内存中，CPU每存取一个数据，都需要？次访问内存</p>
+<p>2次</p>
+<h4 id="2-1）"><a href="#2-1）" class="headerlink" title="2.1）"></a>2.1）</h4><p>在程序装入方式中的可重定位装入方式可以实现进程在内存中位置的移动</p>
+<p>错误</p>
+<p>可重定位是在放入内存的时候改地址，放入后不能再更改地址。</p>
+<h4 id="2-2）"><a href="#2-2）" class="headerlink" title="2.2）"></a>2.2）</h4><p>静态链接方式形成的完整的装入模块是可执行文件</p>
+<p>正确</p>
+<h4 id="2-3）"><a href="#2-3）" class="headerlink" title="2.3）"></a>2.3）</h4><p>装入时的动态链接方式便于实现对目标模块的共享</p>
+<p>正确</p>
+<p>什么时候装，什么时候链接，可以实现目标共享</p>
+<h4 id="2-4）"><a href="#2-4）" class="headerlink" title="2.4）"></a>2.4）</h4><p>页式存储比段式存储更利于实现对目标模块的动态链接</p>
+<p>错误</p>
+<p>说反了，段式有逻辑，更适合动态链接，共享</p>
+<h4 id="2-5）"><a href="#2-5）" class="headerlink" title="2.5）"></a>2.5）</h4><p>装入时的动态链接比运行时的动态链接更加节省内存空间</p>
+<p>错误</p>
+<p>运行时动态链接更节省，只有执行到的会被装入，前者所有需要的都会被装入</p>
+<h4 id="3-1）"><a href="#3-1）" class="headerlink" title="3.1）"></a>3.1）</h4><p>给定一个逻辑地址为A&#x3D;2170B，若页面大小为1KB，则该地址所对应的页号为？页内地址为？</p>
+<p>页号：2170&#x2F;1024 &#x3D; 2，页内地址：2170-2048&#x3D;122</p>
+<p>2048在2号页中，页内地址为0；地址实际上都是偏移，从0开始，页号也是从0开始</p>
+<h4 id="3-2）"><a href="#3-2）" class="headerlink" title="3.2）"></a>3.2）</h4><p>在动态分区分配算法中，如果采用最佳适应算法，需要将空闲分区链按照？顺序排列，如果按照最坏适应算法，则需要将空闲分区链按照？顺序排列。</p>
+<ol>
+<li>递增</li>
+<li>递减</li>
+</ol>
+<p>递增排列，来了程序从前往后遍历，第一次找到可行的分区空间，就是最小能适合它的空间，所以最佳；递减顺序含义类似。</p>
+<h4 id="3-3）"><a href="#3-3）" class="headerlink" title="3.3）"></a>3.3）</h4><p>在具有对换空间的操作系统中，磁盘空间分为对换区和文件区两个部分，其中对换区采用？分配方式，而文件区采用？分配方式。</p>
+<ol>
+<li>连续</li>
+<li>离散</li>
+</ol>
+<p>对换区要求时间效率高，因为调度频繁，所以使用连续分配方式；文件区要求空间利用率高，因为文件需要长时存储，且访问不频繁，所以使用离散分配的方式。</p>
+<h4 id="3-4）"><a href="#3-4）" class="headerlink" title="3.4）"></a>3.4）</h4><p>在段页式系统中，如果段表和页表都在内存中，那么CPU完成一次数据或指令的读取，需要？次访问内存。</p>
+<p>需要3次访问内存</p>
+<p>1次访问段表，获得页表地址，第2次反问页表获得物理地址，第3次访问物理地址读取内容；</p>
+<h4 id="3-5）"><a href="#3-5）" class="headerlink" title="3.5）"></a>3.5）</h4><p><code>这里需要再明确一下</code></p>
+<p>只采用分页方式的用户地址空间是？维的，而采用分段方式的用户地址空间是？维的。</p>
+<ol>
+<li>2 改 1</li>
+<li>2</li>
+</ol>
+<p>页号+位移量，段号+位移量，都是两个维度</p>
+<p>注：段页式也是2维   分页式是1维的</p>
+<h4 id="4-1）"><a href="#4-1）" class="headerlink" title="4.1）"></a>4.1）</h4><p>某OS采用动态分区分配存储管理方法，用户区为512K,且始址为0。若分配时采用分配空闲区低地址部分的方案，且初始时用户的512K空间空闲，对下述申请序列:申请300K，申请100K，释放300K，申请150K，申请30K，申请40K,申请60K，释放30K回答:</p>
+<ol>
+<li>采用首次适应算法，空闲分区中有哪些空块（给出始址、大小）？</li>
+<li>采用最佳适应算法，空闲分区中有哪些空块（给出始址、大小）？</li>
+<li>如再申请100K，针对（1）和(2)各有什么结果？</li>
+</ol>
+<p>Q1:</p>
+<p>申请300K后：空闲块1，起始地址：300K&#x3D;300*1024&#x3D;307200，大小212K</p>
+<p>申请100K后：空闲块1，起始地址：400K&#x3D;400*1024&#x3D;409600，大小112K</p>
+<p>释放300K后：空闲块1，起始地址：0，大小300K；空闲块2，起始地址：409600，大小112K</p>
+<p>申请150K后，空闲块1，起始地址：150K，150*1024&#x3D;153600，大小150K；空闲块2，起始地址：409600，大小112K</p>
+<p>申请30K后，空闲块1，起始地址：180K，大小120K，空闲块2，起始地址，400K，大小112K</p>
+<p>申请40K后，空闲块1，起始地址，220K，大小80K，空闲块2，起始地址，400K，大小112K</p>
+<p>申请60K后，空闲块1，起始地址，280K，大小20K，空闲块2，起始地址，400K，大小112K</p>
+<p>释放30K后，空闲块1，起始地址，150K，大小30K，空闲块2，起始地址280K，大小20K，空闲块3，起始地址400K，大小112K</p>
+<p>若再申请100K，空闲块1，起始地址，150K，大小30K，空闲块2，起始地址280K，大小20K，空闲块3，起始地址500K，大小12K</p>
+<p>Q2是类似的，只是<strong>每次内存从较小的空闲块开始出</strong>，最后的答案是：</p>
+<p><strong>注意，最佳适应法最后给答案的时候，空闲块也要按照从小到大给</strong>；<br><strong>最坏适应法，按从大到小给</strong>；<br><strong>首次适应法，按照地址空间低到高给</strong>；</p>
+<p>空闲块1:400K～430K，30K，空闲块2：470K～512K，42K，空闲块3：210K～300K，90K</p>
+<p>若再申请100K，是给不出来的</p>
+<h4 id="4-2）"><a href="#4-2）" class="headerlink" title="4.2）"></a>4.2）</h4><p>设有一块页式存储管理系统，向用户提供的逻辑地址空间最大为64页，每页1024B，内存总共有32存储块，试问逻辑地址至少应为多少位？内存空间有多大？</p>
+<p>逻辑地址：（页号）（页内偏移）：2^6 2^10，故16位</p>
+<p>内存空间：32*1024 &#x3D; 2^15 Byte</p>
+<p>从这里可以看到实际内存是小于逻辑地址的，那么当进程尝试使用的空间大于实际内存，计算机是如何处理的呢？</p>
+<h4 id="4-3）"><a href="#4-3）" class="headerlink" title="4.3）"></a>4.3）</h4><p>如果分段式地址具有如下结构，在该地址中，允许一个作业最长有多少个段？每个段的最大长度是多少？</p>
+<p>（63～32段号）（31～0段内地址）</p>
+<p>2^32 &#x3D; 4G</p>
+<p>2^32 &#x3D; 4G</p>
+<h4 id="4-4）"><a href="#4-4）" class="headerlink" title="4.4）"></a>4.4）</h4><p><code>再理解一下，虽然记住做法是很简单的</code></p>
+<p>在采用伙伴系统的动态分区算法中，有一个大小为128的块，其地址为640，其伙伴块的地址是什么？</p>
+<p>形成的块大小是256，判断当前地址是否能整除640</p>
+<p>如果能整除，则它是靠前的，否则它是靠后的</p>
+<p>640 MOD 256 !&#x3D; 0</p>
+<p>所以它是靠后的，则伙伴块地址为640-128&#x3D;512</p>
+<h3 id="第五次随堂测试：虚拟存储管理器"><a href="#第五次随堂测试：虚拟存储管理器" class="headerlink" title="第五次随堂测试：虚拟存储管理器"></a>第五次随堂测试：虚拟存储管理器</h3><p>1）虚拟存储器的最大容量是由？</p>
+<p>由计算机的地址结构决定的</p>
+<p>注：虚拟存储器会尝试解析处理任意输入的地址，也就是说其感知到的可寻址空间由输入地址的范围决定，计算机的地址结构就决定了这个输入地址的上、下限</p>
+<p>2）在虚拟存储系统中，若进程在内存中占3块（开始时为空），采用FIFO算法，当执行访问页号序列为1、2、3、4、1、2、5、1、2、3、4、5、6时，将产生几次缺页</p>
+<p>进程的内存块随访问页号变化如下</p>
+<p>1、12、123、234、341、412、125、125、125、253、534、534、346</p>
+<p>每一次改变对应一次缺页，有10次改变，3次未变，所以一共缺页10次</p>
+<p>3）系统“抖动”现象的发生可能是由？引起的</p>
+<p>抖动现象可能产生的原因是：</p>
+<ol>
+<li>置换算法的选择不当</li>
+<li>页面本身的大小有问题</li>
+<li>程序的编写不当</li>
+<li>驻留集大小不当</li>
+</ol>
+<p>所以这里的答案是，置换算法选择不当</p>
+<p>4）实现虚拟存储器的目的是</p>
+<p>扩充内存容量</p>
+<p>注：实际上扩充内存容量是伴随虚拟存储器出现的好处，初衷是为了解决常规存储管理模式中<strong>一次性、驻留性</strong>的问题</p>
+<p>5）作业在执行中发生了缺页中断，经操作系统处理后，应让其执行？指令</p>
+<p>被中断的指令</p>
+<p>因为发生了中断，该指令还没有得到执行，所以要执行它</p>
+<p>6）在请求分页存储管理中，若采用FIFO页面淘汰算法，但分配的页面数增加时，缺页中断的次数将</p>
+<p>可能增加也可能减少</p>
+<p>FIFO算法存在发生belady现象的可能</p>
+<p>7）虚拟存储管理系统的基础上程序的？理论</p>
+<p>局部性</p>
+<p>时间局部性、空间局部性、局部性原理</p>
+<p>8）下述？页面淘汰算法会产生Belady现象</p>
+<p>先进先出</p>
+<p>即FIFO</p>
+<p>9）在页式存储管理方案中，采用？实现地址变换</p>
+<p>页表</p>
+<p>10）在请求分页系统中，主要的硬件支持有请求分页的页表机制，缺页中断机构和？</p>
+<p>地址变换机构</p>
+<p>11）假设某程序的页面访问序列为1、2、3、4、5、2、3、1、2、3、4、5、1、2、3、4且开始执行时内存中没有页面，则在分配给该程序的物理块数是3且采用FIFO方式时，缺页次数是？，在分配给该程序的物理块数是4且采用FIFO方式时，缺页次数是？，在分配给该程序的物理块数是3且采用LRU方式时，缺页次数是？，在分配给该程序的物理块数是4且采用LRU方式时，缺页次数是？</p>
+<p><strong>老师说写序列的时候最好按照访问页面序列写，先将序列抄下来，每访问一个页面在对应序号下面写当前内存块中的序列</strong>。</p>
+<p>物理块数为3时</p>
+<p>FIFO：1、12、123、234、345、452、523、231、231、231、314、145、145、452、523、234：13次<br>LRU：1、12、123、234、345、452、523、231、231、231、423、235、351、512、123、234：14次</p>
+<p>物理块为4时</p>
+<p>FIFO：1、12、123、1234、2345、2345、2345、3451、4512、5123、1234、2345、3451、4512、5123、1234：14次<br>LRU：1、12、123、1234、2345、！3452、！4523、5231、！5312、！5123、1234、2345、3451、4512、5123、1234：12次</p>
+<p>12）在段页式存储管理系统中，每道程序都有一个？表和一组？表</p>
+<p>维护一个段表，一组页表</p>
+<p>先将程序划分为段，然后将一个段划分为若干页，最终使用的都是页表，所以先用段表索引到对应页表存储的位置，然后用页表索引到实际的物理内存，那么就应该是一个段表、一组页表，即每个段都有自己的页表。</p>
+<p>13）设谋进程的页面访问串为1、3、1、2、4，分配的物理块是3块，采用FIFO置换算法时，访问页面4时，要淘汰？号页面</p>
+<p>1、13、13、32、24</p>
+<p>所以淘汰的是3号页面</p>
+<p><strong>？</strong></p>
+<p>14）上一题，若采用LRU算法，则应该淘汰？号页面</p>
+<p>1、13、31、12、24</p>
+<p>淘汰1号页面</p>
+<p><strong>？</strong></p>
+<p>注：<strong>这一部分没有涉及最佳置换算法的考察，注意复习</strong></p>
+<h3 id="第六次随堂测试：I-O系统"><a href="#第六次随堂测试：I-O系统" class="headerlink" title="第六次随堂测试：I&#x2F;O系统"></a>第六次随堂测试：I&#x2F;O系统</h3><h4 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h4><ol>
+<li>以下哪个功能是操作系统的输入输出管理功能？</li>
+</ol>
+<p>设备管理对应输入输出管理；进程、内存、文件系统管理不是</p>
+<ol start="2">
+<li>操作系统的输入输出系统中，设备驱动程序的作用是？</li>
+</ol>
+<p>与硬件交互，提供统一接口给上层应用。</p>
+<ol start="3">
+<li>在操作系统中，哪种设备属于块设备</li>
+</ol>
+<p>硬盘属于块设备，键盘、显示器属于流设备</p>
+<p><strong>似乎打印机也属于块设备？</strong>（来自AI）</p>
+<p>（从数据传输单位上区分，块设备和流设备，流设备又叫做字符设备）</p>
+<ol start="4">
+<li>在I&#x2F;O设备的管理中，以下哪个不是缓冲区的作用？</li>
+</ol>
+<p>进行内存的保护不是缓冲区的作用，感觉缓冲区本身还可能带来溢出的危险</p>
+<ol start="5">
+<li>以下关于I&#x2F;O控制器的说法，哪一项是正确的？</li>
+</ol>
+<p>I&#x2F;O控制器负责将高层输入输出请求转化为硬件指令</p>
+<p>（对应的应该是I&#x2F;O设备与设备控制器的部分，这里将设备控制器称为I&#x2F;O控制器？）</p>
+<ol start="6">
+<li>操作系统中，缓冲区的作用是？</li>
+</ol>
+<p>缓解设备和CPU的速度差异</p>
+<ol start="7">
+<li>以下哪个设备属于字符设备？</li>
+</ol>
+<p>键盘</p>
+<p>注意，打印机应该也是块设备</p>
+<ol start="8">
+<li>操作系统中，I&#x2F;O中断的作用是？</li>
+</ol>
+<p>让CPU暂停当前进程，处理I&#x2F;O事件</p>
+<ol start="9">
+<li>在磁盘管理中，哪个算法取决于磁头移动的顺序？</li>
+</ol>
+<p>SCAN，该算法会考虑当前磁头的移动方向</p>
+<p>FCFS，先来先服务，该变方向就变方向</p>
+<p>还有SSTF（确保距离最短），以及CSCAN（不变换方向，循环扫描）</p>
+<ol start="10">
+<li>假脱机技术主要用于</li>
+</ol>
+<p>在硬盘上提供一个区域存储I&#x2F;O请求，并通过输入输出进程按照顺序执行。</p>
+<h4 id="判断题"><a href="#判断题" class="headerlink" title="判断题"></a>判断题</h4><ol>
+<li>I&#x2F;O管理的核心是通过中断机制来处理I&#x2F;O请求</li>
+</ol>
+<p>错，感觉中断只是I&#x2F;O管理的一部分</p>
+<ol start="2">
+<li>设备驱动程序是操作系统与硬件之间的桥梁</li>
+</ol>
+<p>对</p>
+<ol start="3">
+<li>硬件和操作系统之间不需要任何交互</li>
+</ol>
+<p>错</p>
+<ol start="4">
+<li>在输入输出系统中，CPU对设备的访问是直接的</li>
+</ol>
+<p>错</p>
+<ol start="5">
+<li>缓冲区能够提高设备和CPU之间的速度匹配</li>
+</ol>
+<p>对</p>
+<ol start="6">
+<li>操作系统使用轮训机制来处理I&#x2F;O请求是比较高效的</li>
+</ol>
+<p>对</p>
+<ol start="7">
+<li>I&#x2F;O设备的驱动程序只能用于一个特定型号的设备</li>
+</ol>
+<p>对</p>
+<ol start="8">
+<li>中断机制使CPU在处理I&#x2F;O操作时完全停止运行，直到I&#x2F;O完成</li>
+</ol>
+<p>错</p>
+<ol start="9">
+<li>假脱机技术通过输入和输出进程和内存缓冲区实现从硬盘到其他I&#x2F;O外设的数据传输</li>
+</ol>
+<p>对</p>
+<ol start="10">
+<li>逻辑设备表用于记录实际物理设备的设备号、状态以及对应的物理设备信息</li>
+</ol>
+<p>错</p>
+<h4 id="填空题"><a href="#填空题" class="headerlink" title="填空题"></a>填空题</h4><ol>
+<li>I&#x2F;O系统的层次结构包括：I&#x2F;O硬件、中断处理程序、（驱动）程序、设备独立性软件、用户层软件</li>
+<li>I&#x2F;O设备与控制器：数据信号线、控制信号线、状态信号线；控制器与处理器：数据信号线、控制信号线、地址信号线</li>
+<li>I&#x2F;O通道是一种特殊的处理机，具有执行I&#x2F;O指令的能力，但是与一般处理机不同在于：1）指令较为简单；2）没有自己的内存空间与处理机共享</li>
+<li>中断分为中断和陷入，也称为外中断和内中断</li>
+<li>对于多中断源的情况处理方式有：1）屏蔽中断；2）嵌套中断；中断处理的过程：1）检测有没有中断信号，2）保存现场，3）中断复位，4）转入中断处理程序，5）恢复现场</li>
+<li>设备驱动程序的主要功能是</li>
+</ol>
+<h2 id="期末重点"><a href="#期末重点" class="headerlink" title="期末重点"></a>期末重点</h2><h3 id="ch1"><a href="#ch1" class="headerlink" title="ch1"></a>ch1</h3><p>操作系统是什么：</p>
+<ol>
+<li>操作系统是硬件之上的第一层软件</li>
+<li>操作系统是用户和系统交互的接口</li>
+<li>操作系统是用来管理资源的</li>
+</ol>
+<p>整个操作系统的发展过程：</p>
+<ol>
+<li>手工操作</li>
+<li>单道批处理系统</li>
+<li>多道批处理系统<br> 每个任务交上去后操作系统依次进行处理；<br> 问题是用户不知道任务何时被反馈，所以是缺少交互的；    </li>
+<li>分时系统<br> 分时系统的特点，处理每个用户任务的时候是分时间片的，按照用户的优先级等信息为用户任务分配时间片，好像每个用户是在独享系统；<br> 要求是即时交互，即时相应；</li>
+<li>实时系统<br> 截止时间要求，到截止时间一定要响应；</li>
+</ol>
+<p>什么要的需求用什么样的系统：<br>    要求大量吞吐量，效率高——多道批处理系统；<br>    要求有交互，用户即时响应，用分时系统；<br>    对安全性要求高，实时截止时间，用单道批处理系统；</p>
+<p>从多道批处理系统开始真正有了操作系统的概念</p>
+<p>操作系统四大特征：</p>
+<ol>
+<li>并发</li>
+<li>共享</li>
+<li>虚拟</li>
+<li>异步</li>
+</ol>
+<p>基本特征：</p>
+<ol>
+<li>并发</li>
+<li>共享</li>
+</ol>
+<p>和进程一样有的特征：</p>
+<ol>
+<li>并发</li>
+<li>异步</li>
+</ol>
+<p>操作系统的体系结构</p>
+<p>现代操作系统三大特点</p>
+<ol>
+<li>面向对象<br> 例如管程；</li>
+<li>微内核<br> 内核态可以看到所有的资源，用户态只能看到自己的资源；<br> 内核态和用户态的切换：看是应用程序在跑，还是操作系统在跑；</li>
+<li>客户服务器架构<br> 例如假脱机，输入进程、输出进程，典型的客户服务器架构；</li>
+</ol>
+<h2 id="ch2"><a href="#ch2" class="headerlink" title="ch2"></a>ch2</h2><p>进程的两种关系：互斥关系、前驱（同步）关系；</p>
+<p>为什么引入线程？</p>
+<p>进程和线程的区别：<br>    进程：分配资源的单位，线程：独立运行的单位</p>
+<p>前驱图要会画</p>
+<p>整个进程的基本状态要明确：<br>    三个：就绪、执行、阻塞；<br>    五个：创建、就绪、执行、阻塞、终止；<br>    七个：创建、静止就绪、活动就绪、静止阻塞、活动阻塞、执行、终止；</p>
+<p>状态的转换：<br>    刚开始程序在执行；<br>    需要资源——阻塞；<br>    如果在内存里，就是活动阻塞；<br>    资源得到满足，就绪；<br>    在内存里，活动就绪；<br>    如果内存空间不够，活动就绪、活动阻塞里，进行挂起，静止就绪、静止阻塞；<br>    静止阻塞，获得了资源，静止就绪，再被换入内存，唤醒，编程活动就绪；</p>
+<p>进程 &#x3D; 程序+数据+PCB，程序、数据在用户态，PCB在内核态</p>
+<p>进程和程序之间的区别</p>
+<p><strong>进程同步：</strong><br>    互斥、同步关系的设计；<br>    关键点是找到临界区；</p>
+<p>课堂上练习过的题目</p>
+<p>进程同步四大规则</p>
+<ol>
+<li>空闲让进</li>
+<li>忙则等待</li>
+<li>有限等待</li>
+<li>让权等待</li>
+</ol>
+<p>以四大规则为线索，有了多种进程同步的实现方式的演进</p>
+<ol>
+<li>硬件实现</li>
+<li>信号量实现<br> 整型信号量，不能满足让权等待；<br> 记录型信号量，为什么可以满足让全等待？阻塞队列，将不满足的进程放到队列上；（例如不同的外设上都挂有等待资源的进程，每个资源都有对应的队列将这些进程挂上）；<br> AND型信号量，避免死锁，多个资源同时申请，不会一个拿到A要B，一个拿到B要A；<br> 信号量集，同一个资源可以申请多个；</li>
+<li>管程</li>
+</ol>
+<p>AND型信号量和信号量集是在记录型信号量上的升级，功能强大了会损失一些效率；</p>
+<p>四种信号量机制是怎么实现的，和后面调度的死锁问题联系在一起（预防死锁破坏必要条件）；</p>
+<p>信号量的含义：初始值——资源的初始数量，变为0——资源耗尽，负数——等待的进程数；</p>
+<p>几个特殊的信号量集</p>
+<p><strong>考大题，三大类</strong>：</p>
+<ol>
+<li>生产者消费者（基本形式要会写）</li>
+<li>读者写者（不会直接考原题，会变形，例如过独木桥）</li>
+<li>哲学家就餐（几种避免死锁的方法每种都要会写，对应了哪种预防死锁的方式）</li>
+</ol>
+<h2 id="ch3"><a href="#ch3" class="headerlink" title="ch3"></a>ch3</h2><p>处理机的调度和死锁，主要是计算题</p>
+<p>调度的层次</p>
+<ol>
+<li>高级、中级、低级</li>
+<li>长程、中程、短程</li>
+<li>作业调度、存储器管理的挂起状态、进程调度</li>
+</ol>
+<p>高级调度计算：</p>
+<ol>
+<li>周转时间</li>
+<li>平均周转时间</li>
+<li>带权周转时间（越大效率越低）</li>
+<li>平均带权周转时间</li>
+</ol>
+<p>高级调度算法：</p>
+<ol>
+<li>先来先服务</li>
+<li>最短作业优先</li>
+<li>高响应比优先（大概了解一下）</li>
+</ol>
+<p>作业调度只在批处理系统中有，其他系统中没有；</p>
+<p>作业调度里有一个时间片算法？（进程调度里的轮转调度算法）</p>
+<p>进程的保证调度算法；</p>
+<p>死锁</p>
+<p>预防死锁的四个必要条件：</p>
+<ol>
+<li>互斥</li>
+<li>请求保持（AND型信号量，一次获得所有资源）</li>
+<li>不可抢占（比较难实现，抢占你的资源，让你回退；）</li>
+<li>环路等待（给每个进程加序号，从小到大申请；哲学家的几个基本上都是破坏了环路等待，除了AND的解决方案）</li>
+</ol>
+<p>预防死锁会有考点；</p>
+<p>银行家算法，表格一定要记住（work allocation need allocation+work flag），合理性检查一定要做（两个检查）；</p>
+<p>检测死锁，资源分配图；</p>
+<h2 id="ch4"><a href="#ch4" class="headerlink" title="ch4"></a>ch4</h2><p>程序的装入和链接</p>
+<p>装入：把逻辑地址变成真正可执行的地址（关键的核心点）；</p>
+<p>几种装入方法（什么时候改地址）</p>
+<ol>
+<li>静态装入</li>
+<li>可重定位装入，装入内存之后就不能改了</li>
+<li>运行时装入，什么时候run什么时候改地址</li>
+</ol>
+<p>链接：关键是把分散的文件变成一个整体；</p>
+<ol>
+<li>静态链接：.exe文件，可执行文件，用静态链接</li>
+<li>装入时链接：什么时候改地址，什么时候链接</li>
+<li>运行时链接：run到了链接再链接过来</li>
+</ol>
+<p>静态不能共享，从装入时链接就可以实现共享了，运行时链接是在装入时链接的基础上节省空间资源；</p>
+<p>连续分配存储管理方式（分配内存）</p>
+<ol>
+<li>首次适应算法</li>
+<li>循环适应算法（用一个指针，指的是当前的位置）</li>
+<li>最佳适应算法（要排序，小到大）</li>
+<li>最坏适应算法（要排序，大到小）</li>
+</ol>
+<p>对换，知道有对换区就可以了；</p>
+<h2 id="ch5"><a href="#ch5" class="headerlink" title="ch5"></a>ch5</h2><p>分页分段存储管理方式（离散的存储管理方式，数据是块，内存是页和页框）</p>
+<p>页表、段表（长什么样）、地址转换机构、</p>
+<p>基本分页、分段的时候，页表、段表长什么样、会算物理地址和逻辑地址的转换；</p>
+<p>分页存储、分段存储，访问一次数据要多少次访问内存（基本的，没有快表，分页、分段都是两次；没有块表，段页式管理，三次）；</p>
+<p>虚拟存储器，存储空间的决定方式（由地址结构决定）；</p>
+<p>虚拟存储，请求分页、请求分段（在基本的基础上加了一些请求机构）；</p>
+<p>虚拟分页、分段相对于基本分页、分段表头多出了哪几位（区别）；</p>
+<p>虚拟存储，缺页中断要知道</p>
+<ol>
+<li>执行时发生缺页，陷入，调用缺页中断；</li>
+<li>从外存将页面调进来；</li>
+<li>如果内存空间足够的话直接调入，修改页表（如果有快表同步修改），中断响应完了，就从阻塞状态恢复到就绪状态，再次执行刚才发生了中断的指令（PC指在原位置）；</li>
+<li>如果内存空间不够的话，使用页面置换算法完成页面的置换，将页面调进来，修改页表（有快表同步修改），进程阻塞到恢复（再次执行刚才发生了中断的指令）；<br>（所有的页面变化都要改页表，PC会指到原位置，再次访问页面）；</li>
+</ol>
+<p>虚拟存储，地址变换机构</p>
+<p>页面置换算法：</p>
+<ol>
+<li>最佳置换算法（理想的，不能实际执行，baseline）</li>
+<li>最近最久未使用（寄存器如何实现，置1右移，替换最小的）</li>
+<li>先进先出（Belady现象，分的页面多了，效率反而变低了）</li>
+</ol>
+<p>请求分段，权限管理（了解，这次没怎么涉及）</p>
+<p>知道抖动的概念；</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

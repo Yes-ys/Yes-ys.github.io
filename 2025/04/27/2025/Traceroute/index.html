@@ -1,0 +1,259 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Traceroute [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/plans">Plans</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>Traceroute</h1>
+			<p>这篇blog用于记录我在学习计算机工程系统导论时，一个与网络有关的实验。</p>
+<h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><ol>
+<li>学习Ping和Traceroute工具的使用，能够在网络开发和维护中熟练使用该工具获取网络状态和进行错误排查。</li>
+<li>巩固课堂学习的因特网分层设计实现知识，理解因特网的分组转发网络的特性，通过分析互联网数据包因转发而产生的时延，加深理解尽力而为的因特网设计思想。</li>
+<li>通过分析ICMP协议，学习在分层设计中进行跨层通信的设计实现方法，思考因特网网络层在错误处理上的折中设计和处理技巧。</li>
+<li>通过Traceroute工具基于错误处理包进行路径探测功能的设计，体会在实践中体会设计方案在解决问题的同时是如何带来新的设计机会的。</li>
+</ol>
+<h2 id="实验过程与习题"><a href="#实验过程与习题" class="headerlink" title="实验过程与习题"></a>实验过程与习题</h2><h3 id="ping应用"><a href="#ping应用" class="headerlink" title="ping应用"></a>ping应用</h3><ol>
+<li><p><strong>用不超过200字简要概括ping命令</strong><br>ping命令用于向主机或网关发送请求，使用的是ICMP协议的ECHO_REQUSET数据包，并且会接收ICMP ECHO_RESPONSE作为回应。其中ECHO_REQUSET数据包包含了IP和ICMP头部，其后是一个timeval结构以及若干的填充字节。ping命令支持IPv6以及IPv4协议，其中对IPv6节点的信息查询是根据RFC4620进行的，但是由于IPv6源路由被起用，中间跳点可能不被允许。<br><em><code>man ping</code>结果如图1所示</em></p>
+</li>
+<li><p><strong>说明实验现象背后的原因</strong><br>我使用ping命令，分别对<code>www.sud.edu.cn</code>和<code>www.ouc.edu.cn</code>进行了10次<code>ping</code>操作，每次都发送了56字节的数据包。从结果可以看出，到<code>www.sud.edu.cn</code>的网络连接是通畅的，每一次都成功受到了回复，没有丢包发生。但是延迟时间在10.9ms-170ms之间不等，这可能是由于网络拥塞或者其它网络干扰因素导致的。但是发送到<code>www.ouc.edu.cn</code>始终没有得到回复，可能是因为OUC的网络配置了防火墙或者其它网络安全策略，阻止了<code>ping</code>请求。<br><em>实验现象如图2所示</em></p>
+</li>
+<li><p><strong>通过查询资料，画出所使用ICMP数据包的结构</strong><br>其中相关部分说明如下<br>(1)Type，8bits，用于指定ICMP消息类型，例如0表示<code>Echo Reply</code>，8表示<code>Echo Requset</code><br>(2)Code，8bits，用于对消息类型进行更详细的说明，例如目的地不可达，网络不可达等等<br>(3)Checksum，16bits，用于错误检查<br>(4)Identifier，16bits，用来匹配请求和响应<br>(5)Data，可变长度，包含可选的附加数据。<br><em>ICMP数据包如图3所示</em></p>
+</li>
+</ol>
+<h3 id="traceroute应用"><a href="#traceroute应用" class="headerlink" title="traceroute应用"></a>traceroute应用</h3><ol>
+<li><p><strong>不超过200字简要概括traceroute命令</strong><br>traceroute可以用于追踪数据包从源主机到目标主机的网络路径中，它通过发送一个含有TTL字段的IP数据包进行工作，数据包每传递到一个路由器TTL就会减1，当TTL为0的时候路由器就会丢弃该数据包，并给源主机发送一个ICMP（超时响应），其中包含了当前路由器的地址。traceroute在整个工作流程中会从TTL为1开始发送数据包，每次收到ICMP响应后就增大TTL值（2、3、4…），直到收到目的主机的响应。于是根据每一次收到的ICMP响应，traceroute就可以知晓从源主机到目标主机经过的每个路由器，并且显示相应的IP地址和响应时间。<br><em><code>man traceroute</code>结果如图4所示</em></p>
+</li>
+<li><p><strong>确定并说明从源计算机到<code>www.baidu.com</code>的路径</strong><br>源计算机到<code>www.baidu.com</code>实现路径探测，结果如下图如下图，一共经过了30跳，其中第一跳<code>172.19.0.1</code>是源计算机ip，第三、四、五跳<code>10.149.32.1</code>和<code>10.70.7.2</code>以及<code>10.90.0.4</code>是内部网络路由器，之后经过了若干公网路由器，最终到达目标服务器。显示为<code>***</code>的，可能是由于网络设备被配置为了不响应ICMP请求，所以路径不能完全确定。<br><em><code>traceroute www.baidu.com</code>结果如图5所示</em></p>
+</li>
+<li><p><strong>说明输出结果每个字段的意义</strong><br>(1)<code>traceroute to www.baidu.com (182.61.200.108)</code>为traceroute命令输出说明，目标的IP地址为182.61.200.108<br>(2)<code>30 hops max</code>指最多经过30跳<br>(3)<code>60 byte packets</code>指每个数据包大小为60字节<br>往下是每一跳的详细信息，以第一跳为例<br>(4)<code>1 1(172.19.0.1) 0.647ms 1.041ms 1.285ms</code><br>第一个数字1代表第一跳，172.19.0.1代表第一跳的设备IP，后续三个时间是三个ICMP包的往返时间；后续存在<code>***</code>的输出对应没有收到该跳的ICMP回复（或者是网络拥塞导致的丢包）。</p>
+</li>
+</ol>
+<h3 id="traceroute探索"><a href="#traceroute探索" class="headerlink" title="traceroute探索"></a>traceroute探索</h3><p><code>注：这部分实验，我先是在自己本地的电脑上进行的实验，所以后续的描述是根据本地的输出来的，实验截图也是使用的本地截图</code></p>
+<ol>
+<li><strong>解释traceroute 18.31.0.200的输出</strong><br>通过这条指令，我们使用traceroute追踪了一条从本地网络，通过ISP、NAT字段、跨越国际骨干网再进入教育和研究网络的传输路径，最终到达了目标IP（18.31.0.200）</li>
+</ol>
+<p>以下按照每一跳对路径进行分析<br>(1)（1-3跳）<br>hop1是本地网络，hop2、hop3是私有IP（10.x.x.x），可能对应内部网络路由器、防火墙等<br>(2)（4跳）<br>显示为<code>***</code>，路由器没有响应ICMP请求（或者是丢包）<br>(3)（5-12跳）<br>hop5-hop12对应的是公网地址，数据包是在ISP网络中传输的（211.64.x.x和101.4.x.x地址段对应ISP或骨干网提供商，100.64.x.x属于共享地址空间，通常用于ISP内部的网络地址转换）<br>(4)（13-30跳）<br>hop13对应<code>***</code>同样可能没有响应ICMP请求或丢包；hop14开始数据包进入国际网络，延迟有显著的增加（20ms左右，到后续数百毫秒）；hop19开始数据包进入了亚洲太平洋先进网络（APAN网络），之后进入了教育和研究网络（Internet2），可以看到最后已经显示出了较高的延迟（200~400ms左右）<br><em><code>traceroute 18.31.0.200的输出</code>结果如图6所示</em><br>2. <strong>说明从源地址到<code>www.baidu.com</code>和到<code>cn.bing.com</code>的网络路径差异</strong><br>两者的网络路径在初始几跳上有共同点（除去<code>***</code>，至少前10跳是相同的），在进入外部网络之后，路径显然会分道扬镳（除去<code>***</code>，从第14跳开始不相同）；到<code>cn.bing.com</code>后续经过了一些国际骨干网，（例如202.97.x.x的IP地址属于中国电信骨干网），而到<code>www.baidu.com</code>主要是在国内网络中传输的。<br><em><code>traceroute www.baidu.com</code>与<code>traceroute cn.bing.com</code>的结果如图7、8所示</em><br>3. <strong>如果IPv6上实现路径探测，应该使用包头的哪个字段</strong><br>在IPv6网络中进行路径探测，主要依赖IPv6包头中的Hop limit字段，这个字段是“跳限字段”，其作用和IPv4中的TTL（生存周期）字段相同，用来限制数据包在网络传输的跳数，每经过一个路由器，这个字段的值都会减1，当减为0后数据包就会被丢弃，并且通常会返回一个ICMPv6的超时消息给源地址。</p>
+<h2 id="遇到的问题及解决方法"><a href="#遇到的问题及解决方法" class="headerlink" title="遇到的问题及解决方法"></a>遇到的问题及解决方法</h2><p>在实验过程中我主要遇到了问题是在<code>ping www.ouc.edu.cn</code>始终无法收到返回的结果，掉包率总是100%。经过查阅相关资料，我推测应该是我们学校的服务器配置了防火墙或者其它安全策略，拒绝向ping发送的数据包进行响应。并且我使用<code>traceroute www.ouc.edu.cn</code>尝试追踪，我发现结果从第7跳开始往后始终都只返回<code>***</code>，这间接作证了我的猜测。（因为它们都使用的ICMP数据包）<br><em>结果如图9所示</em></p>
+<h2 id="课后实验与思考"><a href="#课后实验与思考" class="headerlink" title="课后实验与思考"></a>课后实验与思考</h2><h3 id="Traceroute在网络故障排查中有哪些应用场景"><a href="#Traceroute在网络故障排查中有哪些应用场景" class="headerlink" title="Traceroute在网络故障排查中有哪些应用场景"></a>Traceroute在网络故障排查中有哪些应用场景</h3><p>Traceroute的主要应用场景有路径发现（它可以用于追踪整个网络路径）、网络延迟分析（可以识别在哪一条引入了延迟，可以判断哪一条延迟较大）、故障点识别（确定数据包在哪一条丢失或无法到达，例如<code>***</code>的出现可能就是这个原因）、路由问题诊断（找到可能存在的路由环路）、网络性能评估（综合以上功能可以进行网络性能评估）等</p>
+<h3 id="Traceroute中如何通过修改参数来优化网络诊断效果"><a href="#Traceroute中如何通过修改参数来优化网络诊断效果" class="headerlink" title="Traceroute中如何通过修改参数来优化网络诊断效果"></a>Traceroute中如何通过修改参数来优化网络诊断效果</h3><p>(1)修改初始TTL值<br><code>traceroute -f 5 example.com</code> 使用参数f可以完成这种操作，用来跳过已知的安全路径<br>(2)设置最大TTL值<br><code>traceorute -m 20 example.com</code> 使用参数m可以完成这种操作，用于避免弹错过长的路径<br>(3)修改探测包的数量<br><code>traceroute -q 5 example.com</code> 使用参数q可以完成这种操作，用来减少或增加探测粒度</p>
+<p>其它的还有使用不同的协议、修改探测包的端口号等等</p>
+<h3 id="Traceroute交换源节点和目标结点，在同一时刻探测到两条路径是相同的吗"><a href="#Traceroute交换源节点和目标结点，在同一时刻探测到两条路径是相同的吗" class="headerlink" title="Traceroute交换源节点和目标结点，在同一时刻探测到两条路径是相同的吗"></a>Traceroute交换源节点和目标结点，在同一时刻探测到两条路径是相同的吗</h3><p>由于网络路由的动态性、负载均衡、多路径路由等因素，网络路径一般是非堆成的，即A到B的路径和B返回A的路径可能会经过不同的路由器以及有不同的跳数。所以一般情况下上述两条路径不会相同</p>
+<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><p>通过本次实验我掌握了<code>ping</code>和<code>traceroute</code>命令的基础使用方法，例如<code>traceroute</code>的一些常见参数的使用（f、m、q、l等）。并且能够分析两条命令的输出信息，例如ping命令输出的掉包率、时延等等，通过这个过程，我更深刻地体会了网络的结构，以及数据包在网络上传递的整个过程。此外我还了解了两条命令的基本实现原理，例如traceroute就是不断通过增大ICMP数据包的TTL，使其能够传播得更远，并每一次都记录返回的响应，最终形成完整的路径，作为信息进行输出。最后，我掌握了ICMP数据包的结构，对数据包有了更加清晰的认识。</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

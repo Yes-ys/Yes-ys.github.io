@@ -1,0 +1,378 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>搭建各种环境的记录 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/plans">Plans</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>搭建各种环境的记录</h1>
+			<p><code>随着大学课程的进行，每学期总是会被要求搭建各种各样的运行环境，但在学习完成之后通常我不会再用到它们，所以用这篇blog来记录我搭建过的一些环境，简单描述它们的过程，以便我后续能记得我做过哪些改动，从而可以更好地管理我的电脑空间。</code></p>
+<h2 id="default"><a href="#default" class="headerlink" title="default"></a>default</h2><p>我在Mac上安装了命令行工具、Vscode，配置了C&#x2F;C++的基本环境（参照[<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1U741157Rd/?spm_id_from=333.1387.favlist.content.click&vd_source=80df09f481ef5f0671e5e0e35d02e33e">bilibili</a>]）</p>
+<p>于是这一部分我想记录一些命令行常用命令</p>
+<ol>
+<li>查看当前目录的大小<code>du -sh .</code>，这个命令会显示磁盘使用情况，包括当前目录以及所有子目录</li>
+</ol>
+<h2 id="搭建hexo（Mac）"><a href="#搭建hexo（Mac）" class="headerlink" title="搭建hexo（Mac）"></a>搭建hexo（Mac）</h2><ol>
+<li>从github上clone了homebrew的仓库</li>
+<li>在用户目录下，修改了.zshrc与.bashrc文件，配置了homebrew在tuna的镜像源</li>
+<li>运行了homebrew仓库的脚本文件，安装了homebrew，另外<strong>仓库中还有卸载用的文件</strong></li>
+<li>使用包管理器homebrew安装了node以及其附带的nmp</li>
+<li>使用nmp为全局配置了hexo环境</li>
+<li>将为win上的blog源码打包，传到Mac上，并使用<code>nmp install</code>，索引到package.json文件，完成了依赖包的安装</li>
+<li>使用git为全局配置了用户名与邮箱</li>
+<li>使用<code>ssh-keygen -t rsa -C 我的邮箱</code>，生成了公私钥，<strong>同时在本地设置了访问该私钥的密码</strong>，相关文件均在用户目录中隐藏，密码同我的Mac密码</li>
+<li>在github我的主页setting中，添加了访问仓库用的公钥</li>
+<li>完成了所有配置，并写下这篇blog，上传到了github</li>
+</ol>
+<h2 id="搭建java环境（Mac）"><a href="#搭建java环境（Mac）" class="headerlink" title="搭建java环境（Mac）"></a>搭建java环境（Mac）</h2><ol>
+<li>在网址<a href="%5Btext%5D(https://www.oracle.com/java/technologies/downloads/#jdk25-mac)">ORACLE</a>，中下载了<strong>ARM64 DMG Installer</strong>，对应的是Mac M系列芯片，jdk25.0.1的安装包（170MB）</li>
+<li>启动安装包，选择安装位置<strong>为所有用户安装</strong>，相关依赖安装在路径&#x2F;Library&#x2F;Java下（300MB左右），可以使用命令<code>/usr/libexec/java_home -V</code>，该命令用于列出所有已安装的jdk版本及路径</li>
+<li>注意由于为选择了为所有用户安装，所以对应依赖谁在系统级的Library下，而非用户级别的Library下</li>
+<li>然后我在Vscode中安装了扩展<strong>Extension Pack for Java</strong>，对应一共为我自动安装了7个扩展项目（30MB左右），在Vscode中点开扩展清空搜索栏，默认会显示已经安装的扩展</li>
+<li>最后我在我的Mac用户目录下创建了<strong>Java_projects</strong>用来存放我的各种java项目，并创建了一个test项目，完成了测试。此外，实际上在运行的时候要依赖于我签名安装的扩展项目中的java run，如果要使用debug的话则依赖于java debug。（但我注意到也可以使用run code运行，这个插件是我前面为了运行C&#x2F;C++而安装的，不过如果使用它运行，它会将为的java源文件先编译成一个.class的文件）</li>
+</ol>
+<h2 id="搭建Vue环境（Mac）"><a href="#搭建Vue环境（Mac）" class="headerlink" title="搭建Vue环境（Mac）"></a>搭建Vue环境（Mac）</h2><ol>
+<li>检查了我的Mac电脑上具有node.js的环境，以及npm的包管理器</li>
+<li>于是我使用npm下载了Vue CLI(一个Vue项目的命令行工具)，使用命令<code>npm install -g @vue/cli</code>，在全局安装了这个命令行工具</li>
+<li>我在用户目录下创建了Vue_projects，用于存放Vue的项目，并在此文件夹下使用<code>vue create test-project</code>创建了一个测试项目，选择了默认配置Vue2;</li>
+<li>在创建Vue项目的时候遇到了提示<code>yesys@MacBookAir Vue_projects % vue create test-project?  Your connection to the default npm registry seems to be slow. Use https://registry.npmmirror.com for faster installation? (Y/n) </code>，提示我使用npm下载包使用的默认源，较慢，建议我切换到镜像源；于是我切换到了<code>https://registry.npmmirror.com</code>，如果要切换回默认源可以使用<code>npm config set registry https://registry.npmjs.org</code></li>
+<li>接下来cd到我的项目目录，并使用<code>npm run serve</code>打开了我的项目，可以使用浏览器，以及本地的端口号<code>http://localhost:8080/</code>进行访问</li>
+<li>后续我可以使用Vscode在项目文件夹下进行开发工作，使用5中运行项目的命令可以实时查看效果；最后如果项目完成了的话可以使用<code>npm run build</code>生成生产版本</li>
+<li>为了在Vscode中进行Vue开发，我安装了Vue(Official)的插件</li>
+<li>注意：使用vue create project—name创建的项目，所有相关依赖都在该项目文件夹下（node_modules中），当然也有创建全局依赖的方法；总之明确这一点可以帮助我管理好空间。</li>
+</ol>
+<h2 id="搭建微信小程序开发环境（Mac）"><a href="#搭建微信小程序开发环境（Mac）" class="headerlink" title="搭建微信小程序开发环境（Mac）"></a>搭建微信小程序开发环境（Mac）</h2><ol>
+<li>我在微信公众平台<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/">WeChat</a>，为我即将开发的小程序注册了一个账号；</li>
+<li>成功注册后进入了小程序发布流程界面，完成了前置的一些信息设置，并根据引导下载了<code>普通小程序开发工具</code>，网址是<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/devtools/stable.html">小程序开发工具下载</a>，下载了<strong>macOS ARM64</strong>的开发工具，dmg文件390.1MB</li>
+<li>我使用dmg文件安装了微信小程序开发app，名为<code>微信开发者工具</code>，并推出了安装器，删除了dmg文件；</li>
+<li>使用开发工具，在我的用户目录下创建了<code>WeChatProjects</code>文件夹以及我的项目文件<code>EasyCN</code>，使用的是基础模版；</li>
+<li>在Vscode中安装了一个名为<code>微信小程序开发工具</code>的扩展，大概200多MB；</li>
+</ol>
+<h2 id="Py环境"><a href="#Py环境" class="headerlink" title="Py环境"></a>Py环境</h2><p>在vsc中安装了py扩展包，大概200MB</p>
+<p><strong>我的mac环境中自带了python3，或许是和系统开发工具一起安装的</strong></p>
+<p>一般的开发流程中需要先配置虚拟环境并手动选择</p>
+<p>配置虚拟环境</p>
+<ol>
+<li>使用vsc命令面板，Python: Create Environment；</li>
+<li>选择Venv，选择python解释器版本，设置环境名称；（或者直接使用终端命令<code>python -m venv env_name</code>）</li>
+<li>选择是否安装requirements文件中的内容（如果有的话，.txt .yaml）等</li>
+<li><code>source env_name/bin/activate</code> 激活虚拟环境（激活环境之后vsc当前语法检测这一项目会显示目前使用的虚拟环境，或者使用命令<code>which python</code>可以直接查看）；</li>
+<li>使用<code>pip install -r requirements.txt</code>安装环境（如果3中没有选择）；</li>
+</ol>
+<p>使用虚拟环境</p>
+<ol>
+<li>创建项目配置文件<code>.vscode/settings.json</code></li>
+<li>添加虚拟环境有关配置如下，其中<code>$&#123;workspaceFolder&#125;</code>会自动指向VSCode中打开的项目目录；</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;python.defaultInterpreterPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/venv/bin/python&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// Windows用户使用：</span></span><br><span class="line">    <span class="comment">// &quot;python.defaultInterpreterPath&quot;: &quot;$&#123;workspaceFolder&#125;/venv/Scripts/python.exe&quot;,</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 其他有用的Python设置</span></span><br><span class="line">    <span class="attr">&quot;python.terminal.activateEnvironment&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.terminal.activateEnvInCurrentTerminal&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.analysis.extraPaths&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;./src&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;[python]&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;editor.defaultFormatter&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ms-python.autopep8&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="虚拟环境lx-back-env"><a href="#虚拟环境lx-back-env" class="headerlink" title="虚拟环境lx_back_env"></a>虚拟环境lx_back_env</h3><p>用来做软件工程课设的虚拟环境，里面有一些dj的框架；</p>
+<p>虚拟环境~&#x2F;Py_projects&#x2F;THINKPADSTROE-BACKEND&#x2F;lx_back_env</p>
+<p>整个环境大概几十MB</p>
+<h2 id="配置Mac桌面平铺功能"><a href="#配置Mac桌面平铺功能" class="headerlink" title="配置Mac桌面平铺功能"></a>配置Mac桌面平铺功能</h2><p>配置yabai：</p>
+<ol>
+<li>使用homebrew安装yabai<code>brew install koekeishiya/formulae/yabai </code>；</li>
+<li>将yabai初始配置文件&#x2F;opt&#x2F;homebrew&#x2F;opt&#x2F;yabai&#x2F;share&#x2F;yabai&#x2F;examples&#x2F;yabairc移动到本地~&#x2F;.yabai</li>
+<li>编辑文件~&#x2F;.yabai可以编辑yabai的配置；</li>
+<li>我在开机的时候按住电源键（长按直到出现选项界面），进入了恢复模式，打开终端使用<code>crsutil disable</code>，关闭了系统完整性保护SIP；</li>
+<li>使用命令<code>shasum -a 256 $(which yabai)</code>，查看了yabai的哈希值，并使用命令<code>sudo code /etc/sudoers</code>编辑该文件，给yabai添加sudo权限；在&#x2F;ect&#x2F;sudoers文件的最后新添加了一行<code>yesys ALL=(root) NOPASSWD:sha256:7f17e8ff8a6131368c013af4029f3831a8e57723d5e2413a3e3f6cc1b8cdae52 /opt/homebrew/bin/yabai --load-sa</code>；</li>
+<li>使用命令<code>yabai --start-service</code>便可以启动yabai服务；</li>
+<li>使用命令<code>sudo yabai --load-sa</code>让yabai将自己的功能注入到系统中；</li>
+<li>使用命令<code>yabai --stop-service</code>可以停止yabai的进程，系统的窗口管理恢复正常；</li>
+</ol>
+<p>使用的时候遇到过yabai不能获得完整的窗口管理权限的问题，参考解决方案<img src="https://blog.gitcode.com/7853f91c8ad85cb1610aae8074028280.html" alt="git"></p>
+<p>配置skhd：</p>
+<ol>
+<li>使用<code>brew install</code>安装skhd；</li>
+<li>在~&#x2F;.skhd中编写skhd的配置文件；</li>
+<li>使用<code>skhd --start-service</code>启动skhd服务；</li>
+</ol>
+<h3 id="yabai常用命令"><a href="#yabai常用命令" class="headerlink" title="yabai常用命令"></a>yabai常用命令</h3><p><code>yabai -m space --focus 2</code>切换到第二个桌面</p>
+<p><code>yabai --stop-service</code>终止yabai服务</p>
+<p><code>yabai --start-service</code>启动yabai服务</p>
+<p><code>yabai --restart-service</code>重新启动yabai服务</p>
+<h2 id="配置Mac个性化终端"><a href="#配置Mac个性化终端" class="headerlink" title="配置Mac个性化终端"></a>配置Mac个性化终端</h2><p>首先是一个全新的终端</p>
+<ol>
+<li>使用命令<code>brew install --cask wezterm</code>安装wezterm</li>
+<li>不再使用终端，而是使用wezterm</li>
+<li>创建一个文件保存配置文件在~&#x2F;.config&#x2F;wezterm&#x2F;wezterm.lua</li>
+</ol>
+<p>其次是终端的提示效果</p>
+<ol>
+<li>使用<code>brew install starship</code>安装了starship，安装信息：“zsh completions have been installed to:<br>  &#x2F;opt&#x2F;homebrew&#x2F;share&#x2F;zsh&#x2F;site-functions”；</li>
+<li>编辑～目录下的.zshrc文件（在安装homebrew的时候也创建过），配置starship在zsh启动时生效，加入<code>eval &quot;$(starship init zsh)&quot;</code>；</li>
+<li>在~&#x2F;.config目录下创建starship.toml，用来配置starship（然后在starship.rc网站中下载了一个预设的toml文件使用）</li>
+</ol>
+<p>终端的文字高亮</p>
+<ol>
+<li>使用命令<code>brew install zsh-syntax-highlighting zsh-autosuggestions</code>安装zsh高亮提示工具</li>
+<li>在.zshrc中配置了初始化启动，以及相关效果设置</li>
+</ol>
+<p>终端命令自动补全</p>
+<ol>
+<li>使用命令<code>brew install zsh-autocomplete</code>下载zsh自动补全插件；</li>
+<li>在.zshrc中添加相关配置；</li>
+</ol>
+<h3 id="wezterm的常用操作"><a href="#wezterm的常用操作" class="headerlink" title="wezterm的常用操作"></a>wezterm的常用操作</h3><ol>
+<li>ctrl+shift+n新开一个窗口</li>
+<li>Ctrl+Shift+T：新建一个标签页</li>
+<li>ctrl+tab：切换到下一个标签页（循环切换）</li>
+<li>我配置了ctrl+h、l左右切换，然后使用alt+数字切换1～9标签；</li>
+</ol>
+<h2 id="配置系统级进程监视工具htop"><a href="#配置系统级进程监视工具htop" class="headerlink" title="配置系统级进程监视工具htop"></a>配置系统级进程监视工具htop</h2><ol>
+<li>使用<code>brew install htop</code>安装htop</li>
+</ol>
+<p>htop使用</p>
+<ol>
+<li>使用命令<code>htop</code>可以开启它；</li>
+<li>上下左右可以移动选中条；</li>
+<li>空格可以选中F9+return可以结束进程</li>
+</ol>
+<h2 id="配置个性化导航栏"><a href="#配置个性化导航栏" class="headerlink" title="配置个性化导航栏"></a>配置个性化导航栏</h2><ol>
+<li>使用<code>brew install sketchybar</code>安装了sketchybar;</li>
+<li>我clone了一个大佬的仓库到本地<code>git clone https://github.com/FelixKratz/dotfiles.git /tmp/felix_dotfiles_complete</code>;</li>
+<li>导航到需要提交的特定版本<code>cd /tmp/felix_dotfiles</code>以及<code>git checkout e6288b3f4220ca1ac64a68e60fced2d4c3e3e20b</code></li>
+<li>复制 sketchybar 配置到你的配置目录 <code>cp -r .config/sketchybar ~/.config/</code></li>
+<li>安装了一系列外部依赖：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装必备命令行工具</span></span><br><span class="line">brew install jq              <span class="comment"># JSON处理 (必需)</span></span><br><span class="line">brew install sf-symbols      <span class="comment"># Apple系统图标 (必需)</span></span><br><span class="line">brew install gh              <span class="comment"># GitHub CLI (用于某些插件)</span></span><br><span class="line">brew install switchaudio-osx <span class="comment"># 音频设备切换 (用于音频插件)</span></span><br><span class="line">brew install cava            <span class="comment"># 音频频谱可视化</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：`background-music` 可能需要额外步骤，请访问其GitHub页面安装</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装 Nerd Fonts (图标字体，必需!)</span></span><br><span class="line">brew tap homebrew/cask-fonts</span><br><span class="line">brew install --cask font-hack-nerd-font font-sf-pro</span><br><span class="line"><span class="comment"># 安装后，务必打开【字体册】应用，确保这些字体已激活。</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="设置导航栏的音乐组件"><a href="#设置导航栏的音乐组件" class="headerlink" title="设置导航栏的音乐组件"></a>设置导航栏的音乐组件</h3><ol>
+<li>使用<code>brew install --cask blackhole-2ch</code>安装blackhole；</li>
+<li>使用<code>brew install ffmpeg</code>安装ffmpeg（这个依赖似乎比较多有100多MB）；</li>
+<li>配置音频路由，让音频不仅输出到扬声器、耳机，还输出到balckhole；</li>
+<li>配置多输出设备（输出到我原始的设备以及balckhole）这是为了让blackhole能够捕捉到信号，并将blackhole设置为主设备，全部使用48khz；</li>
+<li>编写相应的plugins和items脚本，名为：audio_dynamic_item.sh audio_beat_item.sh以及dynamic_audio_bar.sh；</li>
+<li>reload sketchybar；</li>
+</ol>
+<p>显示当前播放的信息：</p>
+<ol>
+<li>使用<code>brew install nowplaying-cli</code>安装nowpalying工具；</li>
+<li>。。。。先搁置吧</li>
+</ol>
+<h2 id="配置yazi"><a href="#配置yazi" class="headerlink" title="配置yazi"></a>配置yazi</h2><ol>
+<li>使用<code>brew install yazi</code>安装yazi；</li>
+<li>创建文件夹~&#x2F;.config&#x2F;yazi</li>
+<li>在yazi中复制粘贴了github仓库中的默认配置文件yazi-default.toml、keyboard-defualt.toml、dark-theme.toml；</li>
+<li>在~&#x2F;.local&#x2F;bin&#x2F;yazi-copy-files-macos中编写yazi的快捷键脚本（为了将yazi中复制粘贴的内容放到finder的粘贴板）</li>
+<li>赋予脚本执行权限<code>chmod +x ~/.local/bin/yazi-copy-files-macos</code>；</li>
+</ol>
+<dl><dt>yazi的使用：<br>类别	    按键	                            功能<br>基础导航	h j k l &#x2F; 方向键	左、下、上、右移动 &#x2F; 进入文件夹<br>Enter	进入目录或打开文件<br>q	退出 Yazi<br>文件操作	<Space>	标记&#x2F;取消标记文件（用于批量操作）<br>y	复制标记的文件<br>x	剪切标记的文件<br>p	粘贴文件<br>d	将文件移至回收站<br>D	永久删除文件（慎用）<br>a	新建文件&#x2F;文件夹（新建文件夹需以&#x2F;结尾）<br>r	重命名文件<br>视图与高级	.	显示&#x2F;隐藏隐藏文件（以点开头的文件）<br>~ 或 F1	打开内置帮助菜单，忘记快捷键时随时查阅<br>Tab	切换标签页</Space></dt><dd>执行 Shell 命令</dd></dl><h2 id="配置typst"><a href="#配置typst" class="headerlink" title="配置typst"></a>配置typst</h2><ol>
+<li>在vsc安装typst扩展Tinymist Typst；</li>
+<li>使用<code>brew install typst</code>安装typst编译器；</li>
+</ol>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

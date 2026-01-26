@@ -1,0 +1,310 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>论文精读：基于博弈论的复任务学习 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/plans">Plans</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>论文精读：基于博弈论的复任务学习</h1>
+			<p><code>这篇文献的原名是《Multi-Task Learning as a Bargaining Game》，这是我第一次尝试直接通篇阅读英文原文的文献，中间或许会遇到许多困难。我通过这篇blog来记录阅读的过程中遇到的概念，以及简单地对文章整体的脉络进行梳理。最终我希望对论文提到的算法进行复现，这篇blog将会是一个参考。</code></p>
+<h2 id="概念部分"><a href="#概念部分" class="headerlink" title="概念部分"></a>概念部分</h2><p><code>这一部分用于记录阅读时遇到的概念型词汇，并做一些补充解释。困难在于，有的词汇我并不清楚是否是概念型的专业词汇，亦或是只需理解表面含义的词汇...</code></p>
+<h3 id="gradients"><a href="#gradients" class="headerlink" title="gradients"></a>gradients</h3><p>梯度，包含某函数相对自身所有自变量的偏导数。</p>
+<p>对于损失函数$L$梯度$\nabla L$，描述损失函数在参数空间中变化率最快的方向。</p>
+<p>在机器学习中，训练的模型时常需要最小化损失函数，这时常用的方法就是梯度下降算法，通过计算损失函数的梯度，模型可以知道应该如何调整参数，从而减小预测误差。</p>
+<p>梯度冲突，一个任务的梯度指示减小参数，另一个梯度指示增加参数，相互矛盾，最终得不出一个较好的结果。</p>
+<h3 id="multiple-MTL-benchmarks"><a href="#multiple-MTL-benchmarks" class="headerlink" title="multiple MTL benchmarks"></a>multiple MTL benchmarks</h3><p>指的是多个被广泛认可的基准测试数据集或任务，这些任务用于评估多任务学习模型的性能。这些基准测试可以涵盖不同的应用领域，如自然语言处理、计算机视觉、语音识别等。</p>
+<p>benchmark本意是基准</p>
+<ol>
+<li><p>QM9：QM9是一个化学分子数据集，主要用于分子性质预测任务。它包含了约13万条小分子的数据，每个分子都由其原子结构表示，同时提供了9个分子性质的标签（例如，分子的能量、分子的极化率、分子的稳定性等）。这些性质是通过量子力学计算方法（例如密度泛函理论，DFT）得到的。在化学领域，QM9数据集被广泛用于评估各种机器学习模型在分子性质预测任务上的表现。这个数据集是一个相对复杂的回归问题，用于测试模型在不同分子特征下的泛化能力。</p>
+</li>
+<li><p>MT10：MT10数据集是一个多任务学习（MTL）基准数据集，通常用于多任务学习研究的测试。它包含了10个任务，这些任务可以是不同的机器学习任务（例如，分类任务、回归任务等），目标是评估模型在同时处理多个任务时的表现。每个任务都共享一些特征，但每个任务有不同的输出目标，因此适合用于测试多任务学习方法的性能。</p>
+</li>
+</ol>
+<h3 id="Cooperative-bargaining-game"><a href="#Cooperative-bargaining-game" class="headerlink" title="Cooperative bargaining game"></a>Cooperative bargaining game</h3><p>合作博弈，是一种博弈论中的模型，旨在分析参与者如何在合作的情况下进行资源分配或达成协议。</p>
+<p>在多任务学习（MTL）的上下文中，将梯度组合视为一个合作博弈意味着：</p>
+<ol>
+<li>多个任务：每个任务可以看作一个玩家，它们通过共享知识和信息来提高整体性能。</li>
+<li>梯度组合：不同任务的梯度可以被看作是不同玩家的“要求”，通过合作来找到一个能有效结合这些梯度的方式，从而优化模型的表现。</li>
+<li>协商一致：通过合作博弈的方法，任务之间可以“协商”如何平衡彼此的梯度，以减少冲突并提高整体性能。</li>
+</ol>
+<h3 id="Proportionally-fair"><a href="#Proportionally-fair" class="headerlink" title="Proportionally fair"></a>Proportionally fair</h3><p>（按比例公平）是一个博弈论和分配理论中的概念，主要用于描述一种资源分配或收益分配的方法。在这种分配方式下，任何替代方案的平均相对变化都是负的，这意味着在分配中没有任何参与者会因为其他参与者的利益而遭受显著的损失。</p>
+<p>用于MTL中可以：避免主导效应，通过按比例公平的更新，可以确保没有单一任务的梯度（特别是那些较大的梯度）主导更新过程。这可以防止某个任务的影响过大，导致模型在其他任务上的性能下降。<br><strong>Nash bargaining solution就是一种按比例公平的方法</strong></p>
+<h3 id="convex"><a href="#convex" class="headerlink" title="convex"></a>convex</h3><p>convex，字面含义是凸性</p>
+<p>凸集：<br>一个集合 $C$ 被称为 凸集，如果对于集合中的任意两个点 $x_1$和 $x_2$，连接这两个点的线段上的所有点也都在集合 $C$ 中。在数学上可以表示为：</p>
+<p>$\forall x_1, x_2 \in C, \forall \lambda \in [0, 1], \quad \lambda x_1 + (1 - \lambda) x_2 \in C$</p>
+<p>凸函数：<br>一个函数 $f: \mathbb{R}^n \to \mathbb{R}$被称为 凸函数，如果其定义域是一个凸集，并且对于任意的 $x_1, x_2$和 $\lambda \in [0, 1]$，都有：<br>$f(\lambda x_1 + (1 - \lambda) x_2) \leq \lambda f(x_1) + (1 - \lambda) f(x_2)$<br>这表示函数的图形在任意两个点之间的连线不会低于函数的值，换句话说，函数呈一个“碗”的形状。<strong>这与我在大一选修工科数学分析学到的相同，当时老师强调了凸有两种含义，显然这里是下凸上凹的那一种。</strong></p>
+<p>凸性的性质：<br>局部极小值即全局极小值：对于凸函数，如果在某一点有局部极小值，那么该点也是全局极小值。这是凸优化中非常重要的性质。</p>
+<p>非凸的情况：<br>与凸函数相对的是 非凸函数，这些函数可能存在多个局部极小值，这使得优化过程更为复杂。在非凸情况下，找到全局最优解可能更具挑战性。</p>
+<h3 id="帕累托最优"><a href="#帕累托最优" class="headerlink" title="帕累托最优"></a>帕累托最优</h3><p>多目标优化中解的支配关系：如果解$x$支配$x’$则，$x$在$(l_1,l_2,…,l_k)$的目标函数向量上，有1个或多个分量的结果优于$x’$。</p>
+<p>Pareto Optimal：如果在多目标任务的定义域中对于解$x$没有支配自己的其它解，则称该解为帕累托最优</p>
+<p>Local Pareto Optimal：在定义域的子集开集中的帕累托最优，称为帕累托局部最优</p>
+<p>Pareto Stationary：如果解空间中一个点$x$是帕累托静止点，那么在该点上对于多目标对应的各个函数存在梯度凸组合为0。这意味着在该点的所有目标函数的梯度（导数）在某种程度上是平衡的，没有明显的“倾斜”方向可以改进所有目标。</p>
+<p><strong>Pareto stationarity 是 Pareto optimality 的必要条件，但不是充分条件。这意味着一个点如果是 Pareto 最优的，那么它必须是 Pareto stationary 的，但反过来则不一定成立。</strong></p>
+<p>凸组合：是指在数学和优化中，利用给定点的加权平均来形成新点的一种方法。具体来说，给定一组点 $x_1, x_2, \ldots, x_n$和对应的非负权重 $\lambda_1, \lambda_2, \ldots, \lambda_n$，如果这些权重的总和为 1，即</p>
+<p>$\lambda_1 + \lambda_2 + \ldots + \lambda_n &#x3D; 1$<br><strong>注意这些权重都是非负的</strong></p>
+<p>那么我们可以定义一个凸组合 $x$ 为：</p>
+<p>$x &#x3D; \lambda_1 x_1 + \lambda_2 x_2 + \ldots + \lambda_n x_n$</p>
+<p>凸组合的几何意义：在几何上，凸组合可以被视为在给定点之间的“插值”。例如，在二维空间中，两个点的凸组合会形成这两个点之间的线段，而三个点的凸组合则会形成这三点构成的三角形内部的所有点。</p>
+<p>在多目标优化中，凸组合常用于表示不同目标之间的权衡。</p>
+<h3 id="一些衡量MTL模型性能的指标"><a href="#一些衡量MTL模型性能的指标" class="headerlink" title="一些衡量MTL模型性能的指标"></a>一些衡量MTL模型性能的指标</h3><p>1)Segmentation（语义分割）</p>
+<p>mIoU：平均交并比。这个指标是语义分割中常用的评价标准，计算方式是每个类别的交并比（IoU，Intersection over Union）取平均。交并比是预测结果和真实标签之间的交集与并集的比值。这个指标反映了模型在每个类别上的分割准确性，<strong>值越大表示分割结果越好</strong>。</p>
+<p>Pix Acc：像素准确率。这个指标计算的是正确分类的像素点占总像素点的比例。它是一个比较简单的衡量标准，但可能在类别不均衡时会有偏差。</p>
+<p>2)Depth（深度估计）相对误差</p>
+<p>Abs Err：绝对误差。对于每个像素点，计算其预测深度值和真实深度值之间的差异的绝对值，然后取平均。这个指标越小，表示深度估计越准确。</p>
+<p>Rel Err：计算预测深度值与真实深度值之间的相对差异，通常表示为：<br>$  \text{Rel Err} &#x3D; \frac{| \hat{d} - d |}{d} $</p>
+<p>3)Surface Normal（表面法线）</p>
+<p>Angle Distance：角度距离。这个指标计算的是预测法线方向与真实法线方向之间的角度差异。通常以度数（°）表示，<strong>值越小表示模型的法线估计越准确</strong>。</p>
+<p>Within（Within Threshold）：通常指的是预测的法线与真实法线之间的角度差异小于某个阈值的比例。例如，如果设定阈值为$\theta$（例如11.25°、22.5°等），则“Within $\theta$”表示法线估计误差小于该阈值的像素所占比例。这个<strong>指标反映了模型能够准确预测法线的比例</strong>。</p>
+<p>4)MR（Mean Rank）</p>
+<p>**MR(Mean Rank)**是一个排名相关的指标，常用于排序问题。它通常计算的是模型对预测结果的排名准确度。例如，如果模型的预测最接近真实值，那么它会在排名中处于较高的位置。Mean Rank是计算多个任务或样本的平均排名值。</p>
+<p>5)Δm%</p>
+<p>Delta m%（Δm%）表示相对于基线模型的性能提升或下降百分比。计算方式通常是：<br>$  \Delta m% &#x3D; \frac{(\text{new performance} - \text{baseline performance})}{100}$</p>
+<h3 id="张量"><a href="#张量" class="headerlink" title="张量"></a>张量</h3><p>张量的定义<br>在数学上，张量是一个多维数组，扩展了标量、向量和矩阵的概念。具体来说：</p>
+<p>标量（Scalar）: 零阶张量，即一个单一的数值。<br>向量（Vector）: 一阶张量，即一维数组，具有方向和大小。<br>矩阵（Matrix）: 二阶张量，即二维数组，具有行和列的结构。<br>高阶张量（Higher-order Tensor）: 三维及以上的多维数组。</p>
+<p>机器学习与深度学习: 训练数据和模型参数通常可以表示为高维张量。比如在深度学习框架（如TensorFlow和PyTorch）中，数据和权重都是以张量的形式存储和操作的。</p>
+<h3 id="字面词汇"><a href="#字面词汇" class="headerlink" title="字面词汇"></a>字面词汇</h3><p>alleviate，缓解</p>
+<p>negotiate，协商</p>
+<p>heuristic，启发式方法</p>
+<p>convergence，收敛</p>
+<h3 id="文章架构"><a href="#文章架构" class="headerlink" title="文章架构"></a>文章架构</h3><p>这篇文章引入博弈论中的Nash bargaining solution，作为MTL中的aggregation algorithm，对多任务的梯度进行整合，减小gradients conflicts带来的性能影响。</p>
+<p>总的来看，文章分为以下几个部分：</p>
+<ol>
+<li>改进Nash bargaining solution以适应MTL</li>
+<li>从理论上对算法进行分析，保证了在convex和non-convex的case下的收敛</li>
+<li>在多个领域对算法进行了验证</li>
+</ol>
+<h3 id="改进Nash-bargaining-solution以适应MTL"><a href="#改进Nash-bargaining-solution以适应MTL" class="headerlink" title="改进Nash bargaining solution以适应MTL"></a>改进Nash bargaining solution以适应MTL</h3><h4 id="Nash-bargaining-solution"><a href="#Nash-bargaining-solution" class="headerlink" title="Nash bargaining solution"></a>Nash bargaining solution</h4><p><code>这一部分简单介绍纳什协商解(Nash bargaining solution)在谈判博弈(bargaining game)中出现的条件</code></p>
+<p><strong>谈判博弈问题是指</strong>$K$名玩家，每个玩家有一个效用函数$u_i:  A \cup {B} \rightarrow \mathbb{R}$，所有玩家都追求自身<strong>效用函数的最大化</strong>。其中$A$是所有<strong>可能达成的协议</strong>的集合，$D$是<strong>不能达成的协议</strong>（并非集合），对应的是无法达成$A$中元素对应协议时，玩家会采用<strong>默认策略</strong></p>
+<p>定义收益集合$U$与默认收益$d$如下：</p>
+<p>$U &#x3D; {u_1(x),…,u_k(x) : x \in A} \subset \mathbb{R}^{k}$<br>$d &#x3D; (u_1(D),…,u_k(D)) \in \mathbb{R}^{k}$</p>
+<p>假设$U$满足以下性质：</p>
+<ol>
+<li>convex 集合是凸的</li>
+<li>compact 集合是紧致的，即集合满足<strong>有界性、闭性</strong>，有界意味着集合 $U$ 的所有元素（即所有的解）都位于某个有限范围内，没有元素可以无限远离原点；闭性意味着集合 $U$ 包含它的边界点，也就是说，集合中的任何极限点都属于集合 $U$。</li>
+<li>$U$对应的$k$维空间中至少存在一个点$u &#x3D; (u_1,u_2,…,u_k), u \in U$ strictly dominates $d &#x3D; {d_1,d_2,…,d_k}$，即$\forall i &#x3D; 1,…,k: u_i &gt; d_i$</li>
+</ol>
+<p><strong>注：</strong>（在效用函数确定的时候，$U$中不同的点是由协议或称博弈问题的解$x$所影响，产生的。所以当直接讨论$u$的时候实际上可以看作是在讨论某个解$x$，如果直接讨论$u_1,u_2…,u_n$而没有其作为“分量”的上下文，也可以将其看作对应的某些解$x_1,x_2,…,x_n$，或者直接称$U$是解的集合，其中的元素$u_1,u_2,…u_n$就是解）</p>
+<p>则该问题<strong>存在</strong>唯一的解$x$即<strong>最优的策略、协议</strong>，称为<strong>Nash bargaining solution</strong>，且该类博弈具有如下性质：</p>
+<ol>
+<li>Pareto optimality：唯一解$x$满足帕累托最优，此处指的是不存在其它任何解$y$，可以使得$(u_1(y),…u_k(y))$支配$(u_1(x),…,u_k(x))$<br><del>（这个性质确保了，在这类博弈问题中具有唯一的最优解，因为没有其它任何解可以通过损害某方的利益，增大另一方的利益。）</del></li>
+<li>Symmetry： 对称性，交换玩家的排列顺序，最终得到的解仍然是$x$<br><del>（这个性质确保了，这类博弈问题中没有任何特别的角色存在，player的效用函数只于其“所处位置”有关，而与角色自己没有关系。例如player1、palyer2在博弈中扮演character1、character2，则$x$协议下的效用函数对应$(u_1(x),u_2(x))$，交换玩家位置，player1、player2对应character2、character1，同样协议下的效用函数对应$(u_2(x),u_1(x))，效用函数不会因为player的不同而改变，只与character有关$）</del></li>
+<li>Independence of Irrelevant Alternatives (IIA)：不相关选择的独立性，如果在解集合$U$中加入其它<strong>不相关</strong>选项，最优解仍然是$(u_1(x),…,u_k(x))$，不会改变。</li>
+<li>Invariance to affine transformation：仿射变换的不变性，将每个效用函数 $u_i(x)$转换为 $u_i(x) &#x3D; c_i u_i(x) + b_i$且 $c_i &gt; 0$，那么如果原始协议的效用是 $(y_1,…,y_k)$，则经过变换后的协议效用将是 $(c_1 y_1 + b_1,…, c_k y_k + b_k)$。</li>
+</ol>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

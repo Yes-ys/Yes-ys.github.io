@@ -1,0 +1,247 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>分布式的原子性与一致性 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+		<div id="top-bar">
+			
+			<div id="avatar-box">
+				<img 
+				class="avatar"
+				src="/images/my-avatar.jpg" //网站头像
+				alt="avatar">
+			</div>
+
+			<div id="top-bar-text">
+				<div id="top-bar-title">
+					阳生。
+				</div>
+				<div id="top-bar-slogan">
+					风毛丛劲节，只上尽头竿。
+				</div>
+			</div>
+
+		</div>
+
+		<div id="menu-outer">
+			<div id="menu-inner">
+				
+				
+				<div class="menu-item">
+					<a href="/">Home</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/about">About</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/archives">Archives</a>
+				</div>
+				
+				<div class="menu-item">
+					<a href="/plans">Plans</a>
+				</div>
+				
+
+				<div class="menu-item menu-item-search">
+					
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+				</div>
+
+			</div>
+		</div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>分布式的原子性与一致性</h1>
+			<p><code>一次计算机系统工程导论的习题</code></p>
+<h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><p>选择：A</p>
+<p>因为小明的客户端到S3之间的网络经常停止工作，每次几分钟，而根据伪代码，在更新S3服务器上的信息的时候，while循环会一直尝试直到rpc_OK被置为true为止。所以CLENTWRITE通常需要花费几分钟（S3导致的）或更长的时间（可能不排除S1、S2也有出问题的可能性），去更新服务器。</p>
+<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><p>返回：Breakfast</p>
+<p>因为在系统没有故障的时候，该分布式系统的一致性是有得到保障的，根据题目中串行执行的代码，读取到的内容会是最后一次写入的内容，对应为Breakfast。</p>
+<h2 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h2><p>选择：AB</p>
+<p>对于A，如果客户端计算机是在已经完成最后一次CLENTWRITE操作中对部分服务器的更新，那么当使用CLIENTREAD的时候就可能出现A的结果。</p>
+<p>对于B，如果是在CLIENTWRITE (0,11, “Talk to Frans at 11”)刚刚完成的时候，发生了重启，那么使用CLIENTREAD就可能出现B的结果。</p>
+<p>对于C，Breakfast at 10意味着最后一次更新服务器已经部分完成，这与 Free at 11是矛盾的。</p>
+<p>对于D，与C同理，存在矛盾。</p>
+<h2 id="问题四"><a href="#问题四" class="headerlink" title="问题四"></a>问题四</h2><p>选择：ABD</p>
+<p>对于A，如果所有服务器顺利更新，对应为A的结果</p>
+<p>对于B，如果客户端重启前已经顺利执行完CLIENTWRITE (0,10,”Talk to Frans at 10”)，对应为B的结果。</p>
+<p>对于C，CLIENTWRITE (0,10, “Breakfast at 10”)至少已经对部分服务器完成了更新，这意味着CLIENTWRITE (0,11, “Talk to Frans at 11”)已经对服务器完成了更新，那么不应该出现Free at 11，所以C错误</p>
+<p>对于D，如果CLIENTWRITE (0,10,”Talk to Frans at 10”)只是对部分服务器完成更新例如S1、S2，那么S3中对应保存的仍然是Free at 10。当执行CLIENTREAD的时候，如果第一次从S1或S2顺利读取了结果，但是第二次S1、S2的网络出现了问题，从S3读取了结果，则可能出现这样的情况。</p>
+<h2 id="问题五"><a href="#问题五" class="headerlink" title="问题五"></a>问题五</h2><p>选择：ACD</p>
+<p>对于A，如果所有更新与读取都正常，那么得到的会是A的结果。</p>
+<p>对于B，在第二次读取的时候还没有尝试过“Z”的写入，不会读取到“Z”，故错误。</p>
+<p>对于C，如果第二次更新尝试没有一个服务器成功更新，其它操作均正常，则可能得到C的结果。</p>
+<p>对于D，如果第一次更新均正常，第二次更新部分正常例如S1被更新，第三次没有成功更新任何服务器。第一次读取正常，第二次读取从S1读取到了结果，第三次读取从S2或S3读取到结果，则可能出现这样的情况。</p>
+<h2 id="问题六"><a href="#问题六" class="headerlink" title="问题六"></a>问题六</h2><p>选择：A</p>
+<p>因为小明原本的系统在CLIENTWRITE的时候对每个服务器使用了while循环来确保rpc_OK&#x3D;true，这意味着要么对服务器完成更新，要么客户端一直执行CLIENTWRITE。所以如果顺利读取到三个结果，只能是正确的结果，即A对应的结果，其它情况都不可能出现。</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div>
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
