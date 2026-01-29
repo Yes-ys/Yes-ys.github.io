@@ -43,6 +43,8 @@
 	
 	<link rel="stylesheet" href="/css/pagination-fan.css">
 	
+	<link rel="stylesheet" href="/css/about.css">
+	
 	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
 	
 	
@@ -122,45 +124,92 @@
 		<div id="content-outer">
 			<div id="content-inner">
 
-				
-<article id="page">
-  <h1>关于我</h1>
-  <h2 id="一句话介绍"><a href="#一句话介绍" class="headerlink" title="一句话介绍"></a>一句话介绍</h2><p>CS在读本科生，梦想是成为影响世界的AI高手；</p>
-<h2 id="我在做什么"><a href="#我在做什么" class="headerlink" title="我在做什么"></a>我在做什么</h2><ul>
-<li>方向 1：个性化联邦学习算法研究；</li>
-<li>方向 2：机器学习基础知识疯狂补足中，目标是开发自己的lib；</li>
-<li>方向 3：数学知识，算法理论爱好者；</li>
-</ul>
-<h2 id="喜欢的-讨厌的（学习方式）"><a href="#喜欢的-讨厌的（学习方式）" class="headerlink" title="喜欢的&amp;讨厌的（学习方式）"></a>喜欢的&amp;讨厌的（学习方式）</h2><p><strong>喜欢：</strong></p>
-<ol>
-<li>弄懂一个复杂系统的工作原理，思考明白一些高深的理论，加以一些自己的理解、感受；</li>
-<li>建立一套完整的知识体系，每个或难或易的组件都恰得其所的在自己的位置上，这让我感到美妙；</li>
-</ol>
-<p><strong>讨厌：</strong></p>
-<ol>
-<li>快速“学习”例子，知其一而不知其二（大学课堂常见的方式…）；</li>
-<li>不必要的记忆，尤其是对于机械的知识（当然如果是对它在某个体系中的位置除外…）；</li>
-</ol>
-<p>Anyway, 我能够理解有的场景需要我讨厌的学习方式，尽管排斥，但是我还是会尽力去做；我也知道我喜欢的方式通常会花大量的时间这个缺点;)；</p>
-<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><ul>
-<li>Email：<a href="mailto:&#x79;&#101;&#x73;&#x79;&#115;&#x40;&#x73;&#x74;&#117;&#x2e;&#111;&#x75;&#x63;&#46;&#x65;&#x64;&#x75;&#46;&#99;&#x6e;">&#x79;&#101;&#x73;&#x79;&#115;&#x40;&#x73;&#x74;&#117;&#x2e;&#111;&#x75;&#x63;&#46;&#x65;&#x64;&#x75;&#46;&#99;&#x6e;</a></li>
-<li>GitHub：<a target="_blank" rel="noopener" href="https://github.com/Yes-ys">https://github.com/Yes-ys</a></li>
-</ul>
-<h2 id="关于本站"><a href="#关于本站" class="headerlink" title="关于本站"></a>关于本站</h2><ul>
-<li>这个站点用 Hexo 搭建，主题是 PreciousJoy。</li>
-<li>主要用来记录：学习笔记 &#x2F; 项目总结 &#x2F; 读书与论文 &#x2F; 随笔。</li>
-</ul>
+				<div class="about-container">
 
+    <!-- 1. 个人信息卡片 -->
+    <div class="profile-card">
+        <!-- 自动获取GitHub头像，如果不行可以换其他链接 -->
+        <img src="https://github.com/Yes-ys.png" class="profile-avatar" alt="阳生">
+        <h2 class="profile-name">Yes-ys / 阳生</h2>
+        <div class="profile-bio">" 梦想是成为影响世界的 AI 高手 "</div>
+        <div class="profile-tags">
+            <span>💻 CS 本科</span>
+            <span>🤖 AI 研究</span>
+            <span>📐 算法理论</span>
+        </div>
+    </div>
 
-  <!-- Comments removed -->
-  
-</article>
+    <!-- 2. 我在做什么 -->
+    <div class="section-title">我在做什么</div>
+    <div class="focus-grid">
+        <div class="focus-item">
+            <div class="focus-header">
+                <span class="focus-icon">🤝</span>
+                <span class="focus-title">联邦学习研究</span>
+            </div>
+            <div class="focus-desc">专注个性化联邦学习算法，探索分布式场景下的隐私计算与模型优化。</div>
+        </div>
+        <div class="focus-item">
+            <div class="focus-header">
+                <span class="focus-icon">🏗️</span>
+                <span class="focus-title">造轮子</span>
+            </div>
+            <div class="focus-desc">疯狂补足机器学习基础知识，目标是开发属于自己的 ML Library。</div>
+        </div>
+        <div class="focus-item">
+            <div class="focus-header">
+                <span class="focus-icon">🧠</span>
+                <span class="focus-title">理论探索</span>
+            </div>
+            <div class="focus-desc">沉迷数学知识与算法理论，享受深挖底层原理的快乐。</div>
+        </div>
+    </div>
 
-<div id="paginator">
-  
+    <!-- 3. 喜欢与讨厌 (美化版) -->
+    <div class="section-title">学习方式偏好</div>
+    <div class="preference-wrapper">
+        <div class="pref-card pref-likes">
+            <div class="pref-header like">❤️ 我喜欢的</div>
+            <ul class="pref-list">
+                <li>弄懂复杂系统的工作原理，思考高深理论并产生自己的理解。</li>
+                <li>建立完整的知识体系，看着每个组件恰得其所地归位（This feels amazing!）。</li>
+            </ul>
+        </div>
+        <div class="pref-card pref-dislikes">
+            <div class="pref-header dislike">💔 我排斥的</div>
+            <ul class="pref-list">
+                <li>快速“学习”例子但知其一不知其二（大学课堂现状...）。</li>
+                <li>无意义的机械记忆（除非它在知识体系中有明确的位置）。</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align: center; color: #888; margin-top: 20px; font-style: italic; font-size: 0.9rem;">
+        "Anyway, 尽管排斥，为了目标我还是会尽力搞定不喜欢的学习方式；<br>我也接受我喜欢的方式通常极其耗时这个缺点 ;)"
+    </p>
+
+    <!-- 4. 联系方式 (按钮化) -->
+    <div class="section-title">保持联系</div>
+    <div class="contact-container">
+        <a href="mailto:yesys@stu.ouc.edu.cn" class="contact-btn email">
+            <span class="contact-icon">📧</span> Email Me
+        </a>
+        <a href="https://github.com/Yes-ys" class="contact-btn github" target="_blank">
+            <span class="contact-icon">🐱</span> GitHub
+        </a>
+    </div>
+
+    <!-- 5. 底部站点信息 -->
+    <div class="site-note">
+        <p>本站由 <b>Hexo & PreciousJoy</b> 驱动</p>
+        <p>这里记录着我的：学习笔记 / 项目总结 / 读书与论文 / 随笔</p>
+    </div>
+
+    <!-- 显示原本的 markdown 内容 (如果有的话，作为补充) -->
+    <div class="about-markdown-content">
+        
+    </div>
+
 </div>
-
-
 
 
 			</div>
