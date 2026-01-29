@@ -124,441 +124,109 @@
 		<div id="content-outer">
 			<div id="content-inner">
 
-				
+				<style>
+/* Tag Page Styles (Shared with Category) */
+#tag {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
 
-<div id="recent-posts-box">
-  <h1 style="text-align:center; padding: 20px 0; font-size: 2em; color: #444;">unity</h1>
+#tag h1 {
+    text-align: center;
+    color: #444;
+    font-size: 2.2em;
+    margin-bottom: 40px;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+}
+#tag h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #4caf50, #81c784); /* Green for Tags to distinguish */
+    border-radius: 2px;
+}
 
+.tag-item {
+    background: #fff;
+    padding: 20px 25px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+    border-left: 5px solid transparent;
+}
+.tag-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-left-color: #4caf50;
+}
+.tag-item a {
+    color: #333;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-decoration: none;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+.tag-item a:hover {
+    color: #388e3c;
+}
+.tag-item time {
+    color: #999;
+    font-size: 0.9em;
+    font-family: monospace;
+    white-space: nowrap;
+}
+
+#other-paginator {
+    margin-top: 40px;
+    text-align: center;
+}
+#other-paginator span, #other-paginator a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 5px;
+    background: #fff;
+    border-radius: 20px;
+    color: #555;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+#other-paginator .current {
+    background: #4caf50;
+    color: #fff;
+}
+</style>
+
+<div id="tag">
+  <h1># unity</h1>
   
-  <div id="recent-posts">
-    
-    
-    <div class="recent-post-item" data-href="/2025/02/03/2025/unity%E9%94%9A%E7%82%B9/">
-
-      <div class="item-title">unity锚点</div>
-      
-      <time datetime="2025-02-03T10:38:50.000Z">
-        2025-02-03
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>如下参考文章https://blog.csdn.net/Terie/article/details/111433486 透过这篇博客，我大概了解到了两个点：pviot：轴心，采用相对坐标系，(0,0)-&amp;gt;(1,1)，位于某ui的方框内，其表征着在ui被自适应缩放的时候，以哪个位置为标准缩放 锚点：unity提供了三种模式1、四个锚点合在一起的模式该模式下，在屏幕分辨率改变的过程当中，ui相对于锚点的位置不改变，ui的宽、高也不变 2、四个锚点两两在一起的模式该模式下，ui的对应对于锚点连成的线的距离不改变，宽高比不改变，随之缩放 3、四个锚点分开的...</p>
-      </div>
-      
-
-    </div>
-
-    
+  <div class="tag-item">
+    <a href="/2025/02/03/2025/unity%E9%94%9A%E7%82%B9/">
+      unity锚点
+    </a>
+    <time datetime="2025-02-03T10:38:50.000Z">
+      2025-02-03
+    </time>
   </div>
   
 
-  <div id="recent-posts-paginator">
+  <div id="other-paginator">
     <span class="page-number current">1</span>
   </div>
-  
+
 </div>
-
-<aside id="sidebar">
-  
-  <div class="widget-box">
-  	<div class="widget-wrap" id="widget-calendar">
-    <h3 class="widget-title">时空坐标</h3>
-    <div class="widget-box-content">
-        <div id="calendar-clock"></div>
-        <div id="calendar-date-gregorian"></div>
-        <div id="calendar-date-lunar"></div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
-<script>
-(function() {
-    const clockEl = document.getElementById('calendar-clock');
-    const dateGEl = document.getElementById('calendar-date-gregorian');
-    const dateLEl = document.getElementById('calendar-date-lunar');
-
-    function update() {
-        const now = new Date();
-        
-        // Time
-        const h = String(now.getHours()).padStart(2, '0');
-        const m = String(now.getMinutes()).padStart(2, '0');
-        const s = String(now.getSeconds()).padStart(2, '0');
-        clockEl.textContent = `${h}:${m}:${s}`;
-
-        // Gregorian
-        const y = now.getFullYear();
-        const mon = String(now.getMonth() + 1).padStart(2, '0');
-        const d = String(now.getDate()).padStart(2, '0');
-        dateGEl.textContent = `${y}年${mon}月${d}日`;
-
-        // Lunar
-        // Library usage: Solar.fromYmd(y, m, d).getLunar()
-        if (window.Solar && window.Lunar) {
-             const solar = Solar.fromYmd(now.getFullYear(), now.getMonth() + 1, now.getDate());
-             const lunar = solar.getLunar();
-             // Tianchou year (GanZhi)
-             const yearGanZhi = lunar.getYearInGanZhi();
-             const month = lunar.getMonthInChinese();
-             const day = lunar.getDayInChinese();
-             
-             // e.g. 甲辰年 正月 初一
-             dateLEl.textContent = `${yearGanZhi}年 ${month}月${day}`;
-        }
-    }
-
-    setInterval(update, 1000);
-    // Initial delay to ensure library loads if it's async, or retry
-    // Simple retry logic
-    const initInterval = setInterval(() => {
-        if (window.Solar) {
-            update();
-            clearInterval(initInterval);
-            setInterval(update, 1000);
-        }
-    }, 200);
-})();
-</script>
-
-<style>
-#widget-calendar .widget-box-content {
-    text-align: center;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.5); /* Glassy feel */
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-#calendar-clock {
-    font-size: 1.8em; /* Reduced from 2.2em to fit better */
-    font-weight: bold;
-    color: #333;
-    font-family: 'Courier New', Courier, monospace; /* Monospace for steady time */
-    margin-bottom: 5px;
-    white-space: nowrap;
-}
-#calendar-date-gregorian {
-    font-size: 1.1em;
-    color: #555;
-    margin-bottom: 3px;
-}
-#calendar-date-lunar {
-    font-size: 1em;
-    color: #8a6d3b; /* Traditional color feel */
-    font-weight: 500;
-}
-</style>
-
-  </div>
-  
-  <div class="widget-box">
-  	<div class="widget-wrap" id="widget-poetry">
-    <h3 class="widget-title">阳生的诗云</h3>
-    <div class="widget-box-content poetry-container" id="poetry-wheel">
-        <div id="poetry-wrapper">
-            <!-- JS will populate -->
-        </div>
-    </div>
-</div>
-
-
-
-<script>
-(function() {
-    var rawLines = ["水澹金粼雾舞空，烟锁灵山山囚龙。","霰尽芳菲行者至，露上凝珠紫气东。","父老提携童子笑，诸君揖互彩云从。","香火连天今日有，爆竹声毕夕已终。","黄烛灯火暗凝香，红袖酥肩幻梦长。","醉酒吟誐任疏狂，百落临渊战心惶。","前路无光路满霜，苦难同尘藏四方。","来年不求万事祥，我愿与之较锋芒。","春秋五载与君识，几经离别未有知。","可怜怎奈书生骨，举杯邀酒话无时。","今昔难见来日昶，参商共映明月光。","高山流水何其多，相见不言别离长。","秋霜一点红，寒露语松榕。","越鸟惊乡客，南巢临北冬。","遍揲晓风月，满羽繁星空。","择地息未有，淡裁碌日中。","何日花前酒，携诗青崖诵。","云野伴骄阳，仲夏风曦长。","身待雨缦缦，旱久难滂滂。","卧阴苇下驻，遮乌泮水旁。","念死闲行日，不意甘霖降。","细柳抚荫晓云畔，青山带水过君岸。","虽守陌路长相隔，念此故人月上看。","见海连天月下开，踏彩逐浪思楼台。","台下霓潮绕浪舞，台上金麟为我来。","长天碧色里，高阁一湖中。","传即千古士，行则知无穷。","携卷履地因风进，卧看长空皓月行。","明眸晶莹玉齿杯，蓬头恹面笑长情。","墨上还新山水通，此间独骑临霜松。","昨年闻香落笔柔，意与锋芒寄青空。","海破日出乾坤动，河汉月邀金乌重。","沧浪折煞浮萍起，百波沉浮犬马恸。","他日锥断窠臼风，白鹤冲天烟柳中。","任子何笑鱼龙游，东风吹我麟阁梦。","鸣剑八尺，柄灼伤伤。","血蚀锈迹，斑斑其煌。","剑折剑伤，不改剑刚。","素钢以铸，可刻金光。","百剑之中，其伤为扬。","剑鸣剑光，旦列剑榜。","百日随春尽，新曦按夜来。","碧草凝寒露，陌上芳菲开。","折枝近门扉，黄䤋扶老待。","相论无功名，赤子初心在。","自负有翅，既委金笼。","不绝长空，何异斑鸠！","虽离群所，日起当思。","衣冠正否，行止绳否。","若背师恩，女颜不存。","若耽暖衾，女辞为空。","而至今日，才非盖世。","略有所长，只在微志。","今志但弃，形飞神灭。","渺渺于世，不知为人。","幸生父母，又遇恩师。","教吾配兰，视吾圣贤。","前见子丘，后瞻东坡。","周环吾身，竖子小儿。","其钻弥坚？其爱一欢？","若以为前，即当顺羽。","若就后居，不如便埋！","百年征程易难兴，只言片语寥可尽？","听罢放翁示儿语，途闻鹏举复国心。","鱼耽海者树鸟亲，风化雨兮草木喑。","今时往已难可忆，唯叹受多报无冯！","蹇驴踏寒山，欲寻春可安。","此去十二载，未觉铁岭难。","路别桃花庵，又至神女山。","朱唇抿贝齿，纵邀即日欢。","眄谢蛾眉观，仰首望河汉。","心驶沧浪处，欲起罢钓竿！","微月照鬓角，夏风拂过柳眉梢。","微踮首，咧嘴笑，花色泛上白裙脚。","又是一年蝉鸣时，荏苒莺飞鸟。","犹觉夏日胜好。","余见千里之修厚鲲鹏者，以六月之息，适于南冥，一跃而上九万里，水击三千里。","余览其逍遥也，见其适者，天时也，非无所依也。然余谓之，己之限及身之短者，了然于胸，明所适者而享逍遥之微寥，不亦 逍遥也？","余见蜩与学鸠，以决起而飞，抢树而至，下鲲鹏之所适者，成其逍遥之逍遥也，特不解鲲鹏之所适者也。","余谓之，虽是井底之蛙，然于其身者，乐也，见世间万般皆下品，为己独高。于己之界，所达皆可有，所求皆以应，不亦逍遥 也？","且夫不死之椿，长生之冥灵，而宋荣子之辈不亦似鲲鹏哉，或有上中下之境焉也。","至于至人，神人，圣人，于天地之间无所适，乘万物之正，驾六气之辩者，余谓之人力所莫能及。然拊度其中，乘万物之正者 ，即庄周所言，物我为一，以天地万物之百变为己之息，如己心之动，血之流者。所适者皆如己出，故无所适也，通透哉！而 御六气之变，且夫游于无穷之中，仙人之谓也，非物力所能及。","故吾小儿，斗胆列逍遥之次，小，中，大者也。","小之逍遥，所限莫所大焉，然其不见，独达于己，鄙薄万物而如稚童，亦有乐者也。","中之逍遥，所限或有见微，然其了然，善适万物，夷其所长善之所短，诚然逍遥也。","大之逍遥，所限者于己身，通透明达，处之世间，无所不乐无所不适，此真逍遥也。","然三者之上，所能有游于无穷者，特为仙人之所处耳，言之何用？","小之逍遥，行年必出，中之逍遥，或死无穷。","故吾见中之逍遥亦有三般。","一曰，蟪蛄已死，化茧成蝶，初出井底，蓦然之余，惶惶之间，不知所为，旦怀为先，嘲之小儿以自饰，宋荣子之辈也。","二曰，明于世间，知所何为，明所不为，朝朝暮暮，施力其中，然有所乐，亦有所乏，或感万物之何为，或冥灵大椿也。","三曰，旷达自若，气定神闲，可借薄力，而撼世间，明哲处事，善以待人，乐而长命，无所喟叹无所疲，或鲲鹏之状也。","然一者之上，二者之下，或鄙之所谓也，目力有限，思有所疲，略省二者寥寥，而思三者谓何，至于大逍遥者，或愚竭毕生之 力而无以及，乃今之人或有一二，故余妄言，见之可由。余之所望，尽己之力，达于三者而望大逍遥者，仙人之风，果然之间 ，或付诸笑谈一二。"];
-    // Shuffle
-    // seed random? No, Math.random is fine
-    rawLines.sort(() => Math.random() - 0.5);
-
-    var container = document.getElementById('poetry-wheel');
-    var wrapper = document.getElementById('poetry-wrapper');
-    var ITEM_HEIGHT = 40; 
-    var VISIBLE_ITEMS = 5;
-    
-    // Ensure we have enough lines for a smooth loop
-    // At least enough to fill screen + buffers
-    var lines = [...rawLines];
-    while (lines.length < VISIBLE_ITEMS + 4) {
-        lines = lines.concat(rawLines);
-    }
-    
-    // We create 3 sets for infinite scrolling
-    // Set 0: Buffer top
-    // Set 1: Active
-    // Set 2: Buffer bottom
-    // Actually just one long list is enough if we reset transform
-    // Format: [ ...lines, ...lines ]
-    var displayList = [...lines, ...lines];
-    
-    displayList.forEach(text => {
-        var div = document.createElement('div');
-        div.className = 'poetry-line';
-        div.innerText = text;
-        wrapper.appendChild(div);
-    });
-
-    // Animation State
-    var currentY = 0;
-    var speed = 0.4; // Pixels per frame. 0.5 * 60fps = 30px/sec. Smooth.
-    
-    var singleSetHeight = lines.length * ITEM_HEIGHT;
-    
-    function animate() {
-        currentY += speed;
-        
-        // Infinite Loop Logic
-        // If we have scrolled past the first set, jump back to start
-        if (currentY >= singleSetHeight) {
-            currentY -= singleSetHeight;
-        }
-        
-        // Apply transform
-        wrapper.style.transform = `translateY(-${currentY}px)`;
-        
-        // Update Styles (Fan Effect)
-        updateStyles(currentY);
-        
-        requestAnimationFrame(animate);
-    }
-    
-    function updateStyles(scrollY) {
-        var center = container.clientHeight / 2;
-        var items = wrapper.children;
-        
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            
-            // Calculate Item's Y position relative to Container Top
-            // ItemTopInWrapper = i * ITEM_HEIGHT
-            // WrapperTopInContainer = -scrollY
-            // ItemTopInContainer = (i * ITEM_HEIGHT) - scrollY
-            
-            var itemTop = (i * ITEM_HEIGHT) - scrollY;
-            var itemCenter = itemTop + (ITEM_HEIGHT / 2);
-            
-            var dist = Math.abs(center - itemCenter);
-            var maxDist = container.clientHeight / 1.5;
-            
-            var scale = 1;
-            var opacity = 1;
-            var blur = 0;
-            
-            if (dist < maxDist) {
-                var ratio = 1 - (dist / maxDist);
-                // Non-linear easing for better look?
-                scale = 0.85 + (Math.pow(ratio, 0.8) * 0.35); // 0.85 to 1.2
-                opacity = 0.2 + (Math.pow(ratio, 0.5) * 0.8); // 0.2 to 1.0
-                blur = (1 - ratio) * 2;
-            } else {
-                scale = 0.85;
-                opacity = 0.2;
-                blur = 2;
-            }
-            
-            item.style.transform = `scale(${scale})`; // Transform inside wrapper
-            // Note: transforming item changes its layout space? 
-            // Flex items: transform affects visual not layout. OK.
-            item.style.opacity = opacity;
-            item.style.filter = `blur(${blur}px)`;
-            
-            // Optimization: Skip items far out of view?
-            // if (dist > container.clientHeight) item.style.visibility = 'hidden';
-            // else item.style.visibility = 'visible';
-        }
-    }
-
-    // Init
-    // Start slightly offset to show text 
-    currentY = 0; 
-    animate();
-})();
-</script>
-
-<style>
-#widget-poetry .widget-box-content {
-    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,240,240,0.4));
-    height: 200px; /* 5 * 40 */
-    overflow: hidden; /* Hide scrollbar */
-    position: relative;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    width: 100%;
-    box-sizing: border-box;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
-}
-
-#poetry-wrapper {
-    /* Contains all items */
-    will-change: transform;
-}
-
-.poetry-line {
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.15em;
-    font-family: "KaiTi", "STKaiti", "SimKai", serif;
-    font-weight: bold;
-    color: #333;
-    white-space: nowrap;
-    user-select: none;
-    transition: opacity 0.1s; /* Only opacity needs smoothing if logic jumps? No, every frame updates. */
-    /* Transform transition conflicts with JS scale? Yes. Remove transition. */
-}
-</style>
-
-  </div>
-  
-  <div class="widget-box">
-  	<div class="widget-wrap" id="widget-deadline">
-    <h3 class="widget-title">下一个最后期限</h3>
-    <div class="widget-box-content">
-        
-        
-        
-            <div class="deadline-card">
-                <div class="deadline-title">准备每周组会，回顾一下论文进展、评估接下来的工作量（时间），把图画一画</div>
-                <div class="deadline-date">2026-01-29 19:00:00</div>
-                <div class="deadline-timer" id="deadline-timer" data-target="2026-01-29 19:00:00">
-                    <div class="timer-box">
-                        <span class="t-value" id="t-days">00</span>
-                        <span class="t-label">天</span>
-                    </div>
-                    <div class="timer-box">
-                        <span class="t-value" id="t-hours">00</span>
-                        <span class="t-label">时</span>
-                    </div>
-                    <div class="timer-box">
-                        <span class="t-value" id="t-minutes">00</span>
-                        <span class="t-label">分</span>
-                    </div>
-                    <div class="timer-box">
-                        <span class="t-value" id="t-seconds">00</span>
-                        <span class="t-label">秒</span>
-                    </div>
-                </div>
-            </div>
-        
-    </div>
-</div>
-
-<script>
-(function() {
-    var timerEl = document.getElementById('deadline-timer');
-    if (!timerEl) return;
-    
-    var targetStr = timerEl.getAttribute('data-target');
-    // Replace '-' with '/' for better Safari compatibility if needed, but modern browsers are fine
-    var targetDate = new Date(targetStr.replace(/-/g, "/")); 
-
-    function update() {
-        var now = new Date();
-        var diff = targetDate - now;
-        
-        if (diff <= 0) {
-            timerEl.innerHTML = "已到期";
-            return;
-        }
-        
-        // Calc
-        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        document.getElementById('t-days').innerText = String(days).padStart(2, '0');
-        document.getElementById('t-hours').innerText = String(hours).padStart(2, '0');
-        document.getElementById('t-minutes').innerText = String(minutes).padStart(2, '0');
-        document.getElementById('t-seconds').innerText = String(seconds).padStart(2, '0');
-    }
-    
-    setInterval(update, 1000);
-    update();
-})();
-</script>
-
-<style>
-.deadline-card {
-    text-align: center;
-    padding: 10px;
-}
-.deadline-title {
-    font-weight: bold;
-    font-size: 1.1em;
-    margin-bottom: 5px;
-    color: #333;
-}
-.deadline-date {
-    font-size: 0.85em;
-    color: #666;
-    margin-bottom: 15px;
-}
-.deadline-timer {
-    display: flex;
-    justify-content: space-around;
-}
-.timer-box {
-    display: flex;
-    flex-direction: column;
-    background: rgba(0,0,0,0.05);
-    border-radius: 5px;
-    padding: 5px;
-    min-width: 40px;
-}
-.t-value {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #49b1f5; /* Theme color */
-    font-family: monospace;
-}
-.t-label {
-    font-size: 0.7em;
-    color: #888;
-}
-.deadline-empty {
-    text-align: center;
-    padding: 20px;
-    color: #888;
-}
-.deadline-empty i {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-</style>
-
-  </div>
-  
-</aside>
-
-<script>
-  document.querySelectorAll('.recent-post-item').forEach(item => {
-    // Add hover effect tracking
-    item.addEventListener('mousemove', (e) => {
-      const rect = item.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      item.style.setProperty('--x', `${x}px`);
-      item.style.setProperty('--y', `${y}px`);
-    });
-
-    // Make whole card clickable
-    item.addEventListener('click', (e) => {
-      // Don't trigger if user clicked an anchor tag (to allow open in new tab etc)
-      if (e.target.tagName.toLowerCase() === 'a') return;
-      
-      const url = item.getAttribute('data-href');
-      if (url) {
-        window.location.href = url;
-      }
-    });
-  });
-</script>
 
 
 
