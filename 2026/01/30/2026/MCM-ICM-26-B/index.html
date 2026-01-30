@@ -1,0 +1,342 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>MCM/ICM 26 B [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>MCM/ICM 26 B</h1>
+			<h2 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h2><h3 id="问题一初步思路"><a href="#问题一初步思路" class="headerlink" title="问题一初步思路"></a>问题一初步思路</h3><ol>
+<li>确定10个发射场的运力（吨&#x2F;年）、确定太空电梯的运力（吨&#x2F;年）、确定发射场发射火箭运输的成本、确定使用太空电梯+发射火箭的成本</li>
+</ol>
+<ul>
+<li>发射场的运力</li>
+<li>发射场的成本</li>
+<li>太空电梯+发射火箭的运力</li>
+<li>太空电梯+发射火箭</li>
+</ul>
+<hr>
+<p>问题一的整体思路：</p>
+<ul>
+<li>整个问题建模是要在一个时间范围内完成运输的任务</li>
+<li>目标导向是综合考虑成本与时间，成本在目标函数中只要计算出来让成本尽可能小就可以了，时间可以转换为一个时间代价（具体见草稿），具体的权重有待商榷</li>
+<li>关于完工标志的点可能需要理解一下，设置它是为了在数学逻辑上实现时间代价，而对完工标志的约束就像用数学语言实现了一个编程里的if-else的感觉</li>
+<li>很多参数都有待商榷，进一步明确需要数据支撑的地方</li>
+</ul>
+<hr>
+<p><strong>下一步我们的任务？针对这个基础模型细化里面要考虑的参数：1）是否对参数进行修改、2）哪些参数需要具体的数据支撑、3）查阅资料明确对应的数据</strong></p>
+<h3 id="问题一模型草稿"><a href="#问题一模型草稿" class="headerlink" title="问题一模型草稿"></a>问题一模型草稿</h3><p><strong>基本标识符、索引</strong></p>
+<ol>
+<li>$t$：时间段，年索引，以2050为1开始进行索引；</li>
+<li>$s$：传统火箭发射场地索引，$s in {1,\dots,10}$，对应10个发射场地</li>
+<li>$g$：银河港索引，$g \in {1,2,3}$，对应3个银河港；</li>
+</ol>
+<p><strong>决策变量</strong></p>
+<ol>
+<li><p>$x_{s,t}$，t年从传统场地s，交付材料到月球的质量；</p>
+</li>
+<li><p>$e_{g,t}$，t年从银河港g通过电梯从地球港交付到顶点锚的材料质量；</p>
+</li>
+<li><p>$x^{e}_{g,t}$，t年从银河港g的顶点锚，交付到月球的质量；</p>
+</li>
+<li><p>$l_{g,t}$，t年末，顶点锚剩余的质量；</p>
+</li>
+<li><p>发射次数$n_{s,t}$，t年，传统场地s到月球；</p>
+</li>
+<li><p>发射次数$n^e_{g,t}$，t年，银河港g到月球；</p>
+</li>
+<li><p>完工标志$F_t \in {0,1}$，若t年结束时已经完成则$F_t &#x3D; 1$否则$F_t &#x3D; 0$；</p>
+</li>
+</ol>
+<p><strong>约束条件</strong></p>
+<p>传统火箭发射能力与负载</p>
+<ol>
+<li>$0 \le n_{s,t} \le \bar{N}_{s,t}\quad \forall s,t$</li>
+<li>$ x_{s,t} \le P_{s}\cdot n_{s,t}\cdot \eta_{s}\quad \forall s,t $</li>
+</ol>
+<p>银河港发射-电梯段</p>
+<ol>
+<li>$0 \le e_{g,t} \le \bar{E}_{g,t}\quad \forall g,t$</li>
+</ol>
+<p>银河港发射-顶点锚发射次数</p>
+<ol>
+<li>$ 0 \le n^{e}<em>{g,t} \le \bar{N}^{e}</em>{g,t}\quad \forall g,t $</li>
+<li>$x^{e}<em>{g,t} \le P^{e}</em>{g}\cdot n^{e}<em>{g,t}\cdot \eta^{e}</em>{g}\quad \forall g,t$</li>
+</ol>
+<p>顶点锚库存的平衡</p>
+<ol>
+<li>$l_{g,0} &#x3D; 0\quad \forall g$</li>
+<li>$l_{g,t}&#x3D;l_{g,t-1}+e_{g,t}-x_{g,t}\quad \forall g,t$</li>
+<li>$l_{g,t}\ge 0$</li>
+</ol>
+<p>累计交付（到t年末）</p>
+<ol>
+<li>$Z_t&#x3D;\sum_{\tau&#x3D;1}^{t}\left(\sum_{s\in \mathcal{S}} x_{s,\tau} + \sum_{g\in \mathcal{G}} x^{e}_{g,\tau}\right)$</li>
+<li>$Z_{T_{max}} \ge D$</li>
+</ol>
+<p>是否交付的约束</p>
+<ol>
+<li>$Z_t \ge D\cdot F_t$</li>
+<li>$Z_t \le D - \epsilon + M\cdot F_t$（这两个约束用来卡一下$F_t$，没有满足要求是0，首次满足的时候就是1了）</li>
+</ol>
+<p><strong>目标函数</strong></p>
+<p>总成本</p>
+<ol>
+<li>$Cost &#x3D; \sum_{t}[\sum_{s} (c_{s}\cdot n_{s,t})+\sum_{g} c^{e}<em>{g}, n^{e}</em>{g,t}+\sum_{g} c^{el}<em>{g}\cdot e</em>{g,t}+\sum_{g}h_{g}\cdot l_{g,t}]$</li>
+</ol>
+<p>时间代价</p>
+<ol>
+<li>$TimeCost &#x3D; \sum_{i&#x3D;1}^{T_{max}} (1-F_t)$</li>
+</ol>
+<p>加权目标</p>
+<ol>
+<li>$\min \alpha \cdot Cost + \beta\cdot TimeCost$</li>
+</ol>
+<p><strong>参数说明</strong></p>
+<ol>
+<li>$\bar{N}_{s,t}$：传统发射场地t年可以发送的最大次数；</li>
+<li>$P_s$：传统发射场地s一次发射的材料质量</li>
+<li>$\eta_s$：场地s可能的折损率（一次发射如果考虑损失）</li>
+<li>$\bar{E}_{g,t}$：银河港g，t年，电梯最大运输质量</li>
+<li>$\bar{N}^{e}_{g,t}$：银河港g，t年，顶点锚，最大发射质量；</li>
+<li>$P^{e}_g$：银河港g，一次发射质量</li>
+<li>$M$：一个足够大的常数；</li>
+<li>$D$：目标常数$1,000,000,000$</li>
+<li>$T_{max}$：最后时间期限</li>
+<li>$h_{g}$：银河港g的顶点锚的存储成本</li>
+</ol>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="/js/highlight.pack.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
