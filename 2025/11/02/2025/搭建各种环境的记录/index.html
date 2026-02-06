@@ -155,7 +155,7 @@
 <li>然后我在Vscode中安装了扩展<strong>Extension Pack for Java</strong>，对应一共为我自动安装了7个扩展项目（30MB左右），在Vscode中点开扩展清空搜索栏，默认会显示已经安装的扩展</li>
 <li>最后我在我的Mac用户目录下创建了<strong>Java_projects</strong>用来存放我的各种java项目，并创建了一个test项目，完成了测试。此外，实际上在运行的时候要依赖于我签名安装的扩展项目中的java run，如果要使用debug的话则依赖于java debug。（但我注意到也可以使用run code运行，这个插件是我前面为了运行C&#x2F;C++而安装的，不过如果使用它运行，它会将为的java源文件先编译成一个.class的文件）</li>
 </ol>
-<h2 id="搭建Vue环境（Mac）"><a href="#搭建Vue环境（Mac）" class="headerlink" title="搭建Vue环境（Mac）"></a>搭建Vue环境（Mac）</h2><ol>
+<h2 id="搭建Vue环境（Mac）"><a href="#搭建Vue环境（Mac）" class="headerlink" title="搭建Vue环境（Mac）"></a><del>搭建Vue环境（Mac）</del></h2><ol>
 <li>检查了我的Mac电脑上具有node.js的环境，以及npm的包管理器</li>
 <li>于是我使用npm下载了Vue CLI(一个Vue项目的命令行工具)，使用命令<code>npm install -g @vue/cli</code>，在全局安装了这个命令行工具</li>
 <li>我在用户目录下创建了Vue_projects，用于存放Vue的项目，并在此文件夹下使用<code>vue create test-project</code>创建了一个测试项目，选择了默认配置Vue2;</li>
@@ -165,7 +165,7 @@
 <li>为了在Vscode中进行Vue开发，我安装了Vue(Official)的插件</li>
 <li>注意：使用vue create project—name创建的项目，所有相关依赖都在该项目文件夹下（node_modules中），当然也有创建全局依赖的方法；总之明确这一点可以帮助我管理好空间。</li>
 </ol>
-<h2 id="搭建微信小程序开发环境（Mac）"><a href="#搭建微信小程序开发环境（Mac）" class="headerlink" title="搭建微信小程序开发环境（Mac）"></a>搭建微信小程序开发环境（Mac）</h2><ol>
+<h2 id="搭建微信小程序开发环境（Mac）"><a href="#搭建微信小程序开发环境（Mac）" class="headerlink" title="搭建微信小程序开发环境（Mac）"></a><del>搭建微信小程序开发环境（Mac）</del></h2><ol>
 <li>我在微信公众平台<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/">WeChat</a>，为我即将开发的小程序注册了一个账号；</li>
 <li>成功注册后进入了小程序发布流程界面，完成了前置的一些信息设置，并根据引导下载了<code>普通小程序开发工具</code>，网址是<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/devtools/stable.html">小程序开发工具下载</a>，下载了<strong>macOS ARM64</strong>的开发工具，dmg文件390.1MB</li>
 <li>我使用dmg文件安装了微信小程序开发app，名为<code>微信开发者工具</code>，并推出了安装器，删除了dmg文件；</li>
@@ -190,6 +190,14 @@
 </ol>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;python.defaultInterpreterPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/.venv/bin/python&quot;</span><span class="punctuation">,</span><span class="comment">//路径中.venv可能需要修改</span></span><br><span class="line">    <span class="attr">&quot;python.terminal.activateEnvironment&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>  <span class="comment">// 环境自动激活</span></span><br><span class="line">    <span class="attr">&quot;python.terminal.activateEnvInCurrentTerminal&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.terminal.useEnvFile&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
+<p>如何查看当前的虚拟环境，多种方法：</p>
+<ol>
+<li><code>echo $VIRTUAL_ENV</code>，正常情况下会输出当前工作的.venv_name相关的目录；</li>
+<li><code>which python</code>，和1类似</li>
+<li><code>pip -v</code>，和1类似（看来虚拟环境也会有自己的包管理器）</li>
+</ol>
+<h3 id="pytorch环境"><a href="#pytorch环境" class="headerlink" title="pytorch环境"></a>pytorch环境</h3><p>是时候开始动手学习pytorch了！</p>
+<p>只需要在虚拟环境里使用<code>pip3 install torch torchvision</code>就可以快速安装最新版的torch</p>
 <h3 id="虚拟环境lx-back-env"><a href="#虚拟环境lx-back-env" class="headerlink" title="虚拟环境lx_back_env"></a>虚拟环境lx_back_env</h3><p>用来做软件工程课设的虚拟环境，里面有一些dj的框架；</p>
 <p>虚拟环境~&#x2F;Py_projects&#x2F;THINKPADSTROE-BACKEND&#x2F;lx_back_env</p>
 <p>整个环境大概几十MB</p>
@@ -259,7 +267,7 @@
 <li>复制 sketchybar 配置到你的配置目录 <code>cp -r .config/sketchybar ~/.config/</code></li>
 <li>安装了一系列外部依赖：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装必备命令行工具</span></span><br><span class="line">brew install jq              <span class="comment"># JSON处理 (必需)</span></span><br><span class="line">brew install sf-symbols      <span class="comment"># Apple系统图标 (必需)</span></span><br><span class="line">brew install gh              <span class="comment"># GitHub CLI (用于某些插件)</span></span><br><span class="line">brew install switchaudio-osx <span class="comment"># 音频设备切换 (用于音频插件)</span></span><br><span class="line">brew install cava            <span class="comment"># 音频频谱可视化</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：`background-music` 可能需要额外步骤，请访问其GitHub页面安装</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装 Nerd Fonts (图标字体，必需!)</span></span><br><span class="line">brew tap homebrew/cask-fonts</span><br><span class="line">brew install --cask font-hack-nerd-font font-sf-pro</span><br><span class="line"><span class="comment"># 安装后，务必打开【字体册】应用，确保这些字体已激活。</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h3 id="设置导航栏的音乐组件"><a href="#设置导航栏的音乐组件" class="headerlink" title="设置导航栏的音乐组件"></a>设置导航栏的音乐组件</h3><ol>
+<h3 id="设置导航栏的音乐组件"><a href="#设置导航栏的音乐组件" class="headerlink" title="设置导航栏的音乐组件"></a><del>设置导航栏的音乐组件</del></h3><ol>
 <li>使用<code>brew install --cask blackhole-2ch</code>安装blackhole；</li>
 <li>使用<code>brew install ffmpeg</code>安装ffmpeg（这个依赖似乎比较多有100多MB）；</li>
 <li>配置音频路由，让音频不仅输出到扬声器、耳机，还输出到balckhole；</li>
@@ -279,9 +287,14 @@
 <li>在~&#x2F;.local&#x2F;bin&#x2F;yazi-copy-files-macos中编写yazi的快捷键脚本（为了将yazi中复制粘贴的内容放到finder的粘贴板）</li>
 <li>赋予脚本执行权限<code>chmod +x ~/.local/bin/yazi-copy-files-macos</code>；</li>
 </ol>
-<dl><dt>yazi的使用：<br>类别	    按键	                            功能<br>基础导航	h j k l &#x2F; 方向键	左、下、上、右移动 &#x2F; 进入文件夹<br>Enter	进入目录或打开文件<br>q	退出 Yazi<br>文件操作	<Space>	标记&#x2F;取消标记文件（用于批量操作）<br>y	复制标记的文件<br>x	剪切标记的文件<br>p	粘贴文件<br>d	将文件移至回收站<br>D	永久删除文件（慎用）<br>a	新建文件&#x2F;文件夹（新建文件夹需以&#x2F;结尾）<br>r	重命名文件<br>视图与高级	.	显示&#x2F;隐藏隐藏文件（以点开头的文件）<br>~ 或 F1	打开内置帮助菜单，忘记快捷键时随时查阅<br>Tab	切换标签页</Space></dt><dd>执行 Shell 命令</dd></dl><h2 id="配置typst"><a href="#配置typst" class="headerlink" title="配置typst"></a>配置typst</h2><ol>
+<dl><dt>yazi的使用：<br>类别	    按键	                            功能<br>基础导航	h j k l &#x2F; 方向键	左、下、上、右移动 &#x2F; 进入文件夹<br>Enter	进入目录或打开文件<br>q	退出 Yazi<br>文件操作	<Space>	标记&#x2F;取消标记文件（用于批量操作）<br>y	复制标记的文件<br>x	剪切标记的文件<br>p	粘贴文件<br>d	将文件移至回收站<br>D	永久删除文件（慎用）<br>a	新建文件&#x2F;文件夹（新建文件夹需以&#x2F;结尾）<br>r	重命名文件<br>视图与高级	.	显示&#x2F;隐藏隐藏文件（以点开头的文件）<br>~ 或 F1	打开内置帮助菜单，忘记快捷键时随时查阅<br>Tab	切换标签页</Space></dt><dd>执行 Shell 命令</dd></dl><h2 id="配置typst"><a href="#配置typst" class="headerlink" title="配置typst"></a><del>配置typst</del></h2><ol>
 <li>在vsc安装typst扩展Tinymist Typst；</li>
 <li>使用<code>brew install typst</code>安装typst编译器；</li>
+</ol>
+<h2 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h2><ol>
+<li>代理质量检测：<img src="https://www.juliangip.com/agent%60" alt="代理质量检测">，使用的时候用ipv4+端口</li>
+<li>安装chrome浏览器：<img src="https://www.google.cn/chrome/next-steps.html?statcb=0&installdataindex=empty&defaultbrowser=0" alt="chrome国内安装地址">；</li>
+<li>查询ip归属：<img src="https://www.cip.cc/" alt="ip归属查询">；</li>
 </ol>
 
 		</div>
