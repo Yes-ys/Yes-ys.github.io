@@ -152,8 +152,20 @@
 <li><strong>针对具体情况，使用Dataloader</strong>；<br>（因为Dataset类中规定了继承自己的子类必须<strong>重写</strong>的函数是什么，当你完成自己的子类的时候，再和Dataloader结合使用，就意味着你有了可以用于加载自己的数据的“工具”，这就是数据加载在实现层面的目标）；</li>
 </ul>
 <h3 id="数据集的文件组织形式"><a href="#数据集的文件组织形式" class="headerlink" title="数据集的文件组织形式"></a>数据集的文件组织形式</h3><p>数据集文件的组织形式意味着你在编程时的处理范式，一种类型的组织形式往往有着较为固定的编程范式。</p>
-<p>主要有三种形式：</p>
-<p>1. </p>
+<p>按照label所在的位置，主要有三种形式：</p>
+<ol>
+<li>label作为数据文件存储的文件夹名</li>
+</ol>
+<ul>
+<li>trian&#x2F;label_name&#x2F;…(存储的数据文件)</li>
+<li>val&#x2F;label_name&#x2F;…(存储的数据文件)</li>
+</ul>
+<ol start="2">
+<li>label作为数据文件的文件名</li>
+</ol>
+<ul>
+<li>train&#x2F;label_name()</li>
+</ul>
 <h3 id="代码以及注意事项"><a href="#代码以及注意事项" class="headerlink" title="代码以及注意事项"></a>代码以及注意事项</h3><p>下载使用的<img src="https://download.pytorch.org/tutorial/hymenoptera_data.zip" alt="数据集"></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">读取数据集的模块：DataReader.read_data_insect</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">data_reader_insect</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, root_dir, label_dir</span>): <span class="comment"># 初始化的时候将数据的地址组织成一个列表</span></span><br><span class="line">        <span class="variable language_">self</span>.root_dir = root_dir</span><br><span class="line">        <span class="variable language_">self</span>.dir_list = os.listdir(os.path.join(root_dir,label_dir))</span><br><span class="line">        <span class="variable language_">self</span>.label_dir = label_dir</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self,idx</span>): <span class="comment"># 使用idx访问列表，得到图片地址，读取到图片</span></span><br><span class="line">        img_dir = <span class="variable language_">self</span>.dir_list[idx]</span><br><span class="line">        img_dir = os.path.join(<span class="variable language_">self</span>.root_dir,<span class="variable language_">self</span>.label_dir,img_dir) <span class="comment"># os.listdir只返回文件名，需要补全路径！！！</span></span><br><span class="line">        img = Image.<span class="built_in">open</span>(img_dir)</span><br><span class="line">        label = <span class="variable language_">self</span>.label_dir</span><br><span class="line">        <span class="keyword">return</span> img,label <span class="comment"># 最后返回数据和标签</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.dir_list)</span><br></pre></td></tr></table></figure>
 
