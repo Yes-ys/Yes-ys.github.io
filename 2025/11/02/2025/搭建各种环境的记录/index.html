@@ -188,7 +188,12 @@
 <li>创建项目配置文件<code>.vscode/settings.json</code></li>
 <li>添加虚拟环境有关配置如下，其中<code>$&#123;workspaceFolder&#125;</code>会自动指向VSCode中打开的项目目录；</li>
 </ol>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;python.defaultInterpreterPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/.venv/bin/python&quot;</span><span class="punctuation">,</span><span class="comment">//路径中.venv可能需要修改</span></span><br><span class="line">    <span class="attr">&quot;python.terminal.activateEnvironment&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>  <span class="comment">// 环境自动激活</span></span><br><span class="line">    <span class="attr">&quot;python.terminal.activateEnvInCurrentTerminal&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;python.terminal.useEnvFile&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight json"><span class="punctuation">&#123;</span>
+    <span class="attr">&quot;python.defaultInterpreterPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;workspaceFolder&#125;/.venv/bin/python&quot;</span><span class="punctuation">,</span><span class="comment">//路径中.venv可能需要修改</span>
+    <span class="attr">&quot;python.terminal.activateEnvironment&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>  <span class="comment">// 环境自动激活</span>
+    <span class="attr">&quot;python.terminal.activateEnvInCurrentTerminal&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>
+    <span class="attr">&quot;python.terminal.useEnvFile&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span>
+<span class="punctuation">&#125;</span></code></pre>
 
 <p>如何查看当前的虚拟环境，多种方法：</p>
 <ol>
@@ -265,7 +270,19 @@
 <li>我clone了一个大佬的仓库到本地<code>git clone https://github.com/FelixKratz/dotfiles.git /tmp/felix_dotfiles_complete</code>;</li>
 <li>导航到需要提交的特定版本<code>cd /tmp/felix_dotfiles</code>以及<code>git checkout e6288b3f4220ca1ac64a68e60fced2d4c3e3e20b</code></li>
 <li>复制 sketchybar 配置到你的配置目录 <code>cp -r .config/sketchybar ~/.config/</code></li>
-<li>安装了一系列外部依赖：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装必备命令行工具</span></span><br><span class="line">brew install jq              <span class="comment"># JSON处理 (必需)</span></span><br><span class="line">brew install sf-symbols      <span class="comment"># Apple系统图标 (必需)</span></span><br><span class="line">brew install gh              <span class="comment"># GitHub CLI (用于某些插件)</span></span><br><span class="line">brew install switchaudio-osx <span class="comment"># 音频设备切换 (用于音频插件)</span></span><br><span class="line">brew install cava            <span class="comment"># 音频频谱可视化</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：`background-music` 可能需要额外步骤，请访问其GitHub页面安装</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装 Nerd Fonts (图标字体，必需!)</span></span><br><span class="line">brew tap homebrew/cask-fonts</span><br><span class="line">brew install --cask font-hack-nerd-font font-sf-pro</span><br><span class="line"><span class="comment"># 安装后，务必打开【字体册】应用，确保这些字体已激活。</span></span><br></pre></td></tr></table></figure></li>
+<li>安装了一系列外部依赖：<pre><code class="highlight bash"><span class="comment"># 1. 安装必备命令行工具</span>
+brew install jq              <span class="comment"># JSON处理 (必需)</span>
+brew install sf-symbols      <span class="comment"># Apple系统图标 (必需)</span>
+brew install gh              <span class="comment"># GitHub CLI (用于某些插件)</span>
+brew install switchaudio-osx <span class="comment"># 音频设备切换 (用于音频插件)</span>
+brew install cava            <span class="comment"># 音频频谱可视化</span>
+
+<span class="comment"># 注意：`background-music` 可能需要额外步骤，请访问其GitHub页面安装</span>
+
+<span class="comment"># 2. 安装 Nerd Fonts (图标字体，必需!)</span>
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font font-sf-pro
+<span class="comment"># 安装后，务必打开【字体册】应用，确保这些字体已激活。</span></code></pre></li>
 </ol>
 <h3 id="设置导航栏的音乐组件"><a href="#设置导航栏的音乐组件" class="headerlink" title="设置导航栏的音乐组件"></a><del>设置导航栏的音乐组件</del></h3><ol>
 <li>使用<code>brew install --cask blackhole-2ch</code>安装blackhole；</li>

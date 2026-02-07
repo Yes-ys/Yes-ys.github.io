@@ -135,12 +135,109 @@
 <p>我的思路是，现在房屋形成了一个环，我可以任意枚举一个位置入手，把环剪开，此时还原成房屋是一排的情况，然后套用Ⅰ的dp模板就可以了。</p>
 <p>这样做的问题在于，dp模板在新的一排房屋上，相当于状态树是从i+1的位置开始的，但是dp模板是套用在从0开始的。也就是说状态树结点上前后结点的值有严格的依赖，任意剪切环，形成的数组，从前往后的dp并不对应原始数据的状态树。</p>
 <p>以下是第一版代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">rob</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.size() == <span class="number">1</span>)<span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(nums.size() == <span class="number">2</span>)<span class="keyword">return</span> max(nums[<span class="number">1</span>],nums[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(nums.size() == <span class="number">3</span>)<span class="keyword">return</span> max(nums[<span class="number">2</span>],max(nums[<span class="number">1</span>],nums[<span class="number">0</span>]));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.size();i++)&#123;</span><br><span class="line">            <span class="type">int</span> cnt = nums[i];</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> b1 = i,b2 = (i<span class="number">-1</span>+nums.size())%nums.size(),b3 = (i+<span class="number">1</span>)%nums.size();</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; t;</span><br><span class="line">            t.clear();</span><br><span class="line">            <span class="comment">// for(int j = 0;j &lt; nums.size();j++)</span></span><br><span class="line">            <span class="comment">//     if(j != b1&amp;&amp;j != b2&amp;&amp;j != b3)t.push_back(nums[j]); 这样简单粗暴的构造t没有考虑到环断开之后，首位相接的情况</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = i+<span class="number">2</span>;j &lt; nums.size();j++)</span><br><span class="line">                t.push_back(nums[j]);</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; i<span class="number">-1</span>;j++)</span><br><span class="line">                t.push_back(nums[j]);</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(t.size() == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(ans &lt; t[<span class="number">0</span>]+cnt)ans = t[<span class="number">0</span>]+cnt;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(t.size() == <span class="number">2</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(ans &lt; max(t[<span class="number">0</span>],t[<span class="number">1</span>])+cnt) ans = max(t[<span class="number">0</span>],t[<span class="number">1</span>])+cnt;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> new_f,f0 = t[<span class="number">0</span>],f1 = t[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">2</span>;j &lt; t.size();j++)</span><br><span class="line">            &#123;</span><br><span class="line">                new_f = max(f1,f0+t[j]);</span><br><span class="line">                f0 = f1;</span><br><span class="line">                f1 = new_f;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(new_f + cnt &gt; ans)ans = new_f + cnt;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+
+    <span class="type">int</span> ans = <span class="number">0</span>;
+
+    <span class="type">int</span> <span class="title function_">rob</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums)</span> &#123;
+        <span class="keyword">if</span>(nums.size() == <span class="number">1</span>)<span class="keyword">return</span> nums[<span class="number">0</span>];
+        <span class="keyword">else</span> <span class="keyword">if</span>(nums.size() == <span class="number">2</span>)<span class="keyword">return</span> max(nums[<span class="number">1</span>],nums[<span class="number">0</span>]);
+        <span class="keyword">else</span> <span class="keyword">if</span>(nums.size() == <span class="number">3</span>)<span class="keyword">return</span> max(nums[<span class="number">2</span>],max(nums[<span class="number">1</span>],nums[<span class="number">0</span>]));
+
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.size();i++)&#123;
+            <span class="type">int</span> cnt = nums[i];
+
+            <span class="type">int</span> b1 = i,b2 = (i<span class="number">-1</span>+nums.size())%nums.size(),b3 = (i+<span class="number">1</span>)%nums.size();
+            <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; t;
+            t.clear();
+            <span class="comment">// for(int j = 0;j &lt; nums.size();j++)</span>
+            <span class="comment">//     if(j != b1&amp;&amp;j != b2&amp;&amp;j != b3)t.push_back(nums[j]); 这样简单粗暴的构造t没有考虑到环断开之后，首位相接的情况</span>
+
+            <span class="keyword">for</span>(<span class="type">int</span> j = i+<span class="number">2</span>;j &lt; nums.size();j++)
+                t.push_back(nums[j]);
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; i<span class="number">-1</span>;j++)
+                t.push_back(nums[j]);
+            
+            
+            <span class="keyword">if</span>(t.size() == <span class="number">1</span>)&#123;
+                <span class="keyword">if</span>(ans &lt; t[<span class="number">0</span>]+cnt)ans = t[<span class="number">0</span>]+cnt;
+            &#125;
+
+            <span class="keyword">if</span>(t.size() == <span class="number">2</span>)&#123;
+                <span class="keyword">if</span>(ans &lt; max(t[<span class="number">0</span>],t[<span class="number">1</span>])+cnt) ans = max(t[<span class="number">0</span>],t[<span class="number">1</span>])+cnt;
+            &#125;
+
+            <span class="type">int</span> new_f,f0 = t[<span class="number">0</span>],f1 = t[<span class="number">1</span>];
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">2</span>;j &lt; t.size();j++)
+            &#123;
+                new_f = max(f1,f0+t[j]);
+                f0 = f1;
+                f1 = new_f;
+            &#125;
+
+            <span class="keyword">if</span>(new_f + cnt &gt; ans)ans = new_f + cnt;
+        &#125;
+        <span class="keyword">return</span> ans;
+    &#125;
+&#125;;
+</code></pre>
 
 <p>正确的思路是只从第一个位置把环剪开，枚举偷第一个位置，不偷第一个位置；</p>
 <p>我最开始想到从任意位置剪开环，其实是相当于在选不选的子集模板中，不从第一个数开始考虑，从任意的数字开始考虑。看似是为了“考虑所有情况”，实际上打乱了状态树的状态，按照从前往后依次考虑选不选本就能够把所有状态考虑进去。而这道题只是在此基础上多了一个，第一个位置要特殊考虑，它会衍生出两种情况，就第一个位置的特殊考虑而言已经完备，分别在两种情况中直接使用“从前往后选或不选”的思想，也是完备的，综合来看可以考虑所有情况，而不会打乱状态树，可以套用dp模板。否则只会像我的第一版思路，打乱了状态树，还套用dp模板，只会造成错误（这样的错误在某种程度上来说，就是我改变了某些房屋的位置，改变了它们的相邻关系。）</p>
 <p>修改后的代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">rob</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.size() == <span class="number">1</span>)<span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(nums.size() == <span class="number">2</span>)<span class="keyword">return</span> max(nums[<span class="number">1</span>],nums[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(nums.size() == <span class="number">3</span>)<span class="keyword">return</span> max(nums[<span class="number">2</span>],max(nums[<span class="number">1</span>],nums[<span class="number">0</span>]));</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> new_f = <span class="number">0</span>, f1 = <span class="number">0</span>, f0 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//选第一个房屋</span></span><br><span class="line">        <span class="comment">// f0 = nums[2+0], f1 = max(nums[2+0],nums[2+1]);</span></span><br><span class="line">        <span class="comment">// if(4 == nums.size() &amp;&amp; nums[0]+f0 &gt; ans)ans = nums[0]+f0;</span></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// for(int j = 2+2;j &lt; nums.size() - 1;j++)</span></span><br><span class="line">        <span class="comment">// &#123;</span></span><br><span class="line">        <span class="comment">//     new_f = max(f1,f0+nums[j]);</span></span><br><span class="line">        <span class="comment">//     f0 = f1;</span></span><br><span class="line">        <span class="comment">//     f1 = new_f;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// if(new_f+nums[0] &gt; ans) ans = new_f+nums[0]; 注意选第一个房屋不一定要偷第一个房屋，我的代码就错在了这里！</span></span><br><span class="line"></span><br><span class="line">        f0 = nums[<span class="number">0</span>],f1 = max(nums[<span class="number">0</span>],nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">2</span>;j &lt; nums.size()<span class="number">-1</span>;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            new_f = max(f1,f0+nums[j]);</span><br><span class="line">            f0 = f1;</span><br><span class="line">            f1 = new_f;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(new_f &gt; ans) ans = new_f;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//不选第一个房屋</span></span><br><span class="line">        f0 = nums[<span class="number">1</span>+<span class="number">0</span>], f1 = max(nums[<span class="number">1</span>+<span class="number">0</span>],nums[<span class="number">1</span>+<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>+<span class="number">2</span>;j &lt; nums.size();j++)</span><br><span class="line">        &#123;</span><br><span class="line">            new_f = max(f1,f0+nums[j]);</span><br><span class="line">            f0 = f1;</span><br><span class="line">            f1 = new_f;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(new_f &gt; ans) ans = new_f;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="type">int</span> ans = <span class="number">0</span>;
+    <span class="type">int</span> <span class="title function_">rob</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums)</span> &#123;
+        <span class="keyword">if</span>(nums.size() == <span class="number">1</span>)<span class="keyword">return</span> nums[<span class="number">0</span>];
+        <span class="keyword">else</span> <span class="keyword">if</span>(nums.size() == <span class="number">2</span>)<span class="keyword">return</span> max(nums[<span class="number">1</span>],nums[<span class="number">0</span>]);
+        <span class="keyword">else</span> <span class="keyword">if</span>(nums.size() == <span class="number">3</span>)<span class="keyword">return</span> max(nums[<span class="number">2</span>],max(nums[<span class="number">1</span>],nums[<span class="number">0</span>]));
+
+        <span class="type">int</span> new_f = <span class="number">0</span>, f1 = <span class="number">0</span>, f0 = <span class="number">0</span>;
+
+        <span class="comment">//选第一个房屋</span>
+        <span class="comment">// f0 = nums[2+0], f1 = max(nums[2+0],nums[2+1]);</span>
+        <span class="comment">// if(4 == nums.size() &amp;&amp; nums[0]+f0 &gt; ans)ans = nums[0]+f0;</span>
+
+        
+        <span class="comment">// for(int j = 2+2;j &lt; nums.size() - 1;j++)</span>
+        <span class="comment">// &#123;</span>
+        <span class="comment">//     new_f = max(f1,f0+nums[j]);</span>
+        <span class="comment">//     f0 = f1;</span>
+        <span class="comment">//     f1 = new_f;</span>
+        <span class="comment">// &#125;</span>
+
+        <span class="comment">// if(new_f+nums[0] &gt; ans) ans = new_f+nums[0]; 注意选第一个房屋不一定要偷第一个房屋，我的代码就错在了这里！</span>
+
+        f0 = nums[<span class="number">0</span>],f1 = max(nums[<span class="number">0</span>],nums[<span class="number">1</span>]);
+        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">2</span>;j &lt; nums.size()<span class="number">-1</span>;j++)
+        &#123;
+            new_f = max(f1,f0+nums[j]);
+            f0 = f1;
+            f1 = new_f;
+        &#125;
+        <span class="keyword">if</span>(new_f &gt; ans) ans = new_f;
+        
+        <span class="comment">//不选第一个房屋</span>
+        f0 = nums[<span class="number">1</span>+<span class="number">0</span>], f1 = max(nums[<span class="number">1</span>+<span class="number">0</span>],nums[<span class="number">1</span>+<span class="number">1</span>]);
+        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>+<span class="number">2</span>;j &lt; nums.size();j++)
+        &#123;
+            new_f = max(f1,f0+nums[j]);
+            f0 = f1;
+            f1 = new_f;
+        &#125;
+
+        <span class="keyword">if</span>(new_f &gt; ans) ans = new_f;
+
+        <span class="keyword">return</span> ans;
+
+    &#125;
+    
+&#125;;
+</code></pre>
 
 <p>我在写这版代码开始的时候又犯了一个错误，选第一间房屋的意思是要考虑第一间，而不是一定会偷第一间；实际上选第一间与否代表着参与递推计算的索引范围不同，也是考虑的房屋范围不同。但是确定了范围之后使用递推计算的过程，对应的才是考虑实际要不要偷的问题。</p>
 <h2 id="删除并获得点数"><a href="#删除并获得点数" class="headerlink" title="删除并获得点数"></a>删除并获得点数</h2><p>题干：</p>
@@ -159,7 +256,42 @@
 <p>然而上面存在一个问题，即第2步的时候：“对于j是，第一个不满足nums[j]+1 &#x3D;&#x3D; nums[i]的元素的下标”，如果nums[i] !&#x3D; nums[i-1]的话这是正确的，换言之，如果存在相同元素，那么索引范围的缩减会出现错误，误以为已经缩减成剔除了nums[j]+1 &#x3D;&#x3D; nums[i]对应的元素nums[j]，但实际上没有剔除。</p>
 <p>所以为了回溯三问对应的思路是正确的，我们要确保没有相同元素的存在；又因为我们要取得最大值，所以你如果选择了一个nums[i]，那么剩下的相同值的元素你都应该选；于是我想到了用一个哈希表，以nums[i]为key，value存储所有值为nums[i]的元素的和；然后将nums更新，使得重复的元素只保留一个，再排序；最后套用回溯三问的思路即可。</p>
 <p>代码实现：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">    <span class="type">int</span> cnt[<span class="number">20000</span>];</span><br><span class="line">    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i,<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">0</span>)<span class="keyword">return</span> mp[nums[<span class="number">0</span>]];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(i&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i<span class="number">-1</span>]+<span class="number">1</span> == nums[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(cnt[i] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[i];</span><br><span class="line">                cnt[i] = max(dfs(i<span class="number">-1</span>,nums),dfs(i<span class="number">-2</span>,nums)+mp[nums[i]]);</span><br><span class="line">                <span class="keyword">return</span> cnt[i];</span><br><span class="line">            &#125;   </span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(cnt[i] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[i];</span><br><span class="line">                cnt[i] = dfs(i<span class="number">-1</span>,nums)+mp[nums[i]];</span><br><span class="line">                <span class="keyword">return</span> cnt[i];</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">deleteAndEarn</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.size();i++)</span><br><span class="line">            mp[nums[i]]+=nums[i];</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; t;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = mp.begin();it != mp.end();it++)</span><br><span class="line">            t.push_back(it-&gt;first);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; t.size();i++)cnt[i] = <span class="number">-1</span>;</span><br><span class="line">        sort(t.begin(),t.end());</span><br><span class="line">        <span class="keyword">return</span> dfs(t.size()<span class="number">-1</span>,t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="built_in">map</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;
+    <span class="type">int</span> cnt[<span class="number">20000</span>];
+    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i,<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums)</span>&#123;
+        <span class="keyword">if</span>(i == <span class="number">0</span>)<span class="keyword">return</span> mp[nums[<span class="number">0</span>]];
+        <span class="keyword">else</span> <span class="keyword">if</span>(i&gt;<span class="number">0</span>)&#123;
+            <span class="keyword">if</span>(nums[i<span class="number">-1</span>]+<span class="number">1</span> == nums[i])
+            &#123;
+                <span class="keyword">if</span>(cnt[i] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[i];
+                cnt[i] = max(dfs(i<span class="number">-1</span>,nums),dfs(i<span class="number">-2</span>,nums)+mp[nums[i]]);
+                <span class="keyword">return</span> cnt[i];
+            &#125;   
+            <span class="keyword">else</span>&#123;
+                <span class="keyword">if</span>(cnt[i] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[i];
+                cnt[i] = dfs(i<span class="number">-1</span>,nums)+mp[nums[i]];
+                <span class="keyword">return</span> cnt[i];
+            &#125; 
+        &#125;
+        <span class="keyword">return</span> <span class="number">0</span>;
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">deleteAndEarn</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums)</span> &#123;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.size();i++)
+            mp[nums[i]]+=nums[i];
+
+        <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; t;
+        <span class="keyword">for</span>(<span class="keyword">auto</span> it = mp.begin();it != mp.end();it++)
+            t.push_back(it-&gt;first);
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; t.size();i++)cnt[i] = <span class="number">-1</span>;
+        sort(t.begin(),t.end());
+        <span class="keyword">return</span> dfs(t.size()<span class="number">-1</span>,t);
+    &#125;
+&#125;;
+</code></pre>
 
 <h2 id="统计构造好字符串的方案数-leetcode-2466"><a href="#统计构造好字符串的方案数-leetcode-2466" class="headerlink" title="统计构造好字符串的方案数 leetcode 2466"></a>统计构造好字符串的方案数 leetcode 2466</h2><p>题干：</p>
 <p>给你整数 zero ，one ，low 和 high ，我们从空字符串开始构造一个字符串，每一步执行下面操作中的一种：</p>
@@ -170,10 +302,55 @@
 <p>如果通过以上过程得到一个 长度 在 low 和 high 之间（包含上下边界）的字符串，那么这个字符串我们称为 好 字符串。</p>
 <p>请你返回满足以上要求的 不同 好字符串数目。由于答案可能很大，请将结果对 109 + 7 取余 后返回。</p>
 <p>我的第一种思路，试一试dfs，枚举每次选zero还是选one即可，时间复杂度显然是$O(2^n)$，不出所料超时了…但是正确性是有保证的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans;</span><br><span class="line">    <span class="type">int</span> low,high,zero,one;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> M = <span class="number">1000000007</span>;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> len)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(len &gt; high)<span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(len &gt;= low)ans = (ans+<span class="number">1</span>)%M;</span><br><span class="line"></span><br><span class="line">        dfs(len+zero);</span><br><span class="line">        dfs(len+one);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">countGoodStrings</span><span class="params">(<span class="type">int</span> low, <span class="type">int</span> high, <span class="type">int</span> zero, <span class="type">int</span> one)</span> &#123;</span><br><span class="line">        this-&gt;low = low, this-&gt;high = high, this-&gt;zero = zero, this-&gt;one = one;</span><br><span class="line">        dfs(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+
+    <span class="type">int</span> ans;
+    <span class="type">int</span> low,high,zero,one;
+    <span class="type">const</span> <span class="type">int</span> M = <span class="number">1000000007</span>;
+    <span class="type">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> len)</span>&#123;
+        <span class="keyword">if</span>(len &gt; high)<span class="keyword">return</span>;
+        <span class="keyword">if</span>(len &gt;= low)ans = (ans+<span class="number">1</span>)%M;
+
+        dfs(len+zero);
+        dfs(len+one);
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">countGoodStrings</span><span class="params">(<span class="type">int</span> low, <span class="type">int</span> high, <span class="type">int</span> zero, <span class="type">int</span> one)</span> &#123;
+        this-&gt;low = low, this-&gt;high = high, this-&gt;zero = zero, this-&gt;one = one;
+        dfs(<span class="number">0</span>);
+        <span class="keyword">return</span> ans;
+    &#125;
+&#125;;
+</code></pre>
 
 <p>改进的思路是添加记忆化。换一个视角，其实这就是爬楼梯的翻版，每次可以选择爬zero或one阶，爬到x in [low,high]，的方案总和有多少。于是可以写出如下记忆化递归：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> M = <span class="number">1000000007</span>;</span><br><span class="line">    <span class="type">int</span> zero,one;</span><br><span class="line">    <span class="type">int</span> cnt[<span class="number">100001</span>];</span><br><span class="line">    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> len)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(len == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//得到空串的方案数是1</span></span><br><span class="line">        <span class="keyword">if</span>(len &lt; <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(cnt[len] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[len];</span><br><span class="line">        <span class="keyword">else</span> cnt[len] = (dfs(len-zero)+dfs(len-one))%M;</span><br><span class="line">        <span class="keyword">return</span> cnt[len];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">countGoodStrings</span><span class="params">(<span class="type">int</span> low, <span class="type">int</span> high, <span class="type">int</span> zero, <span class="type">int</span> one)</span> &#123;</span><br><span class="line">        this-&gt;zero = zero,this-&gt;one = one;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= high;i++)cnt[i] = <span class="number">-1</span>;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = low;i &lt;= high;i++)</span><br><span class="line">            ans = (ans + dfs(i))%M;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="type">const</span> <span class="type">int</span> M = <span class="number">1000000007</span>;
+    <span class="type">int</span> zero,one;
+    <span class="type">int</span> cnt[<span class="number">100001</span>];
+    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> len)</span>&#123;
+        <span class="keyword">if</span>(len == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//得到空串的方案数是1</span>
+        <span class="keyword">if</span>(len &lt; <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;
+
+        <span class="keyword">if</span>(cnt[len] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[len];
+        <span class="keyword">else</span> cnt[len] = (dfs(len-zero)+dfs(len-one))%M;
+        <span class="keyword">return</span> cnt[len];
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">countGoodStrings</span><span class="params">(<span class="type">int</span> low, <span class="type">int</span> high, <span class="type">int</span> zero, <span class="type">int</span> one)</span> &#123;
+        this-&gt;zero = zero,this-&gt;one = one;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= high;i++)cnt[i] = <span class="number">-1</span>;
+        <span class="type">int</span> ans = <span class="number">0</span>;
+        <span class="keyword">for</span>(<span class="type">int</span> i = low;i &lt;= high;i++)
+            ans = (ans + dfs(i))%M;
+        <span class="keyword">return</span> ans;
+    &#125;
+&#125;;
+</code></pre>
 
 <p>有两个关键点</p>
 <ol>
@@ -185,7 +362,33 @@
 <p>给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。（元素可以重复选取）</p>
 <p>题目数据保证答案符合 32 位整数范围。</p>
 <p>我的思路：仍然可以看成爬楼梯的变式，这次要爬的楼梯数是固定的，但是每次的选择有nums.size()种。dfs枚举每一次每一种选，然后加一个记忆化即可。基本上就是直接套板子了。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> cnt[<span class="number">1001</span>];</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(i &lt; <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(cnt[i] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[i];</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; nums.size();j++)</span><br><span class="line">                res += dfs(i - nums[j]);</span><br><span class="line">            cnt[i] = res;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">combinationSum4</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= target;i++)cnt[i] = <span class="number">-1</span>;</span><br><span class="line">        this-&gt;nums = nums;</span><br><span class="line">        <span class="keyword">return</span> dfs(target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+
+    <span class="type">int</span> cnt[<span class="number">1001</span>];
+    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; nums;
+    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i)</span>&#123;
+        <span class="keyword">if</span>(i == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;
+        <span class="keyword">else</span> <span class="keyword">if</span>(i &lt; <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;
+
+        <span class="keyword">if</span>(cnt[i] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[i];
+        <span class="keyword">else</span>&#123;
+            <span class="type">int</span> res = <span class="number">0</span>;
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; nums.size();j++)
+                res += dfs(i - nums[j]);
+            cnt[i] = res;
+            <span class="keyword">return</span> res;
+        &#125;
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">combinationSum4</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> &#123;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= target;i++)cnt[i] = <span class="number">-1</span>;
+        this-&gt;nums = nums;
+        <span class="keyword">return</span> dfs(target);
+    &#125;
+&#125;;
+</code></pre>
 
 <h2 id="统计打字方案数"><a href="#统计打字方案数" class="headerlink" title="统计打字方案数"></a>统计打字方案数</h2><p>爬楼梯的变式，可以看成楼梯是由数字标定的不同种类，有这样几个关键的条件限制</p>
 <ol>
@@ -194,7 +397,56 @@
 </ol>
 <p>在此基础上，从dfs(-1)开始，代表还没有爬任何一阶（因为string从0开始索引就代表第一阶了）；然后开始爬楼梯，使用check()检查当前位置可以爬几阶，例如可以爬3阶的时候就是dfs(i) &#x3D; dfs(i+1)+dfs(i+2)+dfs(i+3)，向下递归即可；边界条件是i &#x3D;&#x3D; str.length()-1，即i已经索引到了最后一个字符，也就是爬上了最高的台阶。</p>
 <p>最后再引入一个记忆化即可。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    <span class="type">int</span> cnt[<span class="number">100001</span>];</span><br><span class="line">    <span class="type">int</span> tlen[<span class="number">100001</span>];</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">check</span><span class="params">(<span class="type">int</span> i)</span>&#123;<span class="comment">//确定可以上几个台阶</span></span><br><span class="line">        <span class="type">int</span> len = <span class="number">1</span>;<span class="comment">//至少上一阶，不会有上0阶的情况，因为在dfs中以到最后一阶（i == str.length()-1）为边界条件</span></span><br><span class="line">        <span class="keyword">if</span>(len + i == str.length() - <span class="number">1</span>)<span class="keyword">return</span> len;<span class="comment">//上一阶就到最后一阶了</span></span><br><span class="line"></span><br><span class="line">        <span class="type">char</span> t = str[i + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span>(t == <span class="string">&#x27;7&#x27;</span> || t == <span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(;(len + i != str.length())&amp;&amp;(str[len + i] == str[i + <span class="number">1</span>]);len++);</span><br><span class="line">            <span class="keyword">return</span> min(len<span class="number">-1</span>,<span class="number">4</span>);<span class="comment">//最多上4阶</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(;(len + i != str.length())&amp;&amp;(str[len + i] == str[i + <span class="number">1</span>]);len++);</span><br><span class="line">            <span class="keyword">return</span> min(len<span class="number">-1</span>,<span class="number">3</span>);<span class="comment">//最多上3阶</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> len;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == str.length()<span class="number">-1</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(i &gt;= <span class="number">0</span> &amp;&amp; cnt[i] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[i];</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> len;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">-1</span>)len = check(i);</span><br><span class="line">        <span class="keyword">else</span> len = tlen[i];</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= len;j++)</span><br><span class="line">            res = (res + dfs(i+j))%<span class="number">1000000007</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(i &gt;= <span class="number">0</span>)cnt[i] = res;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">countTexts</span><span class="params">(<span class="built_in">string</span> pressedKeys)</span> &#123;</span><br><span class="line">        this-&gt;str = pressedKeys;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; str.length();i++)cnt[i] = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; str.length()<span class="number">-1</span>;i++)</span><br><span class="line">            tlen[i] = check(i);</span><br><span class="line">        <span class="keyword">return</span> dfs(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="built_in">string</span> str;
+    <span class="type">int</span> cnt[<span class="number">100001</span>];
+    <span class="type">int</span> tlen[<span class="number">100001</span>];
+
+    <span class="type">int</span> <span class="title function_">check</span><span class="params">(<span class="type">int</span> i)</span>&#123;<span class="comment">//确定可以上几个台阶</span>
+        <span class="type">int</span> len = <span class="number">1</span>;<span class="comment">//至少上一阶，不会有上0阶的情况，因为在dfs中以到最后一阶（i == str.length()-1）为边界条件</span>
+        <span class="keyword">if</span>(len + i == str.length() - <span class="number">1</span>)<span class="keyword">return</span> len;<span class="comment">//上一阶就到最后一阶了</span>
+
+        <span class="type">char</span> t = str[i + <span class="number">1</span>];
+        <span class="keyword">if</span>(t == <span class="string">&#x27;7&#x27;</span> || t == <span class="string">&#x27;9&#x27;</span>)&#123;
+            <span class="keyword">for</span>(;(len + i != str.length())&amp;&amp;(str[len + i] == str[i + <span class="number">1</span>]);len++);
+            <span class="keyword">return</span> min(len<span class="number">-1</span>,<span class="number">4</span>);<span class="comment">//最多上4阶</span>
+        &#125;<span class="keyword">else</span>&#123;
+            <span class="keyword">for</span>(;(len + i != str.length())&amp;&amp;(str[len + i] == str[i + <span class="number">1</span>]);len++);
+            <span class="keyword">return</span> min(len<span class="number">-1</span>,<span class="number">3</span>);<span class="comment">//最多上3阶</span>
+        &#125;
+        <span class="keyword">return</span> len;
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i)</span>&#123;
+        <span class="keyword">if</span>(i == str.length()<span class="number">-1</span>)<span class="keyword">return</span> <span class="number">1</span>;
+
+        <span class="keyword">if</span>(i &gt;= <span class="number">0</span> &amp;&amp; cnt[i] != <span class="number">-1</span>)<span class="keyword">return</span> cnt[i];
+
+        <span class="type">int</span> res = <span class="number">0</span>;
+        <span class="type">int</span> len;
+        <span class="keyword">if</span>(i == <span class="number">-1</span>)len = check(i);
+        <span class="keyword">else</span> len = tlen[i];
+        
+
+        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= len;j++)
+            res = (res + dfs(i+j))%<span class="number">1000000007</span>;
+        
+        <span class="keyword">if</span>(i &gt;= <span class="number">0</span>)cnt[i] = res;
+        <span class="keyword">return</span> res;
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">countTexts</span><span class="params">(<span class="built_in">string</span> pressedKeys)</span> &#123;
+        this-&gt;str = pressedKeys;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; str.length();i++)cnt[i] = <span class="number">-1</span>;
+
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; str.length()<span class="number">-1</span>;i++)
+            tlen[i] = check(i);
+        <span class="keyword">return</span> dfs(<span class="number">-1</span>);
+    &#125;
+&#125;;
+</code></pre>
 
 <p>但是这样记忆化搜索会被最后几个非常庞大的样例卡住，时间大概是擦边不能过的样子…</p>
 <p>参考了题解之后，这道题应该直接用dp，虽然dp和记忆化搜索在一般情况下认为时间大差不差，但是这种时间擦边不能过的情况，记忆化搜索稍微比dp多出来的一点时间就成为掣肘的关键了。</p>
@@ -205,7 +457,38 @@
 </ol>
 <p>转移方程参考爬楼梯的模板dp[i] &#x3D; dp[i-1] + dp[i-2]，不难理解。 </p>
 <p>代码如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> dp1[<span class="number">100001</span>];<span class="comment">//dp1[i]代表在全是一类台阶的情况下，爬到i的方案数</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> dp2[<span class="number">100001</span>];<span class="comment">//dp2[i]代表在全是二类台阶的情况下，爬到i的方案数</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> M = <span class="number">1000000007</span>;</span><br><span class="line">    <span class="type">void</span> <span class="title function_">ini</span><span class="params">()</span>&#123;</span><br><span class="line">        dp1[<span class="number">0</span>] = <span class="number">1</span>,dp1[<span class="number">1</span>] = <span class="number">1</span>,dp1[<span class="number">2</span>] = <span class="number">2</span>,dp1[<span class="number">3</span>] = <span class="number">4</span>;<span class="comment">//不爬；1；11、2；3、12、21、111；</span></span><br><span class="line">        dp2[<span class="number">0</span>] = <span class="number">1</span>,dp2[<span class="number">1</span>] = <span class="number">1</span>,dp2[<span class="number">2</span>] = <span class="number">2</span>,dp2[<span class="number">3</span>] = <span class="number">4</span>;<span class="comment">//同上</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//提前打好dp表，后续直接用</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">4</span>;i &lt; <span class="number">100001</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp1[i] = (dp1[i<span class="number">-1</span>] + dp1[i<span class="number">-2</span>] + dp1[i<span class="number">-3</span>])%M;</span><br><span class="line">            dp2[i] = (dp2[i<span class="number">-1</span>] + dp2[i<span class="number">-2</span>] + dp2[i<span class="number">-3</span>] + dp2[i<span class="number">-4</span>])%M;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">countTexts</span><span class="params">(<span class="built_in">string</span> pressedKeys)</span> &#123;</span><br><span class="line">        ini();</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> ans = <span class="number">1</span>;<span class="comment">//最后的答案爬完这种楼梯的方案数，中间要用乘法处理，因为楼梯的类型会变化，乘的就是一种类型的楼梯爬了几个台阶</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; pressedKeys.length();)&#123;</span><br><span class="line">            <span class="type">int</span> j;</span><br><span class="line">            <span class="keyword">for</span>(j = i+<span class="number">1</span>;j &lt; pressedKeys.length() &amp;&amp; pressedKeys[j] == pressedKeys[i];j++);<span class="comment">//注意边界情况，最后爬到最高的台阶应该是第pressedKeys.length()阶，而不是按照索引去减1；可以想想里面具体有多少字符</span></span><br><span class="line">            <span class="keyword">if</span>(pressedKeys[i] == <span class="string">&#x27;7&#x27;</span> || pressedKeys[i] == <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">                ans = (ans * dp2[j - i])%M;</span><br><span class="line">            <span class="keyword">else</span> ans = (ans * dp1[j - i])%M;</span><br><span class="line">            i = j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="type">long</span> <span class="type">long</span> dp1[<span class="number">100001</span>];<span class="comment">//dp1[i]代表在全是一类台阶的情况下，爬到i的方案数</span>
+    <span class="type">long</span> <span class="type">long</span> dp2[<span class="number">100001</span>];<span class="comment">//dp2[i]代表在全是二类台阶的情况下，爬到i的方案数</span>
+    <span class="type">const</span> <span class="type">int</span> M = <span class="number">1000000007</span>;
+    <span class="type">void</span> <span class="title function_">ini</span><span class="params">()</span>&#123;
+        dp1[<span class="number">0</span>] = <span class="number">1</span>,dp1[<span class="number">1</span>] = <span class="number">1</span>,dp1[<span class="number">2</span>] = <span class="number">2</span>,dp1[<span class="number">3</span>] = <span class="number">4</span>;<span class="comment">//不爬；1；11、2；3、12、21、111；</span>
+        dp2[<span class="number">0</span>] = <span class="number">1</span>,dp2[<span class="number">1</span>] = <span class="number">1</span>,dp2[<span class="number">2</span>] = <span class="number">2</span>,dp2[<span class="number">3</span>] = <span class="number">4</span>;<span class="comment">//同上</span>
+
+        <span class="comment">//提前打好dp表，后续直接用</span>
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">4</span>;i &lt; <span class="number">100001</span>;i++)
+        &#123;
+            dp1[i] = (dp1[i<span class="number">-1</span>] + dp1[i<span class="number">-2</span>] + dp1[i<span class="number">-3</span>])%M;
+            dp2[i] = (dp2[i<span class="number">-1</span>] + dp2[i<span class="number">-2</span>] + dp2[i<span class="number">-3</span>] + dp2[i<span class="number">-4</span>])%M;
+        &#125;    
+    &#125;
+    <span class="type">int</span> <span class="title function_">countTexts</span><span class="params">(<span class="built_in">string</span> pressedKeys)</span> &#123;
+        ini();
+        <span class="type">long</span> <span class="type">long</span> ans = <span class="number">1</span>;<span class="comment">//最后的答案爬完这种楼梯的方案数，中间要用乘法处理，因为楼梯的类型会变化，乘的就是一种类型的楼梯爬了几个台阶</span>
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; pressedKeys.length();)&#123;
+            <span class="type">int</span> j;
+            <span class="keyword">for</span>(j = i+<span class="number">1</span>;j &lt; pressedKeys.length() &amp;&amp; pressedKeys[j] == pressedKeys[i];j++);<span class="comment">//注意边界情况，最后爬到最高的台阶应该是第pressedKeys.length()阶，而不是按照索引去减1；可以想想里面具体有多少字符</span>
+            <span class="keyword">if</span>(pressedKeys[i] == <span class="string">&#x27;7&#x27;</span> || pressedKeys[i] == <span class="string">&#x27;9&#x27;</span>)
+                ans = (ans * dp2[j - i])%M;
+            <span class="keyword">else</span> ans = (ans * dp1[j - i])%M;
+            i = j;
+        &#125;
+        <span class="keyword">return</span> ans;
+    &#125;
+&#125;;
+</code></pre>
 
 <p>这道题给我最大的感受是，对于边界条件的设置，以及不同索引下dp数组的含义 or dfs递归的状态 要有清楚的认识，这样才不会乱。我被索引绕得有点晕写了好久…</p>
 <h2 id="统计各位数字都不同的数字个数"><a href="#统计各位数字都不同的数字个数" class="headerlink" title="统计各位数字都不同的数字个数"></a>统计各位数字都不同的数字个数</h2><p>题干：</p>
@@ -213,7 +496,37 @@
 <p>示例 1：</p>
 <p>输入：n &#x3D; 2<br>输出：91<br>解释：答案应为除去 11、22、33、44、55、66、77、88、99 外，在 0 ≤ x &lt; 100 范围内的所有数字。</p>
 <p>这道题换一个视角来看，就是有0<del>9，十张卡片，按照要求抽1</del>n张卡，求对应所有的排列情况之和（即抽1张卡时的排列情况+2张卡时的排列情况+…）。可以直接使用全排列；由于抽卡的数量是1~n，所以问题状态树上的每一个结点都对应增加一种情况，而不是完成抽卡之后才统计为一种情况。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">1</span>;<span class="comment">//一位的情况下可以有一个单独的0</span></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> r)</span>&#123;<span class="comment">//i是当前抽的第几个数字，r是当前剩余的数字数量</span></span><br><span class="line">        <span class="keyword">if</span>(i == n)<span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt; r;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                dfs(<span class="number">1</span>,r<span class="number">-1</span>);<span class="comment">//第一个数字不能是0</span></span><br><span class="line">            &#125;    </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; r;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                dfs(i+<span class="number">1</span>,r<span class="number">-1</span>);</span><br><span class="line">            &#125;    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">countNumbersWithUniqueDigits</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        this-&gt;n = n;</span><br><span class="line">        dfs(<span class="number">0</span>,<span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;
+    <span class="type">int</span> ans = <span class="number">1</span>;<span class="comment">//一位的情况下可以有一个单独的0</span>
+    <span class="type">int</span> n;
+
+    <span class="type">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> r)</span>&#123;<span class="comment">//i是当前抽的第几个数字，r是当前剩余的数字数量</span>
+        <span class="keyword">if</span>(i == n)<span class="keyword">return</span>;
+        <span class="keyword">if</span>(i == <span class="number">0</span>)&#123;
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt; r;j++)
+            &#123;
+                ans++;
+                dfs(<span class="number">1</span>,r<span class="number">-1</span>);<span class="comment">//第一个数字不能是0</span>
+            &#125;    
+        &#125;<span class="keyword">else</span>&#123;
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; r;j++)
+            &#123;
+                ans++;
+                dfs(i+<span class="number">1</span>,r<span class="number">-1</span>);
+            &#125;    
+        &#125;
+    &#125;
+    <span class="type">int</span> <span class="title function_">countNumbersWithUniqueDigits</span><span class="params">(<span class="type">int</span> n)</span> &#123;
+        this-&gt;n = n;
+        dfs(<span class="number">0</span>,<span class="number">10</span>);
+        <span class="keyword">return</span> ans;
+    &#125;
+&#125;;
+
+</code></pre>
 
 <p>注意点是</p>
 <ol>
@@ -236,7 +549,72 @@
 <li>当i &#x3D;&#x3D; 0的时候，剩余k此全部选择向下</li>
 </ol>
 <p>代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; cnt;<span class="comment">//记录每一次的选择，1向右，0向下</span></span><br><span class="line">    <span class="type">int</span> memo[<span class="number">200</span>][<span class="number">400</span>];</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; grid;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">compute</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">int</span> x = <span class="number">0</span>,y = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> t = grid[x][y];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; cnt.size();i++)</span><br><span class="line">            <span class="keyword">if</span>(cnt[i] == <span class="number">1</span>)t += grid[x][++y];</span><br><span class="line">            <span class="keyword">else</span> t += grid[++x][y];</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> k)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i == k)&#123;<span class="comment">//只能向右走了</span></span><br><span class="line">            <span class="keyword">if</span>(memo[i][k] != <span class="number">-1</span>)<span class="keyword">return</span> memo[i][k];</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; k;j++)</span><br><span class="line">                cnt.push_back(<span class="number">1</span>);</span><br><span class="line">            <span class="type">int</span> res = compute();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; k;j++)</span><br><span class="line">                cnt.pop_back();</span><br><span class="line">            memo[i][k] = res;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(i == <span class="number">0</span>)&#123;<span class="comment">//只能向下走了</span></span><br><span class="line">            <span class="keyword">if</span>(memo[i][k] != <span class="number">-1</span>)<span class="keyword">return</span> memo[i][k];</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; k;j++)</span><br><span class="line">                cnt.push_back(<span class="number">0</span>);</span><br><span class="line">            <span class="type">int</span> res = compute();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; k;j++)</span><br><span class="line">                cnt.pop_back();</span><br><span class="line">            memo[i][k] = res;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(memo[i][k] != <span class="number">-1</span>)<span class="keyword">return</span> memo[i][k];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//选择向右走</span></span><br><span class="line">        cnt.push_back(<span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span> t1 = dfs(i<span class="number">-1</span>,k<span class="number">-1</span>);</span><br><span class="line">        cnt.pop_back();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//选择向下走</span></span><br><span class="line">        cnt.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="type">int</span> t2 = dfs(i,k<span class="number">-1</span>);</span><br><span class="line">        cnt.pop_back();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> res = min(t1,t2);</span><br><span class="line">        memo[i][k] = res;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">minPathSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; <span class="number">200</span>;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="number">400</span>;j++)</span><br><span class="line">                memo[i][j] = <span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">        this-&gt;grid = grid;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dfs(grid[<span class="number">0</span>].size()<span class="number">-1</span>,grid.size()+grid[<span class="number">0</span>].size()<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; cnt;<span class="comment">//记录每一次的选择，1向右，0向下</span>
+    <span class="type">int</span> memo[<span class="number">200</span>][<span class="number">400</span>];
+    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; grid;
+
+    <span class="type">int</span> <span class="title function_">compute</span><span class="params">()</span>&#123;
+        <span class="type">int</span> x = <span class="number">0</span>,y = <span class="number">0</span>;
+        <span class="type">int</span> t = grid[x][y];
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; cnt.size();i++)
+            <span class="keyword">if</span>(cnt[i] == <span class="number">1</span>)t += grid[x][++y];
+            <span class="keyword">else</span> t += grid[++x][y];
+        <span class="keyword">return</span> t;
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> k)</span>&#123;
+        <span class="keyword">if</span>(i == k)&#123;<span class="comment">//只能向右走了</span>
+            <span class="keyword">if</span>(memo[i][k] != <span class="number">-1</span>)<span class="keyword">return</span> memo[i][k];
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; k;j++)
+                cnt.push_back(<span class="number">1</span>);
+            <span class="type">int</span> res = compute();
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; k;j++)
+                cnt.pop_back();
+            memo[i][k] = res;
+            <span class="keyword">return</span> res;
+        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(i == <span class="number">0</span>)&#123;<span class="comment">//只能向下走了</span>
+            <span class="keyword">if</span>(memo[i][k] != <span class="number">-1</span>)<span class="keyword">return</span> memo[i][k];
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; k;j++)
+                cnt.push_back(<span class="number">0</span>);
+            <span class="type">int</span> res = compute();
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; k;j++)
+                cnt.pop_back();
+            memo[i][k] = res;
+            <span class="keyword">return</span> res;
+        &#125;
+
+        <span class="keyword">if</span>(memo[i][k] != <span class="number">-1</span>)<span class="keyword">return</span> memo[i][k];
+
+        <span class="comment">//选择向右走</span>
+        cnt.push_back(<span class="number">1</span>);
+        <span class="type">int</span> t1 = dfs(i<span class="number">-1</span>,k<span class="number">-1</span>);
+        cnt.pop_back();
+
+        <span class="comment">//选择向下走</span>
+        cnt.push_back(<span class="number">0</span>);
+        <span class="type">int</span> t2 = dfs(i,k<span class="number">-1</span>);
+        cnt.pop_back();
+
+        <span class="type">int</span> res = min(t1,t2);
+        memo[i][k] = res;
+        <span class="keyword">return</span> res;
+
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">minPathSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> &#123;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; <span class="number">200</span>;i++)
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="number">400</span>;j++)
+                memo[i][j] = <span class="number">-1</span>;
+        
+        this-&gt;grid = grid;
+        
+        <span class="keyword">return</span> dfs(grid[<span class="number">0</span>].size()<span class="number">-1</span>,grid.size()+grid[<span class="number">0</span>].size()<span class="number">-2</span>);
+    &#125;
+&#125;;
+</code></pre>
 
 <p>但是这份代码出现了问题。</p>
 <p>其实回溯三问的考量下的状态转移，以及递归的边界条件都没有问题，而状态是出现在记忆化上。</p>
@@ -262,7 +640,39 @@
 <p>dfs(x,y) &#x3D; min(dfs(x+1,y)+g[x+1][y],dfs(x,y+1)+g[x][y+1]) s.t. x !&#x3D; g.size()-1 &amp;&amp; y !&#x3D; g[0].size()-1<br>… s.t. x &#x3D;&#x3D; g.size()-1<br>… s.t. y &#x3D;&#x3D; g[0].size()-1</p>
 <p>g[0][0]可以直接作为初始值，累加在答案上。</p>
 <p>代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="type">int</span> memo[<span class="number">200</span>][<span class="number">200</span>];</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; g;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x == g.size() - <span class="number">1</span> &amp;&amp; y == g[<span class="number">0</span>].size() - <span class="number">1</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(memo[x][y] != <span class="number">-1</span>)<span class="keyword">return</span> memo[x][y];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(x == g.size() - <span class="number">1</span>)&#123;</span><br><span class="line">            memo[x][y] = dfs(x,y+<span class="number">1</span>) + g[x][y+<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">return</span> memo[x][y];</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(y == g[<span class="number">0</span>].size() - <span class="number">1</span>)&#123;</span><br><span class="line">            memo[x][y] = dfs(x+<span class="number">1</span>,y) + g[x+<span class="number">1</span>][y];</span><br><span class="line">            <span class="keyword">return</span> memo[x][y];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            memo[x][y] = min(dfs(x+<span class="number">1</span>,y) + g[x+<span class="number">1</span>][y],dfs(x,y+<span class="number">1</span>) + g[x][y+<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">return</span> memo[x][y];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">minPathSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; <span class="number">200</span>;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="number">200</span>;j++)</span><br><span class="line">                memo[i][j] = <span class="number">-1</span>;</span><br><span class="line">    </span><br><span class="line">        this-&gt;g =grid;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> g[<span class="number">0</span>][<span class="number">0</span>] + dfs(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="type">int</span> memo[<span class="number">200</span>][<span class="number">200</span>];
+    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; g;
+    <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>&#123;
+        <span class="keyword">if</span>(x == g.size() - <span class="number">1</span> &amp;&amp; y == g[<span class="number">0</span>].size() - <span class="number">1</span>)<span class="keyword">return</span> <span class="number">0</span>;
+        
+        <span class="keyword">if</span>(memo[x][y] != <span class="number">-1</span>)<span class="keyword">return</span> memo[x][y];
+
+        <span class="keyword">if</span>(x == g.size() - <span class="number">1</span>)&#123;
+            memo[x][y] = dfs(x,y+<span class="number">1</span>) + g[x][y+<span class="number">1</span>];
+            <span class="keyword">return</span> memo[x][y];
+        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(y == g[<span class="number">0</span>].size() - <span class="number">1</span>)&#123;
+            memo[x][y] = dfs(x+<span class="number">1</span>,y) + g[x+<span class="number">1</span>][y];
+            <span class="keyword">return</span> memo[x][y];
+        &#125;<span class="keyword">else</span>&#123;
+            memo[x][y] = min(dfs(x+<span class="number">1</span>,y) + g[x+<span class="number">1</span>][y],dfs(x,y+<span class="number">1</span>) + g[x][y+<span class="number">1</span>]);
+            <span class="keyword">return</span> memo[x][y];
+        &#125;
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">minPathSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> &#123;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; <span class="number">200</span>;i++)
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="number">200</span>;j++)
+                memo[i][j] = <span class="number">-1</span>;
+    
+        this-&gt;g =grid;
+
+        <span class="keyword">return</span> g[<span class="number">0</span>][<span class="number">0</span>] + dfs(<span class="number">0</span>,<span class="number">0</span>);
+    &#125;
+&#125;;
+</code></pre>
 
 <p>这样才能明显的看见，累积变量是在递归状态转移的过程中累加的，而没有作为参数处理。‘</p>
 <h2 id="将石头分散到网格图的最少移动次数"><a href="#将石头分散到网格图的最少移动次数" class="headerlink" title="将石头分散到网格图的最少移动次数"></a>将石头分散到网格图的最少移动次数</h2><p>题干：</p>
@@ -276,7 +686,59 @@
 <li>保留最少的移动次数</li>
 </ol>
 <p>代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">public:</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Pos</span>&#123;</span></span><br><span class="line">        <span class="type">int</span> x;</span><br><span class="line">        <span class="type">int</span> y;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Pos&gt; a;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Pos&gt; b;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">100000000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> <span class="title function_">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;Pos&gt;&amp; cmb)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(cmb.size() == b.size())&#123;</span><br><span class="line">            <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; cmb.size();i++)&#123;</span><br><span class="line">                cnt += (<span class="built_in">abs</span>(cmb[i].x - b[i].x) + <span class="built_in">abs</span>(cmb[i].y - b[i].y));</span><br><span class="line">            &#125;</span><br><span class="line">            ans = min(ans, cnt);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; a.size();i++)&#123;</span><br><span class="line">            <span class="class"><span class="keyword">struct</span> <span class="title">Pos</span> <span class="title">t</span> =</span> a[i];</span><br><span class="line">            cmb.push_back(t);</span><br><span class="line">            a.erase(a.begin()+i);</span><br><span class="line">            dfs(cmb);</span><br><span class="line">            a.insert(a.begin()+i,t);</span><br><span class="line">            cmb.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">minimumMoves</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; <span class="number">3</span>;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="number">3</span>;j++)</span><br><span class="line">                <span class="keyword">if</span>(grid[i][j] == <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="class"><span class="keyword">struct</span> <span class="title">Pos</span> <span class="title">t</span>;</span></span><br><span class="line">                    t.x = i,t.y = j;</span><br><span class="line">                    b.push_back(t);</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(grid[i][j] &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="type">int</span> k = grid[i][j]<span class="number">-1</span>;k &gt; <span class="number">0</span>;k--)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">struct</span> Pos t;</span><br><span class="line">                        t.x = i,t.y = j;</span><br><span class="line">                        a.push_back(t);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">vector</span>&lt;Pos&gt; t;</span><br><span class="line">        dfs(t);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span>
+public:
+    <span class="class"><span class="keyword">struct</span> <span class="title">Pos</span>&#123;</span>
+        <span class="type">int</span> x;
+        <span class="type">int</span> y;
+    &#125;;
+    <span class="built_in">vector</span>&lt;Pos&gt; a;
+    <span class="built_in">vector</span>&lt;Pos&gt; b;
+    <span class="type">int</span> ans = <span class="number">100000000</span>;
+
+    <span class="type">void</span> <span class="title function_">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;Pos&gt;&amp; cmb)</span>&#123;
+        <span class="keyword">if</span>(cmb.size() == b.size())&#123;
+            <span class="type">int</span> cnt = <span class="number">0</span>;
+            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; cmb.size();i++)&#123;
+                cnt += (<span class="built_in">abs</span>(cmb[i].x - b[i].x) + <span class="built_in">abs</span>(cmb[i].y - b[i].y));
+            &#125;
+            ans = min(ans, cnt);
+            <span class="keyword">return</span>;
+        &#125;
+
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; a.size();i++)&#123;
+            <span class="class"><span class="keyword">struct</span> <span class="title">Pos</span> <span class="title">t</span> =</span> a[i];
+            cmb.push_back(t);
+            a.erase(a.begin()+i);
+            dfs(cmb);
+            a.insert(a.begin()+i,t);
+            cmb.pop_back();
+        &#125;
+    &#125;
+
+    <span class="type">int</span> <span class="title function_">minimumMoves</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> &#123;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; <span class="number">3</span>;i++)
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="number">3</span>;j++)
+                <span class="keyword">if</span>(grid[i][j] == <span class="number">0</span>)&#123;
+                    <span class="class"><span class="keyword">struct</span> <span class="title">Pos</span> <span class="title">t</span>;</span>
+                    t.x = i,t.y = j;
+                    b.push_back(t);
+                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(grid[i][j] &gt; <span class="number">1</span>)&#123;
+                    <span class="keyword">for</span>(<span class="type">int</span> k = grid[i][j]<span class="number">-1</span>;k &gt; <span class="number">0</span>;k--)
+                    &#123;
+                        <span class="keyword">struct</span> Pos t;
+                        t.x = i,t.y = j;
+                        a.push_back(t);
+                    &#125;
+                &#125;
+        
+        <span class="built_in">vector</span>&lt;Pos&gt; t;
+        dfs(t);
+        <span class="keyword">return</span> ans;
+    &#125;
+&#125;;
+</code></pre>
 
 		</div>
 

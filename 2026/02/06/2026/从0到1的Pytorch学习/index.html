@@ -174,11 +174,62 @@
 <li>train&#x2F;001(编号对应的数据文件)</li>
 <li>train_label&#x2F;001(编号对应的label)</li>
 </ul>
-<h3 id="代码以及注意事项"><a href="#代码以及注意事项" class="headerlink" title="代码以及注意事项"></a>代码以及注意事项</h3><p>下载使用的<img src="https://download.pytorch.org/tutorial/hymenoptera_data.zip" alt="数据集"></p>
+<h3 id="代码以及注意事项"><a href="#代码以及注意事项" class="headerlink" title="代码以及注意事项"></a>代码以及注意事项</h3><p>下载使用的<a target="_blank" rel="noopener" href="https://download.pytorch.org/tutorial/hymenoptera_data.zip">数据集</a></p>
 <p>下面的代码按照第一种形式组织；</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">读取数据集的模块：DataReader.read_data_insect</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">data_reader_insect</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, root_dir, label_dir</span>): <span class="comment"># 初始化的时候将数据的地址组织成一个列表</span></span><br><span class="line">        <span class="variable language_">self</span>.root_dir = root_dir</span><br><span class="line">        <span class="variable language_">self</span>.dir_list = os.listdir(os.path.join(root_dir,label_dir))</span><br><span class="line">        <span class="variable language_">self</span>.label_dir = label_dir</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self,idx</span>): <span class="comment"># 使用idx访问列表，得到图片地址，读取到图片</span></span><br><span class="line">        img_dir = <span class="variable language_">self</span>.dir_list[idx]</span><br><span class="line">        img_dir = os.path.join(<span class="variable language_">self</span>.root_dir,<span class="variable language_">self</span>.label_dir,img_dir) <span class="comment"># os.listdir只返回文件名，需要补全路径！！！</span></span><br><span class="line">        img = Image.<span class="built_in">open</span>(img_dir)</span><br><span class="line">        label = <span class="variable language_">self</span>.label_dir</span><br><span class="line">        <span class="keyword">return</span> img,label <span class="comment"># 最后返回数据和标签</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.dir_list)</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py"><span class="string">&quot;&quot;&quot;</span>
+<span class="string">读取数据集的模块：DataReader.read_data_insect</span>
+<span class="string">&quot;&quot;&quot;</span>
+<span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset
+<span class="keyword">from</span> PIL <span class="keyword">import</span> Image
+<span class="keyword">import</span> os
 
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">用来演示read_data_insect.py，即读取昆虫数据集的demo</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> DataReader.read_data_insect <span class="keyword">import</span> data_reader_insect </span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">trian_dir = <span class="string">&quot;DataSets/hymenoptera_data/train&quot;</span> <span class="comment"># &#x27;/&#x27;能够被os正确处理，并且一般也建议这样使用</span></span><br><span class="line">val_dir = <span class="string">&quot;DataSets/hymenoptera_data/val&quot;</span> <span class="comment"># 均采用相对路径</span></span><br><span class="line"></span><br><span class="line">train_label_1 = <span class="string">&quot;ants&quot;</span></span><br><span class="line">train_label_2 = <span class="string">&quot;bees&quot;</span></span><br><span class="line"></span><br><span class="line">val_label_1 = <span class="string">&quot;ants&quot;</span></span><br><span class="line">val_label_2 = <span class="string">&quot;bees&quot;</span></span><br><span class="line"></span><br><span class="line">train_ants_data = data_reader_insect(trian_dir,train_label_1)</span><br><span class="line">train_bees_data = data_reader_insect(trian_dir,train_label_2)</span><br><span class="line">val_ants_data = data_reader_insect(val_dir,val_label_1)</span><br><span class="line">val_bees_data = data_reader_insect(val_dir,val_label_2)</span><br><span class="line"></span><br><span class="line">train_data = train_ants_data + train_bees_data</span><br><span class="line">val_data = val_ants_data + val_bees_data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示训练集或数据集中的随机一张图</span></span><br><span class="line">train_idx = random.randint(<span class="number">0</span>,train_data.__len__()-<span class="number">1</span>)</span><br><span class="line">val_idx = random.randint(<span class="number">0</span>,val_data.__len__() - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">rand_train_img,train_label = train_data[train_idx] <span class="comment"># 注意这里返回的是一个元组！！！</span></span><br><span class="line">rand_val_img,val_label = val_data[val_idx]</span><br><span class="line"></span><br><span class="line">rand_train_img.show()</span><br><span class="line">rand_val_img.show()</span><br></pre></td></tr></table></figure>
+<span class="keyword">class</span> <span class="title class_">data_reader_insect</span>(<span class="title class_ inherited__">Dataset</span>):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, root_dir, label_dir</span>): <span class="comment"># 初始化的时候将数据的地址组织成一个列表</span>
+        <span class="variable language_">self</span>.root_dir = root_dir
+        <span class="variable language_">self</span>.dir_list = os.listdir(os.path.join(root_dir,label_dir))
+        <span class="variable language_">self</span>.label_dir = label_dir
+    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self,idx</span>): <span class="comment"># 使用idx访问列表，得到图片地址，读取到图片</span>
+        img_dir = <span class="variable language_">self</span>.dir_list[idx]
+        img_dir = os.path.join(<span class="variable language_">self</span>.root_dir,<span class="variable language_">self</span>.label_dir,img_dir) <span class="comment"># os.listdir只返回文件名，需要补全路径！！！</span>
+        img = Image.<span class="built_in">open</span>(img_dir)
+        label = <span class="variable language_">self</span>.label_dir
+        <span class="keyword">return</span> img,label <span class="comment"># 最后返回数据和标签</span>
+    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):
+        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.dir_list)</code></pre>
+<p>分割线；）</p>
+<pre><code class="highlight py"><span class="string">&quot;&quot;&quot;</span>
+<span class="string">用来演示read_data_insect.py，即读取昆虫数据集的demo</span>
+<span class="string">&quot;&quot;&quot;</span>
+<span class="keyword">from</span> DataReader.read_data_insect <span class="keyword">import</span> data_reader_insect 
+<span class="keyword">from</span> PIL <span class="keyword">import</span> Image
+<span class="keyword">import</span> random
+
+trian_dir = <span class="string">&quot;DataSets/hymenoptera_data/train&quot;</span> <span class="comment"># &#x27;/&#x27;能够被os正确处理，并且一般也建议这样使用</span>
+val_dir = <span class="string">&quot;DataSets/hymenoptera_data/val&quot;</span> <span class="comment"># 均采用相对路径</span>
+
+train_label_1 = <span class="string">&quot;ants&quot;</span>
+train_label_2 = <span class="string">&quot;bees&quot;</span>
+
+val_label_1 = <span class="string">&quot;ants&quot;</span>
+val_label_2 = <span class="string">&quot;bees&quot;</span>
+
+train_ants_data = data_reader_insect(trian_dir,train_label_1)
+train_bees_data = data_reader_insect(trian_dir,train_label_2)
+val_ants_data = data_reader_insect(val_dir,val_label_1)
+val_bees_data = data_reader_insect(val_dir,val_label_2)
+
+train_data = train_ants_data + train_bees_data
+val_data = val_ants_data + val_bees_data
+
+<span class="comment"># 展示训练集或数据集中的随机一张图</span>
+train_idx = random.randint(<span class="number">0</span>,train_data.__len__()-<span class="number">1</span>)
+val_idx = random.randint(<span class="number">0</span>,val_data.__len__() - <span class="number">1</span>)
+
+rand_train_img,train_label = train_data[train_idx] <span class="comment"># 注意这里返回的是一个元组！！！</span>
+rand_val_img,val_label = val_data[val_idx]
+
+rand_train_img.show()
+rand_val_img.show()</code></pre>
 
 <p><strong>注意事项</strong></p>
 <ol>
@@ -212,7 +263,7 @@
 <li>原型：<code>def add_image(self, tag, img_tensor, global_step=None, walltime=None, dataformats=&#39;CHW&#39;)</code></li>
 <li><code>img_tensor</code>，它对应的就是图像数据，主要有<code>torch.tensor</code>和<code>numpy.array</code>两种类型</li>
 <li>图像转换为张量之后通常有高H，宽W，通道C，三个维度，并且通道数C一般是3（rgb）；</li>
-<li>该方法默认图像张量是$C\tiems H\times W$，从参数默认值也可以看出来</li>
+<li>该方法默认图像张量是$C\times H\times W$，从参数默认值也可以看出来</li>
 <li>如果张量不对应需要<strong>手动指定dataformats</strong>，例如用PIL的Image打开的图像，由numpy.array()方法转出的图像默认是$H\times W\times C$</li>
 </ul>
 <ol start="3">
@@ -231,7 +282,30 @@
 <li>默认会在本地的6006端口打开一个网页，显示TensorBoard根据事件文件的绘制内容（会绘制所有的事件文件对应的图）；</li>
 <li>如果在一个服务器上，多个人都使用tensorboard的话默认端口可能有冲突，可以使用<code>tensorboard --logdir=日志文件夹名 --port==端口号</code>，指定端口；</li>
 </ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">用来演示如何使用tensorboard记录数据</span></span><br><span class="line"><span class="string">主要涉及add_scalar和add_image的使用</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">writer = SummaryWriter(<span class="string">&quot;logs&quot;</span>)</span><br><span class="line"></span><br><span class="line">img_pil1 = Image.<span class="built_in">open</span>(<span class="string">&quot;/Users/yesys/Py_projects/MLpre/DataSets/hymenoptera_data/train/ants/7759525_1363d24e88.jpg&quot;</span>)</span><br><span class="line">img_pil2 = Image.<span class="built_in">open</span>(<span class="string">&quot;/Users/yesys/Py_projects/MLpre/DataSets/hymenoptera_data/train/bees/150013791_969d9a968b.jpg&quot;</span>)</span><br><span class="line"></span><br><span class="line">img_np1 = np.array(img_pil1)</span><br><span class="line">img_np2 = np.array(img_pil2)</span><br><span class="line"></span><br><span class="line">writer.add_image(<span class="string">&quot;demo_img&quot;</span>,img_np1,<span class="number">1</span>,dataformats=<span class="string">&quot;HWC&quot;</span>)</span><br><span class="line">writer.add_image(<span class="string">&quot;demo_img&quot;</span>,img_np2,<span class="number">2</span>,dataformats=<span class="string">&quot;HWC&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    writer.add_scalar(<span class="string">&quot;y=2x&quot;</span>, <span class="number">2</span>*i, i)</span><br><span class="line"></span><br><span class="line">writer.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre><code class="highlight py"><span class="string">&quot;&quot;&quot;</span>
+<span class="string">用来演示如何使用tensorboard记录数据</span>
+<span class="string">主要涉及add_scalar和add_image的使用</span>
+<span class="string">&quot;&quot;&quot;</span>
+<span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter
+<span class="keyword">from</span> PIL <span class="keyword">import</span> Image
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+writer = SummaryWriter(<span class="string">&quot;logs&quot;</span>)
+
+img_pil1 = Image.<span class="built_in">open</span>(<span class="string">&quot;/Users/yesys/Py_projects/MLpre/DataSets/hymenoptera_data/train/ants/7759525_1363d24e88.jpg&quot;</span>)
+img_pil2 = Image.<span class="built_in">open</span>(<span class="string">&quot;/Users/yesys/Py_projects/MLpre/DataSets/hymenoptera_data/train/bees/150013791_969d9a968b.jpg&quot;</span>)
+
+img_np1 = np.array(img_pil1)
+img_np2 = np.array(img_pil2)
+
+writer.add_image(<span class="string">&quot;demo_img&quot;</span>,img_np1,<span class="number">1</span>,dataformats=<span class="string">&quot;HWC&quot;</span>)
+writer.add_image(<span class="string">&quot;demo_img&quot;</span>,img_np2,<span class="number">2</span>,dataformats=<span class="string">&quot;HWC&quot;</span>)
+
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):
+    writer.add_scalar(<span class="string">&quot;y=2x&quot;</span>, <span class="number">2</span>*i, i)
+
+writer.close()
+</code></pre>
 
 		</div>
 

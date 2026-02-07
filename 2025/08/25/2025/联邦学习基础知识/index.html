@@ -164,7 +164,8 @@
 <h3 id="客户端漂移"><a href="#客户端漂移" class="headerlink" title="客户端漂移"></a>客户端漂移</h3><p>由于数据分布的差异，每个客户端的本地模型更新（梯度）可能会在方向和大小上有所不同。当这些更新被聚合时，可能会导致全局模型更新的方向和大小并不是所有客户端所需要的最佳方向。这种现象称为客户端漂移。</p>
 <h3 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h3><p>CUDA（Compute Unified Device Architecture）是由 NVIDIA 开发的并行计算平台和编程模型。它允许开发者使用 NVIDIA 显卡（GPU）进行通用计算，即不仅仅用于图形处理，还可以用于科学计算、机器学习、深度学习等大量需要并行计算的任务。</p>
 <p>通常cuda设备就是指GPU</p>
-<h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><h3 id="Py的for循环"><a href="#Py的for循环" class="headerlink" title="Py的for循环"></a>Py的for循环</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _, train_data <span class="keyword">in</span> <span class="built_in">enumerate</span>(trainloader, <span class="number">0</span>):</span><br><span class="line">    trainset.data, trainset.targets = train_data</span><br></pre></td></tr></table></figure>
+<h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><h3 id="Py的for循环"><a href="#Py的for循环" class="headerlink" title="Py的for循环"></a>Py的for循环</h3><pre><code class="highlight py"><span class="keyword">for</span> _, train_data <span class="keyword">in</span> <span class="built_in">enumerate</span>(trainloader, <span class="number">0</span>):
+    trainset.data, trainset.targets = train_data</code></pre>
 
 <p>enumerate函数返回一个(索引，值)的元组，_是常用的占位符（我们知道这里有值，但是我们不使用），这里_存储的是索引值；train_data是由Dataloader将原始的数据集对象分批后得到的新的“数据集对象列表”trainloader中的元素，作为enumerate元组的值，其是一个数据集对象。</p>
 <p>上面的赋值语句是将一个数据集对象train_data（本身是一个元组）中的两个元素，分别赋值给数据集对象trainset的两个属性元素。</p>
@@ -176,34 +177,65 @@
 <p>__iter__() 方法返回一个特殊的迭代器对象， 这个迭代器对象实现了 __next__() 方法并通过 StopIteration 异常标识迭代的完成。</p>
 <p>__next__() 方法（Python 2 里是 next()）会返回下一个迭代器对象。</p>
 <p><em>一个具体的例子：</em></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyNumbers</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="variable language_">self</span>.a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span></span><br><span class="line"> </span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__next__</span>(<span class="params">self</span>):</span><br><span class="line">    x = <span class="variable language_">self</span>.a</span><br><span class="line">    <span class="variable language_">self</span>.a += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"> </span><br><span class="line">myclass = MyNumbers()</span><br><span class="line">myiter = <span class="built_in">iter</span>(myclass)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(myiter))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(myiter))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(myiter))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(myiter))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(myiter))</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py"><span class="keyword">class</span> <span class="title class_">MyNumbers</span>:
+  <span class="keyword">def</span> <span class="title function_">__iter__</span>(<span class="params">self</span>):
+    <span class="variable language_">self</span>.a = <span class="number">1</span>
+    <span class="keyword">return</span> <span class="variable language_">self</span>
+ 
+  <span class="keyword">def</span> <span class="title function_">__next__</span>(<span class="params">self</span>):
+    x = <span class="variable language_">self</span>.a
+    <span class="variable language_">self</span>.a += <span class="number">1</span>
+    <span class="keyword">return</span> x
+ 
+myclass = MyNumbers()
+myiter = <span class="built_in">iter</span>(myclass)
+ 
+<span class="built_in">print</span>(<span class="built_in">next</span>(myiter))
+<span class="built_in">print</span>(<span class="built_in">next</span>(myiter))
+<span class="built_in">print</span>(<span class="built_in">next</span>(myiter))
+<span class="built_in">print</span>(<span class="built_in">next</span>(myiter))
+<span class="built_in">print</span>(<span class="built_in">next</span>(myiter))</code></pre>
 
 <p><em>输出结果是：</em></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py"><span class="number">1</span>
+<span class="number">2</span>
+<span class="number">3</span>
+<span class="number">4</span>
+<span class="number">5</span></code></pre>
 
-<h3 id="Py使用布尔数组索引元素"><a href="#Py使用布尔数组索引元素" class="headerlink" title="Py使用布尔数组索引元素"></a>Py使用布尔数组索引元素</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">idxs = np.array(<span class="built_in">range</span>(<span class="built_in">len</span>(dataset_label)))</span><br><span class="line">idx_for_each_class = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_classes):</span><br><span class="line">    idx_for_each_class.append(idxs[dataset_label == i])</span><br></pre></td></tr></table></figure>
+<h3 id="Py使用布尔数组索引元素"><a href="#Py使用布尔数组索引元素" class="headerlink" title="Py使用布尔数组索引元素"></a>Py使用布尔数组索引元素</h3><pre><code class="highlight py">idxs = np.array(<span class="built_in">range</span>(<span class="built_in">len</span>(dataset_label)))
+idx_for_each_class = []
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_classes):
+    idx_for_each_class.append(idxs[dataset_label == i])</code></pre>
 
 <p>其中idxs是一个索引数组。</p>
 <p>dataset_label &#x3D;&#x3D; i会生成一个布尔数组，对于dataset_label中的元素等于i的，该元素的位置对应布尔数组中True元素的位置，布尔数组中其它位置元素是False。例如，dataset_label &#x3D; [1, 2, 1, 2, 1]，i &#x3D; 1；那么对应布尔数组为[True, False, True, False, True]</p>
 <p>idxs[dataset_label &#x3D;&#x3D; i]使用布尔数组进行索引，将布尔数组中为True的元素的位置对应到idxs中元素的位置。例如，idxs &#x3D; [1, 2, 3, 4, 5]，根据前面的布尔数组，返回[1, 3, 5]</p>
-<h3 id="Py列表生成式"><a href="#Py列表生成式" class="headerlink" title="Py列表生成式"></a>Py列表生成式</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class_num_per_client = [class_per_client <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_clients)]</span><br></pre></td></tr></table></figure>
+<h3 id="Py列表生成式"><a href="#Py列表生成式" class="headerlink" title="Py列表生成式"></a>Py列表生成式</h3><pre><code class="highlight py">class_num_per_client = [class_per_client <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_clients)]</code></pre>
 
 <p>其中[class_per_client for _ in range(num_clients)]是一个列表生成式；</p>
 <p>用range迭代num_clients次，每次迭代的过程中添加一个元素为class_per_client；</p>
 <p>最终得到一个长度为num_clients，每个元素都是class_per_client的列表；</p>
 <p>实际意义是创建一个列表，其中每个元素代表每个客户端拥有的类别数量</p>
 <h3 id="Py列表截取"><a href="#Py列表截取" class="headerlink" title="Py列表截取"></a>Py列表截取</h3><p>常见的列表截取操作如下：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a[start:stop] <span class="comment"># 从索引start开始到索引stop-1结束</span></span><br><span class="line">a[start:] <span class="comment"># 从索引start开始到列表末尾</span></span><br><span class="line">a[:stop] <span class="comment"># 从列表开头到索引stop-1结束</span></span><br><span class="line">a[:] <span class="comment"># 获取整个列表</span></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py">a[start:stop] <span class="comment"># 从索引start开始到索引stop-1结束</span>
+a[start:] <span class="comment"># 从索引start开始到列表末尾</span>
+a[:stop] <span class="comment"># 从列表开头到索引stop-1结束</span>
+a[:] <span class="comment"># 获取整个列表</span></code></pre>
 
 <p>又如</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">selected_clients = selected_clients[:<span class="built_in">int</span>(np.ceil((num_clients/num_classes)*class_per_client))]</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py">selected_clients = selected_clients[:<span class="built_in">int</span>(np.ceil((num_clients/num_classes)*class_per_client))]</code></pre>
 
 <p>np.ceil的作用告诉向上取整，再用int()转换为整数，又从0截取到stop-1</p>
-<h3 id="Py，利用enumerate的for循环"><a href="#Py，利用enumerate的for循环" class="headerlink" title="Py，利用enumerate的for循环"></a>Py，利用enumerate的for循环</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> idx, train_dict <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_data):  <span class="comment"># 这种循环的作用是idx是train_data的索引，train_dict是train_data的元素（即存有训练数据的字典）</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(train_path + <span class="built_in">str</span>(idx) + <span class="string">&#x27;.npz&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        np.savez_compressed(f, data=train_dict)</span><br></pre></td></tr></table></figure>
+<h3 id="Py，利用enumerate的for循环"><a href="#Py，利用enumerate的for循环" class="headerlink" title="Py，利用enumerate的for循环"></a>Py，利用enumerate的for循环</h3><pre><code class="highlight py"><span class="keyword">for</span> idx, train_dict <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_data):  <span class="comment"># 这种循环的作用是idx是train_data的索引，train_dict是train_data的元素（即存有训练数据的字典）</span>
+    <span class="keyword">with</span> <span class="built_in">open</span>(train_path + <span class="built_in">str</span>(idx) + <span class="string">&#x27;.npz&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:
+        np.savez_compressed(f, data=train_dict)</code></pre>
 
 <p>enumerate返回一个元组(index, element)的迭代器，常用于for index, element in enumerate(list)的循环中</p>
 <h3 id="Py，argparse模块"><a href="#Py，argparse模块" class="headerlink" title="Py，argparse模块"></a>Py，argparse模块</h3><p>argparse 模块是 Python 标准库中的一个模块，它用于解析命令行参数。通过 argparse，我们可以方便地从命令行中获取参数并将其传递给程序。</p>
-<h4 id="argparse的用法"><a href="#argparse的用法" class="headerlink" title="argparse的用法"></a>argparse的用法</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parser = argparse.ArgumentParser()  <span class="comment"># 这是创建一个新的 ArgumentParser 对象，用于处理命令行参数。</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;-go&#x27;</span>, <span class="string">&quot;--goal&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;test&quot;</span>, </span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&quot;The goal for this experiment&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="argparse的用法"><a href="#argparse的用法" class="headerlink" title="argparse的用法"></a>argparse的用法</h4><pre><code class="highlight py">parser = argparse.ArgumentParser()  <span class="comment"># 这是创建一个新的 ArgumentParser 对象，用于处理命令行参数。</span>
+parser.add_argument(<span class="string">&#x27;-go&#x27;</span>, <span class="string">&quot;--goal&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;test&quot;</span>, 
+                    <span class="built_in">help</span>=<span class="string">&quot;The goal for this experiment&quot;</span>)</code></pre>
 
 <p>add_argument 方法用于定义程序可以接受的命令行参数，在上面的例子中：</p>
 <ol>
@@ -213,10 +245,15 @@
 <li>help 提供该参数的帮助信息，会在使用 –help 时显示。</li>
 </ol>
 <p>类似的参数定义方法：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;-dev&#x27;</span>, <span class="string">&quot;--device&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;cuda&quot;</span>,</span><br><span class="line">                    choices=[<span class="string">&quot;cpu&quot;</span>, <span class="string">&quot;cuda&quot;</span>])</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-did&#x27;</span>, <span class="string">&quot;--device_id&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;0&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-data&#x27;</span>, <span class="string">&quot;--dataset&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;MNIST&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-itk&#x27;</span>, <span class="string">&quot;--itk&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">4000</span>,</span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&quot;The iterations for solving quadratic subproblems&quot;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py">parser.add_argument(<span class="string">&#x27;-dev&#x27;</span>, <span class="string">&quot;--device&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;cuda&quot;</span>,
+                    choices=[<span class="string">&quot;cpu&quot;</span>, <span class="string">&quot;cuda&quot;</span>])
+parser.add_argument(<span class="string">&#x27;-did&#x27;</span>, <span class="string">&quot;--device_id&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;0&quot;</span>)
+parser.add_argument(<span class="string">&#x27;-data&#x27;</span>, <span class="string">&quot;--dataset&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;MNIST&quot;</span>)
+parser.add_argument(<span class="string">&#x27;-itk&#x27;</span>, <span class="string">&quot;--itk&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">4000</span>,
+                    <span class="built_in">help</span>=<span class="string">&quot;The iterations for solving quadratic subproblems&quot;</span>)</code></pre>
 
 <p>最后解析参数，得到一个Namespace对象，用来访问各个参数</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">args = parser.parse_args()</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py">args = parser.parse_args()</code></pre>
 
 <p>parse_args 方法会解析命令行参数，并返回一个包含参数值的 Namespace 对象。可以通过 args 对象来访问这些参数，例如 args.goal、args.device 等。</p>
 <p>综合来看，argparse的主要用法就是<strong>创建对象，定义参数，解析参数</strong></p>
@@ -231,10 +268,48 @@
 <li>迭代接口: DataLoader 实现了 Python 迭代器协议，可以在训练循环中方便地使用 for batch in dataloader 这样的语法。</li>
 </ol>
 <p>例子：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SimpleDataset</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = data</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.data[idx]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 假设 read_client_data 返回一个 SimpleDataset 对象</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_client_data</span>(<span class="params">dataset, client_id, is_train, few_shot</span>):</span><br><span class="line">    <span class="keyword">return</span> SimpleDataset([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, batch_size=<span class="number">3</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.batch_size = batch_size</span><br><span class="line">        <span class="variable language_">self</span>.dataset = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.<span class="built_in">id</span> = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.few_shot = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">load_test_data</span>(<span class="params">self, batch_size=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">if</span> batch_size == <span class="literal">None</span>:</span><br><span class="line">            batch_size = <span class="variable language_">self</span>.batch_size</span><br><span class="line">        test_data = read_client_data(<span class="variable language_">self</span>.dataset, <span class="variable language_">self</span>.<span class="built_in">id</span>, is_train=<span class="literal">False</span>, few_shot=<span class="variable language_">self</span>.few_shot)</span><br><span class="line">        <span class="keyword">return</span> DataLoader(test_data, batch_size, drop_last=<span class="literal">False</span>, shuffle=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 MyClass 加载数据</span></span><br><span class="line">my_class = MyClass()</span><br><span class="line">dataloader = my_class.load_test_data()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> batch <span class="keyword">in</span> dataloader:</span><br><span class="line">    <span class="built_in">print</span>(batch)</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py"><span class="keyword">import</span> torch
+<span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader
+
+<span class="keyword">class</span> <span class="title class_">SimpleDataset</span>(<span class="title class_ inherited__">Dataset</span>):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data</span>):
+        <span class="variable language_">self</span>.data = data
+
+    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):
+        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.data)
+
+    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):
+        <span class="keyword">return</span> <span class="variable language_">self</span>.data[idx]
+
+<span class="comment"># 假设 read_client_data 返回一个 SimpleDataset 对象</span>
+<span class="keyword">def</span> <span class="title function_">read_client_data</span>(<span class="params">dataset, client_id, is_train, few_shot</span>):
+    <span class="keyword">return</span> SimpleDataset([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>])
+
+<span class="keyword">class</span> <span class="title class_">MyClass</span>:
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, batch_size=<span class="number">3</span></span>):
+        <span class="variable language_">self</span>.batch_size = batch_size
+        <span class="variable language_">self</span>.dataset = <span class="literal">None</span>
+        <span class="variable language_">self</span>.<span class="built_in">id</span> = <span class="literal">None</span>
+        <span class="variable language_">self</span>.few_shot = <span class="literal">False</span>
+
+    <span class="keyword">def</span> <span class="title function_">load_test_data</span>(<span class="params">self, batch_size=<span class="literal">None</span></span>):
+        <span class="keyword">if</span> batch_size == <span class="literal">None</span>:
+            batch_size = <span class="variable language_">self</span>.batch_size
+        test_data = read_client_data(<span class="variable language_">self</span>.dataset, <span class="variable language_">self</span>.<span class="built_in">id</span>, is_train=<span class="literal">False</span>, few_shot=<span class="variable language_">self</span>.few_shot)
+        <span class="keyword">return</span> DataLoader(test_data, batch_size, drop_last=<span class="literal">False</span>, shuffle=<span class="literal">False</span>)
+
+<span class="comment"># 使用 MyClass 加载数据</span>
+my_class = MyClass()
+dataloader = my_class.load_test_data()
+
+<span class="keyword">for</span> batch <span class="keyword">in</span> dataloader:
+    <span class="built_in">print</span>(batch)</code></pre>
 
 <p>例子将会输出</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">tensor([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line">tensor([<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br><span class="line">tensor([<span class="number">10</span>])</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight py">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])
+tensor([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])
+tensor([<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])
+tensor([<span class="number">10</span>])</code></pre>
 		</div>
 
 		<!-- Comments removed -->

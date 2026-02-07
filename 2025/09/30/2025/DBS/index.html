@@ -367,7 +367,15 @@
 <p>每一个基本表都属于某一个模式</p>
 <p>一个模式可以包含多个基本表</p>
 <h4 id="基本表DDL"><a href="#基本表DDL" class="headerlink" title="基本表DDL"></a>基本表DDL</h4><p><strong>创建基本表的基本范式</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE &lt;name &gt;</span><br><span class="line">(</span><br><span class="line">    &lt;col name &gt; &lt;data <span class="built_in">type</span> &gt; [列级完整性约束]</span><br><span class="line">    [, ...] [...]</span><br><span class="line">    [, 表级完整性约束]</span><br><span class="line">    [, ...]</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+CREATE TABLE &lt;name &gt;
+(
+    &lt;col name &gt; &lt;data <span class="built_in">type</span> &gt; [列级完整性约束]
+    [, ...] [...]
+    [, 表级完整性约束]
+    [, ...]
+);
+</code></pre>
 
 <p>注：如果完整性约束涉及多个列，那必须定义在表级</p>
 <p>在这一部分应该掌握的语句</p>
@@ -383,7 +391,12 @@
 <p>ALTER TABLE Student<br>DROP Sname <strong>UNIQUE</strong>;</p>
 <p>ALTER TABLE Student<br>ADD Ssex CHAR(2) CHECK IN (‘F’,’M’);</p>
 <p>ALTER TABLE Student<br>ALTER <strong>COLUMN</strong> Ssex CHAR(10);</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE &lt;name &gt;</span><br><span class="line">[ADD &lt;col name&gt; &lt;data <span class="built_in">type</span>&gt; &lt;完整性约束&gt;] //增加新列</span><br><span class="line">[DROP &lt;col name&gt; &lt;完整性约束&gt;] //删除列，注意删除的时候要附上该列的完整性约束</span><br><span class="line">[ALTER COLUMN &lt;col name&gt; &lt;data <span class="built_in">type</span>&gt;]; //更改列的数据类型</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+ALTER TABLE &lt;name &gt;
+[ADD &lt;col name&gt; &lt;data <span class="built_in">type</span>&gt; &lt;完整性约束&gt;] //增加新列
+[DROP &lt;col name&gt; &lt;完整性约束&gt;] //删除列，注意删除的时候要附上该列的完整性约束
+[ALTER COLUMN &lt;col name&gt; &lt;data <span class="built_in">type</span>&gt;]; //更改列的数据类型
+</code></pre>
 
 <p>注：</p>
 <ol>
@@ -391,7 +404,10 @@
 <li>ADD有直接添加完整性约束的用法，类似<code>ADD UNIQUE(Cname)</code></li>
 </ol>
 <p><strong>删除基本表的基本范式</strong><br>    CASCADE&#x2F;RESTRICT</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DROP TBALE &lt;name &gt;</span><br><span class="line">[CASCADE | RESTRICT];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+DROP TBALE &lt;name &gt;
+[CASCADE | RESTRICT];
+</code></pre>
 
 <p>注：</p>
 <ol>
@@ -411,7 +427,14 @@
 <h3 id="DQL语句"><a href="#DQL语句" class="headerlink" title="DQL语句"></a>DQL语句</h3><p>这一部分是数据查询语言，基本上都是在基本表上进行的</p>
 <p><strong>基本范式：</strong></p>
 <p>DISTINCT&#x2F;ALL;<br>ASC&#x2F;DESC;</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT [DISTINCT|ALL]&lt;目标列表表达式 &gt; [,&lt;目标列表表达式&gt;...] </span><br><span class="line">FROM &lt;表名 or 视图名 &gt; [,&lt;表名 or 视图名 &gt;...]</span><br><span class="line">[WHERE &lt;条件表达式&gt;]</span><br><span class="line">[GROUP BY &lt;col name&gt;]</span><br><span class="line">[HAVING &lt;条件表达式&gt;]</span><br><span class="line">[ORDER BY &lt;col name&gt; [ASC|DESC]];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT [DISTINCT|ALL]&lt;目标列表表达式 &gt; [,&lt;目标列表表达式&gt;...] 
+FROM &lt;表名 or 视图名 &gt; [,&lt;表名 or 视图名 &gt;...]
+[WHERE &lt;条件表达式&gt;]
+[GROUP BY &lt;col name&gt;]
+[HAVING &lt;条件表达式&gt;]
+[ORDER BY &lt;col name&gt; [ASC|DESC]];
+</code></pre>
 
 <h4 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h4><p><code>单表查询部分在逻辑上理解不困难，难点主要是掌握各种语句的用法，这里主要采用列举例题与对应知识点的形式，复习的时候要做到看到例题能够想到考察的知识点与对应的查询语句是什么</code></p>
 <p>选择<strong>指定列</strong><br>    eg：查询学生表中的学号、姓名；</p>
@@ -450,13 +473,28 @@
 <p>自主存取控制：<br>    <strong>GRANT语句的使用</strong>；<br>        1）<strong>一般用法</strong>；<br>        2）<strong>授权所有权限</strong>：GRANT ALL PRIVILEGES …<br>        3）<strong>授权给所有人</strong>：… TO PUBLIC；<br>        4）<strong>授权特定列</strong>：GRANT UPDATE(Sno) …<br>        5）<strong>授予人将相同权限授予出去的能力</strong>：… WITH GRANT OPTION;<br>    <strong>REVOKE语句的使用</strong>：<br>        1）<strong>一般用法</strong>；<br>        2）<strong>从所有用户收回</strong>：… FROM PUBLIC;<br>        3）<strong>级联收回</strong>：… FROM U5 CASCADE;<br>    <strong>角色</strong>：<br>        <strong>创建</strong>：<br>            CREATE ROLE &lt;角色名&gt;<br>    <strong>授予、回收权限</strong>：<br>        将角色名用在<strong>用户</strong>的位置；<br>    <strong>将角色授予其他角色或用户</strong>：<br>        将角色名用在<strong>权限</strong>的位置；<br>        <strong>可选的转授能力</strong>：<br>            [WITH ADMIN OPTION]</p>
 <p>注意：<br>    WITH GRANT OPTION不能出现<strong>循环授权</strong>；<br>    （或许WITH ADMIN OPTIOPN也是）；</p>
 <p>GRANT一般用法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限 &gt;[,...]</span><br><span class="line">ON &lt;对象类型 &gt; &lt;对象名 &gt;[,...] <span class="comment"># 对象类型一般是TABLE（有时可能是VIEW）</span></span><br><span class="line">TO &lt;USER &gt;[,...]</span><br><span class="line">[WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">GRANT &lt;权限 &gt;[,...]
+ON &lt;对象类型 &gt; &lt;对象名 &gt;[,...] <span class="comment"># 对象类型一般是TABLE（有时可能是VIEW）</span>
+TO &lt;USER &gt;[,...]
+[WITH GRANT OPTION]</code></pre>
 <p>注意对象类型，因为不一定是基本表，也可以是视图等；</p>
 <p>REVOKE一般用法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限 &gt;[,...]</span><br><span class="line">ON &lt;对象类型 &gt; &lt;对象名 &gt;[,...]</span><br><span class="line">FROM &lt;用户 &gt;[,...];</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">REVOKE &lt;权限 &gt;[,...]
+ON &lt;对象类型 &gt; &lt;对象名 &gt;[,...]
+FROM &lt;用户 &gt;[,...];</code></pre>
 
 <p>角色的例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE ROLE R1;</span><br><span class="line"></span><br><span class="line">GRANT UPDATE(Sname)</span><br><span class="line">ON TABLE Student</span><br><span class="line">TO R1;</span><br><span class="line"></span><br><span class="line">CREATE USER U1;</span><br><span class="line"></span><br><span class="line">GRANT R1</span><br><span class="line">TO U1;</span><br><span class="line">WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">CREATE ROLE R1;
+
+GRANT UPDATE(Sname)
+ON TABLE Student
+TO R1;
+
+CREATE USER U1;
+
+GRANT R1
+TO U1;
+WITH GRANT OPTION;</code></pre>
 
 <h2 id="数据库完整性"><a href="#数据库完整性" class="headerlink" title="数据库完整性"></a>数据库完整性</h2><p><code>实际上我们在前面的关系部分也有关系的完整性约束，尝试进行对比。</code></p>
 <p>数据库完整性：<br>    <strong>定义</strong>：数据的<strong>正确、有效和相容</strong>；（<em>也是数据库的一致性</em>）；<br>        1）正确：数据要<strong>符合语义</strong>；<br>        2）有效：数据有<strong>有效期限</strong>；（eg，验证码过了时效就不能用了）；<br>        3）相容：同一关系同一元组，同一关系不同元组，不同关系不同元组，之间的数据<strong>一致性</strong>；<br>        （<em>似乎对于完整性ppt上没有有效这个点</em>）；<br>    面对的场景：<br>        1）合法用户合法操作；<br>        2）不合语义、不正确的数据；<br>    （注意与安全性的对比）；<br>    <strong>DBMS确保完整性的方法：</strong><br>        1）提供<strong>定义</strong>完整性约束条件的机制；<br>        2）提供<strong>完整性检查</strong>的方法；<br>        3）<strong>违约处理</strong>；<br>    包括：<br>        1）实体完整性约束；<br>        2）参照完整性约束；<br>        3）用户定义的完整性约束；</p>
@@ -545,7 +583,15 @@
 <li>较好的数据与程序的物理独立性，是因为当数据库的存储结构改变了，数据库管理员可以修改模式&#x2F;内模式映像，让模式保持不变，从而让应用程序不受影响。</li>
 </ol>
 <h2 id="SQL练习（创建、修改、删除）"><a href="#SQL练习（创建、修改、删除）" class="headerlink" title="SQL练习（创建、修改、删除）"></a>SQL练习（创建、修改、删除）</h2><h3 id="创建基本表"><a href="#创建基本表" class="headerlink" title="创建基本表"></a>创建基本表</h3><p>其基本语言规范是</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line">(</span><br><span class="line">    &lt;列名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">    &lt;列名&gt; &lt;数据类型&gt; [列级完整性约束],</span><br><span class="line">    [表级完整性约束]</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+CREATE TABLE &lt;表名&gt;
+(
+    &lt;列名&gt; &lt;数据类型&gt; [列级完整性约束],
+    &lt;列名&gt; &lt;数据类型&gt; [列级完整性约束],
+    [表级完整性约束]
+);
+
+</code></pre>
 
 <h4 id="eg5-建立学生数据表"><a href="#eg5-建立学生数据表" class="headerlink" title="eg5 建立学生数据表"></a>eg5 建立学生数据表</h4><p>要求：</p>
 <ol>
@@ -553,7 +599,16 @@
 <li>姓名不能重复</li>
 <li>性别是一个汉字（对应旧版本mysql两个字符）</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE Student</span><br><span class="line">(</span><br><span class="line">    Sno CHAR(10) PRIMARY KEY,</span><br><span class="line">    Sname CHAR(20) UNIQUE,</span><br><span class="line">    Ssex CHAR(2),</span><br><span class="line">    Sage SMALLINT,</span><br><span class="line">    Sdept CHAR(20)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+CREATE TABLE Student
+(
+    Sno CHAR(10) PRIMARY KEY,
+    Sname CHAR(20) UNIQUE,
+    Ssex CHAR(2),
+    Sage SMALLINT,
+    Sdept CHAR(20)
+);
+</code></pre>
 
 <h4 id="eg6-建立课程数据表"><a href="#eg6-建立课程数据表" class="headerlink" title="eg6 建立课程数据表"></a>eg6 建立课程数据表</h4><p>要求：</p>
 <ol>
@@ -561,7 +616,17 @@
 <li>课程名不允许为空</li>
 <li>先修课是外码，参照的是自己的课程号属性</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE Course</span><br><span class="line">(</span><br><span class="line">    Cno CHAR(4) PRIMARY KEY,</span><br><span class="line">    Cname CHAR(40) NOT NULL,</span><br><span class="line">    Cpno CHAR(4),</span><br><span class="line">    Ccredit SMALLINT,</span><br><span class="line">    FOREIGN KEY (Cpno)</span><br><span class="line">    REFERENCES Course Cno</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+CREATE TABLE Course
+(
+    Cno CHAR(4) PRIMARY KEY,
+    Cname CHAR(40) NOT NULL,
+    Cpno CHAR(4),
+    Ccredit SMALLINT,
+    FOREIGN KEY (Cpno)
+    REFERENCES Course Cno
+);
+</code></pre>
 
 <p><strong>错误修正</strong>：<code>REFERENCES Course Cno</code>应该是<code>REFERENCES Course(Cno)</code></p>
 <h4 id="eg7-建立选课表"><a href="#eg7-建立选课表" class="headerlink" title="eg7 建立选课表"></a>eg7 建立选课表</h4><p>要求：</p>
@@ -569,16 +634,39 @@
 <li>主键由两个Sno、Cno两个属性构成</li>
 <li>Sno、Cno还分别是外键，参考前面两个表中的对应属性</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE SC</span><br><span class="line">(</span><br><span class="line">    Sno CHAR(10),</span><br><span class="line">    Cno CHAR(4),</span><br><span class="line">    Grade SMALLINT,</span><br><span class="line">    PRIMARY KEY (Sno,Cno),</span><br><span class="line">    FOREIGN KEY (Sno)</span><br><span class="line">    REFERENCES Student(Sno),</span><br><span class="line">    FOREIGN KEY (Cno)</span><br><span class="line">    REFERENCES Course(Cno)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+CREATE TABLE SC
+(
+    Sno CHAR(10),
+    Cno CHAR(4),
+    Grade SMALLINT,
+    PRIMARY KEY (Sno,Cno),
+    FOREIGN KEY (Sno)
+    REFERENCES Student(Sno),
+    FOREIGN KEY (Cno)
+    REFERENCES Course(Cno)
+);
+</code></pre>
 
 <p><strong>注意创建主键为多个属性组合时的写法：</strong><code>PRIMARY KEY (Sno,Cno)</code></p>
 <h3 id="修改基本表"><a href="#修改基本表" class="headerlink" title="修改基本表"></a>修改基本表</h3><p>基本规范如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE &lt;表名&gt;</span><br><span class="line">[ADD &lt;列名&gt; &lt;数据类型&gt; [完整性约束]]</span><br><span class="line">[DROP &lt;列名&gt; &lt;数据类型&gt;]</span><br><span class="line">[ALTER COLUMN &lt;列名&gt; &lt;数据类型&gt;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+ALTER TABLE &lt;表名&gt;
+[ADD &lt;列名&gt; &lt;数据类型&gt; [完整性约束]]
+[DROP &lt;列名&gt; &lt;数据类型&gt;]
+[ALTER COLUMN &lt;列名&gt; &lt;数据类型&gt;]
+</code></pre>
 
-<h4 id="eg8-向学生表增加入学时间"><a href="#eg8-向学生表增加入学时间" class="headerlink" title="eg8 向学生表增加入学时间"></a>eg8 向学生表增加入学时间</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE Student</span><br><span class="line">ADD S_entrance DATA;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="eg8-向学生表增加入学时间"><a href="#eg8-向学生表增加入学时间" class="headerlink" title="eg8 向学生表增加入学时间"></a>eg8 向学生表增加入学时间</h4><pre><code class="highlight bash">
+ALTER TABLE Student
+ADD S_entrance DATA;
+</code></pre>
 
 <p><strong>错误修正：</strong>时间的数据类型应该是<code>DATE</code>而不是<code>DATA</code></p>
-<h4 id="eg9-将学生表中的年龄属性转换为INT类型"><a href="#eg9-将学生表中的年龄属性转换为INT类型" class="headerlink" title="eg9 将学生表中的年龄属性转换为INT类型"></a>eg9 将学生表中的年龄属性转换为INT类型</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER TABLE Student</span><br><span class="line">ALTER COLUMN Sage INT;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="eg9-将学生表中的年龄属性转换为INT类型"><a href="#eg9-将学生表中的年龄属性转换为INT类型" class="headerlink" title="eg9 将学生表中的年龄属性转换为INT类型"></a>eg9 将学生表中的年龄属性转换为INT类型</h4><pre><code class="highlight bash">
+ALTER TABLE Student
+ALTER COLUMN Sage INT;
+</code></pre>
 
 <p><strong>注意以下事项</strong>：</p>
 <ol>
@@ -593,21 +681,35 @@
 <li>GROUP BY子句</li>
 </ol>
 <p><strong>关于GROUP BY，我本地的mysql和教材的SQL标准存在一些偏差</strong>：做如下记录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sno</span><br><span class="line">FROM SC</span><br><span class="line">GROUP BY Sno;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sno
+FROM SC
+GROUP BY Sno;
+</code></pre>
 
 <p>上面的查询语句本地的mysql显示的结果会自动去重，和我理解的按照Sno属性是否相同将对应元组放在一张表里面，而不改变元组的个数有一些不同；<strong>但是使用COUNT语句能够正确统计出各组元组的个数，和课本上一致。</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sno,Cno</span><br><span class="line">FROM SC</span><br><span class="line">GROUP BY Sno</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sno,Cno
+FROM SC
+GROUP BY Sno
+</code></pre>
 
 <p>本地上是会报错的，老师说按照课本的逻辑这应该是可以执行的，并且查询的结果会是没有分组的Sno、Cno</p>
 <p><strong>总是，GROUP BY语句大多数时候还是配合聚集函数使用的，直接显示结果比较少</strong>。</p>
 <h4 id="查询若干列"><a href="#查询若干列" class="headerlink" title="查询若干列"></a>查询若干列</h4><p>eg1 查询全体学生的姓名和学号</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sno</span><br><span class="line">From Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,Sno
+From Student;
+</code></pre>
 
 <p>eg2 查询全体学生的姓名、学号和所在系</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sno,Sdept</span><br><span class="line">FROM Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,Sno,Sdept
+FROM Student;
+</code></pre>
 
 <p>eg3 查询全体学生的详细记录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLECT * FROM Student;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">SLECT * FROM Student;</code></pre>
 
 <p><strong>查询若干列的时候，不仅可以直接查询，还可以查询经过计算的表达式</strong>，常用的表达式如下：</p>
 <ol>
@@ -617,15 +719,24 @@
 <li>列别名，规范<code>SELECT &lt;列名&gt; &lt;列别名&gt;</code>，显示的时候会自然将对应的列作别名显示</li>
 </ol>
 <p>eg4 查询全体学生的姓名及出生年份</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,<span class="string">&#x27;birth of date:&#x27;</span> BIRTH,2025-Sage BIRTHDAY</span><br><span class="line">FROM Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,<span class="string">&#x27;birth of date:&#x27;</span> BIRTH,2025-Sage BIRTHDAY
+FROM Student;
+</code></pre>
 
 <p>eg5 查询学生的姓名、出生年份和所在院系，要求小写字母表示所有系名</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,<span class="string">&#x27;birth of date:&#x27;</span> BIRTH,2025-Sage BIRTHDAY,LOWER(Sdept)</span><br><span class="line">FROM Student;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,<span class="string">&#x27;birth of date:&#x27;</span> BIRTH,2025-Sage BIRTHDAY,LOWER(Sdept)
+FROM Student;
+</code></pre>
 
 <h4 id="选择表中的若干元组"><a href="#选择表中的若干元组" class="headerlink" title="选择表中的若干元组"></a>选择表中的若干元组</h4><p><strong>关于DISTINCT和ALL</strong>：如果没有规定DISTINCT，则默认为ALL，前者会消除重复行，后者会保留所有在原始基本表中查询到的满足条件的元组</p>
 <p>eg6 查询选修了课程的学生学号</p>
 <p>eg6思路：对于SC课程表查询Sno，并去重</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT DISTINCT Sno</span><br><span class="line">FROM SC;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT DISTINCT Sno
+FROM SC;
+</code></pre>
 
 <p><strong>注意：</strong><code>DISTINCT</code>出现的位置，不是在列名之后，否则就变成别名了</p>
 <p><strong>关于选择元组常用的查询条件（比较）</strong>：</p>
@@ -638,27 +749,55 @@
 <li>多重条件（逻辑运算）：<code>AND, OR, NOT</code></li>
 </ol>
 <p>eg7 查询计算机科学系全体学生的名单</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sdept = <span class="string">&#x27;CS&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT *
+FROM Student
+WHERE Sdept = <span class="string">&#x27;CS&#x27;</span>;
+</code></pre>
 
 <p>eg8 查询所有年龄在20岁以下学生姓名及年龄</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sage</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sage&lt;20;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,Sage
+FROM Student
+WHERE Sage&lt;20;
+</code></pre>
 
 <p>eg9 查询考试成绩有不及格的学生学号</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT DISTINCT Sno</span><br><span class="line">FROM SC</span><br><span class="line">WHERE Grade&lt;60;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT DISTINCT Sno
+FROM SC
+WHERE Grade&lt;60;
+</code></pre>
 
 <p><strong>关于选择元组常用的查询条件（确定范围）</strong>：<code>BETWEEN...AND...</code>和<code>NOT BETWEEN...AND...</code>，注意<code>BETWEEN...AND...</code>是包含边界的！</p>
 <p>eg10 查询年龄在20~23岁之间的学生姓名、系别和年龄</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sdept,Sage</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sage BETWEEN 20 AND 23;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,Sdept,Sage
+FROM Student
+WHERE Sage BETWEEN 20 AND 23;
+</code></pre>
 
 <p>eg11 查询年龄不在20~23岁之间的学生姓名、系别和年龄</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sdept,Sage</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sage NOT BETWEEN 20 AND 23;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,Sdept,Sage
+FROM Student
+WHERE Sage NOT BETWEEN 20 AND 23;
+</code></pre>
 
 <p><strong>关于选择元组常用的查询条件（确定集合）</strong>：<code>IN &lt;值表&gt;</code>，<code>NOT IN &lt;值表&gt;</code>，例如，对于字符串的值，值表写法是<code>(&#39;1&#39;,&#39;2&#39;,&#39;3&#39;)</code></p>
 <p>eg12 查询信息系IS、数学系MA和计算机科学系CS，学生姓名和系别</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sdept</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sdept IN (<span class="string">&#x27;IS&#x27;</span>,<span class="string">&#x27;MA&#x27;</span>,<span class="string">&#x27;CS&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,Sdept
+FROM Student
+WHERE Sdept IN (<span class="string">&#x27;IS&#x27;</span>,<span class="string">&#x27;MA&#x27;</span>,<span class="string">&#x27;CS&#x27;</span>);
+</code></pre>
 
 <p>eg13 查询既不是信息系、数学系也不是计算机科学系的学生姓名和性别</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Ssex</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sdept NOT IN (<span class="string">&#x27;IS&#x27;</span>,<span class="string">&#x27;MA&#x27;</span>,<span class="string">&#x27;CS&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,Ssex
+FROM Student
+WHERE Sdept NOT IN (<span class="string">&#x27;IS&#x27;</span>,<span class="string">&#x27;MA&#x27;</span>,<span class="string">&#x27;CS&#x27;</span>);
+</code></pre>
 
 <p><strong>关于选择元组常用的查询条件（字符匹配）</strong>：</p>
 <ol>
@@ -666,27 +805,57 @@
 <li><code>ESCAPE &#39;&lt;转义字符&gt;&#39;</code>，指定的转义字符用于通配符前面，用来将通配符当作一个普通的字符，但是值得注意的是<strong>如果转义字符单独出现那么它只会被当作普通字符</strong>，这与一些常见语言的处理方式是不同的，不需要两个转义字符来表示其本身</li>
 </ol>
 <p>eg14 查询学号为200215121学生的详细情况</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sno LIKE <span class="string">&#x27;200215121&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT *
+FROM Student
+WHERE Sno LIKE <span class="string">&#x27;200215121&#x27;</span>;
+</code></pre>
 
 <p>eg15查询所有姓刘学生的姓名、学号和性别</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname,Sno,Ssex</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sname LIKE <span class="string">&#x27;刘%&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname,Sno,Ssex
+FROM Student
+WHERE Sname LIKE <span class="string">&#x27;刘%&#x27;</span>;
+</code></pre>
 
 <p>eg16查询姓“欧阳”且全名为三个汉字的学生的姓名</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sname LIKE <span class="string">&#x27;欧阳__&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname
+FROM Student
+WHERE Sname LIKE <span class="string">&#x27;欧阳__&#x27;</span>;
+</code></pre>
 
 <p><strong>注意</strong>：实际上现在经过测试，MySQL做了适配，一个下划线就可以对应一个汉字字符，从前要用两个，是因为在编码的时候汉字有内外码，一个汉字对应两个字符长度</p>
 <p>eg18 查询所有不姓刘的学生姓名</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sname</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Sname NOT LIKE <span class="string">&#x27;刘%&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sname
+FROM Student
+WHERE Sname NOT LIKE <span class="string">&#x27;刘%&#x27;</span>;
+</code></pre>
 
 <p>eg19 查询DB_Design课程的课程号和学分</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Cno,Credit</span><br><span class="line">FROM Course</span><br><span class="line">WHERE Cname LIKE <span class="string">&#x27;DB\_Design&#x27;</span></span><br><span class="line">ESCAPE <span class="string">&#x27;\&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Cno,Credit
+FROM Course
+WHERE Cname LIKE <span class="string">&#x27;DB\_Design&#x27;</span>
+ESCAPE <span class="string">&#x27;\&#x27;</span>;
+</code></pre>
 
 <p>eg20 查询以’DB_’开头，且倒数第3个字符为’i’的课程的详细情况</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM Course</span><br><span class="line">WHERE Cname LIKE <span class="string">&#x27;DB\_%i__&#x27;</span></span><br><span class="line">ESCAPE <span class="string">&#x27;\&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT *
+FROM Course
+WHERE Cname LIKE <span class="string">&#x27;DB\_%i__&#x27;</span>
+ESCAPE <span class="string">&#x27;\&#x27;</span>;
+</code></pre>
 
 <p><strong>关于选择元组常用的查询条件（涉及空值）</strong>：使用语句<code>IS NULL</code>或<code>IS NOT NULL</code>，这里的<code>IS</code>不能够用<code>=</code>来代替，简单理解就是，<code>NULL</code>是一个对象而不是一个值</p>
 <p>eg21 查询缺少成绩的学生的学号和相应的课程号</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT Sno,Cno</span><br><span class="line">FROM SC</span><br><span class="line">WHERE Grade IS NULL;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight bash">
+SELECT Sno,Cno
+FROM SC
+WHERE Grade IS NULL;
+</code></pre>
 
 <p><strong>关于选择元组常用的查询条件（多重条件查询）</strong>：</p>
 <ol>

@@ -224,7 +224,20 @@
 </ol>
 <h3 id="负极大值搜索"><a href="#负极大值搜索" class="headerlink" title="负极大值搜索"></a>负极大值搜索</h3><p>思想：<br>    1）父节点的估值是各子节点估值的变号极大值，从而避免奇数层极大、偶数层极小的情况。（实际上这样的话每次只用从子节点中挑选MIN的估值，对MAX节点的子节点，MIN意味着负的越多，取正越大；对MIN节点的子节点，MIN意味着正的越少，取负越大）<br>    2）并且由于实际上，这样处理估值后，无论MAX、MIN都是做的MIN节点的搜索，找子节点中估值最小的，于是只需要实现beta剪枝</p>
 <p>关键点：<br>    1）估值函数的处理：<br>        红方：RedValue-BlackValue；<br>        黑方：BlackValue-RedValue；<br>    2）返回的不再是value而是-value；<br>    3）反向更新的时候，中间节点的估值是子节点估值的负数（-value）中的最大值；<br>    4）前向传播的时候子节点的beta，alpha &#x3D; 父节点的-alpha，-beta；<br>    5）反向更新的时候只更新alpha的值对应的也是 子节点估值的负值 自己的alpha值 中最大的（和value更新类似）；<br>    （参考下面的伪代码…）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">negamax_alpha_beta</span>(<span class="params">node, depth, alpha, beta, color</span>):</span><br><span class="line">    <span class="keyword">if</span> depth == <span class="number">0</span> <span class="keyword">or</span> node.is_terminal():</span><br><span class="line">        <span class="keyword">return</span> color * evaluate(node)</span><br><span class="line">    </span><br><span class="line">    value = -<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> node.children():</span><br><span class="line">        child_value = -negamax_alpha_beta(child, depth-<span class="number">1</span>, -beta, -alpha, -color)</span><br><span class="line">        value = <span class="built_in">max</span>(value, child_value)</span><br><span class="line">        alpha = <span class="built_in">max</span>(alpha, value)</span><br><span class="line">        <span class="keyword">if</span> alpha &gt;= beta:</span><br><span class="line">            <span class="keyword">break</span>  <span class="comment"># 这就是唯一的剪枝条件</span></span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight python">
+<span class="keyword">def</span> <span class="title function_">negamax_alpha_beta</span>(<span class="params">node, depth, alpha, beta, color</span>):
+    <span class="keyword">if</span> depth == <span class="number">0</span> <span class="keyword">or</span> node.is_terminal():
+        <span class="keyword">return</span> color * evaluate(node)
+    
+    value = -<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)
+    <span class="keyword">for</span> child <span class="keyword">in</span> node.children():
+        child_value = -negamax_alpha_beta(child, depth-<span class="number">1</span>, -beta, -alpha, -color)
+        value = <span class="built_in">max</span>(value, child_value)
+        alpha = <span class="built_in">max</span>(alpha, value)
+        <span class="keyword">if</span> alpha &gt;= beta:
+            <span class="keyword">break</span>  <span class="comment"># 这就是唯一的剪枝条件</span>
+    <span class="keyword">return</span> value
+</code></pre>
 
 <h3 id="蒙特卡洛树搜索"><a href="#蒙特卡洛树搜索" class="headerlink" title="蒙特卡洛树搜索"></a>蒙特卡洛树搜索</h3><p>基本思想：</p>
 <ol>

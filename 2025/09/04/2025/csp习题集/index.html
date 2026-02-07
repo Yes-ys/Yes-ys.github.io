@@ -155,7 +155,87 @@
 <li>处理变换，如果某次查询是变换k次，那么从1变换到k，保存一路下来的结果，之后的查询只要小于k就可以直接一次变换即可。</li>
 </ol>
 <p>代码实现如下（考虑了一下，把struct换成tuple了，而且0的初始化是冗余的，直接从1开始了）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;tuple&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">map</span>&lt;tuple&lt;<span class="type">int</span>,<span class="type">char</span>&gt;, <span class="type">char</span>&gt; mp;</span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ini</span><span class="params">()</span> &#123;</span><br><span class="line"> getline(<span class="built_in">cin</span>, s);</span><br><span class="line"> <span class="type">int</span> t; </span><br><span class="line"> <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line"> getchar();<span class="comment">//吞回车</span></span><br><span class="line"> <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">  <span class="comment">//处理函数的映射，注意没有指明的映射映射到自己</span></span><br><span class="line">  <span class="built_in">string</span> ss;</span><br><span class="line">  getline(<span class="built_in">cin</span>, ss);</span><br><span class="line">  tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st1</span><span class="params">(<span class="number">1</span>, ss[<span class="number">1</span>])</span>;</span><br><span class="line">  mp[st1] = ss[<span class="number">2</span>]; </span><br><span class="line"></span><br><span class="line">  tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st2</span><span class="params">(<span class="number">1</span>, ss[<span class="number">2</span>])</span>;</span><br><span class="line">  <span class="keyword">if</span> (mp.find(st2) == mp.end())</span><br><span class="line">   mp[st2] = ss[<span class="number">2</span>];</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; s[i] != <span class="string">&#x27;#&#x27;</span>; i++) &#123;</span><br><span class="line">  <span class="comment">//检查源字符串中是否存在函数映射没有覆盖到的，若有则映射到自己</span></span><br><span class="line">  tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st</span><span class="params">(<span class="number">1</span>, s[i])</span>;</span><br><span class="line">  <span class="keyword">if</span> (mp.find(st) == mp.end())</span><br><span class="line">   mp[st] = s[i];</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> <span class="title function_">f</span><span class="params">(<span class="type">char</span> c,<span class="type">int</span> k)</span> &#123;</span><br><span class="line"> <span class="comment">//将c映射k次</span></span><br><span class="line"> <span class="type">char</span> res = c;</span><br><span class="line"> <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; i++) &#123;</span><br><span class="line">  tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st</span><span class="params">(<span class="number">1</span>, res)</span>;<span class="comment">//不断进行一次映射，进行k次</span></span><br><span class="line">  res = mp[st];</span><br><span class="line">  <span class="keyword">if</span> (i == <span class="number">1</span>)<span class="keyword">continue</span>;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">//当进行i&gt;1次的时候，保存映射结果</span></span><br><span class="line">   tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; st1(i, c);</span><br><span class="line">   mp[st1] = res;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">search</span><span class="params">()</span> &#123;</span><br><span class="line"> <span class="type">int</span> m;</span><br><span class="line"> <span class="built_in">cin</span> &gt;&gt; m;</span><br><span class="line"> <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">  <span class="type">int</span> k;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; k;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27;#&#x27;</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; s[i] != <span class="string">&#x27;#&#x27;</span>; i++) &#123;</span><br><span class="line">   <span class="comment">//逐个处理字符映射</span></span><br><span class="line">   tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st</span><span class="params">(k, s[i])</span>;</span><br><span class="line">   <span class="keyword">if</span> (mp.find(st) == mp.end()) &#123;</span><br><span class="line">    <span class="comment">//如果没有，则进行映射处理</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; f(s[i],k);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//如果有则直接输出</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; mp[st];</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27;#&#x27;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line"> ini();</span><br><span class="line"> search();</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="highlight c">
+<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span><span class="string">&lt;tuple&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span>
+using namespace <span class="built_in">std</span>;
+<span class="built_in">map</span>&lt;tuple&lt;<span class="type">int</span>,<span class="type">char</span>&gt;, <span class="type">char</span>&gt; mp;
+using namespace <span class="built_in">std</span>;
+<span class="built_in">string</span> s;
+
+<span class="type">void</span> <span class="title function_">ini</span><span class="params">()</span> &#123;
+ getline(<span class="built_in">cin</span>, s);
+ <span class="type">int</span> t; 
+ <span class="built_in">cin</span> &gt;&gt; t;
+ getchar();<span class="comment">//吞回车</span>
+ <span class="keyword">while</span> (t--) &#123;
+  <span class="comment">//处理函数的映射，注意没有指明的映射映射到自己</span>
+  <span class="built_in">string</span> ss;
+  getline(<span class="built_in">cin</span>, ss);
+  tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st1</span><span class="params">(<span class="number">1</span>, ss[<span class="number">1</span>])</span>;
+  mp[st1] = ss[<span class="number">2</span>]; 
+
+  tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st2</span><span class="params">(<span class="number">1</span>, ss[<span class="number">2</span>])</span>;
+  <span class="keyword">if</span> (mp.find(st2) == mp.end())
+   mp[st2] = ss[<span class="number">2</span>];
+ &#125;
+
+ <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; s[i] != <span class="string">&#x27;#&#x27;</span>; i++) &#123;
+  <span class="comment">//检查源字符串中是否存在函数映射没有覆盖到的，若有则映射到自己</span>
+  tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st</span><span class="params">(<span class="number">1</span>, s[i])</span>;
+  <span class="keyword">if</span> (mp.find(st) == mp.end())
+   mp[st] = s[i];
+ &#125;
+&#125;
+
+<span class="type">char</span> <span class="title function_">f</span><span class="params">(<span class="type">char</span> c,<span class="type">int</span> k)</span> &#123;
+ <span class="comment">//将c映射k次</span>
+ <span class="type">char</span> res = c;
+ <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; i++) &#123;
+  tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st</span><span class="params">(<span class="number">1</span>, res)</span>;<span class="comment">//不断进行一次映射，进行k次</span>
+  res = mp[st];
+  <span class="keyword">if</span> (i == <span class="number">1</span>)<span class="keyword">continue</span>;
+  <span class="keyword">else</span> &#123;
+   <span class="comment">//当进行i&gt;1次的时候，保存映射结果</span>
+   tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; st1(i, c);
+   mp[st1] = res;
+  &#125;
+ &#125;
+ <span class="keyword">return</span> res;
+&#125;
+
+<span class="type">void</span> <span class="title function_">search</span><span class="params">()</span> &#123;
+ <span class="type">int</span> m;
+ <span class="built_in">cin</span> &gt;&gt; m;
+ <span class="keyword">while</span> (m--) &#123;
+  <span class="type">int</span> k;
+  <span class="built_in">cin</span> &gt;&gt; k;
+  
+  <span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27;#&#x27;</span>;
+  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; s[i] != <span class="string">&#x27;#&#x27;</span>; i++) &#123;
+   <span class="comment">//逐个处理字符映射</span>
+   tuple&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title function_">st</span><span class="params">(k, s[i])</span>;
+   <span class="keyword">if</span> (mp.find(st) == mp.end()) &#123;
+    <span class="comment">//如果没有，则进行映射处理</span>
+    <span class="built_in">cout</span> &lt;&lt; f(s[i],k);
+   &#125;
+   <span class="keyword">else</span> &#123;
+    <span class="comment">//如果有则直接输出</span>
+    <span class="built_in">cout</span> &lt;&lt; mp[st];
+   &#125;
+  &#125;
+  <span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27;#&#x27;</span> &lt;&lt; <span class="built_in">endl</span>;
+ &#125;
+&#125;
+
+<span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;
+ ini();
+ search();
+ <span class="keyword">return</span> <span class="number">0</span>;
+&#125;
+</code></pre>
 
 <h2 id="补丁应用-第35次CCF认证-task3"><a href="#补丁应用-第35次CCF认证-task3" class="headerlink" title="补丁应用 第35次CCF认证 task3"></a>补丁应用 第35次CCF认证 task3</h2><p>大模拟题，先看信息：</p>
 <p>关于diff输出的补丁</p>

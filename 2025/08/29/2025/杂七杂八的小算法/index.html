@@ -131,10 +131,16 @@
 		<div id=details-post-item>
 			<h1>杂七杂八的小算法</h1>
 			<p><code>在平常练习算法题的过程中，有的题目常常涉及到使用一些基本的小算法作为整个解决方案中的一部分，例如gcd、进制转换，乃至KMP等等，我用这篇blog对这些小算法。我在这篇blog中对它们做一个综合的整理。</code></p>
-<h2 id="gcd"><a href="#gcd" class="headerlink" title="gcd"></a>gcd</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(x%y == <span class="number">0</span>)<span class="keyword">return</span> y;</span><br><span class="line"> <span class="keyword">else</span> <span class="keyword">return</span> gcd(y,x%y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="gcd"><a href="#gcd" class="headerlink" title="gcd"></a>gcd</h2><pre><code class="highlight c"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>&#123;
+ <span class="keyword">if</span>(x%y == <span class="number">0</span>)<span class="keyword">return</span> y;
+ <span class="keyword">else</span> <span class="keyword">return</span> gcd(y,x%y);
+&#125;</code></pre>
 
 <p>辗转相除法求最大公约数</p>
-<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><h2 id="lcm"><a href="#lcm" class="headerlink" title="lcm"></a>lcm</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">lcm</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> x*y/gcd(x,y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><h2 id="lcm"><a href="#lcm" class="headerlink" title="lcm"></a>lcm</h2><pre><code class="highlight c"><span class="type">int</span> <span class="title function_">lcm</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>
+&#123;
+    <span class="keyword">return</span> x*y/gcd(x,y);
+&#125;</code></pre>
 
 <p>利用最大公约数求最小公倍数</p>
 <h2 id="Fibonacci"><a href="#Fibonacci" class="headerlink" title="Fibonacci"></a>Fibonacci</h2><p>这一部分从Fibonacci数列的计算出发，使用递归&amp;递归+记忆化的方式实现。</p>
