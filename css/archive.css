@@ -41,3 +41,390 @@
     background-size: 1em 1.1em;
     background-image: url('/images/archive.svg');
 }
+
+/* =========================================
+   NEW ARCHIVE STYLES (Appended)
+   ========================================= */
+
+/* Archive Page Global */
+#archive, #archive-details, #category {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Big Title */
+.archive-big, #archive-details h1, #category h1 {
+    text-align: center;
+    color: #444;
+    font-size: 2.2em;
+    margin-bottom: 40px;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+}
+.archive-big::after, #archive-details h1::after, #category h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #81d4fa, #29b6f6);
+    border-radius: 2px;
+}
+
+/* Sections */
+.archive-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.archive-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+.archive-section h2 {
+    font-size: 1.4em;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f5f5f5;
+    display: flex;
+    align-items: center;
+}
+.archive-section h2 .icon {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Archive/Category/Tag Lists - Refined Style */
+.category-list, .tag-list, .archive-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 15px !important;
+}
+
+/* Common Item Style */
+.category-list-item, .tag-list-item, .archive-list-item {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.category-list-item:hover, .tag-list-item:hover, .archive-list-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-color: #81d4fa;
+}
+
+/* Link Style */
+.category-list-link, .tag-list-link, .archive-list-link {
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.05em;
+    flex-grow: 1;
+    margin-right: 15px;
+    transition: color 0.2s;
+}
+
+.category-list-link:hover, .tag-list-link:hover, .archive-list-link:hover {
+    color: #039be5;
+}
+
+/* Fix Archive Date Format Spacing */
+.archive-list-link {
+    font-family: monospace;
+    letter-spacing: 0.5px;
+}
+
+
+/* ----------------------------------------------------------------
+   COUNT BADGE STYLING (Strong Specificity)
+   ---------------------------------------------------------------- */
+
+#archive .category-list-count, 
+#archive .tag-list-count, 
+#archive .archive-list-count {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #fff !important;
+    min-width: 60px;
+    white-space: nowrap;
+    margin-left: auto; /* Push valid flex item to right */
+}
+
+/* Specific Gradient Colors */
+#archive .category-list-count {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+    box-shadow: 0 2px 8px rgba(79, 172, 254, 0.4);
+}
+
+#archive .tag-list-count {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important;
+    box-shadow: 0 2px 8px rgba(67, 233, 123, 0.4);
+}
+
+#archive .archive-list-count {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
+    box-shadow: 0 2px 8px rgba(250, 112, 154, 0.4);
+}
+
+/* Pseudo-elements for "共" and "篇" */
+#archive .category-list-count::before, 
+#archive .tag-list-count::before, 
+#archive .archive-list-count::before {
+    content: "共 ";
+    font-weight: 400;
+    font-size: 0.9em;
+    margin-right: 2px;
+    opacity: 0.9;
+}
+
+#archive .category-list-count::after, 
+#archive .tag-list-count::after, 
+#archive .archive-list-count::after {
+    content: " 篇";
+    font-weight: 400;
+    font-size: 0.9em;
+    margin-left: 2px;
+    opacity: 0.9;
+}
+
+/* Archive/Category Item (Post List Detail Pages) */
+.archive-item, .category-item {
+    background: #fff;
+    padding: 20px 25px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+    border-left: 5px solid transparent;
+}
+.archive-item:hover, .category-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-left-color: #29b6f6;
+}
+.archive-item a, .category-item a {
+    color: #333;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-decoration: none;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+.archive-item a:hover, .category-item a:hover {
+    color: #0288d1;
+}
+.archive-item time, .category-item time {
+    color: #999;
+    font-size: 0.9em;
+    font-family: monospace;
+    white-space: nowrap;
+}
+
+/* Feed Link */
+.feed-link {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+    color: #888;
+}
+.feed-link a {
+    color: #f57c00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Paginator */
+#other-paginator {
+    margin-top: 40px !important;
+    text-align: center;
+    background: transparent !important;
+    height: auto !important;
+    display: block !important;
+}
+
+#other-paginator .page-number, 
+#other-paginator .extend {
+    display: inline-block !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 5px 12px !important;
+    margin: 0 4px !important;
+    background: #fff !important;
+    border-radius: 15px !important;
+    color: #555 !important;
+    text-decoration: none !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+    font-size: 0.9em !important;
+    transition: all 0.2s !important;
+    line-height: normal !important;
+}
+
+#other-paginator .page-number:hover, 
+#other-paginator .extend:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+#other-paginator .current {
+    background: #29b6f6 !important;
+    color: #fff !important;
+}
+
+/* Category Specific Colors Overrides */
+#category h1::after {
+    background: linear-gradient(90deg, #ff9800, #ffb74d);
+}
+
+.category-item:hover {
+    border-left-color: #ff9800;
+}
+
+.category-item a:hover {
+    color: #f57c00;
+}
+
+/* Orange pagination for Category page details if desired, or keep blue uniform */
+#category #other-paginator .current {
+    background: #ff9800 !important;
+}
+
+/* =========================================
+   SPECIAL TAGS (Refined Customization)
+   ========================================= */
+
+/* Override Grid Layout for Special Tag List */
+ul.special-tag-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
+/* Item Container */
+.special-tag-item {
+    position: relative;
+    /* Basic style overrides */
+    width: 100%;
+    margin: 0 !important;
+    padding: 20px 25px !important;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #eee;
+    /* Left border color is set inline by EJS */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: visible; /* Allow tooltip to float out */
+    cursor: pointer;
+}
+
+.special-tag-item:hover {
+    transform: translateX(8px) scale(1.01);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    background: #fafafa;
+}
+
+/* Layout for the visible row inside item */
+.tag-main-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.tag-icon {
+    font-size: 1.5em;
+    margin-right: 15px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* Link overrides */
+.special-tag-item .tag-list-link {
+    font-size: 1.25em !important; 
+    font-weight: 700 !important;
+    color: #333 !important;
+    margin: 0 !important;
+    display: inline-block;
+}
+
+/* Count overrides */
+.special-tag-item .tag-list-count {
+    /* Reusing the gradient badge style but tweaking positioning */
+    margin-left: auto !important;
+    padding: 5px 12px !important;
+    font-size: 0.9em !important;
+}
+
+
+/* =========================================
+   FLOATING TOOLTIP
+   ========================================= */
+.tag-description {
+    position: absolute;
+    bottom: 110%; /* Float above the item */
+    left: 20px;
+    background: rgba(40, 44, 52, 0.95);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    line-height: 1.5;
+    width: auto;
+    max-width: 400px;
+    min-width: 250px;
+    
+    /* Animation State: Hidden */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    pointer-events: none; /* Let clicks pass through if needed */
+}
+
+/* Arrow for Tooltip */
+.tag-description::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgba(40, 44, 52, 0.95) transparent transparent transparent;
+}
+
+/* Show on Hover */
+.special-tag-item:hover .tag-description {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
