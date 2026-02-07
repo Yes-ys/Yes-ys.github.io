@@ -1,6 +1,6 @@
 // ---------------------文章导航----------------------------
 $(document).ready(function () {
-    hljs.initHighlightingOnLoad();
+    hljs.highlightAll();
     // clickTreeDirectory();
     // serachTree();
     // pjaxLoad();
@@ -25,27 +25,6 @@ $(document).ready(function () {
         $btn.addClass('copy_btn');
         $btn.attr("data-clipboard-text", data);
         $(this).parent().append($btn);
-
-
-
-        var texts = $(this).text().split('\n');
-        var lines = texts.length;
-        $.each(texts, function(index, value){
-            // console.log(index, value);
-            if(index === texts.length - 1 && value === "") {
-                // console.log("Caught you!");
-                lines--;
-            }
-        })
-        
-        var $numbering = $('<ul/>').addClass('pre-numbering');
-        $(this)
-        .addClass('has-numbering')
-        .parent()
-        .append($numbering);
-        for(i=1;i<=lines;i++){
-            $numbering.append($('<li/>').text(i));
-        }
     });
 
     $('p code').each(function(){
