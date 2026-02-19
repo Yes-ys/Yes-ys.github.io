@@ -133,6 +133,44 @@
     <!-- <h1>Recent Posts</h1> -->
     
     
+    <div class="recent-post-item" data-href="/2025/07/29/2025/PFL/">
+
+      <div class="item-title">论文阅读-联邦学习与Stackelberg Game结合</div>
+      
+      <time datetime="2025-07-29T07:33:06.000Z">
+        2025-07-29
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇blog用于记录我阅读论文《 Improve global generalization for personalized federated learning within a Stackelberg game》过程中学习到的一些基础知识。 基本概念PFL个性化联邦学习：在联邦学习(FL)的基础上， PFL的目标是为每个客户端训练一个个性化模型，适应每个客户端的特定数据分布和需求。PFL适用于各客户端数据分布差异较大，且每个客户端需要一个定制化模型的场景。不同于FL训练一个全局共享的模型，希望是该模型在所有客户端上表现良好。 PFL分类“Towar...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/07/16/2025/Joint-Local-Relational-Augmentation-and-Global-Nash-Equilibrium-for-Federated-Learning-with-Non-IID-Data/">
+
+      <div class="item-title">Joint Local Relational Augmentation and Global Nash Equilibrium for Federated Learning with Non-IID Data</div>
+      
+      <time datetime="2025-07-16T02:39:55.000Z">
+        2025-07-16
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇blog用于记录我学习一篇有关运用Nash博弈解决联邦学习有关问题的论文时，学习到的相关知识 基础概念Federated Learning基本架构联邦学习的基本架构是Server和Clients Server通常没有数据，可以有一些用于评估模型的数据，但是在普通联邦学习中Server没有任何数据 Clients持有实际的训练数据，Clients的数量取决于有多少分布式的数据要参与训练。Clients会在各自的本地数据集上进行实际训练。 服务器和客户端都拥有自己的模型副本，前者的称为全局模型，后者的称为局部模型。 训练过程 服务器初始化全局模型参数 将...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
     <div class="recent-post-item" data-href="/2025/07/13/2025/Reforcement-learning%E5%85%A5%E9%97%A8/">
 
       <div class="item-title">Reforcement learning入门</div>
@@ -278,44 +316,6 @@
       
       <div class="article-digest">
         <p>这篇blog用于记录，我在学习计算机系统工程导论，有关性能的章节时，阅读的一篇叫做MapReduce的论文 工程师提出MapReduce的编程模型和实现，他们的性能目标是什么？他们的性能目标是通过MapReduce实现大规模数据专用计算的自动并行化，使得缺少并行与分布式系统经验的程序员可以轻松利用大规模分布式系统资源，从而突破数据处理的时延这一性能瓶颈。 Google是怎么通过实现去满足这些目标的？MapReduce程序主要有用户部分和库部分，前者根据用户的业务逻辑需要在后者的基础上进行编写，而相关的并行化、容错、本地优化和负载均衡的细节被隐藏在后者中。...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/05/08/2025/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%9A%84%E5%A4%8D%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/">
-
-      <div class="item-title">论文精读：基于博弈论的多任务学习</div>
-      
-      <time datetime="2025-05-08T06:32:32.000Z">
-        2025-05-08
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>这篇文献的原名是《Multi-Task Learning as a Bargaining Game》，这是我第一次尝试直接通篇阅读英文原文的文献，中间或许会遇到许多困难。我通过这篇blog来记录阅读的过程中遇到的概念，以及简单地对文章整体的脉络进行梳理。最终我希望对论文提到的算法进行复现，这篇blog将会是一个参考。 概念部分这一部分用于记录阅读时遇到的概念型词汇，并做一些补充解释。困难在于，有的词汇我并不清楚是否是概念型的专业词汇，亦或是只需理解表面含义的词汇... gradients梯度，包含某函数相对自身所有自变量的偏导数。 对于损失函数$L$梯度...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/05/07/2025/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E8%81%9A%E7%B1%BB/">
-
-      <div class="item-title">高斯混合聚类</div>
-      
-      <time datetime="2025-05-07T07:16:00.000Z">
-        2025-05-07
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>简介高斯混合聚类不同于k-means、LVQ利用原型向量刻画聚类结构，而是利用概率来刻画聚类结构。 简单来说，这种算法认为数据集中的每个样本都符合一个多元高斯分布（多元的原因是样本常是多元向量），如下 所有的样本共同符合“混合高斯分布”。混合高斯分布对应的概率密度函数是所有多元高斯分布密度函数的加权量。 多元高斯分布若$x$服从多元高斯分布，对应概率密度函数为 $p(x) &amp;#x3D; \frac{1}{(2\pi)^{\frac{n}{2}}\lvert \Sigma \rvert^{\frac{1}{2}}}e^{-\frac{1}{2}(x-\mu...</p>
       </div>
       
 
@@ -619,9 +619,9 @@
         
         
             <div class="deadline-card">
-                <div class="deadline-title">保研相关事宜</div>
-                <div class="deadline-date">2026-02-12 00:00:00</div>
-                <div class="deadline-timer" id="deadline-timer" data-target="2026-02-12 00:00:00">
+                <div class="deadline-title">寒假想做的事</div>
+                <div class="deadline-date">2026-03-07 00:00:00</div>
+                <div class="deadline-timer" id="deadline-timer" data-target="2026-03-07 00:00:00">
                     <div class="timer-box">
                         <span class="t-value" id="t-days">00</span>
                         <span class="t-label">天</span>
