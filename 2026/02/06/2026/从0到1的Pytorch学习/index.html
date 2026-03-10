@@ -619,6 +619,133 @@ writer = SummaryWriter(<span class="string">&quot;./logs/dataloader_logs&quot;</
 </code></pre>
 
 <p><strong>在实际训练的时候，上面对于dataloader的循环下就是对于网络的操作，会使用imgs、labels作为输入</strong></p>
+<h2 id="神经网络基本骨架nn-Module"><a href="#神经网络基本骨架nn-Module" class="headerlink" title="神经网络基本骨架nn.Module"></a>神经网络基本骨架nn.Module</h2><p>该部分内容主要来自于pytorch的nn库（Neural Network），导入方式如下</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn <span class="comment">#常用</span></code></pre>
+
+<p>在torch.nn的py文件下涉及多种类，其中主要包含：</p>
+<ol>
+<li>Container，作为组织神经网络的容器</li>
+</ol>
+<ul>
+<li>Module 最基本的神经网络容器，用torch编写的神经网络都应该继承它；</li>
+<li>其他还有一些torch中实现好的典型容器，例如线性容器Sequential等</li>
+<li>容器的主要作用：1）实现神经网络的模块化组织（本质是因为一个大的神经网络是由多层小的神经网络组织起来的）；2）便捷地进行参数管理，对组织起来的模块递归地查询可以更新的参数，并统一的进行管理（例如更新）；3）便于进行前向传播forward</li>
+</ul>
+<ol start="2">
+<li>神经网络层</li>
+</ol>
+<ul>
+<li>例如卷积层Convolutinal Layers、池化层Pooling Layers、正则化层Normalization Layers等等</li>
+</ul>
+<ol start="3">
+<li>激活函数</li>
+</ol>
+<ul>
+<li>例如非线性激活函数Non-linear Activations等</li>
+</ul>
+<ol start="4">
+<li>其他工具</li>
+</ol>
+<p>其中对最基本容器torch.nn.Module的使用是我们入门的关键</p>
+<p>我们应该明确以下几点：</p>
+<ol>
+<li>组织复杂神经网络的时候，是通过手动实现容器（例如torch.nn.Module）的子类，并将网络的各个子模块定义在其属性中</li>
+</ol>
+<ul>
+<li>这决定了模块类对象作为当前类的属性在内存中的存储。</li>
+<li>存储顺序：子模块作为属性被赋值时（如 self.conv1 &#x3D; …），Python 会按照属性定义的顺序记录在 self.__dict__ 中（Python 3.6+ 字典保持插入顺序）</li>
+<li>但这只是内部存储，并不直接决定前向传播</li>
+</ul>
+<ol start="2">
+<li>神经网络的前向传播应该手动重写在容器的forward函数中</li>
+</ol>
+<ul>
+<li>情况较多的是各个模块顺序前向传播，可以手动在forward中实现；</li>
+<li>但顺序传播，如果使用Sequential容器，可以不手动实现forward，在执行前向传播的时候会自动按照注册顺序执行；</li>
+<li>当然还有更多的复杂的前向传播方式，例如跳过一些层，反复执行一些层之后再向前，涉及一些循环、条件分支等结构，都可以手动实现；</li>
+</ul>
+<p>相关例子</p>
+<ol>
+<li>在Module容器中注册了两个卷积层</li>
+<li>在forward中确定了网络传播的顺序是：input-&gt;conv1-&gt;relu-&gt;conv2-&gt;relu-&gt;output</li>
+</ol>
+<pre><code class="highlight py"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+<span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F
+
+
+<span class="keyword">class</span> <span class="title class_">Model</span>(nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>) -&gt; <span class="literal">None</span>:
+        <span class="built_in">super</span>().__init__()
+        <span class="variable language_">self</span>.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">20</span>, <span class="number">5</span>)
+        <span class="variable language_">self</span>.conv2 = nn.Conv2d(<span class="number">20</span>, <span class="number">20</span>, <span class="number">5</span>)
+
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):
+        x = F.relu(<span class="variable language_">self</span>.conv1(x))
+        <span class="keyword">return</span> F.relu(<span class="variable language_">self</span>.conv2(x))</code></pre>
+
+<p>再看一个例子，假设我们要实现一个100层的卷积神经网络（当然一般不会堆砌这么多），我们需要一些更复杂的容器</p>
+<p>例如使用nn.ModuleList动态管理多个相同的层</p>
+<pre><code class="highlight py"><span class="keyword">class</span> <span class="title class_">BigModel</span>(nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, num_layers=<span class="number">100</span></span>):
+        <span class="built_in">super</span>().__init__()
+        <span class="comment"># 用 ModuleList 存储 100 个卷积层</span>
+        <span class="variable language_">self</span>.convs = nn.ModuleList([
+            nn.Conv2d(<span class="number">3</span>, <span class="number">64</span>, <span class="number">3</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_layers)
+        ])
+
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):
+        <span class="keyword">for</span> conv <span class="keyword">in</span> <span class="variable language_">self</span>.convs:   <span class="comment"># 按顺序依次通过所有卷积层</span>
+            x = F.relu(conv(x))
+        <span class="keyword">return</span> x</code></pre>
+
+<p>或者使用nn.Sequential简化顺序堆叠</p>
+<pre><code class="highlight py">model = nn.Sequential(
+    nn.Conv2d(<span class="number">3</span>, <span class="number">64</span>, <span class="number">3</span>),
+    nn.ReLU(),
+    <span class="comment"># ... 可以轻松扩展到 100 层，但一般不会真的堆这么多</span>
+    nn.Conv2d(<span class="number">64</span>, <span class="number">128</span>, <span class="number">3</span>)
+)</code></pre>
+
+<p>一些更加复杂的自定义需求（条件分支、循环、跳跃连接等）</p>
+<pre><code class="highlight py"><span class="keyword">class</span> <span class="title class_">DynamicModel</span>(nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):
+        <span class="built_in">super</span>().__init__()
+        <span class="variable language_">self</span>.conv1 = nn.Conv2d(<span class="number">3</span>, <span class="number">64</span>, <span class="number">3</span>)
+        <span class="variable language_">self</span>.conv2 = nn.Conv2d(<span class="number">64</span>, <span class="number">64</span>, <span class="number">3</span>)
+        <span class="variable language_">self</span>.conv3 = nn.Conv2d(<span class="number">64</span>, <span class="number">128</span>, <span class="number">3</span>)
+
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, use_skip=<span class="literal">False</span></span>):
+        x = F.relu(<span class="variable language_">self</span>.conv1(x))
+        <span class="keyword">if</span> use_skip:
+            x = x + <span class="variable language_">self</span>.conv2(x)   <span class="comment"># 残差连接</span>
+        <span class="keyword">else</span>:
+            x = F.relu(<span class="variable language_">self</span>.conv2(x))
+        x = <span class="variable language_">self</span>.conv3(x)
+        <span class="keyword">return</span> x</code></pre>
+
+<p>看一个可以运行的完整例子</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+<span class="keyword">import</span> torch
+
+<span class="keyword">class</span> <span class="title class_">MyModule</span>(nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):
+        <span class="built_in">super</span>().__init__()
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):
+        output = <span class="built_in">input</span>+<span class="number">1</span>
+        <span class="keyword">return</span> output
+
+m = MyModule()
+x = torch.tensor(<span class="number">1.0</span>)
+y = m(x)
+<span class="built_in">print</span>(y)</code></pre>
+<p>几个关键点：</p>
+<ol>
+<li>在继承了父类的时候，类的初始化函数中调用super().__init()__来执行父类相关属性初始化是必须的</li>
+<li>self是“实例方法”所必须的参数，用在类的实例调用函数的时候指定函数由哪个实例调用；其他的还有cls或不用参数，但是需要@classmethod、@staticmethod，两种修饰器来修饰</li>
+<li>forward()是由__call__()调用的，所以使用的时候不需要显示调用，即上述的y &#x3D; m(x)</li>
+<li>在 PyTorch 中，神经网络的输入必须是 torch.Tensor 类型。这是因为 PyTorch 的所有核心功能（如自动求导、GPU 加速、各种层和损失函数）都是围绕张量设计的。<br>（其他类型的数据，例如py的列表&#x2F;数值、NumPy数组、PIL图像等都应该先转换为张量）</li>
+</ol>
+<p><code>接下来就是要熟悉各种神经网络模块，搭建完整的神经网络</code></p>
 
 		</div>
 
