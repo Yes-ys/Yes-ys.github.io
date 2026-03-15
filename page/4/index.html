@@ -129,22 +129,62 @@
 <div id="recent-posts-box">
 
   
+
+  
   <div id="recent-posts">
     <!-- <h1>Recent Posts</h1> -->
     
     
-    <div class="recent-post-item" data-href="/2025/11/07/2025/Intro-of-AI/">
+    <div class="recent-post-item" data-href="/2025/08/29/2025/%E7%AE%97%E6%B3%95%E9%A2%98%E5%B8%B8%E7%94%A8%E5%BA%93%E4%B8%AD%E7%9A%84%E5%B7%A5%E5%85%B7/">
 
-      <div class="item-title">人工智能导论</div>
+      <div class="item-title">算法题常用库中的工具</div>
       
-      <time datetime="2025-11-07T05:33:57.000Z">
-        2025-11-07
+      <time datetime="2025-08-29T12:19:32.000Z">
+        2025-08-29
       </time>
       
       
       
       <div class="article-digest">
-        <p>ch1 绪论人工智能相关概念： 人工智能的定义 1）四个维度：（像人，理性）（思考，行动）； 2）业界通常认为“理性地行动”是作为AI的最重要维度； 人工智能的*本质问题 研究如何制造出智能机器或系统，来模拟人类智能活动的能力，以延伸人们智能的科学。 人工智能名字的由来 1956年在美国召开的达特茅斯会议，提出了Artificial Intelligence；（约翰麦卡锡、马文明斯基）； 人工智能未来的研究目标 近期目标：建造智能计算机代替人类的部分智力劳动； 远期目标：用自动机模仿人类的思维过程和智能行为； ch2 搜索搜索概述什么是搜索问题： 搜索问...</p>
+        <p>在过去的算法竞赛中，我常常接触到一些库中的工具，例如函数、容器、类等等，但是总是零零散散的，记忆也不是很牢，每次都是用到了现查。于是我用这篇blog做一个简单的整理 头文件algorithmmax()函数在 C++ 中，max 函数是一个非常实用的函数，用于比较两个或更多数值并返回其中的最大值。这个函数定义在 algorithm 头文件中。 #include &amp;lt;iostream&amp;gt; #include &amp;lt;algorithm&amp;gt; // 引入algorithm头文件以使用max函数 int main() &amp;#123; int a = 10;...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/08/29/2025/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9F%BA%E7%A1%80/">
+
+      <div class="item-title">动态规划基础</div>
+      
+      <time datetime="2025-08-29T11:24:22.000Z">
+        2025-08-29
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>之前零零散散地接触过一些动态规划的问题，用这篇blog来稍微系统性的记录一下 动态规划的基本步骤 定义数组的基本含义（模板或是灵感） 找到数组元素间的关系（dp的递推式，模板或是灵感） 找到边界的初始值（基本含义定义好了这个通常不难） 递推填表得到需要的元素（结合初始值以及递推式，考虑应该如何进行递推填表，确保新填一个元素需要用到其它元素的时候，其它元素的值已经被填过了） 背包问题01背包（二维解法）问题描述：有n种物品，每种物品只有一个。每个物品有自己的重量和价值。有一个给定容量的背包，问这个背包最多能装的最大价值是多少。 step1定义数组元素的含义...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/08/25/2025/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+      <div class="item-title">联邦学习基础知识</div>
+      
+      <time datetime="2025-08-25T08:55:39.000Z">
+        2025-08-25
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>我正在学习一个用来跑PFL算法的代码框架，读代码的同时用这篇blog记录一些有关联邦学习的基础知识；以及一些python、pytorch的知识 数据集划分的平衡与不平衡含义在联邦学习中，平衡和不平衡主要指数据量上的分布情况： 平衡数据（Balanced Data）：每个客户端拥有的数据量大致相同。例如，如果有10个客户端和1000个数据样本，那么每个客户端分配到的数据约为100条。 不平衡数据（Unbalanced Data）：不同客户端拥有的数据量差别很大。例如，10个客户端中，某些客户端可能分配到300条数据，而另一些可能只有10条。这种情况在实际场...</p>
       </div>
       
 
@@ -190,6 +230,44 @@
 
     
     
+    <div class="recent-post-item" data-href="/2025/07/29/2025/PFL/">
+
+      <div class="item-title">论文阅读-联邦学习与Stackelberg Game结合</div>
+      
+      <time datetime="2025-07-29T07:33:06.000Z">
+        2025-07-29
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇blog用于记录我阅读论文《 Improve global generalization for personalized federated learning within a Stackelberg game》过程中学习到的一些基础知识。 基本概念PFL个性化联邦学习：在联邦学习(FL)的基础上， PFL的目标是为每个客户端训练一个个性化模型，适应每个客户端的特定数据分布和需求。PFL适用于各客户端数据分布差异较大，且每个客户端需要一个定制化模型的场景。不同于FL训练一个全局共享的模型，希望是该模型在所有客户端上表现良好。 PFL分类“Towar...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/07/16/2025/Joint-Local-Relational-Augmentation-and-Global-Nash-Equilibrium-for-Federated-Learning-with-Non-IID-Data/">
+
+      <div class="item-title">Joint Local Relational Augmentation and Global Nash Equilibrium for Federated Learning with Non-IID Data</div>
+      
+      <time datetime="2025-07-16T02:39:55.000Z">
+        2025-07-16
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇blog用于记录我学习一篇有关运用Nash博弈解决联邦学习有关问题的论文时，学习到的相关知识 基础概念Federated Learning基本架构联邦学习的基本架构是Server和Clients Server通常没有数据，可以有一些用于评估模型的数据，但是在普通联邦学习中Server没有任何数据 Clients持有实际的训练数据，Clients的数量取决于有多少分布式的数据要参与训练。Clients会在各自的本地数据集上进行实际训练。 服务器和客户端都拥有自己的模型副本，前者的称为全局模型，后者的称为局部模型。 训练过程 服务器初始化全局模型参数 将...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
     <div class="recent-post-item" data-href="/2025/07/13/2025/Reforcement-learning%E5%85%A5%E9%97%A8/">
 
       <div class="item-title">Reforcement learning入门</div>
@@ -209,113 +287,37 @@
 
     
     
-    <div class="recent-post-item" data-href="/2025/05/25/2025/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E4%B8%80%E8%87%B4%E6%80%A7/">
+    <div class="recent-post-item" data-href="/2025/07/06/2025/Fairness-Aware-Meta-Learning-via-Nash-Bargaining/">
 
-      <div class="item-title">分布式的原子性与一致性</div>
+      <div class="item-title">Fairness-Aware Meta-Learning via Nash Bargaining</div>
       
-      <time datetime="2025-05-25T04:33:42.000Z">
+      <time datetime="2025-07-06T02:04:38.000Z">
+        2025-07-06
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇blog用于记录我阅读的一篇将传统的Game中的方法应用到学习中的论文 论文理解思路： 经典的Meta-learning的框架 Meta-learning在learning with fairness中的运用（框架、典型的方法） 经典方法中存在的问题 &amp;amp; 使用 NBS的改进 Meta-learning的框架在解决机器学习的过程中对于不同group的公平性问题的时候，会使用sensitive-attributed validation set来训练调整模型的参数，这个过程与常规的训练过程相结合通常被套入一个meta-learning frame...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/05/25/2025/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">
+
+      <div class="item-title">拜占庭将军问题与计算机系统的一致性</div>
+      
+      <time datetime="2025-05-25T11:06:55.000Z">
         2025-05-25
       </time>
       
       
       
       <div class="article-digest">
-        <p>一次计算机系统工程导论的习题 问题一选择：A 因为小明的客户端到S3之间的网络经常停止工作，每次几分钟，而根据伪代码，在更新S3服务器上的信息的时候，while循环会一直尝试直到rpc_OK被置为true为止。所以CLENTWRITE通常需要花费几分钟（S3导致的）或更长的时间（可能不排除S1、S2也有出问题的可能性），去更新服务器。 问题二返回：Breakfast 因为在系统没有故障的时候，该分布式系统的一致性是有得到保障的，根据题目中串行执行的代码，读取到的内容会是最后一次写入的内容，对应为Breakfast。 问题三选择：AB 对于A，如果客户端计...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/05/16/2025/Nash-MTL/">
-
-      <div class="item-title">Nash-MTL（代码实现）</div>
-      
-      <time datetime="2025-05-16T05:25:46.000Z">
-        2025-05-16
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>这篇blog用于记录我阅读Nash-MTL算法基于python的implemention，其中存在大量使用pytorch、tensorflow的地方，这些是我之前几乎没有接触过的东西，所以同时我也会进行相关的记录，进行学习。 Readme整篇blog从Nash-MTL开源项目的Readme文档开始，可以帮助我了解整个项目的文件组织结构。 conda在Python中，conda 是一个开源的包管理器和环境管理器，它主要用于安装和管理Python包以及创建和管理虚拟环境。 什么是包管理器和环境管理器通过查阅资料，我现在通俗的理解是： 包&amp;#x2F;库，项目开...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/05/06/2025/%E5%85%AD%E7%BA%A7%E8%AF%8D%E6%B1%87/">
-
-      <div class="item-title">六级词汇</div>
-      
-      <time datetime="2025-05-06T02:17:16.000Z">
-        2025-05-06
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>这篇博客用于记录我在备考英语六级时所做的词汇准备，目前我已经完成了核心词汇的记忆，我会在这里为这些词汇补充一些例句。目前的打算是每天20个词语，此外我会开始着手阅读、听力以及写译的准备，这篇blog中也会用于记录相应的内容 词汇2025.05.061 stabilize “How can I stabilize the colour of our love, my dear.” 2 manipulate “Your mean is that you can manipualte such a monster machine.” 3 ambiguous “...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/05/01/2025/Py-learning/">
-
-      <div class="item-title">Py_learning</div>
-      
-      <time datetime="2025-05-01T04:55:26.000Z">
-        2025-05-01
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>由于我在学习机器学习算法的时候，希望通过Python来对相关的算法进行复现。而自己在此之前其实零零散散不成体系地接触过Python语言，也了解一些基本的东西，但是对于Python中一些语言“特性”方面的东西所知甚少，例如变量的作用域与生命周期，不同模块间的访问等等；此外我对Python风格的代码写法也并不熟悉，其实写什么感觉都是C的味道......于是写下这篇blog用来记录，进一步对相关内容的学习 模块化的Python程序内置变量__name____name__是python模块当中的一个内置变量，每个模块都有。如果你选择当前模块开始执行，那么当前模块...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/04/27/2025/Traceroute/">
-
-      <div class="item-title">Traceroute</div>
-      
-      <time datetime="2025-04-27T11:35:01.000Z">
-        2025-04-27
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>这篇blog用于记录我在学习计算机工程系统导论时，一个与网络有关的实验。 实验目的 学习Ping和Traceroute工具的使用，能够在网络开发和维护中熟练使用该工具获取网络状态和进行错误排查。 巩固课堂学习的因特网分层设计实现知识，理解因特网的分组转发网络的特性，通过分析互联网数据包因转发而产生的时延，加深理解尽力而为的因特网设计思想。 通过分析ICMP协议，学习在分层设计中进行跨层通信的设计实现方法，思考因特网网络层在错误处理上的折中设计和处理技巧。 通过Traceroute工具基于错误处理包进行路径探测功能的设计，体会在实践中体会设计方案在解决问题...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/02/03/2025/unity%E9%94%9A%E7%82%B9/">
-
-      <div class="item-title">unity锚点</div>
-      
-      <time datetime="2025-02-03T10:38:50.000Z">
-        2025-02-03
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>如下参考文章https://blog.csdn.net/Terie/article/details/111433486 透过这篇博客，我大概了解到了两个点：pviot：轴心，采用相对坐标系，(0,0)-&amp;gt;(1,1)，位于某ui的方框内，其表征着在ui被自适应缩放的时候，以哪个位置为标准缩放 锚点：unity提供了三种模式1、四个锚点合在一起的模式该模式下，在屏幕分辨率改变的过程当中，ui相对于锚点的位置不改变，ui的宽、高也不变 2、四个锚点两两在一起的模式该模式下，ui的对应对于锚点连成的线的距离不改变，宽高比不改变，随之缩放 3、四个锚点分开的...</p>
+        <p>拜占庭将军问题是什么（它阐述了什么）？对于n个将军，将一个视为指挥将军，其它n-1个视作它的副将，指挥将军会向所有副将发送命令。在此基础上，拜占庭将军问题就是考虑一种算法，确保1）所有忠诚的副将将遵守相同的命令；2）如果指挥将军是忠诚的，则每个忠诚的副将都必须遵循他发送的命令。 如何确保忠诚的将军能够达成一致的行动计划？对于只能使用口头消息的时候，在叛徒数少于总数的三分之一的时候，忠诚的将军能够按照下面的方法达成一致的行动：我们将第一个发送决策值的将军看错指挥官；在0个叛徒时，指挥官将决策值传递给副将，副将根据接收到的消息，或默认的撤退，直接做出对应的决...</p>
       </div>
       
 
