@@ -746,6 +746,160 @@ y = m(x)
 <li>在 PyTorch 中，神经网络的输入必须是 torch.Tensor 类型。这是因为 PyTorch 的所有核心功能（如自动求导、GPU 加速、各种层和损失函数）都是围绕张量设计的。<br>（其他类型的数据，例如py的列表&#x2F;数值、NumPy数组、PIL图像等都应该先转换为张量）</li>
 </ol>
 <p><code>接下来就是要熟悉各种神经网络模块，搭建完整的神经网络</code></p>
+<h2 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h2><p><code>这一部分主要学习卷积神经网络，它既是基本的神经网络，又是作为大型神经网络中的一个重要组成模块</code></p>
+<h3 id="卷积的相关概念"><a href="#卷积的相关概念" class="headerlink" title="卷积的相关概念"></a>卷积的相关概念</h3><p>以2维卷积为例子，以下简称卷积</p>
+<p>卷积的基本概念：一种运算操作，参与运算的对象是<strong>输入的</strong>平面图和相对固定的卷积核，输出是特征图；</p>
+<p>平面图的相关参数：</p>
+<ol>
+<li>通道数量Ci</li>
+<li>高与宽，H与W</li>
+</ol>
+<p>特征图的相关参数：</p>
+<ol>
+<li>通道数量Co</li>
+<li>高与宽，H与W</li>
+</ol>
+<p>卷积核的相关参数：</p>
+<ol>
+<li>尺寸</li>
+<li>步长（水平、垂直）</li>
+<li>膨胀（卷积核元素之间的间隔，为1时相邻，为2时用一个0在水平、垂直方向间隔，以此类推）</li>
+<li>数量（应用几个卷积核，我们可以用不同卷积核针对同一张图片提取不同的特征）</li>
+</ol>
+<p>和所有运算相同，参与运算的相关量会影响结果，自然平面图、卷积核的相关参数也会影响特征图的参数</p>
+<p><strong>关于输入通道、卷积核数量、输出通道的关系</strong></p>
+<p>官方文档的描述与计算公式：</p>
+<p>In the simplest case, the output value of the layer with input size $(N,C_{in},H,W)$ and output $(N,C_{out},H_{out},W_{out})$ can be precisely described as:</p>
+<p>$out(N_i,C_{out_j}) &#x3D; bias(C_{out_j}) + \sum^{C_{in}-1}<em>{k&#x3D;0} weight(C</em>{out_j},k) * input(N_i,k)$</p>
+<p>where * is the valid 2D cross-correlation operator, $N$ is a batch size, $C$ denotes a number of channels, $H$  is a height of input planes in pixels, and $W$ is width in pixels.</p>
+<p>从上述描述中可以看到输出图像的通道$C_{out_j}$等于 卷积核$weight(C_{out_j},k)$</p>
+<p>主要关系如下：</p>
+<ol>
+<li>输出通道数 &#x3D; 卷积核“组数” &#x3D; $C_{out}$</li>
+<li>每组内有 $C_{in}$ （输入通道数量）个 2D 核</li>
+</ol>
+<ul>
+<li>通常一个输出通道对应一个fliter（滤波器）</li>
+<li>对于一个fliter对应输入通道数量个slice</li>
+<li>通常我们描述卷积核的时候，指的是fliter，此时<strong>输出通道数量&#x3D;卷积核数量</strong></li>
+<li>如果将实际进行卷积的最基本单位2D slice作为一个卷积核，此时<strong>输出通道数量$\times$输入通道数量 &#x3D; 卷积核数量</strong></li>
+</ul>
+<ol start="3">
+<li>第j个输出通道的特征图 等于 所有输入通道与对应的slice进行卷积后 求和 再加上偏置（即上述公式）</li>
+<li>通常我们在描述卷积核的尺寸的时候就会用一个四元组($C_{out}$,$C_{in}$,$H$,$W$)</li>
+</ol>
+<p>在考虑深度卷积，即引入groups参数的时候slice的数量又会发生变化</p>
+<p>通常情况下groups&#x3D;1，此时不进行分组，针对每个输出通道使用一个fliter，其中有输入通道个slice<br>（每个slice与对应的输入通道进行卷积，结果求和 加上 偏置 后得到输出通道的结果）</p>
+<p>当group&#x3D;g的时候，此时进行分组，每组的输入、输出通道数量是 $C_{in}&#x2F;g,C_{out}&#x2F;g$，每组之间面向输入输出通道进行卷积，组间互不影响；<br>例如第j组，对于$C_{out}&#x2F;g$个输出通道中的每个输出通道使用一个fliter，其中有$C_{in}&#x2F;g$个slice；<br>（每个slice与对应的输入通道进行卷积，结果求和 加上 偏置 后得到输出通道的结果）</p>
+<p><strong>两种情况的对比：</strong>前者一个输出通道对应输入通道数量个slice，后者一个输出通道对应 输入通道&#x2F;组数 个slice</p>
+<p><strong>关于卷积核的尺寸、步长、膨胀等参数 &amp; 输入平面图的尺寸 与 输出平面图的尺寸的关系</strong></p>
+<p>$\text{输出尺寸} &#x3D; \left\lfloor \frac{\text{输入尺寸} + 2 \times \text{填充} - \text{膨胀} \times (\text{卷积核尺寸} - 1) - 1}{\text{步长}} \right\rfloor + 1$</p>
+<p>这里的尺寸从一个维度上进行考虑即可</p>
+<h3 id="pytorch提供的卷积"><a href="#pytorch提供的卷积" class="headerlink" title="pytorch提供的卷积"></a>pytorch提供的卷积</h3><p>torch中有许多不同的卷积网络，这里以2维卷积网络为主，如下</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+nn.Conv2d</code></pre>
+
+<p>nn.Conv2d主要有以下几个参数</p>
+<ol>
+<li>in_channel，输入的通道数量</li>
+<li>out_channel，输出的通道数量</li>
+<li>kernel_size，卷积核的尺寸</li>
+<li>stride，卷积的步长</li>
+</ol>
+<ul>
+<li>注意stride除了影响卷积核在图像上水平移动时经过的列数量，还会影响在换行时经过对行数量</li>
+<li>除了用一个int数字，还可以使用一个tuple，用来精细地规划水平移动与垂直移动时的步长</li>
+</ul>
+<ol start="5">
+<li>padding，对图像的四条边进行填充</li>
+<li>dilation，卷积核的膨胀，元素之间的距离，默认为1</li>
+<li>groups，深度卷积的组数，默认为1，普通的卷积</li>
+<li>bias，为True的时候会默认添加一个线性的偏置，和前面的公式描述一致</li>
+</ol>
+<p>一个可运行的例子</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch
+<span class="keyword">import</span> torchvision
+<span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter
+
+<span class="keyword">class</span> <span class="title class_">MyModule</span>(torch.nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):
+        <span class="built_in">super</span>().__init__()
+        <span class="variable language_">self</span>.conv1 = torch.nn.Conv2d(in_channels = <span class="number">3</span>, out_channels = <span class="number">6</span>, kernel_size = <span class="number">1</span>, stride = <span class="number">1</span>)
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):
+        output = <span class="variable language_">self</span>.conv1(<span class="built_in">input</span>)
+        <span class="keyword">return</span> output
+
+Mydataset = torchvision.datasets.CIFAR10(root = <span class="string">&quot;./DataSets/CIFAR10&quot;</span>, train = <span class="literal">True</span>, transform = torchvision.transforms.ToTensor(), download = <span class="literal">True</span>)
+
+dataloader = torch.utils.data.DataLoader(dataset = Mydataset, batch_size = <span class="number">64</span>, shuffle = <span class="literal">True</span>, drop_last = <span class="literal">False</span>)
+
+writer = SummaryWriter(<span class="string">&quot;./logs/Conv&quot;</span>)
+
+m = MyModule()
+
+step = <span class="number">0</span>
+
+<span class="keyword">for</span> data <span class="keyword">in</span> dataloader:
+    images, labels = data
+    <span class="built_in">print</span>(<span class="string">&quot;输入的shape:&quot;</span>)
+    <span class="built_in">print</span>(images.shape)
+    
+    writer.add_images(<span class="string">&quot;Input&quot;</span>, images, global_step = step)
+
+    output = m(images)
+    <span class="built_in">print</span>(<span class="string">&quot;输出的shape:&quot;</span>)
+    <span class="built_in">print</span>(output.shape)
+    <span class="comment"># writer.add_images(&quot;Output&quot;, output, global_step = step)</span>
+
+    output1 = torch.reshape(output,(-<span class="number">1</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">32</span>)) <span class="comment"># 修改通道数量，batch_size的数量会改变，调用时传入-1，让其自适应地改变</span>
+    writer.add_images(<span class="string">&quot;Output&quot;</span>, output1, global_step = step)
+
+    step += <span class="number">1</span>
+
+</code></pre>
+
+<h2 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h2><p>最常用的是</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch.nn
+nn.MaxPool2d</code></pre>
+<p>MaxPool2d是对2d图像的最大池化，池化核的移动和卷积和类似，但是它一次池化操作对应道输出的特征图像中的元素 是取池化核覆盖范围下 输入图像元素的最大值 而不是相乘再求和</p>
+<p>其常用参数有</p>
+<ol>
+<li>kernal_size，和Conv2d的类似</li>
+<li>stride，类似Conv2d，不同是默认不是1，而是kernal_size</li>
+<li>padding，填充</li>
+<li>dilation，膨胀</li>
+<li>ceil_model，为True时，要保留 移动后 不足kernal_size 对应的尺寸下数量的数字的情况，否则不保留</li>
+</ol>
+<ul>
+<li>保留时，移动到的位置没有数字则对应数字不参与最大数字的评估即可</li>
+</ul>
+<p>一个可以运行的例子</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+<span class="keyword">import</span> torch
+
+<span class="keyword">class</span> <span class="title class_">MyModule</span>(nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):
+        <span class="built_in">super</span>(MyModule, <span class="variable language_">self</span>).__init__()
+        <span class="variable language_">self</span>.pool1 = nn.MaxPool2d(kernel_size=<span class="number">3</span>,ceil_mode=<span class="literal">True</span>)
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):
+        output = <span class="variable language_">self</span>.pool1(<span class="built_in">input</span>)
+        <span class="keyword">return</span> output
+
+test_input = torch.tensor([
+    [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>],
+    [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>],
+    [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],
+    [<span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>],
+    [<span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]
+], dtype=torch.float32)
+
+test_input = torch.reshape(test_input, (-<span class="number">1</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">5</span>)) <span class="comment"># 输入神经网络的标准tensor形式，N C H W</span>
+
+m = MyModule()
+output = m(test_input)
+<span class="built_in">print</span>(output)</code></pre>
+
+<p>最大池化的作用是保留输入的特征，同时将数据量减少。例如在网上拍视频，一个是1080p的，经过池化之后得到720p的。</p>
 
 		</div>
 

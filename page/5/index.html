@@ -133,18 +133,18 @@
     <!-- <h1>Recent Posts</h1> -->
     
     
-    <div class="recent-post-item" data-href="/2025/05/11/2025/MapReduce/">
+    <div class="recent-post-item" data-href="/2025/11/02/2025/%E6%90%AD%E5%BB%BA%E5%90%84%E7%A7%8D%E7%8E%AF%E5%A2%83%E7%9A%84%E8%AE%B0%E5%BD%95/">
 
-      <div class="item-title">MapReduce</div>
+      <div class="item-title">搭建各种环境的记录</div>
       
-      <time datetime="2025-05-11T07:41:01.000Z">
-        2025-05-11
+      <time datetime="2025-11-02T08:50:02.000Z">
+        2025-11-02
       </time>
       
       
       
       <div class="article-digest">
-        <p>这篇blog用于记录，我在学习计算机系统工程导论，有关性能的章节时，阅读的一篇叫做MapReduce的论文 工程师提出MapReduce的编程模型和实现，他们的性能目标是什么？他们的性能目标是通过MapReduce实现大规模数据专用计算的自动并行化，使得缺少并行与分布式系统经验的程序员可以轻松利用大规模分布式系统资源，从而突破数据处理的时延这一性能瓶颈。 Google是怎么通过实现去满足这些目标的？MapReduce程序主要有用户部分和库部分，前者根据用户的业务逻辑需要在后者的基础上进行编写，而相关的并行化、容错、本地优化和负载均衡的细节被隐藏在后者中。...</p>
+        <p>随着大学课程的进行，每学期总是会被要求搭建各种各样的运行环境，但在学习完成之后通常我不会再用到它们，所以用这篇blog来记录我搭建过的一些环境，简单描述它们的过程，以便我后续能记得我做过哪些改动，从而可以更好地管理我的电脑空间。 default我在Mac上安装了命令行工具、Vscode，配置了C&amp;#x2F;C++的基本环境（参照[bilibili]） 于是这一部分我想记录一些命令行常用命令 查看当前目录的大小du -sh .，这个命令会显示磁盘使用情况，包括当前目录以及所有子目录 搭建hexo（Mac） 从github上clone了homebrew的仓库...</p>
       </div>
       
 
@@ -152,18 +152,18 @@
 
     
     
-    <div class="recent-post-item" data-href="/2025/05/08/2025/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%9A%84%E5%A4%8D%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/">
+    <div class="recent-post-item" data-href="/2025/10/23/2025/OS/">
 
-      <div class="item-title">论文精读：基于博弈论的多任务学习</div>
+      <div class="item-title">操作系统</div>
       
-      <time datetime="2025-05-08T06:32:32.000Z">
-        2025-05-08
+      <time datetime="2025-10-23T11:27:33.000Z">
+        2025-10-23
       </time>
       
       
       
       <div class="article-digest">
-        <p>这篇文献的原名是《Multi-Task Learning as a Bargaining Game》，这是我第一次尝试直接通篇阅读英文原文的文献，中间或许会遇到许多困难。我通过这篇blog来记录阅读的过程中遇到的概念，以及简单地对文章整体的脉络进行梳理。最终我希望对论文提到的算法进行复现，这篇blog将会是一个参考。 概念部分这一部分用于记录阅读时遇到的概念型词汇，并做一些补充解释。困难在于，有的词汇我并不清楚是否是概念型的专业词汇，亦或是只需理解表面含义的词汇... gradients梯度，包含某函数相对自身所有自变量的偏导数。 对于损失函数$L$梯度...</p>
+        <p>这篇blog用来记录我于大三秋季学期，学习操作系统时，了解到的知识，以备复习以及增强自己的专业素养 操作系统的基本概念L1操作系统需要解决的问题操作系统的功能？ 作为用户与计算机硬件系统之间的接口（例如上层的编程者使用系统调用完成相关工作） 对计算机系统资源进行管理（eg. 管理硬件CPU、存储器、外设，管理软件程序、数据；管理资源状态，如PCB、TCB；采取相关策略，对资源分配、回收等） 在需要的时候马上对计算机资源进行抽象（通过逻辑功能扩展物理功能，如在裸机上附加外设管理、文件管理、存储管理、处理器管理） 一些启发的问题： 直接使用计算机是很不方便的...</p>
       </div>
       
 
@@ -171,18 +171,113 @@
 
     
     
-    <div class="recent-post-item" data-href="/2025/05/07/2025/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E8%81%9A%E7%B1%BB/">
+    <div class="recent-post-item" data-href="/2025/09/04/2025/csp%E4%B9%A0%E9%A2%98%E9%9B%86/">
 
-      <div class="item-title">高斯混合聚类</div>
+      <div class="item-title">csp习题集</div>
       
-      <time datetime="2025-05-07T07:16:00.000Z">
-        2025-05-07
+      <time datetime="2025-09-04T06:26:27.000Z">
+        2025-09-04
       </time>
       
       
       
       <div class="article-digest">
-        <p>简介高斯混合聚类不同于k-means、LVQ利用原型向量刻画聚类结构，而是利用概率来刻画聚类结构。 简单来说，这种算法认为数据集中的每个样本都符合一个多元高斯分布（多元的原因是样本常是多元向量），如下 所有的样本共同符合“混合高斯分布”。混合高斯分布对应的概率密度函数是所有多元高斯分布密度函数的加权量。 多元高斯分布若$x$服从多元高斯分布，对应概率密度函数为 $p(x) &amp;#x3D; \frac{1}{(2\pi)^{\frac{n}{2}}\lvert \Sigma \rvert^{\frac{1}{2}}}e^{-\frac{1}{2}(x-\mu...</p>
+        <p>这篇blog用来记录我练习ccf csp认证的时候做过的习题 梦境巡查 第36次 task2缓存模拟 第36次 task3大模拟题先整理信息： 有N组缓存，每组缓存中有n块 内存块k，存储在k&amp;#x2F;n组中，n个缓存块的任意一个 操作，读、写内存块，分为两种情况：1）k&amp;#x2F;n组中存储了数据（某行），命中；2）k&amp;#x2F;n组中没有数据（所有行），没有命中 命中，分为两种情况：1）读，无特殊处理；2）写，修改缓存行，标记对应内存块是修改了的，实际还没有改内存块 未命中，先进行载入，再按照命中处理 载入，1）如果k&amp;#x2F;n组有未使用的，就...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/08/30/2025/%E5%9B%BE%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+
+      <div class="item-title">图的数据结构与算法</div>
+      
+      <time datetime="2025-08-30T02:29:59.000Z">
+        2025-08-30
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇blog用来整理图有关的数据结构与算法的知识 图的存储结构邻接矩阵邻接矩阵本质上就是一个二维数组，分为两种情况 无权图，m[i][j] &amp;#x3D;&amp;#x3D; 1代表vi有到vj的边；否则为0，代表不存在这样的边 有权图，元素为inf代表两点间不存在边，否则存在，且对应元素值为权重 从数据结构上来说，有向无向图没有区别，都是二维数组，且均适用于上面描述的两种情况。只是无向图有m[i][j] &amp;#x3D;&amp;#x3D; m[j][i]恒成立的性质 链式前向星本质上是数组实现的静态邻接表 掌握的关键在于记住三个点 使用到的数据结构即其含义 初始化的方式 ...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/08/29/2025/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/">
+
+      <div class="item-title">杂七杂八的小算法</div>
+      
+      <time datetime="2025-08-29T14:08:53.000Z">
+        2025-08-29
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>在平常练习算法题的过程中，有的题目常常涉及到使用一些基本的小算法作为整个解决方案中的一部分，例如gcd、进制转换，乃至KMP等等，我用这篇blog对这些小算法。我在这篇blog中对它们做一个综合的整理。 gcdint gcd(int x,int y)&amp;#123; if(x%y == 0)return y; else return gcd(y,x%y); &amp;#125; 辗转相除法求最大公约数 进制转换lcmint lcm(int x,int y) &amp;#123; return x*y/gcd(x,y); &amp;#125; 利用最大公约数求最小公倍数 Fibona...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/08/29/2025/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%9F%BA%E7%A1%80/">
+
+      <div class="item-title">动态规划基础</div>
+      
+      <time datetime="2025-08-29T11:24:22.000Z">
+        2025-08-29
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>之前零零散散地接触过一些动态规划的问题，用这篇blog来稍微系统性的记录一下 动态规划的基本步骤 定义数组的基本含义（模板或是灵感） 找到数组元素间的关系（dp的递推式，模板或是灵感） 找到边界的初始值（基本含义定义好了这个通常不难） 递推填表得到需要的元素（结合初始值以及递推式，考虑应该如何进行递推填表，确保新填一个元素需要用到其它元素的时候，其它元素的值已经被填过了） 背包问题01背包（二维解法）问题描述：有n种物品，每种物品只有一个。每个物品有自己的重量和价值。有一个给定容量的背包，问这个背包最多能装的最大价值是多少。 step1定义数组元素的含义...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/05/25/2025/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">
+
+      <div class="item-title">拜占庭将军问题与计算机系统的一致性</div>
+      
+      <time datetime="2025-05-25T11:06:55.000Z">
+        2025-05-25
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>拜占庭将军问题是什么（它阐述了什么）？对于n个将军，将一个视为指挥将军，其它n-1个视作它的副将，指挥将军会向所有副将发送命令。在此基础上，拜占庭将军问题就是考虑一种算法，确保1）所有忠诚的副将将遵守相同的命令；2）如果指挥将军是忠诚的，则每个忠诚的副将都必须遵循他发送的命令。 如何确保忠诚的将军能够达成一致的行动计划？对于只能使用口头消息的时候，在叛徒数少于总数的三分之一的时候，忠诚的将军能够按照下面的方法达成一致的行动：我们将第一个发送决策值的将军看错指挥官；在0个叛徒时，指挥官将决策值传递给副将，副将根据接收到的消息，或默认的撤退，直接做出对应的决...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2025/05/15/2025/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6MapReduce/">
+
+      <div class="item-title">分布式计算框架MapReduce</div>
+      
+      <time datetime="2025-05-15T10:53:59.000Z">
+        2025-05-15
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>这篇blog用于记录我在学习计算机系统工程导论时所做的一次实验。我阅读了一篇论文，其介绍了一种名为MapReduce的模型，它通过键值对来拆解任务同时并行地处理子任务，达到了提高数据吞吐率从而降低时延提高性能的效果。 实验目的主要实验目的如下： 通过实验，理解MapReduce框架的基本原理，掌握MapReduce框架的Map阶段和Reduce阶段的执行流程，以及数据的划分、传输和聚合过程，具备使用MapReduce进行简单的分布式数据处理，并能通过进一步自学进行更为复杂的分布式数据处理，从而掌握使用MapReduce进行大数据处理的基本系统设计能力。 ...</p>
       </div>
       
 
@@ -209,113 +304,18 @@
 
     
     
-    <div class="recent-post-item" data-href="/2025/05/06/2025/%E5%85%AD%E7%BA%A7%E8%AF%8D%E6%B1%87/">
+    <div class="recent-post-item" data-href="/2025/02/03/2025/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%A0%91/">
 
-      <div class="item-title">六级词汇</div>
+      <div class="item-title">数据结构与算法——树</div>
       
-      <time datetime="2025-05-06T02:17:16.000Z">
-        2025-05-06
+      <time datetime="2025-02-03T10:42:16.000Z">
+        2025-02-03
       </time>
       
       
       
       <div class="article-digest">
-        <p>这篇博客用于记录我在备考英语六级时所做的词汇准备，目前我已经完成了核心词汇的记忆，我会在这里为这些词汇补充一些例句。目前的打算是每天20个词语，此外我会开始着手阅读、听力以及写译的准备，这篇blog中也会用于记录相应的内容 词汇2025.05.061 stabilize “How can I stabilize the colour of our love, my dear.” 2 manipulate “Your mean is that you can manipualte such a monster machine.” 3 ambiguous “...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/05/03/2025/%E8%AE%A1%E7%BB%84%E5%A4%8D%E4%B9%A0/">
-
-      <div class="item-title">计算机组成原理</div>
-      
-      <time datetime="2025-05-03T08:48:40.000Z">
-        2025-05-03
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>我在大二下选修了计算机组成原理，这篇blog用来梳理相关知识点 前言一些学习计算机组成原理之前应该知道的知识… 计算机结构：系统程序员所能见到的硬件特性，指的是计算机的逻辑结构 计算机组成：计算机硬件的具体实现，指的是计算的物理结构 两类汇编语言，RISC &amp;amp; CISC，对应精简与复杂的指令系统，MIPS属于RISC的一种 计算机组成原理涉及：汇编，处理器、内存、IO三者对应的逻辑系统与硬件实现（数据通路），课程定位在整个计算机系统中处于硬件方面的数字电路之上，软件层面的操作系统之内（因为上到汇编），但在编译器之下（编译器同样属于OS的范畴） 核...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/05/01/2025/Py-learning/">
-
-      <div class="item-title">Py_learning</div>
-      
-      <time datetime="2025-05-01T04:55:26.000Z">
-        2025-05-01
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>由于我在学习机器学习算法的时候，希望通过Python来对相关的算法进行复现。而自己在此之前其实零零散散不成体系地接触过Python语言，也了解一些基本的东西，但是对于Python中一些语言“特性”方面的东西所知甚少，例如变量的作用域与生命周期，不同模块间的访问等等；此外我对Python风格的代码写法也并不熟悉，其实写什么感觉都是C的味道......于是写下这篇blog用来记录，进一步对相关内容的学习 模块化的Python程序内置变量__name____name__是python模块当中的一个内置变量，每个模块都有。如果你选择当前模块开始执行，那么当前模块...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/04/30/2025/Clustering-learning-route/">
-
-      <div class="item-title">Clustering-learning-route</div>
-      
-      <time datetime="2025-04-30T13:35:10.000Z">
-        2025-04-30
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>我从现在开始学习聚类相关的内容，最终目标是希望发表一篇相关的论文。我以现在浅显的眼光给自己定下的学习路线如下1. 完成西瓜书聚类部分的学习，完成的标志是将书上给出的伪代码进行真实地复现2. 阅读综述论文，了解聚类对应的科研领域当前大概的情况3. 阅读聚类有关的顶会论文......我以现在的知识，无法继续制定下面的计划了，因为我并不了解3、往后的真正开始着手科研工作会是怎样的。我目前粗浅的想法是，或许我会了解到一些聚类的具体应用，然后为了完成一篇相关的论文：我也必须将聚类投入到具体的应用当中去，这个时候我不得不学习一些其它领域的知识（当然，目前我并不清楚那...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/04/30/2025/Clustering-watermelon-book/">
-
-      <div class="item-title">Clustering-watermelon-book</div>
-      
-      <time datetime="2025-04-30T11:58:19.000Z">
-        2025-04-30
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>聚类任务简介简单地说，就是要对一个n维向量元素的集合求一个划分，划分后的子集就是一类的（不相交的簇）。 对于数据集$D &amp;#x3D; {x_1,x_2,…,x_m}$，划分为k个不相交的集合$C_1, C_2, …, C_k$，若$x_i \in C_j$，则$\lambda_i &amp;#x3D; j$，其中$j \in {1,2,…,k}$，对应$\lambda_i$就是$x_i$的标签。聚类任务要做的是就是求出一个聚类结果$\lambda &amp;#x3D; (\lambda_1,\lambda_2,…,\lambda_m)$，其中$\lambda$为数据集的...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2025/04/27/2025/Traceroute/">
-
-      <div class="item-title">Traceroute</div>
-      
-      <time datetime="2025-04-27T11:35:01.000Z">
-        2025-04-27
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>这篇blog用于记录我在学习计算机工程系统导论时，一个与网络有关的实验。 实验目的 学习Ping和Traceroute工具的使用，能够在网络开发和维护中熟练使用该工具获取网络状态和进行错误排查。 巩固课堂学习的因特网分层设计实现知识，理解因特网的分组转发网络的特性，通过分析互联网数据包因转发而产生的时延，加深理解尽力而为的因特网设计思想。 通过分析ICMP协议，学习在分层设计中进行跨层通信的设计实现方法，思考因特网网络层在错误处理上的折中设计和处理技巧。 通过Traceroute工具基于错误处理包进行路径探测功能的设计，体会在实践中体会设计方案在解决问题...</p>
+        <p>如何输入一棵树在这里记录一些算法题中常见的树的输入方法 *输入格式一第一行输入一个正整数n，代表树中结点的数量。第二行输入n个正整数w1…wn，代表i点的权重接下来n行，每行输入两个整数，其中第i行的li、ri表示i点的左儿子与右儿子，若为-1则表示不存在。 如何存储一颗树在这里记录常见的树的存储方法 *存储方式一我们可以使用一个树结点的结构体，通过将这些结构体使用指针连接起来，从而构建一棵完整的树。 struct tree_node&amp;#123; int value; tree_node * ls; tree_node * rs; &amp;#125;</p>
       </div>
       
 
