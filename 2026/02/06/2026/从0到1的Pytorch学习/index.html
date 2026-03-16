@@ -1037,6 +1037,84 @@ output = m(imgs)
 <span class="built_in">print</span>(output.shape)
 
 writer.close()</code></pre>
+
+<h2 id="损失函数和反向传播"><a href="#损失函数和反向传播" class="headerlink" title="损失函数和反向传播"></a>损失函数和反向传播</h2><p>pytorch中损失函数仍然是用nn调用，类似</p>
+<pre><code class="highlight py">torch.nn.L1loss</code></pre>
+
+<p>上面的L1loss是最简单的损失函数，即MAE(mean absolute error)</p>
+<p>输入(N,any_size)的tensor<br>输出是对应的tensor，相应的数值会改变（类似非线性激活函数）</p>
+<p>常用的loss function有</p>
+<ol>
+<li>MSE，平方差，L1loss上差值求了个平方</li>
+<li>Cross Entropy，交叉熵，常用于分类问题中</li>
+</ol>
+<ul>
+<li>注意：交叉熵的input不是(N,any_size)，而是(N,C)，这里的C是我们有的分类数（对应的意义是，分类目标经过处理过后等于某一类的得分，例如直接使用其属于某一类的概率）</li>
+</ul>
+<p>pytorch中交叉熵的计算公式<br>$loss(x,class) &#x3D; -\log \frac{exp(x[class])}{\sum_j exp(x[j])} &#x3D; -x[class]+log(\sum_j exp(x[j]))$<br>（这里写做log，但是实际上pytorch中计算的是ln，可能是代码上的约定成俗？）</p>
+<p>一个可以运行的例子（关于损失函数）</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+<span class="keyword">import</span> torch
+
+<span class="built_in">input</span> = torch.tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],dtype=torch.float32)
+target = torch.tensor([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],dtype=torch.float32)
+
+<span class="built_in">input</span> = torch.reshape(<span class="built_in">input</span>, (-<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>))
+target = torch.reshape(target, (-<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>))
+
+f = nn.L1Loss() <span class="comment"># 注意loss function本身也是一个对象</span>
+loss = f(<span class="built_in">input</span>, target) <span class="comment"># 同样使用__call__的方式实现</span>
+<span class="built_in">print</span>(loss)
+<span class="built_in">print</span>(target.shape)
+
+<span class="comment"># 关于交叉熵</span>
+<span class="built_in">input</span> = torch.tensor([<span class="number">0.1</span>,<span class="number">0.2</span>,<span class="number">0.3</span>])
+target = torch.tensor([<span class="number">1</span>])
+
+<span class="built_in">input</span> = torch.reshape(<span class="built_in">input</span>,(<span class="number">1</span>,<span class="number">3</span>))
+f = nn.CrossEntropyLoss()
+loss = f(<span class="built_in">input</span>,target)
+<span class="built_in">print</span>(loss)</code></pre>
+
+<p>反向传播的例子</p>
+<pre><code class="highlight py"><span class="comment"># 结合demo12的CIFAR10分类网络（交叉熵）</span>
+<span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+<span class="keyword">import</span> torch
+<span class="keyword">import</span> torchvision
+
+<span class="keyword">class</span> <span class="title class_">MyModule</span>(nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):
+        <span class="built_in">super</span>().__init__()
+        <span class="variable language_">self</span>.seq = nn.Sequential(
+            nn.Conv2d(in_channels=<span class="number">3</span>, out_channels=<span class="number">32</span>,kernel_size=<span class="number">5</span>,stride=<span class="number">1</span>,padding=<span class="number">2</span>),
+            nn.MaxPool2d(kernel_size=<span class="number">2</span>,stride=<span class="number">2</span>),
+            nn.Conv2d(in_channels=<span class="number">32</span>,out_channels=<span class="number">32</span>,kernel_size=<span class="number">5</span>,stride=<span class="number">1</span>,padding=<span class="number">2</span>),
+            nn.MaxPool2d(kernel_size=<span class="number">2</span>,stride=<span class="number">2</span>),
+            nn.Conv2d(in_channels=<span class="number">32</span>,out_channels=<span class="number">64</span>,kernel_size=<span class="number">5</span>,stride=<span class="number">1</span>,padding=<span class="number">2</span>),
+            nn.MaxPool2d(kernel_size=<span class="number">2</span>,stride=<span class="number">2</span>),
+            nn.Flatten(), <span class="comment"># 注意这里的摊平处理</span>
+            nn.Linear(<span class="number">64</span> * <span class="number">4</span> * <span class="number">4</span>, <span class="number">64</span>),
+            nn.Linear(<span class="number">64</span>, <span class="number">10</span>)
+        )
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,<span class="built_in">input</span></span>):
+        output = <span class="variable language_">self</span>.seq(<span class="built_in">input</span>)
+        <span class="keyword">return</span> output
+    
+dataset = torchvision.datasets.CIFAR10(root=<span class="string">&quot;./DataSets/CIFAR10&quot;</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>,transform=torchvision.transforms.ToTensor())
+dataloader = torch.utils.data.DataLoader(dataset=dataset,batch_size = <span class="number">1</span>)
+m = MyModule()
+
+<span class="keyword">for</span> data <span class="keyword">in</span> dataloader:
+    imgs, labels = data
+    <span class="built_in">input</span> = m(imgs)
+    <span class="built_in">input</span> = torch.reshape(<span class="built_in">input</span>,(<span class="number">1</span>,<span class="number">10</span>))
+    loss = f(<span class="built_in">input</span>,labels)
+    <span class="built_in">print</span>(loss) <span class="comment">#输出类似tensor(2.1572, grad_fn=&lt;NllLossBackward0&gt;)</span>
+    loss.backward()</code></pre>
+
+<p>从上面注释的输出可以看出，loss fuction计算后的返回值对象中主要有一个损失函数值，以及梯度信息</p>
+<p>梯度信息在loss.backward()（反向传播）后会计算出来，并且同步到计算损失函数值的网络当中（通过一些调试器可以在网络对象中找到关于模型的保护属性，其中就有每个网络处权重、偏置等的梯度值属性）</p>
+
 		</div>
 
 		<!-- Comments removed -->

@@ -1,0 +1,302 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>矩阵求导 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>矩阵求导</h1>
+			<p><code>在机器学习中不乏有涉及矩阵的运算，其中矩阵求导更是涉及优化问题的关键。虽然现在有很多开包即用的api可以帮助我们完成这个工作，但是我还是想了解一些它们底层的工作原理。用这篇帖子记录之。</code></p>
+<h2 id="标量函数对向量的求导"><a href="#标量函数对向量的求导" class="headerlink" title="标量函数对向量的求导"></a>标量函数对向量的求导</h2><p>在高等数学中我们学习了多元函数的导数，例如$f(y_1,y_2)$是一个对$y_1,y_2$的函数，其导数如下</p>
+<p>$\frac{\partial f(y_1,y_2)}{\partial y_1},\frac{\partial f(y_1,y_2)}{\partial y_2}$</p>
+<p>基于此我们可以定义标量函数对向量求导，因为多元函数中“多元”的变量本身就可以看作一个向量，而最终的向量的函数是一个标量</p>
+<p>定义如下：</p>
+<ol>
+<li>有向量 $\vec{y} &#x3D; (y_1,y_2,…,y_m)^T$ 作为变量</li>
+<li>函数 $f(\vec{y})$ 对变量 $\vec{y}$ 对导数为 $\frac{df(\vec{y})}{d\vec{y}}$</li>
+<li>$\frac{df(\vec{y})}{d\vec{y}} &#x3D; (\frac{\partial f(\vec{y})}{\partial y_1},\frac{\partial f(\vec{y})}{\partial y_2},…,\frac{\partial f(\vec{y})}{\partial y_m})^T$</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>显然，导数作为一个向量，其中的分量就是我们刚刚多元函数求导时的各个偏导；</li>
+<li>注意导数的向量此时带有一个转置，是一个<strong>列向量</strong>和分母$\vec{y}$相同，此时称为<strong>分母布局</strong>，因为行数与分母（$\vec{y}）$相同；</li>
+<li>导数也可以不带转置，此时称为<strong>分子布局</strong>，因为<strong>行数与分子相同</strong>（分子是标量（$f(\vec{y})$），可以看作行数为1的向量）；</li>
+<li>分母布局与分子布局互为转置；</li>
+</ol>
+<p>一个具体的例子:</p>
+<ol>
+<li>$\vec{y} &#x3D; (y_1,y_2)^T,f(\vec{y}) &#x3D; y_1^2+y_2^2$</li>
+<li>$\frac{df(\vec{y})}{d\vec{y}} &#x3D; (2y_1,2y_2)^T$</li>
+</ol>
+<h2 id="向量函数对向量的求导"><a href="#向量函数对向量的求导" class="headerlink" title="向量函数对向量的求导"></a>向量函数对向量的求导</h2><p>在（向量的）标量函数对向量求导的基础上，向量函数本质上是多个标量函数组成的向量，所以向量函数对自变量（向量）的求导实际上就是 向量函数中 作为分量的每个标量函数 对于自变量（向量）的求导</p>
+<p>定义如下</p>
+<ol>
+<li>有向量函数 $\vec{f}(\vec{y}) &#x3D; (f_1(\vec{y}),f_2(\vec{y}),…,f_n(\vec{y}))^T$，注意，这是一个n行的向量；</li>
+<li>自变量 $\vec{y} &#x3D; (y_1,y_2,…y_m)^T$，注意这是一个m行的向量</li>
+<li>上述函数对自变量的导数记做 $\frac{\partial \vec{f}(\vec{y})}{\partial\vec{y}}$</li>
+<li>$\frac{\partial \vec{f}(\vec{y})}{\partial\vec{y}} &#x3D; (\frac{\vec{f}(\vec{y})}{y_1},\frac{\vec{f}(\vec{y})}{y_2},…,\frac{\vec{f}(\vec{y})}{y_m})^T$，然后按照刚才的标量函数（当前向量函数的各个分量），在列上进行展开，得到下述矩阵</li>
+</ol>
+<p>$<br>\begin{pmatrix}<br>\frac{\partial f_1(\vec{y})}{y_1}&amp;\cdots&amp;\frac{\partial f_n(\vec{y})}{y_1}\<br>\vdots&amp;\ddots&amp;\vdots\<br>\frac{\partial f_1(\vec{y})}{\partial y_m}&amp;\cdots&amp;\frac{\partial f_n(\vec{y})}{y_m}<br>\end{pmatrix}<br>$</p>
+<p>显然上述是分母布局，因为矩阵的行数为$m$，和分母的自变量$\vec{y}$相同</p>
+<p>一个具体的例子</p>
+<ol>
+<li>$\vec{f}(\vec{y}) &#x3D; (f_1(\vec{y}),f_2(\vec{y}))^T &#x3D; (y_1^2+y_2^2+y_3,y_3^2+2y_1)^T$</li>
+<li>$\vec{y} &#x3D; (y_1,y_2,y_3)^T$</li>
+<li>$\frac{\partial \vec{f}(\vec{y})}{\partial \vec{y}}$ 展开如下（分母布局）</li>
+</ol>
+<p>$<br>\begin{pmatrix}<br>2y_1&amp;2\<br>2y_2&amp;0\<br>1&amp;2y_3<br>\end{pmatrix}<br>$</p>
+<p><strong>常用的结论</strong></p>
+<ol>
+<li>如果有$\vec{y} &#x3D; (y_1,y_2,…,y_m)^T$</li>
+<li>其中A是一个矩阵，展开如下</li>
+</ol>
+<p>$<br>\begin{pmatrix}<br>a_{11}\cdots a_{1m}\<br>\vdots \ddots \vdots\<br>a_{m1}\cdots a_{mm}<br>\end{pmatrix}<br>$</p>
+<p>那么有如下两个结论</p>
+<ol>
+<li>$\frac{\partial A\vec{y}}{\vec{y}} &#x3D; A^T$</li>
+<li>$\frac{\partial\vec{y}^T A \vec{y}}{\vec{y}} &#x3D; A\vec{y}+A^T\vec{y}$，当$A^T &#x3D; A$（$A$是对称的）时，导数等于$2A\vec{y}$</li>
+</ol>
+<p>在这样的结论下，一般的<strong>线性回归</strong>使用矩阵建模，求解最小二乘法会非常简单！这里不再展开赘述，可以查看如下视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1W84y1H7HR?spm_id_from=333.788.videopod.sections&vd_source=80df09f481ef5f0671e5e0e35d02e33e">bilibili</a></p>
+<p>（但是要注意，矩阵的逆不一定有解，所以可能无法得到线性回归的解析解，但有很多方法可以得到几何解）</p>
+<p>一种很好的理解：通过矩阵求导，我们可以将一个最优化问题转换为求解矩阵方程，而在矩阵方程的层面考虑问题，或许会看到很多能够简化的地方…</p>
+<h2 id="矩阵求导的链式法则"><a href="#矩阵求导的链式法则" class="headerlink" title="矩阵求导的链式法则"></a>矩阵求导的链式法则</h2><p>不失一般性考虑一个外层是标量函数，内层是向量函数的嵌套函数</p>
+<ol>
+<li>$J &#x3D; f(\vec{y}(\vec{u}))$</li>
+<li>$\frac{\partial J}{\partial \vec{u}} &#x3D; \frac{\partial\vec{y}}{\partial\vec{u}}\frac{\partial J}{\partial \vec{y}}$</li>
+</ol>
+<p>注意，链式展开的时候从右往左写，这样矩阵相乘的维度才能够对得上</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
