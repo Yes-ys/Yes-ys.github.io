@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>项目管理 [ 代码和诗 ]</title>
+	<title>Pytorch的自动求导机制 [ 代码和诗 ]</title>
 
 	<link rel="shortcut icon" href="/myicon.ico">
 	
@@ -129,24 +129,31 @@
 	
 	<article id="details-post">
 		<div id=details-post-item>
-			<h1>项目管理</h1>
-			<p>成绩构成：平时（出勤、课堂表现、小组作业）30% + 期末闭卷考试 70%</p>
-<h2 id="第一节课"><a href="#第一节课" class="headerlink" title="第一节课"></a>第一节课</h2><p>项目管理的特点</p>
+			<h1>Pytorch的自动求导机制</h1>
+			<p><code>这篇blog用来记录学习Pytorch关于自动求导的官方文档时了解到的一些东西</code></p>
+<p>官方文档参考连接<a target="_blank" rel="noopener" href="https://docs.pytorch.org/docs/stable/notes/autograd.html">Pytorch_Autograd_mechanics</a></p>
+<p>反向传播时对于计算图上各种函数的处理</p>
 <ol>
-<li>有确定的开始与结束</li>
-<li>要达成一个目的</li>
-<li>要开始一个“新”服务（复制一个服务不是项目管理，但是对已有的服务进行升级和改造是一个项目）</li>
+<li>If the function is differentiable and thus a gradient exists at the current point, use it.</li>
+<li>If the function is convex (at least locally), use the sub-gradient of minimum norm.</li>
 </ol>
-<p>区别项目与相关工作</p>
-<h2 id="第二节课"><a href="#第二节课" class="headerlink" title="第二节课"></a>第二节课</h2><p>项目经理，两个重点</p>
-<ol>
-<li>拉好自己的队伍</li>
-<li>选择合适的生命周期模型</li>
+<ul>
+<li>补充sub-gradient（次梯度）：</li>
+<li>使用场景，主要用于凸函数（Convex Function）。 在凸函数中，有些点可能是“尖角”（不可导），比如$f(x) &#x3D; |x|,x&#x3D;0$处。虽然这里没有传统意义上的切线（导数），但我们可以画出无数条在函数图像“下方”且通过该点的直线。</li>
+<li>数学定义：假设$f$是一个凸函数。对于定义域内的某一点$x_0$，如果存在一个向量$g$，使得对于定义域内的任意$x$，都满足以下不等式：$f(x)\ge f(x_0)+g^T(x-x_0)$那么，$g$就被称为函数$f$在$x_0$处的次梯度。</li>
+<li>为什么pytorch中使用最小范数？在机器学习的自动求导代码实现中，当遇到不可导的点时，程序不能返回一个集合（比如$[-1,1]$，它必须返回一个具体的数值给反向传播去更新权重。既然次微分是一个集合（可能包含无穷多个合法的次梯度），选哪一个最好呢？在梯度下降中，梯度指向函数值增长最快的方向，负梯度指向下降最快的方向。在不可导点，选择范数最小的次梯度意味着我们在做最“保守”且最平稳的更新，有助于优化算法（如 SGD）收敛，避免在不可导的“尖角”处发生剧烈震荡。数学和优化理论上的标准做法是：选择次微分集合中，范数（绝对值或长度）最小的那个次梯度（sub-gradient of minimum norm）。</li>
+</ul>
+<ol start="3">
+<li>If the function is concave (at least locally), use the super-gradient of minimum norm (consider -f(x) and apply the previous point).</li>
 </ol>
-<p>WBS是最核心的东西，后面会讲可以听一听；</p>
-<p>这门课听这三个东西即可：</p>
-<p>范围的WBS<br>进度的关键链<br>成本的政治</p>
-<p>三件事是一件事，形成一个三角形；</p>
+<ul>
+<li>至于super-gradient可以相对应的理解，对于凹函数，超梯度就是让得到的 直线&#x2F;平面&#x2F;超平面 在对应点的$f(x_0)+g^T(x-x_0)$始终大于$f(x)$的向量</li>
+</ul>
+<ol start="4">
+<li>If the function is defined, define the gradient at the current point by continuity (note that inf is possible here, for example for sqrt(0)). If multiple values are possible, pick one arbitrarily.</li>
+<li>If the function is not defined (sqrt(-1), log(-1) or most functions when the input is NaN, for example) then the value used as the gradient is arbitrary (we might also raise an error but that is not guaranteed). Most functions will use NaN as the gradient, but for performance reasons, some functions will use other values (log(-1), for example).</li>
+<li>If the function is not a deterministic mapping (i.e. it is not a mathematical function), it will be marked as non-differentiable. This will make it error out in the backward if used on tensors that require grad outside of a no_grad environment.</li>
+</ol>
 
 		</div>
 

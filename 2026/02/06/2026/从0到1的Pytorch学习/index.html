@@ -1114,6 +1114,38 @@ m = MyModule()
 
 <p>从上面注释的输出可以看出，loss fuction计算后的返回值对象中主要有一个损失函数值，以及梯度信息</p>
 <p>梯度信息在loss.backward()（反向传播）后会计算出来，并且同步到计算损失函数值的网络当中（通过一些调试器可以在网络对象中找到关于模型的保护属性，其中就有每个网络处权重、偏置等的梯度值属性）</p>
+<h2 id="自动微分"><a href="#自动微分" class="headerlink" title="自动微分"></a>自动微分</h2><p>深度学习框架（不仅仅是pytorch）可以自动计算导数，一般的做法是：</p>
+<ul>
+<li>我们首先将梯度附加到想要对其计算偏导数的变量上，然后记录目标值的计算，执行它的反向传播函数，并访问得到的梯度。</li>
+</ul>
+<p>一个具体的例子：</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch
+
+x = torch.tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],dtype=torch.float32)
+x.requires_grad_(<span class="literal">True</span>)
+<span class="built_in">print</span>(x.grad)
+
+y = <span class="number">2</span> * torch.dot(x, x)
+y.backward()
+<span class="built_in">print</span>(x.grad) <span class="comment"># tensor([ 4.,  8., 12., 16.])</span>
+<span class="built_in">print</span>(x.grad == <span class="number">4</span> * x)
+
+<span class="comment"># 在默认情况下，PyTorch会累积梯度，我们需要清除之前的值</span>
+x.grad.zero_() <span class="comment"># 使用该方法之后得到的梯度是tensor([1., 1., 1., 1.])，否则tensor([ 5.,  9., 13., 17.])</span>
+y = x.<span class="built_in">sum</span>()
+y.backward()
+<span class="built_in">print</span>(x.grad)</code></pre>
+<h3 id="分离计算"><a href="#分离计算" class="headerlink" title="分离计算"></a>分离计算</h3><p>有时，我们希望将某些计算移动到记录的计算图之外。 例如，假设y是作为x的函数计算的，而z则是作为y和x的函数计算的。 想象一下，我们想计算z关于x的梯度，但由于某种原因，希望将y视为一个常数， 并且只考虑到x在y被计算后发挥的作用。</p>
+<p>这里可以分离y来返回一个新变量u，该变量与y具有相同的值， 但丢弃计算图中如何计算y的任何信息。 换句话说，梯度不会向后流经u到x。 因此，下面的反向传播函数计算z&#x3D;u*x关于x的偏导数，同时将u作为常数处理， 而不是z&#x3D;x*x*x关于x的偏导数。</p>
+<pre><code class="highlight py">x.grad.zero_()
+y = x * x
+u = y.detach()
+z = u * x
+
+z.<span class="built_in">sum</span>().backward()
+x.grad == u <span class="comment"># 成立</span></code></pre>
+
+<h3 id="自动微分机制的一个好处"><a href="#自动微分机制的一个好处" class="headerlink" title="自动微分机制的一个好处"></a>自动微分机制的一个好处</h3><p>使用自动微分的一个好处是： 即使构建函数的计算图需要通过Python控制流（例如，条件、循环或任意函数调用），我们仍然可以计算得到的变量的梯度。 在下面的代码中，while循环的迭代次数和if语句的结果都取决于输入a的值。</p>
 
 		</div>
 

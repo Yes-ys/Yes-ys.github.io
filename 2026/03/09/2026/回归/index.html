@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>回归 [ 代码和诗 ]</title>
+	<title>线性神经网络 [ 代码和诗 ]</title>
 
 	<link rel="shortcut icon" href="/myicon.ico">
 	
@@ -129,13 +129,48 @@
 	
 	<article id="details-post">
 		<div id=details-post-item>
-			<h1>回归</h1>
-			<p><code>温习回归相关的知识，涵盖线性回归、logstic回归、softmax回归</code></p>
-<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><ol>
-<li>线性回归</li>
-<li>logstic回归（在线性回归之上加入激活函数）</li>
-<li>softmax回归（logstic回归的拓展）</li>
+			<h1>线性神经网络</h1>
+			<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><h3 id="线性回归的基本元素"><a href="#线性回归的基本元素" class="headerlink" title="线性回归的基本元素"></a>线性回归的基本元素</h3><p>线性回归基于几个基本的假设：</p>
+<ol>
+<li>自变量$x$核因变量$y$之间的关系是线性的，即因变量可以表示为自变量中元素的加权和</li>
+<li>观测值和真实值之间存在一些噪声，但是噪声比较简单，认为服从正态分布</li>
 </ol>
+<p><strong>一些基本概念</strong><br>一个实际的例子： 我们希望根据房屋的面积（平方英尺）和房龄（年）来估算房屋价格（美元）。</p>
+<ol>
+<li>为了开发一个能预测房价的模型，我们需要收集一个真实的数据集。这个数据集包括了房屋的销售价格、面积和房龄。在机器学习的术语中，该数据集称为训练数据集（training data set） 或训练集（training set）。</li>
+<li>每行数据（比如一次房屋交易相对应的数据）称为样本（sample），也可以称为数据点（data point）或数据样本（data instance）。 </li>
+<li>我们把试图预测的目标（比如预测房屋价格）称为标签（label）或目标（target）。 </li>
+<li>预测所依据的自变量（面积和房龄）称为特征（feature）或协变量（covariate）。</li>
+</ol>
+<p>根据线性假设，目标（房屋价格）可以表示为特征（面积和房龄）的加权和，如下面的式子：<br>$price &#x3D; w_{area}area + w_{age}age + b$</p>
+<p><strong>一些基本概念</strong><br>其中：</p>
+<ol>
+<li>$w$称为权重</li>
+<li>$b$称为偏置、偏移量或截距。是指当所有特征都取值为0时，预测值应该为多少。</li>
+</ol>
+<ul>
+<li>如果没有偏置项，我们模型的表达能力将受到限制。</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>严格来说前面的公式是放射变换（线性变换的超集）</li>
+<li>仿射变换的特点是通过加权和对特征进行线性变换（linear transformation）， 并通过偏置项来进行平移（translation）。</li>
+</ol>
+<p>线性回归的表示有多种形式，最基础的形式是使用标量，但是通常情况下我们会使用线性代数来高效、简洁地表示线性回归方程。其中代表性地表达是</p>
+<p>$\hat{y} &#x3D; Xw$</p>
+<ol>
+<li>其中$X$是多个列向量的矩阵，w是一个权重的列向量；</li>
+<li>这种表示方式内涵了“批量”数据以及偏置；</li>
+<li>通过这种表示方式，可以方便地利用矩阵运算的性质得到线性回归的解析解；</li>
+</ol>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>损失函数的出现的目的，是因为线性回归中需要一个量来度量模型对数据的拟合程度，而损失函数能够量化预测值与实际值之间的差距，能够很好地充当这个度量；</p>
+<p>我们将均方差定义为损失函数，这就是我们需要最小化的目标函数；</p>
+<p>另一种得出<strong>等价</strong>的目标函数的方法，是通过真实值与预测值之间的高斯噪声的假设下，然后对线性模型进行极大似然估计。</p>
+<h3 id="神经网络图"><a href="#神经网络图" class="headerlink" title="神经网络图"></a>神经网络图</h3><p>线性回归模型可以刻画为最基本的神经网络图，如下图</p>
+<p><img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/Regression/p1.png" alt="单层神经网络"></p>
+<p>注意输入值都是已经给定的，并且只有一个计算神经元。 由于模型重点在发生计算的地方，所以通常我们在计算层数时不考虑输入层。</p>
+<p>因此上面的神经网络只有一层，即一个输出层，并且输出层只有一个节点</p>
+<p><strong>全连接层</strong>：线性回归，每个输入都与每个输出相连，这种变换层即全连接层；<br>（尽管上例中只有一个输出，仍然是全连接层）；</p>
 
 		</div>
 

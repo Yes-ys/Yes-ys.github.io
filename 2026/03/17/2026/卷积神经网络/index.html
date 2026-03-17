@@ -1,0 +1,429 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>卷积神经网络 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>卷积神经网络</h1>
+			<h2 id="从全连接层到卷积"><a href="#从全连接层到卷积" class="headerlink" title="从全连接层到卷积"></a>从全连接层到卷积</h2><p>卷积神经网络正是将空间不变性（spatial invariance）的这一概念系统化，从而基于这个模型使用较少的参数来学习有用的表示</p>
+<ol>
+<li>平移不变性（translation invariance）：不管检测对象出现在图像中的哪个位置，神经网络的前面几层应该对相同的图像区域具有相似的反应，即为“平移不变性”。</li>
+<li>局部性（locality）：神经网络的前面几层应该只探索输入图像中的局部区域，而不过度在意图像中相隔较远区域的关系，这就是“局部性”原则。最终，可以聚合这些局部特征，以在整个图像级别进行预测。</li>
+</ol>
+<h2 id="图像卷积"><a href="#图像卷积" class="headerlink" title="图像卷积"></a>图像卷积</h2><h3 id="互相关运算"><a href="#互相关运算" class="headerlink" title="互相关运算"></a>互相关运算</h3><p>卷积层会执行<strong>互相关运算</strong>，如下所示</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch
+<span class="keyword">from</span> torch <span class="keyword">import</span> nn
+<span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l
+
+<span class="keyword">def</span> <span class="title function_">corr2d</span>(<span class="params">X, K</span>):  <span class="comment">#@save</span>
+    <span class="string">&quot;&quot;&quot;计算二维互相关运算&quot;&quot;&quot;</span>
+    h, w = K.shape
+    Y = torch.zeros((X.shape[<span class="number">0</span>] - h + <span class="number">1</span>, X.shape[<span class="number">1</span>] - w + <span class="number">1</span>))
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(Y.shape[<span class="number">0</span>]):
+        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(Y.shape[<span class="number">1</span>]):
+            Y[i, j] = (X[i:i + h, j:j + w] * K).<span class="built_in">sum</span>()
+    <span class="keyword">return</span> Y</code></pre>
+<h3 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h3><p>注意：</p>
+<ol>
+<li>pytorch中对于tensor重载了乘法运算符“*”，上面执行的就是逐元素相乘；</li>
+</ol>
+<p>卷积层对输入和卷积核权重进行互相关运算，并在添加标量偏置之后产生输出。</p>
+<p>卷积层中的两个被训练的参数是卷积核权重和标量偏置。</p>
+<p>手动定一个简单的卷积层，如下所示：</p>
+<pre><code class="highlight py"><span class="keyword">class</span> <span class="title class_">Conv2D</span>(nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, kernel_size</span>):
+        <span class="built_in">super</span>().__init__()
+        <span class="variable language_">self</span>.weight = nn.Parameter(torch.rand(kernel_size))
+        <span class="variable language_">self</span>.bias = nn.Parameter(torch.zeros(<span class="number">1</span>))
+
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):
+        <span class="keyword">return</span> corr2d(x, <span class="variable language_">self</span>.weight) + <span class="variable language_">self</span>.bias</code></pre>
+<h3 id="目标边缘检测"><a href="#目标边缘检测" class="headerlink" title="目标边缘检测"></a>目标边缘检测</h3><p>边缘检测：通过找到像素变化的位置，来检测图像中不同颜色的边缘。</p>
+<p>例如下述黑白图像</p>
+<pre><code class="highlight py">X = tensor([[<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],
+        [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],
+        [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],
+        [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],
+        [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],
+        [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</code></pre>
+
+<p>使用如下卷积核</p>
+<pre><code class="highlight py">K = torch.tensor([[<span class="number">1.0</span>, -<span class="number">1.0</span>]])</code></pre>
+
+<p>对输入X和卷积核K进行互相关运算得到结果</p>
+<pre><code class="highlight py">tensor([[ <span class="number">0.</span>,  <span class="number">1.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>, -<span class="number">1.</span>,  <span class="number">0.</span>],
+        [ <span class="number">0.</span>,  <span class="number">1.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>, -<span class="number">1.</span>,  <span class="number">0.</span>],
+        [ <span class="number">0.</span>,  <span class="number">1.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>, -<span class="number">1.</span>,  <span class="number">0.</span>],
+        [ <span class="number">0.</span>,  <span class="number">1.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>, -<span class="number">1.</span>,  <span class="number">0.</span>],
+        [ <span class="number">0.</span>,  <span class="number">1.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>, -<span class="number">1.</span>,  <span class="number">0.</span>],
+        [ <span class="number">0.</span>,  <span class="number">1.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>, -<span class="number">1.</span>,  <span class="number">0.</span>]])</code></pre>
+
+<p>显然，上述结果能够表征出之前黑白图像的垂直边缘</p>
+<h3 id="学习卷积核"><a href="#学习卷积核" class="headerlink" title="学习卷积核"></a>学习卷积核</h3><p>如果我们只需寻找黑白边缘，那么以上[1, -1]的边缘检测器足以。然而，当有了更复杂数值的卷积核，或者连续的卷积层时，我们不可能手动设计滤波器。</p>
+<p>通过仅查看“输入-输出”对来学习由X生成Y的卷积核。</p>
+<p>先构造一个卷积层，并将其卷积核初始化为随机张量。接下来，在每次迭代中，我们比较Y与卷积层输出的平方误差，然后计算梯度来更新卷积核。</p>
+<p>例子如下</p>
+<pre><code class="highlight py"><span class="comment"># 构造一个二维卷积层，它具有1个输出通道和形状为（1，2）的卷积核</span>
+conv2d = nn.Conv2d(<span class="number">1</span>,<span class="number">1</span>, kernel_size=(<span class="number">1</span>, <span class="number">2</span>), bias=<span class="literal">False</span>)
+
+<span class="comment"># 这个二维卷积层使用四维输入和输出格式（批量大小、通道、高度、宽度），</span>
+<span class="comment"># 其中批量大小和通道数都为1</span>
+X = X.reshape((<span class="number">1</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>))
+Y = Y.reshape((<span class="number">1</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">7</span>))
+lr = <span class="number">3e-2</span>  <span class="comment"># 学习率</span>
+
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):
+    Y_hat = conv2d(X)
+    l = (Y_hat - Y) ** <span class="number">2</span>
+    conv2d.zero_grad()
+    l.<span class="built_in">sum</span>().backward()
+    <span class="comment"># 迭代卷积核</span>
+    conv2d.weight.data[:] -= lr * conv2d.weight.grad
+    <span class="keyword">if</span> (i + <span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span>:
+        <span class="built_in">print</span>(<span class="string">f&#x27;epoch <span class="subst">&#123;i+<span class="number">1</span>&#125;</span>, loss <span class="subst">&#123;l.<span class="built_in">sum</span>():<span class="number">.3</span>f&#125;</span>&#x27;</span>)</code></pre>
+
+<p>十次迭代之后，得到的卷积核会接近我们之前设置的权重</p>
+<pre><code class="highlight py">tensor([[ <span class="number">1.0010</span>, -<span class="number">0.9739</span>]])</code></pre>
+
+<p>注意：</p>
+<ol>
+<li>上述 [:] 是切片操作，该操作的作用是选取张量的所有元素，并原地（in-place）修改张量的值，而不是创建一个新的张量。</li>
+<li>如果使用 conv2d.weight.data &#x3D; conv2d.weight.data - lr * conv2d.weight.grad，其本意是在等式右侧创建一个新的张量（计算结果），然后将 conv2d.weight.data 指向这个新张量，可能会引入一些问题：</li>
+</ol>
+<ul>
+<li>1）破坏引用：nn.Parameter 内部持有的张量对象被替换了，可能导致一些依赖于原始张量的操作失效（例如某些优化器可能会缓存参数的内存地址）；</li>
+<li>2）效率较低：创建新张量会分配额外内存，而原地修改直接在原内存上操作，更高效；</li>
+<li>3）计算图问题：直接操作 .data 已经脱离了计算图，替换张量对象可能引入微妙的 bug，尤其是在动态图环境中。计算图问题：直接操作 .data 已经脱离了计算图，替换张量对象可能引入微妙的 bug，尤其是在动态图环境中；</li>
+</ul>
+<h3 id="互相关运算和卷积的关系"><a href="#互相关运算和卷积的关系" class="headerlink" title="互相关运算和卷积的关系"></a>互相关运算和卷积的关系</h3><p>为了与深度学习文献中的标准术语保持一致，我们将继续把“互相关运算”称为卷积运算，尽管严格地说，它们略有不同。</p>
+<p>在执行互相关运算之前将卷积核按照水平、垂直方向分别翻转180度，再执行，就等价于标准的卷积运算；</p>
+<p>值得注意的是，由于卷积核是从数据中学习到的，因此无论这些层执行严格的卷积运算还是互相关运算，卷积层的输出都不会受到影响。 </p>
+<h3 id="特征映射和感受野"><a href="#特征映射和感受野" class="headerlink" title="特征映射和感受野"></a>特征映射和感受野</h3><p>输出的卷积层可以被称为特征映射，因为它可以被视为一个输入映射到下一层的空间维度的转换器</p>
+<p>在卷积神经网络中，对于某一层的任意元素x，其感受野（receptive field）是指在前向传播期间可能影响x计算的所有元素（来自所有先前层）。</p>
+<p>感受野可能大于输入的实际大小。</p>
+<ul>
+<li>考虑两层卷积层，第一层输入为3*3图像，卷积核为2*2，输出一个2*2的特征映射</li>
+<li>上述输出作为第二层的输入，卷积核为2*2，最终得到一个1*1的输出x，x的感受野显然大于使用的卷积核</li>
+<li>启示：当一个特征图中的任意元素需要检测更广区域的输入特征时，我们可以构建一个更深的网络。</li>
+</ul>
+<h2 id="填充和步幅"><a href="#填充和步幅" class="headerlink" title="填充和步幅"></a>填充和步幅</h2><p><code>涉及一些输入输出的尺寸关系</code></p>
+<h3 id="填充"><a href="#填充" class="headerlink" title="填充"></a>填充</h3><p>在应用多层卷积时，我们常常丢失边缘像素。 由于我们通常使用小卷积核，因此对于任何单个卷积，我们可能只会丢失几个像素。 但随着我们应用许多连续卷积层，累积丢失的像素数就多了。</p>
+<p>解决这个问题的简单方法即为填充（padding）：在输入图像的边界填充元素（通常填充元素是0）</p>
+<p>在没有填充时：</p>
+<ol>
+<li>输入尺寸为 $n_h\times n_w$</li>
+<li>卷积核尺寸是 $k_h \times k_w$</li>
+<li>输出尺寸 $(n_h - k_h + 1)\times (n_w - k_w +1)$</li>
+</ol>
+<p>执行填充的时候，通常我们填充$p_h$行，$p_w$列（底部、顶部；左侧、右侧对半分），于是</p>
+<ol>
+<li>输入尺寸为 $(n_h+p_h)\times (n_w+p_w)$</li>
+<li>输出尺寸为$(n_h - k_h + p_h + 1)\times (n_w - k_w + p_w +1)$</li>
+</ol>
+<p>通常填充设置为</p>
+<ol>
+<li>$p_h &#x3D; k_h - 1$，如果得到偶数，则上下对半分，如果是奇数则上侧取ceil、下侧取floor</li>
+<li>$p_w$是类似的</li>
+</ol>
+<p>卷积神经网络中卷积核的高度和宽度通常为奇数，例如1、3、5或7。 选择奇数的好处是，保持空间维度的同时，我们可以在顶部和底部填充相同数量的行，在左侧和右侧填充相同数量的列。</p>
+<p>当使用奇数长、宽的卷积核时所具有的好处：<br>对于任何二维张量X，当满足：</p>
+<ol>
+<li>卷积核的大小是奇数； </li>
+<li>所有边的填充行数和列数相同； </li>
+<li>输出与输入具有相同高度和宽度</li>
+</ol>
+<ul>
+<li>则可以得出：输出Y[i, j]是通过以输入X[i, j]为中心，与卷积核进行互相关计算得到的。</li>
+</ul>
+<p>例子：我们创建一个高度和宽度为3的二维卷积层，并在所有侧边填充1个像素。给定高度和宽度为8的输入，则输出的高度和宽度也是8。</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch
+<span class="keyword">from</span> torch <span class="keyword">import</span> nn
+
+
+<span class="comment"># 为了方便起见，我们定义了一个计算卷积层的函数。</span>
+<span class="comment"># 此函数初始化卷积层权重，并对输入和输出提高和缩减相应的维数</span>
+<span class="keyword">def</span> <span class="title function_">comp_conv2d</span>(<span class="params">conv2d, X</span>):
+    <span class="comment"># 这里的（1，1）表示批量大小和通道数都是1</span>
+    X = X.reshape((<span class="number">1</span>, <span class="number">1</span>) + X.shape)
+    Y = conv2d(X)
+    <span class="comment"># 省略前两个维度：批量大小和通道</span>
+    <span class="keyword">return</span> Y.reshape(Y.shape[<span class="number">2</span>:])
+
+<span class="comment"># 请注意，这里每边都填充了1行或1列，因此总共添加了2行或2列</span>
+conv2d = nn.Conv2d(<span class="number">1</span>, <span class="number">1</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)
+X = torch.rand(size=(<span class="number">8</span>, <span class="number">8</span>))
+<span class="built_in">print</span>(comp_conv2d(conv2d, X).shape)<span class="comment"># 输出torch.Size([8, 8])</span></code></pre>
+<p>当卷积核的高度和宽度不同时，我们可以填充不同的高度和宽度，使输出和输入具有相同的高度和宽度。在如下示例中，我们使用高度为5，宽度为3的卷积核，高度和宽度两边的填充分别为2和1。</p>
+<h3 id="步幅"><a href="#步幅" class="headerlink" title="步幅"></a>步幅</h3><p>在计算互相关时，卷积窗口从输入张量的左上角开始，向下、向右滑动。</p>
+<p>有时候为了高效计算或是缩减采样次数，卷积窗口可以跳过中间位置，每次滑动多个元素。</p>
+<p>上面讨论尺寸的时候，垂直步幅$s_h$和水平步幅$s_w$都是1</p>
+<p>在一般情况下输出的形状是:<br>$\lfloor (n_h - k_h + p_h + s_h)&#x2F;s_h \rfloor \times \lfloor(n_w - k_w + p_w + s_w)&#x2F;s_w \rfloor$</p>
+<h2 id="多输入通道和多输出通道"><a href="#多输入通道和多输出通道" class="headerlink" title="多输入通道和多输出通道"></a>多输入通道和多输出通道</h2><h3 id="多输入通道"><a href="#多输入通道" class="headerlink" title="多输入通道"></a>多输入通道</h3><p>当输入包含多个通道时，需要构造一个与输入数据具有相同输入通道数的卷积核，以便与输入数据进行互相关运算。</p>
+<p>此时卷积层所做的就是对每个通道（输入通道与对应的卷积核）执行互相关操作，然后将结果相加。</p>
+<p><strong>注意此时只有一个输出通道</strong></p>
+<h3 id="多输出通道"><a href="#多输出通道" class="headerlink" title="多输出通道"></a>多输出通道</h3><p>在最流行的神经网络架构中，随着神经网络层数的加深，我们常会增加输出通道的维数，通过减少空间分辨率以获得更大的通道深度。</p>
+<p>此时按照这样的方式进行卷积</p>
+<ol>
+<li>$c_i,c_o$对应输入通道、输出通道</li>
+<li>我们为每个通道创建一个形状为$c_i\times k_h\times k_w$的卷积核张量，通常称为fliter</li>
+</ol>
+<ul>
+<li>针对每个输出通道执行上一节“多输入通道”的运算</li>
+</ul>
+<h3 id="1-times-1-卷积层"><a href="#1-times-1-卷积层" class="headerlink" title="$1\times 1$卷积层"></a>$1\times 1$卷积层</h3><p>作用和全连接层类似</p>
+<p>例如3个输入通道、2个输出通道，使用$1\times 1$形状的卷积核的情况</p>
+<h2 id="汇聚层（池化层）pooling"><a href="#汇聚层（池化层）pooling" class="headerlink" title="汇聚层（池化层）pooling"></a>汇聚层（池化层）pooling</h2><p>汇聚（pooling）层，它具有双重目的：降低卷积层对位置的敏感性，同时降低对空间降采样表示的敏感性。</p>
+<p>关于降低对空间降采样表示的敏感性：</p>
+<ol>
+<li>通常当我们处理图像时，我们希望逐渐降低隐藏表示的空间分辨率、聚集信息，这样随着我们在神经网络中层叠的上升，每个神经元对其敏感的感受野（输入）就越大。</li>
+<li>最后一层的神经元应该对整个输入的全局敏感。</li>
+<li>我们希望通过逐渐聚合信息，生成越来越粗糙的映射，最终实现学习全局表示的目标，同时将卷积图层的所有优势保留在中间层。</li>
+</ol>
+<p>关于降低卷积层对位置的敏感性：</p>
+<ol>
+<li>当检测较底层的特征时（例如黑白边缘），我们通常希望这些特征保持某种程度上的平移不变性。</li>
+<li>例如，如果我们拍摄黑白之间轮廓清晰的图像X，并将整个图像向右移动一个像素，即Z[i, j] &#x3D; X[i, j + 1]，则新图像Z的输出可能大不相同。</li>
+</ol>
+<h3 id="最大池化、平均池化"><a href="#最大池化、平均池化" class="headerlink" title="最大池化、平均池化"></a>最大池化、平均池化</h3><p>与互相关运算符一样，汇聚窗口从输入张量的左上角开始，从左往右、从上往下的在输入张量内滑动。在汇聚窗口到达的每个位置，它计算该窗口中输入子张量的最大值或平均值。计算最大值或平均值是取决于使用了最大汇聚层还是平均汇聚层。</p>
+<p>注意：</p>
+<ol>
+<li>池化层显然也可以改变输入的维度</li>
+<li>默认情况下，深度学习框架中的步幅与汇聚窗口的大小相同</li>
+<li>在处理多通道输入数据时，汇聚层在每个输入通道上单独运算，而不是像卷积层一样在通道上对输入进行汇总。 这意味着汇聚层的输出通道数与输入通道数相同（输出通道不能自己指定）</li>
+</ol>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
