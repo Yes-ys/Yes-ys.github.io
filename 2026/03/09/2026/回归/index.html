@@ -187,7 +187,7 @@
 <li>x是一个向量，对应了一个sample的特征</li>
 <li>b是一个向量，对应了三种类别的偏置</li>
 </ol>
-<h3 id="全连接层参数的开销"><a href="#全连接层参数的开销" class="headerlink" title="全连接层参数的开销"></a>全连接层参数的开销</h3><p>假设有d个输入、q个输出全连接层的参数开销是$\mathcal{O}(dq)$。可以通过一种方法将开销降低到$\mathcal{O}(\frac{dq}{n})$，参考<img src="https://arxiv.org/pdf/2102.08597" alt="Zhang et al.2021"></p>
+<h3 id="全连接层参数的开销"><a href="#全连接层参数的开销" class="headerlink" title="全连接层参数的开销"></a>全连接层参数的开销</h3><p>假设有d个输入、q个输出全连接层的参数开销是$\mathcal{O}(dq)$。可以通过一种方法将开销降低到$\mathcal{O}(\frac{dq}{n})$，参考<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2102.08597">Zhang et al.2021</a></p>
 <h3 id="softmax回归-1"><a href="#softmax回归-1" class="headerlink" title="softmax回归"></a>softmax回归</h3><p>到目前为止，我们只是通过一种网络结构做了“堆砌”线性回归这件事，而没有开始真正的softmax</p>
 <p>之所以需要softmax是因为线性回归的结果不能够直接作为概率，因为</p>
 <ol>

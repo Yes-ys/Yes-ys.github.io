@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Archives: 2026 [ 代码和诗 ]</title>
+	<title>缓解过拟合的原理与实战 [ 代码和诗 ]</title>
 
 	<link rel="shortcut icon" href="/myicon.ico">
 	
@@ -125,112 +125,83 @@
 			<div id="content-inner">
 
 				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>缓解过拟合的原理与实战</h1>
+			<h2 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h2><p>在模型训练的过程中会呈现随着训练epoch的增加，模型开始是在训练集和测试集上的表现同步变好，再训练到一定程度之后模型在训练集上的效果变好的同时在测试集上的表现却变差。这就是过拟合。</p>
+<p>在多项式回归中， 我们可以通过调整拟合多项式的阶数来限制模型的容量。</p>
+<p>实际上，限制特征的数量是缓解过拟合的一种常用技术。</p>
+<p>一些理论：</p>
+<ol>
+<li>多项式对多变量数据的自然扩展是单项式（变量幂的乘积），多项式就是很多单项式求和</li>
+<li>单项式的阶数是其中幂的和，例如$x_1x_2^2$的阶数是3</li>
+<li>给定k个变量，随着阶数d的增加，阶数为d的项个数为$C^{k-1+d}_{k-1}$（因此阶数的微小变动会显著增加模型复杂度）</li>
+</ol>
+<p>基于上述理论，模型复杂度很容易就会增大，所以简单丢弃特征是不可取的，需要更加细粒度地操作来防止过拟合。</p>
+<h2 id="权重衰减"><a href="#权重衰减" class="headerlink" title="权重衰减"></a>权重衰减</h2><p>权重衰减也被称为$L_2正则化$</p>
+<p>思想：这项技术通过函数与零的距离来衡量函数的复杂度，因为在所有函数$f$中，函数$f&#x3D;0$（所有输入都得到值0）在某种意义上是最简单的。<br>注意：如何精确测量一个函数和0的距离没有一个正确的答案。事实上，函数分析和巴拿赫空间理论的研究，都在致力于回答这个问题。</p>
+<p>一种衡量线性函数的简单方法：</p>
+<ul>
+<li>线性函数$f(x) &#x3D; w^Tx$</li>
+<li>线性函数的复杂度：权重向量的某个范数，例如$||w||^2$</li>
+<li>要保证权重向量比较小， 最常用方法是将其范数作为惩罚项加到最小化损失的问题中。 将原来的训练目标最小化训练标签上的预测损失， 调整为最小化预测损失和惩罚项之和。 </li>
+<li>优化目标：$L(w,b)+\frac{\lambda}{2} \frac{1}{2}||w||^2$</li>
+</ul>
+<p>注意</p>
+<ol>
+<li>使用$\frac{1}{2}$和范数的平方是为了便于求导计算（$L_2$范数是平方和开根）；</li>
+<li>$L_2$正则化线性模型构成经典的岭回归，而$L_1$正则化则使得模型变为套索回归，前者在统计学上更有效和受到广泛使用；</li>
+<li>$L_2$范数会对权重大的分量施加巨大的惩罚，这使得学习大量参数的模型倾向于均匀地尝试调整所有权重，使得模型对单个变量中的测量误差更加稳定；</li>
+<li>$L_1$范数会导致模型将权重集中在一小部分特征上， 而将其他权重清除为零。 这称为特征选择（feature selection），这可能是其他场景下需要的；</li>
+</ol>
 
+		</div>
 
+		<!-- Comments removed -->
+		
+	</article>
 
-
-<div id="archive-details">
-
-  <h1>undefined/2026</h1>
-
-  
-  <div class="archive-item">
-    <a href="/2026/02/08/2026/%E6%88%90%E4%B8%BA%E7%A0%94%E7%A9%B6%E7%94%9F%E7%9A%84%E6%94%BB%E7%95%A5%E7%A7%98%E7%B1%8D/">
-      成为研究生的攻略秘籍
-    </a>
-    <time datetime="2026-02-08T03:09:07.000Z">
-      2026-02-08
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/02/07/2026/%E5%A4%96%E6%98%9F%E4%BA%BAx14%E5%B1%8F%E7%BA%BF%E6%9B%B4%E6%8D%A2/">
-      外星人x14屏线更换
-    </a>
-    <time datetime="2026-02-07T03:30:50.000Z">
-      2026-02-07
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/02/06/2026/%E4%BB%8E0%E5%88%B01%E7%9A%84Pytorch%E5%AD%A6%E4%B9%A0/">
-      从0到1的Pytorch学习
-    </a>
-    <time datetime="2026-02-06T02:15:53.000Z">
-      2026-02-06
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/01/27/2026/MathModel-Algorithm/">
-      MathModel-Algorithm
-    </a>
-    <time datetime="2026-01-27T07:31:46.000Z">
-      2026-01-27
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/01/27/2026/26%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E8%A7%84%E5%88%92/">
-      26Algo-Exercises
-    </a>
-    <time datetime="2026-01-27T03:47:49.000Z">
-      2026-01-27
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/01/26/2026/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E4%BD%BF%E7%94%A8/">
-      关于hexo的使用
-    </a>
-    <time datetime="2026-01-26T07:29:02.000Z">
-      2026-01-26
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/01/26/2026/%E8%BD%AF%E5%B7%A5%E6%9C%9F%E6%9C%AB/">
-      软工期末
-    </a>
-    <time datetime="2026-01-25T16:13:20.000Z">
-      2026-01-26
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/01/22/2026/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E6%9C%9F%E6%9C%AB/">
-      计算机图形学期末
-    </a>
-    <time datetime="2026-01-22T06:32:32.000Z">
-      2026-01-22
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/01/17/2026/CN-Exercise/">
-      CN-Exercise
-    </a>
-    <time datetime="2026-01-16T16:00:32.000Z">
-      2026-01-17
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/01/12/2026/%E4%B8%AD%E5%9B%BD%E5%93%B2%E5%AD%A6%E7%AE%80%E5%8F%B2/">
-      中国哲学简史
-    </a>
-    <time datetime="2026-01-12T07:32:26.000Z">
-      2026-01-12
-    </time>
-  </div>
-  
-
-  <div id="other-paginator">
-    <a class="extend prev" rel="prev" href="/archives/2026/">«</a><a class="page-number" href="/archives/2026/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2026/page/3/">3</a><a class="extend next" rel="next" href="/archives/2026/page/3/">»</a>
-  </div>
+	<div id="toc">
+		
+	</div>
 
 </div>
 
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
