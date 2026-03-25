@@ -426,6 +426,19 @@ masked_softmax(torch.rand(<span class="number">2</span>, <span class="number">2<
 <span class="string">         [0.3117, 0.2130, 0.1801, 0.2952]]])</span>
 <span class="string">&quot;&quot;&quot;</span></code></pre>
 
+<h2 id="多头注意力机制"><a href="#多头注意力机制" class="headerlink" title="多头注意力机制"></a>多头注意力机制</h2><p>前面我们在讨论注意力汇聚的时候，只涉及一次注意力的汇聚，这时可以理解为单头。</p>
+<p>但是在实践中，当给定相同的查询、键和值的集合时，我们希望模型可以基于相同的注意力机制学习到不同的行为，然后将不同的行为作为知识组合起来，捕获序列内各种范围的依赖关系（例如，短距离依赖和长距离依赖关系）。</p>
+<p>这时我们希望使用多头注意力机制；</p>
+<p>其实现的思想是：</p>
+<ul>
+<li>我们可以用独立学习得到的$h$组不同的线性投影（linear projections）来变换查询、键和值。然后，这$h$组变换后的查询、键和值将并行地送到注意力汇聚中。</li>
+<li>最后，将这$h$个注意力汇聚的输出拼接在一起，并且通过另一个可以学习的线性投影进行变换，以产生最终输出。</li>
+</ul>
+<p>这种结构如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/Regression/p5.png" alt="注意力汇聚的网络结构"></p>
+<p>数学模型</p>
+<p><strong>待补充</strong></p>
+<h2 id="自注意力和位置编码"><a href="#自注意力和位置编码" class="headerlink" title="自注意力和位置编码"></a>自注意力和位置编码</h2>
 		</div>
 
 		<!-- Comments removed -->
