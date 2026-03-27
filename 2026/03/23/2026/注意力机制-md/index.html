@@ -437,8 +437,42 @@ masked_softmax(torch.rand(<span class="number">2</span>, <span class="number">2<
 <p>这种结构如下图所示：</p>
 <p><img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/Regression/p5.png" alt="注意力汇聚的网络结构"></p>
 <p>数学模型</p>
-<p><strong>待补充</strong></p>
-<h2 id="自注意力和位置编码"><a href="#自注意力和位置编码" class="headerlink" title="自注意力和位置编码"></a>自注意力和位置编码</h2>
+<ol>
+<li>给定查询、键、值$q\in R^{d_q},k\in R^{d_k},v \in R^{d_v}$</li>
+<li>每个注意力头$h_i &#x3D; f(W^{(q)}_i q,W^{(k)}_i k, W^{(v)}_i v) \in R^{(p_v)}$</li>
+</ol>
+<ul>
+<li>其中$f$就是代表<strong>注意力汇聚</strong>的函数，例如使用加性注意力、缩放点积注意力等</li>
+<li>此处可学习的参数包括$W^{(q)}_i ,W^{(k)}_i , W^{(v)}_i$，对应注意力头$h_i$之前，面向$q,k,v$的全连接层（线性变换）</li>
+</ul>
+<ol start="3">
+<li>多头注意力输出$h &#x3D; W_o (h_1,\dots,h_h)^T \in R^{p_o}$</li>
+</ol>
+<ul>
+<li>$W_o$是可学习参数，对应面向多头注意力输出的全连接层（线性变换）</li>
+</ul>
+<p><strong>这种设置下，每个头都可能关注输入不同的部分，可以表示比简单加权平均更加复杂的函数</strong></p>
+<h2 id="自注意力和位置编码"><a href="#自注意力和位置编码" class="headerlink" title="自注意力和位置编码"></a>自注意力和位置编码</h2><p>自注意力</p>
+<ul>
+<li>有了注意力机制之后，我们将词元序列输入注意力池化中，以便同一组词元同时充当查询、键和值。</li>
+<li>具体来说，每个查询都会关注所有的键－值对并生成一个注意力输出。</li>
+<li>由于查询、键和值来自同一组输入，因此被称为 自注意力（self-attention）</li>
+</ul>
+<p>位置编码</p>
+<p>引：在处理词元序列时，循环神经网络是逐个的重复地处理词元的， 而自注意力则因为并行计算而放弃了顺序操作。<strong>如果我们想要使用序列的顺序信息的话，就可以使用位置编码</strong></p>
+<p>具体的方法：通过在输入表示中添加 位置编码（positional encoding）来注入绝对的或相对的位置信息。 </p>
+<p>固定位置编码（绝对位置信息）</p>
+<ol>
+<li>输入$X\in R^{n\times d}$包含一个序列中$n$个词元的$d$维嵌入表示</li>
+<li>位置编码使用相同形状的位置嵌入矩阵$P\in R^{n\times d}$</li>
+<li>经过位置编码层后输出$X+P$，然后在作为原来$X$所担任的“输入”的角色，进行后续操作</li>
+<li>$X+P$相对与$X$的改变是，矩阵第i行、第2j列、第2j+1列上的元素是：$p_{i,2j} &#x3D; \sin(\frac{i}{10000^{2j&#x2F;d}}), p_{i,2j+1} &#x3D; \cos(\frac{i}{10000^{2j&#x2F;d}})$</li>
+</ol>
+<ul>
+<li>这样设置位置编码的原因是，随着列号(j)的增大，编码函数值随着行号(i)变化频率会<strong>越来越小</strong></li>
+<li>类似于我们将信息编码为二进制01串后，高位的01变化相比于低位的01变化频率显然会慢很多（因此这样的绝对位置编码可以在这样的编码信息中反映出这种代表序列信息的“模式”，从而被网络学习到）</li>
+</ul>
+
 		</div>
 
 		<!-- Comments removed -->
