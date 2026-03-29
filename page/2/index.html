@@ -135,6 +135,44 @@
     <!-- <h1>Recent Posts</h1> -->
     
     
+    <div class="recent-post-item" data-href="/2026/03/27/2026/%E6%AE%8B%E5%B7%AE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+
+      <div class="item-title">残差神经网络</div>
+      
+      <time datetime="2026-03-27T12:06:00.000Z">
+        2026-03-27
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>函数类假设有神经网络架构，考虑其中所有可学习参数的所有情况，假设其能表征的所有函数形成函数类$F$，假设我们最终想要的是函数$f^*$。 如果$f^* \in F$，那么我们可以通过训练得到它 否则我们往往只能得到一个函数$f^*_{F} \in F$，这是在神经网络架构覆盖的函数类中对于当前数据集表征最好的函数 实际上加深网络的过程，就是为了扩大神经网络对应的函数类的范围 但是范围的扩大不意味着更加接近$f^*$ 我们想确保的是网络的复杂不能导致$F$远离$f^*$（网络衰退），这个时候就需要嵌套函数类，即随着网络复杂程度的增大，所得到的$F_i$是$...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2026/03/27/2026/Transformer/">
+
+      <div class="item-title">Transformer</div>
+      
+      <time datetime="2026-03-27T11:38:19.000Z">
+        2026-03-27
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>模型结构Transformer采用列编码器-解码器架构，其编码器和解码器都是基于自注意力模块叠加得到的 其模型结构是这样的</p>
+      </div>
+      
+
+    </div>
+
+    
+    
     <div class="recent-post-item" data-href="/2026/03/24/2026/leetcode-hot-100/">
 
       <div class="item-title">leetcode-hot-100</div>
@@ -146,7 +184,7 @@
       
       
       <div class="article-digest">
-        <p>用来记录力扣hot100题的思路</p>
+        <p>用来记录力扣hot100题的思路 hot1-两数之和思路： 使用哈希表存储value-index的索引 两个需要关注的点：1）不能使用相同元素；2）哈希表value,index只能存储一个 元素值,元素索引 的pair 如果提前for预处理哈希表可能引发的问题：在存在答案 or 不存在答案的情况下 都可能以重复的相同元素的索引作为答案返回（显然错误） 解决方法：一次for循环，每检查一个x，检查target-x是否在哈希表中，在则找到答案；否则将 x,index 存入哈希表 不用担心返回两个相同元素的索引，检查到x时可以确定 x,index 不在哈希表中...</p>
       </div>
       
 
@@ -280,44 +318,6 @@
       
       <div class="article-digest">
         <p>在机器学习中不乏有涉及矩阵的运算，其中矩阵求导更是涉及优化问题的关键。虽然现在有很多开包即用的api可以帮助我们完成这个工作，但是我还是想了解一些它们底层的工作原理。用这篇帖子记录之。 标量函数对向量的求导在高等数学中我们学习了多元函数的导数，例如$f(y_1,y_2)$是一个对$y_1,y_2$的函数，其导数如下 $\frac{\partial f(y_1,y_2)}{\partial y_1},\frac{\partial f(y_1,y_2)}{\partial y_2}$ 基于此我们可以定义标量函数对向量求导，因为多元函数中“多元”的变量本身就可...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2026/03/10/2026/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
-
-      <div class="item-title">项目管理</div>
-      
-      <time datetime="2026-03-10T07:37:09.000Z">
-        2026-03-10
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>成绩构成：平时（出勤、课堂表现、小组作业）30% + 期末闭卷考试 70% 第一节课项目管理的特点 有确定的开始与结束 要达成一个目的 要开始一个“新”服务（复制一个服务不是项目管理，但是对已有的服务进行升级和改造是一个项目） 区别项目与相关工作 第二节课项目经理，两个重点 拉好自己的队伍 选择合适的生命周期模型 WBS是最核心的东西，后面会讲可以听一听； 这门课听这三个东西即可： 范围的WBS进度的关键链成本的政治 三件事是一件事，形成一个三角形；</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2026/03/09/2026/%E5%9B%9E%E5%BD%92/">
-
-      <div class="item-title">线性神经网络</div>
-      
-      <time datetime="2026-03-09T13:28:22.000Z">
-        2026-03-09
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>线性回归线性回归的基本元素线性回归基于几个基本的假设： 自变量$x$核因变量$y$之间的关系是线性的，即因变量可以表示为自变量中元素的加权和 观测值和真实值之间存在一些噪声，但是噪声比较简单，认为服从正态分布 一些基本概念一个实际的例子： 我们希望根据房屋的面积（平方英尺）和房龄（年）来估算房屋价格（美元）。 为了开发一个能预测房价的模型，我们需要收集一个真实的数据集。这个数据集包括了房屋的销售价格、面积和房龄。在机器学习的术语中，该数据集称为训练数据集（training data set） 或训练集（training set）。 每行数据（比如一次房屋...</p>
       </div>
       
 
@@ -620,9 +620,27 @@
         
         
         
-            <div class="deadline-empty">
-                <i class="fa fa-coffee"></i>
-                <p>无待办计划，享受生活吧！</p>
+            <div class="deadline-card">
+                <div class="deadline-title">完成Transformer的学习</div>
+                <div class="deadline-date">2026-03-30 00:00:00</div>
+                <div class="deadline-timer" id="deadline-timer" data-target="2026-03-30 00:00:00">
+                    <div class="timer-box">
+                        <span class="t-value" id="t-days">00</span>
+                        <span class="t-label">天</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="t-value" id="t-hours">00</span>
+                        <span class="t-label">时</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="t-value" id="t-minutes">00</span>
+                        <span class="t-label">分</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="t-value" id="t-seconds">00</span>
+                        <span class="t-label">秒</span>
+                    </div>
+                </div>
             </div>
         
     </div>

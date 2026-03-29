@@ -1,0 +1,269 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>残差神经网络 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>残差神经网络</h1>
+			<h2 id="函数类"><a href="#函数类" class="headerlink" title="函数类"></a>函数类</h2><p>假设有神经网络架构，考虑其中所有可学习参数的所有情况，假设其能表征的所有函数形成函数类$F$，假设我们最终想要的是函数$f^*$。</p>
+<ul>
+<li>如果$f^* \in F$，那么我们可以通过训练得到它</li>
+<li>否则我们往往只能得到一个函数$f^*_{F} \in F$，这是在神经网络架构覆盖的函数类中对于当前数据集表征最好的函数</li>
+</ul>
+<p>实际上加深网络的过程，就是为了扩大神经网络对应的函数类的范围</p>
+<ul>
+<li>但是范围的扩大不意味着更加接近$f^*$</li>
+<li>我们想确保的是网络的复杂不能导致$F$远离$f^*$（网络衰退），这个时候就需要嵌套函数类，即随着网络复杂程度的增大，所得到的$F_i$是$F_{i+1}$的子集</li>
+</ul>
+<p>即我们希望得到下面右图的情况</p>
+<p><img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/Regression/p7.png" alt="非嵌套函数类与嵌套函数类"></p>
+<h2 id="残差块"><a href="#残差块" class="headerlink" title="残差块"></a>残差块</h2><p>为了确保随着网络复杂性的增加可以使用残差块</p>
+<p>一个正常的前向传播和残差块对比如图</p>
+<p><img src="https://raw.githubusercontent.com/Yes-ys/blog-images/main/Regression/p8.png" alt="前向v.s.残差"></p>
+<h3 id="非残差块网络可能得不到嵌套函数类"><a href="#非残差块网络可能得不到嵌套函数类" class="headerlink" title="非残差块网络可能得不到嵌套函数类"></a>非残差块网络可能得不到嵌套函数类</h3><p>对于一个普通的非残差网络，第 $L+1$ 层的输出是第 $L$ 层输出 $x_L$ 的非线性变换：<br>$$x_{L+1} &#x3D; \mathcal{H}(x_L; W_{L+1}, b_{L+1})$$<br>通常，$\mathcal{H}$ 是一个带有非线性激活函数（如 ReLU）的仿射变换：<br>$$x_{L+1} &#x3D; \sigma(W_{L+1} x_L + b_{L+1})$$</p>
+<p>要使普通网络的函数类满足嵌套（$\mathcal{F}<em>L \subseteq \mathcal{F}</em>{L+1}$），<strong>新增的这一层必须能够精确地表达“恒等映射（Identity Mapping）”</strong>，即必须存在一组参数 $W^*$ 和 $b^*$，使得对于所有的 $x_L$，都有：<br>$$x_{L+1} &#x3D; \sigma(W^* x_L + b^*) &#x3D; x_L$$</p>
+<p><strong>考虑一种情况：</strong><br>如果 $\sigma$ 是 ReLU 函数（$\max(0, x)$），ReLU 会将所有负数映射为 0。因此，除非 $x_L$ 的所有分量永远是非负的，否则<strong>无论你怎么调整权重 $W$ 和偏置 $b$，$\sigma(W x_L + b)$ 都无法完美地等于 $x_L$。</strong></p>
+<p>因为新增的层无法完美退化为恒等映射，导致 $\mathcal{F}<em>L \not\subseteq \mathcal{F}</em>{L+1}$。<br>这就是为什么在 ResNet 提出之前，盲目增加层数会导致“网络退化问题（Degradation Problem）”——更深的网络不仅没有扩大原有的有效搜索空间，反而偏离了浅层网络好不容易找到的优秀解。</p>
+<h3 id="残差网络确保嵌套函数类"><a href="#残差网络确保嵌套函数类" class="headerlink" title="残差网络确保嵌套函数类"></a>残差网络确保嵌套函数类</h3><p>ResNet 引入了跳跃连接（Skip Connection），改变了网络层的数学表达形式。在残差块中，网络不再直接拟合期望的底层映射 $\mathcal{H}(x)$，而是去拟合<strong>残差（Residual）</strong> $\mathcal{R}(x)$：<br>$$x_{L+1} &#x3D; x_L + \mathcal{R}(x_L; W_{L+1}, b_{L+1})$$</p>
+<p>我们同样来检验它是否满足嵌套条件（即 $\mathcal{F}<em>L \subseteq \mathcal{F}</em>{L+1}$）。<br>为了让 $L+1$ 层的网络等价于 $L$ 层的网络，我们需要：<br>$$x_{L+1} &#x3D; x_L$$<br>代入残差公式，这意味着我们需要：<br>$$\mathcal{R}(x_L; W_{L+1}, b_{L+1}) &#x3D; 0$$</p>
+<p><strong>数学上的轻易实现：</strong><br>不管残差块 $\mathcal{R}$ 内部包含多少个 ReLU 和卷积层，只要我们<strong>将这一层的权重矩阵 $W_{L+1}$ 全部初始化&#x2F;优化为零矩阵（$\mathbf{0}$），将偏置也设为零</strong>，那么：<br>$$\mathcal{R}(x_L; \mathbf{0}, 0) &#x3D; \sigma(\mathbf{0} \cdot x_L + 0) &#x3D; \sigma(0) &#x3D; 0$$<br>（对于 ReLU, Tanh 等绝大多数激活函数，输入 0 输出也是 0）。</p>
+<p>因此，此时：<br>$$x_{L+1} &#x3D; x_L + 0 &#x3D; x_L$$</p>
+<p><strong>结论：</strong><br>对于残差网络，<strong>只需将新增层的参数设为 0，就可以完美实现恒等映射</strong>。<br>在数学上，零映射（Zero Mapping）极其容易通过参数清零来逼近，而恒等映射（Identity Mapping）在非线性网络中却极难逼近。</p>
+<p>正因为新增的残差块可以轻而易举地退化为 $0$，所以 $(L+1)$ 层残差网络所能表达的函数集合，严格包含了 $L$ 层网络所能表达的集合。<br>即：**$\mathcal{F}_1 \subseteq \mathcal{F}_2 \subseteq \dots \subseteq \mathcal{F}<em>L \subseteq \mathcal{F}</em>{L+1}$**</p>
+<h2 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h2><p>ResNet是残差神经网络的典型代表</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
