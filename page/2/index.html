@@ -135,6 +135,25 @@
     <!-- <h1>Recent Posts</h1> -->
     
     
+    <div class="recent-post-item" data-href="/2026/03/30/2026/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8/">
+
+      <div class="item-title">贝叶斯分类器</div>
+      
+      <time datetime="2026-03-30T07:24:40.000Z">
+        2026-03-30
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>工作原理思想：贝叶斯分类器使用贝叶斯公式计算样本属于某一类条件的概率值，并将样本判定为概率值最大的那个类； 形式化描述： 当前有一个d维样本$x &amp;#x3D; (x_1,x_2,…,x_d)$ 它有多个可能隶属的类别${c_1,c_2,…,c_k,…c_m}\in C$ 贝叶斯分类器采用的分类方法是$\arg\max_{c\in C} p(c|x)$即样本$x$所属的类 后续内容都是围绕，如何计算上述条件概率而展开。下面补充一些基本概念。 贝叶斯定理 贝叶斯定理描述了类条件概率、先验概率和后验概率的关系。 贝叶斯分类器中需要最大化的条件概率就是后验概率 ...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
     <div class="recent-post-item" data-href="/2026/03/27/2026/%E6%AE%8B%E5%B7%AE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
 
       <div class="item-title">残差神经网络</div>
@@ -299,25 +318,6 @@
       
       <div class="article-digest">
         <p>这篇blog用来记录学习Pytorch关于自动求导的官方文档时了解到的一些东西 官方文档参考连接Pytorch_Autograd_mechanics 反向传播时对于计算图上各种函数的处理 If the function is differentiable and thus a gradient exists at the current point, use it. If the function is convex (at least locally), use the sub-gradient of minimum norm. 补充sub-gradi...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2026/03/16/2026/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/">
-
-      <div class="item-title">矩阵求导</div>
-      
-      <time datetime="2026-03-16T01:23:49.000Z">
-        2026-03-16
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>在机器学习中不乏有涉及矩阵的运算，其中矩阵求导更是涉及优化问题的关键。虽然现在有很多开包即用的api可以帮助我们完成这个工作，但是我还是想了解一些它们底层的工作原理。用这篇帖子记录之。 标量函数对向量的求导在高等数学中我们学习了多元函数的导数，例如$f(y_1,y_2)$是一个对$y_1,y_2$的函数，其导数如下 $\frac{\partial f(y_1,y_2)}{\partial y_1},\frac{\partial f(y_1,y_2)}{\partial y_2}$ 基于此我们可以定义标量函数对向量求导，因为多元函数中“多元”的变量本身就可...</p>
       </div>
       
 

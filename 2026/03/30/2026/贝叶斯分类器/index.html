@@ -1,0 +1,329 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>贝叶斯分类器 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>贝叶斯分类器</h1>
+			<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>思想：贝叶斯分类器使用<strong>贝叶斯公式</strong>计算样本属于某一类条件的概率值，并将样本判定为概率值最大的那个类；</p>
+<p>形式化描述：</p>
+<ol>
+<li>当前有一个d维样本$x &#x3D; (x_1,x_2,…,x_d)$</li>
+<li>它有多个可能隶属的类别${c_1,c_2,…,c_k,…c_m}\in C$</li>
+<li>贝叶斯分类器采用的分类方法是$\arg\max_{c\in C} p(c|x)$即样本$x$所属的类</li>
+</ol>
+<p><strong>后续内容都是围绕，如何计算上述条件概率而展开。下面补充一些基本概念。</strong></p>
+<h3 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h3><ul>
+<li>贝叶斯定理描述了类条件概率、先验概率和后验概率的关系。</li>
+<li>贝叶斯分类器中需要最大化的条件概率就是后验概率</li>
+</ul>
+<p>内容：</p>
+<p>$p(c|x) &#x3D; \frac{p(c,x)}{p(x)} &#x3D; \frac{p(x|c)p(c)}{p(x)}$</p>
+<ol>
+<li>其中$p(c)$是<strong>先验概率</strong>，可通过各类别出现的频率估计（大数定理）</li>
+<li>$p(x)$是<strong>证据因子</strong>，样本、实现现象，与类标记c无关；</li>
+<li>$p(x|c)$是类c中出现样本x的<strong>类条件概率</strong>；</li>
+</ol>
+<h3 id="朴素假设"><a href="#朴素假设" class="headerlink" title="朴素假设"></a>朴素假设</h3><p>假设：样本的所有特征，作为随机变量，在给定类别下<strong>独立同分布</strong></p>
+<p>假设的形式化描述：</p>
+<p>类条件概率$p(x|c) &#x3D; \prod^d_{i &#x3D; 1} p(x_i|c)$</p>
+<ol>
+<li>其中$p(x_i|c)$称为<strong>属性条件概率</strong></li>
+</ol>
+<p><strong>显然这种假设会成为我们求后验概率的一个工具，所以采用这种假设的贝叶斯分类器，称为朴素贝叶斯分类器</strong></p>
+<h3 id="朴素假设下的正态分布假设"><a href="#朴素假设下的正态分布假设" class="headerlink" title="朴素假设下的正态分布假设"></a>朴素假设下的正态分布假设</h3><p>假设：对于样本特征向量的分量的具体特征值 假设其在给定类别下的条件概率 服从高斯分布</p>
+<p>说明：</p>
+<ol>
+<li>该假设的目的是将极大似然估计（MLE）应用于<strong>连续特征值的属性条件概率计算</strong></li>
+<li>应用这种假设的贝叶斯分类器称为<strong>正态朴素贝叶斯分类器</strong></li>
+</ol>
+<h2 id="朴素贝叶斯分类器（离散特征值）"><a href="#朴素贝叶斯分类器（离散特征值）" class="headerlink" title="朴素贝叶斯分类器（离散特征值）"></a>朴素贝叶斯分类器（离散特征值）</h2><p><strong>这一部分假设样本作为特征向量的各个分量值都是离散值</strong></p>
+<p>回到我们的分类器本身</p>
+<p>$\arg\max_{c\in C} p(c|x)$</p>
+<p>结合贝叶斯定理和朴素假设，我们现在知道，<strong>朴素贝叶斯分类器为：</strong></p>
+<p>$\arg\max_{c\in C}\frac{p(c)\prod^d_{i &#x3D; 1} p(x_i|c)}{p(x)}$</p>
+<h3 id="朴素贝叶斯分类器的训练"><a href="#朴素贝叶斯分类器的训练" class="headerlink" title="朴素贝叶斯分类器的训练"></a>朴素贝叶斯分类器的训练</h3><p>在朴素贝叶斯分类器的判别式中：</p>
+<ol>
+<li>$p(x)$对所有类别都相同，故而不用考虑其计算；</li>
+<li>$p(c)$可以使用<strong>数据集中该类别的数量占数据集中样本总数的比例来估计</strong>；（样本总数为多少，该类别的样本数量是多少，都需要数据集支撑）</li>
+<li>$p(x_i|c)$可以使用<strong>类$c$下，特征分量$x_i$的取值占 类c下所有样本数量 的比例来估计</strong>；（特征分量$x_i$作为离散随机变量的可能取值有多少，该类别(c)的样本数量是多少，需要数据集支撑）</li>
+</ol>
+<p>贝叶斯分类器与神经网络的区别：</p>
+<ul>
+<li>贝叶斯分类器有一个关键的优点<strong>简洁性与可解性</strong>，表述上来说即贝叶斯分类器对应的判别模型的 参数 通常有<strong>解析解</strong> 无需迭代优化，计算高效</li>
+<li>这带来了一个直接的表现——贝叶斯分类器的训练 实际上是可以被包含在预测中的 这和神经网络不一样 神经网络的训练和预测（推理） 往往是完全解耦两个部分（甚至在现代工业界中，模型训练与模型部署应用已经成为了两个不同的工作方向）</li>
+<li>但是由于贝叶斯分类器判别式中的参数 即类条件概率和先验概率 是每次需要的时候都可以直接从数据集上根据当前变量 即类别 计算出来的</li>
+<li>所以我们不直接训练，而是在处理具体的待分类样本时再“训练”也是可行的</li>
+</ul>
+<p><strong>但是，面对数据集十分庞大的情况，我们往往会预先计算所有可能的类条件概率、先验概率，并将它们记录在对应的概率表中。我们可以把这个过程称为贝叶斯分类器的“训练”，并且此时训练和预测是两个独立的部分</strong></p>
+<h2 id="正态朴素贝叶斯分类器（特征值是连续变量）"><a href="#正态朴素贝叶斯分类器（特征值是连续变量）" class="headerlink" title="正态朴素贝叶斯分类器（特征值是连续变量）"></a>正态朴素贝叶斯分类器（特征值是连续变量）</h2><p>该分类器的判别式与朴素贝叶斯分类器<strong>类似</strong>：</p>
+<p>$\arg\max_{c\in C}\frac{p(c)\prod^d_{i &#x3D; 1} f(x_i|c)}{p(x)}$</p>
+<p>唯一的不同点在于，使用属性条件<strong>概率密度</strong>来代替概率。因为对于连续随机变量，取得任意一个具体值的概率为0（讨论连续随机变量取得一点的概率是没有意义的）；</p>
+<p><strong>当然，在一个样本既有离散特征又有连续特征的情况下，离散特征仍然采取属性条件概率，连续特征采取属性条件概率密度即可</strong></p>
+<h3 id="正态朴素贝叶斯分类器的计算：计算属性条件概率密度"><a href="#正态朴素贝叶斯分类器的计算：计算属性条件概率密度" class="headerlink" title="正态朴素贝叶斯分类器的计算：计算属性条件概率密度"></a>正态朴素贝叶斯分类器的计算：计算属性条件概率密度</h3><p>现在就针对$f(x_i &#x3D; 0.871|c_k)$来计算这个属性条件概率密度（即样本$x$的特征分量$x_i$在样本属于类$c_k$的条件下，取得值为$0.871$的概率密度）</p>
+<p>属性条件概率密度函数为:</p>
+<p>$f(x_i|c_k) &#x3D; \frac{1}{\sqrt{2\pi \sigma^2_{ki}}}\exp(-\frac{x_i - \mu_{ki}}{2\sigma^2_{ki}})$</p>
+<p>要计算它，首先我们需要确定该条件分布的参数$\mu_{ki}$和$\sigma^2_{ki}$</p>
+<p><strong>极大似然估计 可以给出上述参数的估计值 并且能够直接推导出依赖于数据集的估值的解析解</strong></p>
+<p>我们先不关注极大似然的推导过程，直接看看参数估值的形式：</p>
+<ol>
+<li>特征均值：$\hat{\mu}<em>{ki} &#x3D; \frac{1}{N_k}\sum</em>{j:y_j&#x3D;c_k}x^j_i$</li>
+</ol>
+<ul>
+<li>其中$N_k$是数据集中所有类别为$c_k$的样本数量</li>
+<li>后面的求和指的是，将所有类别为$c_k$的样本$x^j$特征$i$的值加和；</li>
+<li>$y_j$即样本$x^j$的真实类别<br>（为了区别标记的样本还是标记的特征分量，将$j$标在类上标）</li>
+</ul>
+<ol start="2">
+<li>特征方差：$\hat{\sigma}^2_{ki} &#x3D; \frac{1}{N_k}\sum_{j:y_j&#x3D;c_k}(x^j_i - \hat{\mu}_{ki})$</li>
+</ol>
+<p>我们以这些估值作为真实的参数在分类器中使用</p>
+<p>由此：</p>
+<ol>
+<li>我们可以称通过极大似然估计从数据集中得出条件分布参数的部分为<strong>训练部分</strong>；</li>
+<li>当我们有了这些参数之后，就能够计算任何所需的<strong>属性条件概率密度</strong>，并对样本完成分类类；</li>
+</ol>
+<h3 id="补充：极大似然估计的数学推导"><a href="#补充：极大似然估计的数学推导" class="headerlink" title="补充：极大似然估计的数学推导"></a>补充：极大似然估计的数学推导</h3><p>推导部分很简单，本质是一个优化问题</p>
+<p>我们要估计$\hat{\mu}<em>{ki}$ 和 $\hat{\sigma}^2</em>{ki}$，注意，都是针对分量值$x_i$和类$c_k$下进行的</p>
+<p>因此，在原本的数据集中，样本类别为$c_k$的子集里，针对分量$x_i$的观测值有：$t_1,t_2,…,t_n$</p>
+<p>则每个观测值的概率密度函数为$f(t_i|\mu,\sigma^2) &#x3D; \frac{1}{\sqrt{2\pi \sigma^2}}\exp (\frac{-(t_i - \mu)^2}{2\sigma^2})$</p>
+<p>似然函数为$L(\mu,\sigma^2) &#x3D; \prod^n_{i&#x3D;1}\frac{1}{\sqrt{2\pi \sigma^2}}\exp (\frac{-(t_i - \mu)^2}{2\sigma^2})$</p>
+<p>其中任意$t_i$都可以从数据集上得到具体的取值，因此该函数就是关于$\mu$和$\sigma^2$的二元函数，极大似然估计需要最大化该似然函数</p>
+<p>在这种正态分布的情况下，对$\mu$和$\sigma^2$分别求偏导并令其等于0，解二元方程组即可得到我们前面的结论</p>
+<h2 id="正态贝叶斯分类器"><a href="#正态贝叶斯分类器" class="headerlink" title="正态贝叶斯分类器"></a>正态贝叶斯分类器</h2><p>不再使用朴素假设，不聚焦于属性条件概率（密度），而是将样本们对应的高维向量 看作服从 <strong>多维正态分布</strong></p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
