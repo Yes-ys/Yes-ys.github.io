@@ -496,6 +496,46 @@
         <span class="keyword">return</span> ans;
     &#125;
 &#125;;</code></pre>
+
+<h2 id="hot7-接雨水"><a href="#hot7-接雨水" class="headerlink" title="hot7-接雨水"></a>hot7-接雨水</h2><p>最初的思路：</p>
+<ol>
+<li>按照某个设定的高度遍历当前的柱子，找到两个东西：</li>
+</ol>
+<ul>
+<li>当前高度的边界</li>
+<li>当前高度除了边界的柱子还有哪些位置没有柱子</li>
+</ul>
+<ol start="2">
+<li>当前高度边界范围内，没有柱子的位置就是可以有雨水的位置</li>
+<li>外层遍历所有可能的高度（结束条件是某个高度只有一个边界）</li>
+</ol>
+<p>时间复杂度应该是O(nm)，其中n是柱子数量，m是高度数量</p>
+<pre><code class="highlight c++"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;
+<span class="keyword">public</span>:
+    <span class="function"><span class="type">int</span> <span class="title">trap</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; height)</span> </span>&#123;
+        <span class="type">int</span> max_h = <span class="number">0</span>,ans = <span class="number">0</span>;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; height.<span class="built_in">size</span>();i++)
+            <span class="keyword">if</span>(height[i]&gt;max_h)max_h = height[i];
+        <span class="keyword">if</span>(max_h == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;
+
+        <span class="keyword">for</span>(<span class="type">int</span> h = <span class="number">1</span>;h &lt;= max_h;h++)&#123;
+            <span class="type">int</span> l = <span class="number">-1</span>,r = <span class="number">-1</span>,cnt = <span class="number">0</span>;
+            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; height.<span class="built_in">size</span>();i++)&#123;
+                <span class="keyword">if</span>(height[i] &gt;= h)&#123;
+                    <span class="keyword">if</span>(l == <span class="number">-1</span>)l = i;<span class="comment">//左侧边界是遇到的第一个非0高度</span>
+                    r = i;<span class="comment">//右侧边界不断增大</span>
+                    cnt++;<span class="comment">//当前层有效的柱子数量</span>
+                &#125;
+            &#125;
+
+            <span class="keyword">if</span>(l == r)<span class="keyword">break</span>;<span class="comment">//搜索结束</span>
+            <span class="keyword">else</span>&#123;
+                ans += (r-l<span class="number">+1</span>-cnt);
+            &#125;
+        &#125;
+        <span class="keyword">return</span> ans;
+    &#125;
+&#125;;</code></pre>
 		</div>
 
 		<!-- Comments removed -->
