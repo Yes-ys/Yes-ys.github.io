@@ -209,7 +209,7 @@
 <li>当我们有了这些参数之后，就能够计算任何所需的<strong>属性条件概率密度</strong>，并对样本完成分类类；</li>
 </ol>
 <h3 id="补充：极大似然估计的数学推导"><a href="#补充：极大似然估计的数学推导" class="headerlink" title="补充：极大似然估计的数学推导"></a>补充：极大似然估计的数学推导</h3><p>推导部分很简单，本质是一个优化问题</p>
-<p>我们要估计$\hat{\mu}<em>{ki}$ 和 $\hat{\sigma}^2</em>{ki}$，注意，都是针对分量值$x_i$和类$c_k$下进行的</p>
+<p>我们要估计$\hat{\mu}<em>{ki}$ 和<br>$\hat{\sigma}^2</em>{ki}$，注意，都是针对分量值$x_i$和类$c_k$下进行的</p>
 <p>因此，在原本的数据集中，样本类别为$c_k$的子集里，针对分量$x_i$的观测值有：$t_1,t_2,…,t_n$</p>
 <p>则每个观测值的概率密度函数为$f(t_i|\mu,\sigma^2) &#x3D; \frac{1}{\sqrt{2\pi \sigma^2}}\exp (\frac{-(t_i - \mu)^2}{2\sigma^2})$</p>
 <p>似然函数为$L(\mu,\sigma^2) &#x3D; \prod^n_{i&#x3D;1}\frac{1}{\sqrt{2\pi \sigma^2}}\exp (\frac{-(t_i - \mu)^2}{2\sigma^2})$</p>
@@ -222,7 +222,7 @@
 <ol>
 <li>$\mu$是均值向量</li>
 <li>$\Sigma$是协方差矩阵</li>
-<li>$|Sigma|$是协方差矩阵的行列式</li>
+<li>$|\Sigma|$是协方差矩阵的行列式</li>
 <li>$\Sigma^{-1}$是协方差矩阵的逆矩阵</li>
 </ol>
 <p>计算方法：</p>
