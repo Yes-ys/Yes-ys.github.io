@@ -135,6 +135,82 @@
     <!-- <h1>Recent Posts</h1> -->
     
     
+    <div class="recent-post-item" data-href="/2026/04/02/2026/%E4%B8%80%E4%BA%9B%E7%8E%B0%E4%BB%A3%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%90%86%E8%AE%BA-%E5%AE%9E%E8%B7%B5/">
+
+      <div class="item-title">一些现代卷积神经网络理论&amp;实践</div>
+      
+      <time datetime="2026-04-02T06:59:03.000Z">
+        2026-04-02
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p></p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2026/03/31/2026/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/">
+
+      <div class="item-title">机器学习的数学知识</div>
+      
+      <time datetime="2026-03-31T06:56:34.000Z">
+        2026-03-31
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>为机器学习补充一些高等数学、线性代数、概率统计以及最优化的数学知识 Hessian矩阵Hessian矩阵是由多远函数的二阶偏导数组成的矩阵。 数学的形式化描述： 如果函数$f(x_1,x_2,…,x_n)$二阶可导，则Hessian矩阵定义为 $$\begin{pmatrix}\frac{\partial^2 f}{\partial x^2_1},\frac{\partial^2 f}{\partial x_1\partial x_2}\cdots \frac{\partial^2 f}{\partial x_1\partial x_n}\\frac{\...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2026/03/31/2026/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">
+
+      <div class="item-title">支持向量机</div>
+      
+      <time datetime="2026-03-31T03:15:07.000Z">
+        2026-03-31
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>支持向量机是最大化分类间隔的线性分类器，如果使用核函数，可以解决非线性问题。 线性分类器线性分类器本质是n维空间中的超平面，将空间切割成两部分。进行二分类。 数学形式： $w^Tx + b &amp;#x3D; 0$ 其中 $w$是权重向量 $x$是输入向量 $b$是偏置项 二分类问题正类标签值$y &amp;#x3D; +1$，负类标签值$y &amp;#x3D; -1$ 在线性分类器中我们认为$w^Tx_i+b\ge 0$，则样本$x_i$就属于正类，否则为负类 判别函数可以写作 $sgn(w^Tx+b)$ 其中$sgn(x) &amp;#x3D; 1,-1;if:x\ge 0,x...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
+    <div class="recent-post-item" data-href="/2026/03/27/2026/%E6%AE%8B%E5%B7%AE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+
+      <div class="item-title">残差神经网络</div>
+      
+      <time datetime="2026-03-27T12:06:00.000Z">
+        2026-03-27
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>函数类假设有神经网络架构，考虑其中所有可学习参数的所有情况，假设其能表征的所有函数形成函数类$F$，假设我们最终想要的是函数$f^*$。 如果$f^* \in F$，那么我们可以通过训练得到它 否则我们往往只能得到一个函数$f^*_{F} \in F$，这是在神经网络架构覆盖的函数类中对于当前数据集表征最好的函数 实际上加深网络的过程，就是为了扩大神经网络对应的函数类的范围 但是范围的扩大不意味着更加接近$f^*$ 我们想确保的是网络的复杂不能导致$F$远离$f^*$（网络衰退），这个时候就需要嵌套函数类，即随着网络复杂程度的增大，所得到的$F_i$是$...</p>
+      </div>
+      
+
+    </div>
+
+    
+    
     <div class="recent-post-item" data-href="/2026/03/27/2026/Transformer/">
 
       <div class="item-title">Transformer</div>
@@ -248,87 +324,11 @@
     </div>
 
     
-    
-    <div class="recent-post-item" data-href="/2026/03/16/2026/Pytorch%E7%9A%84%E8%87%AA%E5%8A%A8%E6%B1%82%E5%AF%BC%E6%9C%BA%E5%88%B6/">
-
-      <div class="item-title">Pytorch的自动求导机制</div>
-      
-      <time datetime="2026-03-16T03:24:47.000Z">
-        2026-03-16
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>这篇blog用来记录学习Pytorch关于自动求导的官方文档时了解到的一些东西 官方文档参考连接Pytorch_Autograd_mechanics 反向传播时对于计算图上各种函数的处理 If the function is differentiable and thus a gradient exists at the current point, use it. If the function is convex (at least locally), use the sub-gradient of minimum norm. 补充sub-gradi...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2026/03/16/2026/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/">
-
-      <div class="item-title">矩阵求导</div>
-      
-      <time datetime="2026-03-16T01:23:49.000Z">
-        2026-03-16
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>在机器学习中不乏有涉及矩阵的运算，其中矩阵求导更是涉及优化问题的关键。虽然现在有很多开包即用的api可以帮助我们完成这个工作，但是我还是想了解一些它们底层的工作原理。用这篇帖子记录之。 标量函数对向量的求导在高等数学中我们学习了多元函数的导数，例如$f(y_1,y_2)$是一个对$y_1,y_2$的函数，其导数如下 $\frac{\partial f(y_1,y_2)}{\partial y_1},\frac{\partial f(y_1,y_2)}{\partial y_2}$ 基于此我们可以定义标量函数对向量求导，因为多元函数中“多元”的变量本身就可...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2026/03/10/2026/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
-
-      <div class="item-title">项目管理</div>
-      
-      <time datetime="2026-03-10T07:37:09.000Z">
-        2026-03-10
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>成绩构成：平时（出勤、课堂表现、小组作业）30% + 期末闭卷考试 70% 第一节课项目管理的特点 有确定的开始与结束 要达成一个目的 要开始一个“新”服务（复制一个服务不是项目管理，但是对已有的服务进行升级和改造是一个项目） 区别项目与相关工作 第二节课项目经理，两个重点 拉好自己的队伍 选择合适的生命周期模型 WBS是最核心的东西，后面会讲可以听一听； 这门课听这三个东西即可： 范围的WBS进度的关键链成本的政治 三件事是一件事，形成一个三角形；</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2026/03/09/2026/%E5%9B%9E%E5%BD%92/">
-
-      <div class="item-title">线性神经网络</div>
-      
-      <time datetime="2026-03-09T13:28:22.000Z">
-        2026-03-09
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>线性回归线性回归的基本元素线性回归基于几个基本的假设： 自变量$x$核因变量$y$之间的关系是线性的，即因变量可以表示为自变量中元素的加权和 观测值和真实值之间存在一些噪声，但是噪声比较简单，认为服从正态分布 一些基本概念一个实际的例子： 我们希望根据房屋的面积（平方英尺）和房龄（年）来估算房屋价格（美元）。 为了开发一个能预测房价的模型，我们需要收集一个真实的数据集。这个数据集包括了房屋的销售价格、面积和房龄。在机器学习的术语中，该数据集称为训练数据集（training data set） 或训练集（training set）。 每行数据（比如一次房屋...</p>
-      </div>
-      
-
-    </div>
-
-    
   </div>
   
 
   <div id="recent-posts-paginator">
-    <a class="extend prev" rel="prev" href="/"> </a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"> </a>
+    <a class="extend prev" rel="prev" href="/"> </a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"> </a>
   </div>
 
  </div>
@@ -620,9 +620,27 @@
         
         
         
-            <div class="deadline-empty">
-                <i class="fa fa-coffee"></i>
-                <p>无待办计划，享受生活吧！</p>
+            <div class="deadline-card">
+                <div class="deadline-title">持续调研行业前沿问题</div>
+                <div class="deadline-date">2026-06-31</div>
+                <div class="deadline-timer" id="deadline-timer" data-target="2026-06-31">
+                    <div class="timer-box">
+                        <span class="t-value" id="t-days">00</span>
+                        <span class="t-label">天</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="t-value" id="t-hours">00</span>
+                        <span class="t-label">时</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="t-value" id="t-minutes">00</span>
+                        <span class="t-label">分</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="t-value" id="t-seconds">00</span>
+                        <span class="t-label">秒</span>
+                    </div>
+                </div>
             </div>
         
     </div>
@@ -717,7 +735,7 @@
 </aside>
 
 <!-- <div id="paginator"> -->
-<!--   <a class="extend prev" rel="prev" href="/"> </a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"> </a> -->
+<!--   <a class="extend prev" rel="prev" href="/"> </a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"> </a> -->
 <!-- </div> -->
 
     <script type="text/x-mathjax-config">

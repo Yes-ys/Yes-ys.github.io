@@ -1,0 +1,457 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>机器学习的数学知识 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>机器学习的数学知识</h1>
+			<p><code>为机器学习补充一些高等数学、线性代数、概率统计以及最优化的数学知识</code></p>
+<h2 id="Hessian矩阵"><a href="#Hessian矩阵" class="headerlink" title="Hessian矩阵"></a>Hessian矩阵</h2><p>Hessian矩阵是由多远函数的<strong>二阶偏导数</strong>组成的矩阵。</p>
+<p>数学的形式化描述：</p>
+<p>如果函数$f(x_1,x_2,…,x_n)$二阶可导，则Hessian矩阵定义为</p>
+<p>$$<br>\begin{pmatrix}<br>\frac{\partial^2 f}{\partial x^2_1},\frac{\partial^2 f}{\partial x_1\partial x_2}\cdots \frac{\partial^2 f}{\partial x_1\partial x_n}\<br>\frac{\partial^2 f}{\partial x_2x_1},\frac{\partial^2 f}{\partial x_2^2}\cdots \frac{\partial^2 f}{\partial x_2\partial x_n}\<br>\vdots \ \ \  \vdots \ \ \ \vdots \ \ \ \vdots \ \ \ \<br>\frac{\partial^2 f}{\partial x_n \partial x_1},\frac{\partial^2 f}{\partial x_n\partial x_2}\cdots \frac{\partial^2 f}{\partial x_n^2}\<br>\end{pmatrix}<br>$$</p>
+<p>说明：</p>
+<ol>
+<li>Hessian矩阵可以看作二阶导数对多元函数的推广，其简写为$\nabla^2 f(x)$</li>
+<li>根据多元函数判别法，我们知道如果多元函数在点$M$的梯度为0，则$M$为多元函数的<strong>驻点</strong>，结合Hessian矩阵可以判断其是否为极值点</li>
+</ol>
+<ul>
+<li>如果Hessian矩阵正定，则函数在该点有极小值；</li>
+<li>如果Hessian矩阵负定，则函数在该点有极大值；</li>
+<li>如果Hessian矩阵不定，则不是极值点；</li>
+</ul>
+<ol start="3">
+<li>一般情况下多元函数的混合二阶偏导数与求导次序无关，因此Hessian矩阵通常是一个<strong>实对称矩阵</strong></li>
+</ol>
+<p>Hessian矩阵的正定性与多元函数的凹凸性有关：</p>
+<ol>
+<li>如果Hessian矩阵半正定，则函数为凸函数</li>
+<li>正定则为严格凸函数</li>
+</ol>
+<p><em>(注：海森矩阵正定是严格凸的<strong>充分条件</strong>，但不是必要条件。比如 $f(x, y) &#x3D; x^4 + y^4$ 是严格凸的，但在原点 $(0,0)$ 处的海森矩阵是半正定的，不是正定的。)</em></p>
+<h3 id="补充：对称矩阵与实对称矩阵"><a href="#补充：对称矩阵与实对称矩阵" class="headerlink" title="补充：对称矩阵与实对称矩阵"></a>补充：对称矩阵与实对称矩阵</h3><ol>
+<li>对称矩阵要求$A &#x3D; A^T$；</li>
+<li>实对称矩阵在此基础之上还要求矩阵中的每个元素都是实数；</li>
+</ol>
+<h3 id="补充：凸函数与严格凸函数"><a href="#补充：凸函数与严格凸函数" class="headerlink" title="补充：凸函数与严格凸函数"></a>补充：凸函数与严格凸函数</h3><p>在给出具体定义之前，有一个<strong>非常重要的前提</strong>：函数的定义域 $S$ 必须是一个<strong>凸集（Convex Set）</strong>。也就是说，如果集合 $S$ 中有任意两个点，连接这两点的直线段上的所有点也必须完全属于集合 $S$。</p>
+<p>假设 $f: S \to \mathbb{R}$ 是定义在凸集 $S \subseteq \mathbb{R}^n$ 上的多元函数，$\mathbf{x}$ 和 $\mathbf{y}$ 是 $S$ 中的两个不同向量（点）。</p>
+<p>如果对于定义域 $S$ 中的<strong>任意两点</strong> $\mathbf{x}, \mathbf{y} \in S$，以及<strong>任意参数</strong> $t \in [0, 1]$，都满足以下不等式：</p>
+<p>$$ f(t\mathbf{x} + (1-t)\mathbf{y}) \le t f(\mathbf{x}) + (1-t) f(\mathbf{y}) $$</p>
+<p>那么函数 $f$ 被称为<strong>凸函数</strong>。</p>
+<p>如果对于定义域 $S$ 中的<strong>任意两点</strong> $\mathbf{x}, \mathbf{y} \in S$ 且 $\mathbf{x} \neq \mathbf{y}$，以及<strong>任意参数</strong> $t \in (0, 1)$，都满足以下<strong>严格不等式</strong>：</p>
+<p>$$ f(t\mathbf{x} + (1-t)\mathbf{y}) &lt; t f(\mathbf{x}) + (1-t) f(\mathbf{y}) $$</p>
+<p>那么函数 $f$ 被称为<strong>严格凸函数</strong>。</p>
+<h2 id="正定矩阵"><a href="#正定矩阵" class="headerlink" title="正定矩阵"></a>正定矩阵</h2><p>对于矩阵$A$，如果它是正定矩阵则必须满足：</p>
+<ol>
+<li>它是一个方阵，假设为$n$阶</li>
+<li>对于任意非$0$的n维向量$x$都有$x^T A x &gt; 0$</li>
+</ol>
+<p>类似的如果2对应的条件是：</p>
+<ul>
+<li>$x^T A x &lt; 0$，则矩阵是负定的</li>
+<li>$x^T A x \ge 0$，则矩阵是半正定的</li>
+</ul>
+<p>判定正定矩阵的常用方法：</p>
+<ol>
+<li>矩阵的特征值全大于0</li>
+<li>矩阵的所有顺序主子式都大于0</li>
+<li>矩阵合同于单位阵I</li>
+</ol>
+<h2 id="正交矩阵"><a href="#正交矩阵" class="headerlink" title="正交矩阵"></a>正交矩阵</h2><p>一个$n$阶矩阵$P$，如果满足$P^T &#x3D; P^{-1}$，则该矩阵为正交矩阵</p>
+<ol>
+<li>正交矩阵的行列式为1</li>
+<li>正交矩阵的不同行向量之间是正交的，不同列向量也是，即对应内积为0</li>
+</ol>
+<h2 id="特征值与特征向量"><a href="#特征值与特征向量" class="headerlink" title="特征值与特征向量"></a>特征值与特征向量</h2><p>可以从几何意义和数学定义两个角度把握它们</p>
+<h3 id="几何意义"><a href="#几何意义" class="headerlink" title="几何意义"></a>几何意义</h3><p>在空间中，一个矩阵 $A$ 本质上代表了一种<strong>线性变换</strong>（比如拉伸、挤压、旋转等）。当你用矩阵 $A$ 乘以一个向量 $\mathbf{x}$（即 $A\mathbf{x}$），就相当于对这个向量施加了这个“动作”，通常情况下，向量 $\mathbf{x}$ 在变换后，<strong>长度</strong>和<strong>方向</strong>都会发生改变。</p>
+<p>但是，在所有的向量中，存在一些<strong>非常特别的向量</strong>。当矩阵 $A$ 作用在它们身上时，这些向量<strong>只改变长度，不改变方向</strong>（或者完全反向）。</p>
+<ul>
+<li>这些“保持方向不变”的特殊向量，就是<strong>特征向量（Eigenvector）</strong>。</li>
+<li>它们被拉伸或压缩的“倍数”，就是对应的<strong>特征值（Eigenvalue）</strong>。</li>
+</ul>
+<h3 id="数学定义"><a href="#数学定义" class="headerlink" title="数学定义"></a>数学定义</h3><p>设 $A$ 是一个 $n \times n$ 的方阵。如果存在一个<strong>非零</strong>的列向量 $\mathbf{x}$ 和一个标量（实数或复数）$\lambda$，使得：</p>
+<p>$$ A\mathbf{x} &#x3D; \lambda \mathbf{x} $$</p>
+<p>那么：</p>
+<ul>
+<li><strong>$\lambda$</strong> 就被称为矩阵 $A$ 的一个<strong>特征值</strong>。</li>
+<li><strong>$\mathbf{x}$</strong> 就被称为矩阵 $A$ 对应于 $\lambda$ 的<strong>特征向量</strong>。</li>
+</ul>
+<p><em>(注意：特征向量规定不能是零向量 $\mathbf{0}$，因为 $A\mathbf{0} &#x3D; \lambda\mathbf{0}$ 永远成立，没有研究价值。)</em></p>
+<h3 id="求解特征值和特征向量"><a href="#求解特征值和特征向量" class="headerlink" title="求解特征值和特征向量"></a>求解特征值和特征向量</h3><p>求解的过程本质上是在解上述的等式。具体步骤如下：</p>
+<h4 id="第一步：构建特征方程"><a href="#第一步：构建特征方程" class="headerlink" title="第一步：构建特征方程"></a>第一步：构建特征方程</h4><p>我们将定义等式 $A\mathbf{x} &#x3D; \lambda \mathbf{x}$ 稍微变一下形。<br>在右边乘上一个单位矩阵 $I$（不改变结果）：<br>$$ A\mathbf{x} &#x3D; \lambda I \mathbf{x} $$<br>移项得到：<br>$$ (A - \lambda I)\mathbf{x} &#x3D; \mathbf{0} $$</p>
+<h4 id="第二步：求解特征值-lambda"><a href="#第二步：求解特征值-lambda" class="headerlink" title="第二步：求解特征值 $\lambda$"></a>第二步：求解特征值 $\lambda$</h4><p>这是一个关于向量 $\mathbf{x}$ 的齐次线性方程组。因为我们规定特征向量 $\mathbf{x}$ <strong>不能是零向量</strong>，所以要求系数矩阵 $(A - \lambda I)$ 必须是<strong>不可逆的（或者叫奇异的）</strong>。<br>这就意味着，它的行列式必须等于 $0$：</p>
+<p>$$ \det(A - \lambda I) &#x3D; 0 \quad \text{或写作} \quad |A - \lambda I| &#x3D; 0 $$</p>
+<p>这个方程被称为矩阵 $A$ 的<strong>特征方程（Characteristic Equation）</strong>。把这个行列式展开，会得到一个关于 $\lambda$ 的 $n$ 次多项式，解这个 $n$ 次方程，求出来的所有根 $\lambda_1, \lambda_2, \dots, \lambda_n$ 就是所有的特征值。</p>
+<h4 id="第三步：求解对应的特征向量-mathbf-x"><a href="#第三步：求解对应的特征向量-mathbf-x" class="headerlink" title="第三步：求解对应的特征向量 $\mathbf{x}$"></a>第三步：求解对应的特征向量 $\mathbf{x}$</h4><p>求出了特征值之后，把它们<strong>逐个代回</strong>方程 $(A - \lambda I)\mathbf{x} &#x3D; \mathbf{0}$ 中。此时矩阵 $(A - \lambda I)$ 已知，我们只需要解这个普通的线性方程组，求出的基础解系就是对应于该特征值的<strong>特征向量</strong>。</p>
+<h3 id="3-特征值的重要性质"><a href="#3-特征值的重要性质" class="headerlink" title="3. 特征值的重要性质"></a>3. 特征值的重要性质</h3><p>一些最常用、最重要的性质（假设 $n \times n$ 矩阵 $A$ 的特征值为 $\lambda_1, \lambda_2, \dots, \lambda_n$）：</p>
+<h4 id="与矩阵本身元素的关联："><a href="#与矩阵本身元素的关联：" class="headerlink" title="与矩阵本身元素的关联："></a>与矩阵本身元素的关联：</h4><ol>
+<li><strong>迹的性质（Trace）：</strong><br>矩阵 $A$ 所有特征值的<strong>和</strong>，等于矩阵主对角线上所有元素的和（这被称为矩阵的迹，记作 $\text{tr}(A)$）。<br>$$ \lambda_1 + \lambda_2 + \dots + \lambda_n &#x3D; a_{11} + a_{22} + \dots + a_{nn} &#x3D; \text{tr}(A) $$</li>
+<li><strong>行列式的性质（Determinant）：</strong><br>矩阵 $A$ 所有特征值的<strong>乘积</strong>，等于矩阵 $A$ 的行列式。<br>$$ \lambda_1 \times \lambda_2 \times \dots \times \lambda_n &#x3D; |A| $$<br><em>(推论：如果一个矩阵有特征值 $0$，那么它的行列式为 $0$，即矩阵不可逆。)</em></li>
+</ol>
+<h4 id="矩阵运算带来的特征值变化："><a href="#矩阵运算带来的特征值变化：" class="headerlink" title="矩阵运算带来的特征值变化："></a>矩阵运算带来的特征值变化：</h4><p>如果矩阵 $A$ 有特征值 $\lambda$ 和对应的特征向量 $\mathbf{x}$：<br>3. <strong>矩阵的幂：</strong><br>   $A^k$ 的特征值是 **$\lambda^k$**。（特征向量还是 $\mathbf{x}$）。<br>   <em>(比如 $A$ 把向量拉伸2倍，操作3次 $A^3$ 就是拉伸 $2^3&#x3D;8$ 倍)。</em><br>4. <strong>矩阵的逆：</strong><br>   如果 $A$ 可逆，那么 $A^{-1}$ 的特征值是 **$\frac{1}{\lambda}$**。（特征向量还是 $\mathbf{x}$）。<br>5. <strong>数乘与平移：</strong><br>   $(cA + kI)$ 的特征值是 <strong>$c\lambda + k$<strong>（其中 $c, k$ 是常数）。<br>6. <strong>转置矩阵：</strong><br>   $A$ 和它的转置矩阵 $A^T$ 具有</strong>完全相同的特征值</strong>（但特征向量通常不同）。</p>
+<h4 id="特殊矩阵的特征值："><a href="#特殊矩阵的特征值：" class="headerlink" title="特殊矩阵的特征值："></a>特殊矩阵的特征值：</h4><ol start="7">
+<li><strong>实对称矩阵（极其重要！）：</strong><br>如果 $A$ 是实对称矩阵（即 $A &#x3D; A^T$）：<ul>
+<li>它的所有特征值<strong>一定是实数</strong>（没有虚数）。</li>
+<li>它属于不同特征值的特征向量<strong>必定相互正交（垂直）</strong>。<br><em>(这也是海森矩阵（Hessian）能够用特征值的正负来判断是否正定的底层原因，Hessian矩阵作为实对称矩阵，特征值都是实数，可以判断其和0的大小，如果特征值全部 $&gt;0$ 即为正定矩阵。)</em></li>
+</ul>
+</li>
+<li><strong>三角矩阵 &#x2F; 对角矩阵：</strong><br>如果 $A$ 是上三角、下三角或对角矩阵，那么它的特征值<strong>就是它主对角线上的那些元素</strong>。直接看一眼就知道了。</li>
+</ol>
+<h2 id="矩阵对角化与奇异值分解"><a href="#矩阵对角化与奇异值分解" class="headerlink" title="矩阵对角化与奇异值分解"></a>矩阵对角化与奇异值分解</h2><h3 id="对角化"><a href="#对角化" class="headerlink" title="对角化"></a>对角化</h3><p>如果一个 $n \times n$ 的方阵 $A$ 有 $n$ 个<strong>线性无关</strong>的特征向量，我们就可以把它对角化。</p>
+<h4 id="数学定义-1"><a href="#数学定义-1" class="headerlink" title="数学定义"></a>数学定义</h4><p>设 $A$ 的 $n$ 个特征向量组成一个可逆矩阵 $P &#x3D; [\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n]$，对应的特征值组成一个对角矩阵 $\Lambda$（只有主对角线上有值 $\lambda_i$，其余全为0）。<br>那么：<br>$$ AP &#x3D; P\Lambda \implies \mathbf{A &#x3D; P \Lambda P^{-1}} $$<br>这就是矩阵的对角化。</p>
+<h4 id="几何与物理意义"><a href="#几何与物理意义" class="headerlink" title="几何与物理意义"></a>几何与物理意义</h4><p>对于空间中的一个向量 $\mathbf{x}$，我们用 $A$ 去乘它：$A\mathbf{x} &#x3D; (P \Lambda P^{-1})\mathbf{x}$。这个过程可以拆解为三步：</p>
+<ol>
+<li><strong>$P^{-1}\mathbf{x}$（视角的切换）</strong>：把标准坐标系下的向量，转换到由<strong>特征向量</strong>构成的坐标系中。在这个“矩阵的主场”里，矩阵的动作最简单。</li>
+<li><strong>$\Lambda (\dots)$（独立的拉伸）</strong>：因为 $\Lambda$ 是对角阵，这一步仅仅是对各个特征向量方向进行单纯的<strong>拉伸或压缩</strong>（拉伸倍数就是特征值 $\lambda$），各方向互不干扰。</li>
+<li><strong>$P (\dots)$（视角的切回）</strong>：把拉伸完的结果，重新转换回我们人类习惯的标准坐标系。</li>
+</ol>
+<h3 id="奇异值分解（SVD）"><a href="#奇异值分解（SVD）" class="headerlink" title="奇异值分解（SVD）"></a>奇异值分解（SVD）</h3><p>对角化只能适用于方阵；</p>
+<p><strong>但是，无论矩阵 $A$ 是长方形的（$m \times n$）、方的、可逆的还是不可逆的，SVD 永远存在。</strong></p>
+<h4 id="数学定义-2"><a href="#数学定义-2" class="headerlink" title="数学定义"></a>数学定义</h4><p>对于任意一个 $m \times n$ 的实数矩阵 $A$，它都可以被分解为三个矩阵的乘积：<br>$$ \mathbf{A &#x3D; U \Sigma V^T} $$</p>
+<ul>
+<li><strong>$V$（$n \times n$ 的正交矩阵）</strong>：称为左奇异矩阵；</li>
+<li><strong>$\Sigma$（$m \times n$ 的对角矩阵）</strong>：除了主对角线上的元素 $\sigma_i$（称为<strong>奇异值</strong>），其他全为0。且奇异值永远是<strong>非负实数</strong>。</li>
+<li><strong>$U$（$m \times m$ 的正交矩阵）</strong>：称为右奇异矩阵；</li>
+</ul>
+<h4 id="几何与物理意义：“旋转-拉伸-旋转”"><a href="#几何与物理意义：“旋转-拉伸-旋转”" class="headerlink" title="几何与物理意义：“旋转-拉伸-旋转”"></a>几何与物理意义：“旋转-拉伸-旋转”</h4><p>不管一个线性变换 $A$ 有多复杂，它把一个形状（比如一个高维球体）变成另一个形状（高维椭球）的过程，<strong>绝对可以</strong>拆解为以下三步纯粹的物理动作（$A\mathbf{x} &#x3D; U \Sigma V^T \mathbf{x}$）：</p>
+<ol>
+<li><strong>$V^T$（旋转）</strong>：把输入空间的东西原封不动地<strong>旋转</strong>一个角度。</li>
+<li><strong>$\Sigma$（拉伸）</strong>：沿着坐标轴的方向，把形状<strong>拉伸或压扁</strong>。拉伸的倍数就是奇异值 $\sigma_i$。如果奇异值为 0，说明在这个维度上直接被压扁成了纸（降维了）。</li>
+<li><strong>$U$（旋转）</strong>：把拉伸完的形状，在输出空间再<strong>旋转</strong>一次，摆到最终的位置。</li>
+</ol>
+<p><strong>SVD 的几何意义简单来说就是：任何矩阵的作用，仅仅是将正交网格旋转、沿坐标轴拉伸，然后再旋转一次而已。</strong></p>
+<h3 id="对角化与-SVD-的关系"><a href="#对角化与-SVD-的关系" class="headerlink" title="对角化与 SVD 的关系"></a>对角化与 SVD 的关系</h3><p>SVD 为什么总是能做到？其实 <strong>SVD 就是利用“实对称矩阵必能完美对角化”的性质构造出来的</strong>。</p>
+<p>如果 $A$ 是任意一个 $m \times n$ 的矩阵，那么 $A^TA$ 和 $AA^T$ 有一个性质：它们不仅是方阵，而且是<strong>实对称矩阵</strong></p>
+<p>尝试把 $A &#x3D; U \Sigma V^T$ 代入$A^TA$ ：<br>$$ A^TA &#x3D; (U \Sigma V^T)^T (U \Sigma V^T) $$<br>$$ A^TA &#x3D; V \Sigma^T U^T U \Sigma V^T $$<br>因为 $U$ 是正交矩阵，所以 $U^T U &#x3D; I$（单位阵），消掉了：<br>$$ \mathbf{A^TA &#x3D; V (\Sigma^T \Sigma) V^T} $$</p>
+<p>这个形式 $\mathbf{V (\dots) V^{-1}}$，正是<strong>对角化（特征值分解）的标准格式</strong><br>所以 SVD 的构造被揭开了：</p>
+<ol>
+<li>SVD 里的 **右奇异矩阵 $V$**，其实就是方阵 $A^TA$ 的特征向量矩阵。</li>
+<li>SVD 里的 **左奇异矩阵 $U$**，其实就是方阵 $AA^T$ 的特征向量矩阵。</li>
+<li>SVD 里的 <strong>奇异值 $\sigma_i$<strong>，其实就是方阵 $A^TA$（或 $AA^T$）特征值 $\lambda_i$ 的</strong>算术平方根</strong>（即 $\sigma_i &#x3D; \sqrt{\lambda_i}$）。</li>
+</ol>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>这里简单说明一下拉格朗日乘数法、拉格朗日对偶函数、KKT条件在优化问题中的应用</p>
+<h3 id="拉格朗日乘数法"><a href="#拉格朗日乘数法" class="headerlink" title="拉格朗日乘数法"></a>拉格朗日乘数法</h3><p>假设有如下极值问题</p>
+<p>目标函数：$\min f(x)$<br>约束条件：$h_i(x) &#x3D; 0,i &#x3D; 1,2,…,p$</p>
+<p>拉格朗日乘数法构造如下如下目标函数</p>
+<p>$\min f(x)+\sum_{i&#x3D;1}^p \lambda_i h_i(x)$</p>
+<p>说明：</p>
+<ol>
+<li>该函数称为拉格朗日函数</li>
+<li>$\lambda$ 为新引入的自变量（$x,\lambda$ 为向量），称为拉格朗日乘子</li>
+<li>构造该函数，可以去掉对优化变量的等式约束；</li>
+</ol>
+<p>使用：</p>
+<ol>
+<li>使用的时候对拉格朗日函数的所有自变量求偏导，包括$\lambda$并令它们为0，得到方程组；</li>
+<li>该方程组的解对应的$x$，就是函数的候选极值点；</li>
+</ol>
+<p>几何意义：</p>
+<ul>
+<li>极值点处目标函数的梯度是约束函数梯度的线性组合，即$\nabla_x f &#x3D; - \sum_{i&#x3D;1}^p\lambda_i \nabla_x h_i$</li>
+</ul>
+<h3 id="拉格朗日对偶函数"><a href="#拉格朗日对偶函数" class="headerlink" title="拉格朗日对偶函数"></a>拉格朗日对偶函数</h3><p>考虑优化问题如下</p>
+<p>目标函数：$\min f(x)$<br>约束条件：</p>
+<ol>
+<li>$g_i(x) \le 0,i &#x3D; 1,2,…,m$</li>
+<li>$h_i(x) &#x3D; 0,i &#x3D; 1,2,…,p$</li>
+</ol>
+<p>构造广义拉格朗日函数</p>
+<p>$$L(x,\lambda,v) &#x3D; f(x) + \sum_{i&#x3D;1}^m \lambda_i g_i(x) + \sum^p_{i &#x3D; 1}v_i h_i(x)$$</p>
+<p>说明：</p>
+<ol>
+<li>$\lambda,v$称为拉格朗日乘子</li>
+<li>$\lambda_i \ge 0$</li>
+</ol>
+<p>于是原始问题可以转换为</p>
+<p>$$\min_x\max_{x,v,\lambda_i \ge 0}L(x,\lambda,v)$$</p>
+<p>说明：</p>
+<ol>
+<li>该问题指的是，先将$x$固定住，看作常数，然后让拉格朗日函数对拉格朗日乘子求最大值；</li>
+<li>确定拉格朗日乘子这两个变量之后，再对变量$x$求最小值；</li>
+<li><strong>这个问题和要求解的原问题有同样的解</strong>；</li>
+</ol>
+<p>假设转换后的问题的最优解处的函数值为$p^* &#x3D; \min_x\max_{x,v,\lambda_i \ge 0}L(x,\lambda,v)$</p>
+<p>接下来定义它的对偶问题和最优解处的函数值$d^*$</p>
+<p>$$d^* &#x3D; \max_{x,v,\lambda_i \ge 0}\min_x L(x,\lambda,v)$$</p>
+<p><em>现在开始称转换后的问题为原问题，区别最开始说的原问题。</em></p>
+<p>说明：</p>
+<ol>
+<li>原问题和对偶问题改变了求最大最小的顺序，但是操控的变量是相同的；</li>
+<li>如果原问题和对偶问题都存在最优解，那么有性质$d^* \le p^*$，即<strong>对偶问题的最优解不大于原问题的最优解</strong>；</li>
+<li>一般称$p^* - d^*$为对偶间隙</li>
+</ol>
+<p>Slater条件：一个<strong>凸优化</strong>问题，如果存在一个候选$x$使得所有不等式约束<strong>严格</strong>满足（不等式不能取等），那么存在$x,\lambda,v$，使得它们分别为原问题和对偶问题的最优解；</p>
+<p>说明：</p>
+<ol>
+<li>此时称原问题满足<strong>强对偶成立</strong>；</li>
+<li>Slater条件是强对偶成立的充分条件但不是必要条件；</li>
+<li>有时对偶问题比原问题更容易求解，如果此时恰好有强对偶成立，那么我们就能够将原问题很好地进行转换；</li>
+</ol>
+<h3 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h3><p>KKT条件可以看作拉格朗日乘数法在既有等式约束又有不等式约束时的推广；</p>
+<p>优化问题如下</p>
+<p>目标函数：$\min f(x)$<br>约束条件：</p>
+<ol>
+<li>$g_i(x) \le 0,i &#x3D; 1,2,…,q$</li>
+<li>$h_i(x) &#x3D; 0,i &#x3D; 1,2,…,p$</li>
+</ol>
+<p>使用KKT条件构造如下乘子函数</p>
+<p>$$L(x,\lambda,\mu) &#x3D; f(x) + \sum^p_{j&#x3D;1}\lambda_j h_j(x) + \sum^q_{k &#x3D; 1}\mu_k g_k(x)$$</p>
+<p>说明：</p>
+<ol>
+<li>$\lambda,\mu$ 称为KKT乘子；</li>
+</ol>
+<p>最优解$x^*$会满足如下条件：</p>
+<ol>
+<li>$\nabla_x L(x^*) &#x3D; 0$</li>
+<li>$\mu_k \ge 0$</li>
+<li>$\mu_k g_k (x^*) &#x3D; 0$</li>
+<li>$h_j(x^*) &#x3D; 0$</li>
+<li>$g_k(x^*) \le 0$</li>
+</ol>
+<p>说明：</p>
+<ol>
+<li>$h_j(x^*) &#x3D; 0$和$g_k(x^*) \le 0$ 是本就需要满足的条件</li>
+<li>$\nabla_x L(x^*) &#x3D; 0$ 和拉格朗日乘数法一样</li>
+<li>多了的条件是$\mu_k g_k (x^*) &#x3D; 0$和$\mu_k \ge 0$</li>
+</ol>
+<ul>
+<li>如果$g_k(x^*) &lt; 0$，那么必须有$\mu_k &#x3D; 0$</li>
+<li>如果$g_k(x^*) &#x3D; 0$，那么必须有$\mu_k &#x3D; 0$，此时极值点在边界处取得</li>
+</ul>
+<p>注意：KKT条件是取得极值的必要条件，不是充分条件</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

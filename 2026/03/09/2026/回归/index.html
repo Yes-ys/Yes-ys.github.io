@@ -226,6 +226,102 @@
 <li>并且$\hat{y}^i &#x3D; (\hat{y}^i_1,…\hat{y}^i_j,…,\hat{y}^i_q)$</li>
 </ol>
 <p><strong>todo:完成这一部分的内容</strong></p>
+<h2 id="一个全连接层的demo"><a href="#一个全连接层的demo" class="headerlink" title="一个全连接层的demo"></a>一个全连接层的demo</h2><p>下面的代码可以手动指定一个全连接层的输入维度和输出维度；</p>
+<p>默认随机初始化一个全连接层网络，用来生成数据</p>
+<p>使用生成的数据来训练一个结构相同的全连接层网络</p>
+<p>最好的训练结果是结构相同的另一个网络的参数和随机初始化的网络相同</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+<span class="keyword">import</span> torch
+<span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader, Dataset
+<span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> random_split <span class="comment"># 用于按照比例随机提取数据集（可以用来在原始数据集上划分训练集和验证集）</span>
+<span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim
+
+
+<span class="keyword">class</span> <span class="title class_">Net</span>(nn.Module):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, input_dim:<span class="built_in">int</span>, output_dim:<span class="built_in">int</span></span>):
+        <span class="built_in">super</span>().__init__() <span class="comment"># 注意super()是函数，不是对象</span>
+        <span class="variable language_">self</span>.fc = nn.Linear(in_features=input_dim,out_features = output_dim,bias=<span class="literal">True</span>)
+        <span class="comment"># nn.Linear权重会使用输入特征来做均匀初始化，但是bias会全部初始化为0</span>
+        nn.init.uniform_(<span class="variable language_">self</span>.fc.bias, -<span class="number">0.1</span>, <span class="number">0.1</span>) <span class="comment"># 初始化偏置项，均匀分布在-0.1到0.1之间</span>
+    
+    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):
+        <span class="keyword">return</span> <span class="variable language_">self</span>.fc(<span class="built_in">input</span>)
+
+<span class="keyword">class</span> <span class="title class_">MyDataset</span>(<span class="title class_ inherited__">Dataset</span>):
+    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, datas:torch.Tensor, labels:torch.Tensor</span>):
+        <span class="built_in">super</span>().__init__()
+        <span class="variable language_">self</span>.datas = datas
+        <span class="variable language_">self</span>.labels = labels 
+
+    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, index:<span class="built_in">int</span></span>):
+        x, y = <span class="variable language_">self</span>.datas[index], <span class="variable language_">self</span>.labels[index]
+        <span class="keyword">return</span> x, y
+    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):
+        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.datas)
+
+<span class="keyword">def</span> <span class="title function_">generate_data</span>(<span class="params">input_dim: <span class="built_in">int</span>, output_dim: <span class="built_in">int</span>, size: <span class="built_in">int</span></span>): <span class="comment"># 返回一个Dataset的对象以及一个“真实的”模型</span>
+    net = Net(input_dim = input_dim, output_dim = output_dim)
+    x = torch.rand(size,input_dim) <span class="comment"># 2维张量，size行、input_dim列 </span>
+    <span class="keyword">with</span> torch.no_grad():
+        y = net(x)
+    dataset = MyDataset(datas=x,labels=y)
+    train_dataset, val_dataset = random_split(dataset,[<span class="number">0.9</span>,<span class="number">0.1</span>]) <span class="comment"># 接受int作为数据集的长度或者float作为划分比例，如果比例不足导致没有完全划分剩下的数据直接划分到最后一个子集</span>
+    <span class="keyword">return</span> train_dataset, val_dataset, net <span class="comment"># 此时两个数据集类型是Subset，这是Dataset的一个子类，random_split在原始数据集上生成新的数据集 这种方式会确保不会复制数据，提高性能</span>
+
+<span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">mynet:Net, epoches:<span class="built_in">int</span>, dataloader:DataLoader, testloader:DataLoader</span>):
+    <span class="string">&quot;&quot;&quot;</span>
+<span class="string">        mynet.parameters() 能够自动找到当前网络的全部参数；</span>
+<span class="string">        是因为所有自定义的神经网络模型都继承自 torch.nn.Module 基类；</span>
+<span class="string">        而 nn.Module 内部实现了一套完整的参数注册与递归遍历机制；</span>
+<span class="string">        &quot;&quot;&quot;</span>
+    best_mse = <span class="number">1e8</span>
+    best_mae = <span class="number">1e8</span>
+
+    optimizer = optim.SGD(mynet.parameters(),lr = <span class="number">0.01</span>) <span class="comment"># 优化器和损失函数通常都定义在模型类的外部</span>
+    loss = nn.MSELoss() <span class="comment"># 均方差损失</span>
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(epoches):
+        mynet.train() <span class="comment"># 测试的时候使用了evl模式，要切换回来！</span>
+        <span class="keyword">for</span> datas,labels <span class="keyword">in</span> dataloader:
+            o = mynet(datas)
+            f = loss(<span class="built_in">input</span> = o,target = labels)
+            optimizer.zero_grad()
+            f.backward()
+            optimizer.step()
+
+        mae,mse = test(mynet=mynet, rounds=i, dataloader=testloader)
+        best_mae = <span class="built_in">min</span>(best_mae,mae)
+        best_mse = <span class="built_in">min</span>(best_mse,mse)
+    <span class="keyword">return</span> best_mae,best_mse
+
+
+<span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">mynet:Net,rounds:<span class="built_in">int</span>, dataloader:DataLoader</span>):
+    <span class="comment"># 测试没必要使用epoches，epoches一般是指在整个数据集上的迭代次数</span>
+    targets = []
+    preds = []
+
+    mynet.<span class="built_in">eval</span>()
+    <span class="keyword">with</span> torch.no_grad():
+        <span class="keyword">for</span> datas, labels <span class="keyword">in</span> dataloader:
+            o = mynet(datas) <span class="comment"># 输出tensor&#x27;s shape : (batch_size,shpae of a data)</span>
+            preds.append(o)
+            targets.append(labels)
+    
+    t = torch.cat(tensors = targets, dim = <span class="number">0</span>) <span class="comment"># 沿着第0维，batch_size维度拼接，得到的tensor&#x27;s shape : (val_set_size, shape of a data)</span>
+    p = torch.cat(tensors = preds, dim = <span class="number">0</span>)
+    mse = torch.mean((p-t)**<span class="number">2</span>).item()
+    mae = torch.mean(torch.<span class="built_in">abs</span>(p-t)).item() <span class="comment"># item是将tensor转换为普通的数值型，mean返回的是零维的tensor，只有一个元素</span>
+    <span class="built_in">print</span>(<span class="string">f&quot;rounds:<span class="subst">&#123;rounds&#125;</span>,mse:<span class="subst">&#123;mse&#125;</span>,mae:<span class="subst">&#123;mae&#125;</span>&quot;</span>) <span class="comment"># python特有的f-string</span>
+    <span class="keyword">return</span> mae,mse
+
+<span class="keyword">if</span> __name__ ==  <span class="string">&quot;__main__&quot;</span>:
+    train_dataset, val_dataset, true_net = generate_data(input_dim=<span class="number">50</span>,output_dim=<span class="number">5</span>,size=<span class="number">1000</span>)
+    train_dataloader = DataLoader(dataset=train_dataset,shuffle=<span class="literal">True</span>,batch_size=<span class="number">40</span>)
+    val_dataloader = DataLoader(dataset=val_dataset,shuffle=<span class="literal">True</span>,batch_size=<span class="number">40</span>)
+    net = Net(input_dim=<span class="number">50</span>,output_dim=<span class="number">5</span>)
+
+    mae,mse =  train(mynet=net,epoches=<span class="number">100</span>,dataloader=train_dataloader,testloader=val_dataloader)
+    <span class="built_in">print</span>(<span class="string">f&quot;best_mae:<span class="subst">&#123;mae&#125;</span>,best_mse:<span class="subst">&#123;mse&#125;</span>&quot;</span>)</code></pre>
+
 
 		</div>
 

@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Archives: 3/2026: 2026 [ 代码和诗 ]</title>
+	<title>支持向量机 [ 代码和诗 ]</title>
 
 	<link rel="shortcut icon" href="/myicon.ico">
 	
@@ -125,67 +125,104 @@
 			<div id="content-inner">
 
 				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>支持向量机</h1>
+			<p>支持向量机是最大化分类间隔的线性分类器，如果使用核函数，可以解决非线性问题。</p>
+<h2 id="线性分类器"><a href="#线性分类器" class="headerlink" title="线性分类器"></a>线性分类器</h2><p>线性分类器本质是n维空间中的超平面，将空间切割成两部分。进行二分类。</p>
+<p>数学形式：</p>
+<p>$w^Tx + b &#x3D; 0$</p>
+<p>其中</p>
+<ol>
+<li>$w$是权重向量</li>
+<li>$x$是输入向量</li>
+<li>$b$是偏置项</li>
+</ol>
+<p>二分类问题正类标签值$y &#x3D; +1$，负类标签值$y &#x3D; -1$</p>
+<p>在线性分类器中我们认为$w^Tx_i+b\ge 0$，则样本$x_i$就属于正类，否则为负类</p>
+<p>判别函数可以写作</p>
+<p>$sgn(w^Tx+b)$</p>
+<p>其中$sgn(x) &#x3D; 1,-1;if:x\ge 0,x&lt;0$</p>
+<p>通常，一组训练样本有不止一个可行的线性分类器。但我们希望分类平面不偏向于任何一类，且尽可能离两类样本都较远。于是<strong>最大化分类间隔</strong>的目标是支持向量机的基本思想；</p>
+<h3 id="线性可分问题"><a href="#线性可分问题" class="headerlink" title="线性可分问题"></a>线性可分问题</h3><p>现在我们在问题<strong>线性可分</strong>的条件下讨论支持向量机对应的数学问题与其求解方法</p>
+<p>假设数据集中有$l$个样本，对应$x_i$为特征向量，$y_i$为类别标签取$1$或$-1$</p>
+<p>我们希望得到如下超平面</p>
+<p>$w^Tx + b &#x3D; 0$</p>
+<p>满足约束条件：</p>
+<p>$(w^Tx + b)y_i \ge 0$</p>
+<p>这个约束条件可以确保对于正类$x_i$，有$w^Tx_i+b \ge 0$，对于负类$x_j$，有$w^Tx_j+b \le 0$（<strong>这里似乎不能确保严格小于，但或许不太有关系？</strong>）</p>
+<p>由于我们希望超平面离两类样本的距离都足够大，因此考虑平面到某样本$x_i$的距离为</p>
+<p>$d &#x3D; \frac{|w^Tx_i+b|}{||w||}$</p>
+<p>上面的超平面方程有<strong>冗余</strong>，将方程两边都乘以不等于0的常数，还是同一个超平面。形式化表述是：</p>
+<p>$w^Tx+b&#x3D;0,\lambda (w^Tx+b)&#x3D;0$，其中$\lambda \ne 0$，这两个方程描述的是同一个超平面。</p>
+<p>这个冗余性让我们可以自由缩放参数而不改变超平面的位置，利用这个特点，我们可以<strong>固定一个尺度</strong>，从而简化求解的问题。</p>
+<p>我们对$w,b$加上一个约束，用于消除冗余、固定尺度</p>
+<p>$min_{x_i}|w^Tx_i+b|&#x3D;1$</p>
+<ul>
+<li>缩放$(w,b)$时，所有的$w^Tx_i+b,i &#x3D; 1,…,l$会等比变换</li>
+<li>这里将最近的点到平面的距离固定为1，相当于用一个“单位”统一了尺度</li>
+<li>一个重要的好处是冗余性的剔除可以让后续的目标函数进一步化简</li>
+</ul>
+<p>接下来我们可以根据上面的新约束，简化点到超平面的距离，此时分类超<strong>平面与两类样本之间的间隔</strong>为</p>
+<p>$d(w,b) &#x3D;min_{x_i,y_i&#x3D;-1}d(w,b;x_i)+min_{x_j,y_j&#x3D;1}d(w,b;x_j) &#x3D; \frac{2}{||w||}$</p>
+<ul>
+<li>注意上式中，第一个等号后算一个平面到两类样本之间间隔的定义，第二个是根据前面的约束展开的；</li>
+</ul>
+<p>此外，由于超平面到两类样本点<strong>距离最近的点的距离为1</strong>，这样对于分类平面的约束变成</p>
+<p>$y_i (w^Tx_i+b)\ge 1$</p>
+<p>最终我们的优化目标变成了</p>
+<ol>
+<li>$min_{w,b}\  \frac{1}{2} ||w||^2$</li>
+<li>$s.t.\ y_i(w^Tx_i+b)\ge 1,i &#x3D; 1,…,l$</li>
+</ol>
 
+		</div>
 
+		<!-- Comments removed -->
+		
+	</article>
 
-
-<div id="archive-details">
-
-  <h1>3/2026</h1>
-
-  
-  <div class="archive-item">
-    <a href="/2026/03/17/2026/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-      卷积神经网络
-    </a>
-    <time datetime="2026-03-17T06:33:57.000Z">
-      2026-03-17
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/03/16/2026/Pytorch%E7%9A%84%E8%87%AA%E5%8A%A8%E6%B1%82%E5%AF%BC%E6%9C%BA%E5%88%B6/">
-      Pytorch的自动求导机制
-    </a>
-    <time datetime="2026-03-16T03:24:47.000Z">
-      2026-03-16
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/03/16/2026/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/">
-      矩阵求导
-    </a>
-    <time datetime="2026-03-16T01:23:49.000Z">
-      2026-03-16
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/03/10/2026/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
-      项目管理
-    </a>
-    <time datetime="2026-03-10T07:37:09.000Z">
-      2026-03-10
-    </time>
-  </div>
-  
-  <div class="archive-item">
-    <a href="/2026/03/09/2026/%E5%9B%9E%E5%BD%92/">
-      线性神经网络
-    </a>
-    <time datetime="2026-03-09T13:28:22.000Z">
-      2026-03-09
-    </time>
-  </div>
-  
-
-  <div id="other-paginator">
-    <a class="extend prev" rel="prev" href="/archives/2026/03/">«</a><a class="page-number" href="/archives/2026/03/">1</a><span class="page-number current">2</span>
-  </div>
+	<div id="toc">
+		
+	</div>
 
 </div>
 
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
