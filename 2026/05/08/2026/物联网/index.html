@@ -132,120 +132,220 @@
 			<h1>物联网</h1>
 			<p><code>26年春季学期选修物联网的学习记录</code></p>
 <h2 id="物联网的构建环节"><a href="#物联网的构建环节" class="headerlink" title="物联网的构建环节"></a>物联网的构建环节</h2><ol>
-<li>智能设备选择</li>
+<li>智能<strong>设备选择</strong></li>
 </ol>
 <ul>
-<li>按照需求选择合适的智能传感设备；</li>
-<li>尽可能使用成熟的智能设备，因为该步骤是获取所需数据；</li>
+<li>按照<strong>需求</strong>选择合适的智能传感设备；</li>
+<li>尽可能使用<strong>成熟</strong>的智能设备，因为该步骤是获取所需<strong>数据</strong>；</li>
 </ul>
 <ol start="2">
-<li>智能设备互联</li>
+<li>智能<strong>设备互联</strong></li>
 </ol>
 <ul>
-<li>将智能设备与计算机连接，有线连接或无线连接</li>
+<li>将智能设备与计算机连接，<strong>有线连接或无线连接</strong></li>
 </ul>
 <ol start="3">
-<li>设备交互软件编程</li>
+<li>设备交互软件<strong>编程</strong></li>
 </ol>
 <ul>
-<li>智能设备与计算机不能直接交互</li>
-<li>需要在计算机端编写交互软件 使得能够建立通信、正常交互</li>
-<li>计算机端能够按照协议发送请求命令，并接收智能设备的传感数据</li>
+<li>智能设备与计算机<strong>不能</strong>直接<strong>交互</strong></li>
+<li>需要在<strong>计算机端</strong>编写<strong>交互软件</strong> 使得能够建立通信、正常交互</li>
+<li>计算机端能够<strong>按照协议发送请求命令</strong>，并<strong>接收</strong>智能设备的传感数据</li>
 </ul>
 <ol start="4">
-<li>应用软件开发</li>
+<li><strong>应用软件</strong>开发</li>
 </ol>
 <ul>
-<li>实现对检测对象传感器的数据存储、数据分析和数据检索</li>
+<li>实现对监测对象传感器的<strong>数据存储、数据分析和数据检索</strong></li>
 </ul>
 <ol start="5">
-<li>应用互联开发</li>
+<li><strong>应用互联</strong>开发</li>
 </ol>
 <ul>
-<li>为构建物联网系统，需要实现多个应用软件之间互联，避免信息孤岛</li>
-<li>主要的方式游制定标准规范、提供访问接口等</li>
+<li>为构建物联网系统，需要实现<strong>多个应用软件之间互联</strong>，避免<strong>信息孤岛</strong></li>
+<li>主要的方式有<strong>制定标准规范</strong>、<strong>提供访问接口</strong>等</li>
 </ul>
+<p>1 2<br>2 1<br>3 3<br>4 1<br>5 2</p>
 <h2 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h2><p>什么是通信协议</p>
 <ul>
-<li>通信协议是计算机和传感器之间信息交互过程和信息交互格式的约定</li>
+<li>通信协议是<strong>计算机和传感器</strong>之间<strong>信息交互过程</strong>和<strong>信息交互格式</strong>的<strong>约定</strong></li>
 </ul>
 <p>字符串型通信协议</p>
 <ol>
 <li>命令发送端</li>
 </ol>
 <ul>
-<li>采用关键字发送命令</li>
-<li>例如查询命令<code>FData,0</code>，注意末尾有回车+换行，对应十六进制<code>0D,0A</code></li>
+<li>采用<strong>关键字发送命令</strong></li>
+<li>例如查询命令<code>FData,0</code>，注意末尾有<strong>回车+换行</strong>，对应十六进制<code>0D,0A</code></li>
 </ul>
 <ol start="2">
 <li>数据采集器端</li>
 </ol>
 <ul>
-<li>大写字母为关键字，小写字母在实际传输过程中替换为真实数据</li>
+<li><strong>大写字母为关键字</strong>，<strong>小写字母</strong>在实际传输过程中替换为<strong>真实数据</strong></li>
 </ul>
-<h2 id="物联网构建的具体思路"><a href="#物联网构建的具体思路" class="headerlink" title="物联网构建的具体思路"></a>物联网构建的具体思路</h2><p>传感器选择</p>
+<p><strong>一个具体的例子</strong></p>
+<pre><code class="highlight txt">EA&lt;crlf&gt;
+DATE_yy/mm/dd&lt;crlf&gt;
+TIME_hh:mm:ss.mmmt&lt;crlf&gt;
+s_cccca1a2a3a4uuuuuuuuuufddddddddE-pp&lt;crlf&gt;
+…
+s_cccca1a2a3a4uuuuuuuuuufddddddddE-pp&lt;crlf&gt;
+EN&lt;crlf&gt;
+数据格式说明：
+1）EA 数据起始符；
+2）DATE_yy/mm/dd数据日期( 年、月、日)；
+3）TIME_hh:mm:ss.mmm数据时间( 时、分、秒、毫秒)；
+4）t 预留(空白)；
+5）s 数据状态（N标准、D差值输入、S不使用、O溢出、E错误、B断偶） ；
+6）cccc通道号，即传感器在GM10种的编号；
+7） a1a2a3a4 报警状态 （H上限报警、 L下限报警、 h差值上限报警、 空白无报警） ；
+8） uuuuuuuuuu单位( 固定10字符。 左对齐输出， 不足10字符的部分输出空白。 )；
+9）f 符号(+ 或-)；
+10）dddddddd尾数部分(00000000～ 99999999，8 位)；
+11）E科学计数法（指数为10的倍数）；
+12）pp指数部分(00～ 05)；
+13）EN数据结束符；
+14）每一行以回车+换行作为结束符。</code></pre>
+
+<p>多字节型通信协议-modbus协议</p>
+<p>数据查询为例子<br>命令发送端：8字节16进制传输<br>字节序号：</p>
 <ol>
-<li>需求优先：先明确目标对应的核心监测参数。</li>
-<li>环境适配：严格匹配部署场景的防护等级，包括工作温湿度范围、抗干扰能力（工业强电磁、农业高湿腐蚀、户外极端环境等）</li>
-<li>功耗部署：根据现场供电条件选型，布线受限&#x2F;野外场景优先低功耗无线型，固定部署场景优先有线工业级方案</li>
-<li>兼容可靠：优先支持通用标准接口与协议（RS485、I2C、Modbus等），保障与后续互联设备等兼容性，优先选择长期稳定、故障率低低工业级方案</li>
+<li>01（地址，数据采集器的地址编码）</li>
+<li>04（功能码，04代表查询命令）</li>
 </ol>
-<p>通信协议选型逻辑-modbus系列为例</p>
+<ul>
+<li>3&#x2F;4 00 00（寄存器起始地址，从哪一个寄存器开始读取数据）</li>
+<li>5&#x2F;6 00 04（寄存器读取数量，读取多少个寄存器）</li>
+<li>7&#x2F;8 F1 C9（CRC校验码，从开始到CRC校验之前到字节进行CRC校验）<br><strong>1-1-2-2-2</strong><br>数据采集器端：接收到命令后，按照协议格式分析命令内容，返回规范的传感器数据<br>字节序号：</li>
+</ul>
 <ol>
-<li>串口场景首选</li>
+<li>01（地址）</li>
+<li>04（功能码）</li>
+<li>08（数据字节长度，一个寄存器占2字节，返回4个寄存器数据，因此为8）</li>
+</ol>
+<ul>
+<li>4&#x2F;5 00 30 寄存器1数据（4路开关量状态，0表示关状态、1表示开状态，实际有用的只有第2个字节，即字节序号5的前4位，分别对应烟感、火感、红外线、水浸状态，反映是否有报警）</li>
+<li>7&#x2F;8 00 00 寄存器2数据（备用，一般无实际意义）</li>
+<li>8&#x2F;9 00 CE 寄存器3数据（温度的数据）</li>
+<li>10&#x2F;11 00 F7 寄存器4数据（湿度的数据）</li>
+<li>12&#x2F;13 34 77 CRC校验<br><strong>1-1-1-2-2-2-2-2</strong></li>
+</ul>
+<p>注意：上述温度、湿度数据的换算方式：16进制-&gt;10进制，再除以10；</p>
+<p>求和校验</p>
+<ol>
+<li>将数据划分为若干个校验单元</li>
+<li>逐个累加这些校验单元</li>
+<li>将计算结果附加在数据最后</li>
+<li>接收方重新求得的累加结果</li>
+<li>判断接收方和发送方的累加和</li>
+</ol>
+<p>eg.校验和</p>
+<pre><code class="highlight txt">0011 0010 1100 1111
+
+ 0011 0010
++1100 1111
+----------
+10000 0001
+
+保留
+0000 0001
+补码
+1111 1111（最终校验和）
+
+如果发送过去数据没有问题，数据仍然是
+0011 0010 1100 1111
+
+求和保留8位得到
+0000 0001
+与校验和相加结果为
+0000 0000（说明数据可能没有问题，否则有问题）</code></pre>
+<p><strong>注意，校验和存在无法检验到的错误，例如0011 0010 1100 1111-&gt;0011 0011 1100 1110的两位错误</strong></p>
+<p>CRC校验：</p>
+<ol>
+<li>发送方和接收方规定校验协议</li>
+<li>发送方将数据除以协议中的除数（先对数据被除数补0，数量为除数位数-1）</li>
+<li>将得到的余数作为校验码加在最后</li>
+<li>接收方将校验部分除以协议中的除数（不补0，将余数算在数据中）</li>
+<li>判断余数（余数结果为0则可能正确，否则错误）</li>
+</ol>
+<p>eg.CRC校验</p>
+<pre><code class="highlight txt">除数数据9位 1 0011 0001（协议规定）
+被除数数据 1101 1010
+
+补0 8位（9-1）
+
+1101 1010 0000 0000
+对除数进行模2除法，得到余数
+1101 1111
+附加在末尾发送
+1101 1010 1101 1111
+接收方直接使用 数据+余数 除以 1 0011 0001（协议规定）
+为0 数据正确</code></pre>
+
+<h2 id="物联网构建的具体思路"><a href="#物联网构建的具体思路" class="headerlink" title="物联网构建的具体思路"></a>物联网构建的具体思路</h2><p><strong>传感器选择</strong></p>
+<ol>
+<li>需求优先：先明确目标对应的<strong>核心监测参数</strong>。</li>
+<li>环境适配：严格<strong>匹配</strong>部署场景的<strong>防护等级</strong>，包括工作<strong>温湿度范围</strong>、<strong>抗干扰能力</strong>（工业强<strong>电磁</strong>、农业高湿<strong>腐蚀</strong>、户外极端环境等）</li>
+<li>功耗部署：根据现场供电条件选型，<strong>布线受限&#x2F;野外场景</strong>优先低功耗<strong>无线型</strong>，<strong>固定部署</strong>场景优先<strong>有线</strong>工业级方案</li>
+<li>兼容可靠：优先支持<strong>通用标准接口与协议</strong>（RS485、I2C、Modbus等），保障<strong>与后续互联设备</strong>等兼容性，优先选择<strong>长期稳定</strong>、<strong>故障率低</strong>工业级方案</li>
+</ol>
+<p><strong>通信协议选型</strong>逻辑-modbus系列为例</p>
+<ol>
+<li><strong>串口场景</strong>首选</li>
 </ol>
 <ul>
 <li>Modbus-RTU协议</li>
-<li>具体适配场景：单片机&#x2F;开发板 通过串口连接传感器、执行器（教学与工业场景最通用的串口标准协议）</li>
-<li>核心优势：1）帧格式固定（地址码+功能码+数据+校验码）；2）学过的串口字节收发、数据解析能力可直接套用，自带CRC校验保障数据传输准确性</li>
+<li>具体适配场景：<strong>单片机&#x2F;开发板</strong> 通过串口连接传感器、<strong>执行器</strong>（教学与工业场景最通用的串口标准协议）</li>
+<li>核心优势：1）<strong>帧格式固定</strong>（地址码+功能码+数据+校验码）；2）学过的<strong>串口字节收发、数据解析能力</strong>可直接套用，<strong>自带CRC校验保障数据传输</strong>准确性</li>
 </ul>
 <ol start="2">
-<li>网口场景首选</li>
+<li><strong>网口场景首选</strong></li>
 </ol>
 <ul>
 <li>Modbus-TCP协议</li>
-<li>具体适配场景：开发板&#x2F;电脑通过网口（以太网）接入局域网，实现设备间双向通信</li>
-<li>核心优势：基于TCP连接与Socket收发逻辑，协议帧格式和Modbus-RTU高度兼容，学习成本极低，收发与解析逻辑可以直接复用</li>
+<li>具体适配场景：<strong>开发板&#x2F;电脑通过网口</strong>（以太网）接入<strong>局域网</strong>，实现设备间双向通信</li>
+<li>核心优势：基于<strong>TCP连接与Socket收发</strong>逻辑，<strong>协议帧格式和Modbus-RTU高度兼容</strong>，学习成本极低，收发与解析逻辑可以直接复用</li>
 </ul>
 <p>设备连接方式</p>
 <ol>
-<li>串口总线互联</li>
+<li><strong>串口总线互联</strong></li>
 </ol>
 <ul>
-<li>实现方式：所有带有串口的传感器、执行器，通过RS485串口互联</li>
-<li>核心优势：只用一组串口就可以连接多个设备，每个设备分配唯一的地址码，通过Modbus-RTU协议分别读写数据</li>
+<li>实现方式：所有带有串口的传感器、执行器，<strong>通过RS485串口互联</strong></li>
+<li>核心优势：只用<strong>一组串口就可以连接多个设备</strong>，每个设备分配<strong>唯一的地址码</strong>，通过Modbus-RTU协议分别读写数据</li>
 </ul>
 <ol start="2">
-<li>网口互联</li>
+<li><strong>网口互联</strong></li>
 </ol>
 <ul>
-<li>实现方式：带网口的设备、开发板、电脑接入同一个局域网交换机，通过TCP连接建立通信链路，用Modbus-TCP协议实现数据收发</li>
-<li>核心优势：可实现电脑与开发板、多设备之间的双向通信</li>
+<li>实现方式：带网口的设备、开发板、电脑接入<strong>同一个局域网交换机</strong>，通过<strong>TCP连接建立通信链路</strong>，用Modbus-TCP协议实现数据收发</li>
+<li>核心优势：可实现电脑与开发板、<strong>多设备之间的双向通信</strong></li>
 </ul>
 <p>通用代码模块化框架</p>
 <ol>
-<li>接口初始化模块</li>
+<li><strong>接口初始化</strong>模块</li>
 </ol>
 <ul>
-<li>核心功能：完成串口（波特率、数据位、校验位、停止位）或网口（IP地址、端口、TCP连接）的初始化配置，是硬件通信的基础</li>
+<li>核心功能：完成<strong>串口</strong>（<strong>波特率、数据位、校验位、停止位</strong>）或<strong>网口</strong>（<strong>IP地址、端口、TCP连接</strong>）的初始化配置，是硬件通信的基础</li>
 </ul>
 <ol start="2">
-<li>数据收发模块</li>
+<li><strong>数据收发</strong>模块</li>
 </ol>
 <ul>
-<li>核心功能：1）实现指令发送（如传感器发送Modbus读数据指令）；2）数据接收（读取串口&#x2F;网口缓存区的字节数据）</li>
+<li>核心功能：1）实现<strong>指令发送</strong>（如传感器<strong>发送Modbus读数据指令</strong>）；2）<strong>数据接收</strong>（读取<strong>串口&#x2F;网口缓存区的字节数据</strong>）</li>
 </ul>
 <ol start="3">
-<li>数据解析模块</li>
+<li><strong>数据解析</strong>模块</li>
 </ol>
 <ul>
-<li>核心功能：1）实现接收数据的校验；2）有效数据的提取；3）物理量转换（比如把Modbus返回的16进制字节按协议规则转换为物理量数据）</li>
+<li>核心功能：1）实现接收数据的<strong>校验</strong>；2）<strong>有效数据的提取</strong>；3）<strong>物理量转换</strong>（比如把Modbus返回的16进制字节按协议规则转换为物理量数据）</li>
 </ul>
 <ol start="4">
-<li>基础逻辑与异常处理模块</li>
+<li><strong>基础逻辑与异常处理</strong>模块</li>
 </ol>
 <ul>
-<li>核心功能：1）实现简单的阈值判断；2）数据打印&#x2F;显示；3）通信超时；4）数据校验错误的异常重试逻辑；5）保障代码的稳定运行；</li>
+<li>核心功能：1）实现简单的<strong>阈值判断</strong>；2）<strong>数据打印&#x2F;显示</strong>；3）<strong>通信超时</strong>；4）<strong>数据校验错误</strong>的异常重试逻辑；5）保障代码的稳定运行；</li>
 </ul>
 
 		</div>
