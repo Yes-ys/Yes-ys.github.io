@@ -457,6 +457,138 @@
 <li>减少模型参数</li>
 <li>跨通道信息融合（深度分离卷积）</li>
 </ol>
+<h3 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h3><p>张量：Pytorch的核心数据结构</p>
+<ol>
+<li>维度：数据的多维数组结构</li>
+</ol>
+<ul>
+<li>0维度：单个数字</li>
+<li>1维：1维数组</li>
+<li>2维：2维数组</li>
+</ul>
+<ol start="2">
+<li>形状：每个维度上的大小</li>
+<li>数据类型：整数型（如torch.int8、torch.int32）、浮点型（如torch.float32、torch.float64）和布尔型（torch.bool）</li>
+</ol>
+<p>张量的常见操作</p>
+<ol>
+<li>+, -, *, &#x2F;</li>
+</ol>
+<ul>
+<li>元素级加法、减法、乘法、除法。</li>
+<li>z &#x3D; x + y</li>
+</ul>
+<ol start="2">
+<li>torch.matmul(x, y)</li>
+</ol>
+<ul>
+<li>矩阵乘法</li>
+</ul>
+<ol start="3">
+<li>torch.dot(x, y)</li>
+</ol>
+<ul>
+<li>向量点积（仅适用于 1D 张量）。</li>
+</ul>
+<ol start="4">
+<li>torch.sum()</li>
+</ol>
+<ul>
+<li>所有元素求和，返回0维tensor（不指定dim时，例如torch.sum(x)）</li>
+<li>指定dim时会按照指定的维度<strong>求和规约</strong>，返回的tensor是原始tensor去掉所指定的一维（例如原始张量x形状为torch.Size([2, 3, 5, 7])；使用torch.sum(x,dim &#x3D; 2)，得到的新张量形状为torch.Size([2, 3, 7])，3维张量每组坐标处的值都是该组坐标对应原始张量x中的5个元素值之和）</li>
+<li>torch.sum(x,dim&#x3D;1,keep_dim&#x3D;True) 在启用keep_dim的情况下，返回的张量会保留与原始张量x相同的维度，只是被规约的维度（例如当前例子中dim&#x3D;1被规约）大小会变为1</li>
+</ul>
+<ol start="5">
+<li>torch.mean()</li>
+</ol>
+<ul>
+<li>所有元素求均值</li>
+<li>和sum类似</li>
+</ul>
+<ol start="6">
+<li>torch.argmax()</li>
+</ol>
+<ul>
+<li>和sum类似，按最大值规约（也可以理解为返回最大值的索引，注意索引有 原始维度数-1 个）</li>
+</ul>
+<ol start="7">
+<li>torch.softmax()</li>
+</ol>
+<ul>
+<li>和sum类似，按softmax归越</li>
+</ul>
+<p><strong>理解指定维度的操作很重要</strong></p>
+<h4 id="切片语法"><a href="#切片语法" class="headerlink" title="切片语法"></a>切片语法</h4><p>切片语法的作用：高效地在原始张量的基础上提取出所需 维度&#x2F;索引 的数据</p>
+<p>按照最一般的情况（5维张量）对应(批次，时间步，通道，高度，宽度)</p>
+<pre><code class="highlight py">x = torch.rand(<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">16</span>,<span class="number">16</span>) <span class="comment">#2个批次 5个时间步 3个通道 16*16的数据</span></code></pre>
+
+<p>常用符号之“:”</p>
+<ol>
+<li>全选某维度的元素<pre><code class="highlight py">x_view = x[:,:,:,:,:] <span class="comment"># 注意点1：x_view 与 x是共享内存的（切片操作默认得到的是视图，对应原始5维张量）</span>
+x_view = x[<span class="number">1</span>,<span class="number">1</span>,:,:,:] <span class="comment"># 注意点2：整数索引会带来“降维”，这里得到的是torch.Size([3,16,16])的张量视图（对应x张量在第1批次、第1个时间步的样本）</span></code></pre></li>
+<li>选择某维度指定范围的元素（左闭右开）<pre><code class="highlight py">x_view = x[<span class="number">1</span>,<span class="number">3</span>:<span class="number">5</span>,:,:,:] <span class="comment"># 注意点3：时间步选取范围左闭右开对应实际索引是3~4，因此得到的张量形状是torch.Size([2,3,16,16])</span>
+x_view = x[<span class="number">1</span>,:<span class="number">5</span>,:,:,:] <span class="comment"># 注意点4：如果指定范围前面省略默认从0开始，得到张量形状是torch.Size([5,3,16,16])</span></code></pre></li>
+<li>添加维度<pre><code class="highlight py">x_view = x[:,:,:,:,:,<span class="literal">None</span>] <span class="comment"># 注意点5：等价于unsqueeze(5)，在最后插入一个新维度（索引从0开始）当然None也可以出现在起始维度（等价于unsequeeze(0)） 或者出现在中间 即使插入了新维度，默认得到的也是视图</span></code></pre></li>
+<li>步长采样<pre><code class="highlight py">x_view = x[:,::<span class="number">2</span>,:,:,:] <span class="comment"># 注意点6：在时间步维度上每2个索引采样一步，省略开始索引默认从0开始，因此采样到的是0 2 4，对应torch.Size([2,3,3,16,16])</span>
+x_view = x[:,<span class="number">1</span>::<span class="number">2</span>,:,:,:]<span class="comment"># 注意点7：指定开始采样维度，采样得到的是1 3，对应torch.Size([2,2,3,16,16])</span></code></pre></li>
+<li>反向操作<pre><code class="highlight py">x_view = x[:,::-<span class="number">1</span>,:,:,:] <span class="comment"># 注意点8：“-”代表反向操作，反向操作时默认从“末尾索引”开始，到“开始索引”（0）结束</span>
+x_view = x[<span class="number">1</span>,<span class="number">3</span>:<span class="number">5</span>:-<span class="number">1</span>,:,:,:] <span class="comment"># 注意点9：“-”可以搭配前面的多种操作使用，例如此处是对时间步维度选择指定范围之后再反向</span></code></pre></li>
+<li>省略操作<pre><code class="highlight py">x_view = x[...,:<span class="number">4</span>,:<span class="number">4</span>] <span class="comment"># 注意点10：“...”代表范围内所有维度的所有位置都被选中，例子中操作的含义是保留所有批次、时间步、通道中样本的左上角4*4的部分</span></code></pre></li>
+</ol>
+<h4 id="高级索引"><a href="#高级索引" class="headerlink" title="高级索引"></a>高级索引</h4><p>整数张量&#x2F;整数列表索引</p>
+<ol>
+<li>使用torch.Tensor&#x2F;NumPy数组</li>
+<li>索引取得张量的维度是：高级索引数组（广播后，若有）的维数 + 未被高级索引覆盖的维数（这些维数由切片、省略号等保留）</li>
+</ol>
+<ul>
+<li>注意<strong>广播后的高级索引维度会被“提到最前面”，而不是插在原位置</strong></li>
+</ul>
+<p>eg1 没有广播的情况</p>
+<pre><code class="highlight py"><span class="keyword">import</span> torch
+
+x = torch.arange(<span class="number">24</span>).reshape(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)  <span class="comment"># shape (2, 3, 4)</span>
+i = torch.tensor([[<span class="number">0</span>,<span class="number">1</span>], [<span class="number">1</span>,<span class="number">0</span>]])        <span class="comment"># shape (2,2)</span>
+j = torch.tensor([[<span class="number">1</span>,<span class="number">2</span>], [<span class="number">2</span>,<span class="number">1</span>]])        <span class="comment"># shape (2,2)</span>
+
+<span class="comment"># 索引：x[i, j]   # 第0轴用 i，第1轴用 j，第2轴不写（默认:）</span>
+<span class="comment"># 实际等价于 x[i, j, :] 结果形状——广播：i 与 j 形状都是 (2,2)，广播后还是 (2,2)；保留轴：第三轴长度 4；结果形状 = (2,2) + (4,) = (2,2,4)</span>
+
+out = x[i, j]  <span class="comment"># 实际等价于 x[i, j, :]</span>
+<span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([2, 2, 4])</span>
+</code></pre>
+<p>eg2 有广播的情况</p>
+<pre><code class="highlight py">x = torch.randn(<span class="number">5</span>, <span class="number">7</span>, <span class="number">3</span>)        <span class="comment"># (5, 7, 3)</span>
+idx1 = torch.tensor([<span class="number">0</span>, <span class="number">1</span>]).reshape(<span class="number">2</span>, <span class="number">1</span>)   <span class="comment"># (2, 1)</span>
+idx2 = torch.tensor([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]).reshape(<span class="number">1</span>, <span class="number">3</span>) <span class="comment"># (1, 3)</span>
+
+out = x[idx1, :, idx2]          <span class="comment"># 第0、2轴用高级索引，第1轴切片</span>
+<span class="comment"># 广播 idx1(2,1) 与 idx2(1,3) → (2,3)</span>
+<span class="comment"># 保留轴：第1轴长度 7</span>
+<span class="comment"># 结果形状：(2, 3) + (7,) = (2, 3, 7) 高级索引的轴保留相对顺序，提到最前面来</span>
+<span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([2, 3, 7])</span></code></pre>
+
+<p>eg3 单一维度上使用高级索引</p>
+<pre><code class="highlight py">x = torch.randn(<span class="number">5</span>, <span class="number">7</span>, <span class="number">3</span>)        <span class="comment"># (5, 7, 3)</span>
+idx = torch.tensor([[<span class="number">0</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">4</span>]]) <span class="comment"># (2,2)</span>
+
+out = x[idx]                     <span class="comment"># 只索引第0轴，其余轴全保留</span>
+<span class="comment"># 广播形状：(2,2)</span>
+<span class="comment"># 保留轴：第1轴 7，第2轴 3</span>
+<span class="comment"># 结果形状：(2,2) + (7,3) = (2,2,7,3)</span>
+<span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([2, 2, 7, 3])</span></code></pre>
+
+<p>上述维度变换的关系是：</p>
+<ol>
+<li>x的第0维会按照idx变成(2,2)的形状</li>
+<li>对应有4个元素</li>
+</ol>
+<ul>
+<li>out[0,0]&lt;-&gt;idx[0,0]&lt;-&gt;”0”，按照0索引到x[0]，即out[0,0]处为x[0]处的(7,3)形状的矩阵</li>
+<li>out[0,1]&lt;-&gt;idx[0,1]&lt;-&gt;”3”，按照1索引到x[3]</li>
+<li>out[1,0]&lt;-&gt;idx[1,0]&lt;-&gt;”2”&lt;-&gt;x[2]</li>
+<li>out[1,1]&lt;-&gt;idx[1,1]&lt;-&gt;”4”&lt;-&gt;x[4]</li>
+</ul>
+<p><strong>注意，按照高级索引选取维度的规则，甚至存在这种让维度变多的情况</strong><br><strong>注意，与切片不同，一旦使用了高级索引得到的是副本而不是视图</strong><br><strong>高级索引可以和切片结合使用</strong></p>
 <h2 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h2><h3 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h3><ol>
 <li>余子式的计算</li>
 </ol>
@@ -741,7 +873,136 @@
 <li>约束函数即节点扩展后当前背包是否超重</li>
 <li>界限函数（上界值）可以用<strong>分数背包</strong>估计：1）将物品按照价值重量比降序排列，扩展一个节点后针对剩余空间从当前可选物品开始按照<strong>分数背包</strong>的规则贪心拿取，填满背包时得到的就是上界（界限函数），如果该值小于<strong>当前最优值</strong>则该节点不能纳入活节点表（<strong>剪枝</strong>）<br>（<strong>本质上就是暴力搜索加了一些剪枝</strong>）</li>
 </ul>
-<h3 id="计算机组成原理"><a href="#计算机组成原理" class="headerlink" title="计算机组成原理"></a>计算机组成原理</h3>
+<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><h4 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h4><p>TCP&#x2F;IP模型 各层 功能&amp;常见协议</p>
+<ol>
+<li>应用层</li>
+</ol>
+<ul>
+<li>应用程序 报文 1</li>
+<li>1 2 3 4</li>
+</ul>
+<ol start="2">
+<li>传输层</li>
+</ol>
+<ul>
+<li>进程 报文段 1 2 3 4</li>
+<li>1 2</li>
+</ul>
+<ol start="3">
+<li>网络层</li>
+</ol>
+<ul>
+<li>主机 数据报 1 2</li>
+<li>1 2</li>
+</ul>
+<ol start="4">
+<li>数据链路层</li>
+</ol>
+<ul>
+<li>同一链路主机 帧 1 2 3</li>
+<li>1 2</li>
+</ul>
+<ol start="5">
+<li>物理层</li>
+</ol>
+<ul>
+<li>物理介质 比特流 1</li>
+<li>1</li>
+</ul>
+<p>补充知识</p>
+<ol>
+<li>FTP文件传输协议、SMTP简单邮件传输协议</li>
+<li>传输层复用&#x2F;分用功能，不同进程使用不同端口号</li>
+<li>数据链路层流量控制（ARQ自动重传请求协议，采用滑动窗口）</li>
+<li>RARP协议，已知MAC地址，查询IP地址</li>
+</ol>
+<p>计算机网络为什么要分层</p>
+<ol>
+<li>独立 抽象 接口</li>
+<li>灵活易修改</li>
+<li>实现、维护容易</li>
+<li>促进标准化 文档</li>
+<li>可扩展性</li>
+<li>网络应用开发、网络运营、网络设备 商人各司其职<br>（123 4 5 6）</li>
+</ol>
+<p>时延有哪些</p>
+<ol>
+<li>处理</li>
+<li>排队</li>
+<li>传输</li>
+<li>传播</li>
+</ol>
+<p>计算机网络和分布式系统的异同</p>
+<ol>
+<li>相同点</li>
+</ol>
+<ul>
+<li>物理结构</li>
+<li>通信和资源共享</li>
+</ul>
+<ol start="2">
+<li>不同点</li>
+</ol>
+<ul>
+<li>基础-应用</li>
+<li>高层软件</li>
+</ul>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>网络应用模型</p>
+<ol>
+<li>C&#x2F;S</li>
+</ol>
+<ul>
+<li>含义：区分服务器&#x2F;客户机</li>
+<li>优点 1 2</li>
+<li>缺点 1 2</li>
+</ul>
+<ol start="2">
+<li>P2P</li>
+</ol>
+<ul>
+<li>含义：同时是服务器&#x2F;客户机</li>
+<li>优点 1 2 3</li>
+<li>缺点 1 2</li>
+</ul>
+<p>DNS域名解析协议</p>
+<ol>
+<li>基于UDP</li>
+<li>查找过程 客户端本地缓存-本地DNS服务器-根域名服务器递归查找</li>
+<li>为什么DNS采用分布式层次数据库</li>
+</ol>
+<ul>
+<li>集中式点问题 1 2 3 4</li>
+</ul>
+<p>HTTP</p>
+<ol>
+<li>协议作用</li>
+<li>依赖TCP</li>
+<li>特点 1 2 3</li>
+<li>HTTPS</li>
+</ol>
+<p>点击一下网页会发生什么</p>
+<ol>
+<li>DNS</li>
+<li>三次握手 TCP</li>
+<li>HTTP请求</li>
+<li>服务器响应请求</li>
+<li>浏览器解析HTML+请求资源</li>
+<li>四次挥手 TCP</li>
+</ol>
+<p>Cookie和Session的区别</p>
+<ol>
+<li>存放位置</li>
+<li>安全性</li>
+<li>数据大小</li>
+</ol>
+<p>微信撤回机制</p>
+<ol>
+<li>客户端发送撤回请求，包含消息ID、时间戳、会话ID等信息。</li>
+<li>服务器验证该请求是否合法（如是否在撤回时间窗口内、用户是否有权限）。</li>
+<li>服务器将撤回指令广播给所有接收该消息的客户端。</li>
+<li>各客户端接收到指令后，根据消息ID删除或替换本地消息。</li>
+</ol>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4>
 		</div>
 
 		<!-- Comments removed -->
