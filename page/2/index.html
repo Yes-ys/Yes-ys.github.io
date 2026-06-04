@@ -107,6 +107,12 @@
                         </a>
                     </div>
                     
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/poetry">
+                            <span class="btn-text">诗歌</span>
+                        </a>
+                    </div>
+                    
 
                     <div class="menu-item menu-item-search">
                         
@@ -133,6 +139,25 @@
   
   <div id="recent-posts">
     <!-- <h1>Recent Posts</h1> -->
+    
+    
+    <div class="recent-post-item" data-href="/2026/05/13/2026/%E5%85%B3%E4%BA%8ETransfomer%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/">
+
+      <div class="item-title">关于Transfomer的一点理解</div>
+      
+      <time datetime="2026-05-13T14:11:26.000Z">
+        2026-05-13
+      </time>
+      
+      
+      
+      <div class="article-digest">
+        <p>混合交叉注意力模块是Transfomer的一个核心，该模块位于Decoder中。该模块是一个多头注意力模块，之所以名为混合交叉注意力模块，是因为其每个头的Q、K、V的来源，其中K、V对应来自于Encoder而Q来自Decoder。 初学时我不由得想到一个问题：在最简单的机器翻译的例子中，Encoder的输入（源）来自中文、而Decoder的输入（目标）来自英文，Encoder对输入信息经过self-attention机制处理后汇聚的是“中文语义信息”，而将此作为K、V用于Decoder中，mult-head attention处理后注意力汇聚到的也应该是...</p>
+      </div>
+      
+
+    </div>
+
     
     
     <div class="recent-post-item" data-href="/2026/05/08/2026/%E7%89%A9%E8%81%94%E7%BD%91/">
@@ -299,25 +324,6 @@
       
       <div class="article-digest">
         <p>用来记录力扣hot100题的思路 hot1-两数之和思路： 使用哈希表存储value-index的索引 两个需要关注的点：1）不能使用相同元素；2）哈希表value,index只能存储一个 元素值,元素索引 的pair 如果提前for预处理哈希表可能引发的问题：在存在答案 or 不存在答案的情况下 都可能以重复的相同元素的索引作为答案返回（显然错误） 解决方法：一次for循环，每检查一个x，检查target-x是否在哈希表中，在则找到答案；否则将 x,index 存入哈希表 不用担心返回两个相同元素的索引，检查到x时可以确定 x,index 不在哈希表中...</p>
-      </div>
-      
-
-    </div>
-
-    
-    
-    <div class="recent-post-item" data-href="/2026/03/23/2026/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6-md/">
-
-      <div class="item-title">注意力机制</div>
-      
-      <time datetime="2026-03-23T12:43:19.000Z">
-        2026-03-23
-      </time>
-      
-      
-      
-      <div class="article-digest">
-        <p>注意力提示（相关基本概念）注意力的双组件框架 非自主性提示，来自吸引你注意力的物品本身客观自带的突出的特点； 自主性提示，来自你的大脑对你当前注意力的控制； 双组件的神经网络表示 非自主性提示 例如要想将选择偏向于感官输入，则可以简单地使用参数化的全连接层，甚至是非参数化的最大汇聚层或平均汇聚层。 当然，这称不上注意力，所以实际上只有自主性提示才称得上我们在深度学习中提到的“注意力” 自主性提示（在注意力机制背景下，称为查询），它作为“神经网络”的工作流程大致如下 1）注意力机制通过注意力汇聚（attention pooling）将选择引导至感官输入（s...</p>
       </div>
       
 
@@ -621,9 +627,9 @@
         
         
             <div class="deadline-card">
-                <div class="deadline-title">学习AI的下半场游戏所需要的基本知识</div>
-                <div class="deadline-date">2026-05-31</div>
-                <div class="deadline-timer" id="deadline-timer" data-target="2026-05-31">
+                <div class="deadline-title">WISE 2026投稿</div>
+                <div class="deadline-date">2026-06-18</div>
+                <div class="deadline-timer" id="deadline-timer" data-target="2026-06-18">
                     <div class="timer-box">
                         <span class="t-value" id="t-days">00</span>
                         <span class="t-label">天</span>

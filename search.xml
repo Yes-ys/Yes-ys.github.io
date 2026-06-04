@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>论文精读：MISSRec</title>
+      <link href="/2026/06/02/2026/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB%EF%BC%9AMISSRec/"/>
+      <url>/2026/06/02/2026/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB%EF%BC%9AMISSRec/</url>
+      
+        <content type="html"><![CDATA[<h1 id="A-homework"><a href="#A-homework" class="headerlink" title="A homework"></a>A homework</h1><p>three sections:</p><ol><li>conclusion</li><li>discussion</li><li>thinking</li></ol><h2 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h2><p>I conclude this work from two aspects </p><ol><li>motivation, what is the problem (based on introduction&#x2F;related work)</li><li>how to solve it (based on method)</li></ol><p>(Actually, I originally intended to write three parts and the third part is how to demonstrate the efficacy based on method&#x2F;experiment, which I wanna place in the discussion after hesitation)</p><h3 id="part1"><a href="#part1" class="headerlink" title="part1"></a>part1</h3><p>There are defects of traditional sequential recommenders based on ID features:</p><ol><li>underperformce with sparse IDs and struggling with the cold-start problem</li><li>inconsistent ID mappings hinder the model’s transferability</li><li>a popularity bias toward popular IDs, posing the fairness issue</li></ol><p>So, we need to leverage multi-modal data, which is promising to remedy the above shortcomings </p><p>However, challenges still exist:</p><ol><li>the multi-modal synergy within each item is userdependent and dynamic, making it difficult to design effective multi-modal<br>fusion</li><li>information redundancy can overwhelm essential user interests, i.e. homogeneous items result in overemphasis on specific kinds of items</li></ol><p>Fortunately, MISSRec would tackle them, details in part2</p><h3 id="part2"><a href="#part2" class="headerlink" title="part2"></a>part2</h3><p>We divide the method into three parts to discuss, i.e., Model design, Goal of SR and Training strategy</p><p>About Model design, In my view, it mainly based on two design philosophies </p><p>Two deign philosophies:</p><ol><li>Multi-modal Learning: Typically, there are: 1) encoder (i.e., BERT for text and ViT for img); 2) Feature process before fusion (i.e., Dropout for feature augmentation, text&#x2F;visual adapters and concatenation); 3) Feature fusion (MID Module)</li><li>Transformer: Typically, there are: 1) encoder (i.e., Text encoder receiving input of token seq. after concatenation); 2) decoder (i.e., Interest-aware Decoder receiving input of fusion fearture after MID Module); 3) Q-K-V in the interaction between encoders and decoders (i.e., K&#x2F;V: encoded token by Text encoder and Q: interest token by MID Module)</li></ol><p>At present, we have lots of modules with many functions that can be analyzed. So, we need to think about how to organize them or why we do these things (based on I know the details of MISSRec).</p><p>It’s all about the goal of SR:</p><ol><li>the representation of user: aggregation of the decoded embeddings (output of Interest-aware Decoder, which contain rich information about user interest) by mean pooling</li><li>the representation of item: lightweight fusion module to generate user-adaptive item representations (based on user representation and the output of text&#x2F;visual adapters)</li><li>matching score between user and item: a factorizable formula containing user repr. and item repr.</li></ol><p>Finally we talk about the training:</p><ol><li>Pre-training, two main loss fuctions and a regularization: 1) loss in Eq.5 to capture the correspondence between interaction sequences and candidate items; 2) loss in Eq.6 which is based on two repr. with the same original semantic to enhance the robustness of the ability of model to generate the repr.; 3) an orthogonal regularization to diversify interest-aware decoded results</li><li>Fine-tunining, aim to transfer the knowledge: 1)Inductive Transfer: just fine-tune the modality-specific adapters with loss in Eq.5 and orthogonal regularization; 2)Transductive Transfer: Inductive Transfer. with ID embedding</li></ol><p>Up to now, we make the MISSRec which has an effective multi-modal fusion and obvisious transfer ability to tackle the cold-start problem, deal with challenging data distribution and perform well. There are some remaining details so let’s start a discussion.</p><h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><p>I </p><p>Innovations: 1) text&#x2F;visual adapters; 2) MID Module to generate interest tokens</p><p>and some innovations</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 学习记录 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于Transfomer的一点理解</title>
       <link href="/2026/05/13/2026/%E5%85%B3%E4%BA%8ETransfomer%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/"/>
       <url>/2026/05/13/2026/%E5%85%B3%E4%BA%8ETransfomer%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</url>
@@ -515,7 +534,7 @@
       <link href="/2026/02/08/2026/%E6%88%90%E4%B8%BA%E7%A0%94%E7%A9%B6%E7%94%9F%E7%9A%84%E6%94%BB%E7%95%A5%E7%A7%98%E7%B1%8D/"/>
       <url>/2026/02/08/2026/%E6%88%90%E4%B8%BA%E7%A0%94%E7%A9%B6%E7%94%9F%E7%9A%84%E6%94%BB%E7%95%A5%E7%A7%98%E7%B1%8D/</url>
       
-        <content type="html"><![CDATA[<p><code>在面对一个庞大的任务之前，会有一些对于“开始这件事”的抵触或许是人类的可爱反应吧...anyway 在沉迷于其他的各种事物而推迟这件事的开始已经够久后，我决定正式开始准备“成为一名研究生”了！</code></p><h2 id="保研"><a href="#保研" class="headerlink" title="保研"></a>保研</h2><p><code>连去哪里读书都没确定好，当然不能成为研究生了！所以第一件事就是先准备一下保送研究生的事吧...</code></p><h3 id="需要准备的材料"><a href="#需要准备的材料" class="headerlink" title="需要准备的材料"></a>需要准备的材料</h3><p><strong>用来展示实力的</strong></p><ol><li>简历</li><li>个人陈述</li><li>推荐信、自荐信</li><li>自我介绍（ppt、中文口述、英文口述）</li><li>套磁信</li></ol><p><strong>用来证明你展示的实力是真的</strong></p><ol><li>证件照、学生证、身份证</li><li>在学证明、排名证明、历年成绩单</li><li>获奖证书、科研文章证明</li><li>英语成绩</li></ol><h3 id="英文口述自我介绍"><a href="#英文口述自我介绍" class="headerlink" title="英文口述自我介绍"></a>英文口述自我介绍</h3>]]></content>
+        <content type="html"><![CDATA[<h2 id="保研"><a href="#保研" class="headerlink" title="保研"></a>保研</h2><h3 id="需要准备的材料"><a href="#需要准备的材料" class="headerlink" title="需要准备的材料"></a>需要准备的材料</h3><p><strong>用来展示实力的</strong></p><ol><li>简历</li><li>个人陈述</li><li>推荐信、自荐信</li><li>自我介绍（ppt、中文口述、英文口述）</li><li>套磁信</li></ol><p><strong>用来证明你展示的实力是真的</strong></p><ol><li>证件照、学生证、身份证</li><li>在学证明、排名证明、历年成绩单</li><li>获奖证书、科研文章证明</li><li>英语成绩</li></ol><h3 id="夏令营信息收集"><a href="#夏令营信息收集" class="headerlink" title="夏令营信息收集"></a>夏令营信息收集</h3>]]></content>
       
       
       <categories>
