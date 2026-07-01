@@ -353,7 +353,109 @@ EN&lt;crlf&gt;
 <ul>
 <li>核心功能：1）实现简单的<strong>阈值判断</strong>；2）<strong>数据打印&#x2F;显示</strong>；3）<strong>通信超时</strong>；4）<strong>数据校验错误</strong>的异常重试逻辑；5）保障代码的稳定运行；</li>
 </ul>
+<h2 id="期末复习"><a href="#期末复习" class="headerlink" title="期末复习"></a>期末复习</h2><p>物联网分为常规物联网和广义物联网：<br>    常规物联网：<br>        1）通过传感设备和约定好的协议，将任何物体与互联网相连 后<br>        2）进行信息交换和通信，实现对物体的智能识别、定位、跟踪、监督和管理 的<br>        3）一种网络；<br>        （指的是物与物之间通过传感设备互联，构成网络）<br>    广义物联网：<br>        1）泛在系统的互联互通；<br>        2）物物相连的互联网；<br>        （指的是系统之间的数据互联互通）</p>
+<p>物联网最大的挑战：信息孤岛问题；<br>    技术层面：<br>        1）协议碎片化；<br>            不同场景、不同厂商的设备使用完全不同的通信协议，形成了天然的语言障碍。<br>        2）设备与数据的极端异构性；<br>            即使使用相同协议，设备的数据格式、语义定义也千差万别。<br>        3）遗留设备数据盲区；<br>            大量工业设备、市政设施服役年限超过10 年，没有网络接口，只能通过加装传感器和网关实现数据采集，改造难度大、成本高。<br>    产业生态层面：<br>        1）垂直行业标准不统一；<br>            物联网应用高度垂直化，每个行业都有自己的标准和规范，跨行业数据共享几乎不可能。<br>        2）产业链分工碎片：<br>            物联网产业链包括芯片、传感器、网关、平台、应用等多个环节，每个环节都由不同厂商主导，缺乏统一的协调机制，导致上下游产品难以兼容。</p>
+<p>物联网体系结构：<br>    从底层到顶层：<br>        1）智能设备层：一组智能设备；<br>        2）数据传输层：数据传输链路；<br>        3）设备交互层：设备交互软件；<br>        4）节点应用层：节点应用软件；<br>        5）数据存储层：节点存储系统；<br>        6）智能服务层；<br>        7）群组应用层；</p>
+<p>互联网的构建环节：</p>
+<ol>
+<li>智能<strong>设备选择</strong></li>
+</ol>
+<ul>
+<li>按照<strong>需求</strong>选择合适的智能传感设备；</li>
+<li>尽可能使用<strong>成熟</strong>的智能设备，因为该步骤是获取所需<strong>数据</strong>；</li>
+</ul>
+<ol start="2">
+<li>智能<strong>设备互联</strong></li>
+</ol>
+<ul>
+<li>将智能设备与计算机连接，<strong>有线连接或无线连接</strong></li>
+</ul>
+<ol start="3">
+<li>设备交互软件<strong>编程</strong></li>
+</ol>
+<ul>
+<li>智能设备与计算机<strong>不能</strong>直接<strong>交互</strong></li>
+<li>需要在<strong>计算机端</strong>编写<strong>交互软件</strong> 使得能够建立通信、正常交互</li>
+<li>计算机端能够<strong>按照协议发送请求命令</strong>，并<strong>接收</strong>智能设备的传感数据</li>
+</ul>
+<ol start="4">
+<li><strong>应用软件</strong>开发</li>
+</ol>
+<ul>
+<li>实现对监测对象传感器的<strong>数据存储、数据分析和数据检索</strong></li>
+</ul>
+<ol start="5">
+<li><strong>应用互联</strong>开发</li>
+</ol>
+<ul>
+<li>为构建物联网系统，需要实现<strong>多个应用软件之间互联</strong>，避免<strong>信息孤岛</strong></li>
+<li>主要的方式有<strong>制定标准规范</strong>、<strong>提供访问接口</strong>等</li>
+</ul>
+<p>物联网信息的输出形式：<br>    1）模拟量输出：<br>        输出连续变化的信号量（标准电压、标准电流、非标准模拟量）；<br>    2）开关量输出：<br>        是或否（例如火焰传感器）；<br>    3）通信接口输出：<br>        串行接口输出、并行接口输出、有线网络接口输出和无线网络接口输出；</p>
+<p>物联网通信与通信接口：<br>    数据采集器：<br>        1）用于收集传感器或传感设备采集的模拟量或开关量数据；<br>        2）通过A&#x2F;D转换器转换为可以被计算机接收的形式；<br>    网口&#x2F;USB转串口：<br>        当计算机没有232或485串口时 临时实现串口的扩充；</p>
+<p>串口特性：<br>    RS-232 接口：<br>        1）点对点异步通信；<br>        2）物理层采用单端信号输入；<br>        3）只能实现一个主设备 一个从设备的通信<br>    RS-485 接口：<br>        1）差分总线型通信标准；<br>        2）平衡传输方式，多点连接；<br>        3）标准RS485驱动芯片，可以在一个芯片上挂载32个单位负载；</p>
+<h3 id="设备交互编程"><a href="#设备交互编程" class="headerlink" title="设备交互编程"></a>设备交互编程</h3><p>流程：<br>    1）开始；<br>    2）初始化通信接口；<br>        1）对于串行通信接口，需要制定所使用的计算机串口编号；<br>        2）初始化 通信的波特率、数据位长度、停止位长度、数据校验方式通信参数（这些参数要与使用的传感器一致）；<br>        eg：<br>    3）发送获取数据命令；<br>        1）按照传感器设备 约定的通信协议 通过程序选择计算机接口 发送获取数据的命令；（软件在发送命令前，要根据协议，生成校验码包含在发送命令中）；<br>        2）计算机接口会自动把 命令转发到接口连接到传感器设备；<br>        3）传感器设备接到命令 校验无误 把相应的数据通过接口发送给计算机；<br>    4）等待定长；<br>        1）计算机运行速度快 传感设备收到获取命令 要准备一段时间 才向计算机发送数据；<br>        2）准备时间长短根据设备而定；<br>        3）为提高通信效率 可以采用中断或触发事件 通知软件；<br>    5）获取返回数据；<br>    6）解析返回数据；<br>    7）结束；</p>
+<p>编程语言描述：</p>
+<p>串口开启与测试函数（对应1、2）</p>
+<pre><code class="highlight c++"><span class="keyword">class</span> <span class="title class_">SerialPortTest</span>&#123;
+    SerialPort port;
+    <span class="function"><span class="keyword">public</span> <span class="title">SerialPortTest</span><span class="params">()</span></span>&#123;
+        port = <span class="keyword">new</span> <span class="built_in">SerialPort</span>(<span class="string">&quot;COM1&quot;</span>);
+        port.BaudRate = <span class="number">9600</span>;
+        <span class="keyword">try</span>&#123;
+            port.<span class="built_in">Open</span>();
+        &#125;<span class="built_in">catch</span>(Exception)&#123;
+            Console.<span class="built_in">WriteLine</span>(<span class="string">&quot;打开COM口失败&quot;</span>);
+        &#125;
+    &#125;
+&#125;</code></pre>
 
+<p>命令发送函数（对应3）</p>
+<pre><code class="highlight c++"><span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Send</span><span class="params">()</span></span>&#123;
+    byte command[] = Encoding.UTF<span class="number">8.</span><span class="built_in">GetBytes</span>(<span class="string">&quot;:NUMMeric:NORMal:VAlue?\r\n&quot;</span>);
+    port.<span class="built_in">Write</span>(command,<span class="number">0</span>,command.Length);
+&#125;</code></pre>
+
+<p>数据接收函数（对应上面的4、5）</p>
+<pre><code class="highlight c++"><span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Receice</span><span class="params">()</span></span>&#123;
+    System.Threading.Thread.<span class="built_in">sleep</span>(<span class="number">1000</span>);
+    <span class="keyword">if</span>(port != null)&#123;
+        <span class="type">int</span> n = port.BytesToRead;
+        byte[] byteReceive = <span class="keyword">new</span> byte[n];
+        port.<span class="built_in">Read</span>(byteReceive,<span class="number">0</span>,n);
+        string strReceive = Encoding.UTF.<span class="built_in">GetString</span>(byteReceive,<span class="number">0</span>,n);
+    &#125;
+&#125;</code></pre>
+
+<p>串口关闭函数（对应7）</p>
+<pre><code class="highlight c++"><span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Close</span><span class="params">()</span></span>&#123;
+    <span class="keyword">if</span>(port != null &amp;&amp; port.IsOpen)&#123;
+        port.<span class="built_in">Close</span>();
+        prot.<span class="built_in">Dispose</span>();<span class="comment">//Dispose()：彻底销毁对象，释放所有托管和非托管资源，调用后不应再使用该对象。</span>
+    &#125;
+&#125;</code></pre>
+
+<p><strong>这几个函数都在SerialPortTest类里面</strong>；</p>
+<p>处理的主函数：</p>
+<pre><code class="highlight c++"><span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Collections.Generic;
+<span class="keyword">using</span> System.Linq;
+<span class="keyword">using</span> System.Text;
+<span class="keyword">using</span> System.Threading.Tasks;
+<span class="keyword">using</span> Sytem.IO.Ports;
+<span class="keyword">namespace</span> 安防控制&#123;
+    Class Program&#123;
+        <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Main</span><span class="params">(string[] args)</span></span>&#123;
+            Serail PortTest port = <span class="keyword">new</span> <span class="built_in">SerialPortTest</span>();
+            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; <span class="number">20</span>;i++)&#123;
+                port.<span class="built_in">Send</span>();
+                port.<span class="built_in">Receive</span>();
+            &#125;
+            port.<span class="built_in">Close</span>();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 		</div>
 
 		<!-- Comments removed -->
