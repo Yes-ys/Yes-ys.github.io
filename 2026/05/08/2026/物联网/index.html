@@ -270,8 +270,8 @@ EN&lt;crlf&gt;
 <p>CRC校验：</p>
 <ol>
 <li>发送方和接收方规定校验协议</li>
-<li>发送方将数据除以协议中的除数（先对数据被除数补0，数量为除数位数-1）</li>
-<li>将得到的余数作为校验码加在最后</li>
+<li>发送方将数据除以协议中的除数（先对数据被除数<strong>补0</strong>，数量为除数位数-1）</li>
+<li>将得到的<strong>余数作为校验码</strong>加在最后</li>
 <li>接收方将校验部分除以协议中的除数（不补0，将余数算在数据中）</li>
 <li>判断余数（余数结果为0则可能正确，否则错误）</li>
 </ol>
@@ -394,14 +394,15 @@ EN&lt;crlf&gt;
 <p>物联网<strong>信息的输出形式</strong>：<br>    1）<strong>模拟量输出</strong>：<br>        输出<strong>连续变化的信号量</strong>（标准电压、标准电流、非标准模拟量）；<br>    2）<strong>开关量输出</strong>：<br>        <strong>是或否</strong>（例如<strong>火焰传感器</strong>）；<br>    3）<strong>通信接口输出</strong>：<br>        <strong>串行接口</strong>输出、<strong>并行接口</strong>输出、<strong>有线网络接口</strong>输出和<strong>无线网络接口</strong>输出；</p>
 <p>物联网<strong>通信与通信接口</strong>：<br>    <strong>数据采集器</strong>：<br>        1）用于<strong>收集</strong>传感器或传感设备<strong>采集的模拟量或开关量</strong>数据；<br>        2）通过<strong>A&#x2F;D转换器</strong>转换为可以被计算机接收的形式；<br>    <strong>网口&#x2F;USB转串口</strong>：<br>        当计算机没有<strong>232或485串口</strong>时 <strong>临时实现串口的扩充</strong>；</p>
 <p>串口特性：<br>    RS-232 接口：<br>        1）<strong>点对点异步</strong>通信；<br>        2）物理层采用<strong>单端信号输入</strong>；<br>        3）只能实现<strong>一个主设备</strong> <strong>一个从设备</strong>的通信<br>    RS-485 接口：<br>        1）<strong>差分总线型</strong>通信标准；<br>        2）<strong>平衡传输</strong>方式，<strong>多点连接</strong>；<br>        3）标准<strong>RS485驱动芯片</strong>，可以在<strong>一个芯片上挂载32个单位负载</strong>；</p>
-<h3 id="设备交互编程"><a href="#设备交互编程" class="headerlink" title="设备交互编程"></a>设备交互编程</h3><p>流程：<br>    1）开始；<br>    2）初始化通信接口；<br>        1）对于串行通信接口，需要制定所使用的计算机串口编号；<br>        2）初始化 通信的波特率、数据位长度、停止位长度、数据校验方式通信参数（这些参数要与使用的传感器一致）；<br>        eg：<br>    3）发送获取数据命令；<br>        1）按照传感器设备 约定的通信协议 通过程序选择计算机接口 发送获取数据的命令；（软件在发送命令前，要根据协议，生成校验码包含在发送命令中）；<br>        2）计算机接口会自动把 命令转发到接口连接到传感器设备；<br>        3）传感器设备接到命令 校验无误 把相应的数据通过接口发送给计算机；<br>    4）等待定长；<br>        1）计算机运行速度快 传感设备收到获取命令 要准备一段时间 才向计算机发送数据；<br>        2）准备时间长短根据设备而定；<br>        3）为提高通信效率 可以采用中断或触发事件 通知软件；<br>    5）获取返回数据；<br>    6）解析返回数据；<br>    7）结束；</p>
+<h3 id="设备交互编程"><a href="#设备交互编程" class="headerlink" title="设备交互编程"></a>设备交互编程</h3><p>流程：<br>    1）开始；<br>    2）初始化通信接口；<br>        1）对于串行通信接口，需要<strong>指定</strong>所使用的<strong>计算机串口编号</strong>；<br>        2）初始化 通信的波特率、数据位长度、停止位长度、数据校验方式<strong>通信参数</strong>（这些参数要与使用的传感器一致）；<br>        eg：<br>    3）发送获取数据命令；<br>        1）按照传感器设备 <strong>约定的通信协议</strong> 通过程序<strong>选择计算机接口</strong> <strong>发送</strong>获取数据的命令；（软件在发送命令前，要根据协议，生成校验码包含在发送命令中）；<br>        2）计算机接口会自动把 <strong>命令转发</strong>到接口连接到传感器设备；<br>        3）传感器设备接到命令 <strong>校验无误</strong> 把相应的<strong>数据通过接口发送</strong>给计算机；<br>    4）等待定长；<br>        1）计算机<strong>运行速度快</strong> <strong>传感设备</strong>收到获取命令 要<strong>准备一段时间</strong> 才向计算机发送数据；<br>        2）准备时间长短根据设备而定；<br>        3）为提高通信效率 可以采用<strong>中断或触发事件</strong> 通知软件；<br>    5）获取返回数据；<br>    6）解析返回数据；<br>    7）结束；</p>
 <p>编程语言描述：</p>
 <p>串口开启与测试函数（对应1、2）</p>
-<pre><code class="highlight c++"><span class="keyword">class</span> <span class="title class_">SerialPortTest</span>&#123;
+<pre><code class="highlight c++"><span class="comment">//串行接口类WT310、KL-W6000</span>
+<span class="keyword">class</span> <span class="title class_">SerialPortTest</span>&#123;
     SerialPort port;
     <span class="function"><span class="keyword">public</span> <span class="title">SerialPortTest</span><span class="params">()</span></span>&#123;
-        port = <span class="keyword">new</span> <span class="built_in">SerialPort</span>(<span class="string">&quot;COM1&quot;</span>);
-        port.BaudRate = <span class="number">9600</span>;
+        port = <span class="keyword">new</span> <span class="built_in">SerialPort</span>(<span class="string">&quot;COM1&quot;</span>);<span class="comment">//指定串口编号</span>
+        port.BaudRate = <span class="number">9600</span>;<span class="comment">//初始化通信参数</span>
         <span class="keyword">try</span>&#123;
             port.<span class="built_in">Open</span>();
         &#125;<span class="built_in">catch</span>(Exception)&#123;
@@ -411,24 +412,41 @@ EN&lt;crlf&gt;
 &#125;</code></pre>
 
 <p>命令发送函数（对应3）</p>
-<pre><code class="highlight c++"><span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Send</span><span class="params">()</span></span>&#123;
-    byte command[] = Encoding.UTF<span class="number">8.</span><span class="built_in">GetBytes</span>(<span class="string">&quot;:NUMMeric:NORMal:VAlue?\r\n&quot;</span>);
+<pre><code class="highlight c++"><span class="comment">//WT310</span>
+<span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Send</span><span class="params">()</span></span>&#123;
+    byte[] command = Encoding.UTF<span class="number">8.</span><span class="built_in">GetBytes</span>(<span class="string">&quot;:NUMeric:NORMal:VAlue?\r\n&quot;</span>);
     port.<span class="built_in">Write</span>(command,<span class="number">0</span>,command.Length);
+&#125;
+<span class="comment">//KL-W6000</span>
+<span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Send</span><span class="params">()</span></span>&#123;
+    byte[] b = <span class="keyword">new</span> byte[<span class="number">8</span>];
+    b[<span class="number">0</span>] = <span class="number">0x01</span>;
+    b[<span class="number">1</span>] = <span class="number">0x04</span>;
+    b[<span class="number">2</span>] = <span class="number">0x00</span>;
+    b[<span class="number">3</span>] = <span class="number">0x00</span>;
+    b[<span class="number">4</span>] = <span class="number">0x00</span>;
+    b[<span class="number">5</span>] = <span class="number">0x04</span>;
+    b[<span class="number">6</span>] = <span class="number">0xF1</span>;
+    b[<span class="number">7</span>] = <span class="number">0xC9</span>;
+    port.<span class="built_in">Write</span>(b,<span class="number">0</span>,<span class="number">8</span>);
 &#125;</code></pre>
 
 <p>数据接收函数（对应上面的4、5）</p>
 <pre><code class="highlight c++"><span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Receice</span><span class="params">()</span></span>&#123;
-    System.Threading.Thread.<span class="built_in">sleep</span>(<span class="number">1000</span>);
+    System.Threading.Thread.<span class="built_in">sleep</span>(<span class="number">1000</span>);<span class="comment">//等待定长</span>
     <span class="keyword">if</span>(port != null)&#123;
         <span class="type">int</span> n = port.BytesToRead;
         byte[] byteReceive = <span class="keyword">new</span> byte[n];
         port.<span class="built_in">Read</span>(byteReceive,<span class="number">0</span>,n);
-        string strReceive = Encoding.UTF.<span class="built_in">GetString</span>(byteReceive,<span class="number">0</span>,n);
+        
+        string strReceive = Encoding.UTF.<span class="built_in">GetString</span>(byteReceive,<span class="number">0</span>,n);<span class="comment">//WT310</span>
+        string strReceive = BitConverter.<span class="built_in">ToString</span>(byteReceive,<span class="number">0</span>,byteReceive.Length).<span class="built_in">Replace</span>(<span class="string">&quot;-&quot;</span>,<span class="string">&quot;&quot;</span>);<span class="comment">//KL-W6000</span>
     &#125;
 &#125;</code></pre>
 
 <p>串口关闭函数（对应7）</p>
-<pre><code class="highlight c++"><span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Close</span><span class="params">()</span></span>&#123;
+<pre><code class="highlight c++"><span class="comment">//串行接口类WT310、KL-W6000</span>
+<span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">Close</span><span class="params">()</span></span>&#123;
     <span class="keyword">if</span>(port != null &amp;&amp; port.IsOpen)&#123;
         port.<span class="built_in">Close</span>();
         prot.<span class="built_in">Dispose</span>();<span class="comment">//Dispose()：彻底销毁对象，释放所有托管和非托管资源，调用后不应再使用该对象。</span>
@@ -446,7 +464,7 @@ EN&lt;crlf&gt;
 <span class="keyword">namespace</span> 安防控制&#123;
     Class Program&#123;
         <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Main</span><span class="params">(string[] args)</span></span>&#123;
-            Serail PortTest port = <span class="keyword">new</span> <span class="built_in">SerialPortTest</span>();
+            SerailPortTest port = <span class="keyword">new</span> <span class="built_in">SerialPortTest</span>();
             <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; <span class="number">20</span>;i++)&#123;
                 port.<span class="built_in">Send</span>();
                 port.<span class="built_in">Receive</span>();
@@ -457,7 +475,7 @@ EN&lt;crlf&gt;
 &#125;
 </code></pre>
 
-<h3 id="节点应用软件"><a href="#节点应用软件" class="headerlink" title="节点应用软件"></a>节点应用软件</h3><p>节点应用软件功能结构：<br>    元数据录入模块：<br>        1）所有传感器数据的采集、显示和统计分析等都围绕监测对象进行<br>        2）用于描述监测对象及监测过程有关的数据称为元数据<br>        3）元数据录入模块用于实现元数据的录入功能<br>    传感器设置模块：<br>        1）用于对每次测试使用的传感器进行选择和命名；<br>    监测单元导航模块：<br>        1）通常一个监测单元对应一种传感设备，不同的监测单元之间传感数据是相互独立的。<br>        2）当用户想要查看不同传感设备的数据时，需要一个模块能够切换监测单元实现该需求，这就是监测单元导航模块的作用。<br>    数据列表模块：<br>        1）将同一监测对象各个传感数据以列表方式显示，方便用户查看。<br>    曲线显示模块：<br>        1）将同一监测对象的所有传感数据绘制成曲线<br>        2）并具有放大、缩小、移动、标注等功能<br>    查询输出模块：<br>        1）包含综合查询、数据导出和曲线打印功能；<br>        2）综合查询功能能够按照时间段、监测对象信息对数据进行检索、筛选和实现；<br>        3）数据导出功能能实现所选择数据的文件格式输出；<br>        4）曲线打印功能能打印用户选择时间范围的曲线；<br>    统计分析模块：<br>        1）为数据分析提供了数学功能，包括平均值，方差，统计最大值最小值等<br>        2）根据实际需求可以进行调整<br>    数据管理模块：<br>        1）统一管理传感数据，并向外提供获取数据的接口；<br>        2）该模块从设备交互软件读取采集数据，添加到系统中并进行缓存和存储处理；（添加到系统的数据库系统）<br>    主控模块：<br>        1）该模块从设备交互软件读取采集数据，添加到系统中并进行缓存和存储处理；<br>        2）主控模块会综合把控各个功能模块之间的联系；<br>    其他功能模块</p>
+<h3 id="节点应用软件"><a href="#节点应用软件" class="headerlink" title="节点应用软件"></a>节点应用软件</h3><p><strong>节点应用软件功能</strong>结构：<br>    1）元数据录入模块：<br>        1）所有传感器数据的采集、显示和统计分析等都围绕<strong>监测对象</strong>进行<br>        2）用于<strong>描述</strong>监测对象及监测过程有关的数据称为元数据<br>        3）<strong>元数据录入</strong>模块用于实现元数据的录入功能<br>    2）传感器设置模块：<br>        1）用于对每次测试使用的传感器进行<strong>选择和命名</strong>；<br>    3）监测单元导航模块：<br>        1）通常<strong>一个监测单元</strong>对应<strong>一种传感设备</strong>，不同的监测单元之间传感数据是相互独立的。<br>        2）当用户想要查看<strong>不同传感设备的数据</strong>时，需要一个模块能够<strong>切换</strong>监测单元实现该需求，这就是监测单元导航模块的作用。<br>    4）数据列表模块：<br>        1）将<strong>同一</strong>监测对象各个<strong>传感数据以列表方式</strong>显示，方便用户查看。<br>    5）曲线显示模块：<br>        1）将<strong>同一</strong>监测对象的所有传感数据<strong>绘制成曲线</strong><br>        2）并具有<strong>放大、缩小、移动、标注</strong>等功能<br>    6）查询输出模块：<br>        1）包含综合查询、数据导出和曲线打印功能；<br>        2）<strong>综合查询</strong>功能能够按照<strong>时间段、监测对象</strong>信息对数据进行检索、筛选和实现；<br>        3）<strong>数据导出</strong>功能能实现所选择数据的<strong>文件格式</strong>输出；<br>        4）<strong>曲线打印</strong>功能能打印用户选择时间范围的曲线；<br>    7）统计分析模块：<br>        1）为<strong>数据分析</strong>提供了<strong>数学功能</strong>，包括平均值，方差，统计最大值最小值等<br>        2）根据实际需求可以进行调整<br>    8）数据管理模块：<br>        1）统一管理传感数据，并<strong>向外提供获取数据的接口</strong>；<br>        2）该模块从<strong>设备交互软件读取</strong>采集数据，<strong>添加到系统中</strong>并进行缓存和存储处理；（添加到系统的数据库系统）<br>    9）主控模块：<br>        1）与用户交互的<strong>主要界面</strong>，用户通过控制页面使用各个功能；<br>        2）主控模块会综合<strong>把控</strong>各个功能模块之间的<strong>联系</strong>；<br>    其他功能模块<br>    (18 23 4567 9)</p>
 
 		</div>
 
