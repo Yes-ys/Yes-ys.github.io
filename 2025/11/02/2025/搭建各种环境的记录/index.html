@@ -326,6 +326,13 @@ brew install --cask font-hack-nerd-font font-sf-pro
 <li>安装C#环境的相关信息<code>Downloading .NET version(s) 10.0.201-global~arm64 ............................................... Done! .NET 10.0.201-global~arm64 executable path: /usr/local/share/dotnet/dotnet</code></li>
 <li>使用方式：快捷命令new project创建一个新的C#项目，选择项目模板（如控制台），选择文件夹，选择项目类型（一般用.sln）</li>
 </ol>
+<h2 id="配置AstrBot（Win）"><a href="#配置AstrBot（Win）" class="headerlink" title="配置AstrBot（Win）"></a>配置AstrBot（Win）</h2><p>尝试配置一个聊天用的机器人</p>
+<ol>
+<li>使用命令<code>uv install astrbot --python 3.12</code>，这个命令会在LOCALAPPDATE&#x2F;uv&#x2F;tools&#x2F;目录安装astrbot的完整文件（没错，由uv包管理器处理，后续也能很方便地卸载）</li>
+<li>找到一个你喜欢的空目录（我在D盘AstrBot目录下），<code>使用astrbot init</code>，初始化工作环境，其中会创建astrbot所需的数据文件和配置文件</li>
+<li>在该目录下使用<code>astrbot run</code>可以启动astrbot，然后通过终端给的URL，可以进入web的可视化界面进行操作</li>
+<li>安装astrbot tool，其中有napcat，启动后登陆qq，然后进入可视化界面，通过网络绑定到本地运行的astrbot，即可。</li>
+</ol>
 
 		</div>
 

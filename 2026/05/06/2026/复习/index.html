@@ -1110,7 +1110,172 @@ out = x[idx]                     <span class="comment"># 只索引第0轴，其�
 <li>服务器将撤回指令广播给所有接收该消息的客户端。</li>
 <li>各客户端接收到指令后，根据消息ID删除或替换本地消息。</li>
 </ol>
-<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><p>Good afternoon, professors. My name is Yang Zicheng, a senior student in Computer Science at Ocean University of China. My GPA is 3.92 out of 4, ranking second among 93 students. </p>
+<p>I have two years of research experience. As the first author, I designed PFLNash, a federated learning algorithm that uses Nash Bargaining to adaptively balance personalization and client drift. It has been submitted to AAAI. I also developed Nash-MM for multimodal sentiment analysis, framing it as a cooperative game to resolve task conflicts; this work has been submitted to WISE. Moreover, I joined a provincial project on evolutionary reinforcement learning for unmanned ship path planning and filed a patent. </p>
+<p>In competitions, I’ve won five national awards and eight provincial awards, such as second prize in CUMCM.</p>
+<p>I’m passionate about the math behind AI and it’s engineering application. I also like the development of games and I’m familiar with Unity and C#. Thank you.</p>
+<h2 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h2><h3 id="最初的想法"><a href="#最初的想法" class="headerlink" title="最初的想法"></a>最初的想法</h3><p>深入学一些硬核的知识，未来二十年、三十年也能用得上</p>
+<ol>
+<li>AI&#x2F;ML 基础理论	理解智能本质，研究“为什么”和“边界”	</li>
+<li>计算机系统 (Systems)	构建高效可靠的计算基础设施</li>
+<li>计算机理论 (Theory)	探索计算的数学基础和根本限制</li>
+</ol>
+<h3 id="未来就业"><a href="#未来就业" class="headerlink" title="未来就业"></a>未来就业</h3><p>由于我对1、比较感兴趣，进一步了解未来可能的就业岗位</p>
+<p>最对口的是AI算法研发（可能需要博士起步）：</p>
+<p>工作内容（主要是两大块）</p>
+<ul>
+<li>底层算法研发：LLM预训练、对齐、推理优化、多模态</li>
+<li>应用层算法：CV 检测追踪、NLP对话、推荐广告排序、强化学习控制</li>
+<li>最合适的要求，数学好+愿意读博+喜欢模型本身…</li>
+</ul>
+<p>AI应用开发：</p>
+<p>工作内容主要是</p>
+<ul>
+<li>“将大模型接进业务”，最典型的、当下比较火的是Agent工作流（身边一些同学实习在做，或许我大四如果要刷一段实习会考虑这个方向）</li>
+<li>方向比较新，技术栈迭代快，要持续追新工具（或许也意味着有速成的空间，用于保底）</li>
+</ul>
+<h3 id="考虑研究方向"><a href="#考虑研究方向" class="headerlink" title="考虑研究方向"></a>考虑研究方向</h3><p>根据AI算法研发岗的要求，考虑一个我具体的研究方向</p>
+<p>早两年在408上下的功夫不是很够，未来还是想学一些底层的东西，所以选择底层算法研发方向。</p>
+<p>具体该考虑哪些方向呢？一个大方向&#x2F;领域下 研究生阶段又应该从哪个具体的小点（比如一个具体的课题）入手呢</p>
+<h3 id="一些疑问"><a href="#一些疑问" class="headerlink" title="一些疑问"></a>一些疑问</h3><p>自身知识面不足+获取信息的渠道有限 有一些看不见、想不明白的东西</p>
+<h2 id="LLM并行"><a href="#LLM并行" class="headerlink" title="LLM并行"></a>LLM并行</h2><p>常见的并行策略：</p>
+<ol>
+<li>数据并行（DP）：最基础，模型复制多份，分吃不同数据。</li>
+<li>张量并行（TP）：拆解矩阵乘法。把一层网络切分到多张卡上算。</li>
+<li>序列并行（SP）：配合TP使用，专门把LayerNorm、Dropout这些非矩阵运算按序列长度切分。</li>
+<li>上下文并行（CP）：针对超长序列（如DNA、蛋白质序列）。</li>
+<li>流水线并行（PP）：按层切分（GPU 1跑1-5层，GPU 2跑6-10层）。</li>
+<li>专家并行（EP）：针对MoE（混合专家）模型。只激活部分专家，稀疏计算。</li>
+</ol>
+<h3 id="数据并行"><a href="#数据并行" class="headerlink" title="数据并行"></a>数据并行</h3><p>核心思想：当你的模型能放进一张GPU，但数据量太大、训练太慢时，可以把模型复制到多张GPU上，每张卡处理不同的数据子集。最后同步所有卡的梯度来更新模型。</p>
+<p>适用场景：模型能装入单卡，但是想用较大的Batch Size加速训练</p>
+<p>在Pytorch中，梯度采用累加而非替代。因此可以使用多个Mini-Batch模拟一个比较大的Batch，分别进行前向传播和反向传播之后，统一再调用执行一次 optimizer.step()。<strong>这是单卡解决因为Batch Size较大而导致OOM的策略</strong></p>
+<p><strong>在有多卡的时候</strong>可以采用，分布式数据并行（DDP）工作流，来解决上述问题</p>
+<p>DDP 的标准执行流程如下：</p>
+<p>初始化 ProcessGroup：建立进程间的通信握手，每个进程控制一张GPU，保存同一模型的一个副本<br>广播权重（Broadcast）：训练开始时，Rank 0 节点的模型权重被广播到所有其他节点，确保初始状态一致。<br>前向反向传播：每个节点在自己的数据子集上独立计算。<br>梯度归约（All-Reduce）：各节点的梯度被汇聚（求和或平均），通常在Rank 0完成，然后同步回所有节点。<br>参数更新：各节点使用同步后的梯度独立更新权重。</p>
+<p>参考链接：</p>
+<ol>
+<li>PyTorch 分布式训练底层原理与 DDP 实战指南(<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/article/2593964?policyId=1003">https://cloud.tencent.cn/developer/article/2593964?policyId=1003</a>)</li>
+</ol>
+<h3 id="张量并行（TP）"><a href="#张量并行（TP）" class="headerlink" title="张量并行（TP）"></a>张量并行（TP）</h3><p>张量并行的基础概念：张量并行是一种将<strong>模型中的张量</strong>（多维数组或矩阵）沿特定维度分成若干部分，并在不同设备上并行计算的技术。这种技术可以有效解决单块GPU无法储存整个模型的问题，提高训练效率。</p>
+<p>核心思想：将模型中的大张量（如权重矩阵）分解成多个小块，每个小块放置在不同的GPU上进行独立计算。在计算过程中，各GPU之间通过通信来交换必要的数据，以实现整体的计算目标。</p>
+<p>典型的切分方式：</p>
+<ol>
+<li>行并行：将权重矩阵按行切分，输入数据按列切分，然后在不同GPU上分别计算。</li>
+<li>列并行：将权重矩阵按列切分，输入数据保持完整，同样在不同GPU上分别计算。</li>
+</ol>
+<p>具体的例子：<br>假设我们有一个简单的线性层计算：Y &#x3D; XA，其中X是输入数据，A是权重矩阵，Y是输出数据。</p>
+<ol>
+<li>在行并行中，我们可以将A按行切分为A1和A2，X按列切分为X1和X2。然后，在GPU0上计算X1A1得到Y1，在GPU1上计算X2A2得到Y2。最后，将Y1和Y2相加得到最终的Y。</li>
+<li>在列并行中，我们将A按列切分为A1和A2，X保持不变。然后，在GPU0上计算XA1得到Y1的一部分，在GPU1上计算XA2得到Y1的另一部分。最终，将两部分结果拼接起来得到完整的Y。</li>
+</ol>
+<p>拓展参考：</p>
+<ol>
+<li><p>Megatron-LM<br>Megatron-LM是NVIDIA推出的一种高效的一维张量并行实现方案。它通过对Transformer模型中的多头注意力（MHA）块和多层感知机（MLP）块进行切分，实现了模型的分布式训练。在MLP层中，Megatron-LM先对第一个线性层的权重进行列切割，然后对第二个线性层的权重进行行切割，以优化计算效率和内存使用。</p>
+</li>
+<li><p>Colossal-AI<br>与Megatron-LM不同，Colossal-AI提供了多维张量并行方案，包括2D、2.5D和3D张量并行。这些方案通过更复杂的分片策略，进一步提高了计算效率和可扩展性。例如，在2D张量并行中，输入数据和权重矩阵都被划分为多个小块，并在二维网格上分布到不同的GPU上进行计算。</p>
+</li>
+</ol>
+<p>参考链接：</p>
+<ol>
+<li>大模型分布式训练利器：张量并行技术详解(<a target="_blank" rel="noopener" href="https://cloud.baidu.com/article/3334066">https://cloud.baidu.com/article/3334066</a>)</li>
+<li>两种并行方式在反向传播时的特点(<a target="_blank" rel="noopener" href="https://chat.deepseek.com/share/52x08747z9rqvuf48h">https://chat.deepseek.com/share/52x08747z9rqvuf48h</a>)</li>
+</ol>
+<h3 id="序列并行（SP）"><a href="#序列并行（SP）" class="headerlink" title="序列并行（SP）"></a>序列并行（SP）</h3><p>核心思想：序列并行的核心是沿序列维度（Sequence Dimension）切分输入，让多张GPU各自处理一个序列片段，从而突破单卡显存对序列长度的限制</p>
+<p>为什么需要序列并行：</p>
+<p>考虑Transformer中最典型的缩放点积注意力</p>
+<p>$Attention(Q,K,V) &#x3D; softmax(\frac{QK^T}{\sqrt{d_k}})V$</p>
+<p>其中Q、K、V的size都是$[L,d_k]$（暂时不考虑Batch和多头），L是序列长度（包含的token数量），$d_k$是特征维度</p>
+<p>那么$QK^T$实际上是一个size为$[L,L]$的张量，存储了序列中每一个Token对其他所有Token的关注分数。这是包含$L^2$个元素的中间张量，规模实际上很大。</p>
+<p>序列并行具体怎么做，参考下面的链接</p>
+<p>参考链接：SP具体怎么做，以Ulysses为例子(<a target="_blank" rel="noopener" href="https://chat.deepseek.com/share/4ev2vgwh0u1lk184wu">https://chat.deepseek.com/share/4ev2vgwh0u1lk184wu</a>)</p>
+<h3 id="上下文并行（CP）"><a href="#上下文并行（CP）" class="headerlink" title="上下文并行（CP）"></a>上下文并行（CP）</h3><p>和SP是类似的，在处理注意力模块计算的时候要避免出现$L^2$规模的Tensor，即不能像SP一样通过All to All将Q、K、V模块转换为包含完整序列L的数据（虽然有按头划分）的形式。</p>
+<p>采用其他技巧，例如Ring Attention</p>
+<h3 id="流水线并行（PP）"><a href="#流水线并行（PP）" class="headerlink" title="流水线并行（PP）"></a>流水线并行（PP）</h3><p>模型按层切分，跑在不同的GPU上</p>
+<h3 id="专家并行（EP）"><a href="#专家并行（EP）" class="headerlink" title="专家并行（EP）"></a>专家并行（EP）</h3><p>针对MoE（混合专家）模型。只激活部分专家，稀疏计算。</p>
+<h3 id="有前景的可以深入研究的方向"><a href="#有前景的可以深入研究的方向" class="headerlink" title="有前景的可以深入研究的方向"></a>有前景的可以深入研究的方向</h3><ol>
+<li>通信与拓扑优化</li>
+</ol>
+<ul>
+<li>拓扑感知的并行策略：研究如何根据集群的物理网络拓扑（如NVLink、InfiniBand的层次化带宽）来优化并行策略。</li>
+<li>降低同步开销：研究能否不完全同步激活值来训练模型。</li>
+<li>零通信开销的序列并行（SP）：针对线性注意力等特定模型结构，设计几乎无通信开销的SP方法。</li>
+</ul>
+<ol start="2">
+<li>动态与自适应并行策略</li>
+</ol>
+<ul>
+<li>动态策略切换：研究如何根据输入序列的长度，动态地、在运行时切换最优的并行策略。</li>
+<li>自适应并行推理：让模型根据问题复杂度，自主决定是否以及如何分解和并行执行子任务。这能避免为简单问题付出高昂的并行开销，是提升推理效率的前沿方向。</li>
+</ul>
+<ol start="3">
+<li>推理阶段的并行优化</li>
+</ol>
+<ul>
+<li>自适应并行推理：让推理模型自主决定如何将一个复杂问题分解为可并行的子任务、以及启动多少并发线程。</li>
+<li>异构感知的自动并行化：针对由不同算力、内存和带宽设备构成的异构集群，自动搜索最优的并行策略。例如，AutoHAAP框架通过智能的搜索空间剪枝和负载均衡估算，能在异构环境下显著提升训练吞吐量。</li>
+</ul>
+<ol start="4">
+<li>系统与调度优化：宏观视角</li>
+</ol>
+<ul>
+<li>异构资源调度：探索如何在共享GPU集群中，通过时空复用等技术，高效调度混合的微调和推理任务。</li>
+<li>容错与弹性训练：研究如何在超大规模（数万GPU）集群中，通过高效的检查点、恢复和弹性调度，保证训练的长期稳定性。</li>
+</ul>
+<ol start="5">
+<li>新型模型架构的并行策略</li>
+</ol>
+<ul>
+<li>MoE模型的EP优化：针对混合专家（MoE）模型的专家并行（EP），研究如何在运行时无缝切换EP和TP，以适应动态请求；或优化EP在跨Pod通信时的开销。</li>
+<li>多模态大模型（MLLM）的异构并行：MLLM通常包含文本、视觉等多种模态的编码器，其结构和计算模式差异巨大，需要设计异构的并行策略。</li>
+</ul>
+<p>eg：通信与拓扑优化</p>
+<p>为什么需要通信与拓扑优化？</p>
+<ol>
+<li>减少同步开销：研究发现，在张量并行（TP）中并非所有激活都需要完全同步。通过设计“通信感知架构”，可将TP通信量减少高达50%，且不显著损失精度。</li>
+<li>协同调度优化：混合使用TP和流水线并行（PP）时，可设计更精细的协同调度来同时减少TP的通信开销和PP的“流水线气泡”。如STP方法通过将PP的前后向传播解耦为细粒度单元并重新编排，可将训练吞吐量提升12%-16%。</li>
+</ol>
+<p>对应的方法例如，CAAT-Net，使用了部分通信的架构</p>
+<p>传统TP中，每层计算后都需All-Reduce同步全部激活值。CAAT-Net打破了这一做法。它采用，通道分组与部分规约：它将一个层的输出通道分成两组，计算时只对其中一组进行跨设备的同步规约（partial channel-reduce）。未被同步的通道，其来自不同设备的部分直接被拼接（concatenate）起来作为输出。这一改动直接将TP通信量减少了高达50%，并且在7B参数的模型上测试，预训练精度几乎没有下降。</p>
+<ol>
+<li>共享通道 (Shared Channels)：这部分通道在所有设备间进行同步（All-Reduce）。</li>
+<li>私有通道 (Private Channels)：这部分通道不进行同步，每个设备各自保留自己计算出的结果。</li>
+</ol>
+<p>这里的关键是引入了一个同步因子 (synchronization factor) p (0 &lt; p ≤ 1)，它决定了共享通道所占的比例。当 p&#x3D;1 时，就是传统的完全同步；当 p&#x3D;0.5 时，则有一半的通道成为私有通道，通信量因此减半。</p>
+<p>例如：</p>
+<p>MLP层：假设输入X被分为X1和X2，权重B被分为B11, B21（设备1）和B12, B22（设备2）。经过“部分通道归约”后，两个设备的输出Z1和Z2会不同：</p>
+<p>$Z1 &#x3D; [Y1<em>B11 + Y2</em>B12, Y1<em>B21] $<br>$Z2 &#x3D; [Y1</em>B11 + Y2<em>B12, Y2</em>B22] $<br>可以看到，$Y1<em>B11 + Y2</em>B12$ 这部分是共享的（经过了同步），而 $Y1<em>B21 和 Y2</em>B22$ 则是私有的。</p>
+<p>数学上与一般的前向传播不在等价，但依然有效（实验证明的）的可能原因？</p>
+<ol>
+<li>核心原因：大模型的“过度参数化”与鲁棒性，大规模语言模型（LLMs）的一个特点是过度参数化（Over-parameterization），即模型参数量远大于训练数据量，这为网络带来了强大的鲁棒性和容错能力。</li>
+<li>CAAT-Net正是利用了这一点。它引入的“部分同步”本质上是一种可控的、结构化的噪声。你可以把传统的完全同步看作是多位专家必须对每个细节都达成绝对一致；而3. CAAT-Net则是允许专家们在某些细节上（私有通道）保留己见，只需在关键结论上（共享通道）达成共识。</li>
+<li>研究表明，只要控制好这种“分歧”的范围（即同步因子p≥0.5），大模型强大的冗余性就足以吸收这部分噪声，使其不会影响最终的判断（模型精度）。</li>
+</ol>
+<h3 id="进一步的研究方向"><a href="#进一步的研究方向" class="headerlink" title="进一步的研究方向"></a>进一步的研究方向</h3><p>将边界扩展一下，不再局限在LLM并行</p>
+<p>多模态加速，针对当下的world model</p>
+<p>世界模型处理多种模态数据（文本、图像、视频、动作等），其内部不同组件（如视觉编码器、LLM）的计算模式各异。因此，需要有针对性的加速策略：</p>
+<ol>
+<li>架构级加速：新的服务系统（如M*）将模型视为一个“组件图”，为不同组件（如Transformer、扩散模型）匹配最优的并行策略（如Paged Attention、CUDA-graph）。</li>
+<li>推理级加速：专门为世界模型设计的加速方法，例如：</li>
+</ol>
+<ul>
+<li>Fast-LeWorldModel：将传统的“一步步”预测改为并行预测，将动态模块耗时从31.4秒降至8.0秒。</li>
+<li>WorldCache：通过智能缓存技术，区分处理变化平缓或剧烈的数据，实现近无损提速3.7倍。</li>
+<li>Emu3.5的DiDA技术：将推理速度提升了20倍。</li>
+</ul>
+<ol start="3">
+<li>运行时系统：为实时交互场景设计的系统（如TeleFuser），支持流式推理、有状态会话和分布式GPU执行，以满足世界模型连续、低延迟的运行需求。</li>
+</ol>
+<p><strong>世界模型的并行规划与加速</strong></p>
+<p>将LLM并行训练的经验迁移到世界模型的推理与规划阶段，是极具价值的high-impact方向。<br>具体切入点：</p>
+<ol>
+<li>动作前缀并行预测：借鉴Fast-LeWorldModel的思路，将“单步预测”改为“多步并行预测”。</li>
+<li>梯度-based并行规划器：研究GRASP（Gradient RelAxed Stochastic Planner）等方法，利用世界模型的可微性，将状态视为优化变量进行并行规划。</li>
+<li>模型分解与模块化：探索将复杂的世界模型分解为可并行执行的模块，或为Transformer、扩散模型等不同组件匹配最优并行策略。</li>
+</ol>
+<p>游戏引擎在world model的应用：</p>
+<p>最直接的是提供“确定性状态”作为训练数据（消除多模态歧义）<br>真实世界的像素数据（如视频）存在严重的混杂偏差（Confounding）：像素相同不代表状态相同（光照、天气变化）。<br>一般模型的数据数学形式是(x,y)，前者是图像像素级别的张量，后者是主观标注。<br>而游戏引擎提供的数据数学形式：(s,a,s_next,r)，s是精确的物理坐标、速度、质量矩阵。<br>这意味着游戏引擎提供的训练数据包含了底层的真值状态（Ground-truth State）。有了这个，世界模型的训练可以从“像素到像素”的端到端，退化为“状态到状态”的监督学习。</p>
+
 		</div>
 
 		<!-- Comments removed -->

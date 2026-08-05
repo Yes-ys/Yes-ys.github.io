@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>工业人工智能 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/poetry">
+                            <span class="btn-text">诗歌</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>工业人工智能</h1>
+			<h2 id="专业知识与算法基础"><a href="#专业知识与算法基础" class="headerlink" title="专业知识与算法基础"></a>专业知识与算法基础</h2><p>工业人工智能与传统AI的区别，以及其在制造业中的应用</p>
+<ol>
+<li>传统AI追求速度、精度 工业人工智能要注重可靠、稳定、可解释、安全</li>
+<li>传统AI数据量大 工业人工智能数据稀缺、不平衡、样本少</li>
+<li>传统AI大模型 工业人工智能轻量级、小模型</li>
+</ol>
+<p>在工业场景中如何处理小样本或非平衡数据集下的模型训练问题</p>
+<ol>
+<li>做数据集增强翻转、裁剪、模糊等…</li>
+<li>做物理仿真来获取数据</li>
+<li>在模型训练里面加入物理先验，学残差（最终真实结果是物理模型算出来的结果+AI预测的残差）；</li>
+</ol>
+<p>在工业视觉检测任务中CNN和Transfomer的优势劣势</p>
+<ol>
+<li>CNN小样本下泛化更强，Transfomer容易过拟合</li>
+<li>CNN天然擅长细粒度局部纹理，ViT自注意力在低层更关注全局，对细微结构不敏感。</li>
+<li>前两点CNN占优势，但是对于需要整体轮廓判断的缺陷（如零件缺失导致整体形状改变），CNN由于感受野受限可能需要很深的网络才能覆盖，而ViT有天然优势</li>
+</ol>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
