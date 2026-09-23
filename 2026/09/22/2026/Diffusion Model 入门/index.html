@@ -1,0 +1,324 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Diffusion Model 入门 [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/poetry">
+                            <span class="btn-text">诗歌</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>Diffusion Model 入门</h1>
+			<p><code>这篇帖子用来记录我入门diffusion model，虽然我连该学什么资料都不知道...但是总之，目前我时间很充裕，这篇帖子就用做纯探索吧</code></p>
+<p><code>先找了一个网课看</code></p>
+<h2 id="Diffusion-Large-Vision-Model"><a href="#Diffusion-Large-Vision-Model" class="headerlink" title="Diffusion &amp; Large Vision Model"></a>Diffusion &amp; Large Vision Model</h2><p>goal of this class: to understand how this image generation models work and what makes them work so well</p>
+<ol>
+<li>understand <strong>paradigm</strong> behind how we generate images</li>
+<li>learn how image generation models are <strong>trained &amp; used</strong></li>
+</ol>
+<h3 id="prerequisites"><a href="#prerequisites" class="headerlink" title="prerequisites"></a>prerequisites</h3><ol>
+<li>linear algebra: vectors, matrices, gradient, divergence</li>
+<li>probability theory: bayes’ rule, conditional&#x2F;marginal probability, expectation, covariance, Gaussian distribution</li>
+<li>Differential equations: ordinary&#x2F;stochastic differential equations, numerical solvers</li>
+<li>basic of machine learning: loss function, training, inference, neural network</li>
+</ol>
+<h3 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h3><pre><code class="highlight txt">specify: &quot;a teddy bear reading a book&quot; -&gt; generation model -&gt; &#x27;pic&#x27;</code></pre>
+
+<p>llm is intuitive beacuse one token by another token like pepole’s talk</p>
+<p>however img generation model isn’t so intuitive</p>
+<p>how does it work?</p>
+<ol>
+<li>difussion</li>
+<li>score matching</li>
+<li>flow matching</li>
+</ol>
+<p>(these things are belong to generation paradigm, which is from generation model to ‘pic’ ) <strong>l1~l3</strong></p>
+<p>(condition will be explored in <strong>l4</strong>)</p>
+<p>(model architecture will be explored in <strong>l5</strong>)</p>
+<p>(training model is in <strong>l6</strong>)</p>
+<p>(evaluating images in <strong>l7</strong>)</p>
+<h3 id="Generate-paradigm-Diffusion"><a href="#Generate-paradigm-Diffusion" class="headerlink" title="Generate paradigm (Diffusion)"></a>Generate paradigm (Diffusion)</h3><h4 id="motivation"><a href="#motivation" class="headerlink" title="motivation"></a>motivation</h4><p><strong>Unconditioned Generations : Assume that there is nothing as input. We have some training set (some imgs) and we want to train the model generate imgs like them.</strong> (l1~l3 is based on this thing)</p>
+<p>Suppose: sample of obsevations from $p_{data}$</p>
+<p>Obejective: Generate new images from a distribution of images $p_{data}$</p>
+<p>对上面的前提和目标做一些补充</p>
+<p>前提实际上是我们有一批数据集${x_1,x_2,…,x_N}$，这批数据集背后可能存在一个确定的分布$x_i \sim p_{data}(x)$，<strong>我们不知道这个分布的具体形式，我们有的只是有限的样本</strong></p>
+<p>生成模型的目标是学习上面那个我们不知道的分布$p_{data}(x)$，从而让我们可以从数据集中进行“采样”，即生成新的数据（图像）</p>
+<p>Unconditioned Generation中的没有输入指的是没有条件输入，即没有$p(x|y)$中的y，但实际上是有输入的，可以看作一个随机种子$z$，从而完成$x_j &#x3D; p(z)$的采样。（考虑最简单的采样一批符合高斯分布的样本，我们可以先用一些程序语言的随机数生成器，然后把它们输入到概率分布的函数中）</p>
+<p>In img generation, model will statrt from <strong>noise</strong></p>
+<p>why from noise:</p>
+<ol>
+<li>easy to sample (from some easy distribution)</li>
+<li>introduce radomness (random start point will not make the end point always be the same)</li>
+<li>gaussian distribution has nice properties</li>
+</ol>
+<h4 id="forward-and-backwards-a-landmark-paper-DPM"><a href="#forward-and-backwards-a-landmark-paper-DPM" class="headerlink" title="forward and backwards (a landmark paper: DPM)"></a>forward and backwards (a landmark paper: DPM)</h4><ol>
+<li>Add noise (forward process)</li>
+</ol>
+<ul>
+<li>$x_{image} &#x3D; x_0$ , do add noise operation for $x_0$ and we get $x_1$, repeatedly, $x_2,x_3,…,x_{t-1},x_t,… \in \approx x_T$</li>
+<li>add noise operation: $q(x_t|x_{t-1})$ this process is defined by us so we know it</li>
+</ul>
+<ol start="2">
+<li>denoise (reverse process)</li>
+</ol>
+<ul>
+<li>use an operation $p_{\theta}(x_{t-1}|x_t)$ to denoise, we want to learn a model for $p_{\theta}$</li>
+</ul>
+<p>what is the $x_t$? to represent the image</p>
+<ol>
+<li>image is composed of pixel with height and width</li>
+<li>pic covers three colors, i.e. red, blue and green. so pixel &#x3D; (0 to 255,0 to 255,0 to 255)，（R,G,B）</li>
+<li>$x_t &#x3D; (x^(1),x^(2),…,x^(n))^T$，each $x^(i)$ is a pixel, the size of $x_t$ is the dimension n times 3</li>
+</ol>
+<h2 id="单词对照"><a href="#单词对照" class="headerlink" title="单词对照"></a>单词对照</h2><p><code>听的斯坦福的网课，有的英文不认识，记录一下</code></p>
+<p>prerequisites 前置知识</p>
+<p>slides 幻灯片</p>
+<p>annotation 注释</p>
+<p>convention 惯例</p>
+<p>intuitive 直觉的</p>
+<p>cofficient 系数</p>
+<p>standard deviation 标准差</p>
+<p>marginalization 边缘概率</p>
+<p>numerator 分子</p>
+<p>denominator 分母</p>
+<p>KL divergence KL散度</p>
+<p>tractable 易于处理的</p>
+<p>explicit 明确的</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

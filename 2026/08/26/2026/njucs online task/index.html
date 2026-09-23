@@ -1,0 +1,1381 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>njucs online task [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/poetry">
+                            <span class="btn-text">诗歌</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>njucs online task</h1>
+			<h2 id="C-C"><a href="#C-C" class="headerlink" title="C&#x2F;C++"></a>C&#x2F;C++</h2><h3 id="基础核心"><a href="#基础核心" class="headerlink" title="基础核心"></a>基础核心</h3><p>指针：存放内存地址的变量。<br>解引用（<em>）：通过地址取到那间“屋子”里的值。<br>取地址（&amp;）：获取变量在内存中的门牌号。<br>指针的类型：决定了指针加减 1 时跳过多少个字节（int</em> 跳 4 字节，double* 跳 8 字节）。</p>
+<h3 id="数组指针"><a href="#数组指针" class="headerlink" title="数组指针"></a>数组指针</h3><p>指针数组 <code>int *p[5]</code>：[ ] 优先级高于 <code>*</code>，所以 p 是一个数组，里面有 5 个 int* 指针。<br>数组指针 <code>int (*p)[5]</code>：(*p) 说明 p 是个指针，它指向一个包含 5 个 int 元素的整个数组，[5]实际上是类型声明的一部分。</p>
+<p>注意点：</p>
+<ol>
+<li>指针数组每个元素是指向该数组元素的指针 数组指针是指向一个数组的指针</li>
+<li>数组指针的步长是 数组元素的字节数*数组元素的个数</li>
+<li>典型的数组指针的应用场景是在二维数组中，例如<code>int matrix[3][4]; int (*row)[4] = matrix;</code>，用来指向二维数组中一维的指针；</li>
+</ol>
+<h3 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h3><p>函数指针指向的是代码段的首地址，主要用于回调函数（如 qsort）、状态机或实现多态。</p>
+<p>函数指针的例子：</p>
+<pre><code class="highlight c"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> a + b; &#125;
+
+<span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;
+    <span class="comment">// 赋值：函数名就是地址，&amp; 可加可不加</span>
+    <span class="type">int</span> (*func_ptr)(<span class="type">int</span>, <span class="type">int</span>) = add; 
+    <span class="comment">// 调用：两种写法等价（C++ 中推荐直接 func_ptr(a,b)）</span>
+    <span class="type">int</span> result = func_ptr(<span class="number">3</span>, <span class="number">5</span>);   
+    <span class="comment">// 或者 int result = (*func_ptr)(3, 5);</span>
+    <span class="comment">// 如果单纯声明函数指针就使用int (*f)(int,int); 即声明了一个接受 返回类型为int 参数列表为(int,int)类型函数 的指针f，f是变量名</span>
+&#125;</code></pre>
+
+<p>C++中可以使用using别名</p>
+<pre><code class="highlight c++"><span class="keyword">using</span> FuncType = <span class="built_in">void</span>(*)(<span class="type">int</span>); <span class="comment">// 定义类型别名</span>
+<span class="function"><span class="type">void</span> <span class="title">forEach</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> n, FuncType f)</span> </span>&#123; ... &#125; <span class="comment">// 作为参数传递</span>
+<span class="comment">//注意，这里的FuncType是定义了一个函数指针的类型</span>
+<span class="built_in">void</span>(*f)(<span class="type">int</span>);<span class="comment">//这是定义了一个函数指针变量，和上面的类型不同，等价于FuncType f;</span></code></pre>
+
+<p>函数指针通常可以用于复杂解析式的声明（要使用右左法则），下例是<strong>返回函数指针的函数</strong></p>
+<pre><code class="highlight c++"><span class="built_in">void</span> (*<span class="built_in">signal</span>(<span class="type">int</span> sig, <span class="built_in">void</span> (*func)(<span class="type">int</span>)))(<span class="type">int</span>);
+<span class="comment">//这是一个函数声明：signal 接受 (int, 函数指针)，返回一个函数指针（指向返回 void、接受 int 的函数）。</span>
+<span class="comment">//为了让代码可读性强，通常先声明一个函数指针的类型</span>
+<span class="keyword">using</span> FuncType = <span class="built_in">void</span>(*)(<span class="type">int</span>);
+<span class="function">FuncType <span class="title">signal</span><span class="params">(<span class="type">int</span> sig,Func f)</span></span>;</code></pre>
+<p><em>返回函数指针的函数和函数指针的声明很像，要注意区分</em></p>
+<p>右左法则：先向右看（Right），再向左看（Left），遇到括号跳出去，重复这个过程。（主要是帮助读懂声明的“标识符”的含义）；</p>
+<p>例如对于上述复杂解析式：</p>
+<ol>
+<li>找到标识符：找到 signal。</li>
+<li>向右看：遇到 (，说明 signal 是一个函数，参数是 (int sig, void (*func)(int))。</li>
+<li>向左看：跳过 ) 后，遇到 *，说明这个函数返回的是一个指针。</li>
+<li>跳出括号：继续向右看，遇到 (int)，说明这个指针指向一个函数，该函数接受 int，返回 void。</li>
+</ol>
+<p>函数指针的一个应用场景：系统级信号&#x2F;中断处理（如 signal 本身）这是该语法诞生的初衷。操作系统需要允许用户动态替换或恢复某个信号的处理逻辑，同时返回旧的处理函数指针以供备份。</p>
+<p>简单的示例代码：</p>
+<pre><code class="highlight c"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span>
+
+<span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*<span class="type">sighandler_t</span>)</span><span class="params">(<span class="type">int</span>)</span>;
+
+<span class="type">static</span> <span class="type">sighandler_t</span> handler_table[<span class="number">10</span>] = &#123;<span class="literal">NULL</span>&#125;;
+
+<span class="comment">// 为每个包装器分配独立的“下一个”指针</span>
+<span class="type">static</span> <span class="type">sighandler_t</span> g_log_next = <span class="literal">NULL</span>;   <span class="comment">// 日志层专用</span>
+<span class="type">static</span> <span class="type">sighandler_t</span> g_auth_next = <span class="literal">NULL</span>;  <span class="comment">// 鉴权层专用</span>
+
+<span class="type">sighandler_t</span> <span class="title function_">my_signal</span><span class="params">(<span class="type">int</span> sig, <span class="type">sighandler_t</span> func)</span> &#123;
+    <span class="keyword">if</span> (sig &lt; <span class="number">0</span> || sig &gt;= <span class="number">10</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;
+    <span class="type">sighandler_t</span> old = handler_table[sig];
+    handler_table[sig] = func;
+    <span class="keyword">return</span> old;
+&#125;
+
+<span class="type">void</span> <span class="title function_">trigger_signal</span><span class="params">(<span class="type">int</span> sig)</span> &#123;
+    <span class="keyword">if</span> (handler_table[sig] != <span class="literal">NULL</span>)
+        handler_table[sig](sig);
+&#125;
+
+<span class="comment">// ---------- 具体处理函数 ----------</span>
+<span class="type">void</span> <span class="title function_">handle_business</span><span class="params">(<span class="type">int</span> sig)</span> &#123;
+    <span class="built_in">printf</span>(<span class="string">&quot;  [业务层] 执行核心交易逻辑，信号: %d\n&quot;</span>, sig);
+&#125;
+
+<span class="comment">// 日志包装器：调用自己的 g_log_next</span>
+<span class="type">void</span> <span class="title function_">log_wrapper</span><span class="params">(<span class="type">int</span> sig)</span> &#123;
+    <span class="built_in">printf</span>(<span class="string">&quot;  [日志层] 开始记录...\n&quot;</span>);
+    <span class="keyword">if</span> (g_log_next) g_log_next(sig);   <span class="comment">// 指向业务处理</span>
+    <span class="built_in">printf</span>(<span class="string">&quot;  [日志层] 记录结束。\n&quot;</span>);
+&#125;
+
+<span class="comment">// 鉴权包装器：调用自己的 g_auth_next</span>
+<span class="type">void</span> <span class="title function_">auth_wrapper</span><span class="params">(<span class="type">int</span> sig)</span> &#123;
+    <span class="built_in">printf</span>(<span class="string">&quot;  [鉴权层] 验证用户权限...\n&quot;</span>);
+    <span class="keyword">if</span> (g_auth_next) g_auth_next(sig); <span class="comment">// 指向日志包装器</span>
+    <span class="built_in">printf</span>(<span class="string">&quot;  [鉴权层] 权限验证通过。\n&quot;</span>);
+&#125;
+
+<span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;
+    <span class="comment">// 1. 注册核心业务函数</span>
+    my_signal(<span class="number">1</span>, handle_business);
+    <span class="built_in">printf</span>(<span class="string">&quot;&gt;&gt;&gt; 注册业务函数完成\n&quot;</span>);
+
+    <span class="comment">// 2. 构建 日志 → 业务</span>
+    g_log_next = handle_business;      <span class="comment">// 日志的“下一个”设为业务</span>
+    my_signal(<span class="number">1</span>, log_wrapper);         <span class="comment">// 此时表[1] = log_wrapper</span>
+    <span class="built_in">printf</span>(<span class="string">&quot;&gt;&gt;&gt; 注册日志包装器完成\n&quot;</span>);
+
+    <span class="comment">// 3. 构建 鉴权 → 日志 → 业务</span>
+    g_auth_next = log_wrapper;         <span class="comment">// 鉴权的“下一个”设为当前的日志包装器</span>
+    my_signal(<span class="number">1</span>, auth_wrapper);        <span class="comment">// 此时表[1] = auth_wrapper</span>
+    <span class="built_in">printf</span>(<span class="string">&quot;&gt;&gt;&gt; 注册鉴权包装器完成\n&quot;</span>);
+
+    <span class="comment">// 最终触发</span>
+    <span class="built_in">printf</span>(<span class="string">&quot;\n&gt;&gt;&gt; 触发信号 1（执行完整链条）：\n&quot;</span>);
+    trigger_signal(<span class="number">1</span>);
+
+    <span class="comment">// 调用链：auth_wrapper → g_auth_next (log_wrapper) </span>
+    <span class="comment">//       → log_wrapper → g_log_next (handle_business)</span>
+    <span class="comment">// 每个包装器只认自己专属的 next 指针，绝不会互相覆盖或递归。</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<h3 id="多重指针"><a href="#多重指针" class="headerlink" title="多重指针"></a>多重指针</h3><p>存放指针的地址。每多一级 *，就多一层间接寻址。</p>
+<p>一级指针 int *p：指向普通变量。<br>二级指针 int **pp：指向一级指针</p>
+<p>例子：</p>
+<pre><code class="highlight c"><span class="type">int</span> a = <span class="number">10</span>;
+<span class="type">int</span> *p = &amp;a;   <span class="comment">// 一级：p存a的地址</span>
+<span class="type">int</span> **pp = &amp;p; <span class="comment">// 二级：pp存p的地址</span>
+
+**pp == <span class="number">10</span>; <span class="comment">// 解引用两次：*pp 拿到 p 的值（即a的地址），再 * 拿到 a 的值</span></code></pre>
+
+<p>常见的应用场景：</p>
+<ol>
+<li>在函数内修改函数外的指针本身（不只是改所指内容）：</li>
+</ol>
+<pre><code class="highlight c"><span class="type">void</span> <span class="title function_">allocate_memory</span><span class="params">(<span class="type">int</span> **ptr)</span> &#123; <span class="comment">// 传入指针的地址</span>
+    *ptr = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)); <span class="comment">// 修改外部的指针指向</span>
+    **ptr = <span class="number">100</span>;
+&#125;
+<span class="type">int</span> *p = <span class="literal">NULL</span>;
+allocate_memory(&amp;p); <span class="comment">// 传 p 的地址</span></code></pre>
+
+<ol start="2">
+<li>字符串数组（数组的元素是字符串）</li>
+</ol>
+<pre><code class="highlight c"><span class="type">char</span> *argv[] = &#123;<span class="string">&quot;ls&quot;</span>, <span class="string">&quot;-l&quot;</span>, <span class="literal">NULL</span>&#125;; <span class="comment">// 指针数组，argv本身也是二级指针</span>
+<span class="comment">// main 函数的 int main(int argc, char **argv) </span>
+<span class="comment">// argv 就是二级指针，argc 是长度，argv[0] 指向 &quot;ls&quot;</span></code></pre>
+
+<h3 id="数组与指针"><a href="#数组与指针" class="headerlink" title="数组与指针"></a>数组与指针</h3><h4 id="数组名退化和不退化的情况"><a href="#数组名退化和不退化的情况" class="headerlink" title="数组名退化和不退化的情况"></a>数组名退化和不退化的情况</h4><p>数组名与指针的关系：数组名可以退化为指针，但不是所有时候都会退化</p>
+<ol>
+<li>使用数组名直接赋值指针的时候、传递数组名的时候，通常会退化；</li>
+<li>使用sizeof、&amp;的时候不会退化</li>
+</ol>
+<pre><code class="highlight c"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;
+
+<span class="comment">//sizeof</span>
+<span class="built_in">printf</span>(<span class="string">&quot;%zu\n&quot;</span>, <span class="keyword">sizeof</span>(arr)); <span class="comment">// 输出 20 (5 * 4 字节) —— 这是整个数组的大小</span>
+<span class="built_in">printf</span>(<span class="string">&quot;%zu\n&quot;</span>, <span class="keyword">sizeof</span>(arr[<span class="number">0</span>])); <span class="comment">// 输出 4</span>
+
+<span class="comment">//退化</span>
+<span class="comment">// 关键：只有在表达式中使用时，数组名才会&quot;退化&quot;为指向首元素的指针</span>
+<span class="type">int</span> *p = arr; <span class="comment">// 此时 arr 退化成 &amp;arr[0]</span>
+<span class="built_in">printf</span>(<span class="string">&quot;%zu\n&quot;</span>, <span class="keyword">sizeof</span>(p)); <span class="comment">// 输出 8（64位系统下指针大小，不再是20！）</span>
+
+<span class="comment">//&amp;</span>
+<span class="built_in">printf</span>(<span class="string">&quot;arr    = %p\n&quot;</span>, arr);     <span class="comment">// 假设输出 0x100</span>
+<span class="built_in">printf</span>(<span class="string">&quot;arr + 1 = %p\n&quot;</span>, arr + <span class="number">1</span>); <span class="comment">// 输出 0x104（+4字节）</span>
+    
+<span class="built_in">printf</span>(<span class="string">&quot;&amp;arr   = %p\n&quot;</span>, &amp;arr);    <span class="comment">// 输出 0x100（数值相同）</span>
+<span class="built_in">printf</span>(<span class="string">&quot;&amp;arr + 1 = %p\n&quot;</span>, &amp;arr + <span class="number">1</span>); <span class="comment">// 输出 0x114（+20字节）</span>
+<span class="keyword">return</span> <span class="number">0</span>;</code></pre>
+
+<p>传递数组名，导致数组名退化为指针（也就是说本质是传递的指针，因此在传递数组的时候通常要附上数组的长度作为参数）</p>
+<pre><code class="highlight c"><span class="comment">// 下面这三种写法在编译器中完全等价，都是 int *arr</span>
+<span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> arr[<span class="number">5</span>])</span> &#123; <span class="keyword">sizeof</span>(arr); &#125; <span class="comment">// 结果是 8，不是 20！</span>
+<span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> arr[])</span>  &#123; <span class="keyword">sizeof</span>(arr); &#125; <span class="comment">// 结果是 8</span>
+<span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> *arr)</span>   &#123; <span class="keyword">sizeof</span>(arr); &#125; <span class="comment">// 结果是 8</span></code></pre>
+
+<h4 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h4><p>int matrix[3][4] 本质是一个数组，里面有 3 个元素，每个元素是一个 包含 4 个 int 的一维数组。</p>
+<p>内存布局是行主序（Row-major）：[行0][列0] → [行0][列1] → … → [行1][列0] … 连续存储。</p>
+<p>多维数组的<strong>退化</strong>（非常重要）：</p>
+<p>matrix 退化为指向 第一行 的指针，即 int (<em>)[4]（步长是 4 个 int，即16字节）。<br>matrix[0] 退化为指向 第一行第一列 的指针，即 int</em>（步长是 4 字节）。</p>
+<pre><code class="highlight c"><span class="type">int</span> matrix[<span class="number">3</span>][<span class="number">4</span>];
+<span class="type">int</span> (*row)[<span class="number">4</span>] = matrix;     <span class="comment">// 正确，指向第一行</span>
+<span class="type">int</span> *col = matrix[<span class="number">0</span>];        <span class="comment">// 正确，指向首个元素</span>
+<span class="comment">// int **ptr = matrix;       // 错误！类型不匹配，int** 和 int(*)[4] 完全不同！</span></code></pre>
+
+<h4 id="字符串数组"><a href="#字符串数组" class="headerlink" title="字符串数组"></a>字符串数组</h4><p>C语言没有字符串类型，用 char 数组 + \0 结尾。</p>
+<pre><code class="highlight c"><span class="type">char</span> s1[] = <span class="string">&quot;Hello&quot;</span>; <span class="comment">// 长度6（包含隐式的 &#x27;\0&#x27;），存储在栈上，可修改</span>
+<span class="type">char</span> *s2 = <span class="string">&quot;World&quot;</span>;  <span class="comment">// s2 指向常量区的字面量，只读，*s2=&#x27;x&#x27; 会崩溃！</span></code></pre>
+
+<h3 id="内存分区"><a href="#内存分区" class="headerlink" title="内存分区"></a>内存分区</h3><p>C&#x2F;C++程序在运行时，其占用的内存空间会被逻辑地划分为若干个具有不同属性与生命周期的区域。</p>
+<h4 id="代码区-Code-Segment-Text-Segment"><a href="#代码区-Code-Segment-Text-Segment" class="headerlink" title="代码区 (Code Segment &#x2F; Text Segment)"></a>代码区 (Code Segment &#x2F; Text Segment)</h4><p><strong>代码区</strong>，亦称文本段，用于存放程序编译后生成的CPU机器指令，即函数体的二进制代码。该区域具备两个关键特性：</p>
+<p><strong>只读性</strong> (Read-Only)：为防止程序因意外或恶意操作而修改其自身指令，代码区被设定为只读。<br><strong>共享性</strong> (Shared)：对于被多个进程同时执行的同一程序（如动态链接库），操作系统只需在内存中保留一份代码区的副本供所有进程共享，从而有效节省内存资源。</p>
+<p>代码区的内存在程序运行前即被加载，并贯穿整个程序的生命周期。</p>
+<h4 id="全局-静态存储区-Global-Static-Storage"><a href="#全局-静态存储区-Global-Static-Storage" class="headerlink" title="全局&#x2F;静态存储区 (Global&#x2F;Static Storage)"></a>全局&#x2F;静态存储区 (Global&#x2F;Static Storage)</h4><p>此区域用于存放<strong>全局变量和静态变量</strong>（即被<strong>static</strong>关键字修饰的变量）。该区域的内存在程序开始时被分配，并在程序结束时由操作系统统一释放。</p>
+<p>在传统的C语言实现中，该区域会根据变量是否被显式初始化，进一步细分为.data段（已初始化）和.bss段（未初始化）。然而，在现代C++标准中，这种区分在逻辑上通常不再被强调，二者被统一视为全局&#x2F;静态存储区的一部分。</p>
+<h4 id="常量存储区-Constant-Storage"><a href="#常量存储区-Constant-Storage" class="headerlink" title="常量存储区 (Constant Storage)"></a>常量存储区 (Constant Storage)</h4><p>常量存储区用于存放<strong>编译期间即可确定的常量数据</strong>，典型的例子包括字符串字面量（如”hello world”）和用const修饰的全局常量。此区域通常也是<strong>只读</strong>的，任何修改该区域数据的尝试都将在运行时引发段错误（Segmentation Fault）。该区域的数据同样在程序结束后由系统释放。</p>
+<h4 id="栈区-Stack"><a href="#栈区-Stack" class="headerlink" title="栈区 (Stack)"></a>栈区 (Stack)</h4><p>栈区是用于管理<strong>函数调用过程</strong>的内存区域。其内存在编译器需要时自动分配，并在函数执行完毕后自动释放。栈区的管理方式类似于数据结构中的栈，遵循后进先出（LIFO, Last-In-First-Out） 的原则。</p>
+<p>栈区主要存储以下数据:</p>
+<p>函数的参数值（形参）。<br>函数内部定义的局部变量（包括const修饰的局部常量）。<br>函数调用后的返回地址等信息。</p>
+<p>栈的大小在程序编译时通常是固定的（例如在Windows环境下通常为1MB或2MB）。若申请的空间超过栈的剩余容量，将引发栈溢出（Stack Overflow） 错误。</p>
+<h4 id="堆区-Heap"><a href="#堆区-Heap" class="headerlink" title="堆区 (Heap)"></a>堆区 (Heap)</h4><p>堆区是用于动态内存分配的区域。程序员通过malloc（C语言）或new（C++语言）等操作符申请的内存即来源于此。堆区内存的分配与释放<strong>由程序员显式控制</strong>（使用free或delete）。若程序员未主动释放，则需依赖程序结束时操作系统进行回收。</p>
+<p>与栈区不同，堆区的内存空间通常是不连续的，其<strong>管理依赖于操作系统维护的空闲内存链表</strong>。这种分配方式也决定了堆区能够申请到的内存空间通常比栈区更大、更灵活。然而，动态内存分配的效率相对较低，且若管理不当（如忘记释放），极易导致内存泄漏（Memory Leak）。</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>前置底层概念：</p>
+<p>存储期（Storage Duration）：决定变量在内存中存活的时长。<br>1 .自动存储期：栈上分配，进入作用域创建，离开作用域销毁。<br>2. 静态存储期：全局静态区分配，程序启动时创建，程序结束才销毁。</p>
+<p>链接属性（Linkage）：决定变量&#x2F;函数在多个编译单元（.c&#x2F;.cpp 文件）中能否被访问。</p>
+<ol>
+<li>无链接：只在当前代码块内有效。</li>
+<li>内部链接：只在当前编译单元（当前 .c&#x2F;.cpp 文件）内有效，其他文件无法访问。</li>
+<li>外部链接：可被整个项目的其他编译单元访问（如全局变量）。</li>
+</ol>
+<p><strong>static 的本质作用就是干预这两者：要么把存储期改为静态，要么把链接属性改为内部。</strong></p>
+<p>在纯C环境中，static 有且仅有三种使用场景：</p>
+<ol>
+<li>修饰局部变量（改变存储期）</li>
+</ol>
+<ul>
+<li>表现：变量存储在静态区，生命周期贯穿整个程序运行。</li>
+<li>特性：只初始化一次（首次执行到定义处），多次调用间保持值不变。</li>
+<li>作用域：依然受块作用域限制（只在花括号 {} 内可见）。<pre><code class="highlight c"><span class="type">void</span> <span class="title function_">counter</span><span class="params">()</span> &#123;
+    <span class="type">static</span> <span class="type">int</span> count = <span class="number">0</span>; <span class="comment">// 只初始化一次，默认初始化为0</span>
+    count++;
+    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, count);
+&#125;
+<span class="comment">// 多次调用输出：1 2 3 4 ... ，而不会重新从0开始，这也是最经典的用法——“生成唯一序列号”</span>
+
+<span class="comment">//还可以用于“懒加载”，例如用static初始化函数调用中的随机数生成器，让其只初始化一次，避免每次调用都初始化</span></code></pre>
+底层注意：编译时，该变量已被分配在 .data 或 .bss 段，函数调用时的汇编指令直接操作固定内存地址，而非栈指针偏移。</li>
+</ul>
+<ol start="2">
+<li>修饰全局变量（改变链接属性）</li>
+</ol>
+<ul>
+<li>表现：在文件顶层（所有函数之外）定义。</li>
+<li>特性：将默认的外部链接改为内部链接。</li>
+<li>效果：该变量仅在当前编译单元（当前 .c 文件）中可见。其他文件即使使用 extern 声明，也无法链接到这个变量。</li>
+</ul>
+<pre><code class="highlight c"><span class="comment">// file_a.c</span>
+<span class="type">static</span> <span class="type">int</span> hidden_global = <span class="number">100</span>; <span class="comment">// 仅 file_a.c 可见</span>
+<span class="comment">// file_b.c</span>
+<span class="keyword">extern</span> <span class="type">int</span> hidden_global; <span class="comment">// 编译通过，但链接时找不到该符号，报错 undefined reference</span></code></pre>
+
+<ol start="3">
+<li>修饰函数（改变链接属性）</li>
+</ol>
+<ul>
+<li>表现：和修饰全局变量完全一样，将函数的默认外部链接改为内部链接。</li>
+<li>效果：该函数仅限本文件内部调用，防止与其他文件中的同名函数冲突。这是 C 语言实现封装和模块化的最原始手段</li>
+</ul>
+<pre><code class="highlight c"><span class="comment">// math_utils.c</span>
+<span class="type">static</span> <span class="type">int</span> <span class="title function_">add_internal</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> a + b; &#125; <span class="comment">// 内部工具函数，不对外暴露</span>
+<span class="type">int</span> <span class="title function_">public_add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> add_internal(a, b); &#125;</code></pre>
+
+<p>C++中static：C++ 保留了 C 的所有用法，但引入了类（Class），因此 static 在类中有全新的语义。此时 static 不再干预链接属性，而是表明该成员属于类本身，而非类的具体对象。</p>
+<ol>
+<li>静态成员变量（类内声明，类外定义）</li>
+</ol>
+<ul>
+<li>本质：该变量被所有类对象共享，存储在静态区，不占用任何对象的内存空间。</li>
+<li>C++17 关键变化：如果使用 inline 修饰，允许在类内直接初始化且无需在类外单独定义。</li>
+</ul>
+<pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;
+<span class="keyword">public</span>:
+    <span class="type">static</span> <span class="type">int</span> value;      <span class="comment">// 声明，需在类外定义</span>
+    <span class="type">static</span> <span class="keyword">inline</span> <span class="type">int</span> count = <span class="number">10</span>; <span class="comment">// C++17 起，直接定义并初始化</span>
+&#125;;
+<span class="type">int</span> MyClass::value = <span class="number">5</span>; <span class="comment">// 必须在全局作用域显式定义（分配存储）</span></code></pre>
+
+<ol start="2">
+<li>静态成员函数（无 this 指针）</li>
+</ol>
+<ul>
+<li>本质：属于类，不属于对象。</li>
+<li>限制：<strong>只能访问</strong>静态成员变量或其他静态成员函数；<strong>不能访问</strong>非静态成员（因为没有 this，不知道操作哪个对象）。</li>
+<li>用途：工厂函数、工具类、单例模式中的 getInstance()。</li>
+</ul>
+<p>C++11 起：staic的作用还有局部静态变量的线程安全初始化（Magic Static）</p>
+<ul>
+<li>在 C 语言中，多线程同时首次调用包含静态局部变量的函数，可能导致多次初始化或数据竞争。</li>
+<li>C++11 标准规定：局部 static 变量的初始化是线程安全的。编译器会插入互斥锁机制，保证第一个线程初始化完成前，其他线程阻塞等待。</li>
+</ul>
+<pre><code class="highlight cpp"><span class="comment">// 线程安全的单例模式（Meyers&#x27; Singleton）</span>
+<span class="function">Singleton&amp; <span class="title">getInstance</span><span class="params">()</span> </span>&#123;
+    <span class="type">static</span> Singleton instance; <span class="comment">// C++11 保证只初始化一次，且线程安全</span>
+    <span class="keyword">return</span> instance;
+&#125;</code></pre>
+
+<h3 id="const与mutable"><a href="#const与mutable" class="headerlink" title="const与mutable"></a>const与mutable</h3><p>在 C++ 中，成员函数隐含一个指向当前对象的 this 指针。</p>
+<p>普通函数：this 类型是 ClassName*（可修改对象）。</p>
+<p>const 成员函数：this 类型被限定为 const ClassName*（只读对象）。</p>
+<p>因此，在 const 函数内部，编译器会禁止修改任何非 mutable 的成员变量。</p>
+<p>如果确实需要在 const 函数中修改某个成员变量（比如缓存计算结果、统计调用次数、互斥锁），可以用 mutable 关键字修饰该变量。</p>
+<p><strong>补充常函数</strong> 由const修饰的函数，注意点如下：</p>
+<ol>
+<li>常对象（const object）：只能调用常成员函数。如果试图调用非常成员函数，编译器会直接报错（因为非常函数可能修改对象，违背了常对象的常量性）。</li>
+<li>非常对象（non-const object）：可以调用常成员函数，也可以调用非常成员函数。调用哪个取决于函数重载匹配。</li>
+<li>由const修饰已有的函数写一个新函数（除了新增了const修饰以外，其他函数名、参数列表等都相同），也算重载</li>
+</ol>
+<h3 id="运行时多态-虚函数"><a href="#运行时多态-虚函数" class="headerlink" title="运行时多态-虚函数"></a>运行时多态-虚函数</h3><p>C++ 虚函数是实现运行时多态（Run-time Polymorphism）的核心机制。它允许程序在运行时，根据对象的实际类型来决定调用哪个函数，而不是仅仅根据指针或引用的声明类型。</p>
+<p>虚函数的使用&amp;运行时多态的例子</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="keyword">class</span> <span class="title class_">Base</span> &#123;
+<span class="keyword">public</span>:
+    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123; 
+        cout &lt;&lt; <span class="string">&quot;I am Base&quot;</span> &lt;&lt; endl; 
+    &#125;
+&#125;;
+
+<span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;
+<span class="keyword">public</span>:
+    <span class="comment">// 重写虚函数（C++11 建议加 override）</span>
+    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123; 
+        cout &lt;&lt; <span class="string">&quot;I am Derived&quot;</span> &lt;&lt; endl; 
+    &#125;
+&#125;;
+
+<span class="comment">// 全局函数，接受基类引用</span>
+<span class="function"><span class="type">void</span> <span class="title">makeItSpeak</span><span class="params">(Base&amp; obj)</span> </span>&#123;
+    obj.<span class="built_in">speak</span>(); <span class="comment">// 这里发生动态绑定</span>
+&#125;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    Derived d;
+    <span class="built_in">makeItSpeak</span>(d); <span class="comment">// 输出：I am Derived</span>
+
+    Base* ptr = <span class="keyword">new</span> <span class="built_in">Derived</span>();
+    ptr-&gt;<span class="built_in">speak</span>();   <span class="comment">// 输出：I am Derived</span>
+    <span class="keyword">delete</span> ptr;
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;
+
+<span class="comment">//obj.speak() 在编译时无法确定调用哪个版本，运行时通过 d 和 ptr 对象内部的 vptr 找到 Derived 的虚函数表，从而执行正确的函数。</span></code></pre>
+
+<p>主流编译器（如 GCC、Clang、MSVC）普遍采用基于虚函数表（vtable） 和虚函数指针（vptr） 的模型。</p>
+<p>虚函数表 (vtable)：每个包含（或继承）虚函数的类，在编译时都会生成一个唯一的虚函数表。这个表本质上是一个函数指针数组，按声明顺序存储了该类所有虚函数的地址。它是<strong>类级别</strong>的，同一个类的所有对象共享同一个虚函数表。</p>
+<p>虚函数指针 (vptr)：每个包含虚函数的对象，其内存布局中都会有一个隐藏的指针（vptr），指向该类对应的虚函数表。vptr 是<strong>对象级别</strong>的，在对象构造时由编译器自动初始化。</p>
+<p>虚函数在构造和析构期间会“失活”，此时调用的永远是当前正在构造&#x2F;析构的类自身的版本。</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="keyword">class</span> <span class="title class_">Base</span> &#123;
+<span class="keyword">public</span>:
+    <span class="built_in">Base</span>() &#123; 
+        <span class="built_in">speak</span>(); <span class="comment">// 危险调用</span>
+    &#125;
+    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123; 
+        cout &lt;&lt; <span class="string">&quot;Base speak&quot;</span> &lt;&lt; endl; 
+    &#125;
+&#125;;
+
+<span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;
+<span class="keyword">public</span>:
+    <span class="built_in">Derived</span>() &#123; 
+        <span class="built_in">speak</span>(); 
+    &#125;
+    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123; 
+        cout &lt;&lt; <span class="string">&quot;Derived speak&quot;</span> &lt;&lt; endl; 
+    &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    Derived d; 
+    <span class="comment">// 输出顺序：</span>
+    <span class="comment">// Base speak  (构造 Base 时，Derived 还没构造完，vptr 指向 Base 的表)</span>
+    <span class="comment">// Derived speak (构造 Derived 时，vptr 已被修正为指向 Derived 的表)</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<h4 id="virtual-override-final"><a href="#virtual-override-final" class="headerlink" title="virtual&#x2F;override&#x2F;final"></a>virtual&#x2F;override&#x2F;final</h4><p>override：明确告诉编译器“我在重写基类的虚函数”。如果基类没有对应虚函数，或函数签名不匹配，编译器会报错，防止手滑写错（比如把 speak 写成 speek 导致悄悄重载而不是重写）。</p>
+<p>final：阻止派生类继续重写该虚函数。</p>
+<h4 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h4><p>纯虚函数（Pure Virtual Function）是 C++ 实现<strong>抽象接口</strong>的基石</p>
+<p>含有纯虚函数的类称为抽象类（Abstract Class），它不能实例化，只能作为基类使用。</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="comment">// 定义一个接口/抽象类</span>
+<span class="keyword">class</span> <span class="title class_">Shape</span> &#123;
+<span class="keyword">public</span>:
+    <span class="comment">// 纯虚函数：声明末尾加 = 0</span>
+    <span class="function"><span class="keyword">virtual</span> <span class="type">double</span> <span class="title">area</span><span class="params">()</span> <span class="type">const</span> </span>= <span class="number">0</span>; 
+    
+    <span class="comment">// 普通虚函数（可选）：提供默认实现，派生类可以重写也可以不重写</span>
+    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">info</span><span class="params">()</span> <span class="type">const</span> </span>&#123;
+        cout &lt;&lt; <span class="string">&quot;This is a shape&quot;</span> &lt;&lt; endl;
+    &#125;
+&#125;;
+
+<span class="keyword">class</span> <span class="title class_">Circle</span> : <span class="keyword">public</span> Shape &#123;
+<span class="keyword">private</span>:
+    <span class="type">double</span> radius;
+<span class="keyword">public</span>:
+    <span class="built_in">Circle</span>(<span class="type">double</span> r) : <span class="built_in">radius</span>(r) &#123;&#125;
+    
+    <span class="comment">// 必须实现 area()，否则 Circle 也变成抽象类，无法实例化</span>
+    <span class="function"><span class="type">double</span> <span class="title">area</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>&#123;
+        <span class="keyword">return</span> <span class="number">3.14159</span> * radius * radius;
+    &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    <span class="comment">// Shape s; // 编译错误！不能创建抽象类的对象</span>
+    <span class="function">Circle <span class="title">c</span><span class="params">(<span class="number">5.0</span>)</span></span>;
+    cout &lt;&lt; c.<span class="built_in">area</span>() &lt;&lt; endl; <span class="comment">// 输出 78.5397</span>
+    
+    Shape* ptr = <span class="keyword">new</span> <span class="built_in">Circle</span>(<span class="number">3.0</span>);
+    cout &lt;&lt; ptr-&gt;<span class="built_in">area</span>() &lt;&lt; endl; <span class="comment">// 动态绑定，调用 Circle::area()</span>
+    <span class="keyword">delete</span> ptr;
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<h4 id="纯虚析构函数"><a href="#纯虚析构函数" class="headerlink" title="纯虚析构函数"></a>纯虚析构函数</h4><p>当你将析构函数声明为纯虚函数时，必须在类外部提供它的实现（函数体），否则链接会报错。</p>
+<p>派生类对象析构时，无论基类析构函数是否纯虚，最终一定会调用基类的析构函数。如果编译器找不到基类析构的函数体，就无法完成析构链。</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="keyword">class</span> <span class="title class_">Base</span> &#123;
+<span class="keyword">public</span>:
+    <span class="comment">// 声明为纯虚析构，目的是让 Base 成为抽象类（且不占用额外空间）</span>
+    <span class="keyword">virtual</span> ~<span class="built_in">Base</span>() = <span class="number">0</span>; 
+&#125;;
+
+<span class="comment">// 必须提供实现！否则链接器报错 &quot;undefined reference to `Base::~Base()&#x27;&quot;</span>
+Base::~<span class="built_in">Base</span>() &#123;
+    cout &lt;&lt; <span class="string">&quot;Base destructor called&quot;</span> &lt;&lt; endl;
+&#125;
+
+<span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;
+<span class="keyword">public</span>:
+    ~<span class="built_in">Derived</span>() <span class="keyword">override</span> &#123;
+        cout &lt;&lt; <span class="string">&quot;Derived destructor called&quot;</span> &lt;&lt; endl;
+    &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    Base* p = <span class="keyword">new</span> <span class="built_in">Derived</span>();
+    <span class="keyword">delete</span> p; 
+    <span class="comment">// 输出顺序：</span>
+    <span class="comment">// Derived destructor called</span>
+    <span class="comment">// Base destructor called</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<h3 id="编译时多态"><a href="#编译时多态" class="headerlink" title="编译时多态"></a>编译时多态</h3><h4 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h4><p>C++ 模板（Template）是一种强大的编译时泛型编程工具，它允许你编写与类型无关的代码，从而实现代码复用、类型安全和运行时效率（因为所有实例化都在编译期完成）。</p>
+<p>常见的使用有两种：</p>
+<ol>
+<li>函数模板</li>
+<li>类模板</li>
+</ol>
+<p>函数模板的例子</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="comment">// 定义一个交换两个值的函数模板</span>
+<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<span class="function"><span class="type">void</span> <span class="title">mySwap</span><span class="params">(T&amp; a, T&amp; b)</span> </span>&#123;
+    T temp = a;
+    a = b;
+    b = temp;
+&#125;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    <span class="type">int</span> x = <span class="number">10</span>, y = <span class="number">20</span>;
+    <span class="built_in">mySwap</span>(x, y);          <span class="comment">// 实例化为 int 版本</span>
+    cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; y &lt;&lt; endl; <span class="comment">// 20 10</span>
+
+    <span class="type">double</span> p = <span class="number">1.1</span>, q = <span class="number">2.2</span>;
+    <span class="built_in">mySwap</span>(p, q);          <span class="comment">// 实例化为 double 版本</span>
+    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; q &lt;&lt; endl; <span class="comment">// 2.2 1.1</span>
+
+    <span class="comment">// 也可以显式指定类型</span>
+    <span class="built_in">mySwap</span>&lt;<span class="type">double</span>&gt;(p, q);  <span class="comment">// 显式实例化</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+<p>typename T 也可写作 class T，效果相同。</p>
+<p>类型模板的例子</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
+<span class="keyword">class</span> <span class="title class_">Box</span> &#123;
+<span class="keyword">private</span>:
+    T content;
+<span class="keyword">public</span>:
+    <span class="built_in">Box</span>(<span class="type">const</span> T&amp; val) : <span class="built_in">content</span>(val) &#123;&#125;
+    <span class="function">T <span class="title">get</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> content; &#125;
+    <span class="function"><span class="type">void</span> <span class="title">set</span><span class="params">(<span class="type">const</span> T&amp; val)</span> </span>&#123; content = val; &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    <span class="function">Box&lt;<span class="type">int</span>&gt; <span class="title">intBox</span><span class="params">(<span class="number">123</span>)</span></span>;
+    cout &lt;&lt; intBox.<span class="built_in">get</span>() &lt;&lt; endl; <span class="comment">// 123</span>
+
+    <span class="function">Box&lt;string&gt; <span class="title">strBox</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span></span>;
+    cout &lt;&lt; strBox.<span class="built_in">get</span>() &lt;&lt; endl; <span class="comment">// Hello</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<p>其中<code>typename T</code>是类型参数，用于确定模板的类型</p>
+<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><p>函数重载：要求同名函数的形参列表必须不同，判断依据是参数个数、参数类型或参数顺序。</p>
+<ol>
+<li>返回值类型不能作为重载依据，因为调用时返回值可能被忽略，编译器无法仅凭返回值区分。</li>
+<li>const 修饰的成员函数可以重载（视为参数列表不同，因为隐式的 this 指针类型不同）。</li>
+<li>默认参数需谨慎使用，可能引发二义性。</li>
+</ol>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="comment">// 1. 参数个数不同</span>
+<span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> a)</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;int: &quot;</span> &lt;&lt; a &lt;&lt; endl; &#125;
+<span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;two ints: &quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; b &lt;&lt; endl; &#125;
+
+<span class="comment">// 2. 参数类型不同</span>
+<span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">double</span> d)</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;double: &quot;</span> &lt;&lt; d &lt;&lt; endl; &#125;
+
+<span class="comment">// 3. 参数顺序不同</span>
+<span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> a, <span class="type">double</span> d)</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;int + double&quot;</span> &lt;&lt; endl; &#125;
+<span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">double</span> d, <span class="type">int</span> a)</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;double + int&quot;</span> &lt;&lt; endl; &#125;
+
+<span class="comment">// 4. 成员函数 const 重载（常见于迭代器或容器的 begin()）</span>
+<span class="keyword">class</span> <span class="title class_">Test</span> &#123;
+<span class="keyword">public</span>:
+    <span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;non-const&quot;</span> &lt;&lt; endl; &#125;
+    <span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> <span class="type">const</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;const version&quot;</span> &lt;&lt; endl; &#125; <span class="comment">// 常对象调用此版本</span>
+&#125;;</code></pre>
+
+<p>运算符重载为自定义类型（类&#x2F;结构体）提供了类似内置类型的操作语法，让代码更直观。</p>
+<p>实现方式：可作为成员函数（左侧对象调用）或友元&#x2F;全局函数（需显式传入左侧参数）。</p>
+<p>限制：</p>
+<ol>
+<li>必须至少有一个用户定义类型的参数（不能重载 int + int）。</li>
+<li>不可重载的运算符：::（作用域）、.（成员访问）、.*（成员指针）、?:（三目）、sizeof、typeid。</li>
+<li>不可创造新运算符（如 ** 表示幂运算不行）。</li>
+<li>不可改变优先级、结合性或操作数个数（&amp;&amp; 和 || 重载后会失去短路求值特性）。</li>
+</ol>
+<pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">Complex</span> &#123;
+    <span class="type">double</span> real, imag;
+<span class="keyword">public</span>:
+    <span class="built_in">Complex</span>(<span class="type">double</span> r = <span class="number">0</span>, <span class="type">double</span> i = <span class="number">0</span>) : <span class="built_in">real</span>(r), <span class="built_in">imag</span>(i) &#123;&#125;
+    
+    <span class="comment">// 作为成员函数重载 +=</span>
+    Complex&amp; <span class="keyword">operator</span>+=(<span class="type">const</span> Complex&amp; other) &#123;
+        real += other.real;
+        imag += other.imag;
+        <span class="keyword">return</span> *<span class="keyword">this</span>;
+    &#125;
+    
+    <span class="comment">// 作为友元函数重载 +（便于支持隐式转换）</span>
+    <span class="keyword">friend</span> Complex <span class="keyword">operator</span>+(<span class="type">const</span> Complex&amp; a, <span class="type">const</span> Complex&amp; b) &#123;
+        <span class="keyword">return</span> <span class="built_in">Complex</span>(a.real + b.real, a.imag + b.imag);
+    &#125;
+    
+    <span class="comment">// 重载 &lt;&lt; 输出流（必须是非成员）</span>
+    <span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; os, <span class="type">const</span> Complex&amp; c) &#123;
+        os &lt;&lt; <span class="string">&quot;(&quot;</span> &lt;&lt; c.real &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; c.imag &lt;&lt; <span class="string">&quot;i)&quot;</span>;
+        <span class="keyword">return</span> os;
+    &#125;
+&#125;;
+<span class="comment">// 使用时：Complex c1(1,2), c2 = c1 + 3.14; // 借助隐式转换</span></code></pre>
+
+<p>为什么&lt;&lt;必须以非成员函数重载（通常用友元函数）</p>
+<ol>
+<li>这完全是由运算符重载的调用语法决定的。</li>
+<li>当重载为成员函数时，第一个操作数（左侧参数）必须是当前类的对象（即 this）。</li>
+<li>对于 cout &lt;&lt; obj，左侧操作数是 std::ostream 类型的对象（cout），右侧才是你的自定义类。</li>
+<li>你无法给 std::ostream 类添加成员函数（标准库是封闭的），所以 operator&lt;&lt; 只能定义为非成员函数。</li>
+</ol>
+<p><strong>补充友元函数</strong></p>
+<p>友元函数的主要作用：突破类的封装性，允许非成员函数访问类中的私有（private）和保护（protected）成员。</p>
+<p>友元函数通常是在类内部声明为友元函数，然后类外实现。它可能是全局函数也可能是局部函数，取决于实现（定义）的位置</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="keyword">namespace</span> MySpace &#123; <span class="comment">// 自定义命名空间</span>
+    <span class="keyword">class</span> <span class="title class_">Test</span> &#123;
+    <span class="keyword">private</span>:
+        <span class="type">int</span> secret = <span class="number">42</span>;
+    <span class="keyword">public</span>:
+        <span class="comment">// 情况1：友元是全局函数（定义在全局域）</span>
+        <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">globalFriend</span><span class="params">(Test&amp; t)</span></span>;
+        
+        <span class="comment">// 情况2：友元是命名空间中的函数（定义在 MySpace 内，但不是全局）</span>
+        <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">spaceFriend</span><span class="params">(Test&amp; t)</span></span>;
+    &#125;;
+
+    <span class="comment">// 定义在 MySpace 命名空间内的函数（它是非成员函数，但不是全局函数）</span>
+    <span class="function"><span class="type">void</span> <span class="title">spaceFriend</span><span class="params">(Test&amp; t)</span> </span>&#123;
+        cout &lt;&lt; <span class="string">&quot;命名空间中的友元，访问私有: &quot;</span> &lt;&lt; t.secret &lt;&lt; endl;
+    &#125;
+&#125;
+
+<span class="comment">// 定义在全局域的全局函数（它是非成员函数，也是全局函数）</span>
+<span class="function"><span class="type">void</span> <span class="title">globalFriend</span><span class="params">(MySpace::Test&amp; t)</span> </span>&#123;
+    cout &lt;&lt; <span class="string">&quot;全局友元，访问私有: &quot;</span> &lt;&lt; t.secret &lt;&lt; endl;
+&#125;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    MySpace::Test t;
+    
+    <span class="built_in">globalFriend</span>(t);      <span class="comment">// OK，全局函数调用</span>
+    MySpace::<span class="built_in">spaceFriend</span>(t); <span class="comment">// OK，命名空间中的函数调用</span>
+    
+    <span class="comment">// 注意：如果在 main 里直接写 spaceFriend(t); 会因为找不到命名空间而报错</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<p><strong>友元函数也可以在类内部实现</strong></p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><h4 id="构造函数基本的执行过程"><a href="#构造函数基本的执行过程" class="headerlink" title="构造函数基本的执行过程"></a>构造函数基本的执行过程</h4><p>构造函数的执行过程：</p>
+<ol>
+<li>分配内存（通常由 new 表达式或栈帧分配完成，之后会调用构造函数）。</li>
+<li>初始化列表执行（重要：此阶段发生在函数体之前）。</li>
+<li>函数体执行（此时对象内的成员已有初值或默认值）。</li>
+</ol>
+<pre><code class="highlight c++"><span class="keyword">class</span> <span class="title class_">Demo</span> &#123;
+    <span class="type">const</span> <span class="type">int</span> a; <span class="comment">// const成员必须在初始化列表中赋值</span>
+    <span class="type">int</span> b;
+<span class="keyword">public</span>:
+    <span class="comment">// 正确写法：使用初始化列表</span>
+    <span class="built_in">Demo</span>(<span class="type">int</span> val) : <span class="built_in">a</span>(val), <span class="built_in">b</span>(val * <span class="number">2</span>) &#123; 
+        <span class="comment">// 此时a和b已经构造完成，这里只做业务逻辑</span>
+    &#125;
+    
+    <span class="comment">// 错误写法（编译报错）：</span>
+    <span class="comment">// Demo(int val) &#123; a = val; &#125; // const变量赋值发生在函数体，为时已晚</span>
+    <span class="comment">// C++11起也支持，const类型的成员变量在类中声明的时候就进行初始化</span>
+&#125;;</code></pre>
+<p>深入理解：初始化列表是直接构造成员变量，而函数体内的赋值是“先默认构造，再拷贝赋值”。也就是说上面的错误写法，本质上是先使用Demo()，构造了a，再尝试给a赋值，但是a是const类型，不能赋值，所以就出错了。</p>
+<h4 id="构造函数隐式生成"><a href="#构造函数隐式生成" class="headerlink" title="构造函数隐式生成"></a>构造函数隐式生成</h4><p>构造函数的隐式生成与替代</p>
+<p>编译器在特定条件下会隐式生成：</p>
+<ol>
+<li>默认构造函数：仅当类中没有任何用户声明的构造函数时。</li>
+<li>拷贝&#x2F;移动构造函数：按成员逐一拷贝（浅拷贝）。</li>
+<li>析构函数。</li>
+</ol>
+<p>现代C++最佳实践：如果定义了带参构造函数，默认构造函数会被自动删除。如需保留，使用 Demo() &#x3D; default;</p>
+<h4 id="委托构造函数"><a href="#委托构造函数" class="headerlink" title="委托构造函数"></a>委托构造函数</h4><p>委托构造函数，允许一个构造函数调用同一个类的另一个构造函数，避免代码冗余：</p>
+<pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">Student</span> &#123;
+    <span class="type">int</span> id;
+    string name;
+<span class="keyword">public</span>:
+    <span class="built_in">Student</span>(<span class="type">int</span> i, string n) : <span class="built_in">id</span>(i), <span class="built_in">name</span>(n) &#123;&#125;
+    <span class="built_in">Student</span>() : <span class="built_in">Student</span>(<span class="number">0</span>, <span class="string">&quot;Unknown&quot;</span>) &#123;&#125; <span class="comment">// 委托给上面的构造函数</span>
+&#125;;</code></pre>
+
+<h4 id="explicit关键字"><a href="#explicit关键字" class="headerlink" title="explicit关键字"></a>explicit关键字</h4><p>如果构造函数只有一个参数，它默认充当隐式类型转换运算符。为了防止意外的类型转换，必须加 explicit：</p>
+<p><strong>单参构造函数默认是隐式类型转换的“入口”</strong></p>
+<pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">Box</span> &#123;
+<span class="keyword">public</span>:
+    <span class="function"><span class="keyword">explicit</span> <span class="title">Box</span><span class="params">(<span class="type">int</span> size)</span> </span>&#123; <span class="comment">/* ... */</span> &#125; <span class="comment">// 加explicit</span>
+&#125;;
+<span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(Box b)</span></span>;
+<span class="built_in">func</span>(<span class="number">10</span>); <span class="comment">// 编译报错（如果没加explicit，此处会隐式将10转为Box，容易产生Bug）</span>
+<span class="built_in">func</span>(<span class="built_in">Box</span>(<span class="number">10</span>)); <span class="comment">// 必须显式构造，安全</span></code></pre>
+
+<h4 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h4><p>拷贝构造用于“从已存在的对象生成一个新对象”。编译器默认生成的拷贝构造是浅拷贝（Shallow Copy）——直接复制指针变量的地址。（对于非指针的变量，实际上是拷贝的“值”，指针变量其实也拷贝的“值”，只是指针变量的“值”就是地址，所以会引发一系列问题）</p>
+<ol>
+<li>浅拷贝的灾难：如果类管理了堆内存（new），两个对象指向同一块内存，析构时会导致 Double Free（双重释放）或野指针访问。</li>
+<li>深拷贝（Deep Copy）：你必须手动开辟新内存，复制内容。</li>
+<li>拷贝赋值运算符（operator&#x3D;）：注意要处理自我赋值（if (this &#x3D;&#x3D; &amp;other) return *this;），否则释放自身资源时会把 other 的资源也干掉。</li>
+</ol>
+<p>上述1～3，对应的具体代码</p>
+<p>浅拷贝在析构时导致的问题：</p>
+<pre><code class="highlight c++"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+
+<span class="keyword">class</span> <span class="title class_">ShallowString</span> &#123;
+<span class="keyword">public</span>:
+    <span class="type">char</span>* data;
+    
+    <span class="built_in">ShallowString</span>(<span class="type">const</span> <span class="type">char</span>* str) &#123;
+        data = <span class="keyword">new</span> <span class="type">char</span>[<span class="built_in">strlen</span>(str) + <span class="number">1</span>];<span class="comment">//开辟地址</span>
+        <span class="built_in">strcpy</span>(data, str);<span class="comment">//复制内容</span>
+        std::cout &lt;&lt; <span class="string">&quot;构造 data 地址: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data &lt;&lt; std::endl;
+    &#125;
+
+    <span class="comment">// 没有写拷贝构造，编译器自动生成浅拷贝：</span>
+    <span class="comment">// ShallowString(const ShallowString&amp; other) : data(other.data) &#123;&#125;</span>
+
+    ~<span class="built_in">ShallowString</span>() &#123;
+        std::cout &lt;&lt; <span class="string">&quot;析构 data 地址: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data &lt;&lt; std::endl;
+        <span class="keyword">delete</span>[] data;  <span class="comment">// ① 第一次释放 ok</span>
+    &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    <span class="function">ShallowString <span class="title">s1</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span></span>;
+    ShallowString s2 = s1; <span class="comment">// 浅拷贝：s2.data = s1.data（指向同一块内存）</span>
+
+    <span class="comment">// 程序结束时：</span>
+    <span class="comment">// 先析构 s2 -&gt; delete[] 内存 (第一次释放，成功)</span>
+    <span class="comment">// 再析构 s1 -&gt; delete[] 同一块内存 (第二次释放，触发 Double Free 崩溃！)</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<p>显示定义拷贝函数，使用深拷贝：</p>
+<pre><code class="highlight c++"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+
+<span class="keyword">class</span> <span class="title class_">DeepString</span> &#123;
+<span class="keyword">public</span>:
+    <span class="type">char</span>* data;
+    
+    <span class="built_in">DeepString</span>(<span class="type">const</span> <span class="type">char</span>* str) &#123;
+        data = <span class="keyword">new</span> <span class="type">char</span>[<span class="built_in">strlen</span>(str) + <span class="number">1</span>];
+        <span class="built_in">strcpy</span>(data, str);
+        std::cout &lt;&lt; <span class="string">&quot;构造 data 地址: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data &lt;&lt; std::endl;
+    &#125;
+
+    <span class="comment">// 深拷贝构造函数：重新分配内存</span>
+    <span class="built_in">DeepString</span>(<span class="type">const</span> DeepString&amp; other) &#123;
+        data = <span class="keyword">new</span> <span class="type">char</span>[<span class="built_in">strlen</span>(other.data) + <span class="number">1</span>]; <span class="comment">// 开辟新内存</span>
+        <span class="built_in">strcpy</span>(data, other.data);                <span class="comment">// 复制内容</span>
+        std::cout &lt;&lt; <span class="string">&quot;深拷贝 data 地址: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data &lt;&lt; std::endl;
+    &#125;
+
+    ~<span class="built_in">DeepString</span>() &#123;
+        std::cout &lt;&lt; <span class="string">&quot;析构 data 地址: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data &lt;&lt; std::endl;
+        <span class="keyword">delete</span>[] data; <span class="comment">// 此时 s1 和 s2 指向不同内存，各删各的，安全</span>
+    &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    <span class="function">DeepString <span class="title">s1</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span></span>;
+    DeepString s2 = s1; <span class="comment">// 调用深拷贝</span>
+
+    <span class="comment">// 析构时：s2 释放 0x2000，s1 释放 0x1000，互不干扰</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<p><strong>拷贝赋值与拷贝构造</strong></p>
+<p>上面的内容都是拷贝构造，还有一种拷贝是拷贝赋值</p>
+<pre><code class="highlight cpp">ClassType a;
+a = b;<span class="comment">//b也是ClassType类型，这里的“=”操作调用的拷贝赋值</span></code></pre>
+
+<p>拷贝赋值默认也使用的浅拷贝，通常需要在类中重载“&#x3D;”运算符，实现深拷贝；</p>
+<p>即使实现了深拷贝，但可能因为没有处理<strong>自我赋值</strong>的特殊情况，而引起bug</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+
+<span class="keyword">class</span> <span class="title class_">AssignString</span> &#123;
+<span class="keyword">public</span>:
+    <span class="type">char</span>* data;
+    
+    <span class="built_in">AssignString</span>(<span class="type">const</span> <span class="type">char</span>* str) &#123;
+        data = <span class="keyword">new</span> <span class="type">char</span>[<span class="built_in">strlen</span>(str) + <span class="number">1</span>];
+        <span class="built_in">strcpy</span>(data, str);
+    &#125;
+
+    <span class="comment">// 错误版本的赋值运算符：没有检查是否自己赋值给自己</span>
+    AssignString&amp; <span class="keyword">operator</span>=(<span class="type">const</span> AssignString&amp; other) &#123;
+        std::cout &lt;&lt; <span class="string">&quot;赋值操作，准备释放自身: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data &lt;&lt; std::endl;
+        <span class="keyword">delete</span>[] data;                         <span class="comment">// ① 释放了 this 的内存，这一步是必要的，否则会导致内存泄漏</span>
+        
+        std::cout &lt;&lt; <span class="string">&quot;试图拷贝 other: &quot;</span> &lt;&lt; (<span class="type">void</span>*)other.data &lt;&lt; std::endl;
+        data = <span class="keyword">new</span> <span class="type">char</span>[<span class="built_in">strlen</span>(other.data) + <span class="number">1</span>]; <span class="comment">// ② 重新分配</span>
+        <span class="built_in">strcpy</span>(data, other.data);                <span class="comment">// ③ 复制内容</span>
+        <span class="keyword">return</span> *<span class="keyword">this</span>;
+    &#125;
+
+    ~<span class="built_in">AssignString</span>() &#123; <span class="keyword">delete</span>[] data; &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    <span class="function">AssignString <span class="title">s</span><span class="params">(<span class="string">&quot;World&quot;</span>)</span></span>;
+    
+    <span class="comment">// 重点来了：自己赋值给自己</span>
+    s = s; 
+    
+    <span class="comment">// 执行流程分析：</span>
+    <span class="comment">// 1. delete[] data -&gt; 释放了 s 自己的内存</span>
+    <span class="comment">// 2. strlen(other.data) -&gt; 由于 other 就是 this，此时 this-&gt;data 已经是野指针（已被释放）</span>
+    <span class="comment">//    访问野指针 -&gt; 未定义行为（绝大多数情况会读取到乱码或直接 Segfault 崩溃）</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<p>赋值构造前，将自己原本的内存释放（delete操作）是必要的，否则会导致内存泄漏</p>
+<p>易错点，在声明类型变量时使用“&#x3D;”，其实是用的拷贝构造</p>
+<pre><code class="highlight cpp">Type a = b; <span class="comment">//这种写法不是“赋值运算”，它叫拷贝初始化（Copy Initialization），底层调用的是拷贝构造函数。</span>
+a = b;<span class="comment">//（其中 a 已经存在）这种才是拷贝赋值运算符。</span></code></pre>
+<h4 id="移动构造函数"><a href="#移动构造函数" class="headerlink" title="移动构造函数"></a>移动构造函数</h4><p>移动构造函数（Move Constructor，C++11）：性能革命的根源</p>
+<p>移动语义解决的是“临时对象”的昂贵拷贝问题。它的核心逻辑是“资源窃取”，而不是复制。</p>
+<ul>
+<li>右值引用（&amp;&amp;）：移动构造接受 Class(Class&amp;&amp; other)，它将 other 的指针直接“偷”过来，然后把 other 的指针置为 nullptr（或重置为默认状态）。</li>
+<li>noexcept 的重要性：强烈建议将移动构造声明为 noexcept。因为 STL 容器（如 std::vector）在重新分配内存时，为了强异常安全保证，如果移动构造不是 noexcept，它会宁愿选择昂贵的拷贝构造，也不会调用移动构造，导致你的优化失效。</li>
+<li>移动赋值：同样遵循“释放自身旧资源 -&gt; 窃取对方资源 -&gt; 重置对方”。（请你结合代码为我讲解）</li>
+</ul>
+<p>关于noexcept：做说明符（Specifier），写在函数声明处，告诉编译器和调用者“本函数承诺不抛出异常”。</p>
+<pre><code class="highlight cpp"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> <span class="keyword">noexcept</span></span>;          <span class="comment">// C++11 起</span>
+<span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> <span class="title">noexcept</span><span class="params">(<span class="literal">true</span>)</span></span>;    <span class="comment">// 等同于上面</span>
+<span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> <span class="title">noexcept</span><span class="params">(<span class="literal">false</span>)</span></span>;   <span class="comment">// 等同于不写，可能抛异常</span></code></pre>
+
+<p>关于vector的移动构造，这里必须深入到 STL 源码的决策逻辑。</p>
+<p>std::vector::resize() 或 push_back() 导致扩容时，本质是 “分配新内存 -&gt; 转移旧元素 -&gt; 释放旧内存”。C++ 标准为 vector 规定了 “强异常安全保证”（Strong Exception Guarantee）：如果扩容失败（比如内存不足抛出 bad_alloc），原 vector 必须保持原样，不能丢失任何数据。</p>
+<p>这里的分水岭来了：</p>
+<p>如果移动构造是 noexcept：vector 愉快地执行 “移动转移”（O(1) 指针交换）。即使后续操作失败，旧内存已经完全迁移，符合安全逻辑。<br>如果移动构造 不是 noexcept（即可能抛异常）：vector 会拒绝使用移动构造，转而调用昂贵的 “拷贝构造”（Copy）。为什么？因为拷贝如果失败（抛异常），旧数据还完好无损地停在旧内存里，可以回滚。而移动如果移动到一半抛异常，旧对象已经被撕碎（指针被偷走），数据永久丢失，无法回滚。</p>
+<p>一个具体的例子</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+
+<span class="keyword">class</span> <span class="title class_">MyString</span> &#123;
+<span class="keyword">private</span>:
+    <span class="type">char</span>* data_;  <span class="comment">// 指向堆内存的指针</span>
+    <span class="type">size_t</span> len_;  <span class="comment">// 字符串长度</span>
+
+<span class="keyword">public</span>:
+    <span class="comment">// 1. 普通构造函数</span>
+    <span class="built_in">MyString</span>(<span class="type">const</span> <span class="type">char</span>* str = <span class="string">&quot;&quot;</span>) : <span class="built_in">len_</span>(<span class="built_in">strlen</span>(str)) &#123;
+        data_ = <span class="keyword">new</span> <span class="type">char</span>[len_ + <span class="number">1</span>];
+        <span class="built_in">strcpy</span>(data_, str);
+        std::cout &lt;&lt; <span class="string">&quot;[构造] 申请了堆内存: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data_ &lt;&lt; std::endl;
+    &#125;
+
+    <span class="comment">// 2. 拷贝构造函数 (深拷贝)</span>
+    <span class="built_in">MyString</span>(<span class="type">const</span> MyString&amp; other) : <span class="built_in">len_</span>(other.len_) &#123;
+        data_ = <span class="keyword">new</span> <span class="type">char</span>[len_ + <span class="number">1</span>];
+        <span class="built_in">strcpy</span>(data_, other.data_);
+        std::cout &lt;&lt; <span class="string">&quot;[拷贝构造] 深拷贝, 新内存: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data_ &lt;&lt; std::endl;
+    &#125;
+
+    <span class="comment">// 3. 析构函数</span>
+    ~<span class="built_in">MyString</span>() &#123;
+        <span class="keyword">if</span> (data_) &#123;
+            std::cout &lt;&lt; <span class="string">&quot;[析构] 释放堆内存: &quot;</span> &lt;&lt; (<span class="type">void</span>*)data_ &lt;&lt; std::endl;
+            <span class="keyword">delete</span>[] data_;
+            data_ = <span class="literal">nullptr</span>;
+        &#125;
+    &#125;
+
+    <span class="comment">// 为了观察，加一个打印函数</span>
+    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> <span class="type">const</span> </span>&#123; std::cout &lt;&lt; (data_ ? data_ : <span class="string">&quot;null&quot;</span>) &lt;&lt; std::endl; &#125;
+&#125;;</code></pre>
+
+<p>对于移动构造函数本质就是，让自己的对象的指针指向使用other对象指针指向的值，然后将other对象的指针重置</p>
+<pre><code class="highlight cpp"><span class="comment">// 4. 移动构造函数 (C++11)</span>
+<span class="built_in">MyString</span>(MyString&amp;&amp; other) <span class="keyword">noexcept</span> 
+    : <span class="built_in">data_</span>(other.data_), <span class="built_in">len_</span>(other.len_) &#123; <span class="comment">// 第一步：偷走对方的指针和长度</span>
+    
+    other.data_ = <span class="literal">nullptr</span>; <span class="comment">// 第二步：切断对方的“所有权”（重置）</span>
+    other.len_ = <span class="number">0</span>;
+    
+    std::cout &lt;&lt; <span class="string">&quot;[移动构造] 窃取资源, 窃取后原指针: null&quot;</span> &lt;&lt; std::endl;
+&#125;</code></pre>
+
+<p>C++在一定情况下会默认生成移动构造函数，在有默认移动构造函数的时候，触发方式如下：</p>
+<pre><code class="highlight cpp"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    MyClass a;
+    <span class="function">MyClass <span class="title">b</span><span class="params">(std::move(a))</span></span>;
+&#125;</code></pre>
+
+<p>C++ 标准规定：只有当类中没有用户显式声明的以下任何特殊成员函数时，编译器才会隐式生成默认移动构造函数：</p>
+<ol>
+<li>拷贝构造函数（Copy Constructor）</li>
+<li>拷贝赋值运算符（Copy Assignment）</li>
+<li>移动赋值运算符（Move Assignment）</li>
+<li>析构函数（Destructor）</li>
+</ol>
+<pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;
+<span class="keyword">public</span>:
+    ~<span class="built_in">MyClass</span>() &#123;&#125;  <span class="comment">// 我写了个空析构函数（甚至没做任何事）</span>
+    <span class="comment">// 没有写拷贝构造、拷贝赋值、移动构造、移动赋值</span>
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    MyClass a;
+    <span class="function">MyClass <span class="title">b</span><span class="params">(std::move(a))</span></span>; <span class="comment">// 触发的是什么？拷贝构造（默认存在），而不是移动构造。</span>
+&#125;</code></pre>
+
+<p>也就是说，通常在没有移动构造函数的时候，它会退化为拷贝构造函数。</p>
+<h4 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h4><p>析构函数负责释放对象生命周期内获取的所有资源（内存、文件句柄、锁等）。</p>
+<p>C++ 标准规定：析构顺序严格是构造顺序的逆序。</p>
+<ol>
+<li>先执行当前类析构函数体（你写的代码）</li>
+<li>按声明逆序销毁成员对象 </li>
+<li>最后调用父类析构函数。</li>
+</ol>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+
+<span class="comment">// 用于充当“成员对象”的类</span>
+<span class="keyword">class</span> <span class="title class_">Member</span> &#123;
+<span class="keyword">public</span>:
+    <span class="built_in">Member</span>(<span class="type">const</span> <span class="type">char</span>* name) : <span class="built_in">name_</span>(name) &#123;
+        std::cout &lt;&lt; <span class="string">&quot;  [Member] &quot;</span> &lt;&lt; name_ &lt;&lt; <span class="string">&quot; 构造&quot;</span> &lt;&lt; std::endl;
+    &#125;
+    ~<span class="built_in">Member</span>() &#123;
+        std::cout &lt;&lt; <span class="string">&quot;  [Member] &quot;</span> &lt;&lt; name_ &lt;&lt; <span class="string">&quot; 析构&quot;</span> &lt;&lt; std::endl;
+    &#125;
+<span class="keyword">private</span>:
+    <span class="type">const</span> <span class="type">char</span>* name_;
+&#125;;
+
+<span class="keyword">class</span> <span class="title class_">Base</span> &#123;
+<span class="keyword">public</span>:
+    Member m_base&#123;<span class="string">&quot;Base成员&quot;</span>&#125;; <span class="comment">// 成员变量</span>
+    <span class="built_in">Base</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;Base 构造函数&quot;</span> &lt;&lt; std::endl; &#125;
+    ~<span class="built_in">Base</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;Base 析构函数（开始释放基类资源）&quot;</span> &lt;&lt; std::endl; &#125;
+&#125;;
+
+<span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;
+<span class="keyword">public</span>:
+    Member m_derived&#123;<span class="string">&quot;Derived成员&quot;</span>&#125;; <span class="comment">// 派生类成员变量</span>
+    <span class="built_in">Derived</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;Derived 构造函数&quot;</span> &lt;&lt; std::endl; &#125;
+    ~<span class="built_in">Derived</span>() &#123; 
+        std::cout &lt;&lt; <span class="string">&quot;Derived 析构函数（开始释放派生类资源）&quot;</span> &lt;&lt; std::endl; 
+    &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    std::cout &lt;&lt; <span class="string">&quot;=== 开始构造 ===&quot;</span> &lt;&lt; std::endl;
+    Derived d;
+    std::cout &lt;&lt; <span class="string">&quot;=== 开始析构（离开作用域） ===&quot;</span> &lt;&lt; std::endl;
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<p>上述析构函数在默认情况下会得到如下输出：</p>
+<pre><code class="highlight txt">=== 开始构造 ===
+  [Member] Base成员 构造      // 1. 基类成员先构造（因为基类先构造）
+Base 构造函数                  // 2. 基类构造函数体
+  [Member] Derived成员 构造    // 3. 派生类成员构造
+Derived 构造函数               // 4. 派生类构造函数体
+=== 开始析构（离开作用域） ===
+Derived 析构函数（开始释放派生类资源） // 5. 先执行派生类的析构函数体
+  [Member] Derived成员 析构    // 6. 逆序销毁派生类成员（后声明先析构）
+Base 析构函数（开始释放基类资源）       // 7. 执行基类析构函数体
+  [Member] Base成员 析构       // 8. 逆序销毁基类成员</code></pre>
+
+<p>由于继承了父类，所以先调用父类构造函数，构造父类成员变量；然后再调用自己的构造函数，构造自己的成员变量；并且由于自己和父类都有另一个类作为类型的成员变量，所以在自己的构造函数开始前，会默认调用对应类的构造函数。于是关于构造呈现出上述输出结果。</p>
+<p>对于析构而言也是类似的，只是顺序是反的，先销毁派生类，再销毁父类。</p>
+<h4 id="虚析构函数"><a href="#虚析构函数" class="headerlink" title="虚析构函数"></a>虚析构函数</h4><p>析构函数通常要设置为虚函数，否则在一些情况下会出现内存泄漏</p>
+<p>一种典型的析构函数导致的内存泄露是：</p>
+<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+<span class="keyword">class</span> <span class="title class_">Base</span> &#123;
+<span class="keyword">public</span>:
+    ~<span class="built_in">Base</span>() &#123; cout &lt;&lt; <span class="string">&quot;~Base()&quot;</span> &lt;&lt; endl; &#125; <span class="comment">// 非虚析构</span>
+&#125;;
+
+<span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;
+<span class="keyword">public</span>:
+    ~<span class="built_in">Derived</span>() &#123; cout &lt;&lt; <span class="string">&quot;~Derived()&quot;</span> &lt;&lt; endl; &#125;
+&#125;;
+
+<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;
+    Base* p = <span class="keyword">new</span> <span class="built_in">Derived</span>();
+    <span class="keyword">delete</span> p; 
+    <span class="comment">// 输出只有：~Base()</span>
+    <span class="comment">// 因为 Base 的析构非虚，delete 时只调用 Base 的析构，Derived 的析构未执行！</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<p>修复办法：只需将基类析构函数声明为 virtual ~Base() {}，delete p 时就会先调用 ~Derived()，再调用 ~Base()，完美释放资源。</p>
+<h2 id="离散数学"><a href="#离散数学" class="headerlink" title="离散数学"></a>离散数学</h2><h3 id="群论"><a href="#群论" class="headerlink" title="群论"></a>群论</h3><p>群的定义：</p>
+<p>$G$是非空集合，假如定义在$G$上的二元运算$ * $（乘法），满足下面四条公里，则代数结构$(G,*)$即群：</p>
+<ol>
+<li>封闭性，$\forall a,b \in G, a*b \in G$</li>
+<li>结合律，$\forall a,b,c \in G, (a<em>b)<em>c &#x3D; a</em>(b</em>c)$</li>
+<li>单位元，$\exists e \in G, \forall a \in G, e * a &#x3D; a * e &#x3D; a$</li>
+<li>逆元，$\forall a \in G,\exists b \in G, a * b &#x3D; b * a &#x3D; e$，其中$e$是单位元，可以记$b &#x3D; a^{-1}$</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>封闭性通常已包含在“二元运算”的定义中（即运算结果仍在集合内），但单独作为一条公理列出也是常见且完全合理的写法。所以当说明乘法是二元运算之后，不描述封闭性也可以</li>
+<li>只有封闭性和结合律，称为半群（只能正向堆积）。</li>
+<li>半群基础上加上单位元，即幺半裙（可以什么都不做）。</li>
+<li>再幺半群基础上加上逆元，就有了群（拥有了“后悔药”和“解方程”的能力）。</li>
+</ol>
+<p>群的性质：</p>
+<ol>
+<li>唯一性定理</li>
+</ol>
+<ul>
+<li>一个群的单位元是唯一的</li>
+<li>每个元素的逆元是唯一的</li>
+</ul>
+<ol start="2">
+<li>消去律</li>
+</ol>
+<ul>
+<li>左消去$a * b &#x3D; a * c, b &#x3D; c$</li>
+<li>右消去类似</li>
+</ul>
+<ol start="3">
+<li>完备性</li>
+</ol>
+<ul>
+<li>$\forall a,b \in G$，方程$a * x &#x3D; b$总有唯一解$x &#x3D; a^{-1} * b$（像整数集中$2x &#x3D; 1$就是不可解的，实际上整数集也不是群，除非重新定义乘法）</li>
+</ul>
+<ol start="4">
+<li>逆元运算规则</li>
+</ol>
+<ul>
+<li>$(a * b)^{-1} &#x3D; b^{-1} * a^{-1}$</li>
+</ul>
+<ol start="5">
+<li>幂运算推广</li>
+</ol>
+<ul>
+<li>定义$a^0 &#x3D; e,a^{n+1} &#x3D; a^n * a$，则：$a^m * a^n &#x3D; a^{m+n}$，$(a^m)^n &#x3D; a^{mn}$</li>
+<li>注意：在群不满足交换律的情况下$(a * b)^n \ne a^n * b^n$</li>
+</ul>
+<p>子群定义：设$(G, * )$是群，$H$是$G$的非空子集。若$H$在相同的运算下，也满足群的四条公里，则$H$是$G$的子群，记作$H \le G$。</p>
+<p>平凡子群：任何群$G$都有两个平凡子群$G$和${e}$，其他子群，称为非平凡真子群</p>
+<ul>
+<li>代表性的例子，整数加法群$(Z,+)$中所有偶数的集合可以得到子群、所有3的倍数的集合也可以</li>
+</ul>
+<p>陪集定义：设$H \le G,\forall a \in G$</p>
+<ul>
+<li>左陪集：$aH &#x3D; {a* h| h \in H}$</li>
+<li>右陪集：$Ha &#x3D; {h* a| h \in H}$</li>
+<li>注意：陪集不一定是一个新的群，除非$a \in H$，它通常是一个集合，反应的是$H$在原始群空间的一次“平移”或“投影”</li>
+</ul>
+<p>陪集的性质：</p>
+<ul>
+<li>等势性：映射$h -&gt; a* h$是一个双射，即每一个陪集的大小（势）都严格等于子群$H$的大小（$|aH| &#x3D; |H|$）</li>
+<li>分割性：任意两个陪集，要么完全重合，要么毫不相交，即$\forall a,b \in G$，$aH&#x3D;bH$和$aH$与$bH$相交为空，有且仅有一个成立；（这也意味着，所有左陪集构成了群的一个完全划分）</li>
+<li>如果群是阿贝尔群，则同一个元素对应的左、右陪集完全一样；否则<strong>通常不一样</strong>；</li>
+</ul>
+<p>拉格朗日定理：</p>
+<ul>
+<li>陪集的个数称为是$H$在$G$中的<strong>指数</strong>，记做$[G:H]$</li>
+<li>对于有限群$G$，有$|G| &#x3D; [G:H]|H|$（因为$H$对应的陪集将$G$划分为了若干等份，每一份的大小都是$|H|$）</li>
+<li>另一种等价的表述是，“元素阶整除群阶”，对于$|G| &#x3D; 6$，子群大小只能是$1,2,3,6$中的一种，不可能是$4,5$</li>
+</ul>
+<p>元素的阶：设$G$是一个群，$a\in G$，若存在正整数$a^n &#x3D; e$，则这样的最小的正整数$n$就是元素$a$的阶，如果不存在的话阶是无穷大，记做$|a|$或$ord(a)$；</p>
+<p>群的阶：$G$是群，则其元素的个数即群的阶，若有无限个，则阶无限大，记做$|G|$</p>
+<p>循环群：若群$G$中存在至少一个元素$a$使得$G$中的每个元素都可以写成$a$的整数幂$a^n,n \in Z$，则$G$被称为循环群；</p>
+<ul>
+<li>无限循环群，群中非零元的阶是无限大的；</li>
+<li>有限循环群，群中非零元的阶不是无限大的；</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>循环群可能不止有一个生成元</li>
+<li>整数幂，包括负数幂$-1$，对应的是取逆元，从而能够依次定义负数幂</li>
+</ul>
+<p>对称群：</p>
+<ul>
+<li>设$X$是一个非空集合，由$X$到它自身的一个双射称为一个置换；（例如$X &#x3D; {1,2,3}-&gt;{3,2,1}$，可以记做置换$(1 3)$代表$1-&gt;3-&gt;1$，$2$省略了是自己映射到自己；</li>
+<li>$X$上所有这样的置换作为元素，构成的集合，再次基础上定义映射复合运算，就一定会构成一个群，即对称群；</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>若$|X| &#x3D; n$，则称为n次对称群，记做$S_n$</li>
+<li>$|S_n| &#x3D; n!$</li>
+<li>只要$n \ge 3$，$S_n$就是非阿贝尔群</li>
+</ul>
+<p>置换的相关性质</p>
+<ul>
+<li>对换：若置换只交换两个元素，则称为对换</li>
+<li>定理1:所有置换都可以分解成若干个对换的复合映射</li>
+<li>定理2:置换分解成对换的结果不是唯一的，但是奇偶性是唯一的</li>
+<li>分解成奇数个对换的置换称为奇置换，分解成偶数个对换的置换称为偶置换</li>
+</ul>
+<p>一个典型的置换的映射复合运算是(1 2)(1 3) &#x3D; (1 3 2)，置换是从右向左考虑（左结合），得出(1 3 2)的方法是依次考虑输入1、2、3的最终结果（1-&gt;3-&gt;3 2-&gt;2-&gt;1 3-&gt;1-&gt;2）</p>
+<p>置换群：对称群的子群就是置换群；</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="散列表线性探查"><a href="#散列表线性探查" class="headerlink" title="散列表线性探查"></a>散列表线性探查</h3><p>散列表线性探查：</p>
+<ul>
+<li>index &#x3D; (h(key)+i)%TableSize (i &#x3D; 0,1,2,3…)</li>
+<li>实际上就是哈希函数计算出一个初始下标发现已经有元素了，就依次向后移动直到找到一个空位；</li>
+</ul>
+<p>对应的基本操作：</p>
+<p>（1）插入</p>
+<p>从 h(key) 开始，逐个检查槽位，遇到第一个 空 就放进去。</p>
+<p>（2）查找</p>
+<p>从 h(key) 开始，逐个对比键。<br>如果匹配 → 找到。<br>如果遇到空槽 → 说明该键不存在（停止查找）。</p>
+<p>⚠️ 注意：这是查找的终止条件，但如果处理不当删除，就会出大问题。</p>
+<p>（3）删除（最需要留意的）</p>
+<p>绝对不能直接把元素物理删除（置空）！<br>因为如果置空，查找时遇到这个空槽就会误以为后面的元素不存在了，导致查找失败。<br>正确做法：使用“墓碑”（Tombstone）标记。即删除后，将该位置标记为已删除（Deleted），而不是空。插入时可以覆盖墓碑位置，查找时遇到墓碑则跳过继续查。</p>
+<h3 id="希尔排序过程"><a href="#希尔排序过程" class="headerlink" title="希尔排序过程"></a>希尔排序过程</h3><p>为什么要使用希尔排序？</p>
+<p>可以把希尔排序理解为“改进版的插入排序”。直接插入排序在数据基本有序时效率极高，但数据杂乱无章时移动次数太多。希尔排序的核心思想就是：通过“增量（步长）”将序列分组，在组内进行插入排序，让数据先“大范围”地粗略排好，最后再进行一次全局的插入排序。</p>
+<p>希尔排序的核心步骤：</p>
+<ol>
+<li>选定增量（步长）：通常取数组长度的一半作为初始增量（gap &#x3D; n&#x2F;2），之后每次减半，直到 gap &#x3D; 1。</li>
+<li>分组与排序：将相隔 gap 个位置的元素视为同一组，对每组分别进行直接插入排序。</li>
+<li>缩小增量：将 gap 减半（gap &#x3D; gap &#x2F; 2），重复步骤 2。</li>
+<li>最终排序：当 gap &#x3D; 1 时，整个数组视为一组，执行最后一次普通的插入排序。此时数组已基本有序，移动次数极少，排序完成。</li>
+</ol>
+<h3 id="二叉树的重建"><a href="#二叉树的重建" class="headerlink" title="二叉树的重建"></a>二叉树的重建</h3><p>中序遍历+先序遍历</p>
+<p>中序遍历+后序遍历</p>
+<p>（先序遍历和后序遍历可以找到当前树的根节点，中序遍历可以区分左右子树）</p>
+<h3 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h3><p>最小生成树：在无向连通图中，找到一棵树，让它连接图中所有的顶点，且所有边的总权重之和最小。</p>
+<p>求最小生成树</p>
+<p>Prim算法：</p>
+<ul>
+<li>核心思想：把图想象成两个集合——已选顶点集合 U 和 未选顶点集合 V-U。算法每次都从“连接这两个集合”的所有边中，挑出权重最小的那条边，并把对面那个新顶点拉进 U 里。</li>
+<li>执行过程（类似升级版的Dijkstra）：</li>
+</ul>
+<ol>
+<li>任选一个起点（比如顶点0），把它加入 U，此时树根就有了。</li>
+<li>维护一个数组 dist[]，记录每个未选顶点到当前树（U）的最小直接距离。</li>
+<li>循环 V-1 次：每次从 dist[] 中挑出最小值对应的顶点 u，把 u 和那条边收入生成树。</li>
+<li>新顶点 u 加入后，更新它所有邻居的 dist 值（如果邻居到 u 的距离比之前到树的距离更小，就更新）。</li>
+</ol>
+<p>Kruskal算法：</p>
+<ul>
+<li>核心思想：直接把图中所有的边按权重从小到大排序。然后从最小的边开始遍历，如果这条边连接的是两个不同的连通分量（即加入后不会形成环），就把它加入生成树；否则直接扔掉。</li>
+<li>执行过程：</li>
+</ul>
+<ol>
+<li>将所有边 (u, v, w) 按 w 升序排序。</li>
+<li>初始化：每个顶点自成一个独立的连通分量（共 V 个）。</li>
+<li>从小到大依次取边：用并查集（Union-Find）判断 u 和 v 是否已经在同一集合里。</li>
+<li>若不在同一集合，则合并这两个集合（Union），并将该边加入生成树；若在，则跳过（防止成环）。</li>
+<li>直到加入了 V-1 条边，算法结束。</li>
+</ol>
+<h3 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h3><p>Bellman-Ford算法：</p>
+<ol>
+<li>初始化：dist[起点] &#x3D; 0，其余为 INF。</li>
+<li>外层循环：重复执行 V - 1 次（V 为顶点数）。因为最短路径在没有负环的情况下，最多只包含 V-1 条边。</li>
+<li>内层松弛：每次循环，遍历图中所有的边 (u, v, w)。如果 dist[u] + w &lt; dist[v]，就更新 dist[v] &#x3D; dist[u] + w。</li>
+<li>检测负环（关键绝活）：第 V 次再遍历所有边，如果发现还能继续松弛（dist[u] + w &lt; dist[v]），说明图中存在负权环（走一圈路径权值反而变小），此时最短路径无解（负无穷），算法报错。</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>思想类似于，依次考虑只能走一条边的时候，起点到各个点点最短距离、然后2条边的时候、3条边的时候…最终V-1条边，此时就得到了起点到各个点的最短距离</li>
+<li>特殊情况是在V次时再进行遍历，如果出现了距离进一步减小，说明图中有负环，则不存在最短路径（通过负环可以把到所有点的距离都刷成负无穷）</li>
+<li>内部循环每次都遍历图中所有的边，是简单但有效的操作</li>
+</ol>
+<p>性质：</p>
+<ul>
+<li>单源最短路径，支持检测负权</li>
+<li>适合稀疏图，因为只内部只需要遍历边，点多一些无所谓；</li>
+</ul>
+<p>Floyd算法</p>
+<ol>
+<li>初始化：构建距离矩阵 dp[i][j]，直接相连的填权值，自己到自己填 0，其余填 INF。</li>
+<li>三层循环（顺序绝对不能错）：<pre><code class="highlight txt">for k in range(V):      // 枚举中转点（必须最外层）
+    for i in range(V):  // 枚举起点
+        for j in range(V): // 枚举终点
+            if dp[i][k] + dp[k][j] &lt; dp[i][j]:
+                dp[i][j] = dp[i][k] + dp[k][j]</code></pre></li>
+</ol>
+<p>Flody算法的思想：“动态规划” + “中介中转”。它的视角是：如果要从 i 到 j，无非两种情况——要么直接走，要么经过某个中间节点 k 中转更近。算法穷举所有顶点作为中转站，不断更新距离矩阵。</p>
+<p>性质：</p>
+<ul>
+<li>多源最短路径</li>
+<li>适合稠密图，因为时间复杂度是$O(V^3)$</li>
+</ul>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

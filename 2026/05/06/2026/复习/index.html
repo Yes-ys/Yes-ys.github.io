@@ -1114,6 +1114,40 @@ out = x[idx]                     <span class="comment"># 只索引第0轴，其�
 <p>I have two years of research experience. As the first author, I designed PFLNash, a federated learning algorithm that uses Nash Bargaining to adaptively balance personalization and client drift. It has been submitted to AAAI. I also developed Nash-MM for multimodal sentiment analysis, framing it as a cooperative game to resolve task conflicts; this work has been submitted to WISE. Moreover, I joined a provincial project on evolutionary reinforcement learning for unmanned ship path planning and filed a patent. </p>
 <p>In competitions, I’ve won five national awards and eight provincial awards, such as second prize in CUMCM.</p>
 <p>I’m passionate about the math behind AI and it’s engineering application. I also like the development of games and I’m familiar with Unity and C#. Thank you.</p>
+<h3 id="Q-A"><a href="#Q-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><h4 id="PFLNash"><a href="#PFLNash" class="headerlink" title="PFLNash"></a>PFLNash</h4><p>什么是纳什博弈：</p>
+<ul>
+<li>所有的player选择了自己的策略之后，任何一方单独改变自己的策略，都不会让自己获得更好的结果，即达到一种纳什均衡的状态。</li>
+<li>纳什博弈不是一种博弈类别，而是指一个博弈达到了纳什均衡的状态，不是所有的博弈都能达到纳什均衡的状态。</li>
+</ul>
+<p>什么是Pareto最优：</p>
+<ul>
+<li>对于一个策略组合，如果不存在另一个可行的策略组合，使得至少一方的收益严格变好并且同时没有其他任何一方收益变差，那么原始的策略组合就是Pareto最优的。</li>
+<li>Pareto最优是所有Player一起行动没有改进的空间 对比 纳什均衡是一方没有改进空间</li>
+</ul>
+<p>囚徒困境，两个人坐牢，双方沉默坐牢1年，一方坦白一方沉默（坦白释放、沉默10年），双方坦白坐牢5年</p>
+<ul>
+<li>考虑A，若B坦白则A应该坦白（5 &lt; 10），若B沉默则A应该坦白（0 &lt; 1），B是一样的，所以纳什均衡就是（坦白，坦白），都坐牢5年</li>
+<li>但是Pareto最优应该是（沉默，沉默），都坐牢1年</li>
+<li>通常囚徒困境的结果是达到纳什均衡，因为坦白对于每一方来说都是严格占优策略（对于其他player的任何策略，当前选择的策略是最好的）</li>
+</ul>
+<p>数据异质性</p>
+<ul>
+<li>数据异质性是指不同来源、不同群体、不同设备或不同时间的数据，在分布、特征、标签、噪声等方面存在显著差异，而不是来自同一个统一的数据分布。</li>
+<li>它们不是独立同分布（i.i.d.）地从同一个分布里采样出来的。</li>
+</ul>
+<p>个性化性能：各个本地模型在本地测试集上的准确率的加权平均<br>全局性能：全局模型在各个本地模型本地测试集上准确率的加权平均</p>
+<p>Q1: Your CV shows three distinct research directions: Federated Learning, Multimodal Sentiment Analysis, and Evolutionary Reinforcement Learning. Which one interests you the most, and why?</p>
+<p>A1: I am most fascinated by the Personalized Federated Learning project because it tackles the core challenge of data heterogeneity using game theory. As the first author, I independently handled the entire pipeline from innovation to paper writing. Sometimes I encounter difficulties, but I enjoy the process.</p>
+<p>个性化联邦学习 因为解决来数据异构的核心跳战using game theory 作为第一作者完成来from to 的整个过程 有时遇到困难但我享受这个过程</p>
+<p><strong>Q2</strong>: In your AAAI paper, you mention “Nash Bargaining” to solve the conflict between personalization and generalization. Can you briefly explain how this mechanism works in your dual-model architecture?</p>
+<p>A2: Sure. I treat the aggregation process as a cooperative game between the global and local models. Instead of using fixed weights, I apply Nash Bargaining to dynamically compute Pareto-optimal aggregation weights for each client. This ensures neither the personalized performance nor the global generalization is sacrificed. It’s a self-adaptive equilibrium that outperforms manual tuning.  </p>
+<p>aggregation process-cooperative game&#x2F; fixed weights-Pareto Optimal&#x2F; neither…nor… is sacrificed&#x2F;self-adaptive equilibrium-manual tuning</p>
+<p>Q3: You mentioned you plan to pursue a Ph.D. and work in academia. What drives you to choose a research career over an industry position?</p>
+<p>My core drive is intellectual curiosity and the freedom to explore valuable problems. I deeply enjoy the complete cycle of identifying a problem, formulating a mathematical model, and validating it through experiments. Working in academia allows me to continuously learn and contribute to open knowledge, which I find very fulfilling.</p>
+<p>intellectual curiosity freedom to explore&#x2F;complete cycle indentifying…formulating…valiadating&#x2F;academia cintinuously learn and contribute</p>
+<p><strong>Q4</strong>：In your Nash-MM paper, you model multimodal sentiment analysis as a cooperative game. How exactly does your decoupled Nash bargaining mechanism handle conflicts between different modalities during training?</p>
+<p>I treat each modality as an independent player in a multi-task framework and apply decoupled Nash bargaining to dynamically reweight their gradient updates. This prevents any single modality from dominating the optimization process and resolves gradient conflicts effectively. The mechanism ensures Pareto improvements across all modalities, leading to faster convergence. </p>
+<p>each modality-independent player-nash bargaining reweight their gradient updates&#x2F;prevents single modality from dominating the optimization process-resolves gradient conflicts&#x2F;mechanism ensures Pareto improvements-leading to faster convergence</p>
 <h2 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h2><h3 id="最初的想法"><a href="#最初的想法" class="headerlink" title="最初的想法"></a>最初的想法</h3><p>深入学一些硬核的知识，未来二十年、三十年也能用得上</p>
 <ol>
 <li>AI&#x2F;ML 基础理论	理解智能本质，研究“为什么”和“边界”	</li>

@@ -1,0 +1,448 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>nju code task [ 代码和诗 ]</title>
+
+	<link rel="shortcut icon" href="/myicon.ico">
+	
+	
+	<!-- stylesheets list from _config.yml -->
+	
+	<link rel="stylesheet" href="/css/PreciousJoy.css">
+	
+	<link rel="stylesheet" href="/css/top-bar.css">
+	
+	<link rel="stylesheet" href="/css/menu-outer.css">
+	
+	<link rel="stylesheet" href="/css/content-outer.css">
+	
+	<link rel="stylesheet" href="/css/bottom-outer.css">
+	
+	<link rel="stylesheet" href="/css/atom-one-dark.css">
+	
+	<link rel="stylesheet" href="/css/recent-posts-item.css">
+	
+	<link rel="stylesheet" href="/css/article-sidebar-toc.css">
+	
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	
+	<link rel="stylesheet" href="/css/search.css">
+	
+	<link rel="stylesheet" href="/css/toc.css">
+	
+	<link rel="stylesheet" href="/css/sidebar.css">
+	
+	<link rel="stylesheet" href="/css/archive.css">
+	
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+	
+	<link rel="stylesheet" href="/css/pagination-fan.css">
+	
+	<link rel="stylesheet" href="/css/about.css">
+	
+	<link rel="stylesheet" href="/css/Z-last-cover-others.css">
+	
+	
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+
+<body id="wrapper">
+
+	<div id="">
+		
+        <div id="fixed-header">
+            <div id="top-bar">
+                
+                <div id="avatar-box">
+                    <img 
+                    class="avatar"
+                    src="/images/my-avatar.jpg" //网站头像
+                    alt="avatar">
+                </div>
+
+                <div id="top-bar-text">
+                    <div id="top-bar-title">
+                        阳生。
+                    </div>
+                    <div id="top-bar-slogan">
+                        风毛丛劲节，只上尽头竿。
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="menu-outer">
+                <div id="menu-inner">
+                    
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/">
+                            <span class="btn-text">博文</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/plans">
+                            <span class="btn-text">计划</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/archives">
+                            <span class="btn-text">分类</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/about">
+                            <span class="btn-text">关于我</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item particle-effect-btn">
+                        <a href="/poetry">
+                            <span class="btn-text">诗歌</span>
+                        </a>
+                    </div>
+                    
+
+                    <div class="menu-item menu-item-search">
+                        
+  <span class="local-search local-search-google local-search-plugin">
+      <input type="search" placeholder="站内搜索" id="local-search-input" class="local-search-input-cls" style="">
+      <div id="local-search-result" class="local-search-result-cls"></div>
+  </span>
+	
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<div id="content-outer">
+			<div id="content-inner">
+
+				
+<div id="details">
+	
+	<article id="details-post">
+		<div id=details-post-item>
+			<h1>nju code task</h1>
+			<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="使用最小代价爬楼梯"><a href="#使用最小代价爬楼梯" class="headerlink" title="使用最小代价爬楼梯"></a>使用最小代价爬楼梯</h3><pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;
+<span class="keyword">public</span>:
+    <span class="function"><span class="type">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;
+       <span class="type">int</span> dp0 = <span class="number">0</span>,dp1 = <span class="number">0</span>,dpi = <span class="number">0</span>;
+       <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i &lt;= cost.<span class="built_in">size</span>();i++)&#123;
+            dpi = <span class="built_in">min</span>(dp0 + cost[i<span class="number">-2</span>],dp1 + cost[i<span class="number">-1</span>]);
+            dp0 = dp1;
+            dp1 = dpi;
+       &#125;
+        <span class="keyword">return</span> dpi;
+    &#125;
+&#125;;</code></pre>
+
+<p>动态规划转移方程:dp[i] &#x3D; min(dp[i-1]+cost[i-1],dp[i-2]+cost[i-2])</p>
+<h3 id="不同路径"><a href="#不同路径" class="headerlink" title="不同路径"></a>不同路径</h3><pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;
+<span class="keyword">public</span>:
+    <span class="type">int</span> dp[<span class="number">100</span>][<span class="number">100</span>];
+    <span class="function"><span class="type">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> </span>&#123;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; m;i++)dp[i][<span class="number">0</span>] = <span class="number">1</span>;
+        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; n;j++)dp[<span class="number">0</span>][j] = <span class="number">1</span>;
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; m;i++)&#123;
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt; n;j++)&#123;
+                dp[i][j] = dp[i<span class="number">-1</span>][j]+dp[i][j<span class="number">-1</span>];
+            &#125;
+        &#125;
+        <span class="keyword">return</span> dp[m<span class="number">-1</span>][n<span class="number">-1</span>];
+    &#125;
+&#125;;</code></pre>
+
+<p>dp[i][j] &#x3D; dp[i-1][j]+dp[i][j-1];</p>
+<p>到达(i,j)的路径数量等于到达(i-1,j)的路径数量+到达(i,j-1)的路径数量</p>
+<h3 id="不同路径2"><a href="#不同路径2" class="headerlink" title="不同路径2"></a>不同路径2</h3><p>class Solution {<br>public:<br>    int dp[100][100];<br>    int uniquePathsWithObstacles(vector&lt;vector<int>&gt;&amp; obstacleGrid) {<br>        int m &#x3D; obstacleGrid.size();<br>        int n &#x3D; obstacleGrid[0].size();<br>        for(int i &#x3D; 0;i &lt; m&amp;&amp;obstacleGrid[i][0] !&#x3D; 1;i++)dp[i][0] &#x3D; 1;<br>        for(int j &#x3D; 0;j &lt; n&amp;&amp;obstacleGrid[0][j] !&#x3D; 1;j++)dp[0][j] &#x3D; 1;<br>        for(int i &#x3D; 1;i &lt; m;i++){<br>            for(int j &#x3D; 1;j &lt; n;j++){<br>                if(obstacleGrid[i][j] !&#x3D; 1)<br>                    dp[i][j] &#x3D; dp[i-1][j]+dp[i][j-1];<br>            }<br>        }<br>        return dp[m-1][n-1];<br>    }<br>};</int></p>
+<p>转移方程和不同路径2基本相同，如果dp[i][j]对应位置有障碍物则状态值设置为0，初始化的时候注意从有障碍物开始的位置往后的状态函数都为0</p>
+<h3 id="整数拆分"><a href="#整数拆分" class="headerlink" title="整数拆分"></a>整数拆分</h3><p>class Solution {<br>public:<br>    int dp[59];<br>    int integerBreak(int n) {<br>        dp[2] &#x3D; 1;<br>        for(int i &#x3D; 3;i &lt;&#x3D; n;i++){<br>            for(int j &#x3D; 1;j &lt;&#x3D; i-2;j++){<br>                dp[i] &#x3D; max(dp[i],max((i-j)*j,dp[i-j]*j));<br>            }<br>        }<br>        return dp[n];<br>    }<br>};</p>
+<ol>
+<li>dp[i]代表将i拆分后的最大乘积；</li>
+<li>(i-j)*j对应将i拆分成两个数，dp[i-j] * j对应将i拆分成两个以上的数</li>
+</ol>
+<h3 id="找到所有二叉搜索树"><a href="#找到所有二叉搜索树" class="headerlink" title="找到所有二叉搜索树"></a>找到所有二叉搜索树</h3><p>二叉搜索树：</p>
+<ol>
+<li>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>它的左、右子树也分别为二叉搜索树</li>
+</ol>
+<pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;
+<span class="keyword">public</span>:
+    <span class="type">int</span> dp[<span class="number">20</span>];
+    <span class="function"><span class="type">int</span> <span class="title">numTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;
+        dp[<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//0个节点，1个二叉搜索树</span>
+        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;
+            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; i;j++)&#123;
+                dp[i] += dp[j]*dp[i<span class="number">-1</span>-j];
+            &#125;
+        &#125;
+        <span class="keyword">return</span> dp[n];
+    &#125;
+&#125;;</code></pre>
+
+<ol>
+<li>dp[i]，i个节点时能构成的二叉搜索树的数量</li>
+<li>转移方程：dp[i] &#x3D; sum dp[j]*dp[i-1-j], j from 0 to i-1</li>
+</ol>
+<p>仅考虑各种数量节点下，二叉搜索树的形态，很容易发现该规律</p>
+<h3 id="0-1背包"><a href="#0-1背包" class="headerlink" title="0-1背包"></a>0-1背包</h3><pre><code class="highlight c++"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++)dp[i][<span class="number">0</span>] = <span class="number">0</span>;
+<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt;= max_size;j++)
+    <span class="keyword">if</span>(j &gt;= weight[<span class="number">0</span>])dp[<span class="number">0</span>][j] = value[<span class="number">0</span>];
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; n;i++)&#123;
+    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= max_size;j++)&#123;
+        <span class="keyword">if</span>(j &lt; weight[i])dp[i][j] = dp[i<span class="number">-1</span>][j];
+        <span class="keyword">else</span> dp[i][j] = <span class="built_in">max</span>(dp[i<span class="number">-1</span>][j],dp[i<span class="number">-1</span>][j-weight[i]]+value[i]);
+    &#125;
+&#125;</code></pre>
+
+<p>dp[i][j]，容量为j的背包，在考虑前i个物品（包含i）时的最大价值</p>
+<h3 id="0-1背包优化"><a href="#0-1背包优化" class="headerlink" title="0-1背包优化"></a>0-1背包优化</h3><p>dp[j]，容量为j的背包，最大的价值</p>
+<pre><code class="highlight cpp"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span>
+    <span class="keyword">for</span>(<span class="type">int</span> j = bagWeight; j &gt;= weight[i]; j--) &#123; <span class="comment">// 遍历背包容量</span>
+        dp[j] = <span class="built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);
+    &#125;
+&#125;</code></pre>
+
+<p>外层遍历物品，内层遍历背包容量，dp[j]有两层含义，当前更新的是考虑了前i个物品（含i）的，还未更新的是考虑了前i-1（含i-1）个物品的</p>
+<p>因此倒序遍历相当于只考虑一次放入物品i，正序遍历更新dp[j]（考虑了前i个物品），更新dp[j+1]使用dp[j]又考虑了前i个物品</p>
+<p>当完成外部遍历最终dp[j]的含义是，容量为j的背包可以装下的最大价值</p>
+<h3 id="分割等和子集"><a href="#分割等和子集" class="headerlink" title="分割等和子集"></a>分割等和子集</h3><pre><code class="highlight cpp">
+<span class="keyword">if</span>(sum % <span class="number">2</span> == <span class="number">1</span>)<span class="keyword">return</span> <span class="literal">false</span>;
+
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;
+    <span class="keyword">for</span>(<span class="type">int</span> j = sum/<span class="number">2</span>;j &gt;= nums[i];j--)&#123;
+        dp[j] = <span class="built_in">max</span>(dp[j],dp[j-nums[i]]+nums[i]);
+    &#125;
+&#125;
+
+<span class="type">int</span> sum = nums[<span class="number">0</span>]+...+nums[nums.<span class="built_in">size</span>()];
+<span class="keyword">if</span>(dp[sum/<span class="number">2</span>] == sum/<span class="number">2</span>)<span class="keyword">return</span> <span class="literal">true</span>;
+<span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;
+</code></pre>
+
+<p>将数字考虑为价值与重量相等的物品</p>
+<p>这道题就转换为了0-1背包，对于容量为sum&#x2F;2的背包所能容纳的物品的最大价值是否是sum&#x2F;2（这是在变向的求背包是否装满）</p>
+<p>启发：<strong>背包问题不仅可以求容纳的最大价值，还可以求是否装满</strong>；这道题本质上就是考虑sum&#x2F;2容量的背包是否可以装满；</p>
+<h3 id="最后一块石头的重量"><a href="#最后一块石头的重量" class="headerlink" title="最后一块石头的重量"></a>最后一块石头的重量</h3><pre><code class="highlight cpp"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; stones.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span>
+    <span class="keyword">for</span> (<span class="type">int</span> j = target; j &gt;= stones[i]; j--) &#123; <span class="comment">// 遍历背包</span>
+        dp[j] = <span class="built_in">max</span>(dp[j], dp[j - stones[i]] + stones[i]);
+    &#125;
+&#125;</code></pre>
+
+<p>分割等和子集的变式，本质就是尽可能取出一堆石头，使得其重量接近sum&#x2F;2</p>
+<p>变向就是求容积为sum&#x2F;2的背包可以装的最大价值（weight、value均为石头重量）</p>
+<p>ans &#x3D; (sum-dp[sum&#x2F;2]) - sum&#x2F;2;</p>
+<p>是否可以写sum&#x2F;2 - (sum - dp[sum&#x2F;2])，no，因为sum&#x2F;2是向下取整，也就是说dp[sum&#x2F;2]是取的近可能接近sum&#x2F;2的偏小的一堆石头</p>
+<h3 id="一和零"><a href="#一和零" class="headerlink" title="一和零"></a>一和零</h3><pre><code class="highlight cpp"><span class="keyword">for</span> (string str : strs) &#123; <span class="comment">// 遍历物品</span>
+    <span class="type">int</span> oneNum = <span class="number">0</span>, zeroNum = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="type">char</span> c : str) &#123;
+        <span class="keyword">if</span> (c == <span class="string">&#x27;0&#x27;</span>) zeroNum++;
+        <span class="keyword">else</span> oneNum++;
+    &#125;
+    <span class="keyword">for</span> (<span class="type">int</span> i = m; i &gt;= zeroNum; i--) &#123; <span class="comment">// 遍历背包容量且从后向前遍历！</span>
+        <span class="keyword">for</span> (<span class="type">int</span> j = n; j &gt;= oneNum; j--) &#123;
+            dp[i][j] = <span class="built_in">max</span>(dp[i][j], dp[i - zeroNum][j - oneNum] + <span class="number">1</span>);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>01背包，物品有两个维度</p>
+<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><pre><code class="highlight cpp"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123; <span class="comment">// 遍历物品</span>
+    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt;= bagWeight; j++) &#123; <span class="comment">// 遍历背包容量</span>
+        <span class="keyword">if</span> (j &lt; weight[i]) dp[i][j] = dp[i - <span class="number">1</span>][j];
+        <span class="keyword">else</span> dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], dp[i][j - weight[i]] + value[i]);
+    &#125;
+&#125;</code></pre>
+
+<p>初始化dp[i][0] &#x3D; 0,dp[0][j]尽可能多装</p>
+<h3 id="零钱兑换2"><a href="#零钱兑换2" class="headerlink" title="零钱兑换2"></a>零钱兑换2</h3><p>dp[i][j]，前i种硬币（包含i），组合得到j的方案数</p>
+<pre><code class="highlight cpp"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;
+<span class="keyword">public</span>:
+    <span class="function"><span class="type">int</span> <span class="title">change</span><span class="params">(<span class="type">int</span> amount, vector&lt;<span class="type">int</span>&gt;&amp; coins)</span> </span>&#123;
+        <span class="type">int</span> bagSize = amount;
+
+        vector&lt;vector&lt;<span class="type">uint64_t</span>&gt;&gt; <span class="built_in">dp</span>(coins.<span class="built_in">size</span>(), <span class="built_in">vector</span>&lt;<span class="type">uint64_t</span>&gt;(bagSize + <span class="number">1</span>, <span class="number">0</span>));
+
+        <span class="comment">// 初始化最上行，整除的时候有一种方案</span>
+        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= bagSize; j++) &#123;
+            <span class="keyword">if</span> (j % coins[<span class="number">0</span>] == <span class="number">0</span>) dp[<span class="number">0</span>][j] = <span class="number">1</span>;<span class="comment">//dp[0][0]是不用考虑的，没有意义</span>
+        &#125;
+        <span class="comment">// 初始化最左列，注意都有一种方法，那就是不选任何硬币，对应和为0</span>
+        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; coins.<span class="built_in">size</span>(); i++) &#123;
+            dp[i][<span class="number">0</span>] = <span class="number">1</span>; 
+        &#125;
+        <span class="comment">// 以下遍历顺序行列可以颠倒</span>
+        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; coins.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 行，遍历物品</span>
+            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= bagSize; j++) &#123; <span class="comment">// 列，遍历背包</span>
+                <span class="keyword">if</span> (coins[i] &gt; j) dp[i][j] = dp[i - <span class="number">1</span>][j]; 
+                <span class="keyword">else</span> dp[i][j] = dp[i - <span class="number">1</span>][j] +  dp[i][j - coins[i]];<span class="comment">//0-1背包的目标和变种（加法原理） + 完全背包</span>
+            &#125;
+        &#125;
+        <span class="keyword">return</span> dp[coins.<span class="built_in">size</span>() - <span class="number">1</span>][bagSize];
+    &#125;
+&#125;;</code></pre>
+
+<h3 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h3><pre><code class="highlight cpp"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;
+    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;
+        <span class="keyword">if</span> (nums[i] &gt; nums[j]) dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);
+    &#125;
+    <span class="keyword">if</span> (dp[i] &gt; result) result = dp[i]; <span class="comment">// 取长的子序列</span>
+&#125;</code></pre>
+
+<p>dp[i]，以num[i]结尾的最长上升子序列的长度</p>
+<h3 id="最长连续上升子序列"><a href="#最长连续上升子序列" class="headerlink" title="最长连续上升子序列"></a>最长连续上升子序列</h3><pre><code class="highlight cpp"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;
+    <span class="keyword">if</span> (nums[i] &gt; nums[i - <span class="number">1</span>]) &#123; <span class="comment">// 连续记录</span>
+        dp[i] = dp[i - <span class="number">1</span>] + <span class="number">1</span>;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="English"><a href="#English" class="headerlink" title="English"></a>English</h3><p>自我介绍：</p>
+<p>Self-Introduction</p>
+<p>Good morning, professors. My number is xx， I am a senior student in computer science</p>
+<p>My name is Yang Zicheng, a senior student in Computer Science at Ocean University of China. My GPA is 3.92 out of 4, ranking first among 102 students. </p>
+<p>I have two years of research experience. As the first author, I designed PFLNash, a federated learning algorithm that uses Nash Bargaining to adaptively balance personalization and client drift. It has been submitted to AAAI. I also developed Nash-MM for multimodal sentiment analysis, framing it as a cooperative game to resolve task conflicts; this work has been submitted to WISE. Moreover, I joined a provincial project on evolutionary reinforcement learning for unmanned ship path planning and filed a patent. </p>
+<p>In competitions, I’ve won five national awards and eight provincial awards, such as second prize in CUMCM.</p>
+<p>I’m passionate about the math behind AI and it’s engineering application. I also like the development of games and I’m familiar with Unity and C#. Thank you.</p>
+<p>英文介绍一个排序算法</p>
+<p>use english to introduce a sort algorithm</p>
+<p>quick sort</p>
+<p>I introduce the steps of quick sort firstly:</p>
+<p>now we have an arrary, we set the most left element as a pivot, containing it in anoter space</p>
+<p>we set two points in the left-most and right-most</p>
+<p>we move the right-most point along the left. If the point’s element is less than the pivot we swap the elemnt of right-most point and left-most point</p>
+<p>after that we move the left-most point along the right. If the point’s elment is less than the pivot we make a swap again</p>
+<p>we continuously do this until the two points meet each other. the position where they met is a final place we should put the pivot in</p>
+<p>now we get the right position of the pivot. from the position we partition the array into two sub array and <strong>recursively</strong> make operations like what we have done at the start</p>
+<p>英文介绍一个图论算法</p>
+<p>floyd algorithm</p>
+<p>Floyd algorithm is a dynamic programming algorithm that is used to solve <strong>multi-source shortest path</strong></p>
+<p>In details, we will contain a dp arrary to present the shortest distance between any two points on the graph.</p>
+<p>The array has two dimension. The first dimension is the start point’s <strong>serial number</strong> and the second dimension is the end point’s serial number.</p>
+<p>We will intialize the array. If two points is directly conected, we can set their distance in the array. And for the same point, the distance in the arrary is 0.</p>
+<p>We use a tripe loop to solve this dynamic programming. In the first loop, we <strong>enumerate</strong> the <strong>intermediate</strong> point between the start point and tne end point. In the second loop we eunmerate the start point and the end point in the third loop.</p>
+<p>The <strong>equaion of transfer</strong> is dp[i][j] equals to dp[i][k] adds dp[k][j] if the dp[i][j] is less than the dp[i][k] adds dp[k][j]</p>
+
+		</div>
+
+		<!-- Comments removed -->
+		
+	</article>
+
+	<div id="toc">
+		
+	</div>
+
+</div>
+
+<!-- <div id="paginator"> -->
+<!-- 	 -->
+<!-- </div> -->
+<!-- page.mathjax == true修改为true，默认开启-->
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+			</div>
+		</div>
+
+		<!-- <div id="bottom-outer">
+			<div id="bottom-inner">
+				Site by 阳生 | 
+				Powered by <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a> |
+				theme <a target="_blank" rel="noopener" href="https://github.com/fireworks99/hexo-theme-PreciousJoy">PreciousJoy</a>
+			</div>
+		</div> -->
+
+		
+	</div>
+
+
+
+
+
+	
+	<!-- scripts list from theme config.yml -->
+	
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	
+	<script src="/js/PreciousJoy.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+	
+	<script src="/js/jquery.fancybox.min.js"></script>
+	
+	<script src="/js/search.js"></script>
+	
+	<script src="/js/load.js"></script>
+	
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+	<script src="/js/clipboard.min.js"></script>
+	
+	
+
+    <script src="/js/menu-particles.js"></script>
+    <script src="/js/pagination-fan.js"></script>
+    <script src="/js/pagination-string.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
