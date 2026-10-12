@@ -465,8 +465,10 @@
 <li>为什么从$x_t$到$x_{t-1}$，不是直接减掉$\epsilon_\theta$，而是带有一些修正量</li>
 </ol>
 <ul>
-<li>因为网络预测的$\epsilon_\theta$实际上是构造$x_t$时的<strong>累积噪声</strong>，而非单步的噪声，因此要按照时间步的系数来调整这个量，因此有$\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta (x_t,t)$</li>
-<li>另外，我们在构造$x_t$的时候不仅累积了噪声，还对原始信号做了缩放，参考$x_t &#x3D; \sqrt{\bar{\alpha}<em>t}x_0 + \sqrt{1-\bar{\alpha}<em>t}\epsilon$与$x_t &#x3D; \sqrt{1-\beta_t}x</em>{t-1} + \sqrt{\beta_t}\epsilon,\epsilon \sim N(0,I)$，因此有$x</em>{t-1} &#x3D; \frac{1}{\sqrt{\alpha_t}}(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta (x_t,t))+\sigma_t z$中的$\frac{1}{\sqrt{\alpha_t}}$</li>
+<li>因为网络预测的$\epsilon_\theta$实际上是构造$x_t$时的<strong>累积噪声</strong>，而非单步的噪声，因此要按照时间步的系数来调整这个量，因此有$\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t} } \epsilon_\theta (x_t,t)$</li>
+<li>另外，我们在构造$x_t$的时候不仅累积了噪声，还对原始信号做了缩放，参考$x_t &#x3D; \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$</li>
+<li>以及参考$x_t &#x3D; \sqrt{1-\beta_t}x_{t-1} + \sqrt{\beta_t}\epsilon,\epsilon \sim N(0,I)$</li>
+<li>因此有$x_{t-1} &#x3D; \frac{1}{\sqrt{\alpha_t}}(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta (x_t,t))+\sigma_t z$中的$\frac{1}{\sqrt{\alpha_t}}$</li>
 </ul>
 <ol start="2">
 <li>关于这些修正量的具体推导，<strong>需要进行补充</strong></li>
