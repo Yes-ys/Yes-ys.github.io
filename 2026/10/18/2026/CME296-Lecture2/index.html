@@ -392,7 +392,7 @@
 <li>结合后面的推理理解，因为推理的时候要用到这个score项</li>
 </ul>
 <p>for inference, we need the reverse of the original continous formula above, which represents denoising process</p>
-<p>$dx &#x3D; [f(x,t)-g(t)^2\nabla_x \log (p(x))]dt + g(t)d\bra{W}$</p>
+<p>$dx &#x3D; [f(x,t)-g(t)^2\nabla_x \log (p(x))]dt + g(t)d\bar{W}$</p>
 <ol>
 <li>this is the advantages of continous formula: the forward process described as SDE can be reversed through a reverse SDE</li>
 <li>the socre term $\nabla_x \log (p(x))$ has appereared in the reverse SDE</li>
